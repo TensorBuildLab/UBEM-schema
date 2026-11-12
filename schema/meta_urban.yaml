@@ -1,0 +1,538 @@
+id: https://w3id.org/meta-urban/schema
+name: meta_urban
+title: Meta-Urban metadata schema for open data in urban building energy modeling
+version: 2.0.0
+description: >-
+  Meta-Urban describes open datasets used in urban building energy modeling (UBEM) at two levels.
+  The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets:
+  the UBEM workflow role, statistical nature, spatial granularity, temporal resolution, access level and
+  join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it
+  maps to in the Meta-Urban vocabulary, its unit (QUDT), its code list, its aggregation semantics, and
+  whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and
+  carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects.
+license: CC-BY-4.0
+see_also:
+  - https://github.com/TensorBuildLab/UBEM-schema
+  - https://arxiv.org/abs/2311.08535
+prefixes:
+  linkml: https://w3id.org/linkml/
+  meta_urban: https://w3id.org/meta-urban/
+  dcat: http://www.w3.org/ns/dcat#
+  dct: http://purl.org/dc/terms/
+  skos: http://www.w3.org/2004/02/skos/core#
+  schema: http://schema.org/
+  qudt: http://qudt.org/schema/qudt/
+  unit: http://qudt.org/vocab/unit/
+  quantitykind: http://qudt.org/vocab/quantitykind/
+  prov: http://www.w3.org/ns/prov#
+  csvw: http://www.w3.org/ns/csvw#
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: meta_urban
+default_range: string
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------------------------------------
+classes:
+
+  Catalog:
+    description: A collection of dataset profiles and the concept vocabulary they refer to.
+    class_uri: dcat:Catalog
+    tree_root: true
+    slots:
+      - datasets
+      - concepts
+
+  DatasetProfile:
+    description: >-
+      Dataset-level description of one open dataset, sufficient to decide whether and how it can feed a UBEM
+      workflow, and to join it with other datasets.
+    class_uri: dcat:Dataset
+    slots:
+      - id
+      - title
+      - short_name
+      - publisher
+      - landing_page
+      - doi
+      - citation
+      - reference_paper_doi
+      - license
+      - access_level
+      - distributions
+      - ubem_roles
+      - content_types
+      - geographic_scope
+      - spatial_coverage
+      - unit_of_observation
+      - spatial_granularity
+      - temporal_coverage
+      - temporal_resolution
+      - update_frequency
+      - statistical_nature
+      - sampling_weights
+      - record_count
+      - record_count_note
+      - join_keys
+      - variables_documented
+      - machine_readable
+      - versioned
+      - persistent_identifier
+      - known_limitations
+      - notes
+      - verified
+      - variables
+    slot_usage:
+      id:
+        required: true
+      title:
+        required: true
+      ubem_roles:
+        required: true
+      statistical_nature:
+        required: true
+      spatial_granularity:
+        required: true
+      access_level:
+        required: true
+    rules:
+      - description: A weighted sample survey must name its weights.
+        preconditions:
+          slot_conditions:
+            statistical_nature:
+              equals_string: sample_survey_weighted
+        postconditions:
+          slot_conditions:
+            sampling_weights:
+              required: true
+
+  Distribution:
+    description: One way of obtaining the data.
+    class_uri: dcat:Distribution
+    slots:
+      - format
+      - access_url
+      - api
+      - registration_required
+
+  SpatialCoverage:
+    class_uri: dct:Location
+    slots:
+      - countries
+      - description
+      - bbox
+
+  TemporalCoverage:
+    class_uri: dct:PeriodOfTime
+    slots:
+      - start
+      - end
+
+  Verification:
+    description: Provenance of the profile itself (who checked it, when, against which sources).
+    class_uri: prov:Activity
+    slots:
+      - date
+      - by
+      - sources_checked
+
+  VariableProfile:
+    description: >-
+      Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per
+      variable of a gridded dataset.
+    class_uri: csvw:Column
+    slots:
+      - name
+      - label
+      - description
+      - datatype
+      - concept
+      - mapping_relation
+      - unit
+      - unit_multiplier
+      - aggregation
+      - entity
+      - code_list
+      - missing_codes
+      - is_weight
+      - is_imputation_flag
+      - flags_variable
+    slot_usage:
+      name:
+        required: true
+
+  CodeEntry:
+    description: One code of a categorical variable and its meaning.
+    class_uri: skos:Concept
+    slots:
+      - code
+      - label
+      - concept_value
+
+  UBEMConcept:
+    description: >-
+      A concept in the Meta-Urban vocabulary: a quantity or attribute that a UBEM workflow consumes or
+      produces (for example floor area, principal building activity, dry-bulb temperature, annual electricity
+      use). Concepts form a hierarchy through `broader` and point to equivalent terms in other standards.
+    class_uri: skos:Concept
+    slots:
+      - id
+      - pref_label
+      - definition
+      - alt_labels
+      - broader
+      - concept_role
+      - entity
+      - quantity_kind
+      - canonical_unit
+      - exact_match
+      - close_match
+      - related_match
+    slot_usage:
+      id:
+        required: true
+      pref_label:
+        required: true
+      definition:
+        required: true
+
+# ---------------------------------------------------------------------------------------------------------
+slots:
+
+  # catalog
+  datasets:
+    range: DatasetProfile
+    multivalued: true
+    inlined_as_list: true
+  concepts:
+    range: UBEMConcept
+    multivalued: true
+    inlined_as_list: true
+
+  # identification
+  id:
+    identifier: true
+    range: string
+    pattern: "^[a-z0-9][a-z0-9_.-]*$"
+  title:
+    slot_uri: dct:title
+  short_name:
+    slot_uri: skos:altLabel
+  publisher:
+    slot_uri: dct:publisher
+  landing_page:
+    slot_uri: dcat:landingPage
+    range: uri
+  doi:
+    description: DOI of the dataset itself (bare form, e.g. 10.1234/abc).
+    pattern: "^10\\.\\d{4,9}/\\S+$"
+  citation:
+    slot_uri: dct:bibliographicCitation
+  reference_paper_doi:
+    description: DOI of a peer-reviewed paper that describes the dataset.
+    pattern: "^10\\.\\d{4,9}/\\S+$"
+  license:
+    slot_uri: dct:license
+  access_level:
+    range: AccessLevel
+  distributions:
+    slot_uri: dcat:distribution
+    range: Distribution
+    multivalued: true
+    inlined_as_list: true
+  format:
+    slot_uri: dct:format
+  access_url:
+    slot_uri: dcat:accessURL
+  api:
+    range: boolean
+  registration_required:
+    range: boolean
+
+  # facets
+  ubem_roles:
+    description: UBEM workflow steps the dataset feeds; first value is the primary role.
+    range: UBEMRole
+    multivalued: true
+  content_types:
+    multivalued: true
+    slot_uri: dcat:theme
+  geographic_scope:
+    range: GeographicScope
+  spatial_coverage:
+    slot_uri: dct:spatial
+    range: SpatialCoverage
+    inlined: true
+  countries:
+    description: ISO 3166-1 alpha-2 codes, or GLOBAL.
+    multivalued: true
+    pattern: "^([A-Z]{2}|GLOBAL|EU)$"
+  bbox:
+    description: WGS84 bounding box "minLon,minLat,maxLon,maxLat" when meaningful.
+    slot_uri: dcat:bbox
+  unit_of_observation:
+    description: What one record describes (building, meter, household, station, grid_cell, region, person_day, ...).
+  spatial_granularity:
+    description: Finest location detail released publicly.
+    range: SpatialGranularity
+  temporal_coverage:
+    slot_uri: dct:temporal
+    range: TemporalCoverage
+    inlined: true
+  start:
+    slot_uri: dcat:startDate
+  end:
+    slot_uri: dcat:endDate
+  temporal_resolution:
+    description: ISO 8601 duration of the finest time step, or "static" or "irregular".
+    slot_uri: dcat:temporalResolution
+    pattern: "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$"
+  update_frequency:
+    slot_uri: dct:accrualPeriodicity
+  statistical_nature:
+    range: StatisticalNature
+  sampling_weights:
+    description: Weight variables and how to use them (required for weighted sample surveys).
+  record_count:
+    range: integer
+  record_count_note: {}
+  join_keys:
+    range: JoinKey
+    multivalued: true
+  variables_documented:
+    range: boolean
+  machine_readable:
+    range: boolean
+  versioned:
+    range: boolean
+  persistent_identifier:
+    range: boolean
+  known_limitations: {}
+  notes: {}
+  verified:
+    slot_uri: prov:wasGeneratedBy
+    range: Verification
+    inlined: true
+  date: {}
+  by: {}
+  sources_checked:
+    range: uri
+    multivalued: true
+  variables:
+    range: VariableProfile
+    multivalued: true
+    inlined_as_list: true
+
+  # variable level
+  name:
+    slot_uri: csvw:name
+  label:
+    slot_uri: skos:prefLabel
+  description:
+    slot_uri: dct:description
+  datatype:
+    range: VariableDatatype
+  concept:
+    description: Id of the UBEMConcept this variable maps to, or "none".
+    slot_uri: skos:related
+  mapping_relation:
+    range: MappingRelation
+  unit:
+    description: QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.
+    slot_uri: qudt:unit
+  unit_multiplier:
+    description: Factor applied to raw values before the unit applies (e.g., 1000 for "thousand Btu").
+    range: float
+  aggregation:
+    range: Aggregation
+  entity:
+    range: EntityType
+  code_list:
+    range: CodeEntry
+    multivalued: true
+    inlined_as_list: true
+  code: {}
+  concept_value:
+    description: Optional normalized value in the target concept (e.g., an ASHRAE climate zone id).
+  missing_codes:
+    description: Raw values that mean missing, not applicable, or suppressed.
+    multivalued: true
+  is_weight:
+    range: boolean
+  is_imputation_flag:
+    range: boolean
+  flags_variable:
+    description: For an imputation or quality flag, the variable it refers to.
+
+  # vocabulary
+  pref_label:
+    slot_uri: skos:prefLabel
+  definition:
+    slot_uri: skos:definition
+  alt_labels:
+    slot_uri: skos:altLabel
+    multivalued: true
+  broader:
+    slot_uri: skos:broader
+    range: UBEMConcept
+  concept_role:
+    range: UBEMRole
+  quantity_kind:
+    description: QUDT quantity kind CURIE, e.g. quantitykind:Area.
+    slot_uri: qudt:hasQuantityKind
+  canonical_unit:
+    description: SI (or SI-accepted) unit in which normalized values are expressed.
+  exact_match:
+    slot_uri: skos:exactMatch
+    multivalued: true
+  close_match:
+    slot_uri: skos:closeMatch
+    multivalued: true
+  related_match:
+    slot_uri: skos:relatedMatch
+    multivalued: true
+
+# ---------------------------------------------------------------------------------------------------------
+enums:
+
+  UBEMRole:
+    description: The UBEM workflow step a dataset or concept serves.
+    permissible_values:
+      boundary_conditions:
+        description: Weather and climate drivers (observed, reanalysis, typical-year, projections).
+      geometry_inventory:
+        description: Location and shape of buildings (footprints, heights, 3D models, parcels).
+      building_characteristics:
+        description: Non-geometric attributes (use type, vintage, envelope, systems, fuels, floor area).
+      operation_use:
+        description: Occupancy, schedules, occupant behavior, setpoints, plug loads.
+      calibration_validation:
+        description: Measured or reported energy use at any scale.
+      reference_simulation:
+        description: Synthetic building-stock model outputs and model libraries.
+      context_coupling:
+        description: Socio-economic, land use, grid emissions, tariffs, urban microclimate.
+
+  GeographicScope:
+    permissible_values:
+      global: {}
+      multinational: {}
+      national: {}
+      subnational: {}
+      city: {}
+
+  SpatialGranularity:
+    description: Ordered from finest to coarsest (see `rank` annotation).
+    permissible_values:
+      point_station: {annotations: {rank: 1}}
+      building: {annotations: {rank: 1}}
+      parcel: {annotations: {rank: 2}}
+      grid_cell_fine: {description: "<= 1 km", annotations: {rank: 3}}
+      census_block_group: {annotations: {rank: 4}}
+      census_tract: {annotations: {rank: 5}}
+      postal_code: {annotations: {rank: 5}}
+      grid_cell_coarse: {description: "> 1 km", annotations: {rank: 6}}
+      county: {annotations: {rank: 7}}
+      city: {annotations: {rank: 7}}
+      utility_service_territory: {annotations: {rank: 8}}
+      state_province: {annotations: {rank: 9}}
+      climate_zone: {annotations: {rank: 10}}
+      census_region_division: {annotations: {rank: 10}}
+      nation: {annotations: {rank: 11}}
+      none: {description: "No location released", annotations: {rank: 12}}
+      unknown: {description: "Could not be verified from public documentation", annotations: {rank: 99}}
+
+  StatisticalNature:
+    permissible_values:
+      census_complete: {description: "Complete enumeration of a population."}
+      sample_survey_weighted: {description: "Probability sample; estimates need weights."}
+      administrative_record: {description: "Records created by an administrative process (certificates, permits, disclosure, utility filings)."}
+      measured_monitoring: {description: "Sensor or meter measurements."}
+      remote_sensing_derived: {description: "Derived from satellite, aerial or lidar data with a model."}
+      crowdsourced: {description: "Volunteered geographic information."}
+      reanalysis_model: {description: "Model-data assimilation product."}
+      typical_year_synthetic: {description: "Typical meteorological year assembled from observations."}
+      climate_projection: {description: "Output of climate models under scenarios."}
+      simulation_synthetic: {description: "Output of building energy simulation."}
+      standard_or_code: {description: "A standard, dictionary, code or reference model rather than observations."}
+      compilation: {description: "Assembled from several of the above."}
+
+  AccessLevel:
+    permissible_values:
+      open_download: {}
+      open_api: {}
+      registration_required: {}
+      request_or_agreement: {}
+      restricted_commercial: {}
+
+  JoinKey:
+    permissible_values:
+      lat_lon: {}
+      geometry: {}
+      address: {}
+      parcel_id: {}
+      building_id: {}
+      ubid: {}
+      station_id: {}
+      grid_cell: {}
+      census_block_group: {}
+      census_tract: {}
+      small_statistical_area: {description: "Non-U.S. small statistical areas such as UK LSOA/MSOA or national census grid ids"}
+      postal_code: {}
+      fips_county: {}
+      fips_state: {}
+      census_region_division: {}
+      nuts_region: {}
+      country_iso: {}
+      utility_id: {}
+      balancing_authority: {}
+      climate_zone_ashrae: {}
+      climate_zone_iecc: {}
+      building_type: {}
+      vintage: {}
+      timestamp: {}
+
+  VariableDatatype:
+    permissible_values:
+      integer: {}
+      float: {}
+      string: {}
+      categorical: {}
+      boolean: {}
+      datetime: {}
+      geometry: {}
+      identifier: {}
+
+  MappingRelation:
+    permissible_values:
+      exactMatch: {meaning: skos:exactMatch}
+      closeMatch: {meaning: skos:closeMatch}
+      broadMatch: {meaning: skos:broadMatch}
+      narrowMatch: {meaning: skos:narrowMatch}
+      relatedMatch: {meaning: skos:relatedMatch}
+
+  Aggregation:
+    description: How a value relates to time.
+    permissible_values:
+      static: {description: "Attribute that does not vary in the observation period."}
+      instantaneous: {}
+      total_over_period: {}
+      average_over_period: {}
+      count: {}
+      share: {}
+
+  EntityType:
+    description: What a concept or variable describes.
+    permissible_values:
+      site: {}
+      building: {}
+      zone: {}
+      system: {}
+      envelope: {}
+      household: {}
+      occupant: {}
+      meter: {}
+      region: {}
+      weather_station: {}
+      grid_cell: {}
+      dataset_record: {description: "Record bookkeeping (identifiers, weights, flags)."}

@@ -1,0 +1,56 @@
+id: ctx-lcz-global
+title: Global map of Local Climate Zones (LCZ)
+short_name: Global LCZ map
+publisher: Demuzere et al. (WUDAPT / Ghent University and collaborators); hosted on Zenodo
+landing_page: https://doi.org/10.5281/zenodo.6364594
+doi: 10.5281/zenodo.6364594
+citation: Demuzere, M., Kittner, J., Martilli, A., et al. (2022). A global map of local climate zones to support
+  earth system modelling and urban-scale environmental science. Earth System Science Data 14, 3835-3873.
+reference_paper_doi: 10.5194/essd-14-3835-2022
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- format: GeoTIFF
+  access_url: https://zenodo.org/record/6364594
+  api: false
+  registration_required: false
+ubem_roles:
+- context_coupling
+content_types:
+- local_climate_zone_classes
+- classification_probability
+- urban_morphology_classes
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: versioned releases
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: 100 m class map from satellite-based machine learning; accuracy varies by region and by LCZ class,
+  and classes are coarse descriptors of urban form.
+notes: Zenodo v1.0.0 published 2022-03-17 (files lcz_v1.tif, lcz_filter_v1.tif, lcz_probability_v1.tif; 12 GB);
+  the record notes a newer version exists, not checked. Reference year of the map is not stated on the fetched page
+  (null). Concept DOI vs version DOI not distinguished.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://zenodo.org/record/6364594
+  - https://api.crossref.org/works/10.5194/essd-14-3835-2022

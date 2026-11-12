@@ -1,0 +1,852 @@
+{
+    "$defs": {
+        "AccessLevel": {
+            "description": "",
+            "enum": [
+                "open_download",
+                "open_api",
+                "registration_required",
+                "request_or_agreement",
+                "restricted_commercial"
+            ],
+            "title": "AccessLevel",
+            "type": "string"
+        },
+        "Aggregation": {
+            "description": "How a value relates to time.",
+            "enum": [
+                "static",
+                "instantaneous",
+                "total_over_period",
+                "average_over_period",
+                "count",
+                "share"
+            ],
+            "title": "Aggregation",
+            "type": "string"
+        },
+        "Catalog": {
+            "additionalProperties": false,
+            "description": "A collection of dataset profiles and the concept vocabulary they refer to.",
+            "properties": {
+                "concepts": {
+                    "items": {
+                        "$ref": "#/$defs/UBEMConcept"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "datasets": {
+                    "items": {
+                        "$ref": "#/$defs/DatasetProfile"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Catalog",
+            "type": "object"
+        },
+        "CodeEntry": {
+            "additionalProperties": false,
+            "description": "One code of a categorical variable and its meaning.",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "concept_value": {
+                    "description": "Optional normalized value in the target concept (e.g., an ASHRAE climate zone id).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CodeEntry",
+            "type": "object"
+        },
+        "DatasetProfile": {
+            "additionalProperties": false,
+            "description": "Dataset-level description of one open dataset, sufficient to decide whether and how it can feed a UBEM workflow, and to join it with other datasets.",
+            "if": {
+                "properties": {
+                    "statistical_nature": {
+                        "const": "sample_survey_weighted"
+                    }
+                },
+                "required": [
+                    "statistical_nature"
+                ]
+            },
+            "properties": {
+                "access_level": {
+                    "$ref": "#/$defs/AccessLevel"
+                },
+                "citation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "content_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "distributions": {
+                    "items": {
+                        "$ref": "#/$defs/Distribution"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "doi": {
+                    "description": "DOI of the dataset itself (bare form, e.g. 10.1234/abc).",
+                    "pattern": "^10\\.\\d{4,9}/\\S+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "geographic_scope": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GeographicScope"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "id": {
+                    "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+                    "type": "string"
+                },
+                "join_keys": {
+                    "items": {
+                        "$ref": "#/$defs/JoinKey"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "known_limitations": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "landing_page": {
+                    "format": "uri",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "license": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "machine_readable": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "persistent_identifier": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "publisher": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "record_count": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "record_count_note": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reference_paper_doi": {
+                    "description": "DOI of a peer-reviewed paper that describes the dataset.",
+                    "pattern": "^10\\.\\d{4,9}/\\S+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sampling_weights": {
+                    "description": "Weight variables and how to use them (required for weighted sample surveys).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "short_name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "spatial_coverage": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SpatialCoverage"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "spatial_granularity": {
+                    "$ref": "#/$defs/SpatialGranularity",
+                    "description": "Finest location detail released publicly."
+                },
+                "statistical_nature": {
+                    "$ref": "#/$defs/StatisticalNature"
+                },
+                "temporal_coverage": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TemporalCoverage"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "temporal_resolution": {
+                    "description": "ISO 8601 duration of the finest time step, or \"static\" or \"irregular\".",
+                    "pattern": "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "ubem_roles": {
+                    "description": "UBEM workflow steps the dataset feeds; first value is the primary role.",
+                    "items": {
+                        "$ref": "#/$defs/UBEMRole"
+                    },
+                    "type": "array"
+                },
+                "unit_of_observation": {
+                    "description": "What one record describes (building, meter, household, station, grid_cell, region, person_day, ...).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "update_frequency": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "variables": {
+                    "items": {
+                        "$ref": "#/$defs/VariableProfile"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "variables_documented": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "verified": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Verification"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "versioned": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "title",
+                "access_level",
+                "ubem_roles",
+                "spatial_granularity",
+                "statistical_nature"
+            ],
+            "then": {
+                "properties": {
+                    "sampling_weights": {}
+                },
+                "required": [
+                    "sampling_weights"
+                ]
+            },
+            "title": "DatasetProfile",
+            "type": "object"
+        },
+        "Distribution": {
+            "additionalProperties": false,
+            "description": "One way of obtaining the data.",
+            "properties": {
+                "access_url": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "api": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "format": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "registration_required": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Distribution",
+            "type": "object"
+        },
+        "EntityType": {
+            "description": "What a concept or variable describes.",
+            "enum": [
+                "site",
+                "building",
+                "zone",
+                "system",
+                "envelope",
+                "household",
+                "occupant",
+                "meter",
+                "region",
+                "weather_station",
+                "grid_cell",
+                "dataset_record"
+            ],
+            "title": "EntityType",
+            "type": "string"
+        },
+        "GeographicScope": {
+            "description": "",
+            "enum": [
+                "global",
+                "multinational",
+                "national",
+                "subnational",
+                "city"
+            ],
+            "title": "GeographicScope",
+            "type": "string"
+        },
+        "JoinKey": {
+            "description": "",
+            "enum": [
+                "lat_lon",
+                "geometry",
+                "address",
+                "parcel_id",
+                "building_id",
+                "ubid",
+                "station_id",
+                "grid_cell",
+                "census_block_group",
+                "census_tract",
+                "small_statistical_area",
+                "postal_code",
+                "fips_county",
+                "fips_state",
+                "census_region_division",
+                "nuts_region",
+                "country_iso",
+                "utility_id",
+                "balancing_authority",
+                "climate_zone_ashrae",
+                "climate_zone_iecc",
+                "building_type",
+                "vintage",
+                "timestamp"
+            ],
+            "title": "JoinKey",
+            "type": "string"
+        },
+        "MappingRelation": {
+            "description": "",
+            "enum": [
+                "exactMatch",
+                "closeMatch",
+                "broadMatch",
+                "narrowMatch",
+                "relatedMatch"
+            ],
+            "title": "MappingRelation",
+            "type": "string"
+        },
+        "SpatialCoverage": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "bbox": {
+                    "description": "WGS84 bounding box \"minLon,minLat,maxLon,maxLat\" when meaningful.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "countries": {
+                    "description": "ISO 3166-1 alpha-2 codes, or GLOBAL.",
+                    "items": {
+                        "pattern": "^([A-Z]{2}|GLOBAL|EU)$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SpatialCoverage",
+            "type": "object"
+        },
+        "SpatialGranularity": {
+            "description": "Ordered from finest to coarsest (see `rank` annotation).",
+            "enum": [
+                "point_station",
+                "building",
+                "parcel",
+                "grid_cell_fine",
+                "census_block_group",
+                "census_tract",
+                "postal_code",
+                "grid_cell_coarse",
+                "county",
+                "city",
+                "utility_service_territory",
+                "state_province",
+                "climate_zone",
+                "census_region_division",
+                "nation",
+                "none",
+                "unknown"
+            ],
+            "title": "SpatialGranularity",
+            "type": "string"
+        },
+        "StatisticalNature": {
+            "description": "",
+            "enum": [
+                "census_complete",
+                "sample_survey_weighted",
+                "administrative_record",
+                "measured_monitoring",
+                "remote_sensing_derived",
+                "crowdsourced",
+                "reanalysis_model",
+                "typical_year_synthetic",
+                "climate_projection",
+                "simulation_synthetic",
+                "standard_or_code",
+                "compilation"
+            ],
+            "title": "StatisticalNature",
+            "type": "string"
+        },
+        "TemporalCoverage": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "end": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "start": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "TemporalCoverage",
+            "type": "object"
+        },
+        "UBEMConcept": {
+            "additionalProperties": false,
+            "description": "A concept in the Meta-Urban vocabulary: a quantity or attribute that a UBEM workflow consumes or produces (for example floor area, principal building activity, dry-bulb temperature, annual electricity use). Concepts form a hierarchy through `broader` and point to equivalent terms in other standards.",
+            "properties": {
+                "alt_labels": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "broader": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "canonical_unit": {
+                    "description": "SI (or SI-accepted) unit in which normalized values are expressed.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "close_match": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "concept_role": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/UBEMRole"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "definition": {
+                    "type": "string"
+                },
+                "entity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EntityType"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "exact_match": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+                    "type": "string"
+                },
+                "pref_label": {
+                    "type": "string"
+                },
+                "quantity_kind": {
+                    "description": "QUDT quantity kind CURIE, e.g. quantitykind:Area.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "related_match": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "pref_label",
+                "definition"
+            ],
+            "title": "UBEMConcept",
+            "type": "object"
+        },
+        "UBEMRole": {
+            "description": "The UBEM workflow step a dataset or concept serves.",
+            "enum": [
+                "boundary_conditions",
+                "geometry_inventory",
+                "building_characteristics",
+                "operation_use",
+                "calibration_validation",
+                "reference_simulation",
+                "context_coupling"
+            ],
+            "title": "UBEMRole",
+            "type": "string"
+        },
+        "VariableDatatype": {
+            "description": "",
+            "enum": [
+                "integer",
+                "float",
+                "string",
+                "categorical",
+                "boolean",
+                "datetime",
+                "geometry",
+                "identifier"
+            ],
+            "title": "VariableDatatype",
+            "type": "string"
+        },
+        "VariableProfile": {
+            "additionalProperties": false,
+            "description": "Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a gridded dataset.",
+            "properties": {
+                "aggregation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Aggregation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "code_list": {
+                    "items": {
+                        "$ref": "#/$defs/CodeEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "concept": {
+                    "description": "Id of the UBEMConcept this variable maps to, or \"none\".",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "datatype": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/VariableDatatype"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "entity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EntityType"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "flags_variable": {
+                    "description": "For an imputation or quality flag, the variable it refers to.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_imputation_flag": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "is_weight": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "mapping_relation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MappingRelation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "missing_codes": {
+                    "description": "Raw values that mean missing, not applicable, or suppressed.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "unit_multiplier": {
+                    "description": "Factor applied to raw values before the unit applies (e.g., 1000 for \"thousand Btu\").",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "VariableProfile",
+            "type": "object"
+        },
+        "Verification": {
+            "additionalProperties": false,
+            "description": "Provenance of the profile itself (who checked it, when, against which sources).",
+            "properties": {
+                "by": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "date": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sources_checked": {
+                    "items": {
+                        "format": "uri",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Verification",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/meta-urban/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
+    "description": "A collection of dataset profiles and the concept vocabulary they refer to.",
+    "metamodel_version": "1.12.0",
+    "properties": {
+        "concepts": {
+            "items": {
+                "$ref": "#/$defs/UBEMConcept"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "datasets": {
+            "items": {
+                "$ref": "#/$defs/DatasetProfile"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "title": "meta_urban",
+    "type": "object",
+    "version": "2.0.0"
+}
+

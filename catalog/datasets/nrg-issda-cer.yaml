@@ -1,0 +1,51 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-issda-cer
+title: CER Smart Metering Project - Electricity Customer Behaviour Trial, 2009-2010
+short_name: ISSDA CER smart meter trial
+publisher: Irish Social Science Data Archive (ISSDA), University College Dublin; data creator Commission for Energy
+  Regulation (CER)
+landing_page: https://www.ucd.ie/issda/data/commissionforenergyregulationcer/
+doi: 10.7929/ISSDA/BX59EU
+citation: 'Commission for Energy Regulation (CER). CER Smart Metering Project - Electricity Customer Behaviour Trial,
+  2009-2010 [dataset]. 1st Edition. Irish Social Science Data Archive. SN: 0012-00. https://doi.org/10.7929/ISSDA/BX59EU'
+reference_paper_doi: null
+license: ISSDA data request terms (no open license)
+access_level: request_or_agreement
+distributions:
+- {format: text/CSV (pseudonymised), access_url: 'https://www.ucd.ie/issda/data/commissionforenergyregulationcer/',
+  api: false, registration_required: true}
+ubem_roles: [calibration_validation]
+content_types: [household_electricity_halfhourly, sme_electricity_halfhourly, pre_and_post_trial_surveys, time_of_use_tariff_trial]
+geographic_scope: national
+spatial_coverage:
+  countries: [IE]
+  description: Ireland; over 5,000 residential consumers and 650 businesses
+unit_of_observation: meter
+spatial_granularity: none
+temporal_coverage: {start: 2009-07, end: 2010-12}
+temporal_resolution: PT30M
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: Over 5,000 residential consumers and 650 businesses (DOI record); ISSDA FAQ gives 5,029 total
+  (unclear whether residential only)
+join_keys: [timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: Access requires a signed ISSDA Data Request Form for Research Purposes (pseudonymised data),
+  emailed to ISSDA; ISSDA may supply data only for use in the EEA and adequacy-decision countries. Location data
+  and personal data were removed; trial participants recruited for a time-of-use tariff and behaviour trial, so
+  loads may include price response.
+notes: Half-hourly resolution (PT30M) is inferred from a third-party R package description (time-of-day index 0
+  to 47) because the ISSDA pages returned HTTP 403; confirm in the ISSDA manifest. Trial start July 2009 (benchmark
+  period to 31 Dec 2009, active period 2010); recording for most meters begins about 14 July 2009 per the ISSDA
+  FAQ (search snippet). The b2find DOI record labels the dataset open access but the rights note restricts supply
+  to EEA and adequacy countries. A gas trial dataset (DOI 10.7929/ISSDA/JCYEZ3) exists separately.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://b2find.eudat.eu/dataset/be1df6ba-3124-5b96-9b8b-94434c7a61a9', 'https://api.datacite.org/dois?query=CER+Smart+Metering+Project',
+    'https://www.ucd.ie/issda/data/commissionforenergyregulationcer/ (HTTP 403, content known only from search snippets)']

@@ -1,0 +1,62 @@
+id: wx-noaa-normals
+title: NOAA U.S. Climate Normals 1991-2020
+short_name: NOAA Climate Normals 1991-2020
+publisher: NOAA National Centers for Environmental Information (NCEI)
+landing_page: https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+doi: null
+citation: NOAA NCEI. U.S. Climate Normals 1991-2020. https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: CSV
+  access_url: https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+  api: false
+  registration_required: false
+- format: NetCDF
+  access_url: https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+  api: false
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- temperature_normals
+- precipitation_normals
+- degree_days
+- hourly_normals
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States stations; gridded normals for the contiguous U.S.
+unit_of_observation: station
+spatial_granularity: point_station
+temporal_coverage:
+  start: '1991'
+  end: '2020'
+temporal_resolution: P1M
+update_frequency: every 10 years
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- station_id
+- lat_lon
+- fips_county
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Normals are 30-year statistics, not time series; hourly normals exist for only about 467 stations
+  and temperature normals for about 7,300.
+notes: 'Resolutions offered: annual/seasonal, monthly, daily, hourly (station); monthly and daily gridded at about
+  4 km for CONUS. statistical_nature is a station-derived statistical summary (measured_monitoring is the closest
+  enum). Page gives no license or DOI. The Arguez 2012 BAMS paper (10.1175/BAMS-D-11-00197.1) describes the 1981-2010
+  normals, so reference_paper_doi is null. Record count is not a single number (more than 15,000 precipitation stations).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+  - https://api.crossref.org/works/10.1175/BAMS-D-11-00197.1

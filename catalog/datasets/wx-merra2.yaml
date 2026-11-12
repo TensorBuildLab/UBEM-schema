@@ -1,0 +1,57 @@
+id: wx-merra2
+title: MERRA-2 (Modern-Era Retrospective analysis for Research and Applications, Version 2)
+short_name: MERRA-2
+publisher: NASA Global Modeling and Assimilation Office (GMAO); distributed by GES DISC
+landing_page: https://gmao.gsfc.nasa.gov/gmao-products/merra-2/
+doi: null
+citation: Gelaro, R., et al. (2017). The Modern-Era Retrospective Analysis for Research and Applications, Version
+  2 (MERRA-2). Journal of Climate 30, 5419-5454.
+reference_paper_doi: 10.1175/JCLI-D-16-0758.1
+license: null
+access_level: registration_required
+distributions:
+- format: NetCDF
+  access_url: https://gmao.gsfc.nasa.gov/gmao-products/merra-2/
+  api: true
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- near_surface_meteorology
+- surface_radiation
+- reanalysis_fields
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '1980'
+  end: present
+temporal_resolution: PT1H
+update_frequency: continuously (monthly latency)
+statistical_nature: reanalysis_model
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: About 0.5 x 0.625 degree grid (50 km in latitude) is too coarse for urban scales; surface fields
+  carry reanalysis biases.
+notes: Page confirms start 1980 and ~50 km latitudinal resolution only. Data policy, Earthdata-login requirement,
+  collection DOIs and format were not confirmed on the fetched page (null / general knowledge); hourly time-averaged
+  collections exist (general knowledge).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://gmao.gsfc.nasa.gov/gmao-products/merra-2/
+  - https://api.crossref.org/works/10.1175/JCLI-D-16-0758.1

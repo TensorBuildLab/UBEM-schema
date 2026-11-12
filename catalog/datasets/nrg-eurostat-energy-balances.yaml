@@ -1,0 +1,48 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-eurostat-energy-balances
+title: Eurostat complete energy balances (nrg_bal_c)
+short_name: Eurostat energy balances
+publisher: Eurostat, European Commission
+landing_page: https://ec.europa.eu/eurostat/web/energy/data/energy-balances
+doi: null
+citation: Eurostat. Complete energy balances (nrg_bal_c). European Commission. Annual.
+reference_paper_doi: null
+license: Eurostat copyright policy (free reuse, commercial and non-commercial, with acknowledgement)
+access_level: open_download
+distributions:
+- {format: Eurostat database (TSV/CSV/SDMX), access_url: 'https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table',
+  api: false, registration_required: false}
+- {format: XLSX, access_url: 'https://ec.europa.eu/eurostat/web/energy/data/energy-balances', api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [energy_balances_annual, final_energy_consumption_by_sector_and_fuel]
+geographic_scope: multinational
+spatial_coverage:
+  countries: [EU]
+  description: EU Member States, EFTA, EU candidate and potential candidate countries, Energy Community parties;
+    UK only 1990 to 2019
+unit_of_observation: region
+spatial_granularity: nation
+temporal_coverage: {start: '1990', end: present}
+temporal_resolution: P1Y
+update_frequency: annual (first release usually December of Y+1, production cycle complete by April of Y+2)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys: [country_iso, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: National annual totals by sector and fuel; households and commercial/public services are covered
+  but no building-level resolution. Data are reported by national administrations to Eurostat and harmonized; revisions
+  follow validation.
+notes: Added (non-U.S.). 'EU' is used as a placeholder in countries because the field expects ISO 3166-1 alpha-2
+  codes (EU is a reserved exceptional code); the actual coverage is the list of countries above. The page read was
+  the reference metadata for energy balances (nrg_bal) rather than the nrg_bal_c table itself. License wording ('free
+  reuse') is from that metadata page; the exact CC-BY 4.0 statement was not seen. API availability was not confirmed
+  on the page, so access_level is open_download.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm']

@@ -1,0 +1,47 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-ideal
+title: 'IDEAL Household Energy Dataset: electricity, gas, contextual sensor data and survey data for 255 UK homes'
+short_name: IDEAL
+publisher: University of Edinburgh, School of Informatics (Edinburgh DataShare)
+landing_page: https://datashare.ed.ac.uk/handle/10283/3647
+doi: 10.7488/ds/2836
+citation: Pullinger, M., Kilgour, J., Goddard, N., et al. The IDEAL household energy dataset, electricity, gas,
+  contextual sensor data and survey data for 255 UK homes. Scientific Data 8, 146 (2021). https://doi.org/10.1038/s41597-021-00921-y
+reference_paper_doi: 10.1038/s41597-021-00921-y
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://doi.org/10.7488/ds/2836', api: false, registration_required: false}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [household_electricity_1s, gas_pulse_data, room_temperature_humidity, appliance_level_power, occupant_survey,
+  building_room_appliance_characteristics]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [GB]
+  description: 255 UK homes (specific areas not stated in the sources read)
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: '2016', end: 2018-06}
+temporal_resolution: PT1S
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 255
+record_count_note: 255 homes over a 23-month period ending June 2018 (mean participation 286 days); 39 homes with
+  plug-level and radiator monitoring
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Volunteer sample, not nationally representative; participation durations vary by home (mean 286
+  days); the detailed appliance-level subset is only 39 homes; locations anonymised.
+notes: 'Added beyond the candidate list: rare dataset combining electricity, gas, room temperature and building/occupant
+  survey data. Start year 2016 inferred from ''23 months ending June 2018''. The handle URL for the landing page
+  was not opened; the DOI and license are from the DataCite record. Electricity at 1 s, gas pulse-level, environmental
+  sensors at 12 s.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://api.datacite.org/dois/10.7488/ds/2836', 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y',
+    'https://api.crossref.org/works/10.1038/s41597-021-00921-y']

@@ -1,0 +1,61 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-energy-codes-status
+title: DOE Building Energy Codes Program state-level residential and commercial code results (State Portal data)
+short_name: BECP state code status
+publisher: U.S. DOE Building Energy Codes Program (PNNL)
+landing_page: https://energycodes.gov/state-portal
+doi: null
+citation: 'U.S. Department of Energy Building Energy Codes Program. State Portal, Available Data: StateLevelResidentialCodesEnergyUseIndex.xlsx
+  and StateLevelCommercialCodesEnergyUseIndex.xlsx.'
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: XLSX
+  access_url: https://energycodes.gov/state-portal
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- context_coupling
+content_types:
+- state_energy_code_status
+- code_energy_use_index
+- residential_and_commercial_codes
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: U.S. states
+unit_of_observation: state
+spatial_granularity: state_province
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: irregular
+update_frequency: not stated; file paths on the portal include 2026-09, which may indicate the last upload but was not confirmed
+statistical_nature: standard_or_code
+sampling_weights: null
+record_count: null
+record_count_note: Not applicable (one row set per state)
+join_keys: []
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Results are modeled energy use indices comparing each state's adopted code with the last six national model
+  codes (code equivalency), not a legal register of adopted code editions and effective dates; only XLSX downloads were found
+  (no API or CSV); residential and commercial are separate files; local jurisdictions that adopt stricter or different codes
+  than the state are not represented.
+notes: 'Machine-readable data exist: the State Portal ''Available Data'' section offers two XLSX files with the state-level
+  results behind the adoption status maps. License and the date of the last update were not stated (null); the status pages
+  at energycodes.gov/status could not be fetched (HTTP 403 for the automated reader), so adoption-edition fields and update
+  date were not confirmed. spatial_granularity state_province; join keys not verified (state names or FIPS in the files were
+  not inspected). Adoption status methodology as described by DOE: each state''s index is compared to the last six national
+  model codes. The files were not opened.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://energycodes.gov/state-portal
+  - https://www.energycodes.gov/status (HTTP 403, not readable)

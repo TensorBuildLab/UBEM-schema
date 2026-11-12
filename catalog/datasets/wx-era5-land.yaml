@@ -1,0 +1,56 @@
+id: wx-era5-land
+title: ERA5-Land hourly data from 1950 to present
+short_name: ERA5-Land
+publisher: ECMWF / Copernicus Climate Change Service (C3S)
+landing_page: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land
+doi: 10.24381/cds.e2161bac
+citation: Munoz Sabater, J. (2019). ERA5-Land hourly data from 1950 to present. Copernicus Climate Change Service
+  (C3S) Climate Data Store (CDS). https://doi.org/10.24381/cds.e2161bac
+reference_paper_doi: 10.5194/essd-13-4349-2021
+license: CC-BY-4.0
+access_level: registration_required
+distributions:
+- format: GRIB
+  access_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land
+  api: true
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- land_surface_temperature
+- soil_variables
+- near_surface_meteorology
+- surface_radiation
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '1950'
+  end: present
+temporal_resolution: PT1H
+update_frequency: daily (with latency)
+statistical_nature: reanalysis_model
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: About 9 km native grid, land only; offline land-surface simulation driven by ERA5 forcing with
+  no local data assimilation, so urban effects are not represented.
+notes: Page states 'CC-BY licence' (recorded as CC-BY-4.0). Free CDS account required (general knowledge).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land
+  - https://api.crossref.org/works/10.5194/essd-13-4349-2021

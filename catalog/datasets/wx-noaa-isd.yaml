@@ -1,0 +1,64 @@
+id: wx-noaa-isd
+title: NOAA NCEI Integrated Surface Database (ISD) / Global Hourly
+short_name: NOAA ISD
+publisher: NOAA National Centers for Environmental Information (NCEI)
+landing_page: https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
+doi: null
+citation: 'Smith, A., Lott, N., Vose, R. (2011). The Integrated Surface Database: Recent Developments and Partnerships.
+  Bulletin of the American Meteorological Society 92, 704-708.'
+reference_paper_doi: 10.1175/2011BAMS3015.1
+license: null
+access_level: open_download
+distributions:
+- format: ASCII (ISD, ISD-Lite)
+  access_url: https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
+  api: false
+  registration_required: false
+- format: CSV (Global Hourly via Data Access)
+  access_url: https://www.ncei.noaa.gov/access/search/data-search/global-hourly
+  api: true
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- surface_weather_observations
+- temperature
+- humidity
+- wind
+- pressure
+- cloud_cover
+- precipitation
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: station
+spatial_granularity: point_station
+temporal_coverage:
+  start: '1901'
+  end: present
+temporal_resolution: PT1H
+update_frequency: updated daily for active stations
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 35000
+record_count_note: '''over 35,000 stations'' with more than 14,000 active, per NCEI page'
+join_keys:
+- station_id
+- lat_lon
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Station coverage is uneven in space and time with gaps; no solar radiation in the standard record.
+notes: Hourly plus synoptic observations (sub-hourly in full ISD). The page states no license or terms of use and
+  no dataset DOI, so license is null. The Global Hourly search URL in the second distribution is from general knowledge
+  and was not opened.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
+  - https://api.crossref.org/works/10.1175/2011BAMS3015.1

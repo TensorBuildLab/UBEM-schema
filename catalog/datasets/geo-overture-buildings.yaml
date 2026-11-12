@@ -1,0 +1,60 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-overture-buildings
+title: Overture Maps Foundation buildings theme
+short_name: Overture buildings
+publisher: Overture Maps Foundation
+landing_page: https://docs.overturemaps.org/guides/buildings/
+doi: null
+citation: Overture Maps Foundation. Overture Maps buildings theme (building and building_part). https://docs.overturemaps.org/guides/buildings/.
+reference_paper_doi: null
+license: ODbL-1.0
+access_level: open_download
+distributions:
+- format: Parquet (GeoParquet) on Amazon S3 and Azure Blob Storage; format not named on the guide page
+  access_url: https://docs.overturemaps.org/guides/buildings/
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_footprints_polygon
+- building_parts
+- building_height_where_available
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global; sources include OpenStreetMap, Esri Community Maps, Instituto Geografico Nacional (Spain),
+    City of Vancouver, Microsoft and Google Open Buildings, and a dataset for East Asian countries
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Monthly releases (page shows release 2026-10-21.0)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Not stated on the guide page
+join_keys:
+- geometry
+- lat_lon
+- building_id
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Conflation of heterogeneous sources, so quality and attribute coverage vary by region. Height
+  only where a source supplies it (features of 900 m or more excluded). building_part comes only from OSM. ODbL
+  applies because OSM is a source.
+notes: No peer-reviewed descriptor found. A 2026 Research Square preprint (Juhasz and Hochmair, 10.21203/rs.3.rs-11038658/v1)
+  evaluates Overture but is not peer reviewed. The guide page does not list the full attribute schema; building_characteristics
+  role rests on the stated height field, so confirm class, subtype and num_floors against the schema reference before
+  relying on them. Used as the footprint source of GHS-OBAT (see geo-ghs-obat).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://docs.overturemaps.org/guides/buildings/

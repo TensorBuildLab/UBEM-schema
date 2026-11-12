@@ -1,0 +1,64 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-cmab
+title: 'CMAB: A Multi-Attribute Building Dataset of China'
+short_name: CMAB
+publisher: School of Architecture, Tsinghua University (Zhang, Zhao, Long)
+landing_page: https://doi.org/10.6084/m9.figshare.27992417
+doi: 10.6084/m9.figshare.27992417
+citation: 'Zhang, Y., Zhao, H., Long, Y. CMAB: A Multi-Attribute Building Dataset of China. Scientific Data 12,
+  430 (2025).'
+reference_paper_doi: 10.1038/s41597-025-04730-5
+license: CC-BY-4.0 (figshare record); the article itself is CC BY-NC-ND
+access_level: open_download
+distributions:
+- format: Standard GIS vector files by province and natural city (format not named; 272 GB in total)
+  access_url: https://doi.org/10.6084/m9.figshare.27992417
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_rooftop_polygon
+- building_height
+- building_function
+- building_age
+- building_quality
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - CN
+  description: China, 3,667 spatial cities
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Versioned figshare record (v7 listed by the figshare API in April 2025)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 31000000
+record_count_note: About 31 million buildings, 23.6 billion m2 of rooftops (Scientific Data abstract, March 2025)
+join_keys:
+- geometry
+- lat_lon
+- building_type
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: 'AI-generated attributes: rooftop extraction F1 89.93%, most attribute accuracies reported above
+  80%. Source data were not aligned to a single year. Attributes are estimated, not administrative records.'
+notes: Verified to exist. Data licence taken from the figshare API (CC BY 4.0); the paper abstract's CC BY-NC-ND
+  applies to the article. Data Records text lists rooftop, height, function, age and quality; the abstract also
+  lists structure, style and orientation. Imagery years not stated in the content read. registration_required not
+  tested.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-025-04730-5&resultType=core&format=json
+  - https://api.figshare.com/v2/articles/27992417
+  - https://api.crossref.org/works/10.1038/s41597-025-04730-5

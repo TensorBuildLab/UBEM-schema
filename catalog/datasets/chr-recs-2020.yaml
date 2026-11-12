@@ -1,0 +1,77 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-recs-2020
+title: 2020 Residential Energy Consumption Survey (RECS) public-use microdata
+short_name: RECS 2020
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/consumption/residential/data/2020/
+doi: null
+citation: U.S. Energy Information Administration. 2020 Residential Energy Consumption Survey (RECS) public use microdata file,
+  version 7 (January 2024).
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: CSV
+  access_url: https://www.eia.gov/consumption/residential/data/2020/index.php?view=microdata
+  api: false
+  registration_required: false
+- format: SAS
+  access_url: https://www.eia.gov/consumption/residential/data/2020/index.php?view=microdata
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- operation_use
+- calibration_validation
+content_types:
+- housing_unit_characteristics
+- household_characteristics
+- appliance_and_equipment_inventory
+- thermostat_behavior
+- energy_consumption_annual
+- end_use_estimates
+- energy_insecurity
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States (50 states and DC)
+unit_of_observation: household
+spatial_granularity: state_province
+temporal_coverage:
+  start: '2020'
+  end: '2020'
+temporal_resolution: P1Y
+update_frequency: 'irregular, about every 4 to 5 years (survey years listed: 1993, 1997, 2001, 2005, 2009, 2015, 2020, 2024)'
+statistical_nature: sample_survey_weighted
+sampling_weights: NWEIGHT plus 60 jackknife replicate weights (NWEIGHT1-NWEIGHT60); confirmed in the public CSV header; EIA
+  methodology brief states replicates were built with the Jackknife method
+record_count: 18496
+record_count_note: 18,496 household records counted directly in the v7 public CSV (EIA page says nearly 18,500 households);
+  799 columns
+join_keys:
+- fips_state
+- census_region_division
+- climate_zone_iecc
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: State identifiers are on the public file (state_name has 51 values, 50 states plus DC) but EIA warns the
+  sample was not designed for reliable state-level estimates for all variables; no sub-state geography except an urban type
+  code (UATYP10); public file has no address; imputation flags (Z* variables) are included; estimates must use NWEIGHT and
+  replicate weights; data collected late 2020 to early 2021 (pandemic period), which may affect occupancy-related variables.
+notes: 'Energy consumption variables are derived from household energy-supplier billing data via EIA modeling, not metered
+  by the survey. Public file: recs2020_public_v7 (Jan 2024; earlier versions Jul 2022 preliminary, Jun 2023 final). A 2024
+  RECS is listed on EIA''s site but was not examined here. The 18,496 count was derived by reading the file and matches an
+  independent third-party codebook; EIA page states only ''nearly 18,500''. BA_climate and IECC_climate_code variables are
+  present in the file. The EIA descriptor paper does not exist, so reference_paper_doi is null.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.eia.gov/consumption/residential/data/2020/
+  - https://www.eia.gov/consumption/residential/data/2020/index.php?view=microdata
+  - https://www.eia.gov/consumption/residential/data/2020/csv/recs2020_public_v7.csv (header and row count inspected)
+  - https://www.eia.gov/consumption/residential/data/2020/pdf/microdata-guide.pdf (found via search, weights NWEIGHT, NWEIGHT1-NWEIGHT60)

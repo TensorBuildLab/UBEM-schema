@@ -1,0 +1,76 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-3dbag
+title: '3D BAG: 3D building models of the Netherlands'
+short_name: 3D BAG
+publisher: 3D geoinformation research group, Delft University of Technology (TU Delft)
+landing_page: https://3dbag.nl/
+doi: null
+citation: Peters, R., Dukai, B., Vitalis, S., van Liempt, J., Stoter, J. Automated 3D Reconstruction of LoD2 and
+  LoD1 Models for All 10 Million Buildings of the Netherlands. Photogrammetric Engineering & Remote Sensing 88(3),
+  165-170 (2022).
+reference_paper_doi: 10.14358/pers.21-00032r2
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- format: CityJSON
+  access_url: https://docs.3dbag.nl/en/
+  api: false
+  registration_required: false
+- format: GeoPackage
+  access_url: https://docs.3dbag.nl/en/
+  api: false
+  registration_required: false
+- format: Wavefront OBJ
+  access_url: https://docs.3dbag.nl/en/
+  api: false
+  registration_required: false
+- format: WMS and WFS web services
+  access_url: https://docs.3dbag.nl/en/
+  api: true
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_3d_model_lod1_2
+- building_footprint
+- roof_height_statistics
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - NL
+  description: The Netherlands, all buildings in the BAG register
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Updated regularly; the 4TU.ResearchData record states a monthly update (search snippet), the documentation
+  gives no fixed schedule
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: 10000000
+record_count_note: '''All 10 million buildings of the Netherlands'' per the title of the descriptor paper (2022);
+  a source.coop catalog lists about 10.8 million but is not the publisher'
+join_keys:
+- geometry
+- lat_lon
+- building_id
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Automatically reconstructed from BAG footprints and AHN lidar, so geometry errors occur where
+  lidar is outdated or missing; LoD levels offered are LoD1.2, LoD1.3 and LoD2.2.
+notes: Documentation (docs.3dbag.nl) states CC BY 4.0 and the formats and LoDs above; it states no building count.
+  Attributes inherited from BAG (e.g. construction year, status) are plausible but were not verified, so building_characteristics
+  is not claimed. persistent_identifier is true because versioned releases are deposited at 4TU.ResearchData (seen
+  only via search results, not fetched); no single dataset DOI recorded. Peer-reviewed descriptor chosen is Peters
+  et al. 2022 (PERS), a method and dataset paper; Crossref DOI verified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://docs.3dbag.nl/en/
+  - https://www.3dbag.nl/en/download
+  - https://api.crossref.org/works/10.14358/pers.21-00032r2

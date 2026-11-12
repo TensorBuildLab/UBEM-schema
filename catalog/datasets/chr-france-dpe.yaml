@@ -1,0 +1,70 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-france-dpe
+title: DPE (diagnostic de performance énergétique) logements existants, depuis juillet 2021, ADEME open data
+short_name: France DPE (existing dwellings)
+publisher: ADEME (Agence de la transition écologique) with the Ministry in charge of housing
+landing_page: https://data.ademe.fr/datasets/dpe03existant
+doi: null
+citation: ADEME. Diagnostics de performance énergétique (DPE) des logements existants (depuis juillet 2021), data.ademe.fr,
+  dataset dpe03existant. Licence Ouverte 2.0.
+reference_paper_doi: null
+license: Licence Ouverte 2.0 (Etalab)
+access_level: open_api
+distributions:
+- format: API, tabular export (CSV/Excel), DuckDB SQL access
+  access_url: https://data.ademe.fr/datasets/dpe03existant
+  api: true
+  registration_required: false
+- format: PostgreSQL dump (about 70 GB, weekly)
+  access_url: https://data.ademe.fr/datasets/dpe03existant
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- calibration_validation
+content_types:
+- energy_performance_certificates
+- building_characteristics
+- heating_and_dhw_systems
+- envelope_quality
+- calculated_energy_consumption
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - FR
+  description: France; DPEs established from 1 July 2021 on existing dwellings (earlier DPEs, new buildings and tertiary buildings
+    are in other ADEME datasets)
+unit_of_observation: certificate_per_dwelling_or_building
+spatial_granularity: building
+temporal_coverage:
+  start: 2021-07
+  end: present
+temporal_resolution: irregular
+update_frequency: weekly (page shows update of 2026-11-11)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: 16003705
+record_count_note: 16,003,705 records on the dataset page and API on 2026-11-12
+join_keys:
+- address
+- postal_code
+- building_type
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Consumption is calculated by the conventional DPE method (3CL), not metered; DPEs only exist for dwellings
+  that were sold, rented or otherwise required to have one, so the stock is not covered uniformly; records can be duplicated
+  or superseded; geocoding quality varies (score_ban and statut_geocodage columns); personal-address exposure is limited by
+  publisher rules.
+notes: 'Fields verified via the data-fair API schema (230 columns): BAN address and INSEE code, postal code, Lambert coordinates
+  (coordonnee_cartographique_x/y_ban), _geopoint, type_batiment, periode_construction, surface fields, heating generator and
+  envelope-quality fields, conso_5_usages_*. Hence building-level (address) granularity. Data dictionary is attached to the
+  dataset page. The reform of 1 July 2021 changed the method; older DPEs are separate datasets (not checked).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://data.ademe.fr/datasets/dpe03existant
+  - https://data.ademe.fr/data-fair/api/v1/datasets/dpe03existant (schema, count, license inspected)

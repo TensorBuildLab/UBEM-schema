@@ -1,0 +1,64 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-heris-raster-footprints
+title: A national dataset of rasterized building footprints for the U.S.
+short_name: Heris rasterized footprints
+publisher: U.S. Geological Survey (data release); authors Heris, Foks, Bagstad, Troy, Ancona
+landing_page: https://data.usgs.gov/datacatalog/data/USGS:5e432002e4b0edb47be84652
+doi: 10.5066/P9J2Y1WG
+citation: Heris, M.P., Foks, N.L., Bagstad, K.J., Troy, A., Ancona, Z.H. A rasterized building footprint dataset
+  for the United States. Scientific Data 7, 207 (2020).
+reference_paper_doi: 10.1038/s41597-020-0542-3
+license: Not verified for the USGS data release (the article is CC BY)
+access_level: open_download
+distributions:
+- format: 'Raster layers (30 m: footprint coverage, building count, size statistics); download format not verified'
+  access_url: https://data.usgs.gov/datacatalog/data/USGS:5e432002e4b0edb47be84652
+  api: false
+  registration_required: false
+- format: Earth Engine community copy (six derived layers)
+  access_url: https://gee-community-catalog.org/projects/usbuild_raster/
+  api: true
+  registration_required: true
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprint_coverage_raster
+- building_count_raster
+- building_size_statistics_raster
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: 48 conterminous states (Alaska and Hawaii excluded)
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: '2018'
+  end: '2018'
+temporal_resolution: static
+update_frequency: Single release (USGS data release dated 2020-02-28 per search result)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Raster product; no record count
+join_keys:
+- grid_cell
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: 30 m cells derived from the 2018 Microsoft US vector footprints; precision high but recall falls
+  for small buildings; errors in the source footprints are flagged by the authors.
+notes: The USGS catalog page returned HTTP 403 to the fetch tool; DOI 10.5066/P9J2Y1WG, release date, and download
+  location come from web-search results and the Scientific Data article, not from the USGS page itself. The figshare
+  record 10.6084/m9.figshare.12444776 is only a metadata record (CC0). Temporal year 2018 is the vintage of the
+  source Microsoft release, not imagery dates. Heris et al. is itself the peer-reviewed descriptor for this derived
+  product.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-020-0542-3&resultType=core&format=json
+  - https://api.figshare.com/v2/articles/12444776
+  - https://api.crossref.org/works/10.1038/s41597-020-0542-3

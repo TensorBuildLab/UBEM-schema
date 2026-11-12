@@ -1,0 +1,57 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-uk-tus
+title: United Kingdom Time Use Survey, 2014-2015 (UK Data Service study SN 8128)
+short_name: UKTUS 2014-15
+publisher: Centre for Time Use Research, University of Oxford (data distributed by the UK Data Service)
+landing_page: https://datacatalogue.ukdataservice.ac.uk/studies/study/8128
+doi: 10.5255/UKDA-SN-8128-1
+citation: United Kingdom Time Use Survey, 2014-2015. UK Data Service, SN 8128, doi:10.5255/UKDA-SN-8128-1.
+reference_paper_doi: null
+license: UK Data Service End User Licence
+access_level: registration_required
+distributions:
+- format: data files via UK Data Service download after registration (formats not verified)
+  access_url: https://datacatalogue.ukdataservice.ac.uk/studies/study/8128
+  api: false
+  registration_required: true
+ubem_roles:
+- operation_use
+content_types:
+- time_diary_activities
+- household_and_individual_questionnaires
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - GB
+  description: United Kingdom; people aged 8 and over; fieldwork April 2014 to December 2015
+unit_of_observation: person_day
+spatial_granularity: unknown
+temporal_coverage:
+  start: '2014'
+  end: '2015'
+temporal_resolution: null
+update_frequency: one-off survey (2014-2015)
+statistical_nature: sample_survey_weighted
+sampling_weights: "Not verified: microdata are access-restricted and the weight variables could not be checked (author check 2026-11-12)."
+record_count: null
+record_count_note: Over 7,600 people in over 4,000 households returned at least one completed diary in the main data collection
+  period (figure from a beta release, so final may differ)
+join_keys:
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Available only to registered UK Data Service users under the End User Licence (commercial use needs data
+  owner approval); single survey wave, so no trend and no post-2015 update; person-level diaries with limited location detail;
+  sample is not designed for sub-national estimates.
+notes: Access terms (registered users subject to End User Licence) and the DOI come from UK Data Service record text as quoted
+  in search results; the study page itself rendered only its title for the automated fetcher. Principal investigators and
+  creator list were not verified, so none is named in the citation. Weights, diary resolution, geographic granularity and
+  the record count were not verified (null). Sample size comes from a beta release description.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://datacatalogue.ukdataservice.ac.uk/studies/study/8128
+  - https://doi.org/10.5255/UKDA-SN-8128-1 (redirects to the study page)

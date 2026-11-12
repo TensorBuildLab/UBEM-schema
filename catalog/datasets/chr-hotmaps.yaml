@@ -1,0 +1,102 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-hotmaps
+title: Hotmaps building stock and heated gross floor area data (open data repositories)
+short_name: Hotmaps building stock
+publisher: Hotmaps project (Horizon 2020 research project)
+landing_page: https://wiki.hotmaps.hevs.ch/en/Hotmaps-open-data-repositories
+doi: null
+citation: 'Hotmaps project. Hotmaps open data repositories (building stock, gfa_tot_curr_density and related GitLab repositories).
+  Method: Müller, A. et al. 2019, Energies 12(24), 4789.'
+reference_paper_doi: 10.3390/en12244789
+license: null
+access_level: open_download
+distributions:
+- format: GitLab repositories (file formats not verified; 100 m rasters in EPSG:3035 per Hotmaps wiki)
+  access_url: https://gitlab.com/hotmaps/building-stock
+  api: false
+  registration_required: false
+- format: GitLab repository (heated gross floor area, 100 m grid)
+  access_url: https://gitlab.com/hotmaps/gfa_tot_curr_density
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+content_types:
+- building_stock_nuts0
+- heated_gross_floor_area_density
+- heated_volume_density
+- construction_period_shares
+- heat_demand_density
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - AT
+  - BE
+  - BG
+  - HR
+  - CY
+  - CZ
+  - DK
+  - EE
+  - FI
+  - FR
+  - DE
+  - GR
+  - HU
+  - IE
+  - IT
+  - LV
+  - LT
+  - LU
+  - MT
+  - NL
+  - PL
+  - PT
+  - RO
+  - SK
+  - SI
+  - ES
+  - SE
+  - GB
+  - 'NO'
+  - IS
+  - CH
+  description: EU28 plus Norway, Iceland and Switzerland (gfa_tot_curr_density)
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: '2012'
+  end: '2012'
+temporal_resolution: static
+update_frequency: not stated; repositories created 2017 (building-stock Sep 2017, gfa_tot_curr_density Oct 2017)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Not applicable (raster grid and national tables)
+join_keys:
+- grid_cell
+- country_iso
+- nuts_region
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Gross floor area and heat demand density maps are top-down estimates (statistical building stock data disaggregated
+  to a 100 m grid using proxy data), not observed building data; residential and non-residential split relies on modeled allocation;
+  the building-stock repository is at national (NUTS0) resolution; construction-period shares end in 2014.
+notes: The GFA density map has reference year 2012 (gitlab page); construction periods run to 2014; scenario data to 2050
+  exist in other repositories. License was not stated on the GitLab project pages or the wiki (the wiki text itself is CC
+  BY 4.0, which is not the data license), so license is null; check each repository LICENSE file. The Energies 2019 article
+  (CC BY 4.0) describes the GFA and heat demand method. Data file formats and the record count were not verified. 'building-stock'
+  repo description mentions EU28 down to local level; the wiki states NUTS0 resolution. Reported role is building_characteristics
+  although the heat demand density maps are modeled outputs.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.hotmaps-project.eu/
+  - https://wiki.hotmaps.hevs.ch/en/Hotmaps-open-data-repositories
+  - https://gitlab.com/hotmaps/building-stock
+  - https://gitlab.com/hotmaps/gfa_tot_curr_density
+  - https://api.crossref.org/works/10.3390/en12244789

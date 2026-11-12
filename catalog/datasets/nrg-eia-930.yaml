@@ -1,0 +1,51 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-eia-930
+title: Form EIA-930 Hourly and Daily Balancing Authority Operations (Hourly Electric Grid Monitor)
+short_name: EIA-930
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/electricity/gridmonitor/
+doi: null
+citation: U.S. Energy Information Administration. Form EIA-930 Hourly and Daily Balancing Authority Operations Report
+  data (Hourly Electric Grid Monitor). Washington, DC.
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_api
+distributions:
+- {format: JSON, access_url: 'https://www.eia.gov/opendata/', api: true, registration_required: true}
+- {format: CSV, access_url: 'https://www.eia.gov/electricity/gridmonitor/', api: false, registration_required: false}
+- {format: XLSX, access_url: 'https://www.eia.gov/electricity/gridmonitor/', api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [electricity_demand_hourly, day_ahead_demand_forecast, net_generation_by_source, interchange, co2_emissions_estimates]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: Contiguous U.S. balancing authorities (Lower 48); some subregional demand for select BAs
+unit_of_observation: balancing_authority
+spatial_granularity: utility_service_territory
+temporal_coverage: {start: 2015-07, end: present}
+temporal_resolution: PT1H
+update_frequency: hourly (demand about one hour after the operating hour, revisions next day; other fields by 11:00
+  ET next day)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys: [balancing_authority, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Balancing-authority aggregate demand, not building level. Pseudo-ties and dynamic scheduling
+  distort demand for some BAs; day-ahead forecasts not comparable to actual demand for some BAs; interchange reports
+  often mismatch between neighbors; DST transition days are often misreported; generation totals cover only metered
+  units; time zones vary by BA.
+notes: Collection began 1 July 2015, but the API and interactive page serve data only from 1 January 2019; earlier
+  data are in downloadable flat files (EIA about page). Subregion demand, generation by source and CO2 estimates
+  begin 1 July 2018; battery storage appears as a source from 1 January 2025. The EIA Open Data API needs a free
+  API key. Spatial granularity enum has no balancing-authority value, utility_service_territory is the nearest.
+  Number of BAs not stated on the pages checked. Public domain per EIA Copyright and Reuse page.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.eia.gov/electricity/930-content/about.html', 'https://docs.catalyst.coop/pudl/en/stable/data_sources/eia930.html',
+    'https://www.eia.gov/opendata/documentation.php', 'https://www.eia.gov/about/copyrights_reuse.php']

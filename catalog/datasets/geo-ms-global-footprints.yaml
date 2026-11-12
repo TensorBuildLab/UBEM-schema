@@ -1,0 +1,61 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-ms-global-footprints
+title: Microsoft GlobalMLBuildingFootprints
+short_name: MS Global ML Building Footprints
+publisher: Microsoft
+landing_page: https://github.com/microsoft/GlobalMLBuildingFootprints
+doi: null
+citation: Microsoft. Global ML Building Footprints. GitHub repository, https://github.com/microsoft/GlobalMLBuildingFootprints.
+reference_paper_doi: null
+license: CDLA-Permissive-2.0
+access_level: open_download
+distributions:
+- format: Line-delimited GeoJSON (gzip, partitioned by country and quadkey)
+  access_url: https://bfppub.blob.core.windows.net/%24web/2026-08-13/dataset-links.csv
+  api: false
+  registration_required: false
+- format: Copy on Microsoft Planetary Computer
+  access_url: https://github.com/microsoft/GlobalMLBuildingFootprints
+  api: true
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints_polygon
+- building_height_estimate_where_available
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: 225 regions per the 2026-08-13 update (30,340 tiles); gaps where imagery predates 2014 or detection
+    probability was low
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: '2014'
+  end: '2024'
+temporal_resolution: static
+update_frequency: Periodic refresh; latest update on the page is 2026-08-13 (1,945 tiles updated)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: 'Page is inconsistent (read 2026-11-12): intro says about 1.4 billion buildings, FAQ says 999
+  million footprint polygons; no single figure recorded'
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Heights are neural-network estimates averaged within each polygon (meters), -1 where no estimate
+  exists; height coverage is partial (see buildings-with-height-coverage.geojson). Imagery period 2014-2024 means
+  building vintage varies by tile. Files are gzipped line-delimited GeoJSON with a .csv.gz extension.
+notes: 'No peer-reviewed descriptor found; reference_paper_doi null. Temporal coverage is the Bing Maps imagery
+  period stated on the README, not a snapshot date. Height validation accuracy is not stated on the page. License
+  as stated: CDLA Permissive 2.0 (the older US-only release is ODbL).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://github.com/microsoft/GlobalMLBuildingFootprints

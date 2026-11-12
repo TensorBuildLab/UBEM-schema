@@ -1,0 +1,64 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-google-open-buildings-25d
+title: Google Open Buildings 2.5D Temporal Dataset
+short_name: Open Buildings 2.5D Temporal
+publisher: Google Research
+landing_page: https://sites.research.google/gr/open-buildings/temporal/
+doi: null
+citation: Sirko, W., et al. High-Resolution Building and Road Detection from Sentinel-2. arXiv:2310.11622, 2023.
+reference_paper_doi: null
+license: CC-BY-4.0 OR ODbL-1.0 (user's choice); also uses Copernicus Sentinel data
+access_level: open_download
+distributions:
+- format: Raster tiles (building presence, building height, fractional building count; 50 cm grid; download file
+    format not verified)
+  access_url: https://sites.research.google/gr/open-buildings/temporal/
+  api: false
+  registration_required: false
+- format: Earth Engine image collection open-buildings-temporal_v1
+  access_url: https://sites.research.google/gr/open-buildings/temporal/
+  api: true
+  registration_required: true
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_presence_raster
+- building_height_raster
+- fractional_building_count
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Africa, South Asia, South-East Asia, Latin America and the Caribbean; country list on the publisher
+    page is 'subject to change'; sensitive areas excluded
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: '2016'
+  end: '2023'
+temporal_resolution: P1Y
+update_frequency: Annual layers for 2016-2023; version v1 (from the Earth Engine identifier)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Raster product; no record count
+join_keys:
+- grid_cell
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Effective resolution about 4 m (raster at 50 cm). Height is relative height above ground capped
+  at 100 m and must be masked by building presence. Height mean absolute error of 1.5 m was evaluated only in North
+  America, Europe and Japan, not in the covered regions.
+notes: 'Descriptor is an arXiv preprint (not peer reviewed): reference_paper_doi null. A 2026 Gates Open Research
+  paper (10.12688/gatesopenres.16386.1) analyses building characteristics from Google Open Buildings but is not
+  a dataset descriptor and was not used. Raster download format is not stated on the fetched page.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://sites.research.google/gr/open-buildings/temporal/
+  - https://sites.research.google/gr/open-buildings/
+  - https://api.datacite.org/dois/10.48550/arXiv.2310.11622

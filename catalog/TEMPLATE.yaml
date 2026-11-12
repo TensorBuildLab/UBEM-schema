@@ -1,0 +1,52 @@
+# Meta-Urban catalog entry template (DatasetProfile, schema v2.0).
+# One file per dataset: catalog/datasets/<id>.yaml
+# Allowed values for every enum field are defined in schema/meta_urban.yaml and listed in catalog/README.md.
+# Rule: never guess. If a value cannot be verified from an official page or a peer-reviewed source, write null
+# and say why in `notes`.
+
+id: cbecs-2018                       # lowercase-kebab, unique, stable
+title: 2018 Commercial Buildings Energy Consumption Survey (CBECS) public-use microdata
+short_name: CBECS 2018
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/consumption/commercial/data/2018/
+doi: null                            # dataset DOI if one exists, else null
+citation: "U.S. Energy Information Administration. 2018 Commercial Buildings Energy Consumption Survey public use microdata. 2022."
+reference_paper_doi: null            # DOI of a peer-reviewed descriptor/methods paper, if any
+license: US-Government-Public-Domain # SPDX id where possible (CC-BY-4.0, ODbL-1.0, CDLA-Permissive-2.0, ...), else a short string
+access_level: open_download          # enum AccessLevel
+distributions:
+  - format: CSV                      # CSV, XLSX, GeoJSON, GeoParquet, Parquet, Shapefile, CityGML, CityJSON, EPW, NetCDF, GRIB, HDF5, JSON, SAS, ...
+    access_url: https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata
+    api: false
+    registration_required: false
+ubem_roles: [building_characteristics, calibration_validation]   # enum UBEMRole, list, primary role first
+content_types: [building_characteristics, energy_consumption_annual, end_use_estimates]  # free text, snake_case
+geographic_scope: national           # enum GeographicScope
+spatial_coverage:
+  countries: [US]                    # ISO 3166-1 alpha-2 list, or [GLOBAL]
+  description: United States (50 states and DC)
+unit_of_observation: building        # what one record describes: building, meter, household, station, grid_cell, region, person_day, ...
+spatial_granularity: census_region_division   # enum SpatialGranularity: finest location detail released publicly
+temporal_coverage:
+  start: "2018"
+  end: "2018"                        # or "present" for live data
+temporal_resolution: P1Y             # ISO 8601 duration (PT1M, PT15M, PT1H, P1D, P1M, P1Y), or "static" or "irregular"
+update_frequency: about every 4 to 6 years  # free text
+statistical_nature: sample_survey_weighted  # enum StatisticalNature
+sampling_weights: "FINALWT plus 151 jackknife replicate weights (FINALWT1-FINALWT151)"  # null if not applicable
+record_count: 6436                   # number of records/buildings/stations as stated by publisher, else null
+record_count_note: "6,436 sampled buildings representing about 5.9 million U.S. commercial buildings"
+join_keys: [census_region_division, climate_zone_ashrae, building_type]  # enum JoinKey list
+variables_documented: true           # is there a codebook / data dictionary
+machine_readable: true
+versioned: true
+persistent_identifier: false         # DOI or equivalent PID
+known_limitations: >-
+  Public-use file suppresses location below census division; values are top-coded and imputed
+  (imputation flags Z*); estimates must use weights.
+notes: null
+verified:
+  date: "2026-11-12"
+  by: agent                          # agent | author
+  sources_checked:
+    - https://www.eia.gov/consumption/commercial/data/2018/

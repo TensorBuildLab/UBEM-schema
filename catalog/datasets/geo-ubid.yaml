@@ -1,0 +1,60 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-ubid
+title: Unique Building Identifier (UBID)
+short_name: UBID
+publisher: Pacific Northwest National Laboratory (PNNL), U.S. Department of Energy
+landing_page: https://github.com/pnnl/buildingid
+doi: null
+citation: 'U.S. Department of Energy. Unique Building Identifier (UBID): Public Sector Implementation Guide. OSTI
+  1764638 (2021). doi:10.2172/1764638.'
+reference_paper_doi: null
+license: BSD (3-Clause per the Ruby gem; DOE CODE lists BSD 2-Clause)
+access_level: open_download
+distributions:
+- format: Open-source reference implementations (C#, Java, JavaScript, PL/pgSQL, Python, Ruby)
+  access_url: https://github.com/pnnl/buildingid
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_identifier_code
+- footprint_bounding_box_code
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Encoding scheme usable anywhere; adopted by several U.S. local governments and ENERGY STAR Portfolio
+    Manager
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Not applicable (identifier scheme and code)
+statistical_nature: standard_or_code
+sampling_weights: null
+record_count: null
+record_count_note: Not a dataset; no records
+join_keys:
+- ubid
+variables_documented: true
+machine_readable: true
+versioned: null
+persistent_identifier: false
+known_limitations: Derived from a footprint's grid reference (builds on Open Location Code), so it depends on the
+  footprint geometry used and changes if that geometry changes. Identifier only, carries no building attributes.
+notes: Included as a join key standard, not data. No ANSI or BOMA standard designation was found in the search results,
+  so the entry says 'standard_or_code' for its role as an open specification only. The pnnl.gov and GitHub pages
+  were reached only through web-search snippets (the fetch attempts for ubid.pnnl.gov, pnnl.gov/projects/building-unique-identifier
+  and github.com/pnnl/ubid failed), so licence wording is unresolved between BSD 2- and 3-clause. The OSTI guide
+  is a DOE technical report (Crossref DOI verified), not peer reviewed.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://github.com/pnnl/buildingid
+  - https://www.pnnl.gov/unique-building-identification
+  - https://www.osti.gov/doecode/biblio/7609
+  - https://api.crossref.org/works/10.2172/1764638

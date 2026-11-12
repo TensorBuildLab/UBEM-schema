@@ -1,0 +1,64 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-wsf3d
+title: World Settlement Footprint 3D (WSF 3D)
+short_name: WSF 3D
+publisher: German Aerospace Center (DLR), Earth Observation Center
+landing_page: https://geoservice.dlr.de/web/datasets/wsf_3d
+doi: null
+citation: Esch, T., Brzoska, E., Dech, S., Leutner, B., Palacios-Lopez, D., Metz-Marconcini, A., Marconcini, M.,
+  Roth, A., Zeidler, J. World Settlement Footprint 3D - A first three-dimensional survey of the global building
+  stock. Remote Sensing of Environment 270, 112877 (2022).
+reference_paper_doi: 10.1016/j.rse.2021.112877
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- format: GeoTIFF (LZW, 1 x 1 degree tiles; building area, volume, fraction, height)
+  access_url: https://download.geoservice.dlr.de/WSF3D/files
+  api: false
+  registration_required: false
+- format: WMS and WMTS vector tiles
+  access_url: https://geoservice.dlr.de/eoc/land/wms
+  api: true
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_area
+- building_volume
+- building_fraction
+- building_height
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global; accuracy assessed with 3D building models from 19 regions covering about 86,000 km2
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Release 2023-02-15 (layer names carry V02); no update schedule stated
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Raster product; no record count
+join_keys:
+- grid_cell
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: About 90 m grid (2.8 arcsec, coarser toward the poles); not individual buildings. Reference year
+  of source imagery not stated on the dataset page.
+notes: Dataset page also cites Esch et al. 2020 (Remote Sensing 12, 2391, doi 10.3390/rs12152391) for the underlying
+  settlement footprint work; not independently verified in Crossref. A dataset DOI was not found on the DLR page,
+  so doi is null. Temporal reference year left null because it was not stated on the page checked and the RSE paper
+  was not read in full.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://geoservice.dlr.de/web/datasets/wsf_3d
+  - https://api.crossref.org/works/10.1016/j.rse.2021.112877

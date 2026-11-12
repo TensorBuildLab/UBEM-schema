@@ -1,0 +1,55 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-desnz-subnational
+title: Subnational electricity and gas consumption statistics (Great Britain; LSOA, MSOA, local authority, postcode)
+short_name: DESNZ subnational energy
+publisher: Department for Energy Security and Net Zero (DESNZ), UK Government
+landing_page: https://www.gov.uk/government/collections/sub-national-electricity-consumption-data
+doi: null
+citation: Department for Energy Security and Net Zero. Subnational electricity and gas consumption statistics. GOV.UK.
+  Annual accredited official statistics.
+reference_paper_doi: null
+license: OGL-UK-3.0
+access_level: open_download
+distributions:
+- {format: spreadsheet/CSV (format not stated on page), access_url: 'https://www.gov.uk/government/collections/sub-national-electricity-consumption-data',
+  api: false, registration_required: false}
+- {format: spreadsheet/CSV (format not stated on page), access_url: 'https://www.gov.uk/government/organisations/department-of-energy-climate-change/series/sub-national-gas-consumption-data',
+  api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [electricity_consumption_annual_by_meter_aggregates, gas_consumption_annual, domestic_nondomestic_split,
+  meter_counts]
+geographic_scope: national
+spatial_coverage:
+  countries: [GB]
+  description: Great Britain (England, Wales, Scotland); LSOA/MSOA for England and Wales, data zones and intermediate
+    zones for Scotland; postcode level for domestic data
+unit_of_observation: region
+spatial_granularity: postal_code
+temporal_coverage: {start: '2013', end: '2024'}
+temporal_resolution: P1Y
+update_frequency: annual (December release; 2025 data due December 2026)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: '2024: 31.8 million electricity meters (29.3 million domestic) and 24.9 million gas meters (summary
+  report)'
+join_keys: [postal_code, small_statistical_area, country_iso]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Aggregated meter-point records, not individual buildings; electricity not weather corrected,
+  gas is weather corrected; gas year is mid-May to mid-May and non-half-hourly electricity covers February to January;
+  domestic/non-domestic split uses profile classes (electricity) and a 73,200 kWh/year threshold (gas); unique non-standard
+  gas sites excluded. Postcode-level data are Official Statistics (not accredited), and earlier postcode years are
+  experimental.
+notes: 'Added (non-U.S.). Record coverage 2013 to 2024 is the span stated for the summary reports and postcode data
+  on the collection page; local-authority series are reported in some DESNZ publications from 2005, which was not
+  verified here. join_keys uses fips_county only as a placeholder for area codes: no enum fits UK LSOA/MSOA codes,
+  so postal_code and country_iso are the usable keys; this gap should be flagged for the schema. Spatial granularity
+  postal_code reflects the finest public geography (domestic postcode level); the LSOA/MSOA level is the accredited
+  product.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.gov.uk/government/collections/sub-national-electricity-consumption-data', 'https://www.gov.uk/government/statistics/subnational-electricity-and-gas-consumption-summary-report-2024/subnational-electricity-and-gas-consumption-summary-report-2024--2']

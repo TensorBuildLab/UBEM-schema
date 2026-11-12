@@ -1,0 +1,57 @@
+id: ctx-egrid
+title: Emissions & Generation Resource Integrated Database (eGRID)
+short_name: eGRID
+publisher: U.S. Environmental Protection Agency (EPA)
+landing_page: https://www.epa.gov/egrid
+doi: null
+citation: U.S. EPA. Emissions & Generation Resource Integrated Database (eGRID). https://www.epa.gov/egrid
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: XLSX
+  access_url: https://www.epa.gov/egrid/download-data
+  api: false
+  registration_required: false
+ubem_roles:
+- context_coupling
+content_types:
+- grid_emission_rates
+- generation
+- resource_mix
+- plant_level_emissions
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States
+unit_of_observation: power_plant_and_region
+spatial_granularity: utility_service_territory
+temporal_coverage:
+  start: null
+  end: '2023'
+temporal_resolution: P1Y
+update_frequency: roughly annual
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- balancing_authority
+- fips_state
+- utility_id
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Annual average emission rates only (no hourly or marginal rates); data lag the data year by about
+  two years.
+notes: Page confirms latest data year is eGRID2023 and the content types listed; it did not state release date,
+  granularity or file formats. XLSX workbook and plant/subregion/state levels are general knowledge. License given
+  by US Government public-domain status (not stated on page). spatial_granularity is the closest enum for eGRID
+  subregions.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.epa.gov/egrid

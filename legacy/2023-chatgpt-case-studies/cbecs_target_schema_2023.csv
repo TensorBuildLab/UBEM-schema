@@ -1,0 +1,5 @@
+Name of Dataset/ Website,String value
+Effective coverage,"Format such as “GeoJSON” defining the effective area; or geographic information such as country, state, zip code, etc."
+Sample or Probability,Select from “Sample” and “Probability”. The unit of sample is number of buildings; the probability is unitless
+Building characteristics distribution list,"List all the available building characteristics included in a list, e.g., [“floorspace”, “building envelope”, “building systems”, “principal building activity”, “number of story”] "
+Joint distribution list,"Subset of building characteristics distribution list only listing joint distribution groups, e.g., [[“floorspace”, “number of story”], [“building systems”, “principal building activity”]]; if no joint distribution, the value is an empty list []"

@@ -1,0 +1,62 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-open-city-model
+title: 'Open City Model (OCM): open CityGML data for U.S. buildings'
+short_name: Open City Model
+publisher: BuildZero.Org (operator inferred from the project page; not stated explicitly)
+landing_page: https://github.com/opencitymodel/opencitymodel
+doi: null
+citation: Open City Model. LOD1 CityGML building models for the United States. https://github.com/opencitymodel/opencitymodel.
+reference_paper_doi: null
+license: ODbL-1.0
+access_level: open_download
+distributions:
+- format: CityGML (zipped, by state and county; about 40,000 buildings per file)
+  access_url: https://github.com/opencitymodel/opencitymodel
+  api: false
+  registration_required: false
+- format: CityJSON
+  access_url: https://github.com/opencitymodel/opencitymodel
+  api: false
+  registration_required: false
+- format: Parquet
+  access_url: https://github.com/opencitymodel/opencitymodel
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_3d_model_lod1
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States, organized by state and county
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Not stated; state indexes reference a releases/2019-jun folder and no later release is mentioned
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 125000000
+record_count_note: '''About 125 million buildings'' per the GitHub README (page read 2026-11-12)'
+join_keys:
+- geometry
+- lat_lon
+variables_documented: null
+machine_readable: true
+versioned: null
+persistent_identifier: false
+known_limitations: LOD1 only (LOD2 described as 'a ways away'); footprints from Microsoft USBuildingFootprints,
+  so its limitations carry over. Maintenance status unknown.
+notes: No peer-reviewed descriptor found; reference_paper_doi null. Source of building heights is not stated in
+  the fetched README (only that it combines open datasets such as Microsoft footprints with its own code), so statistical_nature
+  remote_sensing_derived is an inference from the footprint source. Operator BuildZero.Org is inferred from the
+  license/contact text. Data in AWS S3 bucket 'opencitymodel'.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://github.com/opencitymodel/opencitymodel

@@ -1,0 +1,56 @@
+id: ctx-cambium
+title: Cambium (NREL long-term grid emission and cost projections)
+short_name: Cambium
+publisher: National Renewable Energy Laboratory (NREL)
+landing_page: https://www.nrel.gov/analysis/cambium
+doi: null
+citation: NREL. Cambium 2024 Scenario Descriptions and Documentation. NREL/TP-6A40-93005, April 2025.
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: CSV
+  access_url: https://scenarioviewer.nrel.gov/
+  api: true
+  registration_required: true
+ubem_roles:
+- context_coupling
+content_types:
+- hourly_marginal_emission_rates
+- average_emission_rates
+- marginal_energy_cost
+- grid_scenarios
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States
+unit_of_observation: region
+spatial_granularity: utility_service_territory
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: PT1H
+update_frequency: annual releases
+statistical_nature: simulation_synthetic
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- balancing_authority
+- fips_state
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Projections from a capacity-expansion/dispatch model under scenarios, not measured data; regions
+  are the GEA regions (18 in the 2023 workbooks).
+notes: 'www.nrel.gov did not resolve from the fetch tool, so details come from search snippets: 2024 documentation
+  (TP-6A40-93005, April 2025) and 2023 workbooks with LRMER for 18 GEA regions. License, years, registration for
+  the Scenario Viewer, and formats were not verified (null / provisional). Hourly granularity is general knowledge.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - 'web search results: nrel.gov/docs/fy25osti/93005.pdf, data.openei.org/submissions/8279, data.nrel.gov/submissions/230'

@@ -1,0 +1,8 @@
+primary_role,administrative_record,census_complete,climate_projection,compilation,crowdsourced,measured_monitoring,reanalysis_model,remote_sensing_derived,sample_survey_weighted,simulation_synthetic,standard_or_code,typical_year_synthetic
+boundary_conditions,0,0,4,0,0,3,4,2,0,0,0,2
+geometry_inventory,2,0,0,4,1,0,0,15,0,0,1,0
+building_characteristics,4,1,0,4,0,0,0,0,3,0,3,0
+operation_use,0,0,0,2,0,2,0,0,3,0,0,0
+calibration_validation,5,0,0,3,0,13,0,0,0,0,0,0
+reference_simulation,0,0,0,0,0,0,0,0,0,5,0,0
+context_coupling,0,0,0,2,0,0,0,1,1,1,0,0

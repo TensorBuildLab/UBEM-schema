@@ -1,0 +1,49 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-eia-mer
+title: Monthly Energy Review (MER), Table 2.3 Commercial Sector Energy Consumption and companion sector tables
+short_name: EIA MER
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/totalenergy/data/monthly/
+doi: null
+citation: U.S. Energy Information Administration. Monthly Energy Review, Table 2.3 Commercial Sector Energy Consumption.
+  Washington, DC. Updated monthly.
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://www.eia.gov/totalenergy/data/browser/csv.php?tbl=T02.03', api: false, registration_required: false}
+- {format: XLSX, access_url: 'https://www.eia.gov/totalenergy/data/monthly/', api: false, registration_required: false}
+- {format: PDF, access_url: 'https://www.eia.gov/totalenergy/data/monthly/', api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [energy_consumption_monthly, energy_consumption_annual, sector_totals_by_fuel, national_aggregate]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: United States total (national aggregate by sector and fuel; no sub-national breakdown in Table 2.3)
+unit_of_observation: region
+spatial_granularity: nation
+temporal_coverage: {start: '1949', end: present}
+temporal_resolution: P1M
+update_frequency: monthly (new month of data each release; recent values preliminary and revised)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Table 2.3 CSV holds 15 series (fuel and total energy consumed by the commercial sector, trillion
+  Btu); monthly values from 1973-01 and annual totals from 1949, checked in the CSV on 2026-11-12
+join_keys: [timestamp, country_iso]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: National totals only; commercial-sector consumption is largely estimated from other EIA surveys
+  and models (not metered), recent months are preliminary, and series definitions (e.g., electrical system energy
+  losses, renewables) change over time. Suitable as a top-down control total, not for building-level calibration.
+notes: 'statistical_nature is compilation: MER republishes and assembles figures from EIA surveys (e.g., EIA-861,
+  EIA-923) and estimates, so values are derived rather than directly observed. Monthly data begin 1973 for Table
+  2.3 (the page''s interactive browser link starts in 2000, the CSV reaches back to 1973). Data are public domain
+  per EIA Copyright and Reuse page; EIA asks for acknowledgement of the source.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.eia.gov/totalenergy/data/monthly/', 'https://www.eia.gov/totalenergy/data/browser/csv.php?tbl=T02.03',
+    'https://www.eia.gov/about/copyrights_reuse.php']

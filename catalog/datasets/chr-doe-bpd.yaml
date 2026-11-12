@@ -1,0 +1,72 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-doe-bpd
+title: DOE Building Performance Database (BPD)
+short_name: DOE BPD
+publisher: Lawrence Berkeley National Laboratory (BIES Division) for the U.S. Department of Energy Building Technologies Office
+landing_page: https://bpd-info.lbl.gov/
+doi: null
+citation: Lawrence Berkeley National Laboratory. Building Performance Database (BPD), U.S. Department of Energy. https://bpd.lbl.gov/
+reference_paper_doi: null
+license: null
+access_level: open_api
+distributions:
+- format: web GUI (aggregated peer-group results)
+  access_url: https://bpd.lbl.gov/
+  api: false
+  registration_required: false
+- format: web API (aggregated results; use free in nearly all cases per LBNL)
+  access_url: https://bpd-info.lbl.gov/
+  api: true
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- calibration_validation
+content_types:
+- building_characteristics
+- energy_consumption_annual
+- operating_hours_and_occupant_counts
+- systems_data
+- certifications
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States (commercial and residential buildings contributed voluntarily; coverage varies by location and
+    type)
+unit_of_observation: building (aggregated into peer groups on release)
+spatial_granularity: none
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: P1Y
+update_frequency: not stated; data are contributed voluntarily
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Over 1 million commercial and residential buildings per LBNL BPD page (no exact count)
+join_keys:
+- building_type
+- climate_zone_ashrae
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Not a statistically representative sample (LBNL says so explicitly); no raw or building-level records are
+  released, only aggregates on groups of buildings large enough to prevent identification; data are annual only, not weather-normalized,
+  with no pre/post-retrofit pairing; most buildings have location, type and energy use but few have systems or operational
+  data.
+notes: 'Status: no retirement notice was found; bpd.lbl.gov and bpd-info.lbl.gov returned HTTP 200 and the LBNL page is written
+  in the present tense on 2026-11-12, and the DOE page lists an open-ended performance period from October 2011. Whether the
+  API still responds was NOT tested. Because raw data are not released, the access level is open_api for aggregates only and
+  this dataset cannot supply building-level inputs. License and API key requirements were not stated (null). spatial_granularity
+  is ''none'' because individual locations are not released; the database stores city, state, ZIP and climate zone, and the
+  allowed filters of the public tool were not enumerated. join_keys climate_zone_ashrae is inferred from ''climate zone''
+  filter and not confirmed. No peer-reviewed descriptor paper was located.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://bpd-info.lbl.gov/
+  - https://bies.lbl.gov/cbs/bpd
+  - https://bpd.lbl.gov/
+  - https://www.energy.gov/eere/buildings/building-performance-database

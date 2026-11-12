@@ -1,0 +1,67 @@
+id: wx-pvgis
+title: Photovoltaic Geographical Information System (PVGIS) radiation databases and TMY tool
+short_name: PVGIS
+publisher: European Commission Joint Research Centre (JRC)
+landing_page: https://re.jrc.ec.europa.eu/pvg_tools/en/
+doi: null
+citation: European Commission, Joint Research Centre. PVGIS 5.3. https://re.jrc.ec.europa.eu/pvg_tools/en/
+reference_paper_doi: 10.1016/j.solener.2012.03.006
+license: null
+access_level: open_api
+distributions:
+- format: EPW
+  access_url: https://re.jrc.ec.europa.eu/pvg_tools/en/
+  api: true
+  registration_required: false
+- format: CSV
+  access_url: https://re.jrc.ec.europa.eu/pvg_tools/en/
+  api: true
+  registration_required: false
+- format: JSON
+  access_url: https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/api-non-interactive-service_en
+  api: true
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- hourly_solar_irradiance
+- typical_meteorological_year
+- meteorological_variables
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: SARAH3 (Europe, Africa, most of Asia, parts of S. America), ERA5 (worldwide), NSRDB (Americas, PVGIS
+    5.2 only)
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '2005'
+  end: '2023'
+temporal_resolution: PT1H
+update_frequency: version releases (5.3 on 2024-09-25)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Irradiance comes from satellite (SARAH3, about 5 km) or reanalysis (ERA5, about 25 km) rather
+  than ground measurement; years and database depend on location.
+notes: Years/coverage from JRC search snippets for PVGIS 5.3 (SARAH3 and ERA5, 2005-2023); license/reuse terms not
+  found (null). Reference paper is Huld et al. 2012, which describes an earlier PVGIS database (Europe/Africa),
+  not 5.3. statistical_nature is the closest enum (satellite-derived, with reanalysis elsewhere). A PVGIS 6 report
+  mentions 2014-2024 inputs; not verified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://re.jrc.ec.europa.eu/pvg_tools/en/
+  - web search results on joint-research-centre.ec.europa.eu PVGIS 5.3 pages
+  - https://api.crossref.org/works/10.1016/j.solener.2012.03.006

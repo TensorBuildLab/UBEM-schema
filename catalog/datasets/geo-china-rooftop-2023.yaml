@@ -1,0 +1,62 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-china-rooftop-2023
+title: Vectorized rooftop area data for 90 cities in China
+short_name: China rooftop (90 cities)
+publisher: Zhang et al.; hosted at the National Tibetan Plateau Data Center (TPDC)
+landing_page: https://doi.org/10.11888/Geogra.tpdc.271702
+doi: 10.11888/Geogra.tpdc.271702
+citation: Zhang, Z., Qian, Z., Zhong, T., Chen, M., Zhang, K., Yang, Y., Zhu, R., Zhang, F., Zhang, H., Zhou, F.,
+  Yu, J., Zhang, B., Lu, G., Yan, J. Vectorized rooftop area data for 90 cities in China. Scientific Data 9, 66
+  (2022).
+reference_paper_doi: 10.1038/s41597-022-01168-x
+license: null
+access_level: open_download
+distributions:
+- format: ESRI Shapefile, one per city
+  access_url: https://doi.org/10.11888/Geogra.tpdc.271702
+  api: false
+  registration_required: null
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_rooftop_polygon
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - CN
+  description: 90 Chinese cities in four administrative tiers, about 40% of China's population
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Authors state the dataset will be updated regularly with urbanization
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Not stated in the content read
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: null
+persistent_identifier: true
+known_limitations: Rooftop polygons only (no heights); 1 m resolution segmentation with overall accuracy 97.95%
+  and F1 83.11% on 180 km2 test samples; covers 90 cities, not all of China.
+notes: 'Answer to the Zhang et al. 2023 question: Nature Communications 14:2347 (10.1038/s41467-023-38079-3) does
+  not release a new building dataset; its data availability statement points to Supplementary Data 1 and to this
+  vectorized rooftop dataset for 90 cities at TPDC (DOI 10.11888/Geogra.tpdc.271702), plus code on Zenodo/GitHub.
+  The descriptor is the 2022 Scientific Data paper, cited here, and the 2023 paper extrapolates rooftop area to
+  354 cities (65,962 km2 in 2020, from search result). Dataset licence and whether TPDC download requires registration
+  were not verified (TPDC page returned no content); the 2022 paper says the data are freely available for all users
+  at TPDC, so access_level is open_download as stated by the paper, licence null.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41467-023-38079-3&resultType=core&format=json
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-022-01168-x&resultType=core&format=json
+  - https://api.crossref.org/works/10.1038/s41597-022-01168-x
+  - https://api.crossref.org/works/10.1038/s41467-023-38079-3

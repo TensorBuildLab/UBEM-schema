@@ -1,0 +1,640 @@
+# Meta-Urban concept vocabulary v0.1 (Catalog instance with `concepts` only).
+# Each concept: id, pref_label, definition, broader, concept_role, entity, quantity_kind, canonical_unit,
+# alt_labels (generic synonyms; deliberately NOT copied from any benchmark dataset's variable names, to avoid
+# leakage into the lexical baseline), and mappings to other standards.
+# Mapping policy: only mappings the authors are sure of are recorded. CityGML 2.0 Building module attributes
+# (prefix citygml_bldg:) and EnergyPlus EPW field names (prefix epw:) are recorded; BEDES, Brick and Energy ADE
+# mappings are TODO for co-author review (see schema/vocab/README.md).
+concepts:
+
+# ---------------------------------------------------------------- record bookkeeping
+- id: record
+  pref_label: record bookkeeping
+  definition: Variables that describe the data record rather than the building, such as identifiers, weights and flags.
+  entity: dataset_record
+- id: record_identifier
+  pref_label: record identifier
+  definition: Identifier of a record, building, meter, station or respondent within the dataset.
+  broader: record
+  entity: dataset_record
+  alt_labels: [id, identifier, unique id, building id, respondent id, key]
+- id: survey_weight
+  pref_label: survey analysis weight
+  definition: Final sampling weight that expands a sampled record to the population it represents.
+  broader: record
+  entity: dataset_record
+  alt_labels: [sampling weight, final weight, expansion factor, analysis weight]
+- id: replicate_weight
+  pref_label: replicate weight
+  definition: Replicate weight used to estimate sampling variance (jackknife, balanced repeated replication).
+  broader: record
+  entity: dataset_record
+  alt_labels: [jackknife weight, BRR weight, variance weight]
+- id: imputation_flag
+  pref_label: imputation or quality flag
+  definition: Indicator that another variable's value was imputed, edited, top-coded or suppressed.
+  broader: record
+  entity: dataset_record
+  alt_labels: [imputed flag, edit flag, data quality flag, allocation flag]
+- id: timestamp
+  pref_label: timestamp
+  definition: Date and time the observation refers to.
+  broader: record
+  entity: dataset_record
+  quantity_kind: quantitykind:Time
+  alt_labels: [date, time, datetime, period, month, year]
+- id: survey_reference_detail
+  pref_label: survey administration detail
+  definition: Information about how the record was collected (respondent type, interview mode, data source), not about the building.
+  broader: record
+  entity: dataset_record
+  alt_labels: [respondent, interview mode, questionnaire, data collection method]
+
+# ---------------------------------------------------------------- location
+- id: location
+  pref_label: location
+  definition: Where the building, station or region is.
+  concept_role: geometry_inventory
+  entity: site
+- id: geographic_coordinates
+  pref_label: geographic coordinates
+  definition: Latitude and longitude (WGS84) of a building, station or grid cell centroid.
+  broader: location
+  concept_role: geometry_inventory
+  entity: site
+  alt_labels: [latitude, longitude, lat, lon, coordinates, centroid]
+- id: administrative_region
+  pref_label: administrative or statistical region
+  definition: Region the record belongs to, such as country, census region or division, state, county, city, tract or postal code.
+  broader: location
+  concept_role: geometry_inventory
+  entity: region
+  alt_labels: [region, division, state, county, zip code, postal code, census tract, metropolitan area]
+- id: climate_zone
+  pref_label: climate zone
+  definition: Climate classification of the location (ASHRAE/IECC climate zone, building America zone, Koppen class).
+  broader: location
+  concept_role: boundary_conditions
+  entity: site
+  alt_labels: [climate region, ASHRAE climate zone, IECC zone, heating and cooling climate]
+- id: urban_rural_indicator
+  pref_label: urban or rural indicator
+  definition: Classification of the location by settlement type or density.
+  broader: location
+  concept_role: context_coupling
+  entity: site
+  alt_labels: [urban, rural, metro status, density class]
+
+# ---------------------------------------------------------------- weather (boundary conditions)
+- id: weather
+  pref_label: weather and climate variable
+  definition: Outdoor meteorological driver of building heat and mass balance.
+  concept_role: boundary_conditions
+  entity: weather_station
+- id: dry_bulb_temperature
+  pref_label: outdoor dry-bulb temperature
+  definition: Outdoor air temperature measured by a thermometer shielded from radiation and moisture.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Temperature
+  canonical_unit: unit:DEG_C
+  alt_labels: [air temperature, outdoor temperature, ambient temperature, 2 m temperature, T2M]
+  exact_match: ["epw:Dry Bulb Temperature"]
+- id: dew_point_temperature
+  pref_label: outdoor dew-point temperature
+  definition: Temperature to which outdoor air must be cooled at constant pressure to reach saturation.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Temperature
+  canonical_unit: unit:DEG_C
+  alt_labels: [dew point, dewpoint]
+  exact_match: ["epw:Dew Point Temperature"]
+- id: relative_humidity
+  pref_label: outdoor relative humidity
+  definition: Ratio of the partial pressure of water vapor in outdoor air to its saturation pressure.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:RelativeHumidity
+  canonical_unit: unit:PERCENT
+  alt_labels: [humidity, RH]
+  exact_match: ["epw:Relative Humidity"]
+- id: atmospheric_pressure
+  pref_label: atmospheric station pressure
+  definition: Atmospheric pressure at the station elevation.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Pressure
+  canonical_unit: unit:PA
+  alt_labels: [surface pressure, barometric pressure, station pressure]
+  exact_match: ["epw:Atmospheric Station Pressure"]
+- id: global_horizontal_irradiance
+  pref_label: global horizontal irradiance
+  definition: Total solar irradiance on a horizontal surface.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Irradiance
+  canonical_unit: unit:W-PER-M2
+  alt_labels: [GHI, global solar radiation, shortwave radiation, surface solar irradiance]
+  close_match: ["epw:Global Horizontal Radiation"]
+- id: direct_normal_irradiance
+  pref_label: direct normal irradiance
+  definition: Beam solar irradiance on a surface normal to the sun.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Irradiance
+  canonical_unit: unit:W-PER-M2
+  alt_labels: [DNI, beam radiation, direct radiation]
+  close_match: ["epw:Direct Normal Radiation"]
+- id: diffuse_horizontal_irradiance
+  pref_label: diffuse horizontal irradiance
+  definition: Sky-diffuse solar irradiance on a horizontal surface.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Irradiance
+  canonical_unit: unit:W-PER-M2
+  alt_labels: [DHI, diffuse radiation]
+  close_match: ["epw:Diffuse Horizontal Radiation"]
+- id: wind_speed
+  pref_label: wind speed
+  definition: Horizontal wind speed at the reference height.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Speed
+  canonical_unit: unit:M-PER-SEC
+  alt_labels: [wind velocity, 10 m wind]
+  exact_match: ["epw:Wind Speed"]
+- id: wind_direction
+  pref_label: wind direction
+  definition: Direction from which the wind blows, clockwise from north.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Angle
+  canonical_unit: unit:DEG
+  alt_labels: [wind bearing]
+  exact_match: ["epw:Wind Direction"]
+- id: precipitation
+  pref_label: precipitation
+  definition: Liquid-equivalent precipitation depth over the time step.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: weather_station
+  quantity_kind: quantitykind:Length
+  canonical_unit: unit:MilliM
+  alt_labels: [rainfall, liquid precipitation, rain]
+- id: degree_days
+  pref_label: heating or cooling degree days
+  definition: Sum over a period of the difference between a base temperature and daily mean outdoor temperature.
+  broader: weather
+  concept_role: boundary_conditions
+  entity: site
+  quantity_kind: quantitykind:Temperature
+  canonical_unit: unit:DEG_C
+  alt_labels: [HDD, CDD, heating degree days, cooling degree days]
+
+# ---------------------------------------------------------------- geometry
+- id: geometry
+  pref_label: building geometry
+  definition: Size and shape of the building envelope.
+  concept_role: geometry_inventory
+  entity: building
+- id: footprint
+  pref_label: building footprint
+  definition: Polygon of the building's ground outline.
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  alt_labels: [outline, polygon, building shape on ground, roofprint]
+  close_match: ["citygml_bldg:lod0FootPrint"]
+- id: building_height
+  pref_label: building height
+  definition: Height of the building from ground to roof (state reference points where known).
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  quantity_kind: quantitykind:Length
+  canonical_unit: unit:M
+  alt_labels: [height, roof height, eave height]
+  close_match: ["citygml_bldg:measuredHeight"]
+- id: floors_above_ground
+  pref_label: number of floors above ground
+  definition: Count of storeys above grade.
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  quantity_kind: quantitykind:Count
+  alt_labels: [stories, storeys, number of stories, floor count, levels]
+  exact_match: ["citygml_bldg:storeysAboveGround"]
+- id: floors_below_ground
+  pref_label: floors below ground or basement
+  definition: Count or presence of storeys below grade, including basements.
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  quantity_kind: quantitykind:Count
+  alt_labels: [basement, underground floors, below grade]
+  close_match: ["citygml_bldg:storeysBelowGround"]
+- id: floor_to_ceiling_height
+  pref_label: floor-to-ceiling height
+  definition: Typical vertical distance between floor and ceiling.
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  quantity_kind: quantitykind:Length
+  canonical_unit: unit:M
+  alt_labels: [ceiling height, storey height]
+- id: building_shape
+  pref_label: building plan shape
+  definition: Plan shape of the building (rectangle, L, U, H, courtyard, other).
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: building
+  alt_labels: [plan shape, footprint shape]
+- id: roof_shape
+  pref_label: roof shape or tilt
+  definition: Roof geometry type or slope (flat, pitched, gable, hip).
+  broader: geometry
+  concept_role: geometry_inventory
+  entity: envelope
+  alt_labels: [roof type, roof slope, roof pitch]
+  close_match: ["citygml_bldg:roofType"]
+- id: window_to_wall_ratio
+  pref_label: window-to-wall ratio
+  definition: Share of exterior wall area that is glazed.
+  broader: geometry
+  concept_role: building_characteristics
+  entity: envelope
+  quantity_kind: quantitykind:DimensionlessRatio
+  canonical_unit: unit:PERCENT
+  alt_labels: [glazing ratio, percent glass, fenestration ratio, WWR]
+
+# ---------------------------------------------------------------- characteristics
+- id: characteristics
+  pref_label: building characteristic
+  definition: Non-geometric attribute of a building that determines its thermal and energy behavior.
+  concept_role: building_characteristics
+  entity: building
+- id: building_use_type
+  pref_label: building use type
+  definition: Principal activity or function of the building (office, retail, education, single-family, etc.).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [building type, occupancy type, principal activity, function, land use of building, property type]
+  close_match: ["citygml_bldg:function", "citygml_bldg:usage"]
+- id: secondary_use
+  pref_label: secondary use or mixed use detail
+  definition: Additional activities in the building, or a finer subtype of its principal activity.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [secondary activity, subtype, mixed use]
+- id: gross_floor_area
+  pref_label: gross floor area
+  definition: Total floor area within the exterior walls, all storeys.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  quantity_kind: quantitykind:Area
+  canonical_unit: unit:M2
+  alt_labels: [floorspace, floor area, square footage, conditioned area, GFA, building size]
+- id: floor_area_category
+  pref_label: floor area category
+  definition: Binned floor area class.
+  broader: gross_floor_area
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [size category, square footage range]
+- id: year_of_construction
+  pref_label: year of construction
+  definition: Year (or period) the building was completed.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  quantity_kind: quantitykind:Time
+  alt_labels: [year built, vintage, construction year, age of building, construction period]
+  exact_match: ["citygml_bldg:yearOfConstruction"]
+- id: renovation
+  pref_label: renovation or retrofit
+  definition: Whether and how the building was renovated (envelope, systems, lighting, additions).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [retrofit, remodel, upgrade, refurbishment]
+- id: wall_construction
+  pref_label: exterior wall construction
+  definition: Material or assembly type of exterior walls.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: envelope
+  alt_labels: [wall material, wall type, facade construction]
+- id: roof_construction
+  pref_label: roof construction
+  definition: Material or assembly type of the roof.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: envelope
+  alt_labels: [roof material, roofing]
+- id: window_properties
+  pref_label: window and glazing properties
+  definition: Window type, number of panes, frame, coatings, tinting or shading.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: envelope
+  alt_labels: [glazing type, double pane, low-e, tinted glass, window type]
+- id: insulation
+  pref_label: insulation level
+  definition: Presence, level or upgrade of thermal insulation in walls, roof or floors.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: envelope
+  alt_labels: [R-value, U-value, thermal insulation, insulated]
+- id: heating_system
+  pref_label: space heating system
+  definition: Type, presence or share of space heating equipment (furnace, boiler, heat pump, district heat).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [heating equipment, furnace, boiler, heat pump heating, space heating]
+- id: cooling_system
+  pref_label: space cooling system
+  definition: Type, presence or share of space cooling equipment (chiller, packaged unit, central AC, room AC).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [air conditioning, AC, chiller, cooling equipment]
+- id: ventilation_system
+  pref_label: ventilation and air distribution
+  definition: Ventilation, economizer, variable-air-volume or air distribution features.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [VAV, economizer, air handling, fresh air, ventilation]
+- id: water_heating_system
+  pref_label: water heating system
+  definition: Type, fuel or size of domestic or service hot-water equipment.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [hot water, water heater, DHW, service water heating]
+- id: lighting_system
+  pref_label: lighting system
+  definition: Lamp types, lit share of floor area, or lighting controls.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [lamps, LED, fluorescent, lighting controls, lit area]
+- id: plug_and_process_equipment
+  pref_label: plug and process equipment
+  definition: Presence or count of appliances, computers, refrigeration, cooking or other process equipment.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [appliances, computers, refrigerators, cooking equipment, office equipment, servers, miscellaneous equipment]
+- id: energy_sources_used
+  pref_label: energy sources used
+  definition: Which fuels or energy carriers are used in the building, overall or for a given end use.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [fuels used, main heating fuel, energy carrier, electricity used, natural gas used]
+- id: onsite_generation
+  pref_label: on-site generation or storage
+  definition: On-site renewable or fossil generation, cogeneration, or energy storage.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [solar PV, photovoltaic, cogeneration, generator, battery]
+- id: building_controls
+  pref_label: building controls and energy management
+  definition: Energy management systems, smart thermostats, demand response participation, or control strategies.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: system
+  alt_labels: [EMS, BAS, building automation, smart thermostat, demand response]
+- id: dwelling_units
+  pref_label: number of dwelling units
+  definition: Number of housing units in the building.
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  quantity_kind: quantitykind:Count
+  alt_labels: [housing units, apartments, units in building]
+- id: ownership_tenure
+  pref_label: ownership, occupancy and tenure
+  definition: Who owns or occupies the building and how (owner-occupied, rented, government, vacant share).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  alt_labels: [owner, tenant, renter, government owned, vacancy]
+- id: rooms_and_spaces
+  pref_label: rooms and space counts
+  definition: Counts or shares of specific spaces (bedrooms, classrooms, seats, beds, server rooms).
+  broader: characteristics
+  concept_role: building_characteristics
+  entity: building
+  quantity_kind: quantitykind:Count
+  alt_labels: [bedrooms, rooms, seats, beds, classrooms]
+
+# ---------------------------------------------------------------- operation and use
+- id: operation
+  pref_label: operation and use
+  definition: How the building and its systems are used over time.
+  concept_role: operation_use
+  entity: building
+- id: occupant_count
+  pref_label: number of occupants
+  definition: Number of people who work in, live in or occupy the building.
+  broader: operation
+  concept_role: operation_use
+  entity: occupant
+  quantity_kind: quantitykind:Count
+  alt_labels: [employees, workers, household size, number of people, occupancy count]
+- id: operating_hours
+  pref_label: operating hours and schedule
+  definition: Hours or days per week the building or a space is open or occupied.
+  broader: operation
+  concept_role: operation_use
+  entity: building
+  quantity_kind: quantitykind:Time
+  alt_labels: [open hours, schedule, weekly hours, open weekends, occupancy schedule]
+- id: thermostat_setpoint
+  pref_label: thermostat setpoint
+  definition: Indoor temperature setpoint for heating or cooling, occupied or unoccupied.
+  broader: operation
+  concept_role: operation_use
+  entity: zone
+  quantity_kind: quantitykind:Temperature
+  canonical_unit: unit:DEG_C
+  alt_labels: [setpoint, set temperature, thermostat setting, setback]
+- id: equipment_usage_behavior
+  pref_label: equipment usage behavior
+  definition: How often or how long occupants use appliances or systems.
+  broader: operation
+  concept_role: operation_use
+  entity: occupant
+  alt_labels: [frequency of use, appliance use, usage hours, usage pattern]
+- id: time_use_activity
+  pref_label: time-use activity
+  definition: Activity episodes of persons with time, duration and location.
+  broader: operation
+  concept_role: operation_use
+  entity: occupant
+  alt_labels: [activity diary, time diary, episode, presence at home]
+- id: thermal_comfort_response
+  pref_label: thermal comfort response
+  definition: Occupant thermal sensation, preference or acceptability vote.
+  broader: operation
+  concept_role: operation_use
+  entity: occupant
+  alt_labels: [thermal sensation, comfort vote, PMV, thermal preference]
+- id: occupant_control_action
+  pref_label: occupant control action
+  definition: Observed occupant interaction with building systems (window opening, light switching, blinds, thermostat change).
+  broader: operation
+  concept_role: operation_use
+  entity: occupant
+  alt_labels: [window opening, light switching, blinds, thermostat adjustment]
+- id: indoor_environment
+  pref_label: indoor environmental condition
+  definition: Measured indoor temperature, humidity, CO2, illuminance or air quality.
+  broader: operation
+  concept_role: operation_use
+  entity: zone
+  alt_labels: [indoor temperature, indoor humidity, CO2, illuminance, IAQ]
+- id: household_demographics
+  pref_label: household or occupant demographics
+  definition: Socio-demographic attributes of occupants (age, income, education, employment).
+  broader: operation
+  concept_role: context_coupling
+  entity: household
+  alt_labels: [income, age, education, employment, race, household characteristics]
+
+# ---------------------------------------------------------------- energy (calibration and validation)
+- id: energy
+  pref_label: energy use
+  definition: Energy consumed, demanded or paid for by a building, stock or region.
+  concept_role: calibration_validation
+  entity: building
+- id: total_energy_consumption
+  pref_label: total site energy consumption
+  definition: Total site energy over a period, all carriers combined.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Energy
+  canonical_unit: unit:KiloW-HR
+  alt_labels: [total energy, site energy, major fuel consumption, annual energy use]
+- id: electricity_consumption
+  pref_label: electricity consumption
+  definition: Electricity used over a period.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Energy
+  canonical_unit: unit:KiloW-HR
+  alt_labels: [electric use, kWh, electricity usage, power consumption]
+- id: natural_gas_consumption
+  pref_label: natural gas consumption
+  definition: Natural gas used over a period.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Energy
+  canonical_unit: unit:KiloW-HR
+  alt_labels: [gas use, therms, cubic feet of gas, methane]
+- id: other_fuel_consumption
+  pref_label: other fuel consumption
+  definition: Fuel oil, propane, district heat or steam, wood or other carriers used over a period.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Energy
+  canonical_unit: unit:KiloW-HR
+  alt_labels: [fuel oil, propane, district heat, steam, kerosene, wood, LPG]
+- id: end_use_energy
+  pref_label: end-use energy consumption
+  definition: Energy attributed to one end use (heating, cooling, ventilation, water heating, lighting, cooking, refrigeration, office equipment, other).
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Energy
+  canonical_unit: unit:KiloW-HR
+  alt_labels: [end use, heating energy, cooling energy, lighting energy, disaggregated consumption]
+- id: energy_expenditure
+  pref_label: energy expenditure
+  definition: Money spent on energy over a period.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  canonical_unit: unit:CCY_USD
+  alt_labels: [energy cost, bill, expenditure, dollars spent]
+- id: energy_use_intensity
+  pref_label: energy use intensity
+  definition: Energy use per unit floor area over a year.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  canonical_unit: unit:KiloW-HR-PER-M2
+  alt_labels: [EUI, energy intensity, kBtu per square foot]
+- id: load_timeseries
+  pref_label: interval load or meter time series
+  definition: Energy or power at sub-annual intervals from a meter, sub-meter or aggregate.
+  broader: energy
+  concept_role: calibration_validation
+  entity: meter
+  quantity_kind: quantitykind:Power
+  canonical_unit: unit:KiloW
+  alt_labels: [interval data, smart meter, AMI, load profile, hourly demand]
+- id: peak_demand
+  pref_label: peak demand
+  definition: Maximum power over a period.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  quantity_kind: quantitykind:Power
+  canonical_unit: unit:KiloW
+  alt_labels: [maximum demand, peak load, kW demand]
+- id: primary_energy_or_emissions
+  pref_label: primary energy or emissions
+  definition: Source energy, primary energy or greenhouse gas emissions attributed to energy use.
+  broader: energy
+  concept_role: calibration_validation
+  entity: building
+  alt_labels: [source energy, CO2 emissions, carbon emissions, GHG]
+
+# ---------------------------------------------------------------- context
+- id: context
+  pref_label: context and coupling variable
+  definition: Non-building variable needed to interpret or couple UBEM results (grid, prices, land use, population).
+  concept_role: context_coupling
+  entity: region
+- id: grid_emission_factor
+  pref_label: grid emission factor
+  definition: Emissions per unit of electricity generated or consumed in a grid region.
+  broader: context
+  concept_role: context_coupling
+  entity: region
+  alt_labels: [marginal emission rate, average emission rate, carbon intensity of electricity]
+- id: energy_price
+  pref_label: energy price or tariff
+  definition: Price per unit energy or demand, or tariff structure.
+  broader: context
+  concept_role: context_coupling
+  entity: region
+  alt_labels: [tariff, rate, price per kWh, utility rate]
+- id: land_use
+  pref_label: land use or land cover
+  definition: Land use class or land cover of the parcel or cell.
+  broader: context
+  concept_role: context_coupling
+  entity: site
+  alt_labels: [zoning, land cover, local climate zone]

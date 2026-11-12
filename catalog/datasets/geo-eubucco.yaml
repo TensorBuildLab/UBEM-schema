@@ -1,0 +1,109 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-eubucco
+title: 'EUBUCCO: European building stock characteristics in a common and open database'
+short_name: EUBUCCO
+publisher: EUBUCCO project team (Milojevic-Dupont, Creutzig et al.)
+landing_page: https://eubucco.com/
+doi: 10.5281/zenodo.7225259
+citation: 'Milojevic-Dupont, N., Wagner, F., Nachtigall, F., Hu, J., Bruser, G.B., Zumwald, M., Biljecki, F., Heeren,
+  N., Kaack, L.H., Pichler, P.-P., Creutzig, F. EUBUCCO v0.1: European building stock characteristics in a common
+  and open database for 200+ million individual buildings. Scientific Data 10, 147 (2023).'
+reference_paper_doi: 10.1038/s41597-023-02040-2
+license: ODbL-1.0 (Prague CC-BY-SA and Abruzzo CC-BY-NC sources keep their own licenses)
+access_level: open_download
+distributions:
+- format: Parquet (S3-compatible storage; website, CLI, Python, DuckDB)
+  access_url: https://docs.eubucco.com/latest/
+  api: false
+  registration_required: false
+- format: GeoPackage and CSV (v0.1 snapshot on Zenodo, 103 GB zip)
+  access_url: https://doi.org/10.5281/zenodo.7225259
+  api: false
+  registration_required: null
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_footprints_polygon
+- building_height
+- building_floors
+- construction_year
+- building_type_residential_nonresidential
+- building_subtype
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - AT
+  - BE
+  - BG
+  - HR
+  - CY
+  - CZ
+  - DK
+  - EE
+  - FI
+  - FR
+  - DE
+  - GR
+  - HU
+  - IE
+  - IT
+  - LV
+  - LT
+  - LU
+  - MT
+  - NL
+  - PL
+  - PT
+  - RO
+  - SK
+  - SI
+  - ES
+  - SE
+  - 'NO'
+  - CH
+  - GB
+  description: 'Paper (v0.1): EU-27 plus Switzerland. Current docs: EU-27, Norway, Switzerland and the UK. Wallonie,
+    Malta and Mecklenburg-Vorpommern excluded from v0.1 for licence reasons.'
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: 'Versioned releases: v0.1 (Oct 2022, Zenodo); v0.2 listed on eubucco.com/data'
+statistical_nature: compilation
+sampling_weights: null
+record_count: 322000000
+record_count_note: '''322+ million buildings'' from 55 open datasets on docs.eubucco.com (page read 2026-11-12;
+  release version of this figure not labelled). The 2023 paper describes v0.1 with 202,191,151 footprints in 28
+  countries (Zenodo text says about 206 million).'
+join_keys:
+- geometry
+- lat_lon
+- building_id
+- building_type
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: 'Attribute coverage uneven by country (v0.1: Denmark and Lithuania have no height, age or type;
+  Germany no age). Current docs: ground-truth share is 43.2% for height, 16.6% for floors, 15.6% for construction
+  year, 38.1% for type; the remainder of height, type and floors are ML-estimated. Outliers not filtered; height
+  and building definitions differ between sources; rural coverage depends on OSM.'
+notes: 'The DOI is the Zenodo v0.1 version DOI; later versions are hosted on eubucco.com (the Zenodo concept record
+  6524780 returned the v0.1 record). Zenodo''s machine-readable licence field shows ''other-closed'' for v0.1 while
+  the record text and docs state ODbL; ODbL used. Paper figures for v0.1: height about 73-74%, age 24%, type 45-46%
+  of buildings (paper text and Zenodo differ slightly). registration_required is null for the Zenodo distribution
+  and false for the Parquet one only by absence of any stated requirement.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://docs.eubucco.com/latest/
+  - https://docs.eubucco.com/latest/license/
+  - https://eubucco.com/data/
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC10027854/
+  - https://zenodo.org/api/records/7225259
+  - https://api.crossref.org/works/10.1038/s41597-023-02040-2

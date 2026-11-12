@@ -1,0 +1,56 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-buildingsync
+title: BuildingSync data exchange schema
+short_name: BuildingSync
+publisher: U.S. DOE national laboratory-led (BuildingSync is a registered trademark of the Alliance for Energy Innovation,
+  LLC; National Laboratory of the Rockies involved)
+landing_page: https://buildingsync.net/
+doi: null
+citation: BuildingSync schema, release 2.7.0 (26 September 2025). https://github.com/BuildingSync/schema
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: XSD (schema repository)
+  access_url: https://github.com/BuildingSync/schema
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+content_types:
+- data_exchange_schema
+- energy_audit_data
+- building_characteristics_schema
+- energy_model_inputs_schema
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: Developed in the United States for energy audit data; use elsewhere was not verified
+unit_of_observation: schema_element
+spatial_granularity: none
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: versioned schema releases (latest 2.7.0, 2025-09-26)
+statistical_nature: standard_or_code
+sampling_weights: null
+record_count: null
+record_count_note: Not applicable
+join_keys: []
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: A schema for exchanging audit and building data (and energy model inputs), not a dataset; adoption determines
+  how much real data are available in BuildingSync form; no open building records are provided by the schema itself.
+notes: License is not named on the web page; the GitHub repository links a LICENSE.md whose type was not read, so license
+  is null. Release 2.7.0 date taken from buildingsync.net. The repository contains XSD files per GitHub; BuildingSync maps
+  to BEDES terms. Role limited to building_characteristics as a standard; it also supports energy model exchange.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://buildingsync.net/
+  - https://github.com/BuildingSync/schema

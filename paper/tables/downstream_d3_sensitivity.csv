@@ -1,0 +1,7 @@
+t3_error_type,quantity,correct,with_error,rel_error_pct
+unit multiplier dropped (thousand Btu read as Btu),national EUI [kWh/m2],221.88452932927459,0.22188452932927458,-99.89999999999999
+wrong unit (thousand Btu read as kWh),national EUI [kWh/m2],221.88452932927459,757.1014402430274,241.2141633
+ft2 read as m2,total floorspace [million m2],8967.67002022729,96527.19674434,976.3910416709723
+top-codes read as values (NFLOOR 994/995),weighted mean floors,1.4637273439524179,4.08215195638117,178.8874562770941
+withheld code kept as data (PUBCLIM 7),share of buildings in hot/very hot zone,0.1383047564964986,0.13491126800303688,-2.453631082129578
+survey weights ignored,number of buildings [thousand],5918.211220000001,6.436,-99.89125092429533

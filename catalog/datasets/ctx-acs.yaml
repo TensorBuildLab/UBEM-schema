@@ -1,0 +1,68 @@
+id: ctx-acs
+title: American Community Survey (ACS)
+short_name: ACS
+publisher: U.S. Census Bureau
+landing_page: https://www.census.gov/programs-surveys/acs/about.html
+doi: null
+citation: U.S. Census Bureau. American Community Survey. https://www.census.gov/programs-surveys/acs
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: registration_required
+distributions:
+- format: JSON
+  access_url: https://www.census.gov/data/developers/data-sets/acs-5year.html
+  api: true
+  registration_required: true
+- format: CSV
+  access_url: https://www.census.gov/programs-surveys/acs/data.html
+  api: false
+  registration_required: false
+ubem_roles:
+- context_coupling
+content_types:
+- household_income
+- housing_tenure
+- occupancy
+- demographics
+- housing_characteristics
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States, DC and Puerto Rico
+unit_of_observation: geographic_area_estimate
+spatial_granularity: census_block_group
+temporal_coverage:
+  start: '2009'
+  end: '2024'
+temporal_resolution: P1Y
+update_frequency: annual (1-year and 5-year estimates)
+statistical_nature: sample_survey_weighted
+sampling_weights: >-
+  Published area estimates already apply the survey weights and carry 90% margins of error (MOE columns). The
+  PUMS microdata use person weight PWGTP and housing-unit weight WGTP with 80 replicate weights each
+  (PWGTP1-80, WGTP1-80). (Added by author check, 2026-11-12.)
+record_count: null
+record_count_note: null
+join_keys:
+- census_block_group
+- census_tract
+- fips_county
+- fips_state
+- postal_code
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Small-area (tract and block-group) estimates carry large margins of error; the survey does not
+  describe individual buildings.
+notes: '5-year vintages 2009-2024 listed on the API page (latest 2020-2024); 2025 1-year estimates released. Block-group
+  detail is for Detailed Tables only. Census API requires a free key (stated on page); bulk files need no key (general
+  knowledge). PUMS microdata exist but were not checked. License: federal public domain (not stated on fetched pages).
+  Sampling weights not documented on fetched pages.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.census.gov/programs-surveys/acs/about.html
+  - https://www.census.gov/data/developers/data-sets/acs-5year.html

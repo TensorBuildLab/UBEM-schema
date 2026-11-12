@@ -1,0 +1,67 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-globalbuildingatlas
+title: 'GlobalBuildingAtlas: building polygons, heights and LoD1 3D models'
+short_name: GlobalBuildingAtlas
+publisher: Technical University of Munich (Chair of Data Science in Earth Observation) and Munich Center for Machine
+  Learning
+landing_page: https://github.com/zhu-xlab/GlobalBuildingAtlas
+doi: 10.14459/2025mp1782307
+citation: 'Zhu, X.X., Chen, S., Zhang, F., Shi, Y., Wang, Y. GlobalBuildingAtlas: an open global and complete dataset
+  of building polygons, heights and LoD1 3D models. Earth System Science Data 17, 6647-6668 (2025).'
+reference_paper_doi: 10.5194/essd-17-6647-2025
+license: CC-BY-NC-4.0 for GBA.Polygon, GBA.LoD1 and GBA.Height; ODbL-1.0 for GBA.ODbLPolygon; code MIT with Commons
+  Clause
+access_level: open_download
+distributions:
+- format: GeoJSON polygons and LoD1 (HuggingFace, EPSG:3857)
+  access_url: https://github.com/zhu-xlab/GlobalBuildingAtlas
+  api: false
+  registration_required: false
+- format: GeoTIFF height tiles, 3 m (mediaTUM)
+  access_url: https://mediatum.ub.tum.de/1782307
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints_polygon
+- building_height_raster_3m
+- building_lod1_3d_model
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global and complete; no reference height data in Africa, so heights unvalidated there
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: '2018'
+  end: '2019'
+temporal_resolution: static
+update_frequency: Single release published with the ESSD paper (2025-12-01)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 2750000000
+record_count_note: About 2.75 billion building polygons (GBA.Polygon); LoD1 model has 2.68 billion buildings with
+  predicted heights (ESSD article, Dec 2025)
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: null
+persistent_identifier: true
+known_limitations: Non-commercial licence (CC BY-NC 4.0) on the full polygon, height and LoD1 products; the ODbL-only
+  polygon subset covers OSM and Microsoft sources. Imagery mainly 2019 (2018 as gap fill). Heights unvalidated in
+  Africa.
+notes: Licences taken from the GitHub README; the ESSD article excerpt names only ODbL for the OSM/Microsoft part.
+  Combining layers can create licence implications. DOI is the mediaTUM record cited by the article (resolved only
+  via the article). Not suitable for commercial UBEM products. An earlier ESSD Discussions version exists (10.5194/essd-2025-327);
+  use the final paper.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://essd.copernicus.org/articles/17/6647/2025/
+  - https://github.com/zhu-xlab/GlobalBuildingAtlas
+  - https://api.crossref.org/works/10.5194/essd-17-6647-2025

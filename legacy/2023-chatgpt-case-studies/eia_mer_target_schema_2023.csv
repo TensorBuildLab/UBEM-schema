@@ -1,0 +1,21 @@
+﻿Name of Dataset/Website,U.S. Energy Information Administration
+Sector,Commercial
+Timeseries,TRUE
+Timestamp format,YYYY-MM-DD HH:MM:SS
+Constant Interval,TRUE
+Time interval,1 month
+Interpolation Methodology,Unknown
+Effective coverage: ,U.S.
+Energy Data List:,Coal Consumed by the Commercial Sector
+,Natural Gas Consumed by the Commercial Sector (Excluding Supplemental Gaseous Fuels)
+,Petroleum Consumed by the Commercial Sector (Excluding Biofuels)
+,Total Fossil Fuels Consumed by the Commercial Sector
+,Conventional Hydroelectric Power Consumed by the Commercial Sector
+,Geothermal Energy Consumed by the Commercial Sector
+,Solar Energy Consumed by the Commercial Sector
+,Wind Energy Consumed by the Commercial Sector
+,Biomass Energy Consumed by the Commercial Sector
+,Total Renewable Energy Consumed by the Commercial Sector
+,Total Primary Energy Consumed by the Commercial Sector
+,End-Use Energy Consumed by the Commercial Sector
+,Total Energy Consumed by the Commercial Sector

@@ -1,0 +1,49 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-london-lcl
+title: SmartMeter Energy Consumption Data in London Households (Low Carbon London trial)
+short_name: Low Carbon London
+publisher: UK Power Networks (London Datastore)
+landing_page: https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households
+doi: null
+citation: 'UK Power Networks. SmartMeter Energy Consumption Data in London Households (Low Carbon London project).
+  London Datastore. Also archived as: Schofield, J.R. Carmichael et al. Low Carbon London Project: Data from the
+  Dynamic Time-of-Use Electricity Pricing Trial, 2013. UK Data Service, SN 7857, 2016. https://doi.org/10.5255/UKDA-SN-7857-1'
+reference_paper_doi: null
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: CSV (zipped), access_url: 'https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households',
+  api: false, registration_required: false}
+- {format: XLSX, access_url: 'https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households',
+  api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [household_electricity_halfhourly, tariff_assignment]
+geographic_scope: city
+spatial_coverage:
+  countries: [GB]
+  description: 5,567 London households (UK Power Networks trial)
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: 2011-11, end: 2014-02}
+temporal_resolution: PT30M
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 5567
+record_count_note: 5,567 London households; about 167 million half-hourly rows (about 10 GB CSV unzipped)
+join_keys: [timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Anonymized household consumption without building characteristics or coordinates; about 1,100
+  households were on a dynamic time-of-use tariff during 2013, so their loads include price response; sample is
+  a trial panel, not weighted to the population.
+notes: Part of this is a trial-participant sample (customers on flat rate about 4,500 and dynamic tariff about 1,100).
+  The ACORN group field was not confirmed on the page. The London Datastore page carries no DOI; the UK Data Service
+  archive SN 7857 (DOI 10.5255/UKDA-SN-7857-1, confirmed in DataCite) is a separate copy whose access terms (UKDS
+  registration) were not checked. No peer-reviewed descriptor paper identified (reference_paper_doi null).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households', 'https://api.datacite.org/dois/10.5255/UKDA-SN-7857-1']

@@ -1,0 +1,58 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: sim-buildings-900k
+title: 'BuildingsBench: Buildings-900K (synthetic building load time series) and benchmark datasets'
+short_name: Buildings-900K
+publisher: National Renewable Energy Laboratory (NREL), via OEDI
+landing_page: https://data.openei.org/submissions/5859
+doi: 10.25984/1986147
+citation: 'Emami, P., Sahu, A., Graf, P. BuildingsBench: A Large-Scale Dataset of 900K Buildings and Benchmark for
+  Short-Term Load Forecasting. Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and
+  Benchmarks Track. arXiv:2307.00142. https://doi.org/10.52202/075280-0871'
+reference_paper_doi: 10.52202/075280-0871
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: 'Parquet (pretraining data, about 110 GB)', access_url: 'https://data.openei.org/submissions/5859', api: false,
+  registration_required: false}
+- {format: CSV (real-building evaluation datasets), access_url: 'https://data.openei.org/submissions/5859', api: false,
+  registration_required: false}
+- {format: 'S3 bucket (oedi-data-lake, prefix buildings-bench)', access_url: 's3://oedi-data-lake/buildings-bench/',
+  api: false, registration_required: false}
+ubem_roles: [reference_simulation]
+content_types: [simulated_building_load_timeseries, pretraining_data_for_load_forecasting, real_building_benchmark_datasets]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: Synthetic buildings derived from the NREL End-Use Load Profiles (ComStock and ResStock), statistically
+    representative of the U.S. building stock; benchmark includes real datasets from several countries
+unit_of_observation: building
+spatial_granularity: county
+temporal_coverage: {start: '2018', end: '2018'}
+temporal_resolution: PT1H
+update_frequency: static (OEDI page last updated July 2026)
+statistical_nature: simulation_synthetic
+sampling_weights: null
+record_count: 900000
+record_count_note: About 900,000 simulated buildings, one time series each, for ComStock and ResStock, in AMY2018
+  and TMY3 weather versions; seven real datasets in the evaluation benchmark
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: Simulated load time series intended for machine-learning pretraining (day-ahead forecasting),
+  not a calibrated representation of any real building; derived from EULP simulations so inherits their model limitations.
+  Mostly electricity load; the benchmark's real-building subset is small and heterogeneous.
+notes: 'The DOI 10.25984/1986147 and CC BY 4.0 license are from the OEDI submission page; the DataCite record for
+  that DOI shows publicationYear 2018 and an empty rights list, an inconsistency not resolved. NeurIPS DOI 10.52202/075280-0871
+  verified in Crossref (authors Emami, Sahu, Graf, and others); arXiv id 2307.00142 (DataCite). Temporal resolution
+  PT1H is inferred from the repository''s data loader example (hourly context windows); weather year AMY2018 from
+  file labels. Spatial granularity county is assumed from the EULP source, not verified. The GitHub README says
+  no license for data (BSD-3-Clause is for code); OEDI page is the data license source. Benchmark real datasets
+  named on OEDI: ElectricityLoadDiagrams20112014, BDG-2, Sceaux household power, Borealis, SMART, IDEAL, Low Carbon
+  London.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://data.openei.org/submissions/5859', 'https://github.com/NREL/BuildingsBench', 'https://api.crossref.org/works?query.bibliographic=BuildingsBench',
+    'https://api.datacite.org/dois/10.48550/arxiv.2307.00142']

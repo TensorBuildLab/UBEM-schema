@@ -1,0 +1,46 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-eia-seds
+title: State Energy Data System (SEDS)
+short_name: EIA SEDS
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/state/seds/
+doi: null
+citation: 'U.S. Energy Information Administration. State Energy Data System (SEDS): 1960-2024 (complete). Washington,
+  DC. Annual.'
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_api
+distributions:
+- {format: CSV, access_url: 'https://www.eia.gov/state/seds/seds-data-complete.php', api: false, registration_required: false}
+- {format: XLSX, access_url: 'https://www.eia.gov/state/seds/', api: false, registration_required: false}
+- {format: JSON, access_url: 'https://www.eia.gov/opendata/', api: true, registration_required: true}
+ubem_roles: [calibration_validation]
+content_types: [energy_consumption_annual_by_sector_and_fuel, energy_prices, energy_expenditures, production, co2_emissions]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: Each U.S. state and the U.S. total (the page's selector also lists five territories)
+unit_of_observation: region
+spatial_granularity: state_province
+temporal_coverage: {start: '1960', end: '2024'}
+temporal_resolution: P1Y
+update_frequency: annual (complete estimates through 2024; later years released on a schedule)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys: [fips_state, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: State annual totals by sector; no sub-state resolution. Many series are estimated from other
+  sources rather than surveyed directly; prices and expenditures start 1970. Data for the most recent year are revised
+  in later releases.
+notes: 'statistical_nature is compilation: SEDS combines EIA survey results with estimates from other available
+  information and converts physical units to Btu using technical-note methods. The EIA Open Data API needs a free
+  API key (registration), the bulk files do not. Public domain per EIA Copyright and Reuse page.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.eia.gov/state/seds/', 'https://www.eia.gov/opendata/documentation.php', 'https://www.eia.gov/about/copyrights_reuse.php']

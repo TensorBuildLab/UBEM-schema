@@ -1,0 +1,45 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-plegma
+title: 'Plegma dataset: domestic appliance-level and aggregate electricity demand with metadata from Greece'
+short_name: Plegma
+publisher: University of Strathclyde (Strathprints data repository); authors from the National Technical University
+  of Athens and partners
+landing_page: https://doi.org/10.1038/s41597-024-03208-0
+doi: null
+citation: 'Athanasoulias, S., Guasselli, F., Doulamis, N., Doulamis, A., et al. The Plegma dataset: Domestic appliance-level
+  and aggregate electricity demand with metadata from Greece. Scientific Data (2024). https://doi.org/10.1038/s41597-024-03208-0'
+reference_paper_doi: 10.1038/s41597-024-03208-0
+license: null
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://github.com/sathanasoulias/Plegma-Dataset', api: false, registration_required: false}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [whole_house_power, appliance_level_power, humidity_temperature, building_characteristics, demographics_and_practices]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [GR]
+  description: 13 households in Greece (Mediterranean climate; includes AC and electric water boilers)
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: null, end: null}
+temporal_resolution: PT10S
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 13
+record_count_note: 13 households over one year, 88 meters and sensors, 218 million readings (paper abstract)
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Only 13 households; first high-frequency Greek dataset but not statistically representative;
+  larger gaps were left unaltered.
+notes: Added as a non-U.S./non-UK example from southern Europe. The data are hosted on Strathprints (CSV, raw and
+  clean); the dataset DOI and dataset license were not retrieved (license null; the Scientific Data article itself
+  is CC BY). access_url above points to the code and notebook repository named in the paper; confirm the Strathprints
+  data link via the article's Data Records section. Collection dates not stated in the abstract (null).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://api.crossref.org/works/10.1038/s41597-024-03208-0', 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11014970/fullTextXML']

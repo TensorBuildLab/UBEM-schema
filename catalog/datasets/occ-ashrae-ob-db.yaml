@@ -1,0 +1,68 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-ashrae-ob-db
+title: ASHRAE Global Occupant Behavior Database
+short_name: ASHRAE OB Database
+publisher: ASHRAE Global Occupant Behavior Database project team (descriptor paper lead author B. Dong, Syracuse University)
+landing_page: https://ashraeobdatabase.com/
+doi: null
+citation: Dong, B., Liu, Y., Mu, W., Jiang, Z., Pandey, P., Hong, T., Olesen, B., Lawrence, T., O'Neil, Z., Andrews, C., et
+  al. 2022. A global building occupant behavior database. Scientific Data 9, 369.
+reference_paper_doi: 10.1038/s41597-022-01475-3
+license: null
+access_level: open_download
+distributions:
+- format: per-dataset downloads and full database via website (file formats not verified); sensor and room metadata as Brick
+    schema models
+  access_url: https://ashraeobdatabase.com/
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+- calibration_validation
+content_types:
+- occupancy_presence
+- people_count
+- occupant_behavior_device_interaction
+- window_opening_closing
+- light_switching
+- thermostat_setpoint_changes
+- brick_metadata
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: 34 field-measured datasets from 15 countries, 39 institutions and 10 climate zones; commercial and residential
+    buildings (country list not enumerated here)
+unit_of_observation: room_or_building_sensor_time_series
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: irregular
+update_frequency: not stated (database published 2022)
+statistical_nature: compilation
+sampling_weights: null
+record_count: 34
+record_count_note: 34 field-measured datasets (Scientific Data abstract)
+join_keys:
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Compilation of contributed field studies, so sampling is opportunistic and not representative of any national
+  stock; datasets differ in sensor types, time resolution and duration; occupancy and behavior are mostly room or zone level;
+  privacy anonymization removed some metadata; geographic and building-type coverage is uneven.
+notes: 'Counts (34 datasets, 15 countries, 39 institutions, 10 climate zones) verified from the Europe PMC abstract of the
+  descriptor paper (PMC9240009; article licensed CC BY). The database website text could not be read by the automated fetcher,
+  so the licence of the DATA is unverified and recorded as null: a third-party Kaggle mirror reports ODbL 1.0 with DbCL, while
+  a repository record lists CC BY 4.0; check ashraeobdatabase.com before reuse. File formats, temporal range and per-dataset
+  resolution were not verified. ''persistent_identifier'' is false because only the descriptor paper has a DOI; no dataset
+  DOI was verified.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://api.crossref.org/works/10.1038/s41597-022-01475-3
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC9240009 (via Europe PMC REST abstract)
+  - https://ashraeobdatabase.com/ (page text not readable by the fetcher)

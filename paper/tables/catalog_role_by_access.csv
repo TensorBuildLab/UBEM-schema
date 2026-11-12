@@ -1,0 +1,8 @@
+primary_role,open_download,open_api,registration_required,request_or_agreement,restricted_commercial
+boundary_conditions,7,2,6,0,0
+geometry_inventory,22,0,0,0,1
+building_characteristics,12,2,1,0,0
+operation_use,4,0,1,2,0
+calibration_validation,13,3,2,3,0
+reference_simulation,5,0,0,0,0
+context_coupling,4,0,1,0,0

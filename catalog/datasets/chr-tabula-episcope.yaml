@@ -1,0 +1,91 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-tabula-episcope
+title: TABULA / EPISCOPE residential building typology WebTool data
+short_name: TABULA WebTool
+publisher: Institut Wohnen und Umwelt (IWU) with TABULA and EPISCOPE project partners (Intelligent Energy Europe)
+landing_page: https://webtool.building-typology.eu/
+doi: null
+citation: 'Institut Wohnen und Umwelt. TABULA WebTool (national residential building typologies), TABULA 2009-2012 and EPISCOPE
+  2013-2016 projects. Descriptor: Loga, T., Stein, B., Diefenbach, N. 2016. Energy and Buildings.'
+reference_paper_doi: 10.1016/j.enbuild.2016.06.094
+license: null
+access_level: open_download
+distributions:
+- format: web tool (the site menu lists a Download page; contents and formats not verified)
+  access_url: https://webtool.building-typology.eu/
+  api: false
+  registration_required: false
+- format: web tool (legacy address)
+  access_url: https://episcope.eu/building-typology/webtool/
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- reference_simulation
+content_types:
+- building_typology
+- u_values
+- typical_heat_supply_systems
+- typical_energy_consumption_by_carrier
+- energy_saving_measures
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - AT
+  - BA
+  - BE
+  - BG
+  - CY
+  - CZ
+  - DE
+  - DK
+  - ES
+  - FR
+  - GB
+  - GR
+  - HU
+  - IE
+  - IT
+  - NL
+  - 'NO'
+  - PL
+  - RS
+  - SE
+  - SI
+  description: 21 countries in the WebTool country menu (coverage per country varies)
+unit_of_observation: building_type_class (typology)
+spatial_granularity: nation
+temporal_coverage:
+  start: '2009'
+  end: '2016'
+temporal_resolution: static
+update_frequency: not updated regularly; project periods 2009-2012 (TABULA) and 2013-2016 (EPISCOPE); site copyright 2012-2016
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Typology classes per country (count not verified)
+join_keys:
+- country_iso
+- building_type
+- vintage
+variables_documented: true
+machine_readable: false
+versioned: true
+persistent_identifier: false
+known_limitations: Residential only; typology (size and age classes with example buildings), not a census of buildings; national
+  datasets compiled with partly different methods; shares of stock per class are not available for every country; data last
+  curated around 2016-2017.
+notes: 'License and terms of use are not stated on the pages checked (copyright notice: Institut Wohnen und Umwelt 2012-2016),
+  so license is null and access_level open_download reflects free browsing of the WebTool; whether bulk download is permitted
+  was not verified, and machine_readable is therefore false. Temporal coverage is the project period, not a data reference
+  year. Role reference_simulation reflects the standard reference calculation procedure and example buildings. Two peer-reviewed
+  descriptor papers exist (Loga et al. 2016, doi 10.1016/j.enbuild.2016.06.094; Ballarini et al. 2014, doi 10.1016/j.enpol.2014.01.027);
+  the first is recorded as reference_paper_doi.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://webtool.building-typology.eu/
+  - https://episcope.eu/building-typology/webtool/
+  - https://api.crossref.org/works/10.1016/j.enbuild.2016.06.094
+  - https://api.crossref.org/works/10.1016/j.enpol.2014.01.027

@@ -1,0 +1,57 @@
+id: wx-bsrn
+title: Baseline Surface Radiation Network (BSRN)
+short_name: BSRN
+publisher: WCRP Baseline Surface Radiation Network / Alfred Wegener Institute (data archive at PANGAEA)
+landing_page: https://bsrn.awi.de/
+doi: null
+citation: 'Driemel, A., et al. (2018). Baseline Surface Radiation Network (BSRN): structure and data description
+  (1992-2017). Earth System Science Data 10, 1491-1501.'
+reference_paper_doi: 10.5194/essd-10-1491-2018
+license: null
+access_level: registration_required
+distributions:
+- format: tab-delimited text
+  access_url: https://bsrn.awi.de/
+  api: false
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- surface_shortwave_radiation
+- longwave_radiation
+- direct_diffuse_radiation
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: station
+spatial_granularity: point_station
+temporal_coverage:
+  start: '1992'
+  end: present
+temporal_resolution: PT1M
+update_frequency: null
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 80
+record_count_note: '''about 80'' stations per BSRN page'
+join_keys:
+- station_id
+- lat_lon
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Only about 80 stations, mostly at research sites away from dense urban areas; station-by-station
+  availability varies.
+notes: 'Page links to ''Conditions of data release'' and PANGAEA retrieval but neither was readable; license and
+  whether registration is required were NOT verified (access_level and registration flag are provisional). Reference
+  paper: Driemel 2018 (Ohmura 1998 not checked).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://bsrn.awi.de/
+  - https://api.crossref.org/works/10.5194/essd-10-1491-2018

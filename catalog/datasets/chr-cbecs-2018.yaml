@@ -1,0 +1,66 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-cbecs-2018
+title: 2018 Commercial Buildings Energy Consumption Survey (CBECS) public-use microdata
+short_name: CBECS 2018
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/consumption/commercial/data/2018/
+doi: null
+citation: U.S. Energy Information Administration. 2018 Commercial Buildings Energy Consumption Survey public use microdata
+  file. Released November 2021, revised December 2022.
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: CSV
+  access_url: https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata
+  api: false
+  registration_required: false
+- format: SAS
+  access_url: https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- calibration_validation
+content_types:
+- building_characteristics
+- energy_consumption_annual
+- end_use_estimates
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States (50 states and DC)
+unit_of_observation: building
+spatial_granularity: census_region_division
+temporal_coverage:
+  start: '2018'
+  end: '2018'
+temporal_resolution: P1Y
+update_frequency: 'irregular, roughly every 4 to 6 years (survey years listed: 1992, 1995, 1999, 2003, 2012, 2018)'
+statistical_nature: sample_survey_weighted
+sampling_weights: FINALWT plus 151 replicate weights (FINALWT1-FINALWT151); variable names confirmed in the public CSV header
+record_count: 6436
+record_count_note: 6,436 sampled buildings representing about 5.9 million U.S. commercial buildings (EIA microdata page);
+  about 620 questionnaire variables plus imputation flags
+join_keys:
+- census_region_division
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Smallest geography on the public file is the census division (no state identifiers); data are masked for
+  disclosure avoidance, so tabulations from the microdata will not exactly match EIA published tables; imputation flags (Z*
+  variables) mark imputed values; estimates must use the final and replicate weights.
+notes: Confidential, finer-grained access exists only through an EIA CIPSEA application granted in special circumstances.
+  The file has a PUBCLIM climate-region variable; it was not mapped to ASHRAE or IECC zones here, so no climate join key is
+  listed. Microdata file first released Nov 2021, revised Dec 2022; User's Guide revised Jan 2023.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.eia.gov/consumption/commercial/data/2018/
+  - https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata
+  - 'https://www.eia.gov/consumption/commercial/data/2018/xls/cbecs2018_final_public.csv (header inspected: FINALWT, FINALWT1-FINALWT151,
+    REGION, CENDIV, PUBCLIM)'

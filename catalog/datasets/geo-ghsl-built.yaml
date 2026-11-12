@@ -1,0 +1,66 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-ghsl-built
+title: GHSL built-up surface (GHS-BUILT-S R2023A) and average net building height (GHS-BUILT-H R2023A)
+short_name: GHS-BUILT-S/H
+publisher: European Commission, Joint Research Centre (JRC), Global Human Settlement Layer
+landing_page: https://human-settlement.emergency.copernicus.eu/ghs_buS2023.php
+doi: 10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA
+citation: 'Pesaresi, M., Politis, P. (2023). GHS-BUILT-S R2023A - GHS built-up surface grid, derived from Sentinel2
+  composite and Landsat, multitemporal (1975-2030). European Commission, JRC. doi:10.2905/9F06F36F-4B11-47EC-ABB0-4F8B7B1D72EA.
+  Height product: GHS-BUILT-H R2023A, doi:10.2905/85005901-3A49-48DD-9D19-6261354F56FE.'
+reference_paper_doi: 10.1080/17538947.2024.2390454
+license: 'EC reuse policy: reuse authorised with acknowledgement of the source (open and free); not labelled with
+  an SPDX licence on the pages checked'
+access_level: open_download
+distributions:
+- format: GeoTIFF rasters (100 m built-up surface 1975-2030; 100 m building height 2018; 10 m built-up 2018 variant)
+    - format per GHSL data package, not confirmed on fetched pages
+  access_url: https://human-settlement.emergency.copernicus.eu/ghs_buS2023.php
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- built_up_surface
+- non_residential_built_up_surface
+- average_net_building_height
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global raster coverage
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: '1975'
+  end: '2030'
+temporal_resolution: P5Y
+update_frequency: Versioned releases (R2023A; later releases exist, e.g. R2025 age layer cited by GHS-OBAT)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Raster product; no record count
+join_keys:
+- grid_cell
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: 100 m cells give built-up surface (m2) and average net building height, not individual buildings.
+  Built-up surface is interpolated or extrapolated at 5-year epochs from 1975 to 2030 (2025 and 2030 are projections).
+  Building height is a single 2018 epoch.
+notes: Two JRC products are bundled here. DOI field holds GHS-BUILT-S; GHS-BUILT-H DOI is in the citation. The methodology
+  paper is Pesaresi et al. 2024 (International Journal of Digital Earth 17(1), 2390454), cited by Google Earth Engine's
+  catalog for both layers; Crossref DOI verified. The GHSL site pages fetched did not state license, resolution
+  or DOI; those come from the Earth Engine catalog entries mirroring the JRC metadata. The JRC data catalogue page
+  was blocked. Do not assume CC-BY-4.0 without checking the EC reuse notice.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://human-settlement.emergency.copernicus.eu/ghs_buS2023.php
+  - https://human-settlement.emergency.copernicus.eu/ghs_buH2023.php
+  - https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_S
+  - https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_H
+  - https://api.crossref.org/works/10.1080/17538947.2024.2390454

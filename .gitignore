@@ -1,0 +1,11 @@
+# private / original project folder (reviews, surveys, old submissions stay local)
+0_Open Data for Building Studies An Introductory Review/
+# downloaded source data (re-create with: python scripts/download_data.py)
+data/raw/
+# python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+# secrets
+.env

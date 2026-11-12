@@ -1,0 +1,46 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-eia-861
+title: Form EIA-861 Annual Electric Power Industry Report (detailed data files)
+short_name: EIA-861
+publisher: U.S. Energy Information Administration (EIA)
+landing_page: https://www.eia.gov/electricity/data/eia861/
+doi: null
+citation: U.S. Energy Information Administration. Form EIA-861 Annual Electric Power Industry Report, detailed data
+  files. Washington, DC. Annual.
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- {format: ZIP (spreadsheets), access_url: 'https://www.eia.gov/electricity/data/eia861/', api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [electricity_sales_by_sector, revenue, customer_counts, net_metering, advanced_metering, demand_response,
+  energy_efficiency_programs, utility_service_territory]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: United States; census of electric distribution utilities and power marketers (smaller bundled-service
+    utilities may file the short EIA-861S)
+unit_of_observation: utility
+spatial_granularity: utility_service_territory
+temporal_coverage: {start: '1990', end: '2025'}
+temporal_resolution: P1Y
+update_frequency: annual (final data for 2025 listed; early-release data precede final)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys: [utility_id, fips_state, balancing_authority, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Annual sales, revenue and customer counts by sector, not interval or building level. Sales are
+  reported per utility, state and balancing authority; service territory is listed by county and state. Early-release
+  files exclude state-level adjustments. Commercial vs industrial classification follows utility reporting practices.
+notes: Classified administrative_record (mandatory utility filing) in line with the catalog instructions; EIA describes
+  it as a census of U.S. electric utilities. File type inside the yearly ZIPs was not confirmed on the page fetched.
+  The monthly counterpart is Form EIA-861M. Public domain per EIA Copyright and Reuse page.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.eia.gov/electricity/data/eia861/', 'https://www.eia.gov/about/copyrights_reuse.php']

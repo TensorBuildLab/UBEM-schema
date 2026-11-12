@@ -1,0 +1,73 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-uk-epc
+title: 'Energy Performance of Buildings data: England and Wales (domestic EPCs, non-domestic EPCs, Display Energy Certificates)'
+short_name: UK EPC (England and Wales)
+publisher: Ministry of Housing, Communities and Local Government (MHCLG, formerly DLUHC)
+landing_page: https://get-energy-performance-data.communities.gov.uk/
+doi: null
+citation: Ministry of Housing, Communities and Local Government. Get energy performance of buildings data (England and Wales).
+  Contains public sector information licensed under the Open Government Licence v3.0.
+reference_paper_doi: null
+license: OGL-UK-3.0
+access_level: registration_required
+distributions:
+- format: CSV (bulk download, certificates and recommendations)
+  access_url: https://get-energy-performance-data.communities.gov.uk/
+  api: false
+  registration_required: true
+- format: developer API (response format not verified)
+  access_url: https://get-energy-performance-data.communities.gov.uk/
+  api: true
+  registration_required: true
+ubem_roles:
+- building_characteristics
+- calibration_validation
+content_types:
+- energy_performance_certificates
+- building_characteristics
+- asset_rating
+- recommendations
+- display_energy_certificates_operational_rating
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - GB
+  description: England and Wales (Scotland has a separate register); certificates registered since 2008
+unit_of_observation: certificate_per_building_or_dwelling
+spatial_granularity: building
+temporal_coverage:
+  start: '2008'
+  end: present
+temporal_resolution: irregular
+update_frequency: continuously as certificates are lodged; the service was migrated and relocated (the earlier epc.opendatacommunities.org
+  address now redirects)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: 'Official DLUHC blog (January 2024): almost 30 million EPCs can be searched and downloaded; exact current
+  count not stated on the new site'
+join_keys:
+- address
+- postal_code
+- building_type
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Domestic EPC asset ratings are calculated from lodged assessments (RdSAP/SAP), not metered use; certificates
+  include expired and superseded ones so duplicates per property must be resolved; address data carry some licensing restrictions
+  per the guidance page; some certificates lack a UPRN because of incomplete lodged addresses; only certified dwellings are
+  covered (not full stock); Display Energy Certificates cover public buildings only.
+notes: A free GOV.UK One Login account is required for bulk download (reflected in access_level). Address and UPRN fields
+  are published per official material (MHCLG user research and blog, found via search); the new service page itself did not
+  list fields, so spatial granularity 'building' rests on that. UPRN is not in the join_keys enum. Exact record count, update
+  frequency and the 'domestic 52 variables' figure (secondary source) were not verified. The licence is OGL v3.0 'except where
+  otherwise stated'. Role calibration_validation applies mainly to DECs (operational ratings) since asset ratings are modeled.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://get-energy-performance-data.communities.gov.uk/
+  - https://epc.opendatacommunities.org (redirects to the above)
+  - https://mhclgdigital.blog.gov.uk/2024/01/29/changes-to-the-energy-performance-certificates-open-data-service/

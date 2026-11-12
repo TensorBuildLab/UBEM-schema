@@ -1,0 +1,52 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-ferc-714
+title: FERC Form No. 714 Annual Electric Balancing Authority Area and Planning Area Report (hourly planning-area
+  demand)
+short_name: FERC-714
+publisher: U.S. Federal Energy Regulatory Commission (FERC)
+landing_page: https://www.ferc.gov/industries-data/electric/general-information/electric-industry-forms/form-no-714-annual-electric/overview
+doi: null
+citation: Federal Energy Regulatory Commission. Form No. 714 - Annual Electric Balancing Authority Area and Planning
+  Area Report. Washington, DC. Annual.
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://www.ferc.gov/industries-data/electric/general-information/electric-industry-forms/form-no-714-annual-electric/data',
+  api: false, registration_required: false}
+- {format: XBRL, access_url: 'https://www.ferc.gov/industries-data/electric/general-information/electric-industry-forms/form-no-714-annual-electric/data',
+  api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [electricity_demand_hourly, annual_demand_forecast, planning_area_boundaries_reference]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: U.S. planning areas and balancing authority areas (filers with annual peak above 200 MW)
+unit_of_observation: planning_area
+spatial_granularity: utility_service_territory
+temporal_coverage: {start: '2006', end: present}
+temporal_resolution: PT1H
+update_frequency: annual
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys: [balancing_authority, utility_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: 'Per PUDL documentation: gaps from hours to whole years (especially small respondents), outliers
+  and long constant runs, inconsistent sign conventions and DST/time-zone errors, shifting territories after mergers,
+  and different respondent IDs between the 2006-2020 CSV era and the 2021+ XBRL era.'
+notes: The FERC website returned HTTP 403 to automated fetches, so format and coverage were verified through the
+  PUDL (Catalyst Cooperative) documentation, which describes the FERC source as ASCII CSV for 2006-2020 and XBRL
+  from 2021. License is null because no license statement for the FERC data itself was found on the pages checked
+  (US federal agency data, but not confirmed here). Cleaned and imputed hourly tables exist via PUDL (documentation
+  CC-BY-4.0; raw archive DOI 10.5281/zenodo.4127100) but are a derivative, not the publisher source.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://docs.catalyst.coop/pudl/en/stable/data_sources/ferc714.html', 'https://data.pnnl.gov/group/nodes/dataset/33306
+      (via search result)', 'https://www.ferc.gov/industries-data/electric/general-information/electric-industry-forms/form-no-714-annual-electric/overview
+      (HTTP 403, not readable)']

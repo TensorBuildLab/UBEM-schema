@@ -1,0 +1,57 @@
+id: wx-nasa-power
+title: NASA POWER (Prediction Of Worldwide Energy Resources)
+short_name: NASA POWER
+publisher: NASA Langley Research Center
+landing_page: https://power.larc.nasa.gov/
+doi: null
+citation: NASA Langley Research Center POWER Project. Prediction Of Worldwide Energy Resources (POWER) Data Access.
+  https://power.larc.nasa.gov/
+reference_paper_doi: null
+license: null
+access_level: open_api
+distributions:
+- format: JSON
+  access_url: https://power.larc.nasa.gov/docs/
+  api: true
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- solar_irradiance
+- meteorological_variables
+- hourly_daily_monthly_climatology
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: PT1H
+update_frequency: continuously updated (Data v10 release noted on docs page)
+statistical_nature: reanalysis_model
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Values are coarse-grid (order of 0.5 degree) model and satellite-blended estimates, not point
+  observations.
+notes: The docs page confirms the API and a Data v10 migration but did not state sources, start year, grid size
+  or license, so those are null/unverified (sources are generally MERRA-2 and CERES-based, not confirmed here).
+  Hourly is available for a subset of variables; also daily/monthly. No-key access is from general knowledge, not
+  confirmed on the page. No descriptor paper identified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://power.larc.nasa.gov/docs/

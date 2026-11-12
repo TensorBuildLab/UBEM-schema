@@ -1,0 +1,301 @@
+dataset,name,label,section,gold,gold_status
+cbecs2018,ATTIC,Attic,,floors_below_ground,draft
+cbecs2018,AWN,External overhangs or awnings,,none,draft
+cbecs2018,BLDSHP,Building shape,,building_shape,draft
+cbecs2018,BLRAIR,Derived variable: Central air handlers for boiler distribution,,heating_system,draft
+cbecs2018,BLRAIR_FK2,Central air handlers for fuel oil boiler distribution,,heating_system,draft
+cbecs2018,BLRAIR_OT2,Central air handlers for other source boiler distribution,,heating_system,draft
+cbecs2018,BLRFNCL,Derived variable: Fan coil or induction units for boiler distribution,,heating_system,draft
+cbecs2018,BLROTD_EL2,Other type of electric boiler distribution,,heating_system,draft
+cbecs2018,BLRRAD_EL2,Radiators for electric boiler distribution,,heating_system,draft
+cbecs2018,BLRRAD_FK2,Radiators for fuel oil boiler distribution,,heating_system,draft
+cbecs2018,BLRRDFL_CO2,Radiant floor or ceiling panels for coal boiler distribution,,heating_system,draft
+cbecs2018,BLRRDFL_NG2,Radiant floor or ceiling panels for nat gas boiler distribution,,heating_system,draft
+cbecs2018,BOILER_PR,Boilers fueled by propane,,heating_system,draft
+cbecs2018,BOILP_FK,Derived variable: Pct heated by fuel oil boiler,,heating_system,draft
+cbecs2018,CAF,Cafeteria or large restaurant,,rooms_and_spaces,draft
+cbecs2018,CENDIV,Census division,,administrative_region,draft
+cbecs2018,CHILLR_EL,Central chillers powered by electricity,,cooling_system,draft
+cbecs2018,CHILP_FK,Derived variable: Pct cooled by fuel oil central chillers,,cooling_system,draft
+cbecs2018,CHLAIR,Central air handlers for central chiller distribution,,cooling_system,draft
+cbecs2018,CHLOTD,Other type of central chiller distribution,,cooling_system,draft
+cbecs2018,COHT1,Coal used for main heating,,energy_sources_used,draft
+cbecs2018,CONFSP,Conference or event space,,none,draft
+cbecs2018,COOK,Energy used for cooking,,plug_and_process_equipment,draft
+cbecs2018,COURT,Food court,,none,draft
+cbecs2018,COWATR,Coal used for water heating,,energy_sources_used,draft
+cbecs2018,CWAIR,Central air handlers for chilled water distribution,,cooling_system,draft
+cbecs2018,CWCOOL,District chilled water used for air conditioning,,energy_sources_used,draft
+cbecs2018,CWFNCL,Fan coil or induction units for chilled water distribution,,cooling_system,draft
+cbecs2018,CWWTLP,Water loop heat pump for chilled water distribution,,cooling_system,draft
+cbecs2018,DHHT1,Derived variable: District heat used for main heating,,energy_sources_used,draft
+cbecs2018,DHOTH,Derived variable: District heat used for some other use,,energy_sources_used,draft
+cbecs2018,DHWATR,Derived variable: District heat used for water heating,,energy_sources_used,draft
+cbecs2018,DHWTBTU,Modeled variable: District heat water heating use (thous Btu),,end_use_energy,draft
+cbecs2018,DIST_HW,Derived variable: District hot water system,,water_heating_system,draft
+cbecs2018,DOAS,Dedicated outside air system (DOAS),,ventilation_system,draft
+cbecs2018,DRVTHRU,Drive-thru window,,none,draft
+cbecs2018,ELBTU,Building/energy supplier variable: Annual electricity consumption (thous Btu),,electricity_consumption,draft
+cbecs2018,ELCKBTU,Modeled variable: Electricity cooking use (thous Btu),,end_use_energy,draft
+cbecs2018,ELCLBTU,Modeled variable: Electricity cooling use (thous Btu),,end_use_energy,draft
+cbecs2018,ELEXP,Building/energy supplier variable: Annual electricity expenditures ($),,energy_expenditure,draft
+cbecs2018,ELHT1,Electricity used for main heating,,energy_sources_used,draft
+cbecs2018,ELRFBTU,Modeled variable: Electricity refrigeration use (thous Btu),,end_use_energy,draft
+cbecs2018,EMCSLT,BAS controls lighting,,building_controls,draft
+cbecs2018,FACACT,Type of complex,,building_use_type,draft
+cbecs2018,FACIL,On a multibuilding complex,,none,draft
+cbecs2018,FASTFD,Fast food or small restaurant,,rooms_and_spaces,draft
+cbecs2018,FINALWT,Nonresponse Adjusted Weight,,survey_weight,draft
+cbecs2018,FIREPLP_NG,Derived variable: Pct heated by natural gas fireplace,,heating_system,draft
+cbecs2018,FKBTU,Building/energy supplier variable: Annual fuel oil consumption (thous Btu),,other_fuel_consumption,draft
+cbecs2018,FKCLBTU,Modeled variable: Fuel oil cooling use (thous Btu),,end_use_energy,draft
+cbecs2018,FKEXP,Building/energy supplier variable: Annual fuel oil expenditures ($),,energy_expenditure,draft
+cbecs2018,FKHT2,Fuel oil used for secondary heating,,energy_sources_used,draft
+cbecs2018,FKWATR,Fuel oil used for water heating,,energy_sources_used,draft
+cbecs2018,FLCEILHT,Floor to ceiling height,,floor_to_ceiling_height,draft
+cbecs2018,GLSSPC,Percent exterior glass,,window_to_wall_ratio,draft
+cbecs2018,HDD65,Third-party data: Heating degree days (base 65),,degree_days,draft
+cbecs2018,HID,High intensity discharge (HID) lighting,,energy_use_intensity,draft
+cbecs2018,HPCDUAL,Combination air source and geothermal heat pump for A/C,,cooling_system,draft
+cbecs2018,HPCWTR,Water loop heat pump for A/C,,cooling_system,draft
+cbecs2018,HPHDUAL,Combination air source and geothermal heat pump,,heating_system,draft
+cbecs2018,HPHWTR,Water loop heat pump,,heating_system,draft
+cbecs2018,HWMANU,District hot water used for manufacturing,,energy_sources_used,draft
+cbecs2018,HWTRM,Large amounts of hot water,,water_heating_system,draft
+cbecs2018,LGOFFDEVN,Number of large office devices,,plug_and_process_equipment,draft
+cbecs2018,LIT,Derived variable: Lighting used in building,,lighting_system,draft
+cbecs2018,LODOCCP,Lodging room percent occupancy,,ownership_tenure,draft
+cbecs2018,LOHRPC,Lit when open category,,none,draft
+cbecs2018,LTNR24,Lights off during 24 hours,,lighting_system,draft
+cbecs2018,MAINCL,Derived variable: Main air-conditioning equipment,,cooling_system,draft
+cbecs2018,MAINHT,Derived variable: Main heating equipment,,heating_system,draft
+cbecs2018,MCROTB,Microturbines,,onsite_generation,draft
+cbecs2018,MFBTU,Derived variable: Annual major fuels consumption (thous Btu),,total_energy_consumption,draft
+cbecs2018,MFCLBTU,Modeled variable: Major fuels cooling use (thous Btu),,end_use_energy,draft
+cbecs2018,MFLTBTU,Modeled variable: Major fuels lighting use (thous Btu),,end_use_energy,draft
+cbecs2018,MFOTBTU,Modeled variable: Major fuels miscellaneous use (thous Btu),,end_use_energy,draft
+cbecs2018,MFUSED,Derived variable: Any major fuel used,,none,draft
+cbecs2018,MLTMON,Multiple monitors,,plug_and_process_equipment,draft
+cbecs2018,NESLTR,Number of escalators,,plug_and_process_equipment,draft
+cbecs2018,NFLOOR,Number of floors,,floors_above_ground,draft
+cbecs2018,NGCNS,Building/energy supplier variable: Annual natural gas consumption (ccf),,natural_gas_consumption,draft
+cbecs2018,NGCOOK,Natural gas used for cooking,,energy_sources_used,draft
+cbecs2018,NGCOOL,Natural gas used for air conditioning,,energy_sources_used,draft
+cbecs2018,NGWATR,Natural gas used for water heating,,energy_sources_used,draft
+cbecs2018,NOCCAT,Number of businesses category,,none,draft
+cbecs2018,NRSBED,Licensed nursing beds,,rooms_and_spaces,draft
+cbecs2018,NWKERC,Number of employees category,,occupant_count,draft
+cbecs2018,OCSN,Occupancy sensors,,building_controls,draft
+cbecs2018,OPNMF,Open during week,,operating_hours,draft
+cbecs2018,OPNWE,Open on weekend,,operating_hours,draft
+cbecs2018,OTCLEQ,Derived variable: Other type of equipment used for cooling,,cooling_system,draft
+cbecs2018,OTCLP_PR,Derived variable: Pct cooled by propane other type of A/C,,cooling_system,draft
+cbecs2018,OTCLP_ST,Derived variable: Pct cooled by district steam other type of A/C,,cooling_system,draft
+cbecs2018,OTCOOK,Other energy source used for cooking,,energy_sources_used,draft
+cbecs2018,OTFDRM,Other type of food preparation or serving area,,rooms_and_spaces,draft
+cbecs2018,OTHTEQ_EL,Other heating equipment powered by electricity,,heating_system,draft
+cbecs2018,OTHTEQ_NG,Other heating equipment fueled by natural gas,,heating_system,draft
+cbecs2018,OTUSED,Other energy source used,,energy_sources_used,draft
+cbecs2018,OTWATR,Other energy source used for water heating,,energy_sources_used,draft
+cbecs2018,OWNPPR,Owner has purchasing power,,ownership_tenure,draft
+cbecs2018,PBSEAT,Assembly seating capacity,,rooms_and_spaces,draft
+cbecs2018,PKGCP_EL,Derived variable: Pct cooled by electric packaged A/C units,,cooling_system,draft
+cbecs2018,PKGHPH,Heat pump in packaged unit,,cooling_system,draft
+cbecs2018,PKGHP_EL,Derived variable: Pct heated by electric packaged unit,,cooling_system,draft
+cbecs2018,PKGHT_OT,Packaged central units fueled by other source,,cooling_system,draft
+cbecs2018,PKGHT_PR,Packaged central units fueled by propane,,cooling_system,draft
+cbecs2018,PLANT,Central physical plant,,none,draft
+cbecs2018,PRAMTC,Propane amount,,none,draft
+cbecs2018,PRCOOK,Propane used for cooking,,energy_sources_used,draft
+cbecs2018,PRGENR,Propane used for electricity generation,,energy_sources_used,draft
+cbecs2018,PRMANU,Propane used for manufacturing,,energy_sources_used,draft
+cbecs2018,PRWATR,Propane used for water heating,,energy_sources_used,draft
+cbecs2018,PUBCLIM,Third-party data: ASHRAE climate zone,,climate_zone,draft
+cbecs2018,PUBID,Public use file building identifier,,record_identifier,draft
+cbecs2018,RADFLR_ST,Radiant floor or ceiling panels for steam distribution,,heating_system,draft
+cbecs2018,RADIATR_ST,Radiators for steam distribution,,heating_system,draft
+cbecs2018,RCAC_EL,Residential-type split system electric A/C,,cooling_system,draft
+cbecs2018,REHEAT_EL,Duct reheat powered by electricity,,heating_system,draft
+cbecs2018,RENADD,Addition or annex,,renovation,draft
+cbecs2018,RENINS,Insulation upgrade,,insulation,draft
+cbecs2018,RENLGT,Lighting upgrade,,lighting_system,draft
+cbecs2018,RENRFF,Roof replacement,,none,draft
+cbecs2018,RENWIN,Window replacement,,window_properties,draft
+cbecs2018,RFCNS,Roof construction material,,roof_construction,draft
+cbecs2018,RFGCOMP,Half-size/compact refrigerators/freezers,,plug_and_process_equipment,draft
+cbecs2018,RFGICE,Commercial ice makers,,plug_and_process_equipment,draft
+cbecs2018,RFGICN,Number of commercial ice makers,,plug_and_process_equipment,draft
+cbecs2018,RFGOPN,Number of open refrigerated cases,,plug_and_process_equipment,draft
+cbecs2018,RFGRES,Full-size residential type refrigerators/freezers,,plug_and_process_equipment,draft
+cbecs2018,RFGRSN,Number of residential refrigerators,,plug_and_process_equipment,draft
+cbecs2018,RFGVNN,Number of vending machines,,plug_and_process_equipment,draft
+cbecs2018,RFTILT,Roof tilt,,roof_shape,draft
+cbecs2018,RGSTR,Point-of-sales devices or cash register,,plug_and_process_equipment,draft
+cbecs2018,SCHED,Light scheduling,,lighting_system,draft
+cbecs2018,SLFCNP_EL,Derived variable: Pct heated by electric space heater,,heating_system,draft
+cbecs2018,SLFCNP_FK,Derived variable: Pct heated by fuel oil space heater,,heating_system,draft
+cbecs2018,SOTHERM_SO,Derived variable: Solar thermal heating equipment,,onsite_generation,draft
+cbecs2018,SOUSED,Solar used,,energy_sources_used,draft
+cbecs2018,SQFT,Square footage,,gross_floor_area,draft
+cbecs2018,SQFTC,Square footage category,,floor_area_category,draft
+cbecs2018,STHWP_HW,Derived variable: Pct heated by district hot water heating system,,water_heating_system,draft
+cbecs2018,STHWP_ST,Derived variable: Pct heated by district steam heating system,,heating_system,draft
+cbecs2018,STOTH,District steam used for some other use,,energy_sources_used,draft
+cbecs2018,TRIM,High-end trimming or light-level tuning,,lighting_system,draft
+cbecs2018,WATR,Energy used for water heating,,water_heating_system,draft
+cbecs2018,WBOARDS,Interactive whiteboards,,plug_and_process_equipment,draft
+cbecs2018,WBOARDSN,Number of interactive whiteboards,,plug_and_process_equipment,draft
+cbecs2018,WLCNS,Wall construction material,,wall_construction,draft
+cbecs2018,WOMANU,Wood used for manufacturing,,energy_sources_used,draft
+cbecs2018,WTLOOP_ST,Water loop heat pump for steam distribution,,heating_system,draft
+cbecs2018,YRCONC,Year of construction category,,year_of_construction,draft
+recs2020,ADQINSUL,Level of insulation; respondent-reported,YOUR HOME,insulation,draft
+recs2020,AGECDRYER,Age of clothes dryer,APPLIANCES,plug_and_process_equipment,draft
+recs2020,AGEDW,Age of dishwasher,APPLIANCES,plug_and_process_equipment,draft
+recs2020,APPOTHER,Any other small kitchen appliance used at least once per week,APPLIANCES,rooms_and_spaces,draft
+recs2020,ATTIC,Attic above the housing unit,YOUR HOME,floors_below_ground,draft
+recs2020,ATTICFIN,Finished attic,YOUR HOME,floors_below_ground,draft
+recs2020,BASEHEAT,Heating used in basement,SPACE HEATING,floors_below_ground,draft
+recs2020,BTUELAHUHEAT,"Calibrated electricity usage for distributing space heating via furnace fans and boiler pumps, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUELCDR,"Calibrated electricity usage for clothes dryers, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUELTVREL,"Calibrated electricity usage for televisions and related peripherals, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUFOSPH,"Calibrated fuel oil/kerosene usage for space heating, main and secondary,  in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTULPNEC,"Calibrated propane usage for other purposes not elsewhere classified, in thousand Btu, 2020",End-use Model,other_fuel_consumption,draft
+recs2020,BTULPSPH,"Calibrated propane usage for space heating, main and secondary, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUNGCDR,"Calibrated natural gas usage for clothes dryers, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUNGHTBHEAT,"Calibrated natural gas usage for hot tub heaters, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUNGNEC,"Calibrated natural gas usage for other purposes not elsewhere classified, in thousand Btu, 2020",End-use Model,natural_gas_consumption,draft
+recs2020,BTUNGPLHEAT,"Calibrated natural gas usage for swimming pool heaters, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUNGSPH,"Calibrated natural gas usage for space heating, main and secondary, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUNGWTH,"Calibrated natural gas usage for water heating, main and secondary, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,BTUWD,"Total wood use, in thousand Btu, 2020",End-use Model,other_fuel_consumption,draft
+recs2020,CDD30YR_PUB,"Cooling degree days, 30-year average 1981-2010, base temperature 65F; Taken from nearest weather station, inoculated with random errors",WEATHER,degree_days,draft
+recs2020,COOKTOPFUEL,Fuel used by separate cooktop,APPLIANCES,energy_sources_used,draft
+recs2020,COOKTOPUSE,Frequency of separate cooktop use per week,APPLIANCES,plug_and_process_equipment,draft
+recs2020,CROCKPOT,Crock-Pot or slow cooker used at least once per week,APPLIANCES,plug_and_process_equipment,draft
+recs2020,CUFEETNGPLHEAT,"Calibrated natural gas usage for swimming pool heaters, in hundred cubic feet, 2020",End-use Model,end_use_energy,draft
+recs2020,CUFEETNGSPH,"Calibrated natural gas usage for space heating, main and secondary, in hundred cubic feet, 2020",End-use Model,end_use_energy,draft
+recs2020,CUFEETNGWTH,"Calibrated natural gas usage for water heating, main and secondary, in hundred cubic feet, 2020",End-use Model,end_use_energy,draft
+recs2020,DEHUMTYPE,Type of dehumidifier used,AIR CONDITIONING,cooling_system,draft
+recs2020,DNTHEAT,"No space heating equipment, or unused space heating equipment; a derived variable",SPACE HEATING,heating_system,draft
+recs2020,DOEID,Unique identifier for each respondent,ADMIN,record_identifier,draft
+recs2020,DOLELAHUHEAT,"Calibrated electricity cost for distributing space heating via furnace fans and boiler pumps, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELCW,"Calibrated electricity cost for clothes washers, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELDHUM,"Calibrated electricity cost for dehumidifiers, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELEVCHRG,"Calibrated electricity cost for charging electric vehicles, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELHTBHEAT,"Calibrated electricity cost for hot tub heaters, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELLGT,"Calibrated electricity cost for indoor and outdoor lighting, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELRFG,"Calibrated electricity cost for all refrigerators, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLELRFG2,"Calibrated electricity cost for second refrigerators, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLFOWTH,"Calibrated fuel oil/kerosene cost for water heating, main and secondary, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLLARFO,"Total fuel oil/kerosene cost, in dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLLARNG,"Total natural gas cost, in dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLLPNEC,"Calibrated propane cost for other purposes not elsewhere classified, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLLPOTH,"Calibrated propane cost for space heating, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLNGCOK,"Calibrated natural gas cost for cooking (cooktops, ovens, and ranges), in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DOLNGHTBHEAT,"Calibrated natural gas cost for hot tub heaters, in US dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,DVD,Number of DVD or Blu-ray players used,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,ELECVEH,Household owns or leases an electric vehicle,ENERGY BILLS,ownership_tenure,draft
+recs2020,ELWATER,Electricity used for water heating; a derived variable,WATER HEATING,energy_sources_used,draft
+recs2020,ENERGYASST16,Received home energy assistance in 2016,ENERGY ASSISTANCE,none,draft
+recs2020,ENERGYASST17,Received home energy assistance in 2017,ENERGY ASSISTANCE,none,draft
+recs2020,ENERGYASSTOTH,Received home energy assistance in some other year,ENERGY ASSISTANCE,none,draft
+recs2020,EQUIPAUXTYPE,Secondary space heating equipment type,SPACE HEATING,heating_system,draft
+recs2020,EQUIPM,Main space heating equipment type,SPACE HEATING,heating_system,draft
+recs2020,EVCHRGDLR,"EV is charged at car dealerships, not imputed",ENERGY BILLS,plug_and_process_equipment,draft
+recs2020,EVCHRGHWY,"EV is charged at highway rest stops, not imputed",ENERGY BILLS,plug_and_process_equipment,draft
+recs2020,FOPAY,Who pays for fuel oil,ENERGY BILLS,none,draft
+recs2020,FOWARM,Fuel oil used for space heating; a derived variable,SPACE HEATING,energy_sources_used,draft
+recs2020,FREEZER,Defrosting type of most-used freezer,APPLIANCES,plug_and_process_equipment,draft
+recs2020,FUELH2O,Fuel used by main water heater,WATER HEATING,energy_sources_used,draft
+recs2020,FUELTUB,Fuel used for heating hot tub,YOUR HOME,energy_sources_used,draft
+recs2020,GALLONFOWTH,"Calibrated fuel oil/kerosene usage for water heating, main and secondary, in gallons, 2020",End-use Model,end_use_energy,draft
+recs2020,GALLONLP,"Total propane use, in gallons, 2020",End-use Model,other_fuel_consumption,draft
+recs2020,GWT,Annual average ground water temperature (F) for 2020,WEATHER,dry_bulb_temperature,draft
+recs2020,H2OAPT,Water heating equipment serves multiple housing units in building,WATER HEATING,dwelling_units,draft
+recs2020,H2OMAIN,Location of main water heating equipment in single-family home,WATER HEATING,water_heating_system,draft
+recs2020,HHAGE,Respondent age (top-coded),HOUSEHOLD CHARACTERISTICS,household_demographics,draft
+recs2020,HIGHCEIL,Any high ceilings; 'Not applicable' applies to mobile homes,YOUR HOME,none,draft
+recs2020,HOTMA,Medical attention needed because home was too hot,ENERGY ASSISTANCE,none,draft
+recs2020,HOUSEHOLDER_RACE,Householder (respondent) race,HOUSEHOLD CHARACTERISTICS,household_demographics,draft
+recs2020,INTDATAACC,Household member has viewed smart meter interval data,ENERGY BILLS,building_controls,draft
+recs2020,INTERNET,Internet access at home,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,INTYPEBROAD,Have Internet access using broadband service,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,KWHAHUHEAT,"Calibrated electricity usage for distributing space heating via furnace fans and boiler pumps, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHCFAN,"Calibrated electricity usage for ceiling fans, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHCW,"Calibrated electricity usage for clothes washers, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHDWH,"Calibrated electricity usage for dishwashers, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHHTBHEAT,"Calibrated electricity usage for hot tub heaters, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHLGT,"Calibrated electricity usage for indoor and outdoor lighting, in kilowatthours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHMICRO,"Calibrated electricity usage for microwaves, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHNEC,"Calibrated electricity usage for other purposes not elsewhere classified, in kilowatt-hours, 2020",End-use Model,electricity_consumption,draft
+recs2020,KWHTV3,"Calibrated electricity usage for third televisions, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,KWHTVREL,"Calibrated electricity usage for televisions and related peripherals, in kilowatt-hours, 2020",End-use Model,end_use_energy,draft
+recs2020,LGTOUTCAN,Any outside incandescent or halogen bulbs left on all night,LIGHTING,lighting_system,draft
+recs2020,LGTOUTCFL,Any outside CFL bulbs left on all night,LIGHTING,lighting_system,draft
+recs2020,LGTOUTLED,Any outside LED bulbs left on all night,LIGHTING,lighting_system,draft
+recs2020,MONTUB,Months hot tub used in the past year,YOUR HOME,plug_and_process_equipment,draft
+recs2020,NCOMBATH,Number of full bathrooms (top-coded),YOUR HOME,rooms_and_spaces,draft
+recs2020,NGPAY,Who pays for natural gas,ENERGY BILLS,none,draft
+recs2020,NHAFBATH,Number of half bathrooms (top-coded),YOUR HOME,rooms_and_spaces,draft
+recs2020,NOACDAYS,Number of days unable to use air conditioning equipment in the past year,ENERGY ASSISTANCE,none,draft
+recs2020,NOACEL,Unable to use air conditioning equipment in the past year because could not afford electricity and it was disconnected,ENERGY ASSISTANCE,none,draft
+recs2020,NOHEATEL,Unable to use heating equipment in the past year because could not afford electricity and it was disconnected,ENERGY ASSISTANCE,none,draft
+recs2020,NOHEATHELP,Received energy assistance to help restore heating,ENERGY ASSISTANCE,none,draft
+recs2020,NUMADULT1,Number of household members age 18 to 64,HOUSEHOLD CHARACTERISTICS,occupant_count,draft
+recs2020,NUMFLOORFAN,Number of floor or window fans used,AIR CONDITIONING,cooling_system,draft
+recs2020,NUMFRIG,Number of refrigerators used,APPLIANCES,plug_and_process_equipment,draft
+recs2020,NUMPORTAC,Number of portable air conditioners used,AIR CONDITIONING,cooling_system,draft
+recs2020,NUMPORTDEHUM,Number of portable dehumidifiers used,AIR CONDITIONING,cooling_system,draft
+recs2020,NUMPORTHUM,Number of portable humidifiers used,SPACE HEATING,heating_system,draft
+recs2020,NUMTABLET,Number of tablet computers or e-readers used,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,NUMWWAC,Number of window or wall air conditioners used,AIR CONDITIONING,cooling_system,draft
+recs2020,NWEIGHT,Final Analysis Weight,WEIGHTS,survey_weight,draft
+recs2020,OVEN,Number of wall ovens,APPLIANCES,plug_and_process_equipment,draft
+recs2020,OVENFUEL,Fuel used by wall oven,APPLIANCES,energy_sources_used,draft
+recs2020,PERIODEL,Number of days covered by Energy Supplier Survey electricity billing data and used to calculate annual consumption and expenditures,End-use Model,energy_expenditure,draft
+recs2020,PERIODFO,Number of days covered by Energy Supplier Survey fuel oil/kerosene delivery data and used to calculate annual consumption and expenditures,End-use Model,energy_expenditure,draft
+recs2020,PLAYSTA,Number of video game consoles used,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,POWEROUT,Any power outages for at least 24 hours in the past year,ENERGY BILLS,operating_hours,draft
+recs2020,RANGEINDT,Range has induction cooktop,APPLIANCES,ventilation_system,draft
+recs2020,RCOOKUSE,Frequency of use of cooktop part of range per week,APPLIANCES,plug_and_process_equipment,draft
+recs2020,RICECOOK,Rice cooker used at least once per week,APPLIANCES,plug_and_process_equipment,draft
+recs2020,ROOFTYPE,Major roofing material; 'Not applicable' applies to apartment buildings with 5 or more units,YOUR HOME,roof_construction,draft
+recs2020,SIZEOFGARAGE,Size of attached garage,YOUR HOME,rooms_and_spaces,draft
+recs2020,SMARTMETER,Home has an electricity smart meter,ENERGY BILLS,building_controls,draft
+recs2020,SOLAR,On-site electricity generation from solar; 'Not applicable' applies to apartment buildings with 2 or more units.,ENERGY BILLS,onsite_generation,draft
+recs2020,SQFTINCA,Respondent-reported square footage includes attic,YOUR HOME,gross_floor_area,draft
+recs2020,SQFTRANGE,Respondent-reported square footage range,YOUR HOME,gross_floor_area,draft
+recs2020,SSTV,Use smart speakers to control TV or peripherals,ELECTRONICS,building_controls,draft
+recs2020,STATE_FIPS,State Federal Information Processing System Code,GEOGRAPHY,administrative_region,draft
+recs2020,STORIES,Number of stories in a single-family home,YOUR HOME,floors_above_ground,draft
+recs2020,TELLDAYS,Number of days teleworking in the past week,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TEMPHOMEAC,Summer thermostat setting or temperature in home when someone is home during the day,THERMOSTAT,thermostat_setpoint,draft
+recs2020,TEMPNITEAC,Summer thermostat setting or temperature in home at night,THERMOSTAT,thermostat_setpoint,draft
+recs2020,TLOTHER,Any other computer equipment used for teleworking,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TOTALBTU,"Total usage including electricity, natural gas, propane, and fuel oil, in thousand Btu, 2020",End-use Model,total_energy_consumption,draft
+recs2020,TOTALBTUSPH,"Total usage for space heating including electricity, natural gas, propane, and fuel oil, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,TOTALBTUWTH,"Total usage for water heating including electricity, natural gas, propane, and fuel oil, in thousand Btu, 2020",End-use Model,end_use_energy,draft
+recs2020,TOTALDOL,"Total cost including electricity, natural gas, propane, and fuel oil, in dollars, 2020",End-use Model,energy_expenditure,draft
+recs2020,TVONWD1,Most-used TV usage on weekdays in hours per day,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TVONWD3,Third-most-used TV usage on weekdays in hours per day,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TVSIZE2,Size of second-most-used TV,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TVTYPE1,Display type of most-used TV,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TVUSE1,Main use of most-used TV,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TVUSE3,Main use of third-most-used TV,ELECTRONICS,plug_and_process_equipment,draft
+recs2020,TYPEHUQ,Type of housing unit,YOUR HOME,building_use_type,draft
+recs2020,UATYP10,2010 Census Urban Type Code,ADMIN,survey_reference_detail,draft
+recs2020,UGASHERE,Natural gas available in neighborhood; respondent-reported,YOUR HOME,none,draft
+recs2020,UGWATER,Natural gas used for water heating; a derived variable,WATER HEATING,energy_sources_used,draft
+recs2020,UPRTFRZR,Door arrangement of most-used freezer,APPLIANCES,plug_and_process_equipment,draft
+recs2020,USEEQUIPAUX,Secondary heating equipment usage,SPACE HEATING,heating_system,draft
+recs2020,USEFO,Fuel oil used; a derived variable,ENERGY BILLS,energy_sources_used,draft
+recs2020,USELP,Propane used; a derived variable,ENERGY BILLS,energy_sources_used,draft
+recs2020,USESOLAR,Solar thermal used; a derived variable,ENERGY BILLS,energy_sources_used,draft
+recs2020,WALLTYPE,Major outside wall material,YOUR HOME,wall_construction,draft
+recs2020,WDWARM,Wood used for space heating; a derived variable,SPACE HEATING,energy_sources_used,draft
+recs2020,WHEATSIZ,Main water heater size,WATER HEATING,water_heating_system,draft
+recs2020,WINDOWS,Number of windows,YOUR HOME,window_properties,draft
+recs2020,WINFRAME,Window frame material,YOUR HOME,window_properties,draft
+recs2020,YEARMADERANGE,Range when housing unit was built,YOUR HOME,year_of_construction,draft
+recs2020,state_postal,State Postal Code,GEOGRAPHY,administrative_region,draft

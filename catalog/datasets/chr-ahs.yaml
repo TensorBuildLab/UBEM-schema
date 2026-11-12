@@ -1,0 +1,64 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-ahs
+title: American Housing Survey (AHS) Public Use File, 2015 to 2023 series
+short_name: AHS PUF
+publisher: U.S. Census Bureau for the U.S. Department of Housing and Urban Development (HUD)
+landing_page: https://www.census.gov/programs-surveys/ahs/data.html
+doi: null
+citation: U.S. Census Bureau and U.S. Department of Housing and Urban Development. American Housing Survey 2023 Public Use
+  File (national and metropolitan PUFs).
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: SAS
+  access_url: https://www.census.gov/programs-surveys/ahs/data/2023/ahs-2023-public-use-file--puf-.html
+  api: false
+  registration_required: false
+- format: ASCII
+  access_url: https://www.census.gov/programs-surveys/ahs/data/2023/ahs-2023-public-use-file--puf-.html
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+content_types:
+- housing_unit_characteristics
+- household_characteristics
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States; separate national and metropolitan public use files (selected metropolitan areas)
+unit_of_observation: household
+spatial_granularity: census_region_division
+temporal_coverage:
+  start: '2015'
+  end: '2023'
+temporal_resolution: P1Y
+update_frequency: biennial (2019, 2021, 2023 listed on the data page; the PUF guide covers 2015 to 2023)
+statistical_nature: sample_survey_weighted
+sampling_weights: WEIGHT plus 160 replicate weights (REPWEIGHT1-REPWEIGHT160); topical-module variables use group-specific
+  weights
+record_count: null
+record_count_note: Housing-unit sample size not stated on the pages checked
+join_keys:
+- census_region_division
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Public file uses disclosure avoidance; the guide lists which metropolitan areas are identified in the metropolitan
+  PUF; no street-level or tract-level geography; for topical modules the correct weight depends on the instrument group.
+notes: Spatial granularity is set to census_region_division because the 'Getting Started' guide says the PUF carries census
+  region and division variables; the metropolitan PUF additionally identifies selected metropolitan areas (there is no enum
+  value for CBSA). The exact list of metropolitan areas and the record count were not verified. Earlier PUF vintages exist
+  (page lists years before 2019) but only the 2015 to 2023 series was checked. Weight names were taken from Census 'Getting
+  Started with the PUF' guide as quoted in search results. Does not hold metered energy use.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.census.gov/programs-surveys/ahs/data.html
+  - https://www.census.gov/programs-surveys/ahs/data/2023/ahs-2023-public-use-file--puf-.html
+  - https://www.census.gov/programs-surveys/ahs/tech-documentation/help-guides/2015-later/puf_start.html

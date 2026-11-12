@@ -1,0 +1,46 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-smart-umass
+title: Smart* Data Set for Sustainability (UMass)
+short_name: Smart*
+publisher: University of Massachusetts Amherst (UMass Trace Repository)
+landing_page: https://traces.cs.umass.edu/docs/traces/smartstar
+doi: null
+citation: 'Barker, S., Mishra, A., Irwin, D., Cecchet, E., Shenoy, P., Albrecht, J. Smart*: An Open Data Set and
+  Tools for Enabling Research in Sustainable Homes. SustKDD workshop, 2012. Data: UMass Trace Repository, Smart*
+  Data Set for Sustainability.'
+reference_paper_doi: null
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: tar.gz (CSV), access_url: 'https://traces.cs.umass.edu/docs/traces/smartstar', api: false, registration_required: false}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [home_electricity_circuit_level, solar_generation, weather, occupancy_ground_truth, switch_and_motion_events]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [US]
+  description: Homes, apartments and solar sites in the United States (specific locations not stated on the page
+    read)
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: '2014', end: '2016'}
+temporal_resolution: irregular
+update_frequency: static (multiple releases, 2017 apartment release)
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: Page lists 3 core homes, Homes A-H in the 2017 release, 114 apartments (2014-2016), minute-level
+  usage from 443 homes in the microgrid dataset, 50 solar panels and 100 solar sites; no single count
+join_keys: [timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Collection of heterogeneous sub-datasets with different periods and resolutions (minute-level
+  for anonymous home usage, hourly for SunDance); small, non-representative samples; limited building metadata.
+notes: temporal_coverage reflects only the apartment dataset (2014 to 2016); home datasets are described as multi-year
+  without dates. Resolution varies by sub-dataset, hence irregular. IEEE DataPort mirrors the data under DOI 10.21227/g91z-hz32
+  (license on the mirror not confirmed). No DOI at the UMass repository; the SustKDD paper has no DOI.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://traces.cs.umass.edu/docs/traces/smartstar']

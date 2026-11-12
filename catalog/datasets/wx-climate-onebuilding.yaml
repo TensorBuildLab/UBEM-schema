@@ -1,0 +1,56 @@
+id: wx-climate-onebuilding
+title: Climate.OneBuilding.Org TMYx and other building-simulation weather files
+short_name: Climate.OneBuilding
+publisher: Climate.OneBuilding.Org (L. K. Lawrie and D. B. Crawley)
+landing_page: https://climate.onebuilding.org/default.html
+doi: null
+citation: Lawrie, L.K. and Crawley, D.B. (2026). Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org
+reference_paper_doi: null
+license: No open license stated; site footer reads 'All Rights Reserved' with a no-liability disclaimer
+access_level: open_download
+distributions:
+- format: EPW
+  access_url: https://climate.onebuilding.org/default.html
+  api: false
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- typical_meteorological_year
+- design_day_conditions
+- hourly_weather_epw
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: station
+spatial_granularity: point_station
+temporal_coverage:
+  start: '2004'
+  end: '2025'
+temporal_resolution: PT1H
+update_frequency: periodic releases (a 2026 release is described)
+statistical_nature: typical_year_synthetic
+sampling_weights: null
+record_count: 17315
+record_count_note: 17,315 TMYx locations as stated on the landing page
+join_keys:
+- lat_lon
+- station_id
+- country_iso
+- climate_zone_ashrae
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: TMYx files are derived from NOAA ISD station observations with solar radiation from other sources
+  (ERA5 for the 2026 release; estimated from cloud cover for 2004-2018 files), so irradiance is not station-measured.
+notes: 'Period options listed: full period, 2011-2025, 2009-2023, 2007-2021, 2004-2018; temporal_coverage spans
+  these. License is not an open license: free to download but terms are all-rights-reserved; flag for the paper.
+  No descriptor paper found.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://climate.onebuilding.org/default.html

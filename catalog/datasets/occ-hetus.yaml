@@ -1,0 +1,77 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-hetus
+title: Harmonised European Time Use Surveys (HETUS) 2010 scientific-use microdata
+short_name: HETUS 2010
+publisher: Eurostat (data collected by national statistical offices)
+landing_page: https://ec.europa.eu/eurostat/web/microdata/harmonised-european-time-use-surveys
+doi: null
+citation: Eurostat. Harmonised European Time Use Surveys (HETUS) 2010, scientific use files for 17 countries.
+reference_paper_doi: null
+license: null
+access_level: request_or_agreement
+distributions:
+- format: scientific-use files (access via Eurostat research microdata application)
+  access_url: https://ec.europa.eu/eurostat/web/microdata/harmonised-european-time-use-surveys
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+content_types:
+- time_diary_activities
+- diary_day_10_minute_slots
+- household_and_individual_variables
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - AT
+  - BE
+  - DE
+  - EE
+  - GR
+  - ES
+  - FI
+  - FR
+  - HU
+  - IT
+  - LU
+  - NL
+  - PL
+  - RO
+  - GB
+  - 'NO'
+  - RS
+  description: 17 countries in the HETUS 2010 scientific-use files (AT, BE, DE, EE, EL, ES, FI, FR, HU, IT, LU, NL, PL, RO,
+    UK, NO, RS); round 2 was conducted 2008 to 2015 in 18 countries
+unit_of_observation: person_day
+spatial_granularity: nation
+temporal_coverage:
+  start: '2008'
+  end: '2015'
+temporal_resolution: PT10M
+update_frequency: 'decennial rounds: HETUS 2000 (microdata not available), HETUS 2010 (available), HETUS 2020 (collection
+  ends 2026; no microdata release before 2027)'
+statistical_nature: sample_survey_weighted
+sampling_weights: "Not verified: microdata are access-restricted and the weight variables could not be checked (author check 2026-11-12)."
+record_count: null
+record_count_note: Record counts per country not stated on the page
+join_keys:
+- country_iso
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Microdata only for recognised research entities under a confidentiality undertaking, not an open download;
+  some variables suppressed (country of birth, citizenship, education level) and age in 5-year bands; only the 2010 round
+  is available; national surveys differ in fieldwork period (2008-2015); no building-level or sub-national geography.
+notes: 'Access: researchers belonging to a recognised research entity request the files through Eurostat''s microdata procedure
+  (Access to European microdata); the page mentions no fee. The HETUS online database with aggregated tables was not checked,
+  so it is not stated whether aggregates are open; the page for time-use statistics only states it holds a ''Database'' section.
+  Weights, license and record counts were not stated (null). GB corresponds to ''UK'' in Eurostat''s list and GR to ''EL''.
+  Temporal coverage is fieldwork period; the page gives reference year 2010 for the files.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://ec.europa.eu/eurostat/web/microdata/harmonised-european-time-use-surveys
+  - https://ec.europa.eu/eurostat/web/time-use-surveys

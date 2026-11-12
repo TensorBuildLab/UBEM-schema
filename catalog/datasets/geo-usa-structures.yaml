@@ -1,0 +1,65 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-usa-structures
+title: USA Structures (ORNL / FEMA national structure inventory)
+short_name: USA Structures
+publisher: FEMA with Oak Ridge National Laboratory (ORNL), DHS FIMA and U.S. Geological Survey
+landing_page: https://gis-fema.hub.arcgis.com/pages/usa-structures
+doi: null
+citation: Hauser, T., Stipek, C., Singh, N., Moehl, J. Building morphologies of the USA structures database; a gauntlet
+  feature set. Scientific Data 12, 1758 (2025).
+reference_paper_doi: 10.1038/s41597-025-05925-6
+license: US-Government-Public-Domain (data.gov metadata points to usa.gov/government-works; some catalogs list CC-BY-4.0,
+  unresolved)
+access_level: open_download
+distributions:
+- format: Download via FEMA GeoPlatform page (file format not stated on fetched pages)
+  access_url: https://gis-fema.hub.arcgis.com/pages/usa-structures
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints_polygon
+- structure_inventory_450sqft_and_larger
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States and territories; structures larger than 450 square feet
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: irregular
+update_frequency: Phased releases (Phase 2 technical report 2023; Phase 3 prototype updates 2023-2024); data.gov
+  metadata modified 2025-04-01
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 131000000
+record_count_note: '''More than 131 million buildings'' (Hauser et al. 2025 abstract); ORNL describes ''more than
+  125 million structures'' in an earlier description'
+join_keys:
+- geometry
+- lat_lon
+- building_id
+variables_documented: null
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Threshold of 450 sq ft excludes small structures. License wording differs between catalogs. Use-type
+  or height attributes were not verified; the 2025 paper proposes derived geometric features that could support
+  height and occupancy-type estimation.
+notes: 'Descriptor used: Hauser et al. 2025 (Scientific Data), which documents 65 morphology features per building
+  (the article itself is CC BY-NC-ND per Europe PMC); ORNL technical reports (10.2172/2076189, 10.2172/2472682)
+  document the inventory phases. Build method (derived from imagery and existing footprints) not verified from a
+  primary page, so remote_sensing_derived is an inference. building_characteristics not claimed because attribute
+  fields were not verified. Downloads page was not retrievable in detail; formats unknown.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://gis-fema.hub.arcgis.com/pages/usa-structures
+  - https://catalog.data.gov/dataset/usa-structures
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-025-05925-6&resultType=core&format=json
+  - https://api.crossref.org/works/10.1038/s41597-025-05925-6

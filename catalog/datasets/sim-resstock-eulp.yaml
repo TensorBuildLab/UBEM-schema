@@ -1,0 +1,56 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: sim-resstock-eulp
+title: NREL ResStock (End-Use Load Profiles for the U.S. Building Stock, residential releases on OEDI)
+short_name: ResStock
+publisher: National Renewable Energy Laboratory (NREL; renamed National Laboratory of the Rockies in recent pages),
+  U.S. Department of Energy
+landing_page: https://data.openei.org/submissions/4520
+doi: 10.25984/1876417
+citation: 'Present, E., White, P., Harris, C., et al. ResStock Dataset 2024.1 Documentation. NREL, 2024. https://doi.org/10.2172/2319195.
+  Methodology: Wilson, E., Parker, A., Fontanini, A., et al. End-Use Load Profiles for the U.S. Building Stock:
+  Methodology and Results of Model Calibration, Validation, and Uncertainty Quantification. NREL/TP-5500-80889,
+  2022. https://doi.org/10.2172/1854582. Dataset: https://doi.org/10.25984/1876417'
+reference_paper_doi: 10.2172/2319195
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: Parquet/CSV (see README in the data lake), access_url: 'https://data.openei.org/s3_viewer?bucket=oedi-data-lake&prefix=nrel-pds-building-stock%2Fend-use-load-profiles-for-us-building-stock%2F',
+  api: false, registration_required: false}
+- {format: S3 bucket (anonymous access), access_url: 's3://oedi-data-lake/nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/',
+  api: false, registration_required: false}
+ubem_roles: [reference_simulation, calibration_validation]
+content_types: [simulated_end_use_load_profiles, building_model_characteristics, upgrade_scenarios, annual_energy_by_end_use]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: Residential housing stock of the United States, sampled from housing characteristic distributions
+    and simulated with OpenStudio/EnergyPlus
+unit_of_observation: building
+spatial_granularity: county
+temporal_coverage: {start: '2012', end: '2018'}
+temporal_resolution: PT15M
+update_frequency: 'periodic releases (OEDI folders: resstock_*_release_1 and 1.1 (2021-2022), release_2 (2024),
+  resstock_dataset_2024.1, resstock_amy2012/amy2018_release_1 (2025))'
+statistical_nature: simulation_synthetic
+sampling_weights: Each simulated dwelling model carries a sample weight (stock representation); exact column name
+  not verified
+record_count: null
+record_count_note: Number of dwelling models differs by release; not stated on the pages read
+join_keys: [building_id, fips_county, building_type, vintage, climate_zone_ashrae, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Simulated, not measured; calibrated to aggregate measured data; housing characteristics are sampled
+  from distributions and dwellings are not real addresses; releases differ in weather year (TMY3, AMY2012, AMY2018),
+  model and methodology versions. Reports are DOE technical reports, not peer-reviewed journal articles. Release
+  2024.1 may use a different time resolution than the 2021 EULP releases (not verified).
+notes: Dataset DOI 10.25984/1876417 covers the whole EULP data lake. reference_paper_doi is the NREL 'ResStock Dataset
+  2024.1 Documentation' technical report (Crossref confirmed), not a peer-reviewed article. Temporal resolution
+  15 minutes is stated by OEDI for the EULP data as a whole; the 2024.1 release was not checked individually. Spatial
+  granularity and weights were not verified on the pages read.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://data.openei.org/submissions/4520', 'https://oedi-data-lake.s3.amazonaws.com/?prefix=nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/
+      (directory listing)', 'https://api.crossref.org/works/10.2172/2319195', 'https://api.crossref.org/works/10.2172/1854582']

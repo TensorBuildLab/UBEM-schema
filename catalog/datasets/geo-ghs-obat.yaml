@@ -1,0 +1,65 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-ghs-obat
+title: 'GHS-OBAT R2024A: GHS Open Building Attribute Table at footprint level'
+short_name: GHS-OBAT
+publisher: European Commission, Joint Research Centre (JRC), Global Human Settlement Layer
+landing_page: http://data.europa.eu/89h/f41a22f1-5741-4c41-86eb-6384654f6927
+doi: 10.2905/f41a22f1-5741-4c41-86eb-6384654f6927
+citation: 'Florio, P., Politis, P., Krasnodebska, K., Uhl, J.H., Melchiorri, M., Martinez, A.M., Kakoulaki, G.,
+  Pesaresi, M., Kemper, T. GHS-OBAT: Global, open building attribute data reporting age, function, height and compactness
+  at footprint level. Data in Brief 61, 111751 (2025).'
+reference_paper_doi: 10.1016/j.dib.2025.111751
+license: null
+access_level: open_download
+distributions:
+- format: Package with CSV attribute table (further package contents not read)
+  access_url: http://data.europa.eu/89h/f41a22f1-5741-4c41-86eb-6384654f6927
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_age
+- building_function_residential_nonresidential
+- building_height
+- building_compactness
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global attribute table linked to Overture building footprints (release 2024-07-22.0); exact country
+    coverage not read
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: '2020'
+  end: '2020'
+temporal_resolution: static
+update_frequency: Release R2024A (data downloaded by authors August 2024)
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Not read
+join_keys:
+- geometry
+- lat_lon
+- building_id
+- vintage
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Attributes are inferred from coarse GHSL rasters (100 m height, 10 m function, age grid), not
+  building-level measurements. Footprint geometry comes from Overture, so ODbL conditions may carry over.
+notes: 'Added because it is the only open global footprint-level age, function and height table for UBEM. Licence
+  of the dataset not verified (the article is CC BY 4.0; JRC data are normally under the EC reuse policy; Overture
+  footprints are ODbL), so license is null. Sources: Overture 2024-07-22.0, GHS-BUILT-H R2023A, GHS-BUILT-C_FUN
+  R2023, GHS-AGE R2025 and GADM 4.1. Record count and file formats beyond the CSV table not read.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016/j.dib.2025.111751&resultType=core&format=json
+  - https://api.crossref.org/works/10.1016/j.dib.2025.111751

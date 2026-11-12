@@ -1,0 +1,67 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-doe-prototypes
+title: DOE commercial, residential and manufactured housing prototype building models (Building Energy Codes Program)
+short_name: DOE prototype buildings
+publisher: Pacific Northwest National Laboratory (PNNL) for the U.S. DOE Building Energy Codes Program
+landing_page: https://www.energycodes.gov/prototype-building-models
+doi: null
+citation: Pacific Northwest National Laboratory for U.S. DOE Building Energy Codes Program. Prototype Building Models (commercial,
+  residential, manufactured housing). energycodes.gov.
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: EnergyPlus IDF and HTM outputs, XLSX scorecards, EPW weather (zip packages by building type and code edition)
+  access_url: https://www.energycodes.gov/prototype-building-models
+  api: false
+  registration_required: false
+ubem_roles:
+- reference_simulation
+- building_characteristics
+content_types:
+- prototype_building_models
+- energyplus_input_files
+- simulation_outputs
+- internal_loads_and_schedules
+- code_stringency_by_vintage
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: U.S. climate zones; commercial models use 19 locations (16 U.S., 3 international); residential models use 18
+    locations
+unit_of_observation: building_model
+spatial_granularity: climate_zone
+temporal_coverage:
+  start: '2006'
+  end: '2024'
+temporal_resolution: static
+update_frequency: new model sets are released with each ASHRAE 90.1 and IECC edition
+statistical_nature: simulation_synthetic
+sampling_weights: null
+record_count: 5168
+record_count_note: 5,168 commercial models (16 building types, 19 climate locations, ASHRAE 90.1 2013-2022 and IECC 2012-2021
+  vintages, EnergyPlus 22.1.0); 4,144 residential models (EnergyPlus 23.1); 152 manufactured housing models
+join_keys:
+- climate_zone_ashrae
+- building_type
+- vintage
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Prototypes represent code-minimum or code-compliant archetypes and are not measured buildings; they do
+  not represent the existing stock; location set limited to 19 (commercial) and 18 (residential) climates; model inputs are
+  tied to specific EnergyPlus versions; the manufactured housing set uses EnergyPlus 8.0.
+notes: statistical_nature is simulation_synthetic (not standard_or_code) because the downloadable artifacts are executable
+  EnergyPlus models plus their simulation outputs, built from ASHRAE 90.1 and IECC requirements; the underlying prescriptions
+  are standard_or_code, which is why building_characteristics is the second role. Commercial and residential counts differ;
+  record_count is the commercial number. License is not stated on the page (null). Temporal coverage lists the code editions
+  covered (residential IECC 2006 to 2024; commercial ASHRAE 90.1 2013-2022 and IECC 2012-2021), not observation dates. The
+  original 2011 PNNL/NREL prototype report was not retrieved, so no descriptor DOI is given. ComStock and ResStock belong
+  to a different family.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.energycodes.gov/prototype-building-models

@@ -1,0 +1,54 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-ecobee-dyd
+title: ecobee Donate Your Data (DYD) research program
+short_name: ecobee DYD
+publisher: ecobee Inc.
+landing_page: https://www.ecobee.com/donate-your-data/
+doi: null
+citation: ecobee Inc. Donate Your Data program (smart thermostat data for researchers).
+reference_paper_doi: null
+license: null
+access_level: request_or_agreement
+distributions:
+- format: anonymized thermostat data supplied to approved researchers on request (format not stated)
+  access_url: https://www.ecobee.com/donate-your-data/
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+content_types:
+- smart_thermostat_data (fields not stated on the program page)
+geographic_scope: national
+spatial_coverage:
+  countries: null
+  description: Customer homes with ecobee thermostats; countries and sample design not stated on the page
+unit_of_observation: household (thermostat)
+spatial_granularity: unknown
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: null
+update_frequency: not stated
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: The program page says studies can expand from dozens of homes to more than 200,000; no record count is
+  stated
+join_keys: []
+variables_documented: false
+machine_readable: null
+versioned: null
+persistent_identifier: false
+known_limitations: 'Not openly downloadable: access is by emailed request to ecobee with a research description and public-good
+  commitment; data are anonymized by ecobee before sharing; participating households are self-selected ecobee customers (not
+  representative); fields, time resolution and years were not stated.'
+notes: 'Included to mark the gap: a widely used source of thermostat setpoints, runtime and occupancy-sensor data in U.S.
+  residential studies, but it is not open (request_or_agreement). The program page does not describe a formal portal or data-use
+  agreement, the license, time resolution, years, fields or geography, so those are null. geographic_scope is set to ''national''
+  as an unverified placeholder and spatial_granularity is null because location release was not verified. The FAQ at support.ecobee.com
+  was not read.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ecobee.com/donate-your-data/

@@ -1,0 +1,46 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-refit
+title: 'REFIT: Electrical Load Measurements (Cleaned)'
+short_name: REFIT
+publisher: University of Strathclyde (cleaned data); collected by Loughborough University within the REFIT project
+landing_page: https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/
+doi: 10.15129/9ab14b0e-19ac-4279-938f-27f643078cec
+citation: Murray, D., Stankovic, L., Stankovic, V. An electrical load measurements dataset of United Kingdom households
+  from a two-year longitudinal study. Scientific Data 4, 160122 (2017). https://doi.org/10.1038/sdata.2016.122
+reference_paper_doi: 10.1038/sdata.2016.122
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://doi.org/10.15129/9ab14b0e-19ac-4279-938f-27f643078cec', api: false, registration_required: false}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [whole_house_power, appliance_level_power]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [GB]
+  description: 20 households in the Loughborough area, United Kingdom
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: 2013-10, end: 2015-06}
+temporal_resolution: PT8S
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 20
+record_count_note: 20 households, aggregate and appliance-level power sampled at 8 s (Strathclyde dataset page)
+join_keys: [timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: 20 homes in one town; owner-occupied sample not nationally representative. Cleaning (merged timestamp
+  duplicates, readings above 4000 W set to zero, short gaps forward-filled, longer gaps zeroed) alters raw values.
+  Appliance-level channels are partial.
+notes: A separate Loughborough record 'REFIT Smart Home dataset' (DOI 10.17028/rd.lboro.2070091, CC-BY-4.0, 2017)
+  holds the project's wider smart-home data (see also the DataCite record); the cleaned load dataset is the one
+  described by the Scientific Data paper. Dataset license CC-BY-4.0 from the DataCite record of the Strathclyde
+  DOI.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/ (via
+      search result)', 'https://api.datacite.org/dois/10.15129/9ab14b0e-19ac-4279-938f-27f643078cec', 'https://api.crossref.org/works/10.1038/sdata.2016.122']

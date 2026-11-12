@@ -1,0 +1,70 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-eu-bso
+title: EU Building Stock Observatory (BSO) database
+short_name: EU BSO
+publisher: European Commission, Directorate-General for Energy
+landing_page: https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficient-buildings/eu-building-stock-observatory_en
+doi: null
+citation: European Commission. EU Building Stock Observatory. Directorate-General for Energy (online database and full BSO
+  dataset download).
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: XLSX
+  access_url: https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficient-buildings/eu-building-stock-observatory_en
+  api: false
+  registration_required: false
+- format: web factsheets and online database
+  access_url: https://building-stock-observatory.energy.ec.europa.eu/
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- calibration_validation
+content_types:
+- building_stock
+- energy_consumption
+- building_elements_and_technical_systems
+- energy_performance_certificates
+- nearly_zero_energy_buildings
+- renovation_rates
+- energy_poverty
+- financing
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - EU
+  description: European Union at EU and country level (list of countries and years not given on the page)
+unit_of_observation: country_indicator
+spatial_granularity: nation
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: null
+update_frequency: updated June 2026 per the Commission page; no regular schedule stated
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Not stated
+join_keys:
+- country_iso
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Country-level aggregate indicators only (no building-level or sub-national data found); indicators compile
+  heterogeneous national sources and the Commission web tool carries a warning that inconsistencies may remain; years covered
+  per indicator differ.
+notes: License/reuse terms are not stated on the page (European Commission reuse policy likely applies but was not confirmed),
+  so license is null. Years covered, country list and temporal resolution were not stated on the page and are null. 'EU' is
+  used as the country code for the EU-wide scope. The full-dataset XLSX link was reported on the page but the file itself
+  was not downloaded. join_keys limited to what is plausible from the description; no variable list was inspected, so building_type
+  is unverified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficient-buildings/eu-building-stock-observatory_en
+  - https://building-stock-observatory.energy.ec.europa.eu/ (redirects to the page above)

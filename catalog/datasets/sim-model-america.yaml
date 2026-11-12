@@ -1,0 +1,52 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: sim-model-america
+title: Model America - data and models of every U.S. building
+short_name: Model America (AutoBEM)
+publisher: Oak Ridge National Laboratory (ORNL), Oak Ridge Leadership Computing Facility (OLCF)
+landing_page: https://doi.org/10.13139/ORNLNCCS/1774134
+doi: 10.13139/ORNLNCCS/1774134
+citation: New, J., Adams, M., Berres, A., Bass, B., Clinton, N. Model America - data and models of every U.S. building.
+  Oak Ridge National Laboratory (ORNL), Oak Ridge Leadership Computing Facility (OLCF), 2021. https://doi.org/10.13139/ORNLNCCS/1774134
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- {format: 'OpenStudio / EnergyPlus models (zip, via Globus)', access_url: 'https://doi.org/10.13139/ORNLNCCS/1774134',
+  api: false, registration_required: false}
+ubem_roles: [reference_simulation]
+content_types: [building_energy_models_openstudio_energyplus, model_input_descriptors]
+geographic_scope: national
+spatial_coverage:
+  countries: [US]
+  description: Auto-generated building energy models for about 122.9 million U.S. buildings (97.8% of 125.7 million
+    detected buildings)
+unit_of_observation: building
+spatial_granularity: county
+temporal_coverage: {start: null, end: null}
+temporal_resolution: static
+update_frequency: one release (14 April 2021)
+statistical_nature: simulation_synthetic
+sampling_weights: null
+record_count: 122930327
+record_count_note: 122,930,327 building energy models (97.8% of 125,714,640 detected buildings), about 3,000 input
+  descriptors each; OpenStudio 3.1.0 and EnergyPlus 9.4
+join_keys: [building_id]
+variables_documented: false
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: 'Provided as is, with no warranties; contains models only: the source metadata used to create
+  them (building ID, location, climate zone, estimated construction year, footprint) is not included, so models
+  cannot be tied to real buildings; model parameters are inferred automatically from remote-sensing and public data.
+  Download needs the free Globus Connect Personal client.'
+notes: Access is open (free, Globus) but the ORNL page states no explicit license ('as is, no warranties'), so license
+  is null. No peer-reviewed descriptor paper was verified for the dataset (AutoBEM papers are listed at a bit.ly
+  link on the ORNL page, not resolved), so reference_paper_doi is null. Regional Zenodo extracts exist (e.g. 10.5281/zenodo.5154216,
+  Los Angeles WRF extract) but were not catalogued. A related ORNL dataset DOI 10.57931/2349436 (Urban Parameters
+  LA County 100m) is listed on the ORNL page; its relationship to Model America was not examined. Spatial granularity
+  county is based on the file name state_county.zip. Simulation outputs (annual or hourly) are not part of the main
+  package. Temporal coverage not stated.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/', 'https://api.datacite.org/dois/10.13139/ornlnccs/1774134']

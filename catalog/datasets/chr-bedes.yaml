@@ -1,0 +1,60 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-bedes
+title: Building Energy Data Exchange Specification (BEDES)
+short_name: BEDES
+publisher: Lawrence Berkeley National Laboratory (Building and Industrial Energy Systems Division), U.S. DOE
+landing_page: https://bies.lbl.gov/cbs/bedes/
+doi: null
+citation: Lawrence Berkeley National Laboratory. Building Energy Data Exchange Specification (BEDES). Building and Industrial
+  Energy Systems Division.
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: web tool (BEDES Mapping Manager; downloadable formats not verified)
+  access_url: https://bedes-manager.lbl.gov/
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+content_types:
+- data_dictionary
+- terms_and_definitions
+- building_characteristics_terms
+- efficiency_measure_terms
+- energy_use_terms
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: Developed in the United States; used by U.S. tools (Portfolio Manager, BuildingSync, SEED). International applicability
+    was not verified
+unit_of_observation: dictionary_term
+spatial_granularity: none
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: continuing development with working group (no schedule or version stated on the page)
+statistical_nature: standard_or_code
+sampling_weights: null
+record_count: null
+record_count_note: Term counts not stated on the page
+join_keys: []
+variables_documented: true
+machine_readable: null
+versioned: null
+persistent_identifier: false
+known_limitations: 'A shared vocabulary, not data: it defines terms for building characteristics, efficiency measures and
+  energy use, and does not itself contain building records; adoption is voluntary (mapping compliance and exchange compliance
+  paths).'
+notes: Current version, license and download formats were not stated on the page (null or unknown). machine_readable and versioned
+  are null because the term list format and version were not verified. The page lists compliance completed for ENERGY STAR
+  Portfolio Manager, BuildingSync and SEED, and 14 endorsers. Include for the gap analysis as the dictionary that links building-characteristics
+  datasets; its role would be harmonizing variable names rather than supplying inputs.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://bedes.lbl.gov/ (redirects)
+  - https://bies.lbl.gov/cbs/bedes/

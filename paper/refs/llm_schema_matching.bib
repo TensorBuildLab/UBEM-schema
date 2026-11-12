@@ -1,0 +1,500 @@
+% LLM-based schema matching, data integration, uncertainty, and building-domain LLM/metadata literature
+% Every entry below was verified on 2026-11-12 against api.crossref.org/works/<doi>,
+% the arXiv API (export.arxiv.org), or an official conference/proceedings page.
+% Metadata (authors, year, venue, pages) is copied from those records, not from memory.
+
+% =====================================================================
+% A1. Classic schema matching and benchmarks
+% =====================================================================
+
+@article{rahm2001survey,
+  author    = {Rahm, Erhard and Bernstein, Philip A.},
+  title     = {A survey of approaches to automatic schema matching},
+  journal   = {The VLDB Journal},
+  volume    = {10},
+  number    = {4},
+  pages     = {334--350},
+  year      = {2001},
+  doi       = {10.1007/s007780100057}
+}
+
+@incollection{do2002coma,
+  author    = {Do, Hong-Hai and Rahm, Erhard},
+  title     = {{COMA} -- A system for flexible combination of schema matching approaches},
+  booktitle = {VLDB '02: Proceedings of the 28th International Conference on Very Large Databases},
+  pages     = {610--621},
+  year      = {2002},
+  doi       = {10.1016/B978-155860869-6/50060-3}
+}
+
+@inproceedings{melnik2002similarity,
+  author    = {Melnik, S. and Garcia-Molina, H. and Rahm, E.},
+  title     = {Similarity flooding: a versatile graph matching algorithm and its application to schema matching},
+  booktitle = {Proceedings 18th International Conference on Data Engineering (ICDE)},
+  pages     = {117--128},
+  year      = {2002},
+  doi       = {10.1109/ICDE.2002.994702}
+}
+
+@inproceedings{koutras2021valentine,
+  author    = {Koutras, Christos and Siachamis, George and Ionescu, Andra and Psarakis, Kyriakos and Brons, Jerry and Fragkoulis, Marios and Lofi, Christoph and Bonifati, Angela and Katsifodimos, Asterios},
+  title     = {Valentine: Evaluating Matching Techniques for Dataset Discovery},
+  booktitle = {2021 IEEE 37th International Conference on Data Engineering (ICDE)},
+  pages     = {468--479},
+  year      = {2021},
+  doi       = {10.1109/ICDE51399.2021.00047}
+}
+
+% =====================================================================
+% A2. Foundation models / LLMs for data integration and wrangling
+% =====================================================================
+
+@article{narayan2022foundation,
+  author    = {Narayan, Avanika and Chami, Ines and Orr, Laurel and R{\'e}, Christopher},
+  title     = {Can Foundation Models Wrangle Your Data?},
+  journal   = {Proceedings of the VLDB Endowment},
+  volume    = {16},
+  number    = {4},
+  pages     = {738--746},
+  year      = {2022},
+  doi       = {10.14778/3574245.3574258}
+}
+
+@article{tu2023unicorn,
+  author    = {Tu, Jianhong and Fan, Ju and Tang, Nan and Wang, Peng and Li, Guoliang and Du, Xiaoyong and Jia, Xiaofeng and Gao, Song},
+  title     = {Unicorn: A Unified Multi-tasking Model for Supporting Matching Tasks in Data Integration},
+  journal   = {Proceedings of the ACM on Management of Data},
+  volume    = {1},
+  number    = {1},
+  pages     = {1--26},
+  year      = {2023},
+  doi       = {10.1145/3588938}
+}
+
+@article{li2024tablegpt,
+  author    = {Li, Peng and He, Yeye and Yashar, Dror and Cui, Weiwei and Ge, Song and Zhang, Haidong and Rifinski Fainman, Danielle and Zhang, Dongmei and Chaudhuri, Surajit},
+  title     = {Table-{GPT}: Table Fine-tuned {GPT} for Diverse Table Tasks},
+  journal   = {Proceedings of the ACM on Management of Data},
+  volume    = {2},
+  number    = {3},
+  pages     = {1--28},
+  year      = {2024},
+  doi       = {10.1145/3654979}
+}
+
+@inproceedings{zhang2024jellyfish,
+  author    = {Zhang, Haochen and Dong, Yuyang and Xiao, Chuan and Oyamada, Masafumi},
+  title     = {Jellyfish: Instruction-Tuning Local Large Language Models for Data Preprocessing},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {8754--8782},
+  year      = {2024},
+  doi       = {10.18653/v1/2024.emnlp-main.497}
+}
+
+@article{feuer2024archetype,
+  author    = {Feuer, Benjamin and Liu, Yurong and Hegde, Chinmay and Freire, Juliana},
+  title     = {{ArcheType}: A Novel Framework for Open-Source Column Type Annotation Using Large Language Models},
+  journal   = {Proceedings of the VLDB Endowment},
+  volume    = {17},
+  number    = {9},
+  pages     = {2279--2292},
+  year      = {2024},
+  doi       = {10.14778/3665844.3665857}
+}
+
+@inproceedings{kayali2025goby,
+  author    = {Kayali, Moe and Wenz, Fabian and Tatbul, Nesime and Demiralp, {\c{C}}a{\u{g}}atay},
+  title     = {Mind the Data Gap: Bridging {LLMs} to Enterprise Data Integration},
+  booktitle = {Conference on Innovative Data Systems Research (CIDR)},
+  year      = {2025},
+  url       = {https://www.vldb.org/cidrdb/papers/2025/p34-kayali.pdf},
+  eprint    = {2412.20331},
+  archivePrefix = {arXiv}
+}
+
+% =====================================================================
+% A3. LLM-based schema matching
+% =====================================================================
+
+@misc{sheetrit2024rematch,
+  author    = {Sheetrit, Eitam and Brief, Menachem and Mishaeli, Moshik and Elisha, Oren},
+  title     = {{ReMatch}: Retrieval Enhanced Schema Matching with {LLMs}},
+  year      = {2024},
+  eprint    = {2403.01567},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.DB},
+  url       = {https://arxiv.org/abs/2403.01567}
+}
+
+@inproceedings{parciak2024schema,
+  author    = {Parciak, Marcel and Vandevoort, Brecht and Neven, Frank and Peeters, Liesbet M. and Vansummeren, Stijn},
+  title     = {Schema Matching with Large Language Models: an Experimental Study},
+  booktitle = {2nd International Workshop on Tabular Data Analysis (TaDA), co-located with VLDB 2024},
+  year      = {2024},
+  url       = {https://vldb.org/workshops/2024/proceedings/TaDA/TaDA.8.pdf},
+  eprint    = {2407.11852},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{parciak2025llmmatcher,
+  author    = {Parciak, Marcel and Vandevoort, Brecht and Neven, Frank and Peeters, Liesbet M. and Vansummeren, Stijn},
+  title     = {{LLM-Matcher}: A Name-Based Schema Matching Tool using Large Language Models},
+  booktitle = {Companion of the 2025 International Conference on Management of Data (SIGMOD-Companion '25)},
+  pages     = {203--206},
+  year      = {2025},
+  doi       = {10.1145/3722212.3725112}
+}
+
+@inproceedings{seedat2024matchmaker,
+  author    = {Seedat, Nabeel and van der Schaar, Mihaela},
+  title     = {Matchmaker: Self-Improving Large Language Model Programs for Schema Matching},
+  booktitle = {NeurIPS 2024 Workshop on Generative AI for Health (GenAI4Health)},
+  year      = {2024},
+  eprint    = {2410.24105},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2410.24105}
+}
+
+@article{liu2025magneto,
+  author    = {Liu, Yurong and Pena, Eduardo H. M. and Santos, A{\'e}cio and Wu, Eden and Freire, Juliana},
+  title     = {Magneto: Combining Small and Large Language Models for Schema Matching},
+  journal   = {Proceedings of the VLDB Endowment},
+  volume    = {18},
+  number    = {8},
+  pages     = {2681--2694},
+  year      = {2025},
+  doi       = {10.14778/3742728.3742757}
+}
+
+@misc{buss2025scalable,
+  author    = {Buss, Christopher and Safari, Mahdis and Termehchy, Arash and Lee, Stefan and Maier, David},
+  title     = {Towards Scalable Schema Mapping using Large Language Models},
+  year      = {2025},
+  eprint    = {2505.24716},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2505.24716}
+}
+
+@misc{gungor2025schemora,
+  author    = {Gungor, Osman Erman and Paulsen, Derak and Kang, William},
+  title     = {Schemora: schema matching via multi-stage recommendation and metadata enrichment using off-the-shelf {LLMs}},
+  year      = {2025},
+  eprint    = {2507.14376},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2507.14376}
+}
+
+@misc{santos2025harmonia,
+  author    = {Santos, A{\'e}cio and Pena, Eduardo H. M. and Lopez, Roque and Freire, Juliana},
+  title     = {Interactive Data Harmonization with {LLM} Agents: Opportunities and Challenges},
+  year      = {2025},
+  eprint    = {2502.07132},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2502.07132}
+}
+
+@misc{chen2026construm,
+  author    = {Chen, Houming and Zhang, Zhe and Jagadish, H. V.},
+  title     = {{ConStruM}: A Structure-Guided {LLM} Framework for Context-Aware Schema Matching},
+  year      = {2026},
+  eprint    = {2601.20482},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2601.20482}
+}
+
+@misc{wu2026bdiviz,
+  author    = {Wu, Eden and Koutras, Christos and Silva, Cl{\'a}udio T. and Freire, Juliana},
+  title     = {{BDIViz} in Action: Interactive Curation and Benchmarking for Schema Matching Methods},
+  year      = {2026},
+  eprint    = {2604.10763},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2604.10763}
+}
+
+% =====================================================================
+% A4. LLM-based ontology matching
+% =====================================================================
+
+@inproceedings{hertling2023olala,
+  author    = {Hertling, Sven and Paulheim, Heiko},
+  title     = {{OLaLa}: Ontology Matching with Large Language Models},
+  booktitle = {Proceedings of the 12th Knowledge Capture Conference 2023 (K-CAP '23)},
+  pages     = {131--139},
+  year      = {2023},
+  doi       = {10.1145/3587259.3627571}
+}
+
+@incollection{babaeigiglou2025llms4om,
+  author    = {Babaei Giglou, Hamed and D'Souza, Jennifer and Engel, Felix and Auer, S{\"o}ren},
+  title     = {{LLMs4OM}: Matching Ontologies with Large Language Models},
+  booktitle = {The Semantic Web: ESWC 2024 Satellite Events},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer Nature Switzerland},
+  pages     = {25--35},
+  year      = {2025},
+  doi       = {10.1007/978-3-031-78952-6_3}
+}
+
+@misc{he2023exploring,
+  author    = {He, Yuan and Chen, Jiaoyan and Dong, Hang and Horrocks, Ian},
+  title     = {Exploring Large Language Models for Ontology Alignment},
+  year      = {2023},
+  eprint    = {2309.07172},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2309.07172}
+}
+
+% =====================================================================
+% A5. Self-consistency, calibration, uncertainty
+% =====================================================================
+
+@inproceedings{wang2023selfconsistency,
+  author    = {Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc V. and Chi, Ed H. and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  title     = {Self-Consistency Improves Chain of Thought Reasoning in Language Models},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2023},
+  url       = {https://iclr.cc/virtual/2023/poster/11718},
+  eprint    = {2203.11171},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{xiong2024uncertainty,
+  author    = {Xiong, Miao and Hu, Zhiyuan and Lu, Xinyang and Li, Yifei and Fu, Jie and He, Junxian and Hooi, Bryan},
+  title     = {Can {LLMs} Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in {LLMs}},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  url       = {https://iclr.cc/virtual/2024/poster/18135},
+  eprint    = {2306.13063},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{tian2023justask,
+  author    = {Tian, Katherine and Mitchell, Eric and Zhou, Allan and Sharma, Archit and Rafailov, Rafael and Yao, Huaxiu and Finn, Chelsea and Manning, Christopher},
+  title     = {Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models Fine-Tuned with Human Feedback},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {5433--5442},
+  year      = {2023},
+  doi       = {10.18653/v1/2023.emnlp-main.330}
+}
+
+@misc{kadavath2022know,
+  author    = {Kadavath, Saurav and Conerly, Tom and Askell, Amanda and Henighan, Tom and Drain, Dawn and Perez, Ethan and Schiefer, Nicholas and Hatfield-Dodds, Zac and DasSarma, Nova and Tran-Johnson, Eli and Johnston, Scott and El-Showk, Sheer and Jones, Andy and Elhage, Nelson and Hume, Tristan and Chen, Anna and Bai, Yuntao and Bowman, Sam and Fort, Stanislav and Ganguli, Deep and Hernandez, Danny and Jacobson, Josh and Kernion, Jackson and Kravec, Shauna and Lovitt, Liane and Ndousse, Kamal and Olsson, Catherine and Ringer, Sam and Amodei, Dario and Brown, Tom and Clark, Jack and Joseph, Nicholas and Mann, Ben and McCandlish, Sam and Olah, Chris and Kaplan, Jared},
+  title     = {Language Models (Mostly) Know What They Know},
+  year      = {2022},
+  eprint    = {2207.05221},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2207.05221}
+}
+
+% =====================================================================
+% A6. LLM-generated dataset metadata
+% =====================================================================
+
+@article{zhang2026autoddg,
+  author    = {Zhang, Haoxiang and Liu, Yurong and Santos, A{\'e}cio and Hung, Wei-Lun (Allen) and Freire, Juliana},
+  title     = {{AutoDDG}: Automated Dataset Description Generation using Large Language Models},
+  journal   = {Proceedings of the ACM on Management of Data},
+  volume    = {4},
+  number    = {1},
+  pages     = {1--27},
+  year      = {2026},
+  doi       = {10.1145/3786626}
+}
+
+@misc{busch2025dcat,
+  author    = {Busch, Lennart and Tebernum, Daniel and Velarde, Gissel},
+  title     = {Exploring {LLM} Capabilities in Extracting {DCAT}-Compatible Metadata for Data Cataloging},
+  year      = {2025},
+  eprint    = {2507.05282},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2507.05282}
+}
+
+@article{eger2025opendata,
+  author    = {Eger, Bj{\"o}rn-Lennart and Ullmann, Franziska and Dinter, Barbara and Gluchowski, Peter},
+  title     = {Mit {Open-Source-LLMs} zu aussagekr{\"a}ftigen Metadaten: Sprachmodelle als Schl{\"u}ssel f{\"u}r nutzerfreundliche {Open-Data-Portale}},
+  journal   = {HMD Praxis der Wirtschaftsinformatik},
+  volume    = {62},
+  number    = {5},
+  pages     = {1112--1126},
+  year      = {2025},
+  doi       = {10.1365/s40702-025-01197-1}
+}
+
+@misc{gan2026lessismore,
+  author    = {Gan, Lisa-Yao and Das, Arunav and Walker, Johanna and Diepold, Klaus and Simperl, Elena},
+  title     = {Less Is More? When Dataset Context Hurts {LLM}-Generated Dataset Descriptions},
+  year      = {2026},
+  eprint    = {2606.02334},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2606.02334}
+}
+
+% =====================================================================
+% B1. LLMs for building energy data transformation / BEM automation
+% =====================================================================
+
+@inproceedings{sharma2023sqlmorpher,
+  author    = {Sharma, Ankita and Li, Xuanmao and Guan, Hong and Sun, Guoxin and Zhang, Liang and Wang, Lanjun and Wu, Kesheng and Cao, Lei and Zhu, Erkang and Sim, Alexander and Wu, Teresa and Zou, Jia},
+  title     = {Automatic Data Transformation Using Large Language Model -- An Experimental Study on Building Energy Data},
+  booktitle = {2023 IEEE International Conference on Big Data (BigData)},
+  pages     = {1824--1834},
+  year      = {2023},
+  doi       = {10.1109/BigData59044.2023.10386931}
+}
+
+@inproceedings{sharma2025datamorpher,
+  author    = {Sharma, Ankita and Tandel, Jaykumar and Li, Xuanmao and Wang, Lanjun and Fariha, Anna and Zhang, Liang and Naqvi, Syed Arsalan Ahmed and Riaz, Irbaz Bin and Cao, Lei and Zou, Jia},
+  title     = {{DataMorpher}: Automatic Data Transformation Using {LLM}-Based Zero-Shot Code Generation},
+  booktitle = {2025 IEEE 41st International Conference on Data Engineering (ICDE)},
+  pages     = {4536--4539},
+  year      = {2025},
+  doi       = {10.1109/ICDE65448.2025.00346}
+}
+
+@inproceedings{khadka2024scaling,
+  author    = {Khadka, Sunil and Zhang, Liang},
+  title     = {Scaling Data-Driven Building Energy Modelling using Large Language Models},
+  booktitle = {2024 ASHRAE Annual Conference},
+  year      = {2024},
+  doi       = {10.63044/s24kha09},
+  eprint    = {2407.03469},
+  archivePrefix = {arXiv}
+}
+
+@article{jiang2024eplusllm,
+  author    = {Jiang, Gang and Ma, Zhihao and Zhang, Liang and Chen, Jianli},
+  title     = {{EPlus-LLM}: A large language model-based computing platform for automated building energy modeling},
+  journal   = {Applied Energy},
+  volume    = {367},
+  pages     = {123431},
+  year      = {2024},
+  doi       = {10.1016/j.apenergy.2024.123431}
+}
+
+@article{zhang2025opportunities,
+  author    = {Zhang, Liang and Chen, Zhelun},
+  title     = {Opportunities of applying Large Language Models in building energy sector},
+  journal   = {Renewable and Sustainable Energy Reviews},
+  volume    = {214},
+  pages     = {115558},
+  year      = {2025},
+  doi       = {10.1016/j.rser.2025.115558}
+}
+
+@article{ma2026tenquestions,
+  author    = {Ma, Nan and Labib, Rania and Amor, Robert and Chong, Adrian and Fan, Cheng and Forth, Kasimir and Fu, Xiaoqin and Fuchs, Stefan and Hong, Tianzhen and Klimenkova, Nina and Koo, Jabeom and Li, Shundong and McCullough, Steven Tanner and Park, June Young and Shraga, Roee and Yoon, Sungmin and Zhang, Liang and Zhang, Yiting},
+  title     = {Ten questions concerning Large Language Models ({LLMs}) for building applications},
+  journal   = {Building and Environment},
+  volume    = {291},
+  pages     = {114260},
+  year      = {2026},
+  doi       = {10.1016/j.buildenv.2026.114260}
+}
+
+% =====================================================================
+% B2. LLMs for Brick / building semantic metadata
+% =====================================================================
+
+@inproceedings{mulayim2024llmontologies,
+  author    = {Mulayim, Ozan Baris and Paul, Lazlo and Pritoni, Marco and Prakash, Anand Krishnan and Sudarshan, Malavikha and Fierro, Gabe},
+  title     = {Large Language Models for the Creation and Use of Semantic Ontologies in Buildings: Requirements and Challenges},
+  booktitle = {Proceedings of the 11th ACM International Conference on Systems for Energy-Efficient Buildings, Cities, and Transportation (BuildSys '24)},
+  pages     = {312--317},
+  year      = {2024},
+  doi       = {10.1145/3671127.3698792}
+}
+
+@article{zheng2025bmstagging,
+  author    = {Zheng, Zhiyu and Mari{\'e}, Sylvain and Farazdaghi, Elham and Yahia, Esma and Makhoul, Khal and Lagarde, Th{\'e}o and El Meouche, Rani and Ababsa, Fakhreddine},
+  title     = {Mastering building management systems data points tagging with minimal examples: unveiling the power of large language models},
+  journal   = {Energy and Buildings},
+  volume    = {328},
+  pages     = {115173},
+  year      = {2025},
+  doi       = {10.1016/j.enbuild.2024.115173}
+}
+
+@article{perini2025brickllm,
+  author    = {Perini, Marco and Antonucci, Daniele and Giudice, Rocco and Piscitelli, Marco Savino and Capozzoli, Alfonso},
+  title     = {{BrickLLM}: A {Python} library for generating {Brick}-compliant {RDF} graphs using {LLMs}},
+  journal   = {SoftwareX},
+  volume    = {30},
+  pages     = {102121},
+  year      = {2025},
+  doi       = {10.1016/j.softx.2025.102121}
+}
+
+@article{wang2026point2brick,
+  author    = {Wang, Zicheng and Ma, Jie and Cai, Jie and Qu, Ming},
+  title     = {{Point2Brick}: Automating building semantic model creation via multi-stage confidence-aware Large Language Model agents},
+  journal   = {Energy and Buildings},
+  volume    = {362},
+  pages     = {117516},
+  year      = {2026},
+  doi       = {10.1016/j.enbuild.2026.117516}
+}
+
+@misc{qian2026brickdicl,
+  author    = {Qian, Yiyue and Zhang, Shinan and Song, Huan and Sokhandan, Negin and Marlowe, Hannah and Socolinsky, Diego},
+  title     = {{Brick-DICL}: Dynamic In-Context Learning for Automated {Brick} Schema Classification},
+  year      = {2026},
+  eprint    = {2606.17637},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2606.17637}
+}
+
+@techreport{jain2025bacnetbrick,
+  author      = {Jain, M. and Lutes, R. G. and Katipamula, S.},
+  title       = {Automated Tagging and Semantic Mapping of {BACnet} Metadata to {Brick} Schema for Building Automation Systems},
+  institution = {Pacific Northwest National Laboratory},
+  address     = {Richland, WA},
+  number      = {PNNL-38511},
+  year        = {2025},
+  url         = {https://www.pnnl.gov/publications/automated-tagging-and-semantic-mapping-bacnet-metadata-brick-schema-building}
+}
+
+@article{he2025metacloze,
+  author    = {He, Fang and Fan, Jiaqi and Deng, Yang and Zhang, Xiaoyang and Wang, Dan},
+  title     = {{MetaCloze}: a schema-guided automated building metadata model generation system via information extraction},
+  journal   = {Knowledge-Based Systems},
+  volume    = {330},
+  pages     = {114596},
+  year      = {2025},
+  doi       = {10.1016/j.knosys.2025.114596}
+}
+
+% =====================================================================
+% B3. Pre-LLM building metadata inference
+% =====================================================================
+
+@inproceedings{bhattacharya2015automated,
+  author    = {Bhattacharya, Arka A. and Hong, Dezhi and Culler, David and Ortiz, Jorge and Whitehouse, Kamin and Wu, Eugene},
+  title     = {Automated Metadata Construction to Support Portable Building Applications},
+  booktitle = {Proceedings of the 2nd ACM International Conference on Embedded Systems for Energy-Efficient Built Environments (BuildSys '15)},
+  pages     = {3--12},
+  year      = {2015},
+  doi       = {10.1145/2821650.2821667}
+}
+
+@inproceedings{koh2018scrabble,
+  author    = {Koh, Jason and Balaji, Bharathan and Sengupta, Dhiman and McAuley, Julian and Gupta, Rajesh and Agarwal, Yuvraj},
+  title     = {Scrabble: transferrable semi-automated semantic metadata normalization using intermediate representation},
+  booktitle = {Proceedings of the 5th Conference on Systems for Built Environments (BuildSys '18)},
+  pages     = {11--20},
+  year      = {2018},
+  doi       = {10.1145/3276774.3276795}
+}
+
+% =====================================================================
+% C. Prompt engineering
+% =====================================================================
+
+@misc{white2023prompt,
+  author    = {White, Jules and Fu, Quchen and Hays, Sam and Sandborn, Michael and Olea, Carlos and Gilbert, Henry and Elnashar, Ashraf and Spencer-Smith, Jesse and Schmidt, Douglas C.},
+  title     = {A Prompt Pattern Catalog to Enhance Prompt Engineering with {ChatGPT}},
+  year      = {2023},
+  eprint    = {2302.11382},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2302.11382}
+}

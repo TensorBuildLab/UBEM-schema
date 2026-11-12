@@ -1,0 +1,59 @@
+id: wx-nsrdb
+title: National Solar Radiation Database (NSRDB)
+short_name: NSRDB
+publisher: National Renewable Energy Laboratory (NREL)
+landing_page: https://nsrdb.nrel.gov/
+doi: null
+citation: Sengupta, M., Xie, Y., Lopez, A., Habte, A., Maclaurin, G., Shelby, J. (2018). The National Solar Radiation
+  Data Base (NSRDB). Renewable and Sustainable Energy Reviews 89, 51-60.
+reference_paper_doi: 10.1016/j.rser.2018.03.003
+license: null
+access_level: registration_required
+distributions:
+- format: CSV
+  access_url: https://nsrdb.nrel.gov/data-viewer
+  api: true
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- solar_irradiance_ghi_dni_dhi
+- meteorological_variables
+- typical_meteorological_year
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - US
+  description: Physical Solar Model covers most of the Americas (per NREL map page, via search snippet); exact extent
+    not verified
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '1998'
+  end: '2023'
+temporal_resolution: PT30M
+update_frequency: annual releases
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Irradiance is modeled from satellite retrievals (Physical Solar Model) at about 4 km, not measured
+  at the site; coverage is limited to the Americas and parts of Asia-Pacific.
+notes: Chosen enum remote_sensing_derived because values are satellite-derived modeled estimates. nsrdb.nrel.gov
+  and www.nrel.gov did not resolve from the fetch tool (NREL appears to have changed domain), so license, access
+  details, resolution and years come from the verified descriptor paper plus search snippets (1998-2023, ~4 km,
+  30 min) and should be re-checked. API needs a free key (general knowledge, unverified here).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://api.crossref.org/works/10.1016/j.rser.2018.03.003
+  - web search snippets (catalog.data.gov NSRDB entry, nrel.gov solar resource maps); nsrdb.nrel.gov unreachable

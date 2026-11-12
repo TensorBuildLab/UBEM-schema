@@ -1,0 +1,74 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-mobility
+title: Google COVID-19 Community Mobility Reports (archived global CSV)
+short_name: Google Community Mobility
+publisher: Google LLC
+landing_page: https://www.google.com/covid19/mobility/
+doi: null
+citation: Google LLC. Google COVID-19 Community Mobility Reports. https://www.google.com/covid19/mobility/ (archived; last
+  updated 15 October 2022).
+reference_paper_doi: null
+license: Google Terms of Service (no open license named)
+access_level: open_download
+distributions:
+- format: CSV (global file and zipped regional files)
+  access_url: https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv
+  api: false
+  registration_required: false
+- format: PDF reports
+  access_url: https://www.google.com/covid19/mobility/
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+- context_coupling
+content_types:
+- relative_visits_retail_and_recreation
+- relative_visits_grocery_and_pharmacy
+- relative_visits_parks
+- relative_visits_transit_stations
+- relative_visits_workplaces
+- relative_time_residential
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Countries and sub-regions worldwide, with county-level rows for the U.S. (census_fips_code) and some metro
+    areas
+unit_of_observation: region_day
+spatial_granularity: county
+temporal_coverage:
+  start: '2020-02-15'
+  end: '2022-10-15'
+temporal_resolution: P1D
+update_frequency: 'no longer updated: archived 2022-10-15; historical data remain publicly available per Google'
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: Row count not determined (global CSV is large)
+join_keys:
+- country_iso
+- fips_county
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Gives only percent change in visits or duration relative to a baseline, for six broad place categories;
+  it cannot represent absolute occupancy, building-level or POI-level visitation, schedules, or building-type-specific occupancy;
+  covers only the pandemic period 2020-2022; the data are no longer updated and derive from opted-in Google location history
+  users (not representative); small-area rows are suppressed or missing where privacy thresholds are not met; each use requires
+  agreeing to Google's Terms of Service.
+notes: 'Verified: the CSV header (country_region_code, country_region, sub_region_1, sub_region_2, metro_area, iso_3166_2_code,
+  census_fips_code, place_id, date and six *_percent_change_from_baseline columns) and a Last-Modified date of 18 October
+  2022 on the gstatic file, and Google''s archive notice (updates stopped 2022-10-15; all historical data remain public).
+  The first rows of the file start on 2020-02-15; the global start date was inferred from that and not confirmed for all regions.
+  The baseline definition and data-collection method were not re-read from the documentation. Included because it is the only
+  open, national-to-global scale visitation signal found; no open building- or POI-level occupancy dataset at national scale
+  was identified in this check. It is a context or boundary-condition proxy for occupancy trends, not a building input.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.google.com/covid19/mobility/
+  - https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv (header and headers inspected)

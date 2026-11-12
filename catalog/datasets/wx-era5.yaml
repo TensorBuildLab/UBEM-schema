@@ -1,0 +1,63 @@
+id: wx-era5
+title: ERA5 hourly data on single levels from 1940 to present
+short_name: ERA5
+publisher: ECMWF / Copernicus Climate Change Service (C3S)
+landing_page: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels
+doi: 10.24381/cds.adbb2d47
+citation: Hersbach, H., et al. (2023). ERA5 hourly data on single levels from 1940 to present. Copernicus Climate
+  Change Service (C3S) Climate Data Store (CDS). https://doi.org/10.24381/cds.adbb2d47
+reference_paper_doi: 10.1002/qj.3803
+license: CC-BY-4.0
+access_level: registration_required
+distributions:
+- format: GRIB
+  access_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels
+  api: true
+  registration_required: true
+- format: NetCDF
+  access_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels
+  api: true
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- near_surface_temperature
+- humidity
+- wind
+- surface_solar_radiation
+- precipitation
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '1940'
+  end: present
+temporal_resolution: PT1H
+update_frequency: daily (with latency)
+statistical_nature: reanalysis_model
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: 0.25 degree (about 31 km) atmospheric grid cannot resolve urban microclimate; surface radiation
+  and 2 m fields carry model biases versus station data.
+notes: Dataset page states 'CC-BY'; recorded as CC-BY-4.0 (Copernicus licence terms apply; confirm the licence version
+  before citing). Ocean-wave fields at 0.5 degree. Free CDS account required (general knowledge). NetCDF output
+  is offered by CDS (general knowledge; page listed GRIB).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels
+  - https://api.crossref.org/works/10.1002/qj.3803

@@ -1,0 +1,50 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-pecan-street
+title: Pecan Street Dataport
+short_name: Pecan Street Dataport
+publisher: Pecan Street Inc.
+landing_page: https://dataport.pecanstreet.org/
+doi: null
+citation: Pecan Street Inc. Dataport. https://dataport.pecanstreet.org/ (accessed 2026-11-12). Cite as instructed
+  in the Dataport terms.
+reference_paper_doi: null
+license: Proprietary (Pecan Street Dataport license tiers)
+access_level: request_or_agreement
+distributions:
+- {format: CSV (via Dataport portal), access_url: 'https://dataport.pecanstreet.org/', api: false, registration_required: true}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [household_electricity_circuit_level, pv_generation, ev_charging, appliance_level_power]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [US]
+  description: Pecan Street testbeds in Austin (Texas), New York and California
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: null, end: present}
+temporal_resolution: irregular
+update_frequency: ongoing
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 75
+record_count_note: The free University tier covers 75 homes from the Austin, New York and California testbeds; other
+  tiers include all datasets (total size not verified)
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: 'Not freely open: the free tier is limited to academic non-commercial research by university
+  faculty, staff and students, with no resale, no sublicensing and no funded research; wider access requires paid
+  licenses (university-funded tiers listed at 10,000 and 15,000 USD, commercial prices in a separate guide). Free
+  tier covers 75 homes only. Sampling resolution is not uniform (Pecan Street states it upgraded Dataport from 1-minute
+  to 1-second measurements in 2019).'
+notes: Classified request_or_agreement (institutional verification and license terms) rather than registration_required
+  because free access is limited to verified academic users and to a 75-home subset. temporal_coverage start and
+  resolution could not be verified (data sheet PDF unreadable), hence null/irregular. A 10-home 1-minute sample
+  is distributed separately on Kaggle according to a Pecan Street page seen only via search snippet. No peer-reviewed
+  descriptor paper identified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.pecanstreet.org/dataport/licenses/', 'https://dataport.pecanstreet.org/ (via search
+      result)']

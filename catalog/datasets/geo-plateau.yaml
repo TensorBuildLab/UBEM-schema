@@ -1,0 +1,63 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-plateau
+title: 'Project PLATEAU: Japan 3D city models (MLIT)'
+short_name: PLATEAU
+publisher: Ministry of Land, Infrastructure, Transport and Tourism (MLIT), Japan
+landing_page: https://www.mlit.go.jp/plateau/open-data/
+doi: null
+citation: Ministry of Land, Infrastructure, Transport and Tourism (MLIT), Japan. Project PLATEAU 3D city model open
+  data. https://www.mlit.go.jp/plateau/open-data/.
+reference_paper_doi: null
+license: PDL-1.0 (Public Data License 1.0), described as compatible with CC-BY-4.0; ODC-BY or ODbL may also be used
+access_level: open_download
+distributions:
+- format: CityGML (and 3D Tiles, GeoPackage, others per secondary sources)
+  access_url: https://www.mlit.go.jp/plateau/open-data/
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_3d_model_citygml
+- building_attributes_per_city
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - JP
+  description: 306 locations as of 2026-05-11 (municipal 3D city models)
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Cities added progressively (56 in FY2021, about 300 planned by end of FY2025; page updated 2026-05-11)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: Not stated by MLIT; a third-party Cesium tileset lists over 23 million buildings from more than
+  200 datasets
+join_keys:
+- geometry
+- lat_lon
+- building_id
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Coverage is city by city, not nationwide. Copyright of the data on G-Spatial Information Center
+  belongs to the local governments, not MLIT. Some content restricted by the Survey Act. LOD and attributes differ
+  by city.
+notes: No peer-reviewed descriptor found (a 2023 Japanese-language JSPRS article exists, 10.4287/jsprs.62.260, but
+  it was not examined); reference_paper_doi null. Licence from the MLIT site-policy page (PDL1.0); formats beyond
+  CityGML come from search results (OSM wiki, FOSS4G abstract) and are unverified. administrative_record is inferred
+  from municipal ownership of the data and CityGML 2.0 / ISO TC211 compliance; the production method was not verified.
+  building_characteristics included because MLIT publishes an attribute list per city, but specific attributes (use,
+  structure, floors) were not read. Downloads via G-Spatial Information Center.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.mlit.go.jp/plateau/open-data/
+  - https://www.mlit.go.jp/plateau/site-policy/

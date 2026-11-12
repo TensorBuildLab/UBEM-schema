@@ -1,0 +1,49 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-ashrae-gepiii
+title: ASHRAE - Great Energy Predictor III (Kaggle competition data)
+short_name: ASHRAE GEPIII
+publisher: ASHRAE (host) via Kaggle; data compiled by the Building Data Genome Project 2 team
+landing_page: https://www.kaggle.com/c/ashrae-energy-prediction
+doi: null
+citation: 'Miller, C., Arjunan, P., Kathirgamanathan, A., Fu, C., Roth, J., et al. The ASHRAE Great Energy Predictor
+  III competition: Overview and results. Science and Technology for the Built Environment (2020). https://doi.org/10.1080/23744731.2020.1795514
+  (arXiv:2007.06933)'
+reference_paper_doi: 10.1080/23744731.2020.1795514
+license: null
+access_level: registration_required
+distributions:
+- {format: CSV, access_url: 'https://www.kaggle.com/c/ashrae-energy-prediction/data', api: false, registration_required: true}
+ubem_roles: [calibration_validation]
+content_types: [energy_meter_timeseries_hourly, building_metadata, weather_timeseries_hourly]
+geographic_scope: multinational
+spatial_coverage:
+  countries: [US, GB, CA, IE]
+  description: 16 sites in North America and Europe (anonymized site IDs in the Kaggle files)
+unit_of_observation: meter
+spatial_granularity: building
+temporal_coverage: {start: '2016', end: '2018'}
+temporal_resolution: PT1H
+update_frequency: static (competition ran October to December 2019)
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 2380
+record_count_note: 'Training data: over 20 million readings from 2,380 meters in 1,448 buildings at 16 sites (overview
+  paper); about 41 million test points (private leaderboard targets 2017-2018)'
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Kaggle files have known unit-conversion and timestamp (weather in UTC) errors that were fixed
+  in BDG2, not in the Kaggle release (BDG2 data paper). Site identity anonymized; non-representative sample of mostly
+  institutional buildings.
+notes: 'License null: the Kaggle rules/data page is JavaScript-rendered and could not be read, and no CC license
+  was found in the overview paper or via search. Check the competition Rules page before reuse; BDG2 (nrg-bdg2)
+  is the better-documented open release of the same data. Access requires a free Kaggle account and, for competition
+  data, acceptance of the competition rules (not read directly; inferred from the general Kaggle workflow). Counts
+  of buildings differ by one between sources (1,448 in the overview paper, 1,449 in the BDG2 GitHub README).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://www.kaggle.com/c/ashrae-energy-prediction (page text not readable)', 'https://arxiv.org/pdf/2007.06933',
+    'https://api.crossref.org/works/10.1080/23744731.2020.1795514', 'https://github.com/buds-lab/building-data-genome-project-2']

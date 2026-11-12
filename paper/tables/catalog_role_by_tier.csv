@@ -1,0 +1,8 @@
+primary_role,Building / station,Fine grid / small area,Coarse grid / county / city,State / region / nation,None / unknown
+boundary_conditions,5,0,10,0,0
+geometry_inventory,18,5,0,0,0
+building_characteristics,2,2,1,6,4
+operation_use,2,0,2,1,2
+calibration_validation,4,1,3,3,10
+reference_simulation,0,0,4,1,0
+context_coupling,0,2,3,0,0

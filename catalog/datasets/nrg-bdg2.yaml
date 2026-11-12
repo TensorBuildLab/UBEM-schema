@@ -1,0 +1,52 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-bdg2
+title: 'Building Data Genome Project 2 (BDG2): hourly energy meter data from non-residential buildings'
+short_name: BDG2
+publisher: Building and Urban Data Science (BUDS) Lab, National University of Singapore, with data donors
+landing_page: https://github.com/buds-lab/building-data-genome-project-2
+doi: 10.5281/zenodo.3887306
+citation: Miller, C., Kathirgamanathan, A., Picchetti, B., et al. The Building Data Genome Project 2, energy meter
+  data from the ASHRAE Great Energy Predictor III competition. Scientific Data 7, 368 (2020). https://doi.org/10.1038/s41597-020-00712-x
+reference_paper_doi: 10.1038/s41597-020-00712-x
+license: CC-BY-SA-4.0
+access_level: open_download
+distributions:
+- {format: CSV, access_url: 'https://github.com/buds-lab/building-data-genome-project-2', api: false, registration_required: false}
+- {format: CSV, access_url: 'https://doi.org/10.5281/zenodo.3887306', api: false, registration_required: false}
+ubem_roles: [calibration_validation]
+content_types: [energy_meter_timeseries_hourly, building_metadata, weather_timeseries_hourly, meter_types_electricity_chilled_water_hot_water_steam_solar_water_irrigation]
+geographic_scope: multinational
+spatial_coverage:
+  countries: [US, GB, CA, IE]
+  description: 19 sites (mostly university campuses plus some city and hospital sites) in North America and Europe;
+    several sites anonymous
+unit_of_observation: meter
+spatial_granularity: building
+temporal_coverage: {start: '2016', end: '2017'}
+temporal_resolution: PT1H
+update_frequency: static (v1.0 release 2020)
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 3053
+record_count_note: 3,053 energy meters in 1,636 non-residential buildings at 19 sites, 17,544 hourly measurements
+  per meter (about 53.6 million values)
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Convenience sample of mostly university and public buildings, not representative of a national
+  stock; exact coordinates withheld and some sites anonymous; two years only; raw data contain gaps and anomalies
+  (a cleaned version is provided). Meter data were converted to kWh by the authors; the third year (2018) of the
+  GEPIII competition data is not released.
+notes: 'License: the repository LICENSE file contains the Creative Commons Attribution-ShareAlike 4.0 text, while
+  the Zenodo v1.0 record metadata lists CC-BY-4.0 and the Scientific Data article itself is CC BY 4.0. CC-BY-SA-4.0
+  is recorded here from the repository LICENSE; confirm with the authors before redistribution. Dataset DOI is the
+  Zenodo v1.0 release (10.5281/zenodo.3887306). The data paper''s figshare machine-accessible metadata DOI is 10.6084/m9.figshare.13033847.
+  A subset was used in the GEPIII competition (see nrg-ashrae-gepiii).'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://github.com/buds-lab/building-data-genome-project-2', 'https://raw.githubusercontent.com/buds-lab/building-data-genome-project-2/master/LICENSE',
+    'https://api.crossref.org/works/10.1038/s41597-020-00712-x', 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7591488/fullTextXML
+      (data paper full text, Table 1)', 'https://api.datacite.org/dois/10.5281/zenodo.3887306']

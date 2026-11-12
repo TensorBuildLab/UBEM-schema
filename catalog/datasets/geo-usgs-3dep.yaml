@@ -1,0 +1,68 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-usgs-3dep
+title: USGS 3D Elevation Program (3DEP) lidar and elevation products
+short_name: USGS 3DEP
+publisher: U.S. Geological Survey
+landing_page: https://www.usgs.gov/3d-elevation-program
+doi: null
+citation: 'Stoker, J., Miller, B. The Accuracy and Consistency of 3D Elevation Program Data: A Systematic Analysis.
+  Remote Sensing 14(4), 940 (2022).'
+reference_paper_doi: 10.3390/rs14040940
+license: US-Government-Public-Domain (3DEP products 'available free of charge and without use restrictions')
+access_level: open_download
+distributions:
+- format: Lidar point clouds (format not named on the page)
+  access_url: https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
+  api: false
+  registration_required: false
+- format: DEM rasters (1 m project-based, 1/3 arc-second seamless, other resolutions)
+  access_url: https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
+  api: false
+  registration_required: false
+- format: OGC WMS and WCS dynamic bare-earth DEM service
+  access_url: https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
+  api: true
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- lidar_point_cloud
+- digital_elevation_model
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: Conterminous U.S., Alaska (IfSAR), Hawaii and territories; page states the first national baseline
+    of consistent high-resolution elevation data was completed per the FY26 status map of 2026-09-30
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_fine
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Continuous acquisition by project; most recent items on the page dated 2026-09-30
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Not applicable (lidar point clouds and DEM tiles)
+join_keys:
+- lat_lon
+- geometry
+variables_documented: true
+machine_readable: true
+versioned: null
+persistent_identifier: false
+known_limitations: 'Not a building inventory: building heights and 3D models must be derived (for example nDSM minus
+  DEM or classified building points). Collected 2014 and later mostly to quality level 2; earlier data often do
+  not meet it; acquisition dates differ by project.'
+notes: Included because lidar is the basis of national LoD2 efforts (for example 3D BAG's AHN) and of U.S. building
+  height derivation. Descriptor chosen is an accuracy and consistency evaluation (Stoker and Miller 2022, Crossref
+  verified), not a data descriptor; a 2014 USGS circular (10.3133/cir1399) describes the program. Point-cloud file
+  format and cloud hosting not verified on the fetched pages. Start year not stated.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.usgs.gov/3d-elevation-program
+  - https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
+  - https://api.crossref.org/works/10.3390/rs14040940

@@ -1,0 +1,61 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-ireland-ber
+title: National BER Research Tool (anonymised Building Energy Rating data for dwellings, Ireland)
+short_name: Ireland BER Research Tool
+publisher: Sustainable Energy Authority of Ireland (SEAI)
+landing_page: https://ndber.seai.ie/BERResearchTool/
+doi: null
+citation: 'Sustainable Energy Authority of Ireland. National BER Research Tool: anonymised domestic Building Energy Rating
+  data. https://ndber.seai.ie/BERResearchTool/'
+reference_paper_doi: null
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- format: zipped xls/csv (full dataset); search results as XLSX
+  access_url: https://ndber.seai.ie/BERResearchTool/
+  api: false
+  registration_required: false
+- format: CSV resource on data.gov.ie
+  access_url: https://data.gov.ie/dataset/ber-research-tool
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+content_types:
+- energy_performance_certificates
+- dwelling_construction_characteristics
+- primary_energy_and_co2_ratings
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - IE
+  description: Ireland, dwellings with a BER certificate
+unit_of_observation: dwelling_certificate
+spatial_granularity: unknown
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: irregular
+update_frequency: not stated on the pages checked (data.gov.ie release date 2022-08-11 listed)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: Record count not stated on the pages checked
+join_keys: []
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Domestic dwellings only for this open tool; the dataset is anonymised so addresses are not released; BER
+  is a calculated asset rating, not metered use; only dwellings with a certificate are included; a separate protected 'Domestic
+  Building Energy Rating Data' dataset on datacatalogue.gov.ie is not part of this open download.
+notes: Added to reduce U.S.-centric coverage. The research tool page offers the full dataset as a zip (xls/csv) with a User
+  Information Guide and Terms and Conditions; the page does not say that registration is required, so the access level is
+  open_download, but the Terms and Conditions PDF was not read. CC BY 4.0 is the license shown by data.gov.ie. Geographic
+  detail (for example county or Eircode routing key), fields, date range and update frequency were not verified (null).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://ndber.seai.ie/BERResearchTool/
+  - https://data.gov.ie/dataset/ber-research-tool

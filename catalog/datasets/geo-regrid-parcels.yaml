@@ -1,0 +1,59 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-regrid-parcels
+title: Regrid nationwide U.S. parcel data
+short_name: Regrid parcels
+publisher: Regrid
+landing_page: https://app.regrid.com/store/us
+doi: null
+citation: Regrid. Nationwide parcel data. https://regrid.com/.
+reference_paper_doi: null
+license: Proprietary (Regrid commercial licence; Data With Purpose offers a pay-what-you-can licence for researchers
+  and nonprofits)
+access_level: restricted_commercial
+distributions:
+- format: Parcel boundaries by county or state (bulk and API); format not verified
+  access_url: https://app.regrid.com/store/us
+  api: true
+  registration_required: true
+ubem_roles:
+- geometry_inventory
+content_types:
+- parcel_boundaries
+- parcel_attributes
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States; Regrid reports 100% U.S. coverage (press release)
+unit_of_observation: parcel
+spatial_granularity: parcel
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Not verified
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: Not verified
+join_keys:
+- parcel_id
+- address
+- geometry
+- lat_lon
+- fips_county
+variables_documented: null
+machine_readable: true
+versioned: null
+persistent_identifier: false
+known_limitations: Paid licence for nationwide data. A free tile layer of parcel boundaries via Esri exposes only
+  address, size and parcel ID. Redistribution restrictions not reviewed.
+notes: Listed only to mark the open-data gap in parcel inventories; not open. Information comes from web-search
+  results; regrid.com/parcel-data returned 404 and the pages were not fetched, so pricing, record counts, formats
+  and the current status of the Data With Purpose program are unverified. No descriptor paper.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://app.regrid.com/store/us
+  - https://regrid.com/purpose/dewey

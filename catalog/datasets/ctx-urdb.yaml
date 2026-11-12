@@ -1,0 +1,58 @@
+id: ctx-urdb
+title: U.S. Utility Rate Database (URDB)
+short_name: URDB
+publisher: OpenEI (NREL / DOE)
+landing_page: https://openei.org/wiki/Utility_Rate_Database
+doi: null
+citation: OpenEI. Utility Rate Database. https://openei.org/wiki/Utility_Rate_Database
+reference_paper_doi: null
+license: CC0-1.0
+access_level: open_download
+distributions:
+- format: CSV
+  access_url: https://openei.org/wiki/Utility_Rate_Database
+  api: false
+  registration_required: false
+- format: JSON
+  access_url: https://openei.org/wiki/Utility_Rate_Database
+  api: true
+  registration_required: true
+ubem_roles:
+- context_coupling
+content_types:
+- electricity_tariffs
+- rate_structures
+- time_of_use_schedules
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  - MX
+  - BZ
+  description: U.S. utilities (over 3,700); some rates for Belize and Mexico
+unit_of_observation: rate_schedule
+spatial_granularity: utility_service_territory
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: about 150 utilities (about 70% of U.S. load) checked and updated annually
+statistical_nature: compilation
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- utility_id
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Crowd-contributed tariff entries; only about 150 utilities are regularly verified and updated.
+notes: CC0 holds per the OpenEI page ('Creative Commons Zero unless otherwise noted'). Page offers bulk CSV/JSON
+  downloads and an API but does not say an API key is needed (key requirement is general knowledge). Total number
+  of rates not stated.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://openei.org/wiki/Utility_Rate_Database

@@ -1,0 +1,66 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-bps
+title: Building Permits Survey (BPS)
+short_name: Census BPS
+publisher: U.S. Census Bureau
+landing_page: https://www.census.gov/construction/bps/
+doi: null
+citation: 'U.S. Census Bureau. Building Permits Survey: housing units authorized by building permits (monthly, year-to-date
+  and annual data). https://www.census.gov/construction/bps/'
+reference_paper_doi: null
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: Comma-delimited ASCII (state, CBSA, county and place files)
+  access_url: https://www2.census.gov/econ/bps/
+  api: false
+  registration_required: false
+- format: XLSX (current data, 2019 to present)
+  access_url: https://www.census.gov/construction/bps/
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- context_coupling
+content_types:
+- housing_units_authorized
+- structure_type
+- new_construction_pipeline
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States by place, county, metropolitan area (CBSA), state, region and division
+unit_of_observation: permit_issuing_place (aggregate counts)
+spatial_granularity: city
+temporal_coverage:
+  start: '1995'
+  end: present
+temporal_resolution: P1M
+update_frequency: monthly (revised data usually released on the 17th workday of the following month), plus annual tables
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: null
+record_count_note: Number of permit-issuing places not stated on the page
+join_keys:
+- fips_state
+- fips_county
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Counts of authorized units from permit offices, not completed buildings; covers new privately-owned residential
+  construction (the page does not describe non-residential coverage); no building-level records or addresses; sub-county place
+  level is the finest geography; permits are not equal to starts or completions.
+notes: Start year 1995 comes from the statement that historical state and MSA text files cover 1995 to 2019; place and county
+  files may start earlier or later and were not checked. API availability is not mentioned on the page (api=false means not
+  found). Role building_characteristics is limited to structure type and unit counts; the survey informs new-build additions
+  to the stock rather than existing building characteristics. Valuation variables were not verified. Classified administrative_record
+  because data are compiled from permit-office reports; BPS includes survey-based estimates for non-responding places that
+  were not examined.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.census.gov/construction/bps/

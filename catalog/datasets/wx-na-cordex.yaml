@@ -1,0 +1,61 @@
+id: wx-na-cordex
+title: North American Coordinated Regional Downscaling Experiment (NA-CORDEX) dataset
+short_name: NA-CORDEX
+publisher: NCAR (NA-CORDEX project)
+landing_page: https://data.ucar.edu/dataset/na-cordex-dataset
+doi: 10.5065/D6SJ1JCH
+citation: NA-CORDEX dataset. NCAR Climate Data Gateway. https://doi.org/10.5065/D6SJ1JCH
+reference_paper_doi: null
+license: null
+access_level: registration_required
+distributions:
+- format: NetCDF
+  access_url: https://data.ucar.edu/dataset/na-cordex-dataset
+  api: false
+  registration_required: true
+ubem_roles:
+- boundary_conditions
+content_types:
+- rcm_projections
+- near_surface_temperature
+- humidity
+- wind
+- insolation
+- bias_corrected_variants
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - US
+  - CA
+  - MX
+  description: North America (NAM-22 and NAM-44 domains, 12N-59N, 171W-24W)
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '1950'
+  end: '2100'
+temporal_resolution: P1D
+update_frequency: null
+statistical_nature: climate_projection
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Resolution is 0.22 degree (about 25 km) or 0.44 degree (about 50 km), driven by CMIP5 GCMs (RCP4.5,
+  RCP8.5); archive is mostly daily or coarser, not hourly weather files.
+notes: From search snippets only (landing pages not fetched directly). License statements conflict between NCAR
+  records (NCAR/UCAR terms of use vs CC-BY-4.0 on the RDA Zarr record vs CC-BY-NC-SA-4.0 on a GDEX record), so license
+  is null. Access level provisional (NCAR Climate Data Gateway; RDA Zarr daily subset). No descriptor paper DOI
+  verified.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - 'web search results: data.ucar.edu/dataset/na-cordex-dataset, rda.ucar.edu/datasets/d316009, earthsystemgrid.org/project/NA-CORDEX.html'

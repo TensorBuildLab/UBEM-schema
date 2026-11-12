@@ -1,0 +1,54 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-lead
+title: 'LEAD1.0: Large-scale Energy Anomaly Detection dataset (annotated electricity meter data)'
+short_name: LEAD1.0
+publisher: Gulati and Arjunan (Singapore Management University / National University of Singapore); hosted on GitHub
+  and Kaggle
+landing_page: https://github.com/samy101/lead-dataset
+doi: null
+citation: 'Gulati, M., Arjunan, P. LEAD1.0: A Large-scale Annotated Dataset for Energy Anomaly Detection in Commercial
+  Buildings. In Proceedings of the 13th ACM International Conference on Future Energy Systems (e-Energy ''22), 2022.
+  https://doi.org/10.1145/3538637.3539761 (arXiv:2203.17256)'
+reference_paper_doi: 10.1145/3538637.3539761
+license: null
+access_level: open_download
+distributions:
+- {format: CSV (zipped), access_url: 'https://github.com/samy101/lead-dataset/tree/main/data', api: false, registration_required: false}
+- {format: CSV, access_url: 'https://www.kaggle.com/competitions/energy-anomaly-detection/overview', api: false,
+  registration_required: true}
+ubem_roles: [calibration_validation]
+content_types: [electricity_meter_timeseries_hourly, anomaly_labels]
+geographic_scope: multinational
+spatial_coverage:
+  countries: [US, GB, CA, IE]
+  description: Derived from GEPIII/BDG2 sites in North America and Europe (country list inherited from BDG2 Table
+    1; LEAD paper states sites worldwide)
+unit_of_observation: meter
+spatial_granularity: building
+temporal_coverage: {start: '2016', end: '2016'}
+temporal_resolution: PT1H
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 1413
+record_count_note: 1,413 electricity meter series (one year, hourly); 199,640 anomalous instances among 12,060,910
+  data points (LEAD paper)
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Annotations of anomalies are by the authors and cover electricity meters only; underlying data
+  are the GEPIII sample (mostly institutional buildings). A subset (200 training buildings plus 206 test buildings)
+  was used for a Kaggle competition; the GitHub repo holds a 'small' zip (about 10 MB) and states that the full
+  1000+ building release would follow the competition.
+notes: 'License null: arXiv lists CC BY 4.0 for the paper but the SMU repository record lists CC BY-NC-ND 4.0, and
+  the GitHub repo has no LICENSE file; the dataset license is therefore unverified. Whether the full LEAD1.0 data
+  were released after the competition was not confirmed (only lead1.0-small.zip was seen in the repo). The year
+  2016 is inferred from the one-year GEPIII training data, and is not stated in the pages read. The Kaggle page
+  was not readable.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://github.com/samy101/lead-dataset', 'https://arxiv.org/pdf/2203.17256', 'https://api.crossref.org/works/10.1145/3538637.3539761',
+    'https://api.github.com/repos/samy101/lead-dataset/contents/data']

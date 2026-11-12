@@ -1,0 +1,64 @@
+id: wx-argonne-future-weather
+title: Dynamically Downscaled Hourly Future Weather Data with 12-km Resolution Covering Most of North America
+short_name: Argonne 12-km future weather (ClimRR)
+publisher: Argonne National Laboratory (DOE); hosted on OEDI / OSTI
+landing_page: https://data.openei.org/submissions/5974
+doi: null
+citation: Argonne National Laboratory. Dynamically Downscaled Hourly Future Weather Data with 12-km Resolution Covering
+  Most of North America. DOE Data Explorer (OSTI ID 2202668).
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: null
+  access_url: https://data.openei.org/submissions/5974
+  api: false
+  registration_required: false
+- format: null
+  access_url: https://www.osti.gov/biblio/2202668
+  api: false
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- hourly_future_weather
+- wrf_downscaled_projections
+- rcp45_rcp85
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - US
+  - CA
+  - MX
+  description: Most of North America
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: '2045'
+  end: '2094'
+temporal_resolution: PT1H
+update_frequency: null
+statistical_nature: climate_projection
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Only two decadal windows (2045-2054 and 2085-2094) and two emission scenarios (RCP4.5, RCP8.5)
+  are described; not ready-made EPW files.
+notes: 'Based on search results only: the ClimRR portal (climrr.anl.gov) returned HTTP 403, so the portal''s derived
+  risk/summary data (also 12 km WRF) was not verified. OEDI/OSTI records not opened: license, file format, DOI,
+  and whether RCP4.5 is fully released (a data.gov record lists ''RCP4.5 v1.1.zip'') are unverified. temporal_coverage
+  records the span of the two decades, not continuous years.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://climrr.anl.gov/ (HTTP 403)
+  - 'web search results: osti.gov/biblio/2202668, data.openei.org/submissions/5974, catalog.data.gov'

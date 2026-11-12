@@ -1,0 +1,47 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-redd
+title: Reference Energy Disaggregation Data Set (REDD)
+short_name: REDD
+publisher: Massachusetts Institute of Technology (J. Zico Kolter, Matthew J. Johnson)
+landing_page: http://redd.csail.mit.edu/
+doi: null
+citation: 'Kolter, J.Z., Johnson, M.J. REDD: A Public Data Set for Energy Disaggregation Research. SustKDD workshop
+  on Data Mining Applications in Sustainability, 2011.'
+reference_paper_doi: null
+license: null
+access_level: registration_required
+distributions:
+- {format: custom (low/high-frequency power logs), access_url: 'http://redd.csail.mit.edu/', api: false, registration_required: true}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [whole_home_power_high_frequency, circuit_level_power, plug_level_power]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [US]
+  description: Homes in the United States (specific locations not verified from the sources read)
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: '2011', end: '2011'}
+temporal_resolution: irregular
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: null
+record_count_note: 'Paper (June 2011): 10 homes monitored, 119 days in total, 268 monitors; secondary catalogs state
+  6 houses in the released data (not verified from the official site)'
+join_keys: [timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: Very small sample of U.S. homes with short monitoring periods (weeks per home); no building-envelope
+  metadata; sampling differs by channel (about 15 kHz mains, 0.5 Hz circuits, 1 Hz plugs, per the paper).
+notes: The official site redd.csail.mit.edu refused connections (ECONNREFUSED) on 2026-11-12, so access terms could
+  not be verified directly. Registration plus a data-use agreement is reported only by a secondary blog source;
+  the paper states the data are freely available. access_level registration_required is therefore provisional. No
+  DOI for the paper (workshop paper); temporal coverage 2011 from the paper date, exact monitoring dates not verified.
+  Fields marked null/irregular because unverifiable.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://zicokolter.com/publications/kolter2011redd.pdf', 'http://redd.csail.mit.edu/ (connection
+      refused)']

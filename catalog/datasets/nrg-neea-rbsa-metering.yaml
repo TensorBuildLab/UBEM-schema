@@ -1,0 +1,49 @@
+# Catalog entry (DatasetProfile, schema v2.0). Verified by agent on 2026-11-12.
+id: nrg-neea-rbsa-metering
+title: 'NEEA Residential Building Stock Assessment (RBSA) Metering Study: end-use load shape data (2011 RBSA)'
+short_name: NEEA RBSA metering
+publisher: Northwest Energy Efficiency Alliance (NEEA); study by Ecotope Inc.
+landing_page: https://neea.org/resource/2011-rbsa-metering-study/
+doi: null
+citation: 'Ecotope, Inc. Residential Building Stock Assessment: Metering Study. Report E14-283, prepared for the
+  Northwest Energy Efficiency Alliance, 2014. Dataset: NEEA RBSA End Use Load Shape Data.'
+reference_paper_doi: null
+license: NEEA Privacy Policy and Terms of Use (data owned by NEEA; no redistribution without permission)
+access_level: request_or_agreement
+distributions:
+- {format: data files (End Use Load Shape Data and Flags Data), access_url: 'https://neea.org/resource/2011-rbsa-metering-study/',
+  api: false, registration_required: true}
+ubem_roles: [calibration_validation, operation_use]
+content_types: [end_use_load_shapes, whole_house_electricity_and_gas, load_shape_flags]
+geographic_scope: subnational
+spatial_coverage:
+  countries: [US]
+  description: Pacific Northwest (NEEA region) single-family homes
+unit_of_observation: household
+spatial_granularity: none
+temporal_coverage: {start: null, end: null}
+temporal_resolution: PT15M
+update_frequency: static
+statistical_nature: measured_monitoring
+sampling_weights: null
+record_count: 101
+record_count_note: 101 homes metered (Ecotope final report; subset of the 2011 RBSA single-family sample), 27 consecutive
+  months of 15-minute end-use data
+join_keys: [building_id, timestamp]
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: 'Small sample (101 sites, the report notes 300-550 would be needed for regional generalisation
+  across climates); recruitment partly non-random; some end uses missing at some sites; data come as-is and require
+  data skills. Terms: request form (name, email, organization, intended use) with agreement not to share, sell or
+  divulge the data without NEEA permission.'
+notes: 'Substituted for nrg-neea-hems: the later NEEA End Use Load Research Home Energy Metering Study (HEMS, 1-minute
+  data from more than 400 homes) is provided by NEEA ''solely for internal use by the person or entity that received
+  the data'' (search snippet), so it is not open and was not catalogued separately. Exact calendar dates of the
+  RBSA metering period were not confirmed (null); the report text read does not give calendar dates of metering.
+  Report PDF text was read from a local copy for the 101-site count.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked: ['https://neea.org/resource/2011-rbsa-metering-study/', 'https://neea.org/?p=4257', 'https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf']

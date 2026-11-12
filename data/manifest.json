@@ -1,0 +1,50 @@
+{
+  "cbecs2018_final_public.csv": {
+    "url": "https://www.eia.gov/consumption/commercial/data/2018/xls/cbecs2018_final_public.csv",
+    "downloaded": "2026-11-12",
+    "sha256": "3e37c81aab2938e63fae47bec837270ba696699aceef904d1326dd25970e7247",
+    "bytes": 19851402
+  },
+  "cbecs2018_codebook.xlsx": {
+    "url": "https://www.eia.gov/consumption/commercial/data/2018/xls/2018microdata_codebook.xlsx",
+    "downloaded": "2026-11-12",
+    "sha256": "5ee2ccb1ae8a2c4196cdb5e3ffd2be11e877d13cae3474f550306f93e92bd26e",
+    "bytes": 89952
+  },
+  "cbecs2018_table_b1.xlsx": {
+    "url": "https://www.eia.gov/consumption/commercial/data/2018/xls/b1_public_data.xlsx",
+    "downloaded": "2026-11-12",
+    "sha256": "aff7871052846215123a1dea640eaaf9fad43690ac0159498de2db664c40e78b",
+    "bytes": 50414
+  },
+  "cbecs2018_table_c1.xlsx": {
+    "url": "https://www.eia.gov/consumption/commercial/data/2018/xls/c1_public_data.xlsx",
+    "downloaded": "2026-11-12",
+    "sha256": "76732665b675558efe1753eab8fc136bd5438f9c398c8e509aa95de3cd3b3485",
+    "bytes": 56703
+  },
+  "recs2020_public_v7.csv": {
+    "url": "https://www.eia.gov/consumption/residential/data/2020/csv/recs2020_public_v7.csv",
+    "downloaded": "2026-11-12",
+    "sha256": "8d5f6d3120d2cbc2535151c7d455e7a536ca9768f773e15edd45932ec38b3592",
+    "bytes": 56044261
+  },
+  "recs2020_codebook_v7.xlsx": {
+    "url": "https://www.eia.gov/consumption/residential/data/2020/xls/RECS%202020%20Codebook%20for%20Public%20File%20-%20v7.xlsx",
+    "downloaded": "2026-11-12",
+    "sha256": "747f5a3d39a1f3b34c4f5041a388c556664497bb4c74c5cac71a97f157f0ad07",
+    "bytes": 58382
+  },
+  "mer_table_2_3.csv": {
+    "url": "https://www.eia.gov/totalenergy/data/browser/csv.php?tbl=T02.03",
+    "downloaded": "2026-11-12",
+    "sha256": "feadd10f37eb57393b31e6ed37284d26912e29f8d7d0427bb0bf783f57da747e",
+    "bytes": 1164897
+  },
+  "mer_table_2_3.xlsx": {
+    "url": "https://www.eia.gov/totalenergy/data/browser/xls.php?tbl=T02.03",
+    "downloaded": "2026-11-12",
+    "sha256": "1b3c6b0f12c1c3cc9f8c45b00011fc3e3b7f12fcd8bcb02e3bffd6a0c1dc103c",
+    "bytes": 82550
+  }
+}

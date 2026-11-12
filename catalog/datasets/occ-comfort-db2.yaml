@@ -1,0 +1,67 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-comfort-db2
+title: ASHRAE Global Thermal Comfort Database II (field measurements and occupant votes), version 2.1
+short_name: ASHRAE Comfort DB II
+publisher: Földváry Ličina et al. (hosted on Dryad by the Center for the Built Environment, UC Berkeley, per search results);
+  includes ASHRAE RP-884 legacy data
+landing_page: https://datadryad.org/dataset/doi:10.6078/D1F671
+doi: 10.6078/D1F671
+citation: 'Földváry Ličina, V., Cheung, T., Zhang, H., de Dear, R., Parkinson, T., Arens, E., et al. (60+ authors) 2018. Development
+  of the ASHRAE Global Thermal Comfort Database II. Building and Environment 142, 502-512. Dataset: ASHRAE global database
+  of thermal comfort field measurements, Dryad, doi:10.6078/D1F671.'
+reference_paper_doi: 10.1016/j.buildenv.2018.06.022
+license: CC0-1.0
+access_level: open_download
+distributions:
+- format: CSV (db_measurements_v2.1.0.csv.gz, db_metadata.csv)
+  access_url: https://datadryad.org/dataset/doi:10.6078/D1F671
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+- calibration_validation
+content_types:
+- thermal_comfort_votes
+- indoor_climate_measurements
+- building_level_metadata
+- clothing_and_metabolic_rate
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Field studies from around the world (country list not given on the Dryad page); mostly non-residential buildings
+    per the 2018 paper (not re-verified)
+unit_of_observation: survey_response_with_paired_measurements
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: irregular
+update_frequency: 'versioned releases: v2.0 and 2.01 (2018), v2.1 (9 June 2022)'
+statistical_nature: compilation
+sampling_weights: null
+record_count: 109033
+record_count_note: 109,033 entries in v2.1 (77,304 paired vote and instrument rows, 25,288 rows from the original ASHRAE RP-884
+  database, 6,441 new rows in v2.1); the 2018 paper reported 81,846 for v2.0
+join_keys:
+- building_type
+- climate_zone_ashrae
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: true
+known_limitations: Compiled from heterogeneous contributed studies, so it is neither random nor representative of any building
+  stock; skewed toward some regions and building types; subjective votes and measurements are at the occupant or room level,
+  not building energy; metadata completeness varies by study; building-level coordinates are not provided on the Dryad page.
+notes: The Dryad page says content is 'licensed for reuse' and does not name the license; CC0-1.0 is taken from the UBC Research
+  Data mirror of Dryad version 9. The 2018 article itself carries a different (CC BY-NC-ND) license that applies to the paper
+  only. Descriptor paper DOI verified in Crossref (authors Földváry Ličina et al.). Temporal range, country list, and join
+  keys such as ASHRAE climate zone (a Köppen or climate field exists in the metadata per the paper, not re-verified) were
+  not inspected in the files; join_keys are therefore tentative.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://datadryad.org/dataset/doi:10.6078/D1F671
+  - https://api.crossref.org/works/10.1016/j.buildenv.2018.06.022
+  - https://open.library.ubc.ca/collections/researchdata/items/1.0397701 (via search)

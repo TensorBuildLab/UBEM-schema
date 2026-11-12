@@ -1,0 +1,57 @@
+id: wx-energyplus-weather
+title: EnergyPlus weather data library (EPW/DDY)
+short_name: EnergyPlus weather
+publisher: U.S. DOE / EnergyPlus (weather files compiled from several originators)
+landing_page: https://energyplus.net/weather
+doi: null
+citation: EnergyPlus weather data, https://energyplus.net/weather (accessed 2026-11-12). Cite the originating file
+  set (e.g., TMY3, IWEC, CWEC) as stated in each file header.
+reference_paper_doi: null
+license: null
+access_level: open_download
+distributions:
+- format: EPW
+  access_url: https://energyplus.net/weather
+  api: false
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- typical_meteorological_year
+- design_day_conditions
+- hourly_weather_epw
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global
+unit_of_observation: station
+spatial_granularity: point_station
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: PT1H
+update_frequency: null
+statistical_nature: typical_year_synthetic
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- station_id
+- climate_zone_ashrae
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Typical-year files represent past climate and not specific years; station coverage and period
+  of record differ between originating file sets.
+notes: The /weather page returned HTTP 404 to the fetch tool on 2026-11-12, so license, counts, coverage years and
+  update frequency were NOT verified (null). Many newer files are now hosted at Climate.OneBuilding.Org (see wx-climate-onebuilding).
+  Free access without registration is general knowledge, page not read.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://energyplus.net/weather (HTTP 404 on fetch)
+  - https://climate.onebuilding.org/default.html

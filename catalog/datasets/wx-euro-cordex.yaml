@@ -1,0 +1,58 @@
+id: wx-euro-cordex
+title: EURO-CORDEX regional climate projections (Europe)
+short_name: EURO-CORDEX
+publisher: WCRP CORDEX; distributed via ESGF
+landing_page: https://euro-cordex.net/
+doi: null
+citation: 'Jacob, D., et al. (2014). EURO-CORDEX: new high-resolution climate change projections for European impact
+  research. Regional Environmental Change 14, 563-578.'
+reference_paper_doi: 10.1007/s10113-013-0499-2
+license: null
+access_level: open_download
+distributions:
+- format: NetCDF
+  access_url: https://euro-cordex.net/
+  api: false
+  registration_required: false
+ubem_roles:
+- boundary_conditions
+content_types:
+- rcm_projections
+- near_surface_temperature
+- radiation
+- humidity
+- wind
+geographic_scope: multinational
+spatial_coverage:
+  countries: []
+  description: Europe (EUR-11 and EUR-44 domains); country list not verified
+unit_of_observation: grid_cell
+spatial_granularity: grid_cell_coarse
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: null
+update_frequency: null
+statistical_nature: climate_projection
+sampling_weights: null
+record_count: null
+record_count_note: null
+join_keys:
+- lat_lon
+- grid_cell
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Regional-model output at about 12.5 km (EUR-11) needs bias correction and is not distributed
+  as building-simulation weather files.
+notes: Landing pages were NOT fetched this session; only the descriptor paper DOI was verified (published online
+  2013, issue year 2014). License, period, temporal resolution, access route (ESGF, registration) and country list
+  are null/unverified and must be filled before use. Resolutions of 0.11 and 0.44 degree are from the descriptor
+  literature (general knowledge).
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://api.crossref.org/works/10.1007/s10113-013-0499-2

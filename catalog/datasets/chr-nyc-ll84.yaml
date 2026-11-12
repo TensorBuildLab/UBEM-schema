@@ -1,0 +1,77 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: chr-nyc-ll84
+title: NYC Building Energy and Water Data Disclosure for Local Law 84 (2023 to Present; data for calendar year 2022 onward)
+  plus earlier annual disclosure datasets
+short_name: NYC LL84 benchmarking
+publisher: New York City Department of Buildings (DOB), via NYC Open Data
+landing_page: https://data.cityofnewyork.us/d/5zyy-y8am
+doi: null
+citation: City of New York, Department of Buildings. NYC Building Energy and Water Data Disclosure for Local Law 84 2023 to
+  Present (Data for Calendar Year 2022-Present). NYC Open Data, dataset 5zyy-y8am.
+reference_paper_doi: null
+license: null
+access_level: open_api
+distributions:
+- format: CSV / JSON via Socrata (SODA) API
+  access_url: https://data.cityofnewyork.us/resource/5zyy-y8am.json
+  api: true
+  registration_required: false
+- format: CSV export
+  access_url: https://data.cityofnewyork.us/d/5zyy-y8am
+  api: false
+  registration_required: false
+ubem_roles:
+- calibration_validation
+- building_characteristics
+content_types:
+- energy_consumption_annual
+- water_consumption
+- ghg_emissions
+- building_characteristics
+- energy_star_score
+- property_use_types
+geographic_scope: city
+spatial_coverage:
+  countries:
+  - US
+  description: New York City; privately owned buildings above a floor-area threshold (the dataset description says more than
+    50,000 sq ft; earlier annual listings were described as 25,000 sq ft private and 10,000 sq ft city-owned)
+unit_of_observation: property (one or more tax lots or buildings)
+spatial_granularity: building
+temporal_coverage:
+  start: '2010'
+  end: present
+temporal_resolution: P1Y
+update_frequency: 'annually (metadata: update frequency Annually, automation No)'
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: 103259
+record_count_note: 103,259 rows in dataset 5zyy-y8am on 2026-11-12 (calendar years 2022 onward only; 265 columns); earlier
+  calendar years 2010-2021 are separate datasets
+join_keys:
+- building_id
+- parcel_id
+- address
+- postal_code
+- lat_lon
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Self-reported through ENERGY STAR Portfolio Manager and not verified for all properties (a separate audit
+  program exists); covers only large buildings; properties may span several tax lots or buildings so BBL/BIN mapping is many-to-many;
+  reporting thresholds changed over time; energy values are site and source energy per property, not end uses.
+notes: 'Fields inspected via the Socrata metadata API: report_year, property_id, nyc_borough_block_and_lot (BBL), nyc_building_identification
+  (BIN), address_1, postal_code, borough, latitude, longitude, year_built, primary property type, site and weather-normalized
+  EUI, ENERGY STAR score, electric distribution utility. Temporal start 2010 rests on the series of earlier annual datasets
+  (calendar year 2010 onward) found via catalog.data.gov and mirror listings; the earlier per-year datasets were not individually
+  opened. License is not stated in the dataset metadata; NYC Open Data terms of use apply, so license is null. NYC LL84 is
+  included as a de facto reference city dataset per catalog criterion 3.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://data.cityofnewyork.us/api/views/5zyy-y8am.json (metadata inspected)
+  - https://data.cityofnewyork.us/resource/5zyy-y8am.json?$select=count(*)
+  - https://catalog.data.gov/dataset/energy-and-water-data-disclosure-for-local-law-84-2011-data-for-calendar-year-2010-dab50

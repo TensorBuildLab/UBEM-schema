@@ -1,0 +1,61 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-3d-globfp
+title: '3D-GloBFP: the first global three-dimensional building footprint dataset'
+short_name: 3D-GloBFP
+publisher: 3D-GloBFP authors (Che, Li, Liu et al.)
+landing_page: https://doi.org/10.5194/essd-16-5357-2024
+doi: null
+citation: 'Che, Y., Li, X., Liu, X., Wang, Y., Liao, W., Zheng, X., Zhang, X., Xu, X., Shi, Q., Zhu, J., Zhang,
+  H., Yuan, H., Dai, Y. 3D-GloBFP: the first global three-dimensional building footprint dataset. Earth System Science
+  Data 16, 5357-5374 (2024).'
+reference_paper_doi: 10.5194/essd-16-5357-2024
+license: CC-BY-4.0
+access_level: open_download
+distributions:
+- format: Shapefile (building footprints with height attribute, by spatial grid; China by province and USA by state)
+  access_url: https://zenodo.org/records/15459025
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints_polygon
+- building_height
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Global, with tiled gaps in some countries where Microsoft footprint coverage was lacking
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: '2020'
+  end: '2020'
+temporal_resolution: static
+update_frequency: Single 2020 product; no update stated
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Number of buildings not stated in the article
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: true
+known_limitations: 'Heights regressed with XGBoost in 33 subregions: R2 about 0.66-0.96, RMSE about 1.9-14.6 m.
+  Footprints largely from Microsoft Building Footprints, which leaves tiled gaps. Imagery from 2019 and 2021 used
+  where 2020 data were missing.'
+notes: Zenodo records (10.5281/zenodo.15459025, 15487006, 15487037, all CC-BY-4.0) hold a readme, a grid index and
+  data_links.txt pointing to figshare parts (grids 0-1799 and beyond); the data themselves sit on figshare, whose
+  per-part licence was not checked. The ESSD article cites older Zenodo IDs 11319912, 11397014 and 11391076 which
+  now resolve to the records above. No single dataset DOI exists, so doi is null. A 2026 Handbook of Satellite Land
+  Products chapter (10.1016/b978-0-443-21485-1.00127-8) summarizes the product.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://essd.copernicus.org/articles/16/5357/2024/
+  - https://zenodo.org/api/records/15459025
+  - https://api.crossref.org/works/10.5194/essd-16-5357-2024

@@ -1,0 +1,68 @@
+# Meta-Urban catalog entry (DatasetProfile, schema v2.0). Verified by agent 2026-11-12; null means not verifiable.
+id: occ-atus
+title: American Time Use Survey (ATUS) microdata files
+short_name: ATUS
+publisher: U.S. Bureau of Labor Statistics (BLS), sponsored by BLS and conducted by the U.S. Census Bureau
+landing_page: https://www.bls.gov/tus/data.htm
+doi: null
+citation: U.S. Bureau of Labor Statistics. American Time Use Survey microdata files, 2003-2025 single-year files and multi-year
+  files. https://www.bls.gov/tus/
+reference_paper_doi: 10.1257/0895330053148029
+license: US-Government-Public-Domain
+access_level: open_download
+distributions:
+- format: Data files readable in Stata, SAS or SPSS (exact file formats not verified; BLS also offers 3-year files)
+  access_url: https://www.bls.gov/tus/data.htm
+  api: false
+  registration_required: false
+ubem_roles:
+- operation_use
+content_types:
+- time_diary_activities
+- person_day_activity_episodes
+- location_of_activity
+- who_present
+- household_roster
+- employment_and_demographics
+geographic_scope: national
+spatial_coverage:
+  countries:
+  - US
+  description: United States civilian noninstitutional population aged 15 and over; diary of one day per respondent
+unit_of_observation: person_day
+spatial_granularity: county
+temporal_coverage:
+  start: '2003'
+  end: '2025'
+temporal_resolution: P1D
+update_frequency: annual (single-year files 2003 to 2025 listed; multi-year files 2003-2025 and 2003-2024)
+statistical_nature: sample_survey_weighted
+sampling_weights: TUFINLWGT (final weight, 2006-2019 and 2021 onward); TU06FWGT for 2003-2005; TU20FWGT for 2020; 160 replicate
+  final weights FINLWGT001-FINLWGT160 in the replicate weights files; module weights EUFINLWGT, WUFINLWGT, LUFINLWGT for Eating
+  and Health, Well-Being and Leave modules
+record_count: null
+record_count_note: Respondent counts per year were not stated on the pages checked
+join_keys:
+- fips_state
+- timestamp
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: 'Does not directly record building occupancy or space use: activities and locations are broad (home, workplace,
+  other); one diary day per respondent; geography is the household state (GESTFIPS) plus metropolitan codes and a county code
+  that is identified only for some cases; person-level, not building-level; not representative of non-household populations;
+  2020 data need separate weights and have pandemic coverage gaps.'
+notes: Weights verified from BLS 'How to use ATUS microdata files' and the user's guide as quoted via search; the BLS file
+  servers returned HTTP 403 to automated downloads so file formats and record counts were not verified directly. Geography
+  verified from ATUS-CPS dictionaries (GESTFIPS state, GTCBSA metro area, GTCO county only for some cases). Trips file covers
+  2005-2010 only. The Hamermesh et al. 2005 JEP paper is a descriptor (Data Watch) rather than a data paper.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.bls.gov/tus/data.htm
+  - https://www.bls.gov/tus/dictionaries.htm
+  - https://www.bls.gov/tus/other-documentation/howto.htm
+  - https://www.bls.gov/tus/atususersguide.pdf (via search)
+  - https://api.crossref.org/works/10.1257/0895330053148029

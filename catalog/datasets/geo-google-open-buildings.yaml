@@ -1,0 +1,67 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-google-open-buildings
+title: Google Open Buildings (v3 building polygons and points)
+short_name: Google Open Buildings v3
+publisher: Google Research
+landing_page: https://sites.research.google/gr/open-buildings/
+doi: null
+citation: Sirko, W., Kashubin, S., Ritter, M., Annkah, A., Bouchareb, Y.S.E., Dauphin, Y., Keysers, D., Neumann,
+  M., Cisse, M., Quinn, J.A. Continental-scale building detection from high resolution satellite imagery. arXiv:2107.12283,
+  2021.
+reference_paper_doi: null
+license: CC-BY-4.0 OR ODbL-1.0 (user's choice)
+access_level: open_download
+distributions:
+- format: CSV (polygons with WKT geometry, sharded by S2 level-4 cell; 178 GB total)
+  access_url: https://sites.research.google/gr/open-buildings/
+  api: false
+  registration_required: false
+- format: Earth Engine asset
+  access_url: https://sites.research.google/gr/open-buildings/
+  api: true
+  registration_required: true
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints_polygon
+- building_points
+- confidence_score
+- footprint_area
+geographic_scope: multinational
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Africa, South Asia, South-East Asia, Latin America and the Caribbean (58 million km2 inference area);
+    sensitive areas such as conflict zones omitted; country list in publisher FAQ
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: 'Versioned: v1 April 2021 (Africa), v2 August 2022, v3 inference run May 2023'
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 1800000000
+record_count_note: 1.8 billion building detections in v3 (inference run May 2023), as stated on the publisher page
+  read 2026-11-12
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Footprints only; no height or use (see geo-google-open-buildings-25d for heights). A confidence
+  score is given per building; a score-threshold CSV gives 80/85/90% precision cut-offs. Coverage excludes the Global
+  North, China and sensitive areas.
+notes: The only descriptor is an arXiv preprint (Sirko et al. 2021, doi 10.48550/arXiv.2107.12283, DataCite-verified),
+  not peer reviewed, so reference_paper_doi is null; cite as a preprint. Imagery acquisition years for v3 are not
+  stated on the page, so temporal coverage is null. Earth Engine access needs a Google account, so registration_required
+  is true for that distribution only.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://sites.research.google/gr/open-buildings/
+  - https://api.datacite.org/dois/10.48550/arXiv.2107.12283

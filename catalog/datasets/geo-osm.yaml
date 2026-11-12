@@ -1,0 +1,65 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-osm
+title: OpenStreetMap buildings (planet data, building=* features)
+short_name: OSM buildings
+publisher: OpenStreetMap Foundation / OpenStreetMap contributors
+landing_page: https://planet.openstreetmap.org/
+doi: null
+citation: OpenStreetMap contributors. Planet OSM. https://planet.openstreetmap.org/. Available under the Open Database
+  License.
+reference_paper_doi: 10.1038/s41467-023-39698-6
+license: ODbL-1.0
+access_level: open_download
+distributions:
+- format: PBF (planet file, 89.1 GB as of 2026-11-01)
+  access_url: https://planet.openstreetmap.org/
+  api: false
+  registration_required: false
+- format: OSM XML (bz2, 167.3 GB as of 2026-11-01)
+  access_url: https://planet.openstreetmap.org/
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+- building_characteristics
+content_types:
+- building_footprints_polygon
+- building_tags_user_contributed
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: Worldwide; completeness of building data is highly uneven
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: irregular
+update_frequency: Weekly planet file; daily, hourly and minutely diffs; full-history planet file also available
+statistical_nature: crowdsourced
+sampling_weights: null
+record_count: null
+record_count_note: OSM publishes no building count on the planet page; not recorded
+join_keys:
+- geometry
+- lat_lon
+- building_id
+variables_documented: null
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: Building completeness differs strongly between regions (Herfort et al. 2023); attribute tags
+  such as height and levels are sparse and inconsistently applied; ODbL share-alike applies to derived databases.
+notes: Herfort et al. 2023 (Nature Communications 14:3985) analyses completeness and inequalities of global urban
+  building data in OSM; it is an assessment paper, not a data descriptor, and is cited as peer-reviewed evidence
+  on coverage. variables_documented is null because the OSM tag documentation was not fetched. Which building tags
+  exist (height, building:levels, building type) was not checked on an OSM page; the Overture and EUBUCCO pages
+  confirm OSM is a source of heights. OSM start date not verified. Planet page does not mention the building tag.
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.openstreetmap.org/copyright
+  - https://wiki.openstreetmap.org/wiki/Planet.osm
+  - https://api.crossref.org/works/10.1038/s41467-023-39698-6

@@ -1,0 +1,64 @@
+# Verified 2026-11-12 by agent. Unknown values are null; see notes.
+id: geo-ut-globus
+title: 'UT-GLOBUS: GLObal Building heights for Urban Studies'
+short_name: UT-GLOBUS
+publisher: UT-GLOBUS authors (Kamath, Niyogi et al.)
+landing_page: https://doi.org/10.5281/zenodo.11156602
+doi: 10.5281/zenodo.11156602
+citation: 'Kamath, H.G., Singh, M., Malviya, N., Martilli, A., He, L., Aliaga, D., He, C., Chen, F., Magruder, L.A.,
+  Yang, Z.-L., Niyogi, D. GLObal Building heights for Urban Studies (UT-GLOBUS) for city- and street- scale urban
+  simulations: Development and first applications. Scientific Data 11, 886 (2024).'
+reference_paper_doi: 10.1038/s41597-024-03719-w
+license: CC-BY-4.0 (Zenodo record); the article itself is CC BY-NC-ND
+access_level: open_download
+distributions:
+- format: Vector building files (UTM) plus city coverage GeoPackage; individual files by region (e.g. USA.zip 14.6
+    GB)
+  access_url: https://zenodo.org/records/11156602
+  api: false
+  registration_required: false
+- format: Urban canopy parameters as WRF WPS-compatible binary files
+  access_url: https://zenodo.org/records/11156602
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_height_vector
+- urban_canopy_parameters
+geographic_scope: global
+spatial_coverage:
+  countries:
+  - GLOBAL
+  description: More than 1,200 cities or locales worldwide
+unit_of_observation: building
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: null
+temporal_resolution: static
+update_frequency: Single release (Zenodo publication date 2024-05-09)
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: null
+record_count_note: Publisher states coverage as more than 1,200 cities; no building count given
+join_keys:
+- geometry
+- lat_lon
+variables_documented: true
+machine_readable: true
+versioned: null
+persistent_identifier: true
+known_limitations: Building height RMSE 9.1 m against LiDAR in six U.S. cities and 7.8 m for 1 km2 averages in Hamburg
+  and Sydney. Footprints come from Google, Microsoft and OSM, so their licences and gaps propagate. Not a full national
+  or global inventory.
+notes: 'Licence conflict: the Zenodo record states CC-BY-4.0 for the data, while Europe PMC lists CC BY-NC-ND for
+  the article; Zenodo licence used for the data. Footprint sources (Google, Microsoft, OSM) may impose ODbL-type
+  conditions on derived data; not examined. Vector file format name not verified.'
+verified:
+  date: '2026-11-12'
+  by: agent
+  sources_checked:
+  - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-024-03719-w&resultType=core&format=json
+  - https://zenodo.org/api/records/11156602
+  - https://api.crossref.org/works/10.1038/s41597-024-03719-w
