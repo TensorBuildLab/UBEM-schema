@@ -144,6 +144,14 @@ def competency(df: pd.DataFrame) -> str:
     return "\n".join(lines)
 
 
+def save_fig(fig, path) -> None:
+    """Save a figure as a 600-dpi PNG and a vector PDF (journal artwork requirements)."""
+    from pathlib import Path as _P
+
+    fig.savefig(path, facecolor=SURFACE, dpi=600)
+    fig.savefig(_P(path).with_suffix(".pdf"), facecolor=SURFACE)
+
+
 def _style(ax):
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
@@ -175,7 +183,7 @@ def fig_heatmap(m: pd.DataFrame, path):
         s.set_visible(False)
     ax.set_xlabel("Finest spatial granularity released publicly", fontsize=8, color=INK2)
     fig.tight_layout()
-    fig.savefig(path, facecolor=SURFACE)
+    save_fig(fig, path)
     plt.close(fig)
 
 
@@ -196,7 +204,7 @@ def fig_access(m: pd.DataFrame, path):
     _style(ax)
     ax.legend(ncol=5, fontsize=6.5, frameon=False, loc="lower center", bbox_to_anchor=(0.4, 1.0))
     fig.tight_layout()
-    fig.savefig(path, facecolor=SURFACE)
+    save_fig(fig, path)
     plt.close(fig)
 
 
@@ -219,7 +227,7 @@ def fig_weights(path):
     ax.set_axisbelow(True)
     _style(ax)
     fig.tight_layout()
-    fig.savefig(path, facecolor=SURFACE)
+    save_fig(fig, path)
     plt.close(fig)
 
 

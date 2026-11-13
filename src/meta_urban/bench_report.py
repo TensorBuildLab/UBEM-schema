@@ -29,7 +29,7 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from . import PAPER  # noqa: E402
-from .analytics import GRID, INK2, MUTED, SURFACE, _style  # noqa: E402
+from .analytics import GRID, INK2, MUTED, SURFACE, _style, save_fig  # noqa: E402
 from .baselines import LexicalRetriever  # noqa: E402
 from .bench import K_CANDIDATES, LEVELS, RES, _records, load_items, t3_items, t3_score  # noqa: E402
 from .io import concept_index  # noqa: E402
@@ -327,7 +327,7 @@ def fig_levels(main: pd.DataFrame, path) -> None:
     _style(ax)
     ax.legend(fontsize=7, frameon=False, loc="upper left")
     fig.tight_layout()
-    fig.savefig(path, facecolor=SURFACE)
+    save_fig(fig, path)
     plt.close(fig)
 
 
@@ -388,7 +388,7 @@ def fig_coverage(frames, path, level: str = "L2") -> pd.DataFrame:
     ax.set_axisbelow(True)
     _style(ax)
     fig.tight_layout()
-    fig.savefig(path, facecolor=SURFACE)
+    save_fig(fig, path)
     plt.close(fig)
     return pd.DataFrame(rows)
 

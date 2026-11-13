@@ -73,7 +73,7 @@ adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebo
 Left for the authors: author list and CRediT roles, funding statement, making the
 repository public with a Zenodo DOI, and the journal's submission forms.
 
-To rebuild the Word version: `python scripts/build_docx.py`.
+To rebuild the submission files: `python scripts/graphical_abstract.py` then `python scripts/build_docx.py` (output in `paper/submission/`, checklist in `paper/submission/CHECKLIST.md`).
 
 All benchmark numbers are recomputed from the cache with:
 

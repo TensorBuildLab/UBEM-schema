@@ -1,43 +1,39 @@
 ---
-title: "Does domain semantics help large language models integrate open data for urban building energy modeling? The Meta-Urban schema, a verified open-data catalog, and a reproducible alignment benchmark"
-short_title: "Meta-Urban: schema, catalog and LLM alignment benchmark for UBEM open data"
-authors: "Liang Zhang (University of Arizona; National Laboratory of the Rockies), Jianli Chen (University of Utah), Jia Zou (Arizona State University) [TODO: confirm author list and order]"
-status: "DRAFT v0.2, 2026-11-13. Target journal: Automation in Construction."
+title: "Domain semantics help large language models integrate open data for urban building energy modeling: schema, verified catalog and benchmark"
 bibliography: references.bib
 ---
 
-<!-- Drafting conventions: American spelling; "Fig. N"; "38%" without space; no em-dashes. Citation keys refer
-to paper/references.bib (all entries verified against Crossref, arXiv or official pages on 2026-11-12). -->
+<!-- Drafting conventions: American spelling; "Fig. N"; "38%" without space; no em-dashes. Formatted for
+Automation in Construction (guide for authors checked 2026-11-13; see paper/submission/CHECKLIST.md). -->
 
-## Highlights
+Liang Zhang^a,b,\*^, Jianli Chen^c^, Jia Zou^d^
 
-- Meta-Urban 2.0: a LinkML schema for open UBEM data with SHACL and OWL versions
-- Verified catalog of 91 open datasets coded on six independent facets
-- Only 3 of 48 non-geometric building datasets can be linked to individual buildings
-- Concept definitions, not labels, raise local LLM mapping accuracy by 12 to 17 points
-- Ignoring survey weights shifts CBECS energy use intensity by -16% to +102%
+^a^ Department of Civil and Architectural Engineering and Mechanics, University of Arizona, 1209 East 2nd
+Street, Tucson, AZ 85719, USA
 
-## Abstract
+^b^ National Laboratory of the Rockies, 15013 Denver West Parkway, Golden, CO 80401, USA
 
-Urban building energy modeling (UBEM) draws on dozens of open datasets that describe the same buildings,
-places and periods with different variables, codes, units, granularities and statistical designs. We ask
-whether a domain schema makes their integration by large language models (LLMs) more reliable. Meta-Urban 2.0
-is a schema with a dataset level (a DCAT 3 profile with six UBEM facets) and a variable level (concept, unit,
-code list, weights and imputation flags), with an 81-concept vocabulary. A catalog of 91 open datasets coded
-with it shows that only 3 of 48 datasets carrying characteristics, operation, energy or simulation data share
-an identifier with building footprints. On 2,048 variables of the CBECS 2018 and RECS 2020 codebooks, we
-benchmark two locally run 8-billion-parameter LLMs against double-annotated gold labels under four levels of
-schema context, five repeats each. Concept definitions raised top-1 mapping accuracy from 0.42-0.43 to
-0.55-0.59, while concept labels alone helped little; restricting the context to ten retrieved candidates cut
-input tokens by 82% but lost accuracy where the retriever missed. Both models detected survey weights and
-imputation flags almost perfectly but could not link a flag to its variable when only a naming convention
-does so, and one model got a fifth of unit multipliers wrong. These errors matter: a correct pipeline
-reproduces EIA's published totals within 0.01%, whereas ignoring survey weights biases energy intensity by
--16% to +102% across building types. The
-schema, catalog, benchmark, code and all model outputs are open.
+^c^ [Affiliation and full postal address of Jianli Chen]
 
-**Keywords:** urban building energy modeling; open data; metadata schema; FAIR; large language models;
-schema matching; building stock; CBECS
+^d^ School of Computing and Augmented Intelligence, Arizona State University, Tempe, AZ 85281, USA
+
+^\*^ Corresponding author. Email: [corresponding author email]
+
+## Abstract {.unnumbered}
+
+Urban building energy modeling combines open datasets that differ in variables, codes, units, granularity
+and statistical design. This study tests whether a domain schema helps large language models (LLMs)
+integrate them. We developed Meta-Urban 2.0, a schema and 81-concept vocabulary for building energy datasets
+and their variables, and used it to profile 91 open datasets: only 3 of 48 non-geometric datasets share an
+identifier with building footprints. On 2,048 variables from two U.S. building energy surveys, two locally
+run LLMs mapped variables to concepts under four levels of schema context. Concept
+definitions raised top-1 accuracy from 0.42-0.43 to 0.55-0.59 (p < 0.001), whereas labels alone helped
+little. Both models detected survey weights reliably but missed naming conventions, and one model got a
+fifth of unit multipliers wrong. Such errors matter: ignoring survey weights biases energy use intensity by
+-16% to +102% across building types. All resources are open.
+
+**Keywords:** Urban building energy modeling; Open data; Metadata schema; Large language models; Schema
+matching; Building stock; Interoperability
 
 ## 1. Introduction
 
@@ -266,10 +262,10 @@ nation, and the two main U.S. surveys stop at census division (CBECS) and state 
 datasets release no location at all, because meters are anonymized.
 
 ![Fig. 1. Number of catalog datasets by primary UBEM workflow role and the finest spatial granularity they
-release publicly. Darker cells hold more datasets.](figures/fig_role_by_granularity.png)
+release publicly. Darker cells hold more datasets. Plotted from the released data with code written with AI assistance (see the generative AI declaration).](figures/fig_role_by_granularity.png)
 
 ![Fig. 2. Access terms by primary role. Blue: obtainable without an agreement; gray: agreement or commercial
-license required.](figures/fig_role_by_access.png)
+license required. Plotted from the released data with code written with AI assistance (see the generative AI declaration).](figures/fig_role_by_access.png)
 
 ### 4.3 Linkage to buildings
 
@@ -311,7 +307,8 @@ the catalog's error rate estimated in Section 4.1.
 
 ### 5.1 Tasks and data
 
-The benchmark uses the public codebooks of CBECS 2018 (1,249 variables) and RECS 2020 (799 variables), which
+The benchmark uses the public codebooks of CBECS 2018 [@eia2018cbecs] (1,249 variables) and RECS 2020
+[@eia2020recs] (799 variables), which
 differ in format, units and conventions, and together contain 733 imputation flags and 213 sampling weights.
 It has two tasks, numbered T2 and T3 for continuity with the repository. A third task we designed,
 extracting a dataset profile from a publisher's documentation (T1), is left out: its natural gold standard
@@ -414,7 +411,7 @@ macro-F1 on all 300; agreement is the mean pairwise agreement of five repeats (o
 | Qwen3 8B | L3 | 0.51 [0.46, 0.57] | 0.60 | 0.67 | 0.59 | 0.56 | 0.98 | 710 |
 
 ![Fig. 3. Top-1 accuracy of variable-to-concept mapping by level of schema context, on the adjudicated gold.
-Error bars: bootstrap 95% intervals. Dashed line: lexical baseline.](figures/fig_t2_levels.png)
+Error bars: bootstrap 95% intervals. Dashed line: lexical baseline. Plotted from the released data with code written with AI assistance (see the generative AI declaration).](figures/fig_t2_levels.png)
 
 Retrieve-then-rerank (L3) uses 18% of the input tokens of L2 (about 705 instead of 3,880 per call) but does
 not match it: -0.02 for Llama 3.1 (p = 0.51) and -0.08 for Qwen3 (p = 0.02). The loss comes from the
@@ -446,7 +443,7 @@ accuracy. Agreement between cheap local runs can therefore decide which mappings
 
 ![Fig. 4. Coverage and accuracy when only some mappings are accepted automatically (L2). Lines: threshold on
 the model's own confidence. Markers: accept only when the five repeats are unanimous, when L2 and L3 agree,
-or when both models agree at both levels.](figures/fig_t2_coverage.png)
+or when both models agree at both levels. Plotted from the released data with code written with AI assistance (see the generative AI declaration).](figures/fig_t2_coverage.png)
 
 **Task T3.** Because the T2 sample excludes imputation flags and replicate weights, T3 adds a fixed supplement
 of 60 imputation flags and 30 replicate weights (seed 20261113; `benchmark/inputs/t3_extra_sample.csv`), so
@@ -504,7 +501,7 @@ health care holds 4.3% of records but 0.1% of buildings, so unweighted counts al
 archetype-based UBEM samples from.
 
 ![Fig. 5. Error in floor-area-weighted EUI by principal building activity when CBECS 2018 survey weights are
-ignored, relative to the weighted estimate. Activities with at least 0.5% of weighted buildings are shown.](figures/fig_weights_eui_error.png)
+ignored, relative to the weighted estimate. Activities with at least 0.5% of weighted buildings are shown. Plotted from the released data with code written with AI assistance (see the generative AI declaration).](figures/fig_weights_eui_error.png)
 
 ### 6.3 Sensitivity to each normalization error
 
@@ -608,37 +605,41 @@ their weights, flags and conventions, and to let LLMs do the first pass of integ
 that sends disagreements to a person. Everything needed to repeat or extend this study, including the
 schema, catalog, gold labels, prompts and all model outputs, is open.
 
-## Code and data availability
+## CRediT authorship contribution statement
 
-All code, the schema and its generated artifacts, the catalog and its verification record, gold labels with
-annotations and rationales, prompts, cached model outputs, and the scripts that produce every table and
-figure are at https://github.com/TensorBuildLab/UBEM-schema [TODO (authors): make the repository public and
-archive the submission release on Zenodo for a DOI]. Source data are downloaded from EIA by
-`scripts/download_data.py`, which records SHA-256 checksums.
-
-## Declaration of generative AI and AI-assisted technologies in the research and writing process
-
-LLMs are the object of study in Section 5. In addition, during the preparation of this work the authors used
-Claude (Anthropic) to draft and re-verify catalog entries (Section 4.1), to produce and adjudicate the T2 gold
-labels (Section 5.2), to verify references, to write analysis code, and to draft and edit text. After using
-this tool, the authors reviewed and edited the content as needed and take full responsibility for the content
-of the published article.
+**Liang Zhang:** Conceptualization, Methodology, Software, Investigation, Data curation, Writing - original
+draft, Writing - review and editing, Visualization. **Jianli Chen:** [roles]. **Jia Zou:** [roles].
 
 ## Declaration of competing interest
 
 The authors declare that they have no known competing financial interests or personal relationships that
-could have appeared to influence the work reported in this paper. [TODO (authors): confirm.]
+could have appeared to influence the work reported in this paper.
+
+## Funding
+
+[Funding statement]
+
+## Data availability
+
+All code, the schema and its generated artifacts, the catalog and its verification record, gold labels with
+annotations and rationales, prompts, cached model outputs, and the scripts that produce every table and
+figure are openly available at https://github.com/TensorBuildLab/UBEM-schema [@zhang2026metaurbanrepo]
+(code under the MIT License; schema, catalog and benchmark under CC BY 4.0). The CBECS 2018 and RECS 2020
+source data are public [@eia2018cbecs; @eia2020recs] and are downloaded by `scripts/download_data.py`, which
+records SHA-256 checksums.
+
+## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+
+Large language models are the object of study in Section 5, where their use is described in full. In
+addition, during the preparation of this work the authors used Claude (Anthropic) to draft and re-verify
+catalog entries (Section 4.1), to produce and adjudicate the T2 gold labels (Section 5.2), to verify
+references, to write the analysis and plotting code from which all figures are generated, and to draft and
+edit text. After using this tool, the authors reviewed and edited the content as needed and take full
+responsibility for the content of the published article.
 
 ## Acknowledgments
 
-[TODO (authors): funding statement, or "This research did not receive any specific grant from funding
-agencies in the public, commercial, or not-for-profit sectors."]
-
-## CRediT authorship contribution statement
-
-**Liang Zhang:** Conceptualization, Methodology, Software, Investigation, Data curation, Writing - original
-draft, Writing - review and editing, Visualization. **Jianli Chen:** [TODO: e.g., Conceptualization,
-Writing - review and editing]. **Jia Zou:** [TODO: e.g., Methodology, Writing - review and editing].
+[Acknowledgments]
 
 ## References
 

@@ -5,9 +5,9 @@ Editor-in-Chief
 
 Dear Editor,
 
-We submit the manuscript "Does domain semantics help large language models integrate open data for urban
-building energy modeling? The Meta-Urban schema, a verified open-data catalog, and a reproducible alignment
-benchmark" for consideration as a research article in *Automation in Construction*.
+We submit the manuscript "Domain semantics help large language models integrate open data for urban building
+energy modeling: schema, verified catalog and benchmark" for consideration as an original research paper in
+*Automation in Construction*.
 
 Urban building energy modeling (UBEM) combines weather, building geometry, building characteristics, operation
 and measured energy from many open sources, and integrating them is still largely manual. LLMs are an obvious
