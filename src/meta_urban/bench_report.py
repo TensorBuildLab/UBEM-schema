@@ -31,7 +31,7 @@ import pandas as pd  # noqa: E402
 from . import PAPER  # noqa: E402
 from .analytics import GRID, INK2, MUTED, SURFACE, _style  # noqa: E402
 from .baselines import LexicalRetriever  # noqa: E402
-from .bench import K_CANDIDATES, LEVELS, RES, _records, load_items, t3_score  # noqa: E402
+from .bench import K_CANDIDATES, LEVELS, RES, _records, load_items, t3_items, t3_score  # noqa: E402
 from .io import concept_index  # noqa: E402
 from .llm import CACHE_DIR, parse_json  # noqa: E402
 from .metrics import acc_at_k, macro_f1, majority, mrr, none_pr, run_agreement  # noqa: E402
@@ -259,22 +259,42 @@ def t2_by_dataset(frames) -> pd.DataFrame:
 
 
 def t3_fields() -> pd.DataFrame:
+    """T3 accuracy by field, each computed on the items where the field is informative.
+
+    Detection fields are split into recall on positives (mostly the supplement of flags and weights) and the
+    false-positive rate on the 300-variable sample; units on items that have a unit; multipliers on items whose
+    unit is scaled (thousand Btu, hundred cubic feet).
+    """
+    items = {(i["dataset"], i["name"]): i for i in t3_items()}
     rows = []
     for model in models():
         s3 = t3_score(model)
         if s3.empty:
             continue
+        it = [items[(d, n)] for d, n in zip(s3.dataset, s3.name)]
+        g = lambda f: np.array([bool(i.get(f)) for i in it])  # noqa: E731
         row = {"model": short(model), "n_calls": len(s3), "valid": s3.valid.mean()}
-        row.update({c.replace("ok_", ""): s3[c].mean() for c in s3.columns if c.startswith("ok_")})
+        for f in ("is_weight", "is_replicate_weight", "is_imputation_flag"):
+            pos = g(f)
+            row[f"{f}_recall"] = s3.loc[pos, f"ok_{f}"].mean() if pos.any() else np.nan
+            row[f"{f}_n_pos"] = int(pos.sum())
+            row[f"{f}_fp_rate"] = 1 - s3.loc[~pos, f"ok_{f}"].mean()
+        flag = g("is_imputation_flag")
+        row["flags_variable_acc"] = s3.loc[flag, "ok_flags_variable"].mean() if flag.any() else np.nan
+        for ds in ("cbecs2018", "recs2020"):  # CBECS labels describe the variable; RECS labels name it
+            m = flag & (s3.dataset == ds).values
+            row[f"flags_variable_acc_{ds}"] = s3.loc[m, "ok_flags_variable"].mean() if m.any() else np.nan
+        has_unit = np.array([i.get("unit") is not None for i in it])
+        row["unit_acc"] = s3.loc[has_unit, "ok_unit"].mean()
+        row["unit_n"] = int(has_unit.sum())
+        row["spurious_unit_rate"] = 1 - s3.loc[~has_unit, "ok_unit"].mean()
+        scaled = np.array([(i.get("unit_multiplier") or 1) != 1 for i in it])
+        row["multiplier_acc_scaled"] = s3.loc[scaled, "ok_unit_multiplier"].mean() if scaled.any() else np.nan
+        row["multiplier_n_scaled"] = int(scaled.sum())
+        row["multiplier_acc_all_units"] = s3.loc[has_unit, "ok_unit_multiplier"].mean()
+        row["missing_codes_exact"] = s3.ok_missing_codes.mean()
+        row["missing_codes_lenient"] = s3.ok_missing_codes_lenient.mean()
         row["codes_jaccard"] = s3.codes_jaccard.mean()
-        # errors that matter downstream (Table 4): multiplier on 'thousand' units, unit on energy variables
-        items = {(i["dataset"], i["name"]): i for i in load_items()}
-        thou = s3[[(items[(d, n)].get("unit_multiplier") or 1) != 1 for d, n in zip(s3.dataset, s3.name)]]
-        row["multiplier_ok_where_scaled"] = thou.ok_unit_multiplier.mean() if len(thou) else np.nan
-        row["n_scaled"] = len(thou)
-        wt = s3[[bool(items[(d, n)].get("is_weight")) for d, n in zip(s3.dataset, s3.name)]]
-        row["weight_recall"] = wt.ok_is_weight.mean() if len(wt) else np.nan
-        row["n_weight"] = len(wt)
         rows.append(row)
     return pd.DataFrame(rows)
 

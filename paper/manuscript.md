@@ -412,7 +412,42 @@ cheap runs decides what a person must review.
 threshold on the model's own confidence. Markers: accept only when the five repeats are unanimous, when L2
 and L3 agree, or when both models agree at both levels.](figures/fig_t2_coverage.png)
 
-**Task T3.** [TODO_T3_TABLE]
+**Task T3.** Because the T2 sample excludes imputation flags and replicate weights, T3 adds a fixed supplement
+of 60 imputation flags and 30 replicate weights (seed 20261113; `benchmark/inputs/t3_extra_sample.csv`), so
+that detection is measured on positives as well as negatives. Table 5 reports each field on the items where
+it is informative. Both models detect weights, replicate weights and imputation flags almost perfectly, with
+no false alarms on the 300 substantive variables. Two failures stand out. First, finding the variable that an
+imputation flag refers to: both models are always right when the codebook names it (RECS: "Imputation
+indicator for DRYER") and never right when it must be inferred from the naming convention (CBECS: "Imputation
+flag: Months in use" for `ZMONUSE`, which flags `MONUSE`); they return the flag's own name instead. The
+convention is documented in the survey's user guide, not in the codebook entry, which is the kind of
+dataset-level knowledge the Meta-Urban profile is meant to carry. Second, units and missing codes: Qwen3 gets
+the unit right for 96% of variables with a unit and the multiplier for 96% of scaled units, while Llama 3.1
+gets 80% and 79%. Missing-value codes match the codebook exactly in only 20-32% of answers (26-57% when an
+empty-string entry that both models add by habit is ignored), and some answers include codes the codebook
+does not define.
+
+Table 5. T3 code and unit normalization, three repeats per item (one at temperature 0, two at 0.7). Gold is
+derived exactly from the codebooks. Generated: `paper/tables/bench_t3_fields.csv`.
+
+| Field (items scored) | Qwen3 8B | Llama 3.1 8B |
+|---|---|---|
+| Valid JSON (390 items) | 1.00 | 0.99 |
+| Weight detected (32 weights) / false alarm | 1.00 / 0.00 | 1.00 / 0.00 |
+| Replicate weight detected (30) / false alarm | 0.98 / 0.00 | 1.00 / 0.00 |
+| Imputation flag detected (60) / false alarm | 1.00 / 0.00 | 1.00 / 0.00 |
+| Flagged variable, RECS (label names it; 30) | 1.00 | 1.00 |
+| Flagged variable, CBECS (convention only; 30) | 0.00 | 0.00 |
+| Unit (52 variables with a unit) | 0.96 | 0.80 |
+| Unit given where there is none | 0.04 | 0.06 |
+| Multiplier, scaled units (31) | 0.96 | 0.79 |
+| Missing codes, exact / ignoring empty strings | 0.32 / 0.57 | 0.20 / 0.26 |
+| Code list, mean Jaccard | 0.74 | 0.68 |
+
+Combined with the sensitivities in Table 6, the multiplier errors matter most: each miss on an energy variable
+changes its total by a factor of 1,000, so a pipeline built on Llama 3.1's answers would carry such an error
+in about one in five scaled energy variables unless a plausibility check catches it. Weight and flag detection,
+by contrast, is reliable enough to automate.
 
 ## 6. Do alignment errors matter downstream? (RQ4)
 

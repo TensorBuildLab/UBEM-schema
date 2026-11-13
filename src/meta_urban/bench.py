@@ -29,6 +29,7 @@ from .metrics import acc_at_k, macro_f1, majority, mrr, none_pr, run_agreement
 
 ITEMS = BENCH / "inputs" / "t2_t3_items.jsonl"
 SAMPLE = BENCH / "inputs" / "t2_eval_sample.csv"
+T3_EXTRA = BENCH / "inputs" / "t3_extra_sample.csv"
 RES = BENCH / "results"
 SEED = 20261112
 
@@ -162,8 +163,34 @@ def _t2_jobs(levels, repeats, limit):
     return jobs
 
 
+def t3_items() -> list[dict]:
+    """T3 items: the 300-variable sample plus a fixed supplement of the record-level variables it excludes.
+
+    The T2 sample has no imputation flags or replicate weights, so on its own it would measure flag and weight
+    detection only on negatives. The supplement adds 30 imputation flags and 15 replicate weights per survey
+    and any final weights not already sampled (seed 20261113), drawn once and frozen in t3_extra_sample.csv.
+    """
+    base = load_items()
+    for i in base:
+        i["subset"] = "sample"
+    allit = load_items(sample_only=False)
+    insample = {(i["dataset"], i["name"]) for i in base}
+    if not T3_EXTRA.exists():
+        rng = np.random.default_rng(20261113)
+        picks = []
+        for ds in ["cbecs2018", "recs2020"]:
+            for pred, n in [(lambda i: i["is_imputation_flag"], 30), (lambda i: i["is_replicate_weight"], 15),
+                            (lambda i: i["is_weight"] and not i["is_replicate_weight"], 5)]:
+                pool = [i for i in allit if i["dataset"] == ds and pred(i) and (i["dataset"], i["name"]) not in insample]
+                picks += [pool[k] for k in sorted(rng.choice(len(pool), min(n, len(pool)), replace=False))]
+        pd.DataFrame([{"dataset": i["dataset"], "name": i["name"]} for i in picks]).to_csv(T3_EXTRA, index=False)
+    keep = set(map(tuple, pd.read_csv(T3_EXTRA)[["dataset", "name"]].values))
+    extra = [dict(i, subset="supplement") for i in allit if (i["dataset"], i["name"]) in keep]
+    return base + extra
+
+
 def _t3_jobs(repeats, limit):
-    items = load_items()[:limit] if limit else load_items()
+    items = t3_items()[:limit] if limit else t3_items()
     return [(t3_request(it), {"task": "T3", "dataset": it["dataset"], "name": it["name"]}, rep)
             for rep in range(repeats) for it in items]
 
@@ -279,14 +306,15 @@ def t3_score(model: str) -> pd.DataFrame:
     if df.empty or "task" not in df:
         return pd.DataFrame()
     df = df[df.task == "T3"]
-    items = {(i["dataset"], i["name"]): i for i in load_items()}
+    items = {(i["dataset"], i["name"]): i for i in t3_items()}
     rows = []
     for r in df.itertuples():
         it = items.get((r.dataset, r.name))
         if it is None:
             continue
         js = parse_json(r.response) or {}
-        row = {"model": model, "repeat": r.repeat, "dataset": r.dataset, "name": r.name, "valid": bool(js)}
+        row = {"model": model, "repeat": r.repeat, "dataset": r.dataset, "name": r.name, "subset": it["subset"],
+               "valid": bool(js)}
         for f in T3_FIELDS:
             if f == "unit_multiplier" and it.get("unit") is None:
                 row[f"ok_{f}"] = np.nan  # a multiplier is only meaningful when the variable has a unit
