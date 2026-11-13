@@ -85,7 +85,7 @@ python -m meta_urban.bench_report     # paper tables (bench_*.csv) and Figs. 3-4
 ## Licenses
 
 Code: MIT. Schema, vocabulary, catalog and gold labels: CC BY 4.0. Source datasets keep their own licenses
-(see each catalog entry). [TODO: confirm with co-authors before making the repository public.]
+(see each catalog entry). See `LICENSE` and `LICENSE-DATA.md`.
 
 ## Citation
 
