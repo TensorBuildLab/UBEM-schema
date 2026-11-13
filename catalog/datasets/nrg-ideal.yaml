@@ -36,7 +36,7 @@ versioned: true
 persistent_identifier: true
 known_limitations: Volunteer sample, not nationally representative; participation durations vary by home (mean 286
   days); the detailed appliance-level subset is only 39 homes; locations anonymised.
-notes: 'Added beyond the candidate list: rare dataset combining electricity, gas, room temperature and building/occupant
+notes: 'Spot-check 2026-11-13: homes are in Edinburgh, the Lothians and south Fife (Scotland); electricity at 1 s, gas at pulse level and room and boiler sensors at 12 s. Added beyond the candidate list: rare dataset combining electricity, gas, room temperature and building/occupant
   survey data. Start year 2016 inferred from ''23 months ending June 2018''. The handle URL for the landing page
   was not opened; the DOI and license are from the DataCite record. Electricity at 1 s, gas pulse-level, environmental
   sensors at 12 s.'

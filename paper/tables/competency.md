@@ -19,4 +19,4 @@ chr-france-dpe, chr-nyc-ll84, chr-uk-epc, geo-cmab, geo-eubucco, geo-ghs-obat, g
 _Building-level keys: address, building_id, geometry, lat_lon, parcel_id, ubid_
 
 **CQ6. Which datasets lack an explicit license?**  
-chr-bedes, chr-buildingsync, chr-doe-bpd, chr-doe-prototypes, chr-energy-codes-status, chr-eu-bso, chr-hotmaps, chr-nyc-ll84, chr-tabula-episcope, ctx-cambium, geo-china-rooftop-2023, geo-ghs-obat, nrg-ashrae-gepiii, nrg-ferc-714, nrg-lead, nrg-plegma, nrg-redd, occ-ashrae-ob-db, occ-ecobee-dyd, occ-hetus, sim-model-america, wx-argonne-future-weather, wx-bsrn, wx-energyplus-weather, wx-euro-cordex, wx-merra2, wx-na-cordex, wx-nasa-power, wx-noaa-isd, wx-noaa-normals, wx-nsrdb, wx-pvgis
+chr-bedes, chr-buildingsync, chr-doe-bpd, chr-doe-prototypes, chr-energy-codes-status, chr-eu-bso, chr-hotmaps, chr-nyc-ll84, chr-tabula-episcope, ctx-cambium, geo-china-rooftop-2023, geo-ghs-obat, nrg-ashrae-gepiii, nrg-ferc-714, nrg-lead, nrg-plegma, nrg-redd, occ-ashrae-ob-db, occ-ecobee-dyd, occ-hetus, sim-model-america, wx-argonne-future-weather, wx-bsrn, wx-euro-cordex, wx-merra2, wx-na-cordex, wx-nasa-power, wx-noaa-isd, wx-noaa-normals, wx-nsrdb, wx-pvgis

@@ -1,8 +1,8 @@
 ,join_key,n_datasets
 0,lat_lon,39
 1,timestamp,39
-2,building_id,19
-3,building_type,18
+2,building_type,18
+3,building_id,18
 4,geometry,18
 5,grid_cell,17
 6,vintage,11

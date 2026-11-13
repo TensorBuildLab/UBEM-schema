@@ -39,7 +39,17 @@ Why blind: a check of the provisional runs found draft labels that are plainly w
 discharge lighting drafted as energy use intensity because of the word "intensity"; an induction cooktop
 drafted as a ventilation system). Annotators who see the draft tend to accept it.
 
-## Task T1 (dataset profile extraction)
+## How the released T2 gold was made (2026-11-13)
+
+Two qualified human annotators were not available, so steps 2 and 4 were run by LLM agents in fresh contexts
+restricted to the annotation files (no web, no repository access, no draft labels, no model outputs):
+annotator 1 Claude Opus 5.5, annotator 2 Claude Sonnet 5.5, adjudicator Claude Opus 5.5. Results: kappa 0.914,
+raw agreement 0.920, 24 items adjudicated (`annotation/adjudication.csv` with rationales). Both annotators
+changed the draft on 25.7% of items. The evaluated models (Qwen3, Llama 3.1) are from other developers. The
+first author audits a random 50 adjudicated labels (`annotation/human_audit.csv`). Human annotations can
+replace these files at any time; scoring reads the gold at run time.
+
+## Task T1 (dataset profile extraction; not used in the paper)
 
 Gold = the verified catalog entries in `catalog/datasets/`. Before T1 is run, an author spot-checks at least
 20 entries against the publisher pages (fields marked null by the agents are the priority), and the

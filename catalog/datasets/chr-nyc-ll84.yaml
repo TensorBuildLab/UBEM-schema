@@ -39,7 +39,7 @@ spatial_coverage:
 unit_of_observation: property (one or more tax lots or buildings)
 spatial_granularity: building
 temporal_coverage:
-  start: '2010'
+  start: '2022'
   end: present
 temporal_resolution: P1Y
 update_frequency: 'annually (metadata: update frequency Annually, automation No)'
@@ -62,7 +62,7 @@ persistent_identifier: false
 known_limitations: Self-reported through ENERGY STAR Portfolio Manager and not verified for all properties (a separate audit
   program exists); covers only large buildings; properties may span several tax lots or buildings so BBL/BIN mapping is many-to-many;
   reporting thresholds changed over time; energy values are site and source energy per property, not end uses.
-notes: 'Fields inspected via the Socrata metadata API: report_year, property_id, nyc_borough_block_and_lot (BBL), nyc_building_identification
+notes: 'Spot-check 2026-11-13: this dataset holds report years 2022 onward (Socrata min/max query); 2010-2021 disclosures are in separate annual datasets. Fields inspected via the Socrata metadata API: report_year, property_id, nyc_borough_block_and_lot (BBL), nyc_building_identification
   (BIN), address_1, postal_code, borough, latitude, longitude, year_built, primary property type, site and weather-normalized
   EUI, ENERGY STAR score, electric distribution utility. Temporal start 2010 rests on the series of earlier annual datasets
   (calendar year 2010 onward) found via catalog.data.gov and mirror listings; the earlier per-year datasets were not individually

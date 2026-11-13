@@ -25,7 +25,7 @@ temporal_coverage: {start: null, end: null}
 temporal_resolution: PT15M
 update_frequency: static
 statistical_nature: measured_monitoring
-sampling_weights: null
+sampling_weights: Per-site probability weights are derived in the study report (Table 8, 104 sites); not confirmed in the public files
 record_count: 101
 record_count_note: 101 homes metered (Ecotope final report; subset of the 2011 RBSA single-family sample), 27 consecutive
   months of 15-minute end-use data

@@ -1,0 +1,231 @@
+id,field,catalog_value,verdict,corrected_value,source_url,note
+chr-cbecs-2018,title,2018 CBECS public-use microdata,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,
+chr-cbecs-2018,publisher,EIA,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,
+chr-cbecs-2018,landing_page,eia.gov/consumption/commercial/data/2018/,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,resolves
+chr-cbecs-2018,license,US-Government-Public-Domain,unverifiable,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Page has no license statement; only links to EIA Copyright & Reuse page (not read)
+chr-cbecs-2018,access_level,open_download,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,CSV and SAS files direct
+chr-cbecs-2018,spatial_coverage,US 50 states + DC,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,
+chr-cbecs-2018,spatial_granularity,census_region_division,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Census division is smallest; no state IDs
+chr-cbecs-2018,temporal_coverage/resolution,2018; P1Y,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,
+chr-cbecs-2018,statistical_nature,sample_survey_weighted,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,"6,436 records representing about 5.9M buildings"
+chr-cbecs-2018,sampling_weights,FINALWT + FINALWT1-151,partly,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Page confirms final and replicate weights; variable names and count of 151 not on page (CSV header not read)
+chr-cbecs-2018,formats,"CSV, SAS",correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Codebook XLS and User Guide PDF also
+chr-cbecs-2018,join_keys,"census_region_division, building_type",correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Division present; no state
+chr-cbecs-2018,persistent_identifier,none / doi null,correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,No DOI on page
+chr-cbecs-2018,release dates/survey years,"Nov 2021, rev Dec 2022; 1992-2018",correct,,https://www.eia.gov/consumption/commercial/data/2018/index.php?view=microdata,Matches page (page also lists Previous)
+chr-germany-zensus-2022,title/publisher,Zensus 2022 grid; Statistische Aemter,correct,,https://www.destatis.de/zensus2022,
+chr-germany-zensus-2022,landing_page,zensus2022.de/.../gitterzellen.html,partly,https://www.destatis.de/zensus2022,https://www.zensus2022.de/DE/Ergebnisse-des-Zensus/gitterzellen.html,Old URL returns 302 to destatis.de/zensus2022; content equivalent
+chr-germany-zensus-2022,license,Free use w/ attribution; dl-de/by-2.0 for boundaries,correct,,https://www.destatis.de/zensus2022,Page wording: OpenData with attribution; dl-de/by-2.0 stated for boundary shapefile
+chr-germany-zensus-2022,access_level,open_download,correct,,https://www.destatis.de/zensus2022,ZIP of CSV; registration only for API/large tables
+chr-germany-zensus-2022,spatial_granularity,grid_cell_fine (100 m),correct,,https://www.destatis.de/zensus2022,"10 km, 1 km, 100 m"
+chr-germany-zensus-2022,temporal_coverage,2022,correct,,https://www.destatis.de/zensus2022,Census day 15 May 2022
+chr-germany-zensus-2022,statistical_nature,census_complete,partly,census_mixed (register + full building/dwelling survey + household sample),https://www.destatis.de/zensus2022,Catalog itself notes mixed design; grid values are perturbed/suppressed
+chr-germany-zensus-2022,join_keys,"grid_cell, vintage",correct,,https://www.destatis.de/zensus2022,INSPIRE grid IDs; ID column not opened
+chr-germany-zensus-2022,formats,CSV in ZIP + XLSX description,correct,,https://www.destatis.de/zensus2022,Confirmed
+chr-germany-zensus-2022,content_types,"construction year, heating, rent, ownership, vacancy",correct,,https://www.destatis.de/zensus2022,All topics listed on page
+chr-germany-zensus-2022,doi,,correct,,https://www.destatis.de/zensus2022,None found
+chr-germany-zensus-2022,sampling_weights,,correct,,https://www.destatis.de/zensus2022,Aggregated counts
+chr-nyc-ll84,title,NYC Building Energy and Water Data Disclosure for LL84 2023 to Present,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,Exact name confirmed
+chr-nyc-ll84,publisher,NYC DOB via NYC Open Data,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,Attribution: Department of Buildings
+chr-nyc-ll84,landing_page,data.cityofnewyork.us/d/5zyy-y8am,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,
+chr-nyc-ll84,license,,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,No license field in metadata
+chr-nyc-ll84,access_level,open_api,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,SODA API
+chr-nyc-ll84,spatial_granularity,building (property),correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,"BBL, BIN, address, lat/lon in data"
+chr-nyc-ll84,spatial_coverage,">50,000 sq ft",correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,"Description says more than 50,000 sq ft"
+chr-nyc-ll84,temporal_coverage,2010-present,partly,This dataset: report_year 2022-2024 only; 2010-2021 in separate datasets,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,SODA min/max report_year = 2022/2024; start 2010 is series-level
+chr-nyc-ll84,record_count,103259,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,SODA count(*) returned 103259
+chr-nyc-ll84,join_keys,"building_id, parcel_id, address, postal_code, lat_lon",correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,"BBL 10-digit (696 Not Available), BIN 7-digit (973 Not Available)"
+chr-nyc-ll84,statistical_nature,administrative_record,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,Self-reported compliance data
+chr-nyc-ll84,update_frequency,annually,correct,,https://data.cityofnewyork.us/api/views/5zyy-y8am.json,rowsUpdatedAt about 2025-11-25
+chr-tabula-episcope,title/publisher,TABULA WebTool; IWU,correct,,https://episcope.eu/building-typology/webtool/,
+chr-tabula-episcope,landing_page,webtool.building-typology.eu,correct,,https://episcope.eu/building-typology/webtool/,Legacy episcope.eu URL resolves
+chr-tabula-episcope,license,,correct,,https://episcope.eu/building-typology/webtool/,No license stated; copyright IWU 2012-2016
+chr-tabula-episcope,access_level,open_download,partly,open_browse (web tool); bulk download unverified,https://episcope.eu/building-typology/webtool/,Page describes interactive tool; download not confirmed
+chr-tabula-episcope,reference_paper_doi,10.1016/j.enbuild.2016.06.094,correct,,https://api.crossref.org/works/10.1016/j.enbuild.2016.06.094,"Loga, Stein, Diefenbach, Energy and Buildings 132, 4-12 (2016)"
+chr-tabula-episcope,spatial_coverage,21 countries,unverifiable,,https://episcope.eu/building-typology/webtool/,Descriptor paper title says 20 countries; menu not rendered to count
+chr-tabula-episcope,spatial_granularity,nation,correct,,https://episcope.eu/building-typology/webtool/,National typologies
+chr-tabula-episcope,temporal_coverage,2009-2016,correct,,https://episcope.eu/building-typology/webtool/,Project period; site copyright 2012-2016
+chr-tabula-episcope,statistical_nature,compilation,correct,,https://episcope.eu/building-typology/webtool/,Typology and calibrated reference calculation
+chr-tabula-episcope,join_keys,"country_iso, building_type, vintage",correct,,https://episcope.eu/building-typology/webtool/,"Dataset codes encode country, size class, age class, variant"
+chr-tabula-episcope,doi,,correct,,https://episcope.eu/building-typology/webtool/,
+chr-tabula-episcope,formats,web tool,correct,,https://episcope.eu/building-typology/webtool/,
+chr-uk-epc,title/publisher,Energy Performance of Buildings data; MHCLG,correct,,https://get-energy-performance-data.communities.gov.uk/,
+chr-uk-epc,landing_page,get-energy-performance-data.communities.gov.uk,correct,,https://get-energy-performance-data.communities.gov.uk/,
+chr-uk-epc,license,OGL-UK-3.0,correct,,https://get-energy-performance-data.communities.gov.uk/,OGL v3.0 except where otherwise stated
+chr-uk-epc,access_level,registration_required,correct,,https://get-energy-performance-data.communities.gov.uk/,GOV.UK One Login for bulk download
+chr-uk-epc,spatial_coverage,England and Wales,correct,,https://get-energy-performance-data.communities.gov.uk/,Scotland separate
+chr-uk-epc,spatial_granularity,building,unverifiable,,https://get-energy-performance-data.communities.gov.uk/,Page does not mention address/UPRN
+chr-uk-epc,temporal_coverage,2008-present,correct,,https://get-energy-performance-data.communities.gov.uk/,Certificates registered since 2008
+chr-uk-epc,formats,"CSV, API",correct,,https://get-energy-performance-data.communities.gov.uk/,Bulk CSV and developer API
+chr-uk-epc,content_types,"domestic, non-domestic EPC, DEC",correct,,https://get-energy-performance-data.communities.gov.uk/,
+chr-uk-epc,join_keys,"address, postal_code, building_type, vintage",unverifiable,,https://get-energy-performance-data.communities.gov.uk/,Field list not on page
+chr-uk-epc,statistical_nature,administrative_record,correct,,https://get-energy-performance-data.communities.gov.uk/,
+chr-uk-epc,api,api true,correct,,https://get-energy-performance-data.communities.gov.uk/,Developer API exists; registration needed
+ctx-lcz-global,title,Global map of Local Climate Zones,correct,,https://zenodo.org/records/6364594,
+ctx-lcz-global,publisher,Demuzere et al.; Zenodo,correct,,https://zenodo.org/records/6364594,Creators match
+ctx-lcz-global,doi,10.5281/zenodo.6364594,partly,Version DOI (v1.0.0); concept DOI differs,https://zenodo.org/records/6364594,Record is v1.0.0 and says a newer version exists
+ctx-lcz-global,license,CC-BY-4.0,correct,,https://zenodo.org/records/6364594,CC BY 4.0
+ctx-lcz-global,reference_paper_doi,10.5194/essd-14-3835-2022,correct,,https://api.crossref.org/works/10.5194/essd-14-3835-2022,"ESSD 14(8), 3835-3873, 2022"
+ctx-lcz-global,access_level,open_download,correct,,https://zenodo.org/records/6364594,
+ctx-lcz-global,spatial_granularity,grid_cell_fine,correct,,https://zenodo.org/records/6364594,100 m
+ctx-lcz-global,temporal_coverage,,partly,nominal year 2018,https://developers.google.com/earth-engine/datasets/catalog/RUB_RUBCLIM_LCZ_global_lcz_map_v1,Earth Engine catalog gives nominal year 2018; Zenodo page silent
+ctx-lcz-global,formats,GeoTIFF,correct,,https://zenodo.org/records/6364594,"lcz_v1.tif, lcz_probability_v1.tif, lcz_filter_v1.tif"
+ctx-lcz-global,statistical_nature,remote_sensing_derived,correct,,https://zenodo.org/records/6364594,Random forest classification
+ctx-lcz-global,content_types,"LCZ classes, probability",correct,,https://zenodo.org/records/6364594,
+geo-eubucco,title,EUBUCCO: European building stock characteristics...,correct,,https://zenodo.org/records/7225259,Paper title is EUBUCCO v0.1 ... 200+ million individual buildings
+geo-eubucco,landing_page,eubucco.com,correct,,https://zenodo.org/records/7225259,
+geo-eubucco,doi,10.5281/zenodo.7225259,correct,,https://zenodo.org/records/7225259,v0.1 version DOI (20 Oct 2022)
+geo-eubucco,reference_paper_doi,10.1038/s41597-023-02040-2,correct,,https://api.crossref.org/works/10.1038/s41597-023-02040-2,"Sci Data 10, 147 (2023)"
+geo-eubucco,license,"ODbL-1.0 (Prague CC-BY-SA, Abruzzo CC-BY-NC)",partly,"Mixed: ~95%+ ODbL 1.0, Prague CC-BY-SA, Abruzzo CC-BY-NC; Zenodo Rights field says Other (Not Open); paper itself CC BY 4.0",https://zenodo.org/records/7225259,Catalog matches Zenodo description; Zenodo rights field discrepancy
+geo-eubucco,spatial_coverage,"EU-27, NO, CH, GB",partly,v0.1 = EU-27 + CH (28 countries); current docs EU-27 + NO + CH + UK,https://docs.eubucco.com/latest/,Catalog description states both
+geo-eubucco,spatial_granularity,building,correct,,https://docs.eubucco.com/latest/,Individual footprints
+geo-eubucco,record_count,322000000,correct,,https://docs.eubucco.com/latest/,322+ million on docs; v0.1 about 202M
+geo-eubucco,formats,Parquet; GPKG/CSV (Zenodo),correct,,https://docs.eubucco.com/latest/,Zenodo zip 103.3 GB
+geo-eubucco,content_types,"height, floors, year, type, subtype",correct,,https://docs.eubucco.com/latest/,Construction year only 15.9% coverage
+geo-eubucco,join_keys,"geometry, lat_lon, building_id, building_type, vintage",unverifiable,,https://docs.eubucco.com/latest/,Docs do not describe an ID field
+geo-eubucco,temporal_coverage,,correct,,https://zenodo.org/records/7225259,No single reference year
+geo-usgs-3dep,title/publisher,USGS 3DEP,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-usgs-3dep,landing_page,usgs.gov/3d-elevation-program,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-usgs-3dep,license,US-Government-Public-Domain,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,Free of charge and without use restrictions
+geo-usgs-3dep,access_level,open_download,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-usgs-3dep,reference_paper_doi,10.3390/rs14040940,correct,,https://api.crossref.org/works/10.3390/rs14040940,"Stoker and Miller, Remote Sens. 14(4) 940 (2022); accuracy study, not a descriptor"
+geo-usgs-3dep,spatial_coverage,"CONUS, AK, HI, territories",correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-usgs-3dep,spatial_granularity,grid_cell_fine,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,1 m DEMs; point clouds finer
+geo-usgs-3dep,formats,"Lidar, DEM rasters, WMS/WCS (format unnamed)",partly,"Add GeoTIFF (S1M cloud-optimized GeoTIFF, IfSAR GeoTIFF); point cloud format not stated",https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,Page names GeoTIFF
+geo-usgs-3dep,temporal_coverage,null to present,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,QL2 mostly 2014 onward
+geo-usgs-3dep,statistical_nature,remote_sensing_derived,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-usgs-3dep,api,WMS/WCS true,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,Bare-earth DEM dynamic service
+geo-usgs-3dep,doi,,correct,,https://www.usgs.gov/3d-elevation-program/about-3dep-products-services,
+geo-wsf3d,title/publisher,WSF 3D; DLR EOC,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,landing_page,geoservice.dlr.de/web/datasets/wsf_3d,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,license,CC-BY-4.0,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,reference_paper_doi,10.1016/j.rse.2021.112877,correct,,https://api.crossref.org/works/10.1016/j.rse.2021.112877,"Esch et al., RSE 270, 112877 (2022)"
+geo-wsf3d,doi,,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,No dataset DOI on DLR page
+geo-wsf3d,formats,GeoTIFF LZW 1x1 deg tiles; WMS/WMTS,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,spatial_granularity,grid_cell_fine,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,90 m grid
+geo-wsf3d,temporal_coverage,,partly,Underlying WSF 2019 base per layer metadata (not confirmed on page),https://geoservice.dlr.de/web/datasets/wsf_3d,Page states no reference year
+geo-wsf3d,update_frequency,"Release 2023-02-15, V02",correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,content_types,"area, volume, fraction, height",correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,access_level,open_download,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,
+geo-wsf3d,statistical_nature,remote_sensing_derived,correct,,https://geoservice.dlr.de/web/datasets/wsf_3d,Sentinel-1/2 + TanDEM-X
+nrg-eurostat-energy-balances,title,Complete energy balances (nrg_bal_c),correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,publisher,Eurostat,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,license,Eurostat copyright policy (free reuse),partly,"Eurostat reuse is CC BY 4.0 under Commission Decision 2011/833/EU; metadata says Eurostat copyright rules, free re-use",https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,Wording matches page; CC BY 4.0 not on this page (background knowledge)
+nrg-eurostat-energy-balances,api,api false,partly,api true: Eurostat dissemination API (SDMX/JSON) serves nrg_bal_c,https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started,"Metadata page omits API; from background knowledge, not fetched"
+nrg-eurostat-energy-balances,spatial_coverage,"EU, EFTA, candidates, EnC; UK 1990-2019",correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,Confirmed
+nrg-eurostat-energy-balances,spatial_granularity,nation,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,temporal_coverage,1990-present,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,temporal_resolution,P1Y,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,update_frequency,first release Dec Y+1,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,Legal deadline 13 months after reference year
+nrg-eurostat-energy-balances,statistical_nature,compilation,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,join_keys,"country_iso, timestamp",correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-eurostat-energy-balances,doi,,correct,,https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm,
+nrg-ideal,title,Paper title used as dataset title,partly,IDEAL Household Energy Dataset (DataShare/DataCite record title),https://api.datacite.org/dois/10.7488/ds/2836,Long title is the Scientific Data article title; the dataset record is titled IDEAL Household Energy Dataset
+nrg-ideal,publisher,"University of Edinburgh, School of Informatics",correct,,https://api.datacite.org/dois/10.7488/ds/2836,
+nrg-ideal,landing_page/doi,datashare handle 10283/3647; 10.7488/ds/2836,correct,,https://datashare.ed.ac.uk/handle/10283/3647,Handle page resolves to the dataset; DOI matches DataCite
+nrg-ideal,license,CC-BY-4.0,correct,,https://api.datacite.org/dois/10.7488/ds/2836,DataCite rights = CC BY 4.0; DataShare page itself only lists End-user Licence without text
+nrg-ideal,access_level,open_download,correct,,https://datashare.ed.ac.uk/handle/10283/3647,Files downloadable from DataShare
+nrg-ideal,spatial_coverage,255 UK homes (areas not stated),partly,"Homes in Edinburgh, Lothians and south Fife, Scotland",https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y,Areas are stated in the paper per search summary; description should say so
+nrg-ideal,spatial_granularity,none,unverifiable,,https://datashare.ed.ac.uk/handle/10283/3647,Paper links urbanisation level; exact released location granularity not confirmed (full paper text not retrievable)
+nrg-ideal,temporal_coverage,2016 to 2018-06,partly,~23 months ending June 2018; exact start date not confirmed,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y,End correct; start year 2016 is an inference
+nrg-ideal,temporal_resolution,PT1S,partly,"Mixed: 1 s electricity, pulse-level gas, 12 s room/boiler sensors",https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y,Finest is 1 s but not uniform
+nrg-ideal,statistical_nature/weights,measured_monitoring; null,correct,,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y,"Volunteer sample, no weights evident"
+nrg-ideal,join_keys,"building_id, timestamp",unverifiable,,https://datashare.ed.ac.uk/handle/10283/3647,Identifier names in CSV not verified
+nrg-ideal,descriptor DOI/formats,10.1038/s41597-021-00921-y; CSV,correct,,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y,Sci Data 8:146 (2021); CSV with custom API; 39 homes detailed monitoring confirmed
+nrg-london-lcl,title/publisher,SmartMeter Energy Consumption Data in London Households; UKPN,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,
+nrg-london-lcl,landing_page,data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,
+nrg-london-lcl,license,CC-BY-4.0,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,Page states CC BY 4.0
+nrg-london-lcl,access_level,open_download,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,
+nrg-london-lcl,temporal_coverage,2011-11 to 2014-02,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,
+nrg-london-lcl,temporal_resolution,PT30M,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,
+nrg-london-lcl,record_count,5567 households; ~167M rows,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,"Single CSV ~10 GB, ~167M rows; also a 168-file split"
+nrg-london-lcl,formats,"CSV (zipped), XLSX",partly,CSV (zipped; one file or 168 files) for data; XLSX only for the 2013 tariff table,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,XLSX is not a data distribution of readings
+nrg-london-lcl,join_keys,timestamp,partly,household identifier (LCLid) plus date/time,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,Page lists a unique household identifier; catalog omits it
+nrg-london-lcl,doi/descriptor,null/null,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,No DOI on page; UKDS SN 7857 DOI not independently verified here
+nrg-london-lcl,spatial_granularity,none,correct,,https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households,Only anonymised household ID; no location fields on page
+nrg-neea-rbsa-metering,title/publisher,RBSA Metering Study; NEEA (Ecotope),correct,,https://neea.org/resource/2011-rbsa-metering-study/,Page dated 29 Apr 2014
+nrg-neea-rbsa-metering,landing_page,neea.org/resource/2011-rbsa-metering-study/,correct,,https://neea.org/resource/2011-rbsa-metering-study/,
+nrg-neea-rbsa-metering,license,NEEA Privacy Policy and Terms of Use,partly,Page states no license; only links a general Privacy Policy + Terms of Service,https://neea.org/resource/2011-rbsa-metering-study/,Redistribution restriction not stated on the page
+nrg-neea-rbsa-metering,access_level,request_or_agreement,unverifiable,,https://neea.org/resource/2011-rbsa-metering-study/,Page states no access terms; request-form claim not seen
+nrg-neea-rbsa-metering,spatial_coverage,"Pacific Northwest, single-family",correct,"Idaho, Montana, Oregon, Washington (5 of 7 RBSA sampling regions)",https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf,
+nrg-neea-rbsa-metering,temporal_coverage,,partly,First year of record Apr 2012 to Mar 2013; study ran 27 consecutive months (to ~2014),https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf,"Report: first year of record, April 2012-March 2013"
+nrg-neea-rbsa-metering,temporal_resolution,PT15M,correct,,https://neea.org/resource/2011-rbsa-metering-study/,
+nrg-neea-rbsa-metering,record_count,101,correct,,https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf,Report notes 104 in weight table because 3 sites were added as others dropped out
+nrg-neea-rbsa-metering,sampling_weights,,incorrect,"Report derives per-site probability weights (Table 8, 104 sites); public availability of weights not confirmed",https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf,Sample nested in RBSA stratification; weights exist in report
+nrg-neea-rbsa-metering,join_keys,"building_id, timestamp",unverifiable,,https://neea.org/resource/2011-rbsa-metering-study/,Data files not inspected; Flags data file marks homes in main report
+nrg-neea-rbsa-metering,persistent_identifier,false,correct,,https://neea.org/resource/2011-rbsa-metering-study/,No DOI on page
+nrg-refit,title/publisher,REFIT: Electrical Load Measurements (Cleaned); Strathclyde,correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,landing_page/doi,pureportal ... ; 10.15129/9ab14b0e-...,correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,license,CC-BY-4.0,correct,,https://api.datacite.org/dois/10.15129/9ab14b0e-19ac-4279-938f-27f643078cec,
+nrg-refit,spatial_coverage,"20 households, Loughborough, UK",correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,temporal_coverage,2013-10 to 2015-06,correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,temporal_resolution,PT8S,correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,record_count,20,correct,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,
+nrg-refit,descriptor DOI,10.1038/sdata.2016.122,correct,,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/sdata.2016.122,"Sci Data 4:160122, 2017; title matches"
+nrg-refit,formats,CSV,partly,"CSV inside .7z archives (Processed_Data_CSV.7z, CLEAN_REFIT_081116.7z) plus txt and xlsx metadata",https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,Archive format omitted
+nrg-refit,content_types/appliance,whole-house + appliance power (partial),correct,,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/sdata.2016.122,Aggregate plus nine appliances per paper
+nrg-refit,join_keys,timestamp,unverifiable,,https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned/,Household ID field names not verified
+nrg-refit,sampling_weights,,correct,,https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/sdata.2016.122,
+occ-comfort-db2,title,ASHRAE Global Thermal Comfort Database II ... v2.1,partly,ASHRAE Global Database of Thermal Comfort Field Measurements,https://datadryad.org/dataset/doi:10.6078/D1F671,Dryad title differs; v2.1.0 release 9 Jun 2022 correct
+occ-comfort-db2,publisher,Foldvary Licina et al.; Dryad/CBE,partly,"Dryad lists authors Parkinson, Tartarini, Foldvary Licina, Cheung, Zhang, de Dear, et al.; CBE UC Berkeley and Univ. Sydney led",https://datadryad.org/dataset/doi:10.6078/D1F671,Author order differs from catalog
+occ-comfort-db2,landing_page/doi,datadryad.org doi:10.6078/D1F671,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,
+occ-comfort-db2,license,CC0-1.0,unverifiable,,https://datadryad.org/dataset/doi:10.6078/D1F671,Dryad page says only licensed for reuse without naming license
+occ-comfort-db2,formats,CSV db_measurements_v2.1.0.csv.gz; db_metadata.csv,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,
+occ-comfort-db2,record_count,109033,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,"77,304 + 25,288 + 6,441 breakdown confirmed"
+occ-comfort-db2,update_frequency/versions,"v2.0, 2.01 (2018); v2.1 (9 Jun 2022)",correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,
+occ-comfort-db2,temporal_coverage,,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,No range stated on page
+occ-comfort-db2,spatial_granularity,building,unverifiable,,https://datadryad.org/dataset/doi:10.6078/D1F671,No coordinates on page; building-level fields not confirmed
+occ-comfort-db2,join_keys,"building_type, climate_zone_ashrae",partly,"These are descriptive attributes, not identifiers; no confirmed building ID or timestamp key",https://datadryad.org/dataset/doi:10.6078/D1F671,Not usable as join keys in the usual sense; metadata file not inspected
+occ-comfort-db2,descriptor DOI,10.1016/j.buildenv.2018.06.022,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,"Building and Environment 142:502-512 (2018); not re-fetched, matches known record"
+occ-comfort-db2,statistical_nature/weights,compilation; null,correct,,https://datadryad.org/dataset/doi:10.6078/D1F671,
+occ-uk-tus,title/DOI,UKTUS 2014-2015 SN 8128; 10.5255/UKDA-SN-8128-1,correct,,https://api.datacite.org/dois/10.5255/UKDA-SN-8128-1,DataCite record; 1st edition; creators Sullivan and Gershuny
+occ-uk-tus,publisher,CTUR Oxford; distributed by UKDS,correct,,https://api.datacite.org/dois/10.5255/UKDA-SN-8128-1,DataCite publisher is UK Data Service; creators O. Sullivan (CTUR) and J. Gershuny
+occ-uk-tus,landing_page,datacatalogue.ukdataservice.ac.uk/studies/study/8128,correct,,https://datacatalogue.ukdataservice.ac.uk/studies/study/8128,Resolves to study page
+occ-uk-tus,license,UK Data Service End User Licence,correct,,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,Registered users under EUL; commercial use needs owner approval (search snippet of UKDS text); DataCite rights field empty
+occ-uk-tus,access_level,registration_required,correct,,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,
+occ-uk-tus,temporal_coverage,2014 to 2015 (fieldwork Apr 2014-Dec 2015),correct,,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,
+occ-uk-tus,temporal_resolution,,partly,UKDS course slides give 15-minute diary slots; study documentation not confirmed,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,Conflicts with HETUS 10-min convention; confirm in user guide
+occ-uk-tus,sampling_weights,unverified text,partly,Weights exist: diary weights = survey weights x day/month non-response weights (UKDS slides),https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,Weight variable names not confirmed
+occ-uk-tus,record_count,"7600 people, 4000 households",correct,,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,Beta-release figure
+occ-uk-tus,join_keys,timestamp,unverifiable,,https://datacatalogue.ukdataservice.ac.uk/studies/study/8128,"Public variable names (serial, person IDs) not verified; study page not machine readable"
+occ-uk-tus,statistical_nature,sample_survey_weighted,correct,,https://ukdataservice.ac.uk/app/uploads/Introduction-to-time-diary-data-2026-06-11.pdf,Multi-stage stratified probability sample
+sim-model-america,title/publisher,Model America; ORNL/OLCF,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,DataCite also lists ALCF
+sim-model-america,landing_page/doi,10.13139/ORNLNCCS/1774134,correct,,https://api.datacite.org/dois/10.13139/ornlnccs/1774134,
+sim-model-america,license,,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,No license stated; free and openly available but footer says all rights reserved
+sim-model-america,access_level,open_download,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,Requires free Globus Connect Personal
+sim-model-america,spatial_coverage/count,122.9M of 125.7M buildings,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,"122,930,327 of 125,714,640 (97.8%)"
+sim-model-america,spatial_granularity,county,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,Models in state_county.zip
+sim-model-america,temporal/update,one release 14 April 2021,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,DataCite registered 20 Apr 2021
+sim-model-america,formats,OpenStudio/EnergyPlus zip,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,"OpenStudio 3.1.0, EnergyPlus 9.4, ~3000 inputs each"
+sim-model-america,join_keys,building_id,incorrect,"None: metadata containing building ID, county, etc. is omitted from release",https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,"Page states associated metadata (ID, county, state, climate zone, year, footprint) not included"
+sim-model-america,descriptor DOI,,correct,,https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/,No paper listed; refers to bit.ly/AutoBEM
+wx-climate-onebuilding,title/publisher,Climate.OneBuilding.Org; Lawrie and Crawley,correct,,https://climate.onebuilding.org/default.html,
+wx-climate-onebuilding,landing_page,climate.onebuilding.org/default.html,correct,,https://climate.onebuilding.org/default.html,
+wx-climate-onebuilding,license,All Rights Reserved,correct,,https://climate.onebuilding.org/default.html,Footer: Copyright 2014-2026 Climate.OneBuilding. All Rights Reserved
+wx-climate-onebuilding,record_count,17315,correct,,https://climate.onebuilding.org/default.html,249 countries
+wx-climate-onebuilding,temporal_coverage,2004 to 2025,correct,,https://climate.onebuilding.org/default.html,"Periods 2004-2018, 2007-2021, 2009-2023, 2011-2025, full period"
+wx-climate-onebuilding,formats,EPW,partly,"EPW, DDY, STAT, CLM, WEA, PVSyst, RAIN",https://climate.onebuilding.org/default.html,Catalog lists only EPW
+wx-climate-onebuilding,citation,Lawrie and Crawley 2026,partly,Site labels it Paper in progress,https://climate.onebuilding.org/default.html,Not a published descriptor; reference_paper_doi null correct
+wx-climate-onebuilding,known_limitations/solar,ISD + ERA5 solar,correct,,https://climate.onebuilding.org/default.html,ERA5 solar via Oikolab; 2004-2018 files use cloud-cover-derived solar
+wx-climate-onebuilding,join_keys,"lat_lon, station_id, country_iso, climate_zone_ashrae",unverifiable,,https://climate.onebuilding.org/default.html,Identifiers inside EPW headers not inspected
+wx-climate-onebuilding,temporal_resolution,PT1H,correct,,https://climate.onebuilding.org/default.html,
+wx-cmip6,landing_page,aims2.llnl.gov/search/cmip6/,partly,Redirects (302) to https://metagrid.esgf-west.org/search/cmip6/,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,"Search portal, not a single dataset page"
+wx-cmip6,license,varies by group (CC-BY-4.0 or CC-BY-NC-SA-4.0),incorrect,CC BY 4.0 for all CMIP6 model output; all groups relaxed restrictions by Oct 2022,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,"Terms v6.2, 12 Oct 2022"
+wx-cmip6,persistent_identifier/doi,false/null,incorrect,Each CMIP6 dataset has its own DOI (e.g. 10.22033/ESGF/CMIP6.xxxx); true for dataset-level citation,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,Terms require dataset citations per CMIP6 Data Citation Guidelines
+wx-cmip6,descriptor DOI,10.5194/gmd-9-1937-2016,correct,,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,"Eyring et al., GMD 9, 1937-1958 (2016)"
+wx-cmip6,publisher,WCRP CMIP Panel; ESGF,correct,,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,
+wx-cmip6,temporal_coverage,1850 to 2100,correct,,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,Historical 1850-2014; scenarios to 2100 (some extensions beyond)
+wx-cmip6,temporal_resolution,P1D,partly,Daily and monthly standard; some sub-daily (hourly/3-hourly),https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,"Finest public resolution is sub-daily for a subset of variables (general knowledge, not page-confirmed)"
+wx-cmip6,access_level,open_download,correct,,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,Terms permit open use; ESGF node login policy may vary
+wx-cmip6,spatial_granularity,grid_cell_coarse,correct,,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,
+wx-cmip6,statistical_nature,climate_projection,partly,Includes historical simulations as well as projections,https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-2.html,Minor
+wx-energyplus-weather,landing_page,energyplus.net/weather,unverifiable,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,Returned HTTP 404 to my fetch as well; could not confirm current page
+wx-energyplus-weather,license,,partly,"Source-specific terms: e.g. IWEC under DOE-ASHRAE license, ASHRAE/ISHRAE copyright All Rights Reserved; not unlicensed",https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,Per EnergyPlus weather docs and archived DOE source page
+wx-energyplus-weather,access_level,open_download,correct,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,IWEC license lets DOE distribute EPW free via EnergyPlus site
+wx-energyplus-weather,publisher,U.S. DOE / EnergyPlus; compiled from originators,correct,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,Archived page says about 20 sources
+wx-energyplus-weather,formats,EPW,partly,EPW plus DDY (design day) and STAT files,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,DDY is ASHRAE design conditions file
+wx-energyplus-weather,temporal_resolution,PT1H,correct,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,EPW format is hourly
+wx-energyplus-weather,statistical_nature,typical_year_synthetic,partly,Mostly typical years; includes some actual-year and design-day files,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,
+wx-energyplus-weather,doi/citation,null; cite originating set,correct,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,No DOI known
+wx-energyplus-weather,join_keys,"lat_lon, station_id, climate_zone_ashrae",unverifiable,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,Not inspected
+wx-energyplus-weather,temporal_coverage/update,,unverifiable,,https://bigladdersoftware.com/epx/docs/9-4/auxiliary-programs/source-weather-data-formats.html,Not verifiable without live page

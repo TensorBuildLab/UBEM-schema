@@ -7,7 +7,7 @@ doi: null
 citation: EnergyPlus weather data, https://energyplus.net/weather (accessed 2026-11-12). Cite the originating file
   set (e.g., TMY3, IWEC, CWEC) as stated in each file header.
 reference_paper_doi: null
-license: null
+license: Source-specific (IWEC files under the DOE-ASHRAE license; ASHRAE and ISHRAE sets all rights reserved)
 access_level: open_download
 distributions:
 - format: EPW

@@ -30,7 +30,7 @@ sampling_weights: null
 record_count: 122930327
 record_count_note: 122,930,327 building energy models (97.8% of 125,714,640 detected buildings), about 3,000 input
   descriptors each; OpenStudio 3.1.0 and EnergyPlus 9.4
-join_keys: [building_id]
+join_keys: []
 variables_documented: false
 machine_readable: true
 versioned: false
@@ -39,7 +39,7 @@ known_limitations: 'Provided as is, with no warranties; contains models only: th
   them (building ID, location, climate zone, estimated construction year, footprint) is not included, so models
   cannot be tied to real buildings; model parameters are inferred automatically from remote-sensing and public data.
   Download needs the free Globus Connect Personal client.'
-notes: Access is open (free, Globus) but the ORNL page states no explicit license ('as is, no warranties'), so license
+notes: Spot-check 2026-11-13, the ORNL page states that building metadata (ID, county and similar) is omitted from the release, so no join key is usable. Access is open (free, Globus) but the ORNL page states no explicit license ('as is, no warranties'), so license
   is null. No peer-reviewed descriptor paper was verified for the dataset (AutoBEM papers are listed at a bit.ly
   link on the ORNL page, not resolved), so reference_paper_doi is null. Regional Zenodo extracts exist (e.g. 10.5281/zenodo.5154216,
   Los Angeles WRF extract) but were not catalogued. A related ORNL dataset DOI 10.57931/2349436 (Urban Parameters

@@ -15,7 +15,7 @@ distributions:
   access_url: https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
   api: false
   registration_required: false
-- format: DEM rasters (1 m project-based, 1/3 arc-second seamless, other resolutions)
+- format: GeoTIFF DEM rasters (1 m project-based, 1/3 arc-second seamless, other resolutions)
   access_url: https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
   api: false
   registration_required: false

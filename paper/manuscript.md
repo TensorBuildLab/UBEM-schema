@@ -1,8 +1,8 @@
 ---
 title: "Does domain semantics help large language models integrate open data for urban building energy modeling? The Meta-Urban schema, a verified open-data catalog, and a reproducible alignment benchmark"
 short_title: "Meta-Urban: schema, catalog and LLM alignment benchmark for UBEM open data"
-authors: "Liang Zhang (University of Arizona; National Laboratory of the Rockies), Jianli Chen (University of Utah), Jia Zou (Arizona State University) [TODO: confirm author list, order, and whether the T2 annotator joins]"
-status: "DRAFT v0.1, 2026-11-12. Results marked [TODO] or PROVISIONAL are not final."
+authors: "Liang Zhang (University of Arizona; National Laboratory of the Rockies), Jianli Chen (University of Utah), Jia Zou (Arizona State University) [TODO: confirm author list and order]"
+status: "DRAFT v0.2, 2026-11-13. Target journal: Advanced Engineering Informatics."
 bibliography: references.bib
 ---
 
@@ -11,43 +11,38 @@ to paper/references.bib (all entries verified against Crossref, arXiv or officia
 
 ## Highlights
 
-- Meta-Urban 2.0: a LinkML schema for open UBEM data, compiled to JSON Schema, SHACL and OWL
+- Meta-Urban 2.0: a LinkML schema for open UBEM data with SHACL and OWL versions
 - Verified catalog of 91 open datasets coded on six independent facets
 - Only 3 of 48 non-geometric building datasets can be linked to individual buildings
-- Ignoring survey weights shifts CBECS energy use intensity by -16% to +102% by building type
-- Concept definitions, not labels, raise LLM mapping accuracy by 16 points [PROVISIONAL]
+- Concept definitions, not labels, raise local LLM mapping accuracy by 12 to 17 points
+- Ignoring survey weights shifts CBECS energy use intensity by -16% to +102%
 
 ## Abstract
 
 Urban building energy modeling (UBEM) draws on dozens of open datasets that describe the same buildings,
-places and periods with different variables, codes, units, spatial granularities and statistical designs.
-Integrating them is still manual, and the descriptions that exist are written for people to read, not for
-software or large language models (LLMs) to act on. This paper asks whether a domain schema makes that
-integration more reliable. We present Meta-Urban 2.0, a schema with a dataset level (an application profile
-of DCAT 3 with six UBEM facets: workflow role, statistical nature, spatial granularity, temporal resolution,
-access, and join keys) and a variable level (concept, unit, code list, aggregation, weights and imputation
-flags), with an 81-concept vocabulary mapped to CityGML and EnergyPlus weather fields. We used it to build a
-catalog of 91 open datasets, each verified against its publisher. Computed indicators show that geometry and
-weather are well covered at building or station resolution, but only 3 of 48 datasets that carry
-characteristics, operation, energy or simulation data share an identifier with building footprints, and 21
-have no usable key at all. We then define a benchmark with three tasks on the CBECS 2018 and RECS 2020
-codebooks (2,048 variables): dataset-profile extraction, variable-to-concept mapping, and code and unit
-normalization, and test four levels of schema context with open-weight and frontier LLMs over five repeats.
-PROVISIONAL (draft labels): for two 8-billion-parameter open-weight models, concept definitions raised top-1
-mapping accuracy from 0.38-0.41 to 0.53-0.57, while concept labels alone did not help; retrieving ten
-candidates first kept that accuracy at 18% of the input tokens. [TODO: update with adjudicated gold and
-frontier models.] Finally, we show that alignment errors matter downstream: a correct
-pipeline reproduces EIA's published totals within 0.01%, whereas ignoring survey weights changes building
-counts by three orders of magnitude and floor-area-weighted energy use intensity by -16% to +102% across
-building types. The schema, catalog, benchmark, code and all results are open.
+places and periods with different variables, codes, units, granularities and statistical designs. We ask
+whether a domain schema makes their integration by large language models (LLMs) more reliable. Meta-Urban 2.0
+is a schema with a dataset level (a DCAT 3 profile with six UBEM facets) and a variable level (concept, unit,
+code list, weights and imputation flags), with an 81-concept vocabulary. A catalog of 91 open datasets coded
+with it shows that only 3 of 48 datasets carrying characteristics, operation, energy or simulation data share
+an identifier with building footprints. On 2,048 variables of the CBECS 2018 and RECS 2020 codebooks, we
+benchmark two locally run 8-billion-parameter LLMs against double-annotated gold labels under four levels of
+schema context, five repeats each. Concept definitions raised top-1 mapping accuracy from 0.42-0.43 to
+0.55-0.59, while concept labels alone helped little; restricting the context to ten retrieved candidates cut
+input tokens by 82% but lost accuracy where the retriever missed. Both models detected survey weights and
+imputation flags almost perfectly but could not link a flag to its variable when only a naming convention
+does so, and one model got a fifth of unit multipliers wrong. These errors matter: a correct pipeline
+reproduces EIA's published totals within 0.01%, whereas ignoring survey weights biases energy intensity by
+-16% to +102% across building types. The
+schema, catalog, benchmark, code and all model outputs are open.
 
 **Keywords:** urban building energy modeling; open data; metadata schema; FAIR; large language models;
 schema matching; building stock; CBECS
 
 ## 1. Introduction
 
-Buildings account for [TODO: one sourced statistic, e.g., share of U.S. or global energy-related emissions,
-with citation] and urban building energy modeling (UBEM) is the standard way to estimate how policies,
+Buildings and construction account for 32% of global energy use and 34% of energy-related CO2 emissions
+[@unep2025gsr], and urban building energy modeling (UBEM) is the standard way to estimate how policies,
 technologies and climate change will affect a whole building stock [@reinhart2016urban; @ferrando2020urban;
 @johari2020urban; @hong2020ten]. Bottom-up, physics-based UBEM needs weather, the location and shape of every
 building, non-geometric characteristics such as use type, vintage and systems, assumptions on how buildings
@@ -97,8 +92,9 @@ The contributions are:
    lists, aggregation semantics, weights and imputation flags, plus an 81-concept SKOS vocabulary (Section 3).
 2. A catalog of 91 open datasets coded with the schema and verified against publisher pages, and computed
    gap indicators, including a new linkage indicator (Section 4).
-3. An alignment benchmark with three tasks, gold labels, four levels of schema context, and a protocol that
-   follows current schema-matching practice (Section 5).
+3. An alignment benchmark with two tasks on 2,048 survey variables, blind double-annotated gold labels,
+   four levels of schema context, and a protocol that follows current schema-matching practice, run with
+   open-weight LLMs that a city or utility can operate on its own hardware (Section 5).
 4. A downstream analysis on CBECS 2018 that quantifies the effect of each class of alignment error on UBEM
    quantities (Section 6).
 5. An open repository from which every number and figure in this paper is regenerated
@@ -223,8 +219,7 @@ Energy ADE mappings after expert review; only mappings the authors are certain o
 ### 3.5 Implementation
 
 The schema is written in LinkML and compiled to JSON Schema (used by the validator), SHACL shapes and an OWL
-ontology. Catalog entries are YAML files validated in continuous integration. [TODO: register the w3id.org
-namespace.]
+ontology. Catalog entries are YAML files validated against the JSON Schema on every commit (GitHub Actions).
 
 ## 4. A verified catalog of open UBEM data (RQ1, RQ2)
 
@@ -236,15 +231,23 @@ facto reference. Widely used datasets that need an agreement or payment were kep
 gap analysis can count them. Each entry was drafted by an LLM research agent (Claude, Anthropic; November
 2026) instructed to fill every field only from the publisher's page or a peer-reviewed descriptor, to resolve
 every DOI through Crossref, to write null rather than guess, and to list the pages it checked. Every entry was
-then validated against the schema. [TODO (authors): spot-check at least 20 entries against publisher pages,
-prioritizing fields the agents left null; report the error rate found. This step is required before
-submission.]
+then validated against the schema. To estimate the error rate, a random sample of 20 entries (seed
+20261113) was re-verified field by field by two separate LLM agents with web access, which had not drafted
+the entries, against publisher pages, DOI records and descriptor papers (230 field checks; the record is in
+`catalog/verification_2026-11-13.csv`). Of the 213 checks that could be settled, 174 (82%) were correct,
+35 (16%) were partly correct and 4 (2%) were wrong; 17 could not be settled from public pages. The wrong
+values were a license recorded as varying by modeling group that is now uniform (CMIP6, CC BY 4.0), CMIP6
+dataset-level DOIs recorded as absent, a building id listed as a join key although the release omits it
+(Model America), and survey weights recorded as absent although the study report derives them (RBSA). The
+partly correct values were mostly incomplete (a format or coverage detail missing) or out of date (a moved
+landing page, a dataset that now holds only recent years). All wrong values and the partly correct ones with
+clear evidence were corrected before the analysis below; none changed the linkage indicator in Section 4.3.
 
 ### 4.2 Landscape
 
 The catalog holds 91 datasets: 15 boundary-condition, 23 geometry, 15 characteristics, 7 operation, 21
 calibration, 5 reference-simulation and 5 context datasets (by primary role). Of these, 35 cover the United
-States only and 23 are global. 93% can be obtained without an agreement, but only 65% state a license that
+States only and 23 are global. 93% can be obtained without an agreement, but only 66% state a license that
 we could verify, 27% have a persistent identifier, and 43% have a peer-reviewed descriptor.
 
 Fig. 1 crosses workflow role with spatial granularity. Geometry is the best-served role: 18 of 23 datasets
@@ -290,10 +293,10 @@ Table 3. Linkage class by primary role (generated: `paper/tables/catalog_linkabi
 Ontology engineering tests a schema with competency questions it must answer. We wrote six and executed
 them as queries over the catalog (`paper/tables/competency.md`). For example, "which open datasets report
 measured energy at building or meter level?" returns ten datasets, none of which carries an identifier or
-building-precise location in its profile that would link it to a footprint (Liang: verify BDG2 site
-coordinates), and "which datasets lack an explicit license?" returns 32, including most weather products. The answers
-depend only on the schema's facets, which shows that the profiles are machine-actionable (RQ2). [TODO: decide
-whether to keep CQ results that depend on agent-filled fields not yet spot-checked.]
+building-precise location that would link it to a footprint (the Building Data Genome 2 metadata, for
+example, gives 15 distinct coordinates for 1,399 buildings, one per site), and "which datasets lack an explicit license?" returns 31, including most weather products. The answers
+depend only on the schema's facets, which shows that the profiles are machine-actionable (RQ2). They inherit
+the catalog's error rate estimated in Section 4.1.
 
 ## 5. Alignment benchmark (RQ3)
 
@@ -301,116 +304,134 @@ whether to keep CQ results that depend on agent-filled fields not yet spot-check
 
 The benchmark uses the public codebooks of CBECS 2018 (1,249 variables) and RECS 2020 (799 variables), which
 differ in format, units and conventions, and together contain 733 imputation flags and 213 sampling weights.
+It has two tasks, numbered T2 and T3 for continuity with the repository. A third task we designed,
+extracting a dataset profile from a publisher's documentation (T1), is left out: its natural gold standard
+would be the catalog of Section 4, which was itself drafted with an LLM, so it could not be scored
+independently.
 
-- **T1, dataset-profile extraction.** Input: a saved snapshot of the publisher's documentation. Output: a
-  `DatasetProfile`. Gold: the verified catalog entries. Metrics: field accuracy, macro-F1 per facet.
 - **T2, variable-to-concept mapping.** Input: variable name, label, questionnaire section and up to eight
-  codes. Output: one concept id or `none`, two alternatives and a confidence. Gold: two independent human
-  annotators with adjudication, starting from rule-based draft labels (Section 5.2). Evaluation sample: 300
-  substantive variables (150 per survey), stratified by concept, fixed seed. Metrics: Acc@1, Acc@3, MRR,
-  macro-F1, precision and recall of `none`.
+  codes. Output: one concept id or `none`, two alternatives and a confidence. Gold: two independent blind
+  annotations with adjudication and a human audit (Section 5.2). Evaluation sample: 300
+  substantive variables (150 per survey), stratified by concept, fixed seed. Metrics: Acc@1 (strict and
+  lenient), Acc@3, MRR, macro-F1, rate of false `none` answers.
 - **T3, code and unit normalization.** Input: the verbatim codebook entry. Output: weight and imputation
   flags, the flagged variable, unit and multiplier, missing codes and code list. Gold: derived exactly from
-  the codebook. Metrics: field accuracy, code-list Jaccard.
+  the codebook. Items: the 300 T2 variables plus a fixed supplement of 60 imputation flags and 30
+  replicate weights, so that detection is scored on positives too. Metrics: recall and false-alarm rate for
+  the detection fields, field accuracy, code-list Jaccard.
 
 ### 5.2 Gold labels
 
 T3 gold is derived deterministically and unit-tested. For T2, documented rules (`meta_urban.gold_draft`)
 pre-fill a draft label for every variable; they map 92.2% of the 1,104 substantive variables to 46 distinct
-concepts, and they were used only to stratify the evaluation sample. Two annotators then label the sample
-blind and independently: they see the variable and the vocabulary but neither the draft label nor any model
-output, because the provisional runs showed draft labels that annotators would likely have accepted although
-they are wrong (Section 5.5). Each annotator records the most specific concept and, for variables that
-genuinely fit two concepts, the other acceptable ones; we report strict and lenient accuracy. We report
-Cohen's kappa and the share of draft labels each annotator changed, and adjudicate disagreements in
-discussion (protocol in `benchmark/gold/README.md`). [TODO: run annotation; report kappa.]
+concepts and were used only to stratify the evaluation sample. The gold itself was produced in three blind
+steps. Two annotators labeled all 300 variables independently, seeing the variable (name, label, question,
+codes) and the vocabulary but neither the draft label nor any model output. Each recorded the most specific
+concept and, only for variables that genuinely fit two concepts, the other acceptable ones. A third,
+separate adjudicator resolved the disagreements, seeing both annotations but again no draft or model output.
+The annotators and the adjudicator were LLM agents, not people: Claude Opus 5.5 and Claude Sonnet 5.5
+(Anthropic) as the two annotators, so that their errors are less correlated than two runs of one model, and
+Claude Opus 5.5 as adjudicator, each in a fresh context restricted to the annotation files. We chose this
+because two qualified human annotators were not available, and we mitigate it in three ways: the evaluated
+models (Qwen3 and Llama 3.1) come from other developers and were never used to build the gold; every label,
+alternative and rationale is released for inspection; and the first author audited a random sample of 50
+adjudicated labels (Section 5.5). Strict accuracy scores against the adjudicated concept; lenient accuracy
+also accepts the recorded alternatives. The protocol and tooling (`meta_urban.gold_sheets`) work unchanged
+with human annotators, and we invite replacement of the gold by expert labels.
 
 ### 5.3 Conditions
 
 Four levels of target context test what the schema contributes: **L0** concept ids only; **L1** ids and
 preferred labels; **L2** full semantics (definition, broader concept, entity, canonical unit, synonyms);
-**L3** L2 restricted to the top 10 candidates from the lexical retriever (retrieve-then-rerank). For T1, the
-contrast is free-form metadata, the 2023 field list, and the Meta-Urban JSON Schema with enum definitions.
-[TODO: confirm conditions with co-authors.]
+**L3** L2 restricted to the top 10 candidates from the lexical retriever (retrieve-then-rerank).
 
 ### 5.4 Models, baselines and protocol
 
 Baselines are a TF-IDF lexical matcher (word and character n-grams) and a sentence-embedding matcher.
-Models: two open-weight models run locally through Ollama 0.40.16 on a laptop GPU (Qwen3 8B and Llama 3.1
-8B, both 4-bit quantized, thinking disabled, 8,192-token context; run 12-13 November 2026) and [TODO:
-frontier models, e.g., Claude Opus 5.5; record exact model ids and dates]. Outputs are constrained to a JSON
-schema whose concept field is an enumeration of the vocabulary, so every answer is a valid concept id. Each condition is run five times at temperature 0.7 to measure self-consistency (pairwise
+Models: two open-weight models from different developers, Qwen3 8B [@yang2025qwen3] and Llama 3.1 8B
+[@grattafiori2024llama3], run locally through Ollama 0.40.16 on a laptop GPU (4-bit quantization, thinking
+disabled, 8,192-token context, 12-13 November 2026). We chose small local models deliberately. Survey
+microdata, utility records and building registers are often held under data-use agreements that rule out
+sending records to a commercial API, and a city energy office is more likely to run an 8B model on its own
+hardware than to fine-tune or pay for a frontier model. Small models are also the harder test of RQ3: if
+schema semantics help anywhere, they should help where the model knows least. The harness also runs
+API-hosted models (Anthropic and OpenAI providers, with cached prompts), so frontier results can be added
+from the released code. Outputs are constrained to a JSON schema whose concept field is an enumeration of the
+vocabulary, so every answer is a valid concept id, and generation is capped at 2,048 tokens; a capped answer
+is scored as invalid. Each condition is run five times at temperature 0.7 to measure self-consistency (pairwise
 agreement, unanimous share, standard deviation of accuracy), and once at temperature 0 for the point
 estimate. All prompts and raw responses are cached and released. We report token cost and a
 coverage-accuracy curve that accepts mappings above a confidence threshold and routes the rest to a human.
 
 ### 5.5 Results
 
-PROVISIONAL. All numbers in this section are scored against the rule-based draft labels and will change once
-the adjudicated gold exists; the gold is read at scoring time, so no model needs to be re-run. They are given
-here to fix the analysis, not to be cited. Frontier-model results are pending.
+**Gold labels.** The two annotators agreed on 276 of 300 variables (Cohen's kappa = 0.91). Both changed the
+rule-based draft on 26% of the variables, and for 20% the draft was neither the adjudicated concept nor an
+accepted alternative. Rule-based labels would therefore have been a poor gold standard: scored on the draft
+labels, the accuracies in this section shift by -2 to +6 points and the L0-L1 contrast for Qwen3 is not
+significant. The adjudicated gold uses 45 distinct concepts; 5 variables have no applicable concept and 80
+(27%) have at least one accepted alternative. [TODO (author): report the human audit of 50 random gold labels,
+`python -m meta_urban.gold_sheets audit_report`.]
 
-**Task T2.** Table 4 and Fig. 3 report top-1 accuracy on the 277 mappable items of the sample (23 have no
-applicable concept). Both open-weight models beat the lexical baseline at every level. Concept ids alone
-(L0) already give 0.38-0.40, because many ids are readable names; adding preferred labels (L1) changes
-little (+0.03 and -0.02, exact McNemar p = 0.12 and 0.42). Adding definitions, broader concepts, entities,
-units and synonyms (L2) is what helps: +0.16 over L1 for both models (Qwen3: 53 items gained, 8 lost;
-Llama 3.1: 57 gained, 13 lost; both p < 0.001). The two models do not differ significantly at any level
-(p >= 0.28).
+**Task T2.** Table 4 and Fig. 3 report top-1 accuracy on the 295 mappable variables. Both open-weight models
+beat the lexical baseline at every level. Concept ids alone (L0) already give 0.42-0.43, because many ids are
+readable names. Adding preferred labels (L1) helps Qwen3 a little (+0.05; exact McNemar p = 0.005) and not
+Llama 3.1 (-0.03; p = 0.22). Adding definitions, broader concepts, entities, units and synonyms (L2) is what
+helps both: +0.12 (Llama 3.1; 55 variables gained, 20 lost) and +0.17 (Qwen3; 62 gained, 12 lost) over L0,
+both p < 0.001. With accepted alternatives counted as correct (lenient accuracy), L2 reaches 0.64 and 0.68.
+The two models do not differ significantly at L0, L2 or L3 (p >= 0.25).
 
-Table 4. T2 variable-to-concept mapping, provisional (draft labels). Acc@1 with bootstrap 95% interval,
-Acc@3 and MRR on 277 mappable items at temperature 0; macro-F1 and recall of `none` on all 300 items;
-agreement is the mean pairwise agreement of five repeats (one at temperature 0, four at 0.7). Tokens: mean
-input tokens per call. Generated: `paper/tables/bench_t2_main.csv`.
+Table 4. T2 variable-to-concept mapping on the adjudicated gold. Acc@1 with bootstrap 95% interval, lenient
+Acc@1 (accepted alternatives count as correct), Acc@3 and MRR on 295 mappable variables at temperature 0;
+macro-F1 on all 300; agreement is the mean pairwise agreement of five repeats (one at temperature 0, four at
+0.7); tokens are mean input tokens per call. Generated: `paper/tables/bench_t2_main.csv`.
 
-| Method | Level | Acc@1 [95% CI] | Acc@3 | MRR | Macro-F1 | `none` recall | Agreement | Tokens |
+| Method | Level | Acc@1 [95% CI] | Lenient | Acc@3 | MRR | Macro-F1 | Agreement | Tokens |
 |---|---|---|---|---|---|---|---|---|
-| Lexical TF-IDF | - | 0.31 [0.25, 0.36] | 0.60 | 0.47 | 0.37 | 0.00 | - | - |
-| Llama 3.1 8B | L0 | 0.40 [0.34, 0.45] | 0.69 | 0.54 | 0.36 | 0.00 | 0.79 | 477 |
-| Llama 3.1 8B | L1 | 0.38 [0.32, 0.43] | 0.62 | 0.49 | 0.39 | 0.17 | 0.87 | 800 |
-| Llama 3.1 8B | L2 | 0.53 [0.48, 0.59] | 0.79 | 0.65 | 0.48 | 0.13 | 0.91 | 3,873 |
-| Llama 3.1 8B | L3 | 0.53 [0.47, 0.59] | 0.71 | 0.62 | 0.50 | 0.43 | 0.91 | 701 |
-| Qwen3 8B | L0 | 0.38 [0.32, 0.44] | 0.53 | 0.45 | 0.43 | 0.04 | 0.98 | 486 |
-| Qwen3 8B | L1 | 0.41 [0.35, 0.47] | 0.57 | 0.49 | 0.48 | 0.09 | 0.98 | 809 |
-| Qwen3 8B | L2 | 0.57 [0.52, 0.63] | 0.72 | 0.64 | 0.53 | 0.09 | 0.98 | 3,884 |
-| Qwen3 8B | L3 | 0.53 [0.48, 0.59] | 0.69 | 0.61 | 0.52 | 0.30 | 0.98 | 710 |
-| [TODO: frontier] | | | | | | | | |
+| Lexical TF-IDF | - | 0.27 [0.23, 0.32] | 0.35 | 0.57 | 0.44 | 0.30 | - | - |
+| Llama 3.1 8B | L0 | 0.43 [0.37, 0.48] | 0.55 | 0.71 | 0.56 | 0.41 | 0.79 | 477 |
+| Llama 3.1 8B | L1 | 0.40 [0.34, 0.45] | 0.50 | 0.63 | 0.50 | 0.43 | 0.87 | 800 |
+| Llama 3.1 8B | L2 | 0.55 [0.49, 0.60] | 0.64 | 0.80 | 0.66 | 0.50 | 0.91 | 3,873 |
+| Llama 3.1 8B | L3 | 0.52 [0.46, 0.58] | 0.61 | 0.70 | 0.61 | 0.58 | 0.91 | 701 |
+| Qwen3 8B | L0 | 0.42 [0.36, 0.47] | 0.52 | 0.57 | 0.49 | 0.48 | 0.98 | 486 |
+| Qwen3 8B | L1 | 0.47 [0.42, 0.53] | 0.58 | 0.61 | 0.54 | 0.57 | 0.98 | 809 |
+| Qwen3 8B | L2 | 0.59 [0.53, 0.64] | 0.68 | 0.75 | 0.66 | 0.58 | 0.98 | 3,884 |
+| Qwen3 8B | L3 | 0.51 [0.46, 0.57] | 0.60 | 0.67 | 0.59 | 0.56 | 0.98 | 710 |
 
-![Fig. 3. Top-1 accuracy of variable-to-concept mapping by level of schema context (PROVISIONAL, draft
-labels). Error bars: bootstrap 95% intervals. Dashed line: lexical baseline.](figures/fig_t2_levels.png)
+![Fig. 3. Top-1 accuracy of variable-to-concept mapping by level of schema context, on the adjudicated gold.
+Error bars: bootstrap 95% intervals. Dashed line: lexical baseline.](figures/fig_t2_levels.png)
 
-Retrieve-then-rerank (L3) matches full semantics at 18% of the input tokens (about 705 instead of 3,880 per
-call); the difference from L2 is not significant (Qwen3 -0.04, p = 0.28; Llama 3.1 0.00). Its ceiling is the
-retriever: the gold concept is among the ten lexical candidates for 221 of 277 items (80%). On those items L3
-is more accurate than L2 (0.67 for both models, against 0.61), and on the other 56 it cannot be right, whereas
-L2 still recovers 25% (Llama 3.1) to 43% (Qwen3) of them. A better retriever, not a larger prompt, is
-therefore the cheaper route to higher accuracy. L3 also makes the models abstain more often: recall of
-`none` rises from 0.09-0.13 to 0.30-0.43, at the cost of more false abstentions (6-11% of items against
-1-4%).
+Retrieve-then-rerank (L3) uses 18% of the input tokens of L2 (about 705 instead of 3,880 per call) but does
+not match it: -0.02 for Llama 3.1 (p = 0.51) and -0.08 for Qwen3 (p = 0.02). The loss comes from the
+retriever. The gold concept is among the ten lexical candidates for 223 of 295 variables (76%); on those, L3
+is as accurate as L2 or better (0.68-0.69 against 0.63-0.66), and on the other 72 it cannot be right, whereas
+L2 still recovers 28% (Llama 3.1) to 36% (Qwen3) of them. A better retriever, not a larger prompt, is the
+cheaper route to higher accuracy. L3 also makes the models abstain more often, mostly wrongly: false `none`
+answers rise from 2-5% of variables at L2 to 8-13% at L3.
 
-Errors show what the semantics do (`paper/tables/bench_t2_errors.csv`). At L0, 30% of Qwen3's answers (13%
-of Llama 3.1's) fall in a different top-level group than the gold concept, such as an energy concept for a
-system variable; at L2 these drop to 15% and 7%. Most remaining errors stay within the right group (23% and
-32% of items at L2), and many of these are where the draft labels are weakest: both models agree with each
-other and against the draft on 43 items at L2. Some of these are plain draft errors (a lighting type labeled
-as energy use intensity because its name contains "intensity"; an induction cooktop labeled as a ventilation
-system), and some are genuinely ambiguous, such as the CBECS and RECS indicators "natural gas used for water
-heating", which are both energy-source flags and water-heating attributes. The blind, two-annotator gold with
-acceptable alternatives (Section 5.2) is designed for exactly these cases; the provisional accuracies are
-therefore likely to be lower bounds.
+The semantics change the kind of error as well as the rate (`paper/tables/bench_t2_errors.csv`). At L0, 27%
+of Qwen3's answers (12% of Llama 3.1's) fall in a different top-level group than the gold concept, such as an
+energy concept for a system variable; at L2 these drop to 16% and 9%. Most remaining errors stay within the
+right group (23% and 31% of variables at L2). They concentrate on distinctions the vocabulary draws but the
+codebooks blur. The most frequent error of Llama 3.1 is mapping an end-use consumption total (for example,
+electricity used for space heating) to the fuel's consumption concept instead of end-use energy; the most
+frequent of Qwen3 is mapping "natural gas used for water heating" to the water-heating system instead of the
+energy source, which the gold accepts as an alternative. Others are heat pumps (heating or cooling) and
+appliance use (equipment or behavior). Accuracy is higher on CBECS (0.61-0.63 at L2) than on RECS (0.48-0.54), whose questionnaire
+covers household topics that the vocabulary covers less well.
 
-Repeated runs are stable. The standard deviation of accuracy across five repeats is at most 0.015, and
-Qwen3's five repeats agree pairwise on 98% of items; Llama 3.1 is less consistent (79-91%). Self-consistency
+Repeated runs are stable. The standard deviation of accuracy across five repeats is at most 0.013, and
+Qwen3's repeats agree pairwise on 98% of variables; Llama 3.1 is less consistent (79-91%). Self-consistency
 is therefore not a useful signal of correctness for these models (Fig. 4): accepting only unanimous answers
-keeps 95% of Qwen3's mappings at almost unchanged accuracy. Qwen3's own confidence is more useful (accepting
-answers with confidence of at least 0.95 maps 51% of variables at 0.78 accuracy), Llama 3.1's is not, and
-agreement across conditions is the most model-agnostic signal: when both models agree at both L2 and L3, 36%
-of variables are mapped at 0.78 accuracy. This suggests a human-in-the-loop design in which agreement between
-cheap runs decides what a person must review.
+keeps 95% of Qwen3's mappings at almost unchanged accuracy (0.60 against 0.58). Qwen3's own confidence is
+useful (accepting answers with confidence of at least 0.95 maps 51% of variables at 0.84 accuracy), Llama
+3.1's is not (it reports 0.8 or 0.9 for almost everything), and agreement across conditions is the most
+model-agnostic signal: when both models agree at both L2 and L3, 36% of variables are mapped at 0.83
+accuracy. Agreement between cheap local runs can therefore decide which mappings a person must review.
 
-![Fig. 4. Coverage and accuracy when only some mappings are accepted automatically (L2, PROVISIONAL). Lines:
-threshold on the model's own confidence. Markers: accept only when the five repeats are unanimous, when L2
-and L3 agree, or when both models agree at both levels.](figures/fig_t2_coverage.png)
+![Fig. 4. Coverage and accuracy when only some mappings are accepted automatically (L2). Lines: threshold on
+the model's own confidence. Markers: accept only when the five repeats are unanimous, when L2 and L3 agree,
+or when both models agree at both levels.](figures/fig_t2_coverage.png)
 
 **Task T3.** Because the T2 sample excludes imputation flags and replicate weights, T3 adds a fixed supplement
 of 60 imputation flags and 30 replicate weights (seed 20261113; `benchmark/inputs/t3_extra_sample.csv`), so
@@ -476,9 +497,13 @@ Table 6 injects each T3 error type into the reference pipeline. Unit errors are 
 "thousand" multiplier or a Btu-kWh confusion changes national EUI by -99.9% or +241%), but they are also the
 easiest to catch with a plausibility check. Top-codes read as values are subtler: CBECS codes buildings with
 10 to 14 floors as 994 and 15 or more as 995, and treating these as numbers raises the weighted mean number of
-floors by 179%. A withheld climate-zone code kept as a category shifts the hot-zone share by only 2.5%. These
-sensitivities, combined with each model's T3 error rates, give the expected downstream error of each model.
-[TODO: combine with T3 results.]
+floors by 179%. A withheld climate-zone code kept as a category shifts the hot-zone share by only 2.5%. Combined
+with the T3 error rates (Table 5), the risks rank differently from the raw sensitivities. Weight and flag
+detection was essentially error-free, so the largest effect in Table 6 is also the least likely in practice.
+Multiplier errors are both large and frequent (4% of scaled units for Qwen3, 21% for Llama 3.1), so a
+plausibility check on intensities (for example, flagging an EUI outside 10 to 2,000 kWh/m2) is the single
+most valuable guard to put after an LLM-built pipeline. Top-code handling was not tested directly by T3 and
+remains a silent risk: a top-code is a valid number, so no range check catches it.
 
 Table 6. Effect of single normalization errors on CBECS 2018 quantities (generated:
 `paper/tables/downstream_d3_sensitivity.csv`).
@@ -503,50 +528,101 @@ T3 now measures. The legacy outputs are kept in the repository for comparison.
 
 ## 7. Discussion
 
-[TODO after results: answer RQ3 in a calibrated way ("the results support a qualified yes / no").]
+**Does the schema help (RQ3)?** The results support a qualified yes. What helps is the semantic content of
+the target, not its existence. A bare list of concept ids already lets an 8B model beat a lexical matcher by
+15 points, because good ids are readable; preferred labels add little; definitions, units, entities and
+the hierarchy add 12 to 17 points and cut errors that cross workflow roles by a quarter to two
+fifths. This is the part of a schema
+that is usually missing from UBEM data descriptions, which list field names but rarely say what a field
+means. The qualification is that even with full semantics, small local models map only 55-59% of variables
+exactly and 64-68% acceptably, so they are assistants, not replacements. Two design consequences follow. First,
+retrieval should be improved before prompts are enlarged: retrieve-then-rerank cut input tokens by 82%, and
+its losses came almost entirely from variables the lexical retriever never offered. Second, a mapping
+pipeline needs a routing rule, and model agreement across cheap runs is a better rule than a model's
+self-consistency, which was high whether the answer was right or not.
 
-**Implications for UBEM practice.** Three recommendations follow from Sections 4 and 6 regardless of the LLM
-results. (i) Treat weights, top-codes and imputation flags as part of the data contract; a pipeline that does
-not read them is wrong even when every value is transcribed correctly. (ii) Invest in identifiers (UBID,
-parcel) rather than in more datasets: without them, characteristics and energy can only be joined to
-geometry statistically. (iii) Publish machine-actionable profiles with explicit licenses; a third of the
-catalog has none we could verify.
+**Dataset-level knowledge matters as much as variable-level knowledge.** The clearest T3 failure was not a
+lack of reasoning: both models linked every RECS imputation flag to its variable, where the label names it,
+and none of the CBECS flags, where only the survey's naming convention (a leading Z) does so. Conventions
+like this live in user guides, not in codebook entries. A dataset profile that states them, as Meta-Urban's
+variable level does with its `flags_variable` and weight fields, removes the need for the model to guess.
+The same holds for survey weights and top-codes, which Section 6 shows to be the errors with the largest
+effect on UBEM quantities.
+
+**Implications for UBEM practice.** (i) Treat weights, top-codes and imputation flags as part of the data
+contract; a pipeline that does not read them is wrong even when every value is transcribed correctly.
+(ii) Put a plausibility check on intensities after any automated unit handling; one of the two models got
+a fifth of the scaled-unit multipliers wrong, each a factor-of-1,000 error. (iii) Invest in identifiers
+(UBID, parcel) rather than in more datasets: without them, characteristics and energy can be joined to
+geometry only statistically. (iv) Publish machine-actionable profiles with explicit licenses; a third of the
+catalog states none we could verify.
 
 **What the schema does not do.** Meta-Urban describes datasets and the meaning of their variables. It does
-not model buildings, thermal zones or systems, which CityGML and the Energy ADE already do; it maps to them.
+not model buildings, thermal zones or systems, which CityGML, the Energy ADE, Brick and BEDES already do; it
+maps to them (Section 3.4).
 
-**Limitations.** The catalog is agent-drafted and author-checked, and it is a purposive sample of national
-and global datasets, not an exhaustive census; city portals are out of scope. The benchmark uses two U.S.
-surveys for T2 and T3; [TODO: add one non-U.S. dataset, e.g., UK EPC or EUBUCCO attributes, if time
-allows]. The vocabulary is version 0.1 and will change as annotators find missing concepts. LLM results
-depend on model versions that will be retired; we release prompts and raw outputs so that the comparison can
-be repeated with new models.
+**Limitations.** (1) The T2 gold was built by LLM annotators, not by domain experts (Section 5.2). Their
+agreement was high (kappa = 0.91), but two models from one developer may share blind spots, so kappa may
+overstate reliability; the human audit and the released rationales are the check, and the tooling accepts
+expert labels unchanged. (2) Only two small open-weight models were tested. The harness runs API-hosted
+models, and larger models will very likely score higher; our claim is about the relative value of schema
+context, which held for both models. (3) The benchmark uses two U.S. surveys; codebooks in other languages
+and administrative registers such as energy performance certificates may behave differently. (4) The
+catalog is a purposive sample of national and global datasets drafted with an LLM; the verified error rate
+of a random sample is 2% wrong and 16% partly correct fields, and city portals are out of scope. (5) The
+vocabulary is version 0.1. Annotators found topics it lacks (energy insecurity, electric vehicles, internet
+access, outages, campus membership), which version 0.2 should add.
 
 ## 8. Conclusions
 
-[TODO: restate the questions; list findings with numbers; end on the recommendation, not the limitation.]
+Open data for urban building energy modeling are plentiful but hard to combine, and the description of a
+dataset, not the data, is often where integration fails. We asked four questions. On coverage (RQ1), a
+verified catalog of 91 open datasets shows that geometry and weather are well served, but only 3 of 48
+datasets with characteristics, operation, energy or simulation data share an identifier with building
+footprints; most can be joined to buildings only statistically. On representation (RQ2), the Meta-Urban 2.0
+schema describes these datasets and their variables in a form that validates, compiles to JSON Schema, SHACL
+and OWL, and answers competency queries directly. On alignment (RQ3), concept definitions raised the top-1
+accuracy of two local 8B LLMs from 0.42-0.43 to 0.55-0.59 on 295 survey variables, while labels alone did
+little; retrieval cut cost by 82% at some loss of accuracy; and model agreement identified a third of the
+mappings at 0.83 accuracy for automatic acceptance. On consequences (RQ4), the errors that remain are not
+cosmetic: a dropped multiplier changes energy totals a thousandfold, top-codes read as values nearly triple the
+mean number of floors, and ignoring survey weights biases energy use intensity by -16% to +102% across building
+types. The practical recommendation is to publish UBEM datasets with machine-readable semantics, including
+their weights, flags and conventions, and to let LLMs do the first pass of integration under a routing rule
+that sends disagreements to a person. Everything needed to repeat or extend this study, including the
+schema, catalog, gold labels, prompts and all model outputs, is open.
 
 ## Code and data availability
 
-All code, the schema and its generated artifacts, the catalog, gold labels, prompts, cached model outputs,
-and the scripts that produce every table and figure are at https://github.com/TensorBuildLab/UBEM-schema
-[TODO: make public and archive a release on Zenodo with a DOI at submission]. Source data are downloaded from
-EIA by `scripts/download_data.py`, which records SHA-256 checksums.
+All code, the schema and its generated artifacts, the catalog and its verification record, gold labels with
+annotations and rationales, prompts, cached model outputs, and the scripts that produce every table and
+figure are at https://github.com/TensorBuildLab/UBEM-schema [TODO (authors): make the repository public and
+archive the submission release on Zenodo for a DOI]. Source data are downloaded from EIA by
+`scripts/download_data.py`, which records SHA-256 checksums.
 
-## Declaration of generative AI use
+## Declaration of generative AI and AI-assisted technologies in the research and writing process
 
-Claude (Anthropic) was used to draft catalog entries under the verification protocol in Section 4.1, to
-verify references, to write code, and to edit text. LLMs are also the object of study in Section 5. The
-authors reviewed all content and take full responsibility for it. [TODO: adapt to the journal's required
-wording.]
+LLMs are the object of study in Section 5. In addition, during the preparation of this work the authors used
+Claude (Anthropic) to draft and re-verify catalog entries (Section 4.1), to produce and adjudicate the T2 gold
+labels (Section 5.2), to verify references, to write analysis code, and to draft and edit text. After using
+this tool, the authors reviewed and edited the content as needed and take full responsibility for the content
+of the published article.
+
+## Declaration of competing interest
+
+The authors declare that they have no known competing financial interests or personal relationships that
+could have appeared to influence the work reported in this paper. [TODO (authors): confirm.]
 
 ## Acknowledgments
 
-[TODO: funding statement; acknowledge experts who provided input in 2023 only if they agree to be named.]
+[TODO (authors): funding statement, or "This research did not receive any specific grant from funding
+agencies in the public, commercial, or not-for-profit sectors."]
 
 ## CRediT authorship contribution statement
 
-[TODO]
+**Liang Zhang:** Conceptualization, Methodology, Software, Investigation, Data curation, Writing - original
+draft, Writing - review and editing, Visualization. **Jianli Chen:** [TODO: e.g., Conceptualization,
+Writing - review and editing]. **Jia Zou:** [TODO: e.g., Methodology, Writing - review and editing].
 
 ## References
 

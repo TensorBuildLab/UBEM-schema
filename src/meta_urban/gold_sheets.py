@@ -2,6 +2,8 @@
 
     python -m meta_urban.gold_sheets make     # benchmark/gold/annotation/annotator_{1,2}.csv
     python -m meta_urban.gold_sheets merge    # kappa, draft-change rates, t2_gold_<dataset>.csv for adjudication
+    python -m meta_urban.gold_sheets audit    # random 50 adjudicated labels for a human audit
+    python -m meta_urban.gold_sheets audit_report
 
 Annotators see the variable (name, label, section, question, codes) and the concept vocabulary, but neither
 the rule-based draft label nor any model output, so the gold is not anchored on either. Each annotator fills
@@ -79,6 +81,7 @@ def merge() -> None:
             rows.append({"dataset": ds, "name": r.name, "label": r.label_1,
                          "annotator_1": r.concept_1, "annotator_2": r.concept_2,
                          "also_1": r.also_acceptable_1, "also_2": r.also_acceptable_2,
+                         "comment_1": r.comment_1, "comment_2": r.comment_2,
                          # agreed labels are adopted; disagreements stay empty until adjudicated in discussion
                          "adjudicated": prev.at[r.name, "adjudicated"] if keep else (r.concept_1 if agree else ""),
                          "also_acceptable": prev.at[r.name, "also_acceptable"] if keep else ";".join(alts),
@@ -88,6 +91,38 @@ def merge() -> None:
         print(f"wrote {out}: {sum(x['needs_adjudication'] == 'yes' for x in rows)} items need adjudication")
 
 
+def audit(n: int = 50, seed: int = 20261114) -> None:
+    """Random sample of adjudicated labels for a human audit (columns: verdict = agree | disagree, correction)."""
+    import numpy as np
+
+    g = pd.concat([pd.read_csv(BENCH / "gold" / f"t2_gold_{ds}.csv", dtype=str).fillna("")
+                   for ds in ("cbecs2018", "recs2020")])
+    items = {(i["dataset"], i["name"]): i for i in load_items()}
+    g = g[g.adjudicated != ""]
+    pick = g.iloc[np.random.default_rng(seed).choice(len(g), min(n, len(g)), replace=False)]
+    out = pd.DataFrame([{"dataset": r.dataset, "name": r.name, "label": r.label,
+                         "question": items[(r.dataset, r.name)].get("question") or "",
+                         "codes": _codes(items[(r.dataset, r.name)]), "gold": r.adjudicated,
+                         "also_acceptable": r.also_acceptable, "verdict": "", "correction": "", "comment": ""}
+                        for r in pick.itertuples()]).sort_values(["dataset", "name"])
+    path = ANN / "human_audit.csv"
+    if path.exists():
+        print(f"{path} exists; not overwritten")
+        return
+    out.to_csv(path, index=False, encoding="utf-8-sig")
+    print(f"wrote {path} ({len(out)} items)")
+
+
+def audit_report() -> None:
+    a = pd.read_csv(ANN / "human_audit.csv", dtype=str).fillna("")
+    done = a[a.verdict.str.strip() != ""]
+    if done.empty:
+        print("human audit not done yet")
+        return
+    ok = (done.verdict.str.strip().str.lower() == "agree").mean()
+    print(f"human audit: {len(done)} items, agreement with gold {ok:.3f}")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "make"
-    {"make": make, "merge": merge}[cmd]()
+    {"make": make, "merge": merge, "audit": audit, "audit_report": audit_report}[cmd]()

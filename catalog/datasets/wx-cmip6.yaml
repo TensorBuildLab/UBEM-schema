@@ -8,7 +8,7 @@ doi: null
 citation: Eyring, V., et al. (2016). Overview of the Coupled Model Intercomparison Project Phase 6 (CMIP6) experimental
   design and organization. Geoscientific Model Development 9, 1937-1958.
 reference_paper_doi: 10.5194/gmd-9-1937-2016
-license: Varies by modeling group (CC-BY-4.0 or CC-BY-NC-SA-4.0); not re-verified this session
+license: CC-BY-4.0 (all CMIP6 model output since the PCMDI terms of use v6.2, 2022)
 access_level: open_download
 distributions:
 - format: NetCDF
@@ -46,10 +46,10 @@ join_keys:
 variables_documented: true
 machine_readable: true
 versioned: true
-persistent_identifier: false
+persistent_identifier: true
 known_limitations: Global model grids are about 100 km or coarser and need downscaling and bias correction before
   use in building simulation; not all models provide hourly output.
-notes: Landing page, license terms, access and temporal frequencies (daily and monthly standard, some sub-daily)
+notes: Spot-check 2026-11-13, each CMIP6 dataset has its own DOI of the form 10.22033/ESGF/CMIP6.nnnn, so there is no single dataset DOI; the archive holds historical simulations as well as projections. Landing page, license terms, access and temporal frequencies (daily and monthly standard, some sub-daily)
   were NOT fetched this session; only the descriptor DOI was verified, so treat these fields as provisional. Historical
   1850-2014 and scenarios to 2100 are general knowledge. ESGF node and anonymous-download policy may vary.
 verified:

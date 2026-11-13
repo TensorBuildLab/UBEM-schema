@@ -63,14 +63,18 @@ gen-owl schema/meta_urban.yaml > schema/generated/meta_urban.owl.ttl
 
 ## Status (2026-11-13)
 
-- Done: schema v2.0, vocabulary v0.1, 91-entry catalog (agent-drafted, schema-valid), codebook parsing and
-  T3 gold, T2 draft labels and frozen evaluation sample, blind annotation sheets, lexical baseline, LLM harness,
-  open-weight runs (Qwen3 8B, Llama 3.1 8B; T2 x 4 levels x 5 repeats, T3 x 3 repeats), downstream analysis
-  (pipeline reproduces EIA totals within 0.01%), catalog analytics and figures, manuscript draft with
-  provisional results.
-- To do before submission: two-annotator blind T2 gold with kappa (`python -m meta_urban.gold_sheets make`,
-  then `merge`); author spot-check of catalog entries; T1 documentation snapshots; frontier-model runs;
-  BEDES/Brick/Energy ADE mappings; discussion and conclusions.
+Manuscript v0.2 (target: *Advanced Engineering Informatics*) with final results. Done: schema v2.0,
+vocabulary v0.1 with verified external mappings, 91-entry catalog with a field-level verification of a random
+20-entry sample (`catalog/verification_2026-11-13.csv`), T2 gold from two blind LLM annotators plus blind
+adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebooks, open-weight runs
+(Qwen3 8B, Llama 3.1 8B), downstream analysis, cover letter (`paper/cover_letter.md`) and a Word build
+(`paper/build/manuscript.docx`).
+
+Left for the authors: the human audit of 50 gold labels (`benchmark/gold/annotation/human_audit.csv`, then
+`python -m meta_urban.gold_sheets audit_report`), author list and CRediT roles, funding statement, making the
+repository public with a Zenodo DOI, and the journal's submission forms.
+
+To rebuild the Word version: `python scripts/build_docx.py`.
 
 All benchmark numbers are recomputed from the cache with:
 

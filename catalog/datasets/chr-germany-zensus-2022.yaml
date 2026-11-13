@@ -3,7 +3,7 @@ id: chr-germany-zensus-2022
 title: Zensus 2022 grid cell results (buildings by construction year, heating type and other housing topics)
 short_name: Germany Zensus 2022 grid
 publisher: Statistische Ämter des Bundes und der Länder (Federal Statistical Office and statistical offices of the Länder)
-landing_page: https://www.zensus2022.de/DE/Ergebnisse-des-Zensus/gitterzellen.html
+landing_page: https://www.destatis.de/zensus2022
 doi: null
 citation: 'Statistische Ämter des Bundes und der Länder. Zensus 2022: Ergebnisse in Gitterzellen (10 km, 1 km, 100 m), Stichtag
   15 May 2022.'
@@ -51,7 +51,7 @@ persistent_identifier: false
 known_limitations: Cell values are subject to statistical confidentiality (suppression or perturbation on all grid levels
   per the statistical offices), so small 100 m cells are incomplete; counts, not building-level attributes; topics are limited
   to published tables; the Zensus 2022 combines register data, a full building and dwelling survey and household sample surveys.
-notes: Added to reduce U.S.-centric coverage. The release page states that the grid tables are free to use with attribution
+notes: Spot-check 2026-11-13, the former zensus2022.de page redirects to destatis.de/zensus2022; the census combines registers, a full building and dwelling survey and household sample surveys, and census_complete refers to the building and dwelling count. Added to reduce U.S.-centric coverage. The release page states that the grid tables are free to use with attribution
   as Open Data, with each ZIP containing CSV files for the 10 km, 1 km and 100 m grids plus an XLSX dataset description; the
   explicit dl-de/by-2.0 wording was found for the boundary geodata only, so the license is recorded as the page wording. Heating-type
   tables ('Gebäude mit Wohnraum nach überwiegender Heizungsart') and building-year classes were confirmed via search result
