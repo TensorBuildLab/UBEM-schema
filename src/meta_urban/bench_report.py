@@ -393,6 +393,47 @@ def fig_coverage(frames, path, level: str = "L2") -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def label_sources() -> dict[str, dict]:
+    """Alternative label sets for a sensitivity analysis: (dataset, name) -> (label, acceptable labels)."""
+    from . import BENCH
+
+    ann = BENCH / "gold" / "annotation"
+    src = {}
+    items = load_items()
+    src["adjudicated gold"] = {(i["dataset"], i["name"]): (i["gold"], set(i["gold_ok"])) for i in items}
+    for k in (1, 2):
+        t = pd.read_csv(ann / f"annotator_{k}.csv", dtype=str).fillna("")
+        src[f"annotator {k} alone"] = {
+            (d, n): (c, {c} | {x.strip() for x in a.split(";") if x.strip()})
+            for d, n, c, a in zip(t.dataset, t.name, t.concept, t.also_acceptable)}
+    draft = {}
+    for ds in ("cbecs2018", "recs2020"):
+        t = pd.read_csv(BENCH / "gold" / f"t2_draft_{ds}.csv", dtype=str).fillna("")
+        draft.update({(ds, n): (c, {c}) for n, c in zip(t.name, t.draft_concept)})
+    src["rule-based draft (keyword rules)"] = {k: draft[k] for k in src["adjudicated gold"]}
+    return src
+
+
+def t2_label_sensitivity(frames) -> pd.DataFrame:
+    """Do the T2 conclusions hold whichever label set is used? Strict and lenient Acc@1 at repeat 0, and exact
+    McNemar p for the two contrasts the paper relies on (L0 vs L2, L2 vs L3)."""
+    rows = []
+    tabs = {m: {lv: item_table(df, lv) for lv in LEVELS if lv in set(df.level)} for m, df in frames.items()}
+    for src_name, lab in label_sources().items():
+        for model, t in tabs.items():
+            idx = [k for k in t["L0"].index if lab[k][0] != "none"]
+            hit = {lv: np.array([t[lv].at[k, "pred0"] == lab[k][0] for k in idx]) for lv in t}
+            len_ = {lv: np.mean([t[lv].at[k, "pred0"] in lab[k][1] for k in idx]) for lv in t}
+            row = {"labels": src_name, "model": short(model), "n": len(idx)}
+            for lv in LEVELS:
+                row[f"acc_{lv}"] = hit[lv].mean()
+                row[f"lenient_{lv}"] = len_[lv]
+            row["p_L0_vs_L2"] = mcnemar_exact(hit["L0"], hit["L2"])[2]
+            row["p_L2_vs_L3"] = mcnemar_exact(hit["L2"], hit["L3"])[2]
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
 def main() -> int:
     frames = {m: t2_frame(m) for m in models()}
     frames = {m: f for m, f in frames.items() if not f.empty}
@@ -404,6 +445,7 @@ def main() -> int:
         "bench_t2_errors": t2_errors(frames),
         "bench_t2_by_dataset": t2_by_dataset(frames),
         "bench_t3_fields": t3_fields(),
+        "bench_t2_label_sensitivity": t2_label_sensitivity(frames),
     }
     fig_levels(out["bench_t2_main"], FIG / "fig_t2_levels.png")
     out["bench_t2_coverage"] = fig_coverage(frames, FIG / "fig_t2_coverage.png")

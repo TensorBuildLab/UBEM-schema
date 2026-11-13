@@ -70,8 +70,7 @@ adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebo
 (Qwen3 8B, Llama 3.1 8B), downstream analysis, cover letter (`paper/cover_letter.md`) and a Word build
 (`paper/build/manuscript.docx`).
 
-Left for the authors: the human audit of 50 gold labels (`benchmark/gold/annotation/human_audit.csv`, then
-`python -m meta_urban.gold_sheets audit_report`), author list and CRediT roles, funding statement, making the
+Left for the authors: author list and CRediT roles, funding statement, making the
 repository public with a Zenodo DOI, and the journal's submission forms.
 
 To rebuild the Word version: `python scripts/build_docx.py`.

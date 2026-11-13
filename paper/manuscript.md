@@ -320,7 +320,7 @@ independently.
 
 - **T2, variable-to-concept mapping.** Input: variable name, label, questionnaire section and up to eight
   codes. Output: one concept id or `none`, two alternatives and a confidence. Gold: two independent blind
-  annotations with adjudication and a human audit (Section 5.2). Evaluation sample: 300
+  annotations with adjudication and a label-sensitivity analysis (Section 5.2). Evaluation sample: 300
   substantive variables (150 per survey), stratified by concept, fixed seed. Metrics: Acc@1 (strict and
   lenient), Acc@3, MRR, macro-F1, rate of false `none` answers.
 - **T3, code and unit normalization.** Input: the verbatim codebook entry. Output: weight and imputation
@@ -341,10 +341,11 @@ separate adjudicator resolved the disagreements, seeing both annotations but aga
 The annotators and the adjudicator were LLM agents, not people: Claude Opus 5.5 and Claude Sonnet 5.5
 (Anthropic) as the two annotators, so that their errors are less correlated than two runs of one model, and
 Claude Opus 5.5 as adjudicator, each in a fresh context restricted to the annotation files. We chose this
-because two qualified human annotators were not available, and we mitigate it in three ways: the evaluated
-models (Qwen3 and Llama 3.1) come from other developers and were never used to build the gold; every label,
-alternative and rationale is released for inspection; and the first author audited a random sample of 50
-adjudicated labels (Section 5.5). Strict accuracy scores against the adjudicated concept; lenient accuracy
+because qualified human annotators were not available, and we mitigate it in three ways: the evaluated models
+(Qwen3 and Llama 3.1) come from other developers and were never used to build the gold; every label,
+alternative and rationale is released for inspection; and we test whether the conclusions depend on the
+labels by rescoring every model against four label sets, namely the adjudicated gold, each annotator alone,
+and the deterministic keyword rules, which were fixed before any model was run (Section 5.5). Strict accuracy scores against the adjudicated concept; lenient accuracy
 also accepts the recorded alternatives. The protocol and tooling (`meta_urban.gold_sheets`) work unchanged
 with human annotators, and we invite replacement of the gold by expert labels.
 
@@ -379,8 +380,13 @@ rule-based draft on 26% of the variables, and for 20% the draft was neither the 
 accepted alternative. Rule-based labels would therefore have been a poor gold standard: scored on the draft
 labels, the accuracies in this section shift by -2 to +6 points and the L0-L1 contrast for Qwen3 is not
 significant. The adjudicated gold uses 45 distinct concepts; 5 variables have no applicable concept and 80
-(27%) have at least one accepted alternative. [TODO (author): report the human audit of 50 random gold labels,
-`python -m meta_urban.gold_sheets audit_report`.]
+(27%) have at least one accepted alternative. The keyword rules agree with the adjudicated gold on 75% of
+variables (80% counting alternatives; kappa = 0.73), so the two independent ways of labeling agree
+substantially where the rules apply. The conclusions below hold under every label set
+(`paper/tables/bench_t2_label_sensitivity.csv`): L2 beats L0 for both models under all four (p <= 0.001);
+Qwen3's loss from L2 to L3 is significant under the three annotation-based sets (p = 0.007-0.021) but not
+under the keyword rules (p = 0.28); and top-1 accuracies at a given level differ by at most 0.04 across the
+four sets.
 
 **Task T2.** Table 4 and Fig. 3 report top-1 accuracy on the 295 mappable variables. Both open-weight models
 beat the lexical baseline at every level. Concept ids alone (L0) already give 0.42-0.43, because many ids are
@@ -570,10 +576,11 @@ catalog states none we could verify.
 not model buildings, thermal zones or systems, which CityGML, the Energy ADE, Brick and BEDES already do; it
 maps to them (Section 3.4).
 
-**Limitations.** (1) The T2 gold was built by LLM annotators, not by domain experts (Section 5.2). Their
-agreement was high (kappa = 0.91), but two models from one developer may share blind spots, so kappa may
-overstate reliability; the human audit and the released rationales are the check, and the tooling accepts
-expert labels unchanged. (2) Only two small open-weight models were tested. The harness runs API-hosted
+**Limitations.** (1) The T2 gold was built by LLM annotators and was not audited by domain experts
+(Section 5.2). Their agreement was high (kappa = 0.91), but two models from one developer may share blind
+spots, so kappa may overstate reliability. The sensitivity analysis shows that the conclusions do not depend
+on which label set is used, but absolute accuracies could change under expert labels; the released
+rationales, an audit sheet and tooling that accepts expert labels unchanged are provided for that check. (2) Only two small open-weight models were tested. The harness runs API-hosted
 models, and larger models will very likely score higher; our claim is about the relative value of schema
 context, which held for both models. (3) The benchmark uses two U.S. surveys; codebooks in other languages
 and administrative registers such as energy performance certificates may behave differently. (4) The

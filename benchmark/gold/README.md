@@ -46,7 +46,9 @@ restricted to the annotation files (no web, no repository access, no draft label
 annotator 1 Claude Opus 5.5, annotator 2 Claude Sonnet 5.5, adjudicator Claude Opus 5.5. Results: kappa 0.914,
 raw agreement 0.920, 24 items adjudicated (`annotation/adjudication.csv` with rationales). Both annotators
 changed the draft on 25.7% of items. The evaluated models (Qwen3, Llama 3.1) are from other developers. The
-first author audits a random 50 adjudicated labels (`annotation/human_audit.csv`). Human annotations can
+gold was not audited by a domain expert; instead, every result is rescored against four label sets
+(`paper/tables/bench_t2_label_sensitivity.csv`). An expert can still audit the 50 sampled labels in
+`annotation/human_audit.csv` (instructions in `annotation/AUDIT_INSTRUCTIONS.md`). Human annotations can
 replace these files at any time; scoring reads the gold at run time.
 
 ## Task T1 (dataset profile extraction; not used in the paper)
