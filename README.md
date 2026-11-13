@@ -37,13 +37,16 @@ python -m meta_urban.bench baselines
 pytest -q
 ```
 
-Running LLMs (keys are read from the environment and never stored here):
+Running LLMs. Put credentials in a git-ignored `.env` file at the repository root (for example
+`ANTHROPIC_API_KEY=...`); the scripts read it and never print it. Open-weight models run through a local
+Ollama server.
 
 ```bash
-export ANTHROPIC_API_KEY=...       # or OPENAI_API_KEY, or a local OpenAI-compatible server:
-export META_URBAN_LOCAL_BASE_URL=http://localhost:11434/v1
-python -m meta_urban.bench t2 --model local:qwen3:32b --levels L0 L1 L2 L3 --repeats 5
-python -m meta_urban.bench t3 --model anthropic:<model-id> --repeats 3
+python -m meta_urban.bench plan --repeats 5                                   # calls and tokens, no spending
+python -m meta_urban.bench t2 --model ollama:qwen3:8b --repeats 5
+python -m meta_urban.bench t2 --model anthropic:claude-opus-5-5 --repeats 5 --workers 8
+python -m meta_urban.bench t3 --model anthropic:claude-opus-5-5 --repeats 3 --workers 8
+python -m meta_urban.bench score                                              # summary tables for all models
 ```
 
 Every call is cached in `benchmark/results/cache/` with token counts and latency, so results can be

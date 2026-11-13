@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 
 import numpy as np
 import pandas as pd
@@ -23,7 +24,7 @@ import pandas as pd
 from . import BENCH
 from .baselines import LexicalRetriever
 from .codebooks import load_all
-from .llm import _load_cache, complete, parse_json, t2_prompt, t3_prompt
+from .llm import approx_tokens, complete, load_cache, parse_json, t2_request, t3_request
 from .metrics import acc_at_k, macro_f1, majority, mrr, none_pr, run_agreement
 
 ITEMS = BENCH / "inputs" / "t2_t3_items.jsonl"
@@ -118,51 +119,112 @@ def t2_baselines(embedding: bool = False) -> pd.DataFrame:
     return out
 
 
-def t2_llm(model: str, levels: list[str], repeats: int, temperature: float, limit: int | None, k: int = 10):
+LEVELS = ["L0", "L1", "L2", "L3"]
+K_CANDIDATES = 10
+
+
+def _t2_jobs(levels, repeats, limit):
     items = load_items()[:limit] if limit else load_items()
-    cands = LexicalRetriever().rank(items, k=k)
-    cache = _load_cache(model)
+    cands = LexicalRetriever().rank(items, k=K_CANDIDATES)
+    jobs = []
     for level in levels:
         for rep in range(repeats):
             for it, cand in zip(items, cands):
-                prompt = t2_prompt(it, level, cand if level == "L3" else None)
-                complete(model, prompt, temperature=temperature, repeat=rep, cache=cache)
-            print(f"{model} {level} repeat {rep} done ({len(items)} items)", flush=True)
+                req = t2_request(it, level, cand if level == "L3" else None)
+                meta = {"task": "T2", "level": level, "dataset": it["dataset"], "name": it["name"]}
+                jobs.append((req, meta, rep))
+    return jobs
 
 
-def t2_score(model: str, levels: list[str], repeats: int, temperature: float, limit: int | None, k: int = 10):
+def _t3_jobs(repeats, limit):
     items = load_items()[:limit] if limit else load_items()
-    gold = [i["gold"] for i in items]
-    cands = LexicalRetriever().rank(items, k=k)
-    cache = _load_cache(model)
+    return [(t3_request(it), {"task": "T3", "dataset": it["dataset"], "name": it["name"]}, rep)
+            for rep in range(repeats) for it in items]
+
+
+def run_jobs(model: str, jobs: list, workers: int = 1) -> None:
+    cache = load_cache(model)
+    t0, done = time.time(), 0
+
+    def tick():
+        if done % 50 == 0:
+            print(f"{model}: {done}/{len(jobs)} ({time.time() - t0:.0f}s)", flush=True)
+
+    if workers <= 1:
+        for req, meta, rep in jobs:
+            complete(model, req, meta, rep, cache)
+            done += 1
+            tick()
+        return
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    with ThreadPoolExecutor(workers) as ex:
+        futs = [ex.submit(complete, model, req, meta, rep, cache) for req, meta, rep in jobs]
+        for f in as_completed(futs):
+            f.result()
+            done += 1
+            tick()
+
+
+def plan(repeats: int, limit: int | None) -> pd.DataFrame:
+    parts = []
+    for task, jobs in [("T2", _t2_jobs(LEVELS, repeats, limit)), ("T3", _t3_jobs(min(repeats, 3), limit))]:
+        df = pd.DataFrame([{"task": task, "level": m.get("level", "-"), "sys": approx_tokens(r["system"]),
+                            "user": approx_tokens(r["user"])} for r, m, _ in jobs])
+        g = df.groupby(["task", "level"]).agg(calls=("sys", "size"), system_tokens_each=("sys", "mean"),
+                                              user_tokens_each=("user", "mean"))
+        g["input_tokens_total_M"] = g.calls * (g.system_tokens_each + g.user_tokens_each) / 1e6
+        parts.append(g)
+    return pd.concat(parts).round(3)
+
+
+def _records(model: str) -> pd.DataFrame:
+    recs = list(load_cache(model).values())
+    return pd.DataFrame(recs) if recs else pd.DataFrame()
+
+
+def t2_score(model: str) -> pd.DataFrame:
+    df = _records(model)
+    if df.empty or "task" not in df:
+        return pd.DataFrame()
+    df = df[df.task == "T2"].copy()
+    items = load_items()
+    gold = {(i["dataset"], i["name"]): i["gold"] for i in items}
+    df = df[[(d, n) in gold for d, n in zip(df.dataset, df.name)]].copy()
+    df["gold"] = [gold[(d, n)] for d, n in zip(df.dataset, df.name)]
+    parsed = df.response.map(parse_json)
+    df["pred"] = parsed.map(lambda j: j.get("concept", "INVALID") if j else "INVALID")
+    df["ranked"] = parsed.map(lambda j: ([j.get("concept")] + [a for a in j.get("alternatives", []) if isinstance(a, str)])
+                              if j else ["INVALID"])
     rows = []
-    for level in levels:
-        runs, ranked_runs = [], []
-        for rep in range(repeats):
-            preds, ranks = [], []
-            for it, cand in zip(items, cands):
-                key_prompt = t2_prompt(it, level, cand if level == "L3" else None)
-                from .llm import _key
-                rec = cache.get(_key(model, key_prompt, temperature, rep))
-                js = parse_json(rec["response"]) if rec else None
-                p = (js or {}).get("concept", "PARSE_ERROR") if js else ("MISSING" if rec is None else "PARSE_ERROR")
-                preds.append(p)
-                ranks.append([p, *[a for a in (js or {}).get("alternatives", []) if isinstance(a, str)]])
-            runs.append(preds)
-            ranked_runs.append(ranks)
-        maj = [majority([r[k] for r in runs])[0] for k in range(len(items))]
-        pos = [k for k, g in enumerate(gold) if g != "none"]
-        per_rep_acc = [np.mean([runs[r][k] == gold[k] for k in range(len(items))]) for r in range(repeats)]
-        npr = none_pr(maj, gold)
+    for level, g in df.groupby("level"):
+        piv = g.pivot_table(index=["dataset", "name"], columns="repeat", values="pred", aggfunc="first").dropna()
+        if piv.empty:
+            continue
+        gl = [gold[k] for k in piv.index]
+        runs = [list(piv[c]) for c in piv.columns]
+        maj = [majority(list(row))[0] for row in piv.itertuples(index=False)]
+        acc_reps = [float(np.mean([p == q for p, q in zip(run, gl)])) for run in runs]
+        g0 = g[g.repeat == piv.columns[0]].drop_duplicates(["dataset", "name"]).set_index(["dataset", "name"]).loc[piv.index]
+        mappable = [k for k, x in enumerate(gl) if x != "none"]
+        npr = none_pr(maj, gl)
+        tin = g.input_tokens.fillna(0).sum()
+        cread = g["cache_read_input_tokens"].fillna(0).sum() if "cache_read_input_tokens" in g else 0.0
         rows.append({
-            "model": model, "level": level, "repeats": repeats, "n_items": len(items),
-            "acc@1_mean": float(np.mean(per_rep_acc)), "acc@1_sd": float(np.std(per_rep_acc, ddof=1)) if repeats > 1 else 0.0,
-            "acc@1_majority": float(np.mean([m == g for m, g in zip(maj, gold)])),
-            "acc@3_rep0_mappable": acc_at_k([ranked_runs[0][k] for k in pos], [gold[k] for k in pos], 3),
-            "macro_f1_majority": macro_f1(maj, gold),
+            "model": model, "level": level, "n_items": len(piv), "repeats": len(runs),
+            "acc@1_rep0": acc_reps[0], "acc@1_mean": float(np.mean(acc_reps)),
+            "acc@1_sd": float(np.std(acc_reps, ddof=1)) if len(runs) > 1 else 0.0,
+            "acc@1_majority": float(np.mean([m == x for m, x in zip(maj, gl)])),
+            "acc@3_rep0": acc_at_k([g0.ranked.iloc[k] for k in mappable], [gl[k] for k in mappable], 3),
+            "mrr_rep0": mrr([g0.ranked.iloc[k] for k in mappable], [gl[k] for k in mappable]),
+            "macro_f1_majority": macro_f1(maj, gl),
             "none_precision": npr[0], "none_recall": npr[1],
-            "invalid_rate": float(np.mean([p in {"PARSE_ERROR", "MISSING"} for r in runs for p in r])),
+            "invalid_rate": float((g.pred == "INVALID").mean()),
             **run_agreement(runs),
+            "mean_latency_s": float(g.latency_s.mean()),
+            "input_tokens_per_call": float((tin + cread) / len(g)),
+            "cache_read_share": float(cread / max(1.0, tin + cread)),
+            "gold_status": ",".join(sorted({i["gold_status"] for i in items})),
         })
     return pd.DataFrame(rows)
 
@@ -172,50 +234,80 @@ T3_FIELDS = ["is_weight", "is_replicate_weight", "is_imputation_flag", "flags_va
              "missing_codes"]
 
 
-def t3_gold(item: dict) -> dict:
-    return {k: item.get(k) for k in T3_FIELDS} | {"codes": item.get("code_list") or []}
-
-
 def _norm(field, v):
     if field in {"unit", "flags_variable"}:
-        return None if v in (None, "", "null", "None") else str(v)
+        return None if v in (None, "", "null", "None", "none") else str(v)
     if field == "unit_multiplier":
-        return None if v in (None, "", "null") else float(v)
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            return None
+        return None if v == 0.0 else v
     if field == "missing_codes":
         return sorted(str(x) for x in (v or []))
     return bool(v)
 
 
-def t3_run_and_score(model: str, repeats: int, temperature: float, limit: int | None) -> pd.DataFrame:
-    items = load_items()[:limit] if limit else load_items()
-    cache = _load_cache(model)
+def t3_score(model: str) -> pd.DataFrame:
+    df = _records(model)
+    if df.empty or "task" not in df:
+        return pd.DataFrame()
+    df = df[df.task == "T3"]
+    items = {(i["dataset"], i["name"]): i for i in load_items()}
     rows = []
-    for rep in range(repeats):
-        for it in items:
-            rec = complete(model, t3_prompt(it), temperature=temperature, repeat=rep, cache=cache)
-            js = parse_json(rec["response"]) or {}
-            g = t3_gold(it)
-            row = {"model": model, "repeat": rep, "dataset": it["dataset"], "name": it["name"]}
-            for f in T3_FIELDS:
-                row[f"ok_{f}"] = _norm(f, js.get(f)) == _norm(f, g[f])
-            gc = {str(c) for c, _ in g["codes"]}
-            pc = {str(c[0]) for c in js.get("codes", []) if isinstance(c, (list, tuple)) and c}
-            row["codes_jaccard"] = len(gc & pc) / len(gc | pc) if (gc | pc) else 1.0
-            rows.append(row)
-    out = pd.DataFrame(rows)
-    out.to_csv(RES / f"t3_{model.replace(':', '__')}.csv", index=False)
-    return out
+    for r in df.itertuples():
+        it = items.get((r.dataset, r.name))
+        if it is None:
+            continue
+        js = parse_json(r.response) or {}
+        row = {"model": model, "repeat": r.repeat, "dataset": r.dataset, "name": r.name, "valid": bool(js)}
+        for f in T3_FIELDS:
+            gold_v = it.get(f)
+            if f == "unit_multiplier" and it.get("unit") is None:
+                gold_v = None
+            row[f"ok_{f}"] = _norm(f, js.get(f)) == _norm(f, gold_v)
+        gc = {str(c) for c, _ in (it.get("code_list") or [])}
+        pc = {str(c[0]) for c in js.get("codes", []) if isinstance(c, (list, tuple)) and c}
+        row["codes_jaccard"] = len(gc & pc) / len(gc | pc) if (gc | pc) else 1.0
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def score_all() -> None:
+    from .llm import CACHE_DIR
+
+    t2, t3 = [], []
+    for p in sorted(CACHE_DIR.glob("*.jsonl")):
+        with open(p, encoding="utf-8") as fh:
+            model = json.loads(fh.readline())["model"]
+        s2 = t2_score(model)
+        if not s2.empty:
+            t2.append(s2)
+        s3 = t3_score(model)
+        if not s3.empty:
+            agg = s3.filter(like="ok_").mean().to_dict() | {"codes_jaccard": s3.codes_jaccard.mean(),
+                                                           "valid": s3.valid.mean(), "n": len(s3)}
+            t3.append(pd.DataFrame([{"model": model, **agg}]))
+    RES.mkdir(parents=True, exist_ok=True)
+    if t2:
+        T2 = pd.concat(t2)
+        T2.to_csv(RES / "t2_llm_summary.csv", index=False)
+        print(T2.round(3).to_string(index=False))
+    if t3:
+        T3 = pd.concat(t3)
+        T3.to_csv(RES / "t3_llm_summary.csv", index=False)
+        print(T3.round(3).to_string(index=False))
 
 
 # ------------------------------------------------------------------------------------------------- CLI
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["items", "baselines", "t2", "t3"])
+    ap.add_argument("cmd", choices=["items", "baselines", "plan", "t2", "t3", "score"])
     ap.add_argument("--model")
-    ap.add_argument("--levels", nargs="+", default=["L0", "L1", "L2", "L3"])
+    ap.add_argument("--levels", nargs="+", default=LEVELS)
     ap.add_argument("--repeats", type=int, default=5)
-    ap.add_argument("--temperature", type=float, default=0.7)
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--workers", type=int, default=1)
     ap.add_argument("--embedding", action="store_true")
     a = ap.parse_args(argv)
     if a.cmd == "items":
@@ -223,14 +315,17 @@ def main(argv=None) -> int:
         print(s.groupby("dataset").size(), "\n", s.gold.value_counts().head(15))
     elif a.cmd == "baselines":
         print(t2_baselines(a.embedding).round(3).to_string(index=False))
+    elif a.cmd == "plan":
+        print(plan(a.repeats, a.limit).to_string())
     elif a.cmd == "t2":
-        t2_llm(a.model, a.levels, a.repeats, a.temperature, a.limit)
-        res = t2_score(a.model, a.levels, a.repeats, a.temperature, a.limit)
-        res.to_csv(RES / f"t2_{a.model.replace(':', '__')}.csv", index=False)
-        print(res.round(3).to_string(index=False))
+        run_jobs(a.model, _t2_jobs(a.levels, a.repeats, a.limit), a.workers)
+        print(t2_score(a.model).round(3).to_string(index=False))
     elif a.cmd == "t3":
-        res = t3_run_and_score(a.model, a.repeats, a.temperature, a.limit)
-        print(res.filter(like="ok_").mean().round(3).to_string(), "\ncodes_jaccard", round(res.codes_jaccard.mean(), 3))
+        run_jobs(a.model, _t3_jobs(a.repeats, a.limit), a.workers)
+        s3 = t3_score(a.model)
+        print(s3.filter(like="ok_").mean().round(3).to_string(), "\ncodes_jaccard", round(s3.codes_jaccard.mean(), 3))
+    elif a.cmd == "score":
+        score_all()
     return 0
 
 
