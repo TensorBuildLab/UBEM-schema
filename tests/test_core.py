@@ -60,3 +60,17 @@ def test_weighted_totals_match_eia():
     df, _ = load_cbecs()
     d1 = d1_reference(df)
     assert (d1.rel_diff_pct.abs() < 0.1).all()
+
+
+def test_mcnemar_and_gold_ok():
+    import numpy as np
+
+    from meta_urban.bench import load_items
+    from meta_urban.bench_report import mcnemar_exact
+
+    a = np.array([True] * 10 + [False] * 10)
+    b = np.array([True] * 10 + [True] * 8 + [False] * 2)
+    n01, n10, p = mcnemar_exact(a, b)
+    assert (n01, n10) == (8, 0) and abs(p - 2 / 2 ** 8) < 1e-12
+    items = load_items()
+    assert len(items) == 300 and all(i["gold"] in i["gold_ok"] for i in items)

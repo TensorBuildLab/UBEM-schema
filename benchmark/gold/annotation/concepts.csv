@@ -1,0 +1,74 @@
+﻿id,label,broader,definition
+record_identifier,record identifier,record,"Identifier of a record, building, meter, station or respondent within the dataset."
+survey_weight,survey analysis weight,record,Final sampling weight that expands a sampled record to the population it represents.
+replicate_weight,replicate weight,record,"Replicate weight used to estimate sampling variance (jackknife, balanced repeated replication)."
+imputation_flag,imputation or quality flag,record,"Indicator that another variable's value was imputed, edited, top-coded or suppressed."
+timestamp,timestamp,record,Date and time the observation refers to.
+survey_reference_detail,survey administration detail,record,"Information about how the record was collected (respondent type, interview mode, data source), not about the building."
+geographic_coordinates,geographic coordinates,location,"Latitude and longitude (WGS84) of a building, station or grid cell centroid."
+administrative_region,administrative or statistical region,location,"Region the record belongs to, such as country, census region or division, state, county, city, tract or postal code."
+climate_zone,climate zone,location,"Climate classification of the location (ASHRAE/IECC climate zone, building America zone, Koppen class)."
+urban_rural_indicator,urban or rural indicator,location,Classification of the location by settlement type or density.
+dry_bulb_temperature,outdoor dry-bulb temperature,weather,Outdoor air temperature measured by a thermometer shielded from radiation and moisture.
+dew_point_temperature,outdoor dew-point temperature,weather,Temperature to which outdoor air must be cooled at constant pressure to reach saturation.
+relative_humidity,outdoor relative humidity,weather,Ratio of the partial pressure of water vapor in outdoor air to its saturation pressure.
+atmospheric_pressure,atmospheric station pressure,weather,Atmospheric pressure at the station elevation.
+global_horizontal_irradiance,global horizontal irradiance,weather,Total solar irradiance on a horizontal surface.
+direct_normal_irradiance,direct normal irradiance,weather,Beam solar irradiance on a surface normal to the sun.
+diffuse_horizontal_irradiance,diffuse horizontal irradiance,weather,Sky-diffuse solar irradiance on a horizontal surface.
+wind_speed,wind speed,weather,Horizontal wind speed at the reference height.
+wind_direction,wind direction,weather,"Direction from which the wind blows, clockwise from north."
+precipitation,precipitation,weather,Liquid-equivalent precipitation depth over the time step.
+degree_days,heating or cooling degree days,weather,Sum over a period of the difference between a base temperature and daily mean outdoor temperature.
+footprint,building footprint,geometry,Polygon of the building's ground outline.
+building_height,building height,geometry,Height of the building from ground to roof (state reference points where known).
+floors_above_ground,number of floors above ground,geometry,Count of storeys above grade.
+floors_below_ground,floors below ground or basement,geometry,"Count or presence of storeys below grade, including basements."
+floor_to_ceiling_height,floor-to-ceiling height,geometry,Typical vertical distance between floor and ceiling.
+building_shape,building plan shape,geometry,"Plan shape of the building (rectangle, L, U, H, courtyard, other)."
+roof_shape,roof shape or tilt,geometry,"Roof geometry type or slope (flat, pitched, gable, hip)."
+window_to_wall_ratio,window-to-wall ratio,geometry,Share of exterior wall area that is glazed.
+building_use_type,building use type,characteristics,"Principal activity or function of the building (office, retail, education, single-family, etc.)."
+secondary_use,secondary use or mixed use detail,characteristics,"Additional activities in the building, or a finer subtype of its principal activity."
+gross_floor_area,gross floor area,characteristics,"Total floor area within the exterior walls, all storeys."
+floor_area_category,floor area category,gross_floor_area,Binned floor area class.
+year_of_construction,year of construction,characteristics,Year (or period) the building was completed.
+renovation,renovation or retrofit,characteristics,"Whether and how the building was renovated (envelope, systems, lighting, additions)."
+wall_construction,exterior wall construction,characteristics,Material or assembly type of exterior walls.
+roof_construction,roof construction,characteristics,Material or assembly type of the roof.
+window_properties,window and glazing properties,characteristics,"Window type, number of panes, frame, coatings, tinting or shading."
+insulation,insulation level,characteristics,"Presence, level or upgrade of thermal insulation in walls, roof or floors."
+heating_system,space heating system,characteristics,"Type, presence or share of space heating equipment (furnace, boiler, heat pump, district heat)."
+cooling_system,space cooling system,characteristics,"Type, presence or share of space cooling equipment (chiller, packaged unit, central AC, room AC)."
+ventilation_system,ventilation and air distribution,characteristics,"Ventilation, economizer, variable-air-volume or air distribution features."
+water_heating_system,water heating system,characteristics,"Type, fuel or size of domestic or service hot-water equipment."
+lighting_system,lighting system,characteristics,"Lamp types, lit share of floor area, or lighting controls."
+plug_and_process_equipment,plug and process equipment,characteristics,"Presence or count of appliances, computers, refrigeration, cooking or other process equipment."
+energy_sources_used,energy sources used,characteristics,"Which fuels or energy carriers are used in the building, overall or for a given end use."
+onsite_generation,on-site generation or storage,characteristics,"On-site renewable or fossil generation, cogeneration, or energy storage."
+building_controls,building controls and energy management,characteristics,"Energy management systems, smart thermostats, demand response participation, or control strategies."
+dwelling_units,number of dwelling units,characteristics,Number of housing units in the building.
+ownership_tenure,"ownership, occupancy and tenure",characteristics,"Who owns or occupies the building and how (owner-occupied, rented, government, vacant share)."
+rooms_and_spaces,rooms and space counts,characteristics,"Counts or shares of specific spaces (bedrooms, classrooms, seats, beds, server rooms)."
+occupant_count,number of occupants,operation,"Number of people who work in, live in or occupy the building."
+operating_hours,operating hours and schedule,operation,Hours or days per week the building or a space is open or occupied.
+thermostat_setpoint,thermostat setpoint,operation,"Indoor temperature setpoint for heating or cooling, occupied or unoccupied."
+equipment_usage_behavior,equipment usage behavior,operation,How often or how long occupants use appliances or systems.
+time_use_activity,time-use activity,operation,"Activity episodes of persons with time, duration and location."
+thermal_comfort_response,thermal comfort response,operation,"Occupant thermal sensation, preference or acceptability vote."
+occupant_control_action,occupant control action,operation,"Observed occupant interaction with building systems (window opening, light switching, blinds, thermostat change)."
+indoor_environment,indoor environmental condition,operation,"Measured indoor temperature, humidity, CO2, illuminance or air quality."
+household_demographics,household or occupant demographics,operation,"Socio-demographic attributes of occupants (age, income, education, employment)."
+total_energy_consumption,total site energy consumption,energy,"Total site energy over a period, all carriers combined."
+electricity_consumption,electricity consumption,energy,Electricity used over a period.
+natural_gas_consumption,natural gas consumption,energy,Natural gas used over a period.
+other_fuel_consumption,other fuel consumption,energy,"Fuel oil, propane, district heat or steam, wood or other carriers used over a period."
+end_use_energy,end-use energy consumption,energy,"Energy attributed to one end use (heating, cooling, ventilation, water heating, lighting, cooking, refrigeration, office equipment, other)."
+energy_expenditure,energy expenditure,energy,Money spent on energy over a period.
+energy_use_intensity,energy use intensity,energy,Energy use per unit floor area over a year.
+load_timeseries,interval load or meter time series,energy,"Energy or power at sub-annual intervals from a meter, sub-meter or aggregate."
+peak_demand,peak demand,energy,Maximum power over a period.
+primary_energy_or_emissions,primary energy or emissions,energy,"Source energy, primary energy or greenhouse gas emissions attributed to energy use."
+grid_emission_factor,grid emission factor,context,Emissions per unit of electricity generated or consumed in a grid region.
+energy_price,energy price or tariff,context,"Price per unit energy or demand, or tariff structure."
+land_use,land use or land cover,context,Land use class or land cover of the parcel or cell.

@@ -61,14 +61,23 @@ gen-shacl schema/meta_urban.yaml > schema/generated/meta_urban.shacl.ttl
 gen-owl schema/meta_urban.yaml > schema/generated/meta_urban.owl.ttl
 ```
 
-## Status (2026-11-12)
+## Status (2026-11-13)
 
 - Done: schema v2.0, vocabulary v0.1, 91-entry catalog (agent-drafted, schema-valid), codebook parsing and
-  T3 gold, T2 draft labels and evaluation sample, lexical baseline, LLM harness, downstream analysis
-  (pipeline reproduces EIA totals within 0.01%), catalog analytics and figures, manuscript draft.
-- To do before submission: author spot-check of catalog entries; two-annotator T2 gold with kappa; T1
-  documentation snapshots; LLM runs (open-weight and frontier); BEDES/Brick/Energy ADE mappings; results,
-  discussion and conclusions in the manuscript.
+  T3 gold, T2 draft labels and frozen evaluation sample, blind annotation sheets, lexical baseline, LLM harness,
+  open-weight runs (Qwen3 8B, Llama 3.1 8B; T2 x 4 levels x 5 repeats, T3 x 3 repeats), downstream analysis
+  (pipeline reproduces EIA totals within 0.01%), catalog analytics and figures, manuscript draft with
+  provisional results.
+- To do before submission: two-annotator blind T2 gold with kappa (`python -m meta_urban.gold_sheets make`,
+  then `merge`); author spot-check of catalog entries; T1 documentation snapshots; frontier-model runs;
+  BEDES/Brick/Energy ADE mappings; discussion and conclusions.
+
+All benchmark numbers are recomputed from the cache with:
+
+```bash
+python -m meta_urban.bench score      # summary CSVs in benchmark/results/
+python -m meta_urban.bench_report     # paper tables (bench_*.csv) and Figs. 3-4
+```
 
 ## Licenses
 

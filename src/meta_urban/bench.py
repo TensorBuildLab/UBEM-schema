@@ -35,30 +35,48 @@ SEED = 20261112
 
 # ------------------------------------------------------------------------------------------------- items
 def gold_table() -> pd.DataFrame:
+    """Current T2 gold: adjudicated labels where present, otherwise the rule-based draft.
+
+    `also_acceptable` (semicolon-separated concept ids) records other concepts the adjudicators accept for an
+    ambiguous variable; lenient accuracy counts them as correct.
+    """
     parts = []
     for ds in ["cbecs2018", "recs2020"]:
         g = BENCH / "gold" / f"t2_gold_{ds}.csv"
         d = BENCH / "gold" / f"t2_draft_{ds}.csv"
+        t = pd.read_csv(d, dtype=str).fillna("")
+        t["gold"], t["gold_status"], t["also_acceptable"] = t["draft_concept"], "draft", ""
         if g.exists():
-            t = pd.read_csv(g, dtype=str).fillna("")
-            t["gold"] = np.where(t["adjudicated"] != "", t["adjudicated"], t["draft_concept"])
-            t["gold_status"] = np.where(t["adjudicated"] != "", "adjudicated", "draft")
-        else:
-            t = pd.read_csv(d, dtype=str).fillna("")
-            t["gold"], t["gold_status"] = t["draft_concept"], "draft"
-        parts.append(t[["dataset", "name", "gold", "gold_status"]])
+            a = pd.read_csv(g, dtype=str).fillna("").set_index(["dataset", "name"])
+            t = t.set_index(["dataset", "name"])
+            adj = a["adjudicated"].reindex(t.index).fillna("")
+            t.loc[adj != "", "gold"] = adj[adj != ""]
+            t.loc[adj != "", "gold_status"] = "adjudicated"
+            if "also_acceptable" in a:
+                t["also_acceptable"] = a["also_acceptable"].reindex(t.index).fillna("")
+            t = t.reset_index()
+        t["gold_ok"] = [[x] + [y.strip() for y in str(alt).split(";") if y.strip()]
+                        for x, alt in zip(t["gold"], t["also_acceptable"])]
+        parts.append(t[["dataset", "name", "gold", "gold_status", "gold_ok"]])
     return pd.concat(parts, ignore_index=True)
 
 
-def build_items(per_dataset: int = 150) -> pd.DataFrame:
+def build_items(per_dataset: int = 150, resample: bool = False) -> pd.DataFrame:
+    """Write all codebook items and, on first use only, draw the 300-variable evaluation sample.
+
+    The sample is frozen once drawn (it is stratified on the draft labels): later runs keep it, so that
+    adjudicated gold and new model runs refer to the same variables. Pass resample=True to redraw it.
+    """
     cb = load_all()
-    g = gold_table()
+    g = gold_table().drop(columns="gold_ok")
     df = cb.merge(g, on=["dataset", "name"], how="left")
     ITEMS.parent.mkdir(parents=True, exist_ok=True)
     with open(ITEMS, "w", encoding="utf-8") as fh:
         for rec in df.to_dict("records"):
             rec = {k: (None if isinstance(v, float) and np.isnan(v) else v) for k, v in rec.items()}
             fh.write(json.dumps(rec, ensure_ascii=False, default=str) + "\n")
+    if SAMPLE.exists() and not resample:
+        return pd.read_csv(SAMPLE)
     # evaluation sample for T2: substantive variables only (no imputation flags, no replicate weights),
     # stratified by draft concept so that rare concepts are represented, fixed seed.
     sub = df[~df.is_imputation_flag & ~df.is_replicate_weight].copy()
@@ -86,6 +104,14 @@ def load_items(sample_only: bool = True) -> list[dict]:
     if sample_only:
         keep = set(map(tuple, pd.read_csv(SAMPLE)[["dataset", "name"]].values))
         items = [i for i in items if (i["dataset"], i["name"]) in keep]
+    # gold is read at load time, so adjudicated labels apply without rebuilding items or re-running models
+    g = gold_table().set_index(["dataset", "name"])
+    for i in items:
+        k = (i["dataset"], i["name"])
+        if k in g.index:
+            i["gold"], i["gold_status"], i["gold_ok"] = g.at[k, "gold"], g.at[k, "gold_status"], g.at[k, "gold_ok"]
+        else:
+            i["gold_ok"] = [i["gold"]]
     return items
 
 

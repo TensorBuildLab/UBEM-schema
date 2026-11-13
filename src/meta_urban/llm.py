@@ -216,6 +216,10 @@ def _call(model: str, req: dict, settings: dict) -> tuple[str, dict]:
                 "think": settings.get("think", False),
                 "messages": [{"role": "system", "content": req["system"]}, {"role": "user", "content": req["user"]}],
                 "options": {k: settings[k] for k in ("temperature", "seed", "num_ctx") if k in settings}}
+        # Safety cap against runaway generation under constrained decoding (llama3.1 T3 hung for >600 s).
+        # The largest valid output in the cache is under 1,000 tokens, so the cap never binds on a normal
+        # answer; a capped answer is truncated JSON and is scored as invalid. Not part of the cache key.
+        body["options"]["num_predict"] = 2048
         r = requests.post(f"{host}/api/chat", json=body, timeout=600)
         r.raise_for_status()
         js = r.json()

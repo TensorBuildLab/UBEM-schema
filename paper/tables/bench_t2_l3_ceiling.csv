@@ -1,0 +1,5 @@
+model,level,gold_in_candidates_n,acc_if_in_candidates,gold_not_in_candidates_n,acc_if_not_in_candidates
+llama3.1:8b,L2,221,0.6063348416289592,56,0.25
+llama3.1:8b,L3,221,0.669683257918552,56,0.0
+qwen3:8b,L2,221,0.6108597285067874,56,0.42857142857142855
+qwen3:8b,L3,221,0.669683257918552,56,0.0

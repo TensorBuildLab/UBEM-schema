@@ -15,7 +15,7 @@ to paper/references.bib (all entries verified against Crossref, arXiv or officia
 - Verified catalog of 91 open datasets coded on six independent facets
 - Only 3 of 48 non-geometric building datasets can be linked to individual buildings
 - Ignoring survey weights shifts CBECS energy use intensity by -16% to +102% by building type
-- Benchmark tests whether schema semantics improve LLM alignment [TODO: headline number]
+- Concept definitions, not labels, raise LLM mapping accuracy by 16 points [PROVISIONAL]
 
 ## Abstract
 
@@ -32,9 +32,11 @@ weather are well covered at building or station resolution, but only 3 of 48 dat
 characteristics, operation, energy or simulation data share an identifier with building footprints, and 21
 have no usable key at all. We then define a benchmark with three tasks on the CBECS 2018 and RECS 2020
 codebooks (2,048 variables): dataset-profile extraction, variable-to-concept mapping, and code and unit
-normalization, and test five levels of schema context with open-weight and frontier LLMs over five repeats.
-[TODO: main LLM result, e.g., "Full schema semantics raised top-1 mapping accuracy from X to Y; retrieval
-added Z; run-to-run agreement was W".] Finally, we show that alignment errors matter downstream: a correct
+normalization, and test four levels of schema context with open-weight and frontier LLMs over five repeats.
+PROVISIONAL (draft labels): for two 8-billion-parameter open-weight models, concept definitions raised top-1
+mapping accuracy from 0.38-0.41 to 0.53-0.57, while concept labels alone did not help; retrieving ten
+candidates first kept that accuracy at 18% of the input tokens. [TODO: update with adjudicated gold and
+frontier models.] Finally, we show that alignment errors matter downstream: a correct
 pipeline reproduces EIA's published totals within 0.01%, whereas ignoring survey weights changes building
 counts by three orders of magnitude and floor-area-weighted energy use intensity by -16% to +102% across
 building types. The schema, catalog, benchmark, code and all results are open.
@@ -95,7 +97,7 @@ The contributions are:
    lists, aggregation semantics, weights and imputation flags, plus an 81-concept SKOS vocabulary (Section 3).
 2. A catalog of 91 open datasets coded with the schema and verified against publisher pages, and computed
    gap indicators, including a new linkage indicator (Section 4).
-3. An alignment benchmark with three tasks, gold labels, five levels of schema context, and a protocol that
+3. An alignment benchmark with three tasks, gold labels, four levels of schema context, and a protocol that
    follows current schema-matching practice (Section 5).
 4. A downstream analysis on CBECS 2018 that quantifies the effect of each class of alignment error on UBEM
    quantities (Section 6).
@@ -315,13 +317,17 @@ differ in format, units and conventions, and together contain 733 imputation fla
 
 T3 gold is derived deterministically and unit-tested. For T2, documented rules (`meta_urban.gold_draft`)
 pre-fill a draft label for every variable; they map 92.2% of the 1,104 substantive variables to 46 distinct
-concepts. Two annotators then accept or correct each draft label in the evaluation sample independently. We
-report Cohen's kappa and the share of draft labels changed. [TODO: run annotation; report kappa.] The draft
-rules are never shown to any baseline or model.
+concepts, and they were used only to stratify the evaluation sample. Two annotators then label the sample
+blind and independently: they see the variable and the vocabulary but neither the draft label nor any model
+output, because the provisional runs showed draft labels that annotators would likely have accepted although
+they are wrong (Section 5.5). Each annotator records the most specific concept and, for variables that
+genuinely fit two concepts, the other acceptable ones; we report strict and lenient accuracy. We report
+Cohen's kappa and the share of draft labels each annotator changed, and adjudicate disagreements in
+discussion (protocol in `benchmark/gold/README.md`). [TODO: run annotation; report kappa.]
 
 ### 5.3 Conditions
 
-Five levels of target context test what the schema contributes: **L0** concept ids only; **L1** ids and
+Four levels of target context test what the schema contributes: **L0** concept ids only; **L1** ids and
 preferred labels; **L2** full semantics (definition, broader concept, entity, canonical unit, synonyms);
 **L3** L2 restricted to the top 10 candidates from the lexical retriever (retrieve-then-rerank). For T1, the
 contrast is free-form metadata, the 2023 field list, and the Meta-Urban JSON Schema with enum definitions.
@@ -330,18 +336,83 @@ contrast is free-form metadata, the 2023 field list, and the Meta-Urban JSON Sch
 ### 5.4 Models, baselines and protocol
 
 Baselines are a TF-IDF lexical matcher (word and character n-grams) and a sentence-embedding matcher.
-Models: [TODO: at least two open-weight models run locally and two frontier models; record exact model ids
-and dates]. Each condition is run five times at temperature 0.7 to measure self-consistency (pairwise
+Models: two open-weight models run locally through Ollama 0.40.16 on a laptop GPU (Qwen3 8B and Llama 3.1
+8B, both 4-bit quantized, thinking disabled, 8,192-token context; run 12-13 November 2026) and [TODO:
+frontier models, e.g., Claude Opus 5.5; record exact model ids and dates]. Outputs are constrained to a JSON
+schema whose concept field is an enumeration of the vocabulary, so every answer is a valid concept id. Each condition is run five times at temperature 0.7 to measure self-consistency (pairwise
 agreement, unanimous share, standard deviation of accuracy), and once at temperature 0 for the point
 estimate. All prompts and raw responses are cached and released. We report token cost and a
 coverage-accuracy curve that accepts mappings above a confidence threshold and routes the rest to a human.
 
 ### 5.5 Results
 
-PROVISIONAL (draft labels, not to be reported): the lexical baseline reaches Acc@1 = 0.31, Acc@5 = 0.71 and
-MRR = 0.48 on the 277 mappable items of the sample; the correct concept is among its top 10 candidates for
-80% of items, which bounds L3. [TODO: replace with results on adjudicated gold; add Table 4 (T2 by model and
-level), Table 5 (T3 field accuracy), Fig. 3 (coverage-accuracy), and an error analysis with examples.]
+PROVISIONAL. All numbers in this section are scored against the rule-based draft labels and will change once
+the adjudicated gold exists; the gold is read at scoring time, so no model needs to be re-run. They are given
+here to fix the analysis, not to be cited. Frontier-model results are pending.
+
+**Task T2.** Table 4 and Fig. 3 report top-1 accuracy on the 277 mappable items of the sample (23 have no
+applicable concept). Both open-weight models beat the lexical baseline at every level. Concept ids alone
+(L0) already give 0.38-0.40, because many ids are readable names; adding preferred labels (L1) changes
+little (+0.03 and -0.02, exact McNemar p = 0.12 and 0.42). Adding definitions, broader concepts, entities,
+units and synonyms (L2) is what helps: +0.16 over L1 for both models (Qwen3: 53 items gained, 8 lost;
+Llama 3.1: 57 gained, 13 lost; both p < 0.001). The two models do not differ significantly at any level
+(p >= 0.28).
+
+Table 4. T2 variable-to-concept mapping, provisional (draft labels). Acc@1 with bootstrap 95% interval,
+Acc@3 and MRR on 277 mappable items at temperature 0; macro-F1 and recall of `none` on all 300 items;
+agreement is the mean pairwise agreement of five repeats (one at temperature 0, four at 0.7). Tokens: mean
+input tokens per call. Generated: `paper/tables/bench_t2_main.csv`.
+
+| Method | Level | Acc@1 [95% CI] | Acc@3 | MRR | Macro-F1 | `none` recall | Agreement | Tokens |
+|---|---|---|---|---|---|---|---|---|
+| Lexical TF-IDF | - | 0.31 [0.25, 0.36] | 0.60 | 0.47 | 0.37 | 0.00 | - | - |
+| Llama 3.1 8B | L0 | 0.40 [0.34, 0.45] | 0.69 | 0.54 | 0.36 | 0.00 | 0.79 | 477 |
+| Llama 3.1 8B | L1 | 0.38 [0.32, 0.43] | 0.62 | 0.49 | 0.39 | 0.17 | 0.87 | 800 |
+| Llama 3.1 8B | L2 | 0.53 [0.48, 0.59] | 0.79 | 0.65 | 0.48 | 0.13 | 0.91 | 3,873 |
+| Llama 3.1 8B | L3 | 0.53 [0.47, 0.59] | 0.71 | 0.62 | 0.50 | 0.43 | 0.91 | 701 |
+| Qwen3 8B | L0 | 0.38 [0.32, 0.44] | 0.53 | 0.45 | 0.43 | 0.04 | 0.98 | 486 |
+| Qwen3 8B | L1 | 0.41 [0.35, 0.47] | 0.57 | 0.49 | 0.48 | 0.09 | 0.98 | 809 |
+| Qwen3 8B | L2 | 0.57 [0.52, 0.63] | 0.72 | 0.64 | 0.53 | 0.09 | 0.98 | 3,884 |
+| Qwen3 8B | L3 | 0.53 [0.48, 0.59] | 0.69 | 0.61 | 0.52 | 0.30 | 0.98 | 710 |
+| [TODO: frontier] | | | | | | | | |
+
+![Fig. 3. Top-1 accuracy of variable-to-concept mapping by level of schema context (PROVISIONAL, draft
+labels). Error bars: bootstrap 95% intervals. Dashed line: lexical baseline.](figures/fig_t2_levels.png)
+
+Retrieve-then-rerank (L3) matches full semantics at 18% of the input tokens (about 705 instead of 3,880 per
+call); the difference from L2 is not significant (Qwen3 -0.04, p = 0.28; Llama 3.1 0.00). Its ceiling is the
+retriever: the gold concept is among the ten lexical candidates for 221 of 277 items (80%). On those items L3
+is more accurate than L2 (0.67 for both models, against 0.61), and on the other 56 it cannot be right, whereas
+L2 still recovers 25% (Llama 3.1) to 43% (Qwen3) of them. A better retriever, not a larger prompt, is
+therefore the cheaper route to higher accuracy. L3 also makes the models abstain more often: recall of
+`none` rises from 0.09-0.13 to 0.30-0.43, at the cost of more false abstentions (6-11% of items against
+1-4%).
+
+Errors show what the semantics do (`paper/tables/bench_t2_errors.csv`). At L0, 30% of Qwen3's answers (13%
+of Llama 3.1's) fall in a different top-level group than the gold concept, such as an energy concept for a
+system variable; at L2 these drop to 15% and 7%. Most remaining errors stay within the right group (23% and
+32% of items at L2), and many of these are where the draft labels are weakest: both models agree with each
+other and against the draft on 43 items at L2. Some of these are plain draft errors (a lighting type labeled
+as energy use intensity because its name contains "intensity"; an induction cooktop labeled as a ventilation
+system), and some are genuinely ambiguous, such as the CBECS and RECS indicators "natural gas used for water
+heating", which are both energy-source flags and water-heating attributes. The blind, two-annotator gold with
+acceptable alternatives (Section 5.2) is designed for exactly these cases; the provisional accuracies are
+therefore likely to be lower bounds.
+
+Repeated runs are stable. The standard deviation of accuracy across five repeats is at most 0.015, and
+Qwen3's five repeats agree pairwise on 98% of items; Llama 3.1 is less consistent (79-91%). Self-consistency
+is therefore not a useful signal of correctness for these models (Fig. 4): accepting only unanimous answers
+keeps 95% of Qwen3's mappings at almost unchanged accuracy. Qwen3's own confidence is more useful (accepting
+answers with confidence of at least 0.95 maps 51% of variables at 0.78 accuracy), Llama 3.1's is not, and
+agreement across conditions is the most model-agnostic signal: when both models agree at both L2 and L3, 36%
+of variables are mapped at 0.78 accuracy. This suggests a human-in-the-loop design in which agreement between
+cheap runs decides what a person must review.
+
+![Fig. 4. Coverage and accuracy when only some mappings are accepted automatically (L2, PROVISIONAL). Lines:
+threshold on the model's own confidence. Markers: accept only when the five repeats are unanimous, when L2
+and L3 agree, or when both models agree at both levels.](figures/fig_t2_coverage.png)
+
+**Task T3.** [TODO_T3_TABLE]
 
 ## 6. Do alignment errors matter downstream? (RQ4)
 
@@ -354,19 +425,19 @@ and C1 to within 0.01%, which validates the pipeline used as the reference below
 ### 6.2 Ignoring the survey design
 
 The 2023 case study processed CBECS records without weights. Doing so reports 6.4 thousand buildings instead of
-5.9 million. Less obviously, it also biases intensities. Fig. 3 compares the floor-area-weighted energy use
+5.9 million. Less obviously, it also biases intensities. Fig. 5 compares the floor-area-weighted energy use
 intensity (EUI) by principal building activity with and without weights. For the 16 activities that hold at
 least 0.5% of buildings, the unweighted EUI is off by -16% (food sales) to +102% (other), with 12 of 16
 overestimated: retail other than mall +45%, public assembly +31%, outpatient health care +27%. Inpatient
 health care holds 4.3% of records but 0.1% of buildings, so unweighted counts also distort the stock mix that
 archetype-based UBEM samples from.
 
-![Fig. 3. Error in floor-area-weighted EUI by principal building activity when CBECS 2018 survey weights are
+![Fig. 5. Error in floor-area-weighted EUI by principal building activity when CBECS 2018 survey weights are
 ignored, relative to the weighted estimate. Activities with at least 0.5% of weighted buildings are shown.](figures/fig_weights_eui_error.png)
 
 ### 6.3 Sensitivity to each normalization error
 
-Table 4 injects each T3 error type into the reference pipeline. Unit errors are the most damaging (a dropped
+Table 6 injects each T3 error type into the reference pipeline. Unit errors are the most damaging (a dropped
 "thousand" multiplier or a Btu-kWh confusion changes national EUI by -99.9% or +241%), but they are also the
 easiest to catch with a plausibility check. Top-codes read as values are subtler: CBECS codes buildings with
 10 to 14 floors as 994 and 15 or more as 995, and treating these as numbers raises the weighted mean number of
@@ -374,7 +445,7 @@ floors by 179%. A withheld climate-zone code kept as a category shifts the hot-z
 sensitivities, combined with each model's T3 error rates, give the expected downstream error of each model.
 [TODO: combine with T3 results.]
 
-Table 4. Effect of single normalization errors on CBECS 2018 quantities (generated:
+Table 6. Effect of single normalization errors on CBECS 2018 quantities (generated:
 `paper/tables/downstream_d3_sensitivity.csv`).
 
 | Error type | Quantity | Correct | With error | Relative error |

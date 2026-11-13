@@ -16,16 +16,28 @@ Protocol (to be run by the authors):
 
 1. **Sample.** `benchmark/inputs/t2_eval_sample.csv`: 300 substantive variables (150 CBECS 2018, 150 RECS
    2020; imputation flags and replicate weights excluded because they are trivial), stratified by draft concept,
-   seed 20261112.
-2. **Annotate independently.** Two annotators with UBEM experience fill `annotator_1` and `annotator_2` in
-   `t2_gold_<dataset>.csv` (copy of the draft file). Each sees the variable name, label, question text and
-   code list and the concept vocabulary (`schema/vocab/ubem_concepts.yaml`). They may accept the draft or
-   change it. Rule: choose the most specific concept the variable measures; `none` if no concept applies.
-3. **Agreement.** Report Cohen's kappa between annotators (`meta_urban.metrics.cohen_kappa`) and the share of
-   draft labels each annotator changed.
-4. **Adjudicate.** Disagreements are resolved in discussion; the result goes into `adjudicated`.
-5. **Vocabulary changes.** If annotators agree a concept is missing, record it in `notes` and add it to the
+   seed 20261112. The sample is frozen: `bench items` keeps it unless called with `resample=True`.
+2. **Annotate blind and independently.** `python -m meta_urban.gold_sheets make` writes
+   `annotation/annotator_1.csv`, `annotation/annotator_2.csv` and `annotation/concepts.csv`. The sheets show
+   the variable (name, label, section, question, codes) but **neither the draft label nor any model output**,
+   so the gold is anchored on neither. Rule: `concept` is the most specific concept the variable measures, or
+   `none`. Use `also_acceptable` (semicolon-separated ids) only when the variable genuinely fits another
+   concept as well, for example a fuel-by-end-use indicator ("natural gas used for water heating") that is
+   both an energy-source flag and a water-heating attribute. Annotators do not discuss items before merging.
+3. **Agreement.** `python -m meta_urban.gold_sheets merge` reports Cohen's kappa, raw agreement and the share
+   of draft labels each annotator changed, and writes `t2_gold_<dataset>.csv`. Agreed labels are adopted;
+   disagreements are marked `needs_adjudication`.
+4. **Adjudicate.** Resolve each flagged item in discussion and fill `adjudicated` (and `also_acceptable` if
+   needed). Re-running `merge` keeps adjudicated rows.
+5. **Score.** Gold is read at load time, so `python -m meta_urban.bench score` and
+   `python -m meta_urban.bench_report` use the adjudicated labels without re-running any model. Strict
+   accuracy uses `adjudicated`; lenient accuracy also accepts `also_acceptable`.
+6. **Vocabulary changes.** If annotators agree a concept is missing, record it in `notes` and add it to the
    vocabulary in a new version; do not silently re-label.
+
+Why blind: a check of the provisional runs found draft labels that are plainly wrong (high-intensity
+discharge lighting drafted as energy use intensity because of the word "intensity"; an induction cooktop
+drafted as a ventilation system). Annotators who see the draft tend to accept it.
 
 ## Task T1 (dataset profile extraction)
 
