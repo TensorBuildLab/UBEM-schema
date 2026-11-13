@@ -103,4 +103,4 @@ grows large, a separate *Scientific Data* data descriptor for the catalog is a n
 - [x] 2023 expert survey not used.
 - [ ] Author list, order and CRediT roles (Jianli Chen, Jia Zou).
 - [ ] Funding statement and competing interests.
-- [ ] Repository public, Zenodo DOI, license confirmation (suggested MIT code, CC BY 4.0 data).
+- [x] Repository public (2026-11-13) with MIT (code) and CC BY 4.0 (schema, catalog, benchmark); no Zenodo archive.

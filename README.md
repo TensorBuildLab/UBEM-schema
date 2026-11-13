@@ -70,8 +70,8 @@ adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebo
 (Qwen3 8B, Llama 3.1 8B), downstream analysis, cover letter (`paper/cover_letter.md`) and a Word build
 (`paper/build/manuscript.docx`).
 
-Left for the authors: author list and CRediT roles, funding statement, making the
-repository public with a Zenodo DOI, and the journal's submission forms.
+Left for the authors: author roles, funding, the corresponding-author email on the title page, and the
+journal's submission forms.
 
 To rebuild the submission files: `python scripts/graphical_abstract.py` then `python scripts/build_docx.py` (output in `paper/submission/`, checklist in `paper/submission/CHECKLIST.md`).
 
@@ -89,4 +89,4 @@ Code: MIT. Schema, vocabulary, catalog and gold labels: CC BY 4.0. Source datase
 
 ## Citation
 
-[TODO: add the journal citation and Zenodo DOI at release.]
+[TODO: add the journal citation after publication.]

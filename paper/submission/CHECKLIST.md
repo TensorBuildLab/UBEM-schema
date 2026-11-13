@@ -19,7 +19,7 @@ Checked against the journal's Guide for Authors on 2026-11-13. Rebuild every fil
 | Requirement | Status |
 |---|---|
 | Title concise, informative, no abbreviations | Done (no abbreviations) |
-| Author names, lowercase superscript affiliation letters, full postal addresses with country | Done for L. Zhang and J. Zou; **fill Jianli Chen's affiliation** |
+| Author names, lowercase superscript affiliation letters, full postal addresses with country | Done |
 | Corresponding author marked, email on title page | Marked; **fill the email** (placeholder kept out of the public repository) |
 | Abstract at most 150 words, purpose, procedures, findings with significance, no references | 148 words |
 | 1 to 7 keywords, avoiding "and"/"of" | 7 |
@@ -29,7 +29,7 @@ Checked against the journal's Guide for Authors on 2026-11-13. Rebuild every fil
 | CRediT statement | Section present; **fill co-author roles** |
 | Declaration of competing interest | Present |
 | Funding statement in the standard form | Section present; **fill** |
-| Data availability (Option C: deposit, link, statement) | Repository link and statement present; a Zenodo DOI for the release is recommended |
+| Data availability (Option C: deposit, link, statement) | Done (public GitHub repository link and statement) |
 | Declaration of generative AI and AI-assisted technologies in the manuscript preparation process | Present, exact section title, before the references |
 | Acknowledgments directly before the references | Done |
 | References numbered in square brackets in order of citation; DOIs where available | Done (Elsevier numeric style; journal style applied at proof) |

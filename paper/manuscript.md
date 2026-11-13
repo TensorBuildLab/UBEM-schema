@@ -13,7 +13,7 @@ Street, Tucson, AZ 85719, USA
 
 ^b^ National Laboratory of the Rockies, 15013 Denver West Parkway, Golden, CO 80401, USA
 
-^c^ [Affiliation and full postal address of Jianli Chen]
+^c^ College of Civil Engineering, Tongji University, 1239 Siping Road, Shanghai 200092, China
 
 ^d^ School of Computing and Augmented Intelligence, Arizona State University, Tempe, AZ 85281, USA
 
