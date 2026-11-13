@@ -2,7 +2,7 @@
 title: "Does domain semantics help large language models integrate open data for urban building energy modeling? The Meta-Urban schema, a verified open-data catalog, and a reproducible alignment benchmark"
 short_title: "Meta-Urban: schema, catalog and LLM alignment benchmark for UBEM open data"
 authors: "Liang Zhang (University of Arizona; National Laboratory of the Rockies), Jianli Chen (University of Utah), Jia Zou (Arizona State University) [TODO: confirm author list and order]"
-status: "DRAFT v0.2, 2026-11-13. Target journal: Advanced Engineering Informatics."
+status: "DRAFT v0.2, 2026-11-13. Target journal: Automation in Construction."
 bibliography: references.bib
 ---
 

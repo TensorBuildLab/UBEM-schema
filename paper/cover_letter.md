@@ -1,19 +1,22 @@
 [Date]
 
 Editor-in-Chief
-*Advanced Engineering Informatics*
+*Automation in Construction*
 
 Dear Editor,
 
 We submit the manuscript "Does domain semantics help large language models integrate open data for urban
 building energy modeling? The Meta-Urban schema, a verified open-data catalog, and a reproducible alignment
-benchmark" for consideration as a research article in *Advanced Engineering Informatics*.
+benchmark" for consideration as a research article in *Automation in Construction*.
 
 Urban building energy modeling (UBEM) combines weather, building geometry, building characteristics, operation
 and measured energy from many open sources, and integrating them is still largely manual. LLMs are an obvious
 way to automate it, but there is no machine-actionable target to align to and no evidence that a domain
-schema, rather than the model, drives accuracy. The paper addresses both, which we believe fits the journal's
-focus on knowledge representation and AI for engineering data:
+schema, rather than the model, drives accuracy. The paper addresses both. We believe it fits the journal's
+focus on information technology for the management of the built environment: it concerns how building-stock
+information is described, linked and integrated across sources, it extends the semantic building models the
+journal has published (Brick, CityGML and BEDES are all mapped), and it evaluates LLMs on that information
+under controlled conditions:
 
 1. **A schema and vocabulary.** Meta-Urban 2.0 is a LinkML schema (compiled to JSON Schema, SHACL and OWL)
    with a dataset level that profiles DCAT 3 using six UBEM facets, and a variable level that records concept,

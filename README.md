@@ -63,7 +63,7 @@ gen-owl schema/meta_urban.yaml > schema/generated/meta_urban.owl.ttl
 
 ## Status (2026-11-13)
 
-Manuscript v0.2 (target: *Advanced Engineering Informatics*) with final results. Done: schema v2.0,
+Manuscript v0.2 (target: *Automation in Construction*) with final results. Done: schema v2.0,
 vocabulary v0.1 with verified external mappings, 91-entry catalog with a field-level verification of a random
 20-entry sample (`catalog/verification_2026-11-13.csv`), T2 gold from two blind LLM annotators plus blind
 adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebooks, open-weight runs
