@@ -17,8 +17,8 @@ focus on knowledge representation and AI for engineering data:
 
 1. **A schema and vocabulary.** Meta-Urban 2.0 is a LinkML schema (compiled to JSON Schema, SHACL and OWL)
    with a dataset level that profiles DCAT 3 using six UBEM facets, and a variable level that records concept,
-   unit, code list, survey weights and imputation flags. It comes with an 81-concept SKOS vocabulary mapped to
-   CityGML and other building standards.
+   unit, code list, survey weights and imputation flags. It comes with an 81-concept SKOS vocabulary with verified
+   mappings to Brick, BEDES and the CityGML Energy ADE.
 2. **A verified catalog and a new linkage indicator.** Of 91 open datasets, only 3 of 48 that carry
    characteristics, operation, energy or simulation data share an identifier with building footprints.
 3. **A controlled benchmark.** On 2,048 variables of two national surveys, we vary the schema context given

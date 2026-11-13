@@ -12,48 +12,48 @@
 dct:Location a sh:NodeShape ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n8 ;
-	sh:property _:c14n61 , _:c14n80 , _:c14n91 ;
+	sh:property _:c14n61 , _:c14n81 , _:c14n92 ;
 	sh:targetClass dct:Location .
 dct:PeriodOfTime a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n122 ;
-	sh:property _:c14n23 , _:c14n73 ;
+	sh:ignoredProperties _:c14n125 ;
+	sh:property _:c14n23 , _:c14n74 ;
 	sh:targetClass dct:PeriodOfTime .
 skos:Concept a sh:NodeShape ;
 	rdfs:comment "A concept in the Meta-Urban vocabulary: a quantity or attribute that a UBEM workflow consumes or produces (for example floor area, principal building activity, dry-bulb temperature, annual electricity use). Concepts form a hierarchy through `broader` and point to equivalent terms in other standards." , "One code of a categorical variable and its meaning." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n200 , _:c14n201 ;
-	sh:property _:c14n103 , _:c14n107 , _:c14n117 , _:c14n127 , _:c14n13 , _:c14n143 , _:c14n145 , _:c14n146 , _:c14n149 , _:c14n20 , _:c14n63 , _:c14n65 , _:c14n77 , _:c14n79 , _:c14n90 ;
+	sh:ignoredProperties _:c14n202 , _:c14n203 ;
+	sh:property _:c14n101 , _:c14n106 , _:c14n110 , _:c14n120 , _:c14n13 , _:c14n130 , _:c14n146 , _:c14n148 , _:c14n151 , _:c14n20 , _:c14n63 , _:c14n64 , _:c14n66 , _:c14n78 , _:c14n80 , _:c14n91 , _:c14n98 ;
 	sh:targetClass skos:Concept .
 csvw:Column a sh:NodeShape ;
 	rdfs:comment "Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a gridded dataset." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n86 ;
-	sh:property _:c14n128 , _:c14n138 , _:c14n141 , _:c14n148 , _:c14n17 , _:c14n21 , _:c14n29 , _:c14n43 , _:c14n45 , _:c14n54 , _:c14n59 , _:c14n72 , _:c14n81 , _:c14n84 , _:c14n94 ;
+	sh:ignoredProperties _:c14n87 ;
+	sh:property _:c14n131 , _:c14n141 , _:c14n144 , _:c14n150 , _:c14n17 , _:c14n21 , _:c14n29 , _:c14n43 , _:c14n45 , _:c14n54 , _:c14n59 , _:c14n73 , _:c14n82 , _:c14n85 , _:c14n95 ;
 	sh:targetClass csvw:Column .
 dcat:Catalog a sh:NodeShape ;
 	rdfs:comment "A collection of dataset profiles and the concept vocabulary they refer to." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n93 ;
+	sh:ignoredProperties _:c14n94 ;
 	sh:property _:c14n12 , _:c14n50 ;
 	sh:targetClass dcat:Catalog .
 dcat:Dataset a sh:NodeShape ;
 	rdfs:comment "Dataset-level description of one open dataset, sufficient to decide whether and how it can feed a UBEM workflow, and to join it with other datasets." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n76 ;
-	sh:property _:c14n0 , _:c14n10 , _:c14n106 , _:c14n110 , _:c14n123 , _:c14n126 , _:c14n131 , _:c14n132 , _:c14n139 , _:c14n144 , _:c14n15 , _:c14n150 , _:c14n16 , _:c14n18 , _:c14n3 , _:c14n32 , _:c14n36 , _:c14n40 , _:c14n41 , _:c14n42 , _:c14n46 , _:c14n47 , _:c14n48 , _:c14n49 , _:c14n5 , _:c14n51 , _:c14n58 , _:c14n7 , _:c14n70 , _:c14n85 , _:c14n87 , _:c14n96 , _:c14n99 ;
+	sh:ignoredProperties _:c14n77 ;
+	sh:property _:c14n0 , _:c14n10 , _:c14n102 , _:c14n109 , _:c14n113 , _:c14n126 , _:c14n129 , _:c14n134 , _:c14n135 , _:c14n142 , _:c14n147 , _:c14n15 , _:c14n152 , _:c14n16 , _:c14n18 , _:c14n3 , _:c14n32 , _:c14n36 , _:c14n40 , _:c14n41 , _:c14n42 , _:c14n46 , _:c14n47 , _:c14n48 , _:c14n49 , _:c14n5 , _:c14n51 , _:c14n58 , _:c14n7 , _:c14n71 , _:c14n86 , _:c14n88 , _:c14n97 ;
 	sh:targetClass dcat:Dataset .
 dcat:Distribution a sh:NodeShape ;
 	rdfs:comment "One way of obtaining the data." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n71 ;
-	sh:property _:c14n125 , _:c14n142 , _:c14n31 , _:c14n52 ;
+	sh:ignoredProperties _:c14n72 ;
+	sh:property _:c14n128 , _:c14n145 , _:c14n31 , _:c14n52 ;
 	sh:targetClass dcat:Distribution .
 prov:Activity a sh:NodeShape ;
 	rdfs:comment "Provenance of the profile itself (who checked it, when, against which sources)." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n56 ;
-	sh:property _:c14n114 , _:c14n153 , _:c14n26 ;
+	sh:property _:c14n117 , _:c14n155 , _:c14n26 ;
 	sh:targetClass prov:Activity .
 _:c14n0 sh:datatype xsd:integer ;
 	sh:maxCount 1 ;
@@ -61,190 +61,186 @@ _:c14n0 sh:datatype xsd:integer ;
 	sh:order 22 ;
 	sh:path meta_urban:record_count .
 _:c14n1 rdf:first "open_download" ;
-	rdf:rest _:c14n78 .
+	rdf:rest _:c14n79 .
 _:c14n10 sh:description "UBEM workflow steps the dataset feeds; first value is the primary role." ;
-	sh:in _:c14n159 ;
+	sh:in _:c14n161 ;
 	sh:minCount 1 ;
 	sh:order 11 ;
 	sh:path meta_urban:ubem_roles .
-_:c14n100 rdf:first "national" ;
+_:c14n100 rdf:first "count" ;
+	rdf:rest _:c14n11 .
+_:c14n101 sh:datatype xsd:string ;
+	sh:nodeKind sh:Literal ;
+	sh:order 11 ;
+	sh:path skos:broadMatch .
+_:c14n102 sh:class dcat:Distribution ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 10 ;
+	sh:path dcat:distribution .
+_:c14n103 rdf:first "national" ;
 	rdf:rest _:c14n57 .
-_:c14n101 rdf:first "utility_id" ;
-	rdf:rest _:c14n115 .
-_:c14n102 rdf:first "station_id" ;
-	rdf:rest _:c14n197 .
-_:c14n103 sh:datatype xsd:string ;
+_:c14n104 rdf:first "utility_id" ;
+	rdf:rest _:c14n118 .
+_:c14n105 rdf:first "station_id" ;
+	rdf:rest _:c14n199 .
+_:c14n106 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 10 ;
 	sh:path skos:closeMatch .
-_:c14n104 rdf:first "datetime" ;
-	rdf:rest _:c14n195 .
-_:c14n105 rdf:first "instantaneous" ;
-	rdf:rest _:c14n133 .
-_:c14n106 sh:datatype xsd:string ;
+_:c14n107 rdf:first "datetime" ;
+	rdf:rest _:c14n198 .
+_:c14n108 rdf:first "instantaneous" ;
+	rdf:rest _:c14n136 .
+_:c14n109 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 29 ;
 	sh:path meta_urban:known_limitations .
-_:c14n107 sh:datatype xsd:string ;
+_:c14n11 rdf:first "share" ;
+	rdf:rest rdf:nil .
+_:c14n110 sh:datatype xsd:string ;
 	sh:description "SI (or SI-accepted) unit in which normalized values are expressed." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path meta_urban:canonical_unit .
-_:c14n108 rdf:first "administrative_record" ;
-	rdf:rest _:c14n147 .
-_:c14n109 rdf:first "categorical" ;
+_:c14n111 rdf:first "administrative_record" ;
+	rdf:rest _:c14n149 .
+_:c14n112 rdf:first "categorical" ;
 	rdf:rest _:c14n60 .
-_:c14n11 rdf:first "share" ;
-	rdf:rest rdf:nil .
-_:c14n110 sh:in _:c14n89 ;
+_:c14n113 sh:in _:c14n90 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 20 ;
 	sh:path meta_urban:statistical_nature .
-_:c14n111 rdf:first "simulation_synthetic" ;
+_:c14n114 rdf:first "simulation_synthetic" ;
 	rdf:rest _:c14n35 .
-_:c14n112 rdf:first "crowdsourced" ;
+_:c14n115 rdf:first "crowdsourced" ;
 	rdf:rest _:c14n24 .
-_:c14n113 rdf:first "restricted_commercial" ;
+_:c14n116 rdf:first "restricted_commercial" ;
 	rdf:rest rdf:nil .
-_:c14n114 sh:datatype xsd:string ;
+_:c14n117 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path meta_urban:date .
-_:c14n115 rdf:first "balancing_authority" ;
-	rdf:rest _:c14n83 .
-_:c14n116 rdf:first "climate_projection" ;
-	rdf:rest _:c14n111 .
-_:c14n117 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path skos:prefLabel .
-_:c14n118 rdf:first "climate_zone" ;
-	rdf:rest _:c14n194 .
-_:c14n119 rdf:first "static" ;
-	rdf:rest _:c14n105 .
+_:c14n118 rdf:first "balancing_authority" ;
+	rdf:rest _:c14n84 .
+_:c14n119 rdf:first "climate_projection" ;
+	rdf:rest _:c14n114 .
 _:c14n12 sh:class skos:Concept ;
 	sh:nodeKind sh:IRI ;
 	sh:order 1 ;
 	sh:path meta_urban:concepts .
-_:c14n120 rdf:first "unknown" ;
+_:c14n120 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path skos:prefLabel .
+_:c14n121 rdf:first "climate_zone" ;
+	rdf:rest _:c14n196 .
+_:c14n122 rdf:first "static" ;
+	rdf:rest _:c14n108 .
+_:c14n123 rdf:first "unknown" ;
 	rdf:rest rdf:nil .
-_:c14n121 rdf:first "identifier" ;
+_:c14n124 rdf:first "identifier" ;
 	rdf:rest rdf:nil .
-_:c14n122 rdf:first rdf:type ;
+_:c14n125 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n123 sh:datatype xsd:string ;
+_:c14n126 sh:datatype xsd:string ;
 	sh:description "Weight variables and how to use them (required for weighted sample surveys)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 21 ;
 	sh:path meta_urban:sampling_weights .
-_:c14n124 rdf:first "grid_cell_coarse" ;
-	rdf:rest _:c14n69 .
-_:c14n125 sh:datatype xsd:string ;
+_:c14n127 rdf:first "grid_cell_coarse" ;
+	rdf:rest _:c14n70 .
+_:c14n128 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path dct:format .
-_:c14n126 sh:datatype xsd:string ;
+_:c14n129 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path dct:license .
-_:c14n127 sh:in _:c14n169 ;
-	sh:maxCount 1 ;
-	sh:order 6 ;
-	sh:path meta_urban:entity .
-_:c14n128 sh:datatype xsd:boolean ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 12 ;
-	sh:path meta_urban:is_weight .
-_:c14n129 rdf:first "climate_zone_iecc" ;
-	rdf:rest _:c14n28 .
 _:c14n13 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path meta_urban:id ;
 	sh:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n130 rdf:first "state_province" ;
-	rdf:rest _:c14n118 .
-_:c14n131 sh:class prov:Activity ;
+_:c14n130 sh:in _:c14n184 ;
+	sh:maxCount 1 ;
+	sh:order 6 ;
+	sh:path meta_urban:entity .
+_:c14n131 sh:datatype xsd:boolean ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 12 ;
+	sh:path meta_urban:is_weight .
+_:c14n132 rdf:first "climate_zone_iecc" ;
+	rdf:rest _:c14n28 .
+_:c14n133 rdf:first "state_province" ;
+	rdf:rest _:c14n121 .
+_:c14n134 sh:class prov:Activity ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 31 ;
 	sh:path prov:wasGeneratedBy .
-_:c14n132 sh:in _:c14n75 ;
+_:c14n135 sh:in _:c14n76 ;
 	sh:order 24 ;
 	sh:path meta_urban:join_keys .
-_:c14n133 rdf:first "total_over_period" ;
-	rdf:rest _:c14n88 .
-_:c14n134 rdf:first "grid_cell_fine" ;
-	rdf:rest _:c14n204 .
-_:c14n135 rdf:first "timestamp" ;
+_:c14n136 rdf:first "total_over_period" ;
+	rdf:rest _:c14n89 .
+_:c14n137 rdf:first "grid_cell_fine" ;
+	rdf:rest _:c14n206 .
+_:c14n138 rdf:first "timestamp" ;
 	rdf:rest rdf:nil .
-_:c14n136 rdf:first "fips_county" ;
+_:c14n139 rdf:first "fips_county" ;
 	rdf:rest _:c14n38 .
-_:c14n137 rdf:first skos:broadMatch ;
+_:c14n14 rdf:first "typical_year_synthetic" ;
+	rdf:rest _:c14n119 .
+_:c14n140 rdf:first skos:broadMatch ;
 	rdf:rest _:c14n34 .
-_:c14n138 sh:in _:c14n182 ;
+_:c14n141 sh:in _:c14n172 ;
 	sh:maxCount 1 ;
 	sh:order 9 ;
 	sh:path meta_urban:entity .
-_:c14n139 sh:datatype xsd:string ;
+_:c14n142 sh:datatype xsd:string ;
 	sh:description "What one record describes (building, meter, household, station, grid_cell, region, person_day, ...)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 15 ;
 	sh:path meta_urban:unit_of_observation .
-_:c14n14 rdf:first "typical_year_synthetic" ;
-	rdf:rest _:c14n116 .
-_:c14n140 rdf:first "city" ;
+_:c14n143 rdf:first "city" ;
 	rdf:rest _:c14n39 .
-_:c14n141 sh:in _:c14n119 ;
+_:c14n144 sh:in _:c14n122 ;
 	sh:maxCount 1 ;
 	sh:order 8 ;
 	sh:path meta_urban:aggregation .
-_:c14n142 sh:datatype xsd:string ;
+_:c14n145 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path dcat:accessURL .
-_:c14n143 sh:datatype xsd:string ;
+_:c14n146 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 9 ;
 	sh:path skos:exactMatch .
-_:c14n144 sh:datatype xsd:string ;
+_:c14n147 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path skos:altLabel .
-_:c14n145 sh:datatype xsd:string ;
-	sh:nodeKind sh:Literal ;
-	sh:order 11 ;
-	sh:path skos:relatedMatch .
-_:c14n146 sh:class skos:Concept ;
+_:c14n148 sh:class skos:Concept ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 4 ;
 	sh:path skos:broader .
-_:c14n147 rdf:first "measured_monitoring" ;
+_:c14n149 rdf:first "measured_monitoring" ;
 	rdf:rest _:c14n22 .
-_:c14n148 sh:in _:c14n30 ;
-	sh:maxCount 1 ;
-	sh:order 3 ;
-	sh:path meta_urban:datatype .
-_:c14n149 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path skos:prefLabel .
 _:c14n15 sh:datatype xsd:string ;
 	sh:description "ISO 8601 duration of the finest time step, or \"static\" or \"irregular\"." ;
 	sh:maxCount 1 ;
@@ -252,31 +248,37 @@ _:c14n15 sh:datatype xsd:string ;
 	sh:order 18 ;
 	sh:path dcat:temporalResolution ;
 	sh:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
-_:c14n150 sh:datatype xsd:string ;
+_:c14n150 sh:in _:c14n30 ;
+	sh:maxCount 1 ;
+	sh:order 3 ;
+	sh:path meta_urban:datatype .
+_:c14n151 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path skos:prefLabel .
+_:c14n152 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path dct:publisher .
-_:c14n151 rdf:first "registration_required" ;
+_:c14n153 rdf:first "registration_required" ;
 	rdf:rest _:c14n4 .
-_:c14n152 rdf:first "ubid" ;
-	rdf:rest _:c14n102 .
-_:c14n153 sh:datatype xsd:string ;
+_:c14n154 rdf:first "ubid" ;
+	rdf:rest _:c14n105 .
+_:c14n155 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path meta_urban:by .
-_:c14n154 rdf:first "reference_simulation" ;
-	rdf:rest _:c14n160 .
-_:c14n155 rdf:first "calibration_validation" ;
-	rdf:rest _:c14n154 .
-_:c14n156 rdf:first "operation_use" ;
-	rdf:rest _:c14n155 .
-_:c14n157 rdf:first "building_characteristics" ;
+_:c14n156 rdf:first "reference_simulation" ;
+	rdf:rest _:c14n162 .
+_:c14n157 rdf:first "calibration_validation" ;
 	rdf:rest _:c14n156 .
-_:c14n158 rdf:first "geometry_inventory" ;
+_:c14n158 rdf:first "operation_use" ;
 	rdf:rest _:c14n157 .
-_:c14n159 rdf:first "boundary_conditions" ;
+_:c14n159 rdf:first "building_characteristics" ;
 	rdf:rest _:c14n158 .
 _:c14n16 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
@@ -284,125 +286,129 @@ _:c14n16 sh:datatype xsd:string ;
 	sh:order 0 ;
 	sh:path meta_urban:id ;
 	sh:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n160 rdf:first "context_coupling" ;
+_:c14n160 rdf:first "geometry_inventory" ;
+	rdf:rest _:c14n159 .
+_:c14n161 rdf:first "boundary_conditions" ;
+	rdf:rest _:c14n160 .
+_:c14n162 rdf:first "context_coupling" ;
 	rdf:rest rdf:nil .
-_:c14n161 rdf:first "reference_simulation" ;
-	rdf:rest _:c14n167 .
-_:c14n162 rdf:first "calibration_validation" ;
-	rdf:rest _:c14n161 .
-_:c14n163 rdf:first "operation_use" ;
-	rdf:rest _:c14n162 .
-_:c14n164 rdf:first "building_characteristics" ;
+_:c14n163 rdf:first "reference_simulation" ;
+	rdf:rest _:c14n169 .
+_:c14n164 rdf:first "calibration_validation" ;
 	rdf:rest _:c14n163 .
-_:c14n165 rdf:first "geometry_inventory" ;
+_:c14n165 rdf:first "operation_use" ;
 	rdf:rest _:c14n164 .
-_:c14n166 rdf:first "boundary_conditions" ;
+_:c14n166 rdf:first "building_characteristics" ;
 	rdf:rest _:c14n165 .
-_:c14n167 rdf:first "context_coupling" ;
+_:c14n167 rdf:first "geometry_inventory" ;
+	rdf:rest _:c14n166 .
+_:c14n168 rdf:first "boundary_conditions" ;
+	rdf:rest _:c14n167 .
+_:c14n169 rdf:first "context_coupling" ;
 	rdf:rest rdf:nil .
-_:c14n168 rdf:first "building" ;
-	rdf:rest _:c14n170 .
-_:c14n169 rdf:first "site" ;
-	rdf:rest _:c14n168 .
 _:c14n17 sh:datatype xsd:string ;
 	sh:description "For an imputation or quality flag, the variable it refers to." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 14 ;
 	sh:path meta_urban:flags_variable .
-_:c14n170 rdf:first "zone" ;
-	rdf:rest _:c14n171 .
-_:c14n171 rdf:first "system" ;
-	rdf:rest _:c14n172 .
-_:c14n172 rdf:first "envelope" ;
+_:c14n170 rdf:first "building" ;
+	rdf:rest _:c14n83 .
+_:c14n171 rdf:first "building" ;
 	rdf:rest _:c14n173 .
-_:c14n173 rdf:first "household" ;
+_:c14n172 rdf:first "site" ;
+	rdf:rest _:c14n171 .
+_:c14n173 rdf:first "zone" ;
 	rdf:rest _:c14n174 .
-_:c14n174 rdf:first "occupant" ;
+_:c14n174 rdf:first "system" ;
 	rdf:rest _:c14n175 .
-_:c14n175 rdf:first "meter" ;
+_:c14n175 rdf:first "envelope" ;
 	rdf:rest _:c14n176 .
-_:c14n176 rdf:first "region" ;
+_:c14n176 rdf:first "household" ;
 	rdf:rest _:c14n177 .
-_:c14n177 rdf:first "weather_station" ;
+_:c14n177 rdf:first "occupant" ;
 	rdf:rest _:c14n178 .
-_:c14n178 rdf:first "grid_cell" ;
+_:c14n178 rdf:first "meter" ;
 	rdf:rest _:c14n179 .
-_:c14n179 rdf:first "dataset_record" ;
-	rdf:rest rdf:nil .
+_:c14n179 rdf:first "region" ;
+	rdf:rest _:c14n180 .
 _:c14n18 sh:description "Finest location detail released publicly." ;
-	sh:in _:c14n68 ;
+	sh:in _:c14n69 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 16 ;
 	sh:path meta_urban:spatial_granularity .
-_:c14n180 rdf:first "building" ;
-	rdf:rest _:c14n82 .
-_:c14n181 rdf:first "building" ;
-	rdf:rest _:c14n183 .
-_:c14n182 rdf:first "site" ;
+_:c14n180 rdf:first "weather_station" ;
 	rdf:rest _:c14n181 .
-_:c14n183 rdf:first "zone" ;
-	rdf:rest _:c14n184 .
-_:c14n184 rdf:first "system" ;
+_:c14n181 rdf:first "grid_cell" ;
+	rdf:rest _:c14n182 .
+_:c14n182 rdf:first "dataset_record" ;
+	rdf:rest rdf:nil .
+_:c14n183 rdf:first "building" ;
 	rdf:rest _:c14n185 .
-_:c14n185 rdf:first "envelope" ;
+_:c14n184 rdf:first "site" ;
+	rdf:rest _:c14n183 .
+_:c14n185 rdf:first "zone" ;
 	rdf:rest _:c14n186 .
-_:c14n186 rdf:first "household" ;
+_:c14n186 rdf:first "system" ;
 	rdf:rest _:c14n187 .
-_:c14n187 rdf:first "occupant" ;
+_:c14n187 rdf:first "envelope" ;
 	rdf:rest _:c14n188 .
-_:c14n188 rdf:first "meter" ;
+_:c14n188 rdf:first "household" ;
 	rdf:rest _:c14n189 .
-_:c14n189 rdf:first "region" ;
+_:c14n189 rdf:first "occupant" ;
 	rdf:rest _:c14n190 .
 _:c14n19 rdf:first "float" ;
-	rdf:rest _:c14n95 .
-_:c14n190 rdf:first "weather_station" ;
+	rdf:rest _:c14n96 .
+_:c14n190 rdf:first "meter" ;
 	rdf:rest _:c14n191 .
-_:c14n191 rdf:first "grid_cell" ;
+_:c14n191 rdf:first "region" ;
 	rdf:rest _:c14n192 .
-_:c14n192 rdf:first "dataset_record" ;
+_:c14n192 rdf:first "weather_station" ;
+	rdf:rest _:c14n193 .
+_:c14n193 rdf:first "grid_cell" ;
+	rdf:rest _:c14n194 .
+_:c14n194 rdf:first "dataset_record" ;
 	rdf:rest rdf:nil .
-_:c14n193 rdf:first "census_region_division" ;
-	rdf:rest _:c14n64 .
-_:c14n194 rdf:first "census_region_division" ;
+_:c14n195 rdf:first "census_region_division" ;
+	rdf:rest _:c14n65 .
+_:c14n196 rdf:first "census_region_division" ;
 	rdf:rest _:c14n53 .
-_:c14n195 rdf:first "geometry" ;
-	rdf:rest _:c14n121 .
-_:c14n196 rdf:first "geometry" ;
-	rdf:rest _:c14n74 .
-_:c14n197 rdf:first "grid_cell" ;
-	rdf:rest _:c14n198 .
-_:c14n198 rdf:first "census_block_group" ;
-	rdf:rest _:c14n199 .
-_:c14n199 rdf:first "census_tract" ;
-	rdf:rest _:c14n37 .
+_:c14n197 rdf:first "geometry" ;
+	rdf:rest _:c14n75 .
+_:c14n198 rdf:first "geometry" ;
+	rdf:rest _:c14n124 .
+_:c14n199 rdf:first "grid_cell" ;
+	rdf:rest _:c14n200 .
 _:c14n2 rdf:first skos:exactMatch ;
-	rdf:rest _:c14n97 .
-_:c14n20 sh:in _:c14n166 ;
+	rdf:rest _:c14n99 .
+_:c14n20 sh:in _:c14n168 ;
 	sh:maxCount 1 ;
 	sh:order 5 ;
 	sh:path meta_urban:concept_role .
-_:c14n200 rdf:first rdf:type ;
+_:c14n200 rdf:first "census_block_group" ;
+	rdf:rest _:c14n201 .
+_:c14n201 rdf:first "census_tract" ;
+	rdf:rest _:c14n37 .
+_:c14n202 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n201 rdf:first rdf:type ;
+_:c14n203 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n202 rdf:first "postal_code" ;
-	rdf:rest _:c14n124 .
-_:c14n203 rdf:first "census_tract" ;
-	rdf:rest _:c14n202 .
-_:c14n204 rdf:first "census_block_group" ;
-	rdf:rest _:c14n203 .
-_:c14n205 rdf:first "postal_code" ;
-	rdf:rest _:c14n136 .
+_:c14n204 rdf:first "postal_code" ;
+	rdf:rest _:c14n127 .
+_:c14n205 rdf:first "census_tract" ;
+	rdf:rest _:c14n204 .
+_:c14n206 rdf:first "census_block_group" ;
+	rdf:rest _:c14n205 .
+_:c14n207 rdf:first "postal_code" ;
+	rdf:rest _:c14n139 .
 _:c14n21 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 13 ;
 	sh:path meta_urban:is_imputation_flag .
 _:c14n22 rdf:first "remote_sensing_derived" ;
-	rdf:rest _:c14n112 .
+	rdf:rest _:c14n115 .
 _:c14n23 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
@@ -442,7 +448,7 @@ _:c14n32 sh:datatype xsd:string ;
 	sh:order 1 ;
 	sh:path dct:title .
 _:c14n33 rdf:first "country_iso" ;
-	rdf:rest _:c14n101 .
+	rdf:rest _:c14n104 .
 _:c14n34 rdf:first skos:narrowMatch ;
 	rdf:rest _:c14n6 .
 _:c14n35 rdf:first "standard_or_code" ;
@@ -452,13 +458,13 @@ _:c14n36 sh:maxCount 1 ;
 	sh:order 4 ;
 	sh:path dcat:landingPage .
 _:c14n37 rdf:first "small_statistical_area" ;
-	rdf:rest _:c14n205 .
+	rdf:rest _:c14n207 .
 _:c14n38 rdf:first "fips_state" ;
-	rdf:rest _:c14n193 .
+	rdf:rest _:c14n195 .
 _:c14n39 rdf:first "utility_service_territory" ;
-	rdf:rest _:c14n130 .
+	rdf:rest _:c14n133 .
 _:c14n4 rdf:first "request_or_agreement" ;
-	rdf:rest _:c14n113 .
+	rdf:rest _:c14n116 .
 _:c14n40 sh:datatype xsd:string ;
 	sh:description "DOI of the dataset itself (bare form, e.g. 10.1234/abc)." ;
 	sh:maxCount 1 ;
@@ -482,7 +488,7 @@ _:c14n43 sh:datatype xsd:string ;
 	sh:order 4 ;
 	sh:path skos:related .
 _:c14n44 rdf:first "parcel_id" ;
-	rdf:rest _:c14n67 .
+	rdf:rest _:c14n68 .
 _:c14n45 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
@@ -529,14 +535,14 @@ _:c14n52 sh:datatype xsd:boolean ;
 	sh:order 2 ;
 	sh:path meta_urban:api .
 _:c14n53 rdf:first "nation" ;
-	rdf:rest _:c14n92 .
+	rdf:rest _:c14n93 .
 _:c14n54 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path skos:prefLabel .
 _:c14n55 rdf:first "vintage" ;
-	rdf:rest _:c14n135 .
+	rdf:rest _:c14n138 .
 _:c14n56 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
 _:c14n57 rdf:first "subnational" ;
@@ -554,7 +560,7 @@ _:c14n59 sh:datatype xsd:float ;
 _:c14n6 rdf:first skos:relatedMatch ;
 	rdf:rest rdf:nil .
 _:c14n60 rdf:first "boolean" ;
-	rdf:rest _:c14n104 .
+	rdf:rest _:c14n107 .
 _:c14n61 sh:datatype xsd:string ;
 	sh:description "ISO 3166-1 alpha-2 codes, or GLOBAL." ;
 	sh:nodeKind sh:Literal ;
@@ -562,142 +568,144 @@ _:c14n61 sh:datatype xsd:string ;
 	sh:path meta_urban:countries ;
 	sh:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
 _:c14n62 rdf:first "multinational" ;
-	rdf:rest _:c14n100 .
+	rdf:rest _:c14n103 .
 _:c14n63 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path skos:altLabel .
-_:c14n64 rdf:first "nuts_region" ;
+_:c14n64 sh:datatype xsd:string ;
+	sh:nodeKind sh:Literal ;
+	sh:order 13 ;
+	sh:path skos:relatedMatch .
+_:c14n65 rdf:first "nuts_region" ;
 	rdf:rest _:c14n33 .
-_:c14n65 sh:datatype xsd:string ;
+_:c14n66 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path meta_urban:code .
-_:c14n66 rdf:first "sample_survey_weighted" ;
-	rdf:rest _:c14n108 .
-_:c14n67 rdf:first "building_id" ;
-	rdf:rest _:c14n152 .
-_:c14n68 rdf:first "point_station" ;
-	rdf:rest _:c14n180 .
-_:c14n69 rdf:first "county" ;
-	rdf:rest _:c14n140 .
+_:c14n67 rdf:first "sample_survey_weighted" ;
+	rdf:rest _:c14n111 .
+_:c14n68 rdf:first "building_id" ;
+	rdf:rest _:c14n154 .
+_:c14n69 rdf:first "point_station" ;
+	rdf:rest _:c14n170 .
 _:c14n7 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 23 ;
 	sh:path meta_urban:record_count_note .
-_:c14n70 sh:datatype xsd:string ;
+_:c14n70 rdf:first "county" ;
+	rdf:rest _:c14n143 .
+_:c14n71 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 30 ;
 	sh:path meta_urban:notes .
-_:c14n71 rdf:first rdf:type ;
+_:c14n72 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n72 sh:datatype xsd:string ;
+_:c14n73 sh:datatype xsd:string ;
 	sh:description "Raw values that mean missing, not applicable, or suppressed." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 11 ;
 	sh:path meta_urban:missing_codes .
-_:c14n73 sh:datatype xsd:string ;
+_:c14n74 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path dcat:endDate .
-_:c14n74 rdf:first "address" ;
+_:c14n75 rdf:first "address" ;
 	rdf:rest _:c14n44 .
-_:c14n75 rdf:first "lat_lon" ;
-	rdf:rest _:c14n196 .
-_:c14n76 rdf:first rdf:type ;
+_:c14n76 rdf:first "lat_lon" ;
+	rdf:rest _:c14n197 .
+_:c14n77 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n77 sh:datatype xsd:string ;
+_:c14n78 sh:datatype xsd:string ;
 	sh:description "QUDT quantity kind CURIE, e.g. quantitykind:Area." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 7 ;
 	sh:path qudt:hasQuantityKind .
-_:c14n78 rdf:first "open_api" ;
-	rdf:rest _:c14n151 .
-_:c14n79 sh:datatype xsd:string ;
+_:c14n79 rdf:first "open_api" ;
+	rdf:rest _:c14n153 .
+_:c14n8 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n80 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path skos:definition .
-_:c14n8 rdf:first rdf:type ;
-	rdf:rest rdf:nil .
-_:c14n80 sh:datatype xsd:string ;
+_:c14n81 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path dct:description .
-_:c14n81 sh:datatype xsd:string ;
+_:c14n82 sh:datatype xsd:string ;
 	sh:description "QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path qudt:unit .
-_:c14n82 rdf:first "parcel" ;
-	rdf:rest _:c14n134 .
-_:c14n83 rdf:first "climate_zone_ashrae" ;
-	rdf:rest _:c14n129 .
-_:c14n84 sh:in _:c14n2 ;
+_:c14n83 rdf:first "parcel" ;
+	rdf:rest _:c14n137 .
+_:c14n84 rdf:first "climate_zone_ashrae" ;
+	rdf:rest _:c14n132 .
+_:c14n85 sh:in _:c14n2 ;
 	sh:maxCount 1 ;
 	sh:order 5 ;
 	sh:path meta_urban:mapping_relation .
-_:c14n85 sh:class dct:Location ;
+_:c14n86 sh:class dct:Location ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 14 ;
 	sh:path dct:spatial .
-_:c14n86 rdf:first rdf:type ;
+_:c14n87 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n87 sh:datatype xsd:boolean ;
+_:c14n88 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 26 ;
 	sh:path meta_urban:machine_readable .
-_:c14n88 rdf:first "average_over_period" ;
-	rdf:rest _:c14n98 .
-_:c14n89 rdf:first "census_complete" ;
-	rdf:rest _:c14n66 .
+_:c14n89 rdf:first "average_over_period" ;
+	rdf:rest _:c14n100 .
 _:c14n9 rdf:first "city" ;
 	rdf:rest rdf:nil .
-_:c14n90 sh:datatype xsd:string ;
+_:c14n90 rdf:first "census_complete" ;
+	rdf:rest _:c14n67 .
+_:c14n91 sh:datatype xsd:string ;
 	sh:description "Optional normalized value in the target concept (e.g., an ASHRAE climate zone id)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path meta_urban:concept_value .
-_:c14n91 sh:datatype xsd:string ;
+_:c14n92 sh:datatype xsd:string ;
 	sh:description "WGS84 bounding box \"minLon,minLat,maxLon,maxLat\" when meaningful." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path dcat:bbox .
-_:c14n92 rdf:first "none" ;
-	rdf:rest _:c14n120 .
-_:c14n93 rdf:first rdf:type ;
+_:c14n93 rdf:first "none" ;
+	rdf:rest _:c14n123 .
+_:c14n94 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n94 sh:datatype xsd:string ;
+_:c14n95 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path csvw:name .
-_:c14n95 rdf:first "string" ;
-	rdf:rest _:c14n109 .
-_:c14n96 sh:in _:c14n1 ;
+_:c14n96 rdf:first "string" ;
+	rdf:rest _:c14n112 .
+_:c14n97 sh:in _:c14n1 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 9 ;
 	sh:path meta_urban:access_level .
-_:c14n97 rdf:first skos:closeMatch ;
-	rdf:rest _:c14n137 .
-_:c14n98 rdf:first "count" ;
-	rdf:rest _:c14n11 .
-_:c14n99 sh:class dcat:Distribution ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 10 ;
-	sh:path dcat:distribution .
+_:c14n98 sh:datatype xsd:string ;
+	sh:nodeKind sh:Literal ;
+	sh:order 12 ;
+	sh:path skos:narrowMatch .
+_:c14n99 rdf:first skos:closeMatch ;
+	rdf:rest _:c14n140 .
 

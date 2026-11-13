@@ -27,6 +27,10 @@ prefixes:
   prov: http://www.w3.org/ns/prov#
   csvw: http://www.w3.org/ns/csvw#
   xsd: http://www.w3.org/2001/XMLSchema#
+  brick: https://brickschema.org/schema/Brick#
+  rec: https://w3id.org/rec#
+  bedes: https://bedes.lbl.gov/node/
+  energy: http://www.sig3d.org/citygml/2.0/energy/1.0#
 default_prefix: meta_urban
 default_range: string
 imports:
@@ -187,6 +191,8 @@ classes:
       - canonical_unit
       - exact_match
       - close_match
+      - broad_match
+      - narrow_match
       - related_match
     slot_usage:
       id:
@@ -390,6 +396,12 @@ slots:
     multivalued: true
   related_match:
     slot_uri: skos:relatedMatch
+    multivalued: true
+  broad_match:
+    slot_uri: skos:broadMatch
+    multivalued: true
+  narrow_match:
+    slot_uri: skos:narrowMatch
     multivalued: true
 
 # ---------------------------------------------------------------------------------------------------------

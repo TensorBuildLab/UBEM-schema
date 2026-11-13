@@ -213,8 +213,17 @@ lacked: whether the variable is a sampling weight and whether it is an imputatio
 The vocabulary (`schema/vocab/ubem_concepts.yaml`) has 81 concepts: 8 grouping concepts and 73 mapping
 targets organized by workflow role with `skos:broader`. Each target has a definition, the entity it
 describes, a QUDT quantity kind and canonical unit where applicable, generic synonyms, and mappings to
-CityGML 2.0 building attributes and EnergyPlus weather file fields. [TODO (co-authors): add BEDES, Brick and
-Energy ADE mappings after expert review; only mappings the authors are certain of are recorded.]
+CityGML 2.0 building attributes and EnergyPlus weather file fields. It is also mapped with SKOS mapping
+relations to Brick 1.4.4 (46 links, including RealEstateCore classes where Brick deprecates its own location
+classes), BEDES 2.5 (84 links) and the CityGML Energy ADE 1.0 (38 links). Every target was checked verbatim
+against the official release files, whose versions and checksums are recorded with the vocabulary. Only 4 of
+the 168 links are exact: Brick and the Energy ADE describe equipment, points and objects, BEDES composes
+building characteristics from terms and qualifiers, and Meta-Urban concepts describe what a dataset column
+measures, so most links are close, broader, narrower or related. We relate Brick sensor classes to the
+quantities they measure rather than equate them. Ten concepts have no counterpart in any of the three,
+including survey and replicate weights, appliance use, time use, thermal comfort responses and land use,
+which marks where a dataset-level vocabulary adds to the building-level ones. 64 of the 73 mapping targets
+have at least one external link.
 
 ### 3.5 Implementation
 

@@ -89,12 +89,17 @@ model's mapping, (iii) unweighted records. Report relative error against EIA pub
 Avoid sending the same framing back to Applied Energy, SCS, B&E, BRI, Urban Informatics or E&B. If the catalog
 grows large, a separate *Scientific Data* data descriptor for the catalog is a natural second paper.
 
-## 6. Decisions only the authors can make
+## 6. Decisions (updated 2026-11-13)
 
-- [ ] Target journal and whether to split into two papers.
-- [ ] Co-author roles: Jianli Chen (occupant behavior, taxonomy review), Jia Zou (data integration baselines,
-      DataMorpher/TreeMorpher), a student annotator for T2 gold labels (adds an author).
-- [ ] Which LLMs to run and the budget; API keys are not stored in this repository.
-- [ ] Whether to use the 2023 expert survey (n = 3) at all; if yes, confirm the respondents agree to be
-      acknowledged or quoted.
-- [ ] License for the repository (suggest MIT for code, CC-BY-4.0 for schema, catalog and gold labels).
+- [x] Target journal: Advanced Engineering Informatics (backups: Energy and AI; Journal of Building
+      Performance Simulation). One paper, not split.
+- [x] LLMs: two local open-weight models (Qwen3 8B, Llama 3.1 8B); frontier runs dropped (no API budget), the
+      harness supports them.
+- [x] T1 dropped: its gold would be the LLM-drafted catalog.
+- [x] T2 gold: two blind LLM annotators plus blind adjudication; first-author audit of 50 labels pending.
+- [x] Catalog: random 20-entry field-level re-verification, errors corrected.
+- [x] Vocabulary mappings to Brick 1.4.4, BEDES 2.5 and Energy ADE 1.0, verified against release files.
+- [x] 2023 expert survey not used.
+- [ ] Author list, order and CRediT roles (Jianli Chen, Jia Zou).
+- [ ] Funding statement and competing interests.
+- [ ] Repository public, Zenodo DOI, license confirmation (suggested MIT code, CC BY 4.0 data).

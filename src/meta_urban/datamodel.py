@@ -62,14 +62,18 @@ metamodel_version = "1.12.0"
 version = "2.0.0"
 
 # Namespaces
+BEDES = CurieNamespace('bedes', 'https://bedes.lbl.gov/node/')
+BRICK = CurieNamespace('brick', 'https://brickschema.org/schema/Brick#')
 CSVW = CurieNamespace('csvw', 'http://www.w3.org/ns/csvw#')
 DCAT = CurieNamespace('dcat', 'http://www.w3.org/ns/dcat#')
 DCT = CurieNamespace('dct', 'http://purl.org/dc/terms/')
+ENERGY = CurieNamespace('energy', 'http://www.sig3d.org/citygml/2.0/energy/1.0#')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 META_URBAN = CurieNamespace('meta_urban', 'https://w3id.org/meta-urban/')
 PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
 QUANTITYKIND = CurieNamespace('quantitykind', 'http://qudt.org/vocab/quantitykind/')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/schema/qudt/')
+REC = CurieNamespace('rec', 'https://w3id.org/rec#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
 UNIT = CurieNamespace('unit', 'http://qudt.org/vocab/unit/')
@@ -524,6 +528,8 @@ class UBEMConcept(YAMLRoot):
     canonical_unit: Optional[str] = None
     exact_match: Optional[Union[str, list[str]]] = empty_list()
     close_match: Optional[Union[str, list[str]]] = empty_list()
+    broad_match: Optional[Union[str, list[str]]] = empty_list()
+    narrow_match: Optional[Union[str, list[str]]] = empty_list()
     related_match: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -568,6 +574,14 @@ class UBEMConcept(YAMLRoot):
         if not isinstance(self.close_match, list):
             self.close_match = [self.close_match] if self.close_match is not None else []
         self.close_match = [v if isinstance(v, str) else str(v) for v in self.close_match]
+
+        if not isinstance(self.broad_match, list):
+            self.broad_match = [self.broad_match] if self.broad_match is not None else []
+        self.broad_match = [v if isinstance(v, str) else str(v) for v in self.broad_match]
+
+        if not isinstance(self.narrow_match, list):
+            self.narrow_match = [self.narrow_match] if self.narrow_match is not None else []
+        self.narrow_match = [v if isinstance(v, str) else str(v) for v in self.narrow_match]
 
         if not isinstance(self.related_match, list):
             self.related_match = [self.related_match] if self.related_match is not None else []
@@ -1053,6 +1067,12 @@ slots.close_match = Slot(uri=SKOS.closeMatch, name="close_match", curie=SKOS.cur
 
 slots.related_match = Slot(uri=SKOS.relatedMatch, name="related_match", curie=SKOS.curie('relatedMatch'),
                    model_uri=META_URBAN.related_match, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.broad_match = Slot(uri=SKOS.broadMatch, name="broad_match", curie=SKOS.curie('broadMatch'),
+                   model_uri=META_URBAN.broad_match, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.narrow_match = Slot(uri=SKOS.narrowMatch, name="narrow_match", curie=SKOS.curie('narrowMatch'),
+                   model_uri=META_URBAN.narrow_match, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.DatasetProfile_id = Slot(uri=META_URBAN.id, name="DatasetProfile_id", curie=META_URBAN.curie('id'),
                    model_uri=META_URBAN.DatasetProfile_id, domain=DatasetProfile, range=Union[str, DatasetProfileId],

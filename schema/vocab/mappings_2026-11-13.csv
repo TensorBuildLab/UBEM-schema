@@ -1,0 +1,169 @@
+concept_id,standard,target_id,target_label,relation,verified_in_source,note
+record_identifier,bedes,https://bedes.lbl.gov/node/fb871c36-a226-4297-b674-319455f05f83,Identifier,closeMatch,yes,BEDES pairs Identifier with Identifier Label
+imputation_flag,bedes,https://bedes.lbl.gov/node/bf19d06e-7803-41c6-927f-87872c0beaf4,Derivation Method,relatedMatch,yes,"Options include Estimated, Interpolated, Default"
+imputation_flag,bedes,https://bedes.lbl.gov/node/2714c60b-c5b1-4bbe-8047-1280aa5df1df,Quality,relatedMatch,yes,"Options include Manually edited, Validated, Questionable"
+timestamp,brick,https://brickschema.org/schema/Brick#timestamp,Timestamp,closeMatch,yes,Brick datatype property for timeseries values
+timestamp,bedes,https://bedes.lbl.gov/node/b2a9970d-75bc-4e60-a295-a1f33e2d5dae,Date,broadMatch,yes,BEDES Date is a date only; concept also covers time and period
+timestamp,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#MeasurementPointType/time,energy:MeasurementPointType/time,relatedMatch,yes,Time of an irregular time-series measurement point
+survey_reference_detail,bedes,https://bedes.lbl.gov/node/cda2228c-421a-4d99-86c5-d3b6ef1ba851,Origin,relatedMatch,yes,"Origin of the data value (assessor, utility, simulation...)"
+geographic_coordinates,brick,https://brickschema.org/schema/Brick#coordinates,Coordinates,closeMatch,yes,Brick entity property (lat/lon)
+geographic_coordinates,brick,https://brickschema.org/schema/Brick#latitude,Latitude,narrowMatch,yes,
+geographic_coordinates,brick,https://brickschema.org/schema/Brick#longitude,Longitude,narrowMatch,yes,
+geographic_coordinates,bedes,https://bedes.lbl.gov/node/913d4b10-bf26-4c0d-b662-699c339c3ad6,Latitude,narrowMatch,yes,
+geographic_coordinates,bedes,https://bedes.lbl.gov/node/b263d4b0-0f00-48fd-a750-3e8d610bdb98,Longitude,narrowMatch,yes,
+geographic_coordinates,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#referencePoint,energy:referencePoint,closeMatch,yes,gml:Point; geographical location of the building
+administrative_region,brick,https://w3id.org/rec#Region,Region,closeMatch,yes,RealEstateCore class shipped in the Brick 1.4.4 release as the replacement for deprecated brick:Region
+administrative_region,bedes,https://bedes.lbl.gov/node/9a8423a7-0729-4eca-b6b4-4ec39a1f4a5b,State,narrowMatch,yes,
+administrative_region,bedes,https://bedes.lbl.gov/node/be811d87-d5db-4e1c-84ec-ccbbccdb852c,County,narrowMatch,yes,
+administrative_region,bedes,https://bedes.lbl.gov/node/c208fe09-422d-4031-abf6-073aa7bda8c5,City,narrowMatch,yes,
+administrative_region,bedes,https://bedes.lbl.gov/node/6eea1dab-5d50-45f7-ae8d-5f7a183a536a,ZIP Code,narrowMatch,yes,
+administrative_region,bedes,https://bedes.lbl.gov/node/9afc3a7b-af21-4517-b7e9-da6c9f7975d2,Country Name,narrowMatch,yes,
+climate_zone,bedes,https://bedes.lbl.gov/node/af2178d7-3ed1-456d-af87-3decc69dd233,Climate Zone,exactMatch,yes,Qualified by Climate Zone Type
+climate_zone,bedes,https://bedes.lbl.gov/node/83d301d1-3e81-4213-a3a8-c09d1e75337a,Climate Zone Type,relatedMatch,yes,"Classification scheme (ASHRAE, IECC, Building America...)"
+urban_rural_indicator,bedes,https://bedes.lbl.gov/node/93b49fed-7059-4a77-b31a-f625131b0564,Site Type,closeMatch,yes,"Options Urban, Suburban, Rural"
+weather,brick,https://brickschema.org/schema/Brick#Weather_Station,Weather Station,relatedMatch,yes,Brick equipment class for the measuring station
+weather,bedes,https://bedes.lbl.gov/node/5d3f7113-5e9b-4a66-b276-0577af6d68dc,Weather Metric,closeMatch,yes,
+weather,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherData,energy:WeatherData,closeMatch,yes,
+dry_bulb_temperature,brick,https://brickschema.org/schema/Brick#Outside_Air_Temperature_Sensor,Outside Air Temperature Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+dry_bulb_temperature,bedes,https://bedes.lbl.gov/node/c8607e33-3e6f-4877-b40f-fb1efd1a6e95,Dry bulb temperature (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+dry_bulb_temperature,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/airTemperature,energy:WeatherDataTypeValue/airTemperature,closeMatch,yes,Enumeration of weatherDataType
+dew_point_temperature,brick,https://brickschema.org/schema/Brick#Outside_Air_Dewpoint_Sensor,Outside Air Dewpoint Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+relative_humidity,brick,https://brickschema.org/schema/Brick#Outside_Air_Humidity_Sensor,Outside Air Humidity Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+relative_humidity,bedes,https://bedes.lbl.gov/node/800c1937-ac73-4820-b6bd-e4afb97d2434,Relative humidity (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+relative_humidity,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/humidity,energy:WeatherDataTypeValue/humidity,closeMatch,yes,Documented as relative air humidity
+atmospheric_pressure,brick,https://brickschema.org/schema/Brick#Air_Pressure_Sensor,Air Pressure Sensor,broadMatch,yes,Pressure of surrounding air; not specific to outdoor station
+global_horizontal_irradiance,brick,https://brickschema.org/schema/Brick#Solar_Irradiance_Sensor,Solar Irradiance Sensor,broadMatch,yes,Brick sensor not restricted to the horizontal plane
+global_horizontal_irradiance,bedes,https://bedes.lbl.gov/node/97ba9c27-edf8-493a-8355-0a914bb3701f,Global horizontal radiation (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+global_horizontal_irradiance,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/globalSolarIrradiance,energy:WeatherDataTypeValue/globalSolarIrradiance,closeMatch,yes,Documented as total irradiance on a horizontal area
+direct_normal_irradiance,bedes,https://bedes.lbl.gov/node/44a40be2-a949-4dbb-931b-5472a241233d,Direct normal radiation (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+direct_normal_irradiance,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/directSolarIrradiance,energy:WeatherDataTypeValue/directSolarIrradiance,relatedMatch,yes,"ADE defines direct irradiance on a horizontal surface, not normal"
+diffuse_horizontal_irradiance,bedes,https://bedes.lbl.gov/node/668d6385-b142-4570-917b-8fa6b1025d2a,Diffuse horizontal radiation (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+diffuse_horizontal_irradiance,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/diffuseSolarIrradiance,energy:WeatherDataTypeValue/diffuseSolarIrradiance,closeMatch,yes,Documented as diffuse irradiance on a horizontal surface
+wind_speed,brick,https://brickschema.org/schema/Brick#Wind_Speed_Sensor,Wind Speed Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+wind_speed,bedes,https://bedes.lbl.gov/node/30325cf5-a29b-4864-b465-be9993c5b7e6,Wind speed (list option of Weather Metric),closeMatch,yes,Weather Metric list option
+wind_speed,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#WeatherDataTypeValue/windSpeed,energy:WeatherDataTypeValue/windSpeed,closeMatch,yes,Enumeration of weatherDataType
+wind_direction,brick,https://brickschema.org/schema/Brick#Wind_Direction_Sensor,Wind Direction Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+precipitation,brick,https://brickschema.org/schema/Brick#Rain_Level_Sensor,Rain Level Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+degree_days,bedes,https://bedes.lbl.gov/node/a866b3eb-173c-492e-af4e-93da59cb7e7d,Heating degree days (list option of Weather Metric),narrowMatch,yes,Weather Metric list option
+degree_days,bedes,https://bedes.lbl.gov/node/8b2711ff-d952-4c79-8753-54acee4606b6,Cooling degree days (list option of Weather Metric),narrowMatch,yes,Weather Metric list option
+building_height,bedes,https://bedes.lbl.gov/node/1ec70a6b-70cf-45f5-85ee-3c77476d3451,Height,broadMatch,yes,Generic height of any object or component
+building_height,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#heightAboveGround,energy:heightAboveGround,closeMatch,yes,Carries an explicit heightReference
+floors_above_ground,bedes,https://bedes.lbl.gov/node/0698bc5a-c677-4937-a364-0c7f2047631f,Height Classification,relatedMatch,yes,Binned storey count (Low/Mid/High Rise)
+floors_below_ground,brick,https://w3id.org/rec#BasementLevel,Basement level,relatedMatch,yes,RealEstateCore class shipped in the Brick 1.4.4 release as the replacement for deprecated brick:Basement; concept is count or presence
+floor_to_ceiling_height,bedes,https://bedes.lbl.gov/node/715c099e-ad33-4b40-a5ed-07fe137b4ce8,Floor to ceiling (list option of Floor Height Measurement),relatedMatch,yes,Composite: Height + Floor Height Measurement
+building_shape,bedes,https://bedes.lbl.gov/node/dc8cd762-b447-4c87-8a7b-1ccf451fbf06,Footprint Shape,exactMatch,yes,
+roof_shape,bedes,https://bedes.lbl.gov/node/adffe5cb-1940-4b3b-a3b3-9cf37aa7b227,Roof Shape,closeMatch,yes,BEDES covers shape; tilt is separate (Tilt Angle)
+window_to_wall_ratio,bedes,https://bedes.lbl.gov/node/386c6359-a381-4dbf-b2e0-c72069f7843c,Window To Wall Ratio,exactMatch,yes,
+window_to_wall_ratio,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#OpticalPropertiesType/glazingRatio,energy:OpticalPropertiesType/glazingRatio,closeMatch,yes,Property of a construction's optical properties
+building_use_type,brick,https://brickschema.org/schema/Brick#buildingPrimaryFunction,Building primary function,closeMatch,yes,Brick entity property (ENERGY STAR list)
+building_use_type,bedes,https://bedes.lbl.gov/node/c96589bd-0dfc-47a4-b040-11dba49d2ebd,Occupancy Classification,closeMatch,yes,
+building_use_type,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#buildingType,energy:buildingType,closeMatch,yes,Usage and form classification
+gross_floor_area,brick,https://brickschema.org/schema/Brick#grossArea,Gross area,exactMatch,yes,Brick entity property
+gross_floor_area,bedes,https://bedes.lbl.gov/node/09d61aee-b740-4655-8a5c-75ccf98d3731,Area,broadMatch,yes,Composite: Area + Floor Area Qualifier = Gross
+gross_floor_area,bedes,https://bedes.lbl.gov/node/49c74a3e-12c9-43e7-b3af-715ccf3aa0b3,Gross (list option of Floor Area Qualifier),relatedMatch,yes,Qualifier value in the composite term
+gross_floor_area,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#FloorAreaTypeValue/grossFloorArea,energy:FloorAreaTypeValue/grossFloorArea,closeMatch,yes,Type value of energy:floorArea
+year_of_construction,brick,https://brickschema.org/schema/Brick#yearBuilt,Year built,closeMatch,yes,Brick entity property; four-digit year
+renovation,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#refurbishmentMeasure,energy:refurbishmentMeasure,closeMatch,yes,
+wall_construction,bedes,https://bedes.lbl.gov/node/16d028b7-fe74-4fb7-a17a-46c42310febb,Construction Method,broadMatch,yes,Applies to any Opaque Surface
+wall_construction,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#Construction,energy:Construction,broadMatch,yes,Layered construction of any thermal boundary
+roof_construction,bedes,https://bedes.lbl.gov/node/16d028b7-fe74-4fb7-a17a-46c42310febb,Construction Method,broadMatch,yes,Applies to any Opaque Surface
+roof_construction,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#Construction,energy:Construction,broadMatch,yes,Layered construction of any thermal boundary
+window_properties,bedes,https://bedes.lbl.gov/node/72b5b341-ba65-447b-a827-dd8b954db234,Fenestration,closeMatch,yes,
+window_properties,bedes,https://bedes.lbl.gov/node/cdfc6404-8b5b-44e4-85a4-45694b429188,Fenestration Glazing Type,narrowMatch,yes,
+window_properties,bedes,https://bedes.lbl.gov/node/c42d750c-4816-45cd-a63e-be7e72d2f532,Fenestration Number of Glass Layers,narrowMatch,yes,
+window_properties,bedes,https://bedes.lbl.gov/node/94def164-4be5-4ffb-9603-b179d31d5e33,Fenestration Frame Material,narrowMatch,yes,
+insulation,brick,https://brickschema.org/schema/Brick#thermalTransmittance,Thermal transmittance,relatedMatch,yes,U-value entity property
+insulation,bedes,https://bedes.lbl.gov/node/da8e676f-7a62-462e-a2e3-0c984269f4aa,Insulation Application,closeMatch,yes,
+insulation,bedes,https://bedes.lbl.gov/node/09d9cf77-6f90-4551-bca4-900fcf4593cc,Effective R Value,narrowMatch,yes,
+insulation,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#ConstructionType/uValue,energy:ConstructionType/uValue,relatedMatch,yes,
+heating_system,brick,https://brickschema.org/schema/Brick#Heating_Ventilation_Air_Conditioning_System,Heating Ventilation Air Conditioning System,broadMatch,yes,
+heating_system,bedes,https://bedes.lbl.gov/node/e2a69ad1-8ba8-4303-8f63-3f70d88d7553,Heating Type,closeMatch,yes,
+cooling_system,brick,https://brickschema.org/schema/Brick#Heating_Ventilation_Air_Conditioning_System,Heating Ventilation Air Conditioning System,broadMatch,yes,
+cooling_system,bedes,https://bedes.lbl.gov/node/c5eca96c-5058-420d-9d80-74696bc84ecb,Cooling Type,closeMatch,yes,
+ventilation_system,brick,https://brickschema.org/schema/Brick#Ventilation_Air_System,Ventilation Air System,closeMatch,yes,
+ventilation_system,brick,https://brickschema.org/schema/Brick#Variable_Air_Volume_Box,Variable Air Volume Box,narrowMatch,yes,
+ventilation_system,brick,https://brickschema.org/schema/Brick#Economizer,Economizer,narrowMatch,yes,
+ventilation_system,bedes,https://bedes.lbl.gov/node/dab5513e-50b4-445e-ae1d-b303d31fb3cc,Ventilation Type,narrowMatch,yes,
+ventilation_system,bedes,https://bedes.lbl.gov/node/87e077eb-6d96-476b-bec7-483ba30a9f26,Air Distribution Type,narrowMatch,yes,
+ventilation_system,bedes,https://bedes.lbl.gov/node/d0ceb18c-2473-4e34-94d6-18d4336eda71,Air Side Economizer,narrowMatch,yes,
+ventilation_system,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#MechanicalVentilation,energy:MechanicalVentilation,narrowMatch,yes,
+water_heating_system,brick,https://brickschema.org/schema/Brick#Domestic_Hot_Water_System,Domestic Hot Water System,closeMatch,yes,
+water_heating_system,brick,https://brickschema.org/schema/Brick#Water_Heater,Water Heater,narrowMatch,yes,
+water_heating_system,bedes,https://bedes.lbl.gov/node/9e8edeaf-8b56-4893-a42b-9521248b5e06,Domestic Hot Water Type,closeMatch,yes,
+lighting_system,brick,https://brickschema.org/schema/Brick#Lighting_System,Lighting System,closeMatch,yes,
+lighting_system,bedes,https://bedes.lbl.gov/node/b0b0b5fb-2906-40a2-9125-b701d38ae570,Lamp Type,narrowMatch,yes,
+lighting_system,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#LightingFacilities,energy:LightingFacilities,closeMatch,yes,
+plug_and_process_equipment,bedes,https://bedes.lbl.gov/node/83445117-0c0a-4922-ac82-9e98dd9fe63f,Electronic Equipment Type,narrowMatch,yes,
+plug_and_process_equipment,bedes,https://bedes.lbl.gov/node/55d4daf1-bb0c-4b4e-ac8a-46814701b5ff,Process Load Type,narrowMatch,yes,
+plug_and_process_equipment,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#ElectricalAppliances,energy:ElectricalAppliances,closeMatch,yes,
+energy_sources_used,bedes,https://bedes.lbl.gov/node/ecaea4e4-495f-40c0-985a-de04a668c3bd,Resource,closeMatch,yes,Type of energy resource fuel
+energy_sources_used,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergyDemandType/energyCarrierType,energy:EnergyDemandType/energyCarrierType,closeMatch,yes,
+onsite_generation,brick,https://brickschema.org/schema/Brick#Energy_Generation_System,Energy Generation System,narrowMatch,yes,
+onsite_generation,brick,https://brickschema.org/schema/Brick#Energy_Storage_System,Energy Storage System,narrowMatch,yes,
+onsite_generation,brick,https://brickschema.org/schema/Brick#PV_Generation_System,PV Generation System,narrowMatch,yes,
+onsite_generation,bedes,https://bedes.lbl.gov/node/d3107e23-f59e-452e-aaae-b7a43ff286d0,Energy Generation Technology,narrowMatch,yes,
+onsite_generation,bedes,https://bedes.lbl.gov/node/fb504df8-24ad-42a0-b05a-7662a0c772d8,Energy Storage Technology,narrowMatch,yes,
+onsite_generation,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#PhotovoltaicSystem,energy:PhotovoltaicSystem,narrowMatch,yes,
+onsite_generation,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#CombinedHeatPower,energy:CombinedHeatPower,narrowMatch,yes,
+onsite_generation,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#PowerStorageSystem,energy:PowerStorageSystem,narrowMatch,yes,
+building_controls,brick,https://brickschema.org/schema/Brick#Thermostat,Thermostat,narrowMatch,yes,
+building_controls,bedes,https://bedes.lbl.gov/node/9f25b506-119d-4216-950e-8c2530512ce9,Control Technology,closeMatch,yes,
+building_controls,bedes,https://bedes.lbl.gov/node/a2205a8c-403f-4416-825d-28a510517c90,Demand Response Participation,narrowMatch,yes,
+dwelling_units,bedes,https://bedes.lbl.gov/node/6f966b38-c2b3-4348-a0aa-3ea125192c68,Apartment unit (list option of Spatial Unit Type),relatedMatch,yes,Composite: Quantity + Spatial Unit Type
+dwelling_units,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#BuildingUnit,energy:BuildingUnit,relatedMatch,yes,Concept is the count of such units
+ownership_tenure,bedes,https://bedes.lbl.gov/node/11aa3a57-c513-4a19-89ec-3b2a4f2b2088,Ownership Status,closeMatch,yes,"Owned, owner occupied, rented"
+ownership_tenure,bedes,https://bedes.lbl.gov/node/24bd82d8-839c-4442-a939-457fae1d207d,Ownership,narrowMatch,yes,Type of owning organization
+ownership_tenure,bedes,https://bedes.lbl.gov/node/c96ba8d5-cb5a-4163-8ca7-d62a24b3de34,Occupied Status,narrowMatch,yes,Occupied or vacant
+ownership_tenure,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#BuildingUnitType/ownershipType,energy:BuildingUnitType/ownershipType,closeMatch,yes,
+rooms_and_spaces,brick,https://w3id.org/rec#Room,Room,relatedMatch,yes,RealEstateCore class shipped in the Brick 1.4.4 release as the replacement for deprecated brick:Room; concept is counts
+rooms_and_spaces,bedes,https://bedes.lbl.gov/node/c9d609a0-439d-486a-8af0-5b8371bd2e21,Bedroom (list option of Spatial Unit Type),relatedMatch,yes,Composite: Quantity + Spatial Unit Type
+rooms_and_spaces,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#BuildingUnitType/numberOfRooms,energy:BuildingUnitType/numberOfRooms,narrowMatch,yes,
+occupant_count,brick,https://brickschema.org/schema/Brick#Occupancy_Count_Sensor,Occupancy Count Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+occupant_count,bedes,https://bedes.lbl.gov/node/0f74ee3f-107b-48dd-878f-8d3a8ee389ca,Occupant Quantity Type,relatedMatch,yes,Qualifier; value carried by Quantity
+occupant_count,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#OccupantsType/numberOfOccupants,energy:OccupantsType/numberOfOccupants,closeMatch,yes,
+operating_hours,bedes,https://bedes.lbl.gov/node/72d3712d-a8cd-4c62-9b97-41746907d67a,Average Weekly Hours,narrowMatch,yes,
+operating_hours,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#DualValueScheduleType/usageHoursPerDay,energy:DualValueScheduleType/usageHoursPerDay,narrowMatch,yes,
+thermostat_setpoint,brick,https://brickschema.org/schema/Brick#Heating_Zone_Air_Temperature_Setpoint,Heating Zone Air Temperature Setpoint,narrowMatch,yes,
+thermostat_setpoint,brick,https://brickschema.org/schema/Brick#Cooling_Zone_Air_Temperature_Setpoint,Cooling Zone Air Temperature Setpoint,narrowMatch,yes,
+thermostat_setpoint,bedes,https://bedes.lbl.gov/node/e008f92c-2fa5-4afc-a5f1-2bcdcc1ae651,Setpoint,broadMatch,yes,Composite with Setpoint Type = Room temperature
+thermostat_setpoint,bedes,https://bedes.lbl.gov/node/ae702282-454d-4fbb-9eb6-1f70b132d1c2,Room temperature (list option of Setpoint Type),relatedMatch,yes,Qualifier value in the composite term
+thermostat_setpoint,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#UsageZoneType/heatingSchedule,energy:UsageZoneType/heatingSchedule,narrowMatch,yes,Heating setpoint schedule of a usage zone
+thermostat_setpoint,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#UsageZoneType/coolingSchedule,energy:UsageZoneType/coolingSchedule,narrowMatch,yes,Cooling setpoint schedule of a usage zone
+indoor_environment,brick,https://brickschema.org/schema/Brick#Zone_Air_Temperature_Sensor,Zone Air Temperature Sensor,narrowMatch,yes,
+indoor_environment,brick,https://brickschema.org/schema/Brick#Zone_Air_Humidity_Sensor,Zone Air Humidity Sensor,narrowMatch,yes,
+indoor_environment,brick,https://brickschema.org/schema/Brick#CO2_Level_Sensor,CO2 Level Sensor,narrowMatch,yes,
+indoor_environment,brick,https://brickschema.org/schema/Brick#Illuminance_Sensor,Illuminance Sensor,narrowMatch,yes,
+indoor_environment,brick,https://brickschema.org/schema/Brick#Air_Quality_Sensor,Air Quality Sensor,narrowMatch,yes,
+household_demographics,bedes,https://bedes.lbl.gov/node/93c2f048-f9c8-4a40-9d0b-bd301033cf15,Occupant Income Range,narrowMatch,yes,
+household_demographics,bedes,https://bedes.lbl.gov/node/3d8f4d75-8578-46ef-8d4c-e94b00be54fa,Highest Level Of Occupant Education,narrowMatch,yes,
+household_demographics,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#HouseholdType/householdType,energy:HouseholdType/householdType,narrowMatch,yes,
+energy,bedes,https://bedes.lbl.gov/node/8abec35e-27f4-4141-9106-90c31f9b661e,Resource Value,closeMatch,yes,"Amount of resource consumed, generated or exported"
+energy,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergyDemand,energy:EnergyDemand,closeMatch,yes,
+total_energy_consumption,brick,https://brickschema.org/schema/Brick#Energy_Usage_Sensor,Energy Usage Sensor,broadMatch,yes,"Any energy over a period, not necessarily whole-site"
+total_energy_consumption,bedes,https://bedes.lbl.gov/node/fdb2f8c5-a4df-4f5f-8faf-75056db9b436,Energy (list option of Resource),relatedMatch,yes,Composite: Resource Value + Resource = Energy
+electricity_consumption,brick,https://brickschema.org/schema/Brick#Electrical_Energy_Usage_Sensor,Electrical Energy Usage Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+electricity_consumption,bedes,https://bedes.lbl.gov/node/4ff6a8b1-b171-4711-b104-70019401d11d,Electricity (list option of Resource),relatedMatch,yes,Composite: Resource Value + Resource = Electricity
+natural_gas_consumption,brick,https://brickschema.org/schema/Brick#Natural_Gas_Usage_Sensor,Natural Gas Usage Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+natural_gas_consumption,bedes,https://bedes.lbl.gov/node/4b8b36ee-a6d5-4d80-921d-4751be391c0f,Natural gas (list option of Resource),relatedMatch,yes,Composite: Resource Value + Resource = Natural gas
+other_fuel_consumption,brick,https://brickschema.org/schema/Brick#Steam_Usage_Sensor,Steam Usage Sensor,narrowMatch,yes,
+other_fuel_consumption,bedes,https://bedes.lbl.gov/node/7005daf6-c6d3-43df-a191-db7ea936035b,Fuel oil (list option of Resource),relatedMatch,yes,Composite with Resource Value
+other_fuel_consumption,bedes,https://bedes.lbl.gov/node/82346908-97b5-4663-b950-97f632f7d868,Propane (list option of Resource),relatedMatch,yes,Composite with Resource Value
+other_fuel_consumption,bedes,https://bedes.lbl.gov/node/73276ade-08dc-4d40-b7dc-c4c07bbb95cc,District steam (list option of Resource),relatedMatch,yes,Composite with Resource Value
+end_use_energy,bedes,https://bedes.lbl.gov/node/af5347a6-34a5-4c9c-aa98-ff257a3b90e3,End Use,relatedMatch,yes,Qualifier of Resource Value
+end_use_energy,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergyDemandType/endUse,energy:EnergyDemandType/endUse,relatedMatch,yes,Qualifier of EnergyDemand
+energy_expenditure,bedes,https://bedes.lbl.gov/node/a2c6cbb2-35a8-4f6c-82d1-dea4ab7fc346,Resource Cost,closeMatch,yes,
+energy_use_intensity,bedes,https://bedes.lbl.gov/node/7fc2aee5-94f2-4d9a-80d5-7deb90b878e5,Resource Intensity,closeMatch,yes,Resource value per gross floor area
+load_timeseries,brick,https://brickschema.org/schema/Brick#Meter,Meter,relatedMatch,yes,Brick meter device that produces the series
+load_timeseries,bedes,https://bedes.lbl.gov/node/9cd35067-eb88-44a5-9379-402792d71572,Interval Frequency,relatedMatch,yes,Qualifier of time-series resource data
+load_timeseries,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#RegularTimeSeries,energy:RegularTimeSeries,broadMatch,yes,Generic regular time series
+peak_demand,brick,https://brickschema.org/schema/Brick#Peak_Demand_Sensor,Peak Demand Sensor,relatedMatch,yes,"Brick point class whose readings are this quantity; downgraded from closeMatch: a sensor class is a point, not the quantity"
+peak_demand,bedes,https://bedes.lbl.gov/node/7d6917b4-35f5-4ce0-9629-d8d82bb23910,Demand (list option of Interval Measure),relatedMatch,yes,Interval Measure qualifier
+peak_demand,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergyDemandType/maximumLoad,energy:EnergyDemandType/maximumLoad,closeMatch,yes,
+primary_energy_or_emissions,bedes,https://bedes.lbl.gov/node/16b741cc-67eb-4be0-b417-2765890bb73a,Emissions Value,narrowMatch,yes,
+primary_energy_or_emissions,bedes,https://bedes.lbl.gov/node/658797eb-6b25-4d5d-9bd8-9b9b82f78a2e,Source (list option of Resource Boundary),relatedMatch,yes,Source-energy boundary qualifier
+primary_energy_or_emissions,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergySourceType/primaryEnergyFactor,energy:EnergySourceType/primaryEnergyFactor,relatedMatch,yes,
+grid_emission_factor,bedes,https://bedes.lbl.gov/node/23408f8b-3d5c-45f6-9cbd-e58a12fc05a5,Emissions Factor,broadMatch,yes,Emissions factor of any Resource
+grid_emission_factor,bedes,https://bedes.lbl.gov/node/1c03bd87-9df9-42e9-abf6-f16e2e3b3092,eGRID Subregion Code,relatedMatch,yes,
+grid_emission_factor,energy_ade,http://www.sig3d.org/citygml/2.0/energy/1.0#EnergySourceType/co2EmissionFactor,energy:EnergySourceType/co2EmissionFactor,relatedMatch,yes,CO2 factor of an energy source
+energy_price,bedes,https://bedes.lbl.gov/node/333ca515-5dda-4641-a12d-13380109b0f0,Rate Structure,closeMatch,yes,
+energy_price,bedes,https://bedes.lbl.gov/node/356cbe7e-c3ca-4a07-8d88-2e6cacdad81e,Rate Charge Value,narrowMatch,yes,
