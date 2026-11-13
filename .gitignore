@@ -9,3 +9,5 @@ __pycache__/
 .venv/
 # secrets
 .env
+# live run log (results tables and the response cache are committed)
+benchmark/results/run_log.txt

@@ -262,10 +262,13 @@ def t3_score(model: str) -> pd.DataFrame:
         js = parse_json(r.response) or {}
         row = {"model": model, "repeat": r.repeat, "dataset": r.dataset, "name": r.name, "valid": bool(js)}
         for f in T3_FIELDS:
-            gold_v = it.get(f)
             if f == "unit_multiplier" and it.get("unit") is None:
-                gold_v = None
-            row[f"ok_{f}"] = _norm(f, js.get(f)) == _norm(f, gold_v)
+                row[f"ok_{f}"] = np.nan  # a multiplier is only meaningful when the variable has a unit
+                continue
+            row[f"ok_{f}"] = _norm(f, js.get(f)) == _norm(f, it.get(f))
+        # lenient variant: ignore the blank-code convention ("" for 'Missing=...') on both sides
+        strip = lambda v: sorted(str(x) for x in (v or []) if str(x) != "")  # noqa: E731
+        row["ok_missing_codes_lenient"] = strip(js.get("missing_codes")) == strip(it.get("missing_codes"))
         gc = {str(c) for c, _ in (it.get("code_list") or [])}
         pc = {str(c[0]) for c in js.get("codes", []) if isinstance(c, (list, tuple)) and c}
         row["codes_jaccard"] = len(gc & pc) / len(gc | pc) if (gc | pc) else 1.0
