@@ -14,8 +14,8 @@ and measured energy from many open sources, and integrating them is still largel
 way to automate it, but there is no machine-actionable target to align to and no evidence that a domain
 schema, rather than the model, drives accuracy. The paper addresses both. We believe it fits the journal's
 focus on information technology for the management of the built environment: it concerns how building-stock
-information is described, linked and integrated across sources, it extends the semantic building models the
-journal has published (Brick, CityGML and BEDES are all mapped), and it evaluates LLMs on that information
+information is described, linked and integrated across sources, it complements semantic building models such as Brick
+(whose occupant extension appeared in this journal), CityGML and BEDES, all of which it maps to, and it evaluates LLMs on that information
 under controlled conditions:
 
 1. **A schema and vocabulary.** Meta-Urban 2.0 is a LinkML schema (compiled to JSON Schema, SHACL and OWL)
