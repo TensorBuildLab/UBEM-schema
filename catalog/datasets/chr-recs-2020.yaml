@@ -54,6 +54,21 @@ join_keys:
 - census_region_division
 - climate_zone_iecc
 - building_type
+conventions:
+- applies_to: variables whose name starts with Z
+  rule: Z<NAME> is the imputation flag for the variable <NAME>; codes 1 = imputed, 0 = not imputed, -2 = not applicable.
+  example: ZACEQUIPAGE flags ACEQUIPAGE.
+- applies_to: NWEIGHT, NWEIGHT1 to NWEIGHT60
+  rule: NWEIGHT is the final analysis weight and NWEIGHT1 to NWEIGHT60 are jackknife replicate weights; weights are
+    not observations and every estimate must be weighted by NWEIGHT.
+  example: The sum of NWEIGHT over all records estimates the number of U.S. housing units.
+- applies_to: all categorical and numeric variables
+  rule: Code -2 means not applicable and -4 means don't know; both are missing codes, not values.
+  example: ATTIC -2 = Not applicable.
+- applies_to: energy consumption and expenditure variables
+  rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
+    cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
+  example: BTUEL is annual electricity use in thousand Btu.
 variables_documented: true
 machine_readable: true
 versioned: true

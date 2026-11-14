@@ -1,7 +1,7 @@
 # Highlights
 
-- Meta-Urban 2.0: a machine-readable schema for open building energy data
-- Verified catalog of 91 open datasets coded on six independent facets
-- Only 3 of 48 non-geometric building datasets can be linked to individual buildings
-- Concept definitions, not labels, raise local LLM mapping accuracy by 12 to 17 points
-- Ignoring survey weights shifts energy use intensity by -16% to +102%
+- AI-ready schemas let AI understand, produce and check data without human explanation
+- Six design principles for AI-ready schemas, each tested in a controlled experiment
+- Concept definitions, not labels, give about four-fifths of the gain in AI mapping
+- Stated publisher conventions fix integration errors no model can infer from a record
+- Documentation from other standards helps AI only where it defines its terms

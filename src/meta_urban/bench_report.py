@@ -393,6 +393,55 @@ def fig_coverage(frames, path, level: str = "L2") -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+UNIT_DIM = {"unit:BTU_IT": "Energy", "unit:KiloW-HR": "Energy", "unit:FT3": "Energy", "unit:GAL_US": "Energy",
+            "iso4217:USD": "Currency", "unit:FT2": "Area", "unit:DEG_F": "Temperature", "unit:HR": "Time"}
+UNIT_BEARING = {"Energy", "Currency", "Area", "Temperature", "Power", "Irradiance", "Pressure", "Speed", "Length"}
+
+
+def concept_dim(c: dict) -> str | None:
+    if c.get("canonical_unit") == "unit:CCY_USD":
+        return "Currency"
+    if c.get("canonical_unit") == "unit:KiloW-HR-PER-M2":
+        return "EnergyIntensity"
+    q = c.get("quantity_kind")
+    return q.split(":")[1] if q else None
+
+
+def schema_check(concept: str, item: dict, idx: dict) -> bool:
+    """True if the schema's unit/quantity rules reject mapping `item` to `concept` (a verifiable inconsistency).
+
+    The variable's unit comes from its profile (codebook-derived); the concept's dimension from its quantity
+    kind or canonical unit. Rejected: a unit-bearing variable mapped to a categorical concept or to a concept of
+    another dimension, and a categorical variable without a unit mapped to a unit-bearing quantity."""
+    if concept in ("none", "INVALID") or concept not in idx:
+        return False
+    vdim = UNIT_DIM.get(item.get("unit"))
+    cdim = concept_dim(idx[concept])
+    if vdim:
+        return cdim is None or (cdim != vdim and not (cdim == "Count" and vdim == "Time"))
+    return bool(item.get("code_list")) and cdim in UNIT_BEARING
+
+
+def t2_verification(frames) -> pd.DataFrame:
+    """How many wrong mappings the schema's own constraints catch, and at what false-alarm cost."""
+    idx = concept_index()
+    items = {(i["dataset"], i["name"]): i for i in t3_items()}
+    rows = []
+    for model, df in frames.items():
+        for lv in LEVELS:
+            if lv not in set(df.level):
+                continue
+            it = item_table(df, lv)
+            flag = np.array([schema_check(p, items[k], idx) for k, p in zip(it.index, it.pred0)])
+            ok = np.array([p in g for p, g in zip(it.pred0, it.gold_ok)])
+            rows.append({"model": short(model), "level": lv, "n": len(it), "wrong": int((~ok).sum()),
+                         "wrong_flagged": int((flag & ~ok).sum()),
+                         "wrong_flagged_pct": 100 * (flag & ~ok).sum() / max(1, (~ok).sum()),
+                         "correct_flagged_pct": 100 * (flag & ok).sum() / max(1, ok.sum()),
+                         "accuracy_after_review": float((ok | flag).mean()) if False else float(ok.mean())})
+    return pd.DataFrame(rows)
+
+
 def label_sources() -> dict[str, dict]:
     """Alternative label sets for a sensitivity analysis: (dataset, name) -> (label, acceptable labels)."""
     from . import BENCH
@@ -446,6 +495,7 @@ def main() -> int:
         "bench_t2_by_dataset": t2_by_dataset(frames),
         "bench_t3_fields": t3_fields(),
         "bench_t2_label_sensitivity": t2_label_sensitivity(frames),
+        "bench_t2_verification": t2_verification(frames),
     }
     fig_levels(out["bench_t2_main"], FIG / "fig_t2_levels.png")
     out["bench_t2_coverage"] = fig_coverage(frames, FIG / "fig_t2_coverage.png")

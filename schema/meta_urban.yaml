@@ -75,6 +75,7 @@ classes:
       - update_frequency
       - statistical_nature
       - sampling_weights
+      - conventions
       - record_count
       - record_count_note
       - join_keys
@@ -120,6 +121,7 @@ classes:
       - registration_required
 
   SpatialCoverage:
+    description: "Geographic area a dataset covers."
     class_uri: dct:Location
     slots:
       - countries
@@ -127,10 +129,25 @@ classes:
       - bbox
 
   TemporalCoverage:
+    description: "Period of time a dataset covers."
     class_uri: dct:PeriodOfTime
     slots:
       - start
       - end
+
+  Convention:
+    description: >-
+      A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a
+      code that means "not applicable", or a unit used for all energy totals. Conventions are usually stated
+      once in a user guide and never in the individual codebook entries, so a person or an AI system reading
+      one entry cannot infer them; the profile states them explicitly.
+    slots:
+      - applies_to
+      - rule
+      - example
+    slot_usage:
+      rule:
+        required: true
 
   Verification:
     description: Provenance of the profile itself (who checked it, when, against which sources).
@@ -207,53 +224,80 @@ slots:
 
   # catalog
   datasets:
+    description: "Dataset profiles held in the catalog."
     range: DatasetProfile
     multivalued: true
     inlined_as_list: true
   concepts:
+    description: "Concepts of the vocabulary held in the catalog."
     range: UBEMConcept
     multivalued: true
     inlined_as_list: true
 
   # identification
   id:
+    description: "Stable lowercase identifier of the record (letters, digits, '_', '.', '-')."
     identifier: true
     range: string
     pattern: "^[a-z0-9][a-z0-9_.-]*$"
   title:
+    description: "Full title of the dataset as given by its publisher."
     slot_uri: dct:title
   short_name:
+    description: "Common short name or acronym of the dataset (for example CBECS 2018)."
     slot_uri: skos:altLabel
   publisher:
+    description: "Organization that publishes and maintains the dataset."
     slot_uri: dct:publisher
   landing_page:
+    description: "Web page of the dataset maintained by the publisher."
     slot_uri: dcat:landingPage
     range: uri
   doi:
     description: DOI of the dataset itself (bare form, e.g. 10.1234/abc).
     pattern: "^10\\.\\d{4,9}/\\S+$"
   citation:
+    description: "Citation text the publisher asks users to give."
     slot_uri: dct:bibliographicCitation
   reference_paper_doi:
     description: DOI of a peer-reviewed paper that describes the dataset.
     pattern: "^10\\.\\d{4,9}/\\S+$"
   license:
+    description: "License or terms of use, as stated by the publisher (SPDX identifier where one exists)."
     slot_uri: dct:license
   access_level:
+    description: "How the data can be obtained, from open download to restricted or commercial access."
     range: AccessLevel
   distributions:
+    description: "The downloadable files or services through which the data are released."
     slot_uri: dcat:distribution
     range: Distribution
     multivalued: true
     inlined_as_list: true
   format:
+    description: "File format or media type of a distribution (for example CSV, GeoParquet, NetCDF)."
     slot_uri: dct:format
   access_url:
+    description: "URL from which a distribution can be accessed or downloaded."
     slot_uri: dcat:accessURL
   api:
+    description: "True if the distribution is a programmatic interface (API or web service) rather than a file."
     range: boolean
   registration_required:
+    description: "True if users must register or sign in before downloading."
     range: boolean
+
+  conventions:
+    description: "Dataset-wide rules for naming, coding and units that apply to many variables."
+    range: Convention
+    multivalued: true
+    inlined_as_list: true
+  applies_to:
+    description: "Which variables the convention applies to (a name pattern or a description)."
+  rule:
+    description: "The convention, stated as a rule that can be applied without other context."
+  example:
+    description: "One concrete example of the rule from the dataset."
 
   # facets
   ubem_roles:
@@ -261,11 +305,14 @@ slots:
     range: UBEMRole
     multivalued: true
   content_types:
+    description: "Kinds of content in the dataset (for example footprints, microdata, hourly loads)."
     multivalued: true
     slot_uri: dcat:theme
   geographic_scope:
+    description: "Extent of the area covered, from city to global."
     range: GeographicScope
   spatial_coverage:
+    description: "Area the dataset covers, as countries and optional regions."
     slot_uri: dct:spatial
     range: SpatialCoverage
     inlined: true
@@ -282,66 +329,90 @@ slots:
     description: Finest location detail released publicly.
     range: SpatialGranularity
   temporal_coverage:
+    description: "Period the data describe."
     slot_uri: dct:temporal
     range: TemporalCoverage
     inlined: true
   start:
+    description: "First period covered (ISO 8601 year, month or date)."
     slot_uri: dcat:startDate
   end:
+    description: "Last period covered (ISO 8601), or 'present' for an ongoing series."
     slot_uri: dcat:endDate
   temporal_resolution:
     description: ISO 8601 duration of the finest time step, or "static" or "irregular".
     slot_uri: dcat:temporalResolution
     pattern: "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$"
   update_frequency:
+    description: "How often the publisher releases new data (for example annual, irregular)."
     slot_uri: dct:accrualPeriodicity
   statistical_nature:
+    description: "How the data were generated, which decides how they may be analyzed (for example a weighted sample survey must be analyzed with its weights)."
     range: StatisticalNature
   sampling_weights:
     description: Weight variables and how to use them (required for weighted sample surveys).
   record_count:
+    description: "Number of records (rows, buildings, meters or stations) in the dataset."
     range: integer
-  record_count_note: {}
+  record_count_note:
+    description: "What the record count counts and its source."
   join_keys:
+    description: "Keys present in the public data that allow records to be linked to other datasets."
     range: JoinKey
     multivalued: true
   variables_documented:
+    description: "True if the publisher documents every variable (codebook or data dictionary)."
     range: boolean
   machine_readable:
+    description: "True if the data are released in a machine-readable format, not only as reports."
     range: boolean
   versioned:
+    description: "True if the publisher identifies releases with versions."
     range: boolean
   persistent_identifier:
+    description: "True if the dataset has a persistent identifier such as a DOI."
     range: boolean
-  known_limitations: {}
-  notes: {}
+  known_limitations:
+    description: "Limitations a user must know before using the data (bias, coverage gaps, suppression)."
+  notes:
+    description: "Other information about the dataset or about how its profile was verified."
   verified:
+    description: "Provenance of the profile: who checked it, when and against which sources."
     slot_uri: prov:wasGeneratedBy
     range: Verification
     inlined: true
-  date: {}
-  by: {}
+  date:
+    description: "Date of the verification (ISO 8601)."
+  by:
+    description: "Person or agent who carried out the verification."
   sources_checked:
+    description: "Pages and documents consulted during verification."
     range: uri
     multivalued: true
   variables:
+    description: "Variable-level profiles of the dataset's columns."
     range: VariableProfile
     multivalued: true
     inlined_as_list: true
 
   # variable level
   name:
+    description: "Variable name exactly as it appears in the data file."
     slot_uri: csvw:name
   label:
+    description: "Short human-readable label of the variable as given in the codebook."
     slot_uri: skos:prefLabel
   description:
+    description: "Longer description of the variable, such as the question text."
     slot_uri: dct:description
   datatype:
+    description: "Data type of the variable's values."
     range: VariableDatatype
   concept:
     description: Id of the UBEMConcept this variable maps to, or "none".
     slot_uri: skos:related
   mapping_relation:
+    description: "SKOS relation between the variable and its concept (exact, close, broad, narrow, related)."
     range: MappingRelation
   unit:
     description: QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.
@@ -350,38 +421,49 @@ slots:
     description: Factor applied to raw values before the unit applies (e.g., 1000 for "thousand Btu").
     range: float
   aggregation:
+    description: "How each value relates to time: static, instantaneous, total or average over a period, count or share."
     range: Aggregation
   entity:
+    description: "What the variable or concept describes (building, household, system, meter, region, ...)."
     range: EntityType
   code_list:
+    description: "Codes of a categorical variable with their meanings."
     range: CodeEntry
     multivalued: true
     inlined_as_list: true
-  code: {}
+  code:
+    description: "A value as stored in the data."
   concept_value:
     description: Optional normalized value in the target concept (e.g., an ASHRAE climate zone id).
   missing_codes:
     description: Raw values that mean missing, not applicable, or suppressed.
     multivalued: true
   is_weight:
+    description: "True if the variable is a sampling or analysis weight; such variables are not observations."
     range: boolean
   is_imputation_flag:
+    description: "True if the variable records whether another variable was imputed."
     range: boolean
   flags_variable:
     description: For an imputation or quality flag, the variable it refers to.
 
   # vocabulary
   pref_label:
+    description: "Preferred human-readable label of the concept."
     slot_uri: skos:prefLabel
   definition:
+    description: "What the concept means, written so that a person or an AI system can apply it without other context."
     slot_uri: skos:definition
   alt_labels:
+    description: "Generic synonyms of the concept."
     slot_uri: skos:altLabel
     multivalued: true
   broader:
+    description: "The more general concept in the hierarchy (SKOS broader)."
     slot_uri: skos:broader
     range: UBEMConcept
   concept_role:
+    description: "UBEM workflow role the concept belongs to."
     range: UBEMRole
   quantity_kind:
     description: QUDT quantity kind CURIE, e.g. quantitykind:Area.
@@ -389,18 +471,23 @@ slots:
   canonical_unit:
     description: SI (or SI-accepted) unit in which normalized values are expressed.
   exact_match:
+    description: "Term in another standard with the same meaning (SKOS exactMatch)."
     slot_uri: skos:exactMatch
     multivalued: true
   close_match:
+    description: "Term in another standard with nearly the same meaning (SKOS closeMatch)."
     slot_uri: skos:closeMatch
     multivalued: true
   related_match:
+    description: "Term in another standard that is associated but not equivalent (SKOS relatedMatch)."
     slot_uri: skos:relatedMatch
     multivalued: true
   broad_match:
+    description: "Term in another standard that is more general (SKOS broadMatch)."
     slot_uri: skos:broadMatch
     multivalued: true
   narrow_match:
+    description: "Term in another standard that is more specific (SKOS narrowMatch)."
     slot_uri: skos:narrowMatch
     multivalued: true
 
@@ -426,35 +513,37 @@ enums:
         description: Socio-economic, land use, grid emissions, tariffs, urban microclimate.
 
   GeographicScope:
+    description: "Extent of the area a dataset covers."
     permissible_values:
-      global: {}
-      multinational: {}
-      national: {}
-      subnational: {}
-      city: {}
+      global: {description: "Covers (nearly) the whole world."}
+      multinational: {description: "Covers several countries, such as the European Union."}
+      national: {description: "Covers one country."}
+      subnational: {description: "Covers part of a country, such as a state, province or utility territory."}
+      city: {description: "Covers one city or metropolitan area."}
 
   SpatialGranularity:
     description: Ordered from finest to coarsest (see `rank` annotation).
     permissible_values:
-      point_station: {annotations: {rank: 1}}
-      building: {annotations: {rank: 1}}
-      parcel: {annotations: {rank: 2}}
-      grid_cell_fine: {description: "<= 1 km", annotations: {rank: 3}}
-      census_block_group: {annotations: {rank: 4}}
-      census_tract: {annotations: {rank: 5}}
-      postal_code: {annotations: {rank: 5}}
-      grid_cell_coarse: {description: "> 1 km", annotations: {rank: 6}}
-      county: {annotations: {rank: 7}}
-      city: {annotations: {rank: 7}}
-      utility_service_territory: {annotations: {rank: 8}}
-      state_province: {annotations: {rank: 9}}
-      climate_zone: {annotations: {rank: 10}}
-      census_region_division: {annotations: {rank: 10}}
-      nation: {annotations: {rank: 11}}
+      point_station: {description: "Individual measurement points such as weather stations.", annotations: {rank: 1}}
+      building: {description: "Individual buildings or footprints.", annotations: {rank: 1}}
+      parcel: {description: "Individual land parcels or lots.", annotations: {rank: 2}}
+      grid_cell_fine: {description: "Raster or model grid cells of 1 km or finer.", annotations: {rank: 3}}
+      census_block_group: {description: "U.S. census block groups (about 600 to 3,000 people).", annotations: {rank: 4}}
+      census_tract: {description: "U.S. census tracts (about 4,000 people).", annotations: {rank: 5}}
+      postal_code: {description: "Postal or ZIP codes.", annotations: {rank: 5}}
+      grid_cell_coarse: {description: "Raster or model grid cells coarser than 1 km.", annotations: {rank: 6}}
+      county: {description: "Counties or equivalent second-level administrative units.", annotations: {rank: 7}}
+      city: {description: "Cities or municipalities.", annotations: {rank: 7}}
+      utility_service_territory: {description: "Service territories of electric or gas utilities.", annotations: {rank: 8}}
+      state_province: {description: "States, provinces or equivalent first-level administrative units.", annotations: {rank: 9}}
+      climate_zone: {description: "Climate zones (for example ASHRAE or IECC zones).", annotations: {rank: 10}}
+      census_region_division: {description: "U.S. census regions or divisions.", annotations: {rank: 10}}
+      nation: {description: "Whole countries, with no finer location.", annotations: {rank: 11}}
       none: {description: "No location released", annotations: {rank: 12}}
       unknown: {description: "Could not be verified from public documentation", annotations: {rank: 99}}
 
   StatisticalNature:
+    description: "How the data were generated; decides the statistical treatment they need."
     permissible_values:
       census_complete: {description: "Complete enumeration of a population."}
       sample_survey_weighted: {description: "Probability sample; estimates need weights."}
@@ -470,81 +559,85 @@ enums:
       compilation: {description: "Assembled from several of the above."}
 
   AccessLevel:
+    description: "How the data can be obtained."
     permissible_values:
-      open_download: {}
-      open_api: {}
-      registration_required: {}
-      request_or_agreement: {}
-      restricted_commercial: {}
+      open_download: {description: "Files can be downloaded by anyone without registration."}
+      open_api: {description: "Data can be retrieved by anyone through an open programmatic interface."}
+      registration_required: {description: "Free, but users must register or sign in."}
+      request_or_agreement: {description: "Access requires an application, a data-use agreement or approval."}
+      restricted_commercial: {description: "Access requires payment or is restricted to specific users."}
 
   JoinKey:
+    description: "Keys in the public data through which records can be linked to other datasets."
     permissible_values:
-      lat_lon: {}
-      geometry: {}
-      address: {}
-      parcel_id: {}
-      building_id: {}
-      ubid: {}
-      station_id: {}
-      grid_cell: {}
-      census_block_group: {}
-      census_tract: {}
+      lat_lon: {description: "Latitude and longitude of the record."}
+      geometry: {description: "A point, line or polygon geometry of the record."}
+      address: {description: "Street address of the building or site."}
+      parcel_id: {description: "Cadastral parcel or lot identifier shared with other datasets (for example BBL)."}
+      building_id: {description: "Building identifier shared with other datasets (for example BIN, UPRN); not a dataset-internal row id."}
+      ubid: {description: "Unique Building Identifier derived from the footprint."}
+      station_id: {description: "Identifier of a weather or measurement station (for example WMO or USAF id)."}
+      grid_cell: {description: "Identifier or coordinates of a raster or grid cell."}
+      census_block_group: {description: "U.S. census block group code."}
+      census_tract: {description: "U.S. census tract code."}
       small_statistical_area: {description: "Non-U.S. small statistical areas such as UK LSOA/MSOA or national census grid ids"}
-      postal_code: {}
-      fips_county: {}
-      fips_state: {}
-      census_region_division: {}
-      nuts_region: {}
-      country_iso: {}
-      utility_id: {}
-      balancing_authority: {}
-      climate_zone_ashrae: {}
-      climate_zone_iecc: {}
-      building_type: {}
-      vintage: {}
-      timestamp: {}
+      postal_code: {description: "Postal or ZIP code."}
+      fips_county: {description: "U.S. FIPS county code."}
+      fips_state: {description: "U.S. FIPS state code."}
+      census_region_division: {description: "U.S. census region or division code."}
+      nuts_region: {description: "European NUTS region code."}
+      country_iso: {description: "ISO 3166 country code."}
+      utility_id: {description: "Identifier of an electric or gas utility (for example EIA utility id)."}
+      balancing_authority: {description: "Identifier of an electricity balancing authority."}
+      climate_zone_ashrae: {description: "ASHRAE Standard 169 climate zone."}
+      climate_zone_iecc: {description: "IECC climate zone."}
+      building_type: {description: "Building type or use class (attribute key for statistical matching only)."}
+      vintage: {description: "Construction period (attribute key for statistical matching only)."}
+      timestamp: {description: "Date and time of an observation."}
 
   VariableDatatype:
+    description: "Data type of a variable's values."
     permissible_values:
-      integer: {}
-      float: {}
-      string: {}
-      categorical: {}
-      boolean: {}
-      datetime: {}
-      geometry: {}
-      identifier: {}
+      integer: {description: "Whole numbers, such as counts or years."}
+      float: {description: "Real numbers that may have decimals."}
+      string: {description: "Free text without a code list."}
+      categorical: {description: "Codes from a fixed list (see code_list)."}
+      boolean: {description: "True or false."}
+      datetime: {description: "Dates or date-times (ISO 8601)."}
+      geometry: {description: "Spatial geometries such as points, lines or polygons."}
+      identifier: {description: "Identifiers of records or entities."}
 
   MappingRelation:
+    description: "SKOS mapping relation between a variable and a concept."
     permissible_values:
-      exactMatch: {meaning: skos:exactMatch}
-      closeMatch: {meaning: skos:closeMatch}
-      broadMatch: {meaning: skos:broadMatch}
-      narrowMatch: {meaning: skos:narrowMatch}
-      relatedMatch: {meaning: skos:relatedMatch}
+      exactMatch: {description: "The variable measures exactly the concept.", meaning: skos:exactMatch}
+      closeMatch: {description: "The variable measures nearly the concept and can be used in its place in most applications.", meaning: skos:closeMatch}
+      broadMatch: {description: "The concept is more general than the variable.", meaning: skos:broadMatch}
+      narrowMatch: {description: "The concept is more specific than the variable.", meaning: skos:narrowMatch}
+      relatedMatch: {description: "The variable is associated with the concept but does not measure it.", meaning: skos:relatedMatch}
 
   Aggregation:
     description: How a value relates to time.
     permissible_values:
       static: {description: "Attribute that does not vary in the observation period."}
-      instantaneous: {}
-      total_over_period: {}
-      average_over_period: {}
-      count: {}
-      share: {}
+      instantaneous: {description: "Value at a point in time (for example a temperature reading)."}
+      total_over_period: {description: "Sum over the reporting period (for example annual energy use)."}
+      average_over_period: {description: "Mean over the reporting period."}
+      count: {description: "Number of items (for example number of floors or occupants)."}
+      share: {description: "Fraction or percentage of a whole."}
 
   EntityType:
     description: What a concept or variable describes.
     permissible_values:
-      site: {}
-      building: {}
-      zone: {}
-      system: {}
-      envelope: {}
-      household: {}
-      occupant: {}
-      meter: {}
-      region: {}
-      weather_station: {}
-      grid_cell: {}
+      site: {description: "A property or campus that may contain several buildings."}
+      building: {description: "A single building."}
+      zone: {description: "A thermal zone or space within a building."}
+      system: {description: "A building system or piece of equipment (HVAC, water heating, lighting, ...)."}
+      envelope: {description: "Walls, roofs, windows and other parts of the building envelope."}
+      household: {description: "A household occupying a housing unit."}
+      occupant: {description: "A person using a building."}
+      meter: {description: "An energy or water meter."}
+      region: {description: "A geographic area."}
+      weather_station: {description: "A weather or climate observation station."}
+      grid_cell: {description: "A cell of a raster or model grid."}
       dataset_record: {description: "Record bookkeeping (identifiers, weights, flags)."}

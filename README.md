@@ -1,4 +1,4 @@
-# Meta-Urban: schema, open-data catalog and LLM alignment benchmark for urban building energy modeling
+# Meta-Urban: an AI-ready semantic schema, open-data catalog and benchmark for urban building energy modeling
 
 TensorBuild Lab, University of Arizona. Companion repository for the manuscript in `paper/` (draft), which
 replaces the preprint *Taxonomy, Semantic Data Schema, and Schema Alignment for Open Data in Urban Building
@@ -63,15 +63,18 @@ gen-owl schema/meta_urban.yaml > schema/generated/meta_urban.owl.ttl
 
 ## Status (2026-11-13)
 
-Manuscript v0.2 (target: *Automation in Construction*) with final results. Done: schema v2.0,
+Manuscript v0.3, rebuilt around AI-ready schemas (proposed target: *Engineering Applications of Artificial
+Intelligence*, to be confirmed by the authors). New in v0.3: definitions for all 271 schema terms, a
+`Convention` class, the AI documentation layer (`schema/ai/`, `python -m meta_urban.ai_docs`), an
+AI-readiness audit of five standards (`python -m meta_urban.standards`) and the schema-design experiments
+E1-E6 (`bash scripts/run_ai_ready.sh`, then `python -m meta_urban.design_report`). Also done: schema v2.0,
 vocabulary v0.1 with verified external mappings, 91-entry catalog with a field-level verification of a random
 20-entry sample (`catalog/verification_2026-11-13.csv`), T2 gold from two blind LLM annotators plus blind
 adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebooks, open-weight runs
 (Qwen3 8B, Llama 3.1 8B), downstream analysis, cover letter (`paper/cover_letter.md`) and a Word build
 (`paper/build/manuscript.docx`).
 
-Left for the authors: author roles, funding, the corresponding-author email on the title page, and the
-journal's submission forms.
+Left for the authors: funding, acknowledgments, confirming the journal, and the journal's submission forms.
 
 To rebuild the submission files: `python scripts/graphical_abstract.py` then `python scripts/build_docx.py` (output in `paper/submission/`, checklist in `paper/submission/CHECKLIST.md`).
 

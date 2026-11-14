@@ -1,0 +1,7 @@
+standard,terms,with_definition_pct,median_definition_words,enum_values,enum_values_defined_pct,statistical_design_terms,vocabulary_tokens_k,json_schema,validation,level
+Meta-Urban 2.0,271,100.0,9.0,101,100.0,7,5.31775,yes,JSON Schema + SHACL,dataset + variable
+Brick 1.4.4,1434,73.98884239888424,12.0,0,,0,32.0185,no,SHACL shapes in Brick.ttl,"building points, equipment"
+BEDES 2.5,6217,44.61959144281808,11.0,5558,58.04246131702051,0,157.5895,no,none (dictionary),building characteristics
+CityGML Energy ADE 1.0,665,21.654135338345863,12.0,146,50.68493150684932,0,6.4405,no,XML Schema,building objects
+DCAT 3,52,86.53846153846153,12.0,0,,0,1.1365,no,none in the W3C namespace file,dataset
+schema.org (Dataset-related),163,100.0,16.0,0,,0,7.62775,no,none,dataset (web)

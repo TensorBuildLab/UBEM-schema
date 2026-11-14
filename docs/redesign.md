@@ -91,8 +91,10 @@ grows large, a separate *Scientific Data* data descriptor for the catalog is a n
 
 ## 6. Decisions (updated 2026-11-13)
 
-- [x] Target journal: Automation in Construction, subscription route (backup: Computers, Environment and
-      Urban Systems). Excluded by the authors: AEI, Building Simulation, Building and Environment, SoftwareX,
+- [x] Target journal (v0.3, pending the authors' confirmation): Engineering Applications of Artificial
+      Intelligence, subscription route (backups: Computers, Environment and Urban Systems; Journal of Web
+      Semantics). Automation in Construction was dropped because building energy modeling is outside
+      construction. The paper is now framed around AI-ready schemas (see `paper/manuscript.md`, Section 3). Excluded by the authors: AEI, Building Simulation, Building and Environment, SoftwareX,
       Energy and Buildings, JBPS, Applied Energy, and open-access-only journals. One paper, not split.
 - [x] LLMs: two local open-weight models (Qwen3 8B, Llama 3.1 8B); frontier runs dropped (no API budget), the
       harness supports them.

@@ -150,6 +150,7 @@ class DatasetProfile(YAMLRoot):
     temporal_resolution: Optional[str] = None
     update_frequency: Optional[str] = None
     sampling_weights: Optional[str] = None
+    conventions: Optional[Union[Union[dict, "Convention"], list[Union[dict, "Convention"]]]] = empty_list()
     record_count: Optional[int] = None
     record_count_note: Optional[str] = None
     join_keys: Optional[Union[Union[str, "JoinKey"], list[Union[str, "JoinKey"]]]] = empty_list()
@@ -244,6 +245,8 @@ class DatasetProfile(YAMLRoot):
         if self.sampling_weights is not None and not isinstance(self.sampling_weights, str):
             self.sampling_weights = str(self.sampling_weights)
 
+        self._normalize_inlined_as_list(slot_name="conventions", slot_type=Convention, key_name="rule", keyed=False)
+
         if self.record_count is not None and not isinstance(self.record_count, int):
             self.record_count = int(self.record_count)
 
@@ -315,6 +318,9 @@ class Distribution(YAMLRoot):
 
 @dataclass(repr=False)
 class SpatialCoverage(YAMLRoot):
+    """
+    Geographic area a dataset covers.
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = DCT["Location"]
@@ -342,6 +348,9 @@ class SpatialCoverage(YAMLRoot):
 
 @dataclass(repr=False)
 class TemporalCoverage(YAMLRoot):
+    """
+    Period of time a dataset covers.
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = DCT["PeriodOfTime"]
@@ -358,6 +367,40 @@ class TemporalCoverage(YAMLRoot):
 
         if self.end is not None and not isinstance(self.end, str):
             self.end = str(self.end)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Convention(YAMLRoot):
+    """
+    A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a code that
+    means "not applicable", or a unit used for all energy totals. Conventions are usually stated once in a user guide
+    and never in the individual codebook entries, so a person or an AI system reading one entry cannot infer them; the
+    profile states them explicitly.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = META_URBAN["Convention"]
+    class_class_curie: ClassVar[str] = "meta_urban:Convention"
+    class_name: ClassVar[str] = "Convention"
+    class_model_uri: ClassVar[URIRef] = META_URBAN.Convention
+
+    rule: str = None
+    applies_to: Optional[str] = None
+    example: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.rule):
+            self.MissingRequiredField("rule")
+        if not isinstance(self.rule, str):
+            self.rule = str(self.rule)
+
+        if self.applies_to is not None and not isinstance(self.applies_to, str):
+            self.applies_to = str(self.applies_to)
+
+        if self.example is not None and not isinstance(self.example, str):
+            self.example = str(self.example)
 
         super().__post_init__(**kwargs)
 
@@ -623,44 +666,83 @@ class UBEMRole(EnumDefinitionImpl):
     )
 
 class GeographicScope(EnumDefinitionImpl):
-
-    multinational = PermissibleValue(text="multinational")
-    national = PermissibleValue(text="national")
-    subnational = PermissibleValue(text="subnational")
-    city = PermissibleValue(text="city")
+    """
+    Extent of the area a dataset covers.
+    """
+    multinational = PermissibleValue(
+        text="multinational",
+        description="Covers several countries, such as the European Union.")
+    national = PermissibleValue(
+        text="national",
+        description="Covers one country.")
+    subnational = PermissibleValue(
+        text="subnational",
+        description="Covers part of a country, such as a state, province or utility territory.")
+    city = PermissibleValue(
+        text="city",
+        description="Covers one city or metropolitan area.")
 
     _defn = EnumDefinition(
         name="GeographicScope",
+        description="Extent of the area a dataset covers.",
     )
 
     @classmethod
     def _addvals(cls):
         setattr(cls, "global",
-            PermissibleValue(text="global"))
+            PermissibleValue(
+                text="global",
+                description="Covers (nearly) the whole world."))
 
 class SpatialGranularity(EnumDefinitionImpl):
     """
     Ordered from finest to coarsest (see `rank` annotation).
     """
-    point_station = PermissibleValue(text="point_station")
-    building = PermissibleValue(text="building")
-    parcel = PermissibleValue(text="parcel")
+    point_station = PermissibleValue(
+        text="point_station",
+        description="Individual measurement points such as weather stations.")
+    building = PermissibleValue(
+        text="building",
+        description="Individual buildings or footprints.")
+    parcel = PermissibleValue(
+        text="parcel",
+        description="Individual land parcels or lots.")
     grid_cell_fine = PermissibleValue(
         text="grid_cell_fine",
-        description="<= 1 km")
-    census_block_group = PermissibleValue(text="census_block_group")
-    census_tract = PermissibleValue(text="census_tract")
-    postal_code = PermissibleValue(text="postal_code")
+        description="Raster or model grid cells of 1 km or finer.")
+    census_block_group = PermissibleValue(
+        text="census_block_group",
+        description="U.S. census block groups (about 600 to 3,000 people).")
+    census_tract = PermissibleValue(
+        text="census_tract",
+        description="U.S. census tracts (about 4,000 people).")
+    postal_code = PermissibleValue(
+        text="postal_code",
+        description="Postal or ZIP codes.")
     grid_cell_coarse = PermissibleValue(
         text="grid_cell_coarse",
-        description="> 1 km")
-    county = PermissibleValue(text="county")
-    city = PermissibleValue(text="city")
-    utility_service_territory = PermissibleValue(text="utility_service_territory")
-    state_province = PermissibleValue(text="state_province")
-    climate_zone = PermissibleValue(text="climate_zone")
-    census_region_division = PermissibleValue(text="census_region_division")
-    nation = PermissibleValue(text="nation")
+        description="Raster or model grid cells coarser than 1 km.")
+    county = PermissibleValue(
+        text="county",
+        description="Counties or equivalent second-level administrative units.")
+    city = PermissibleValue(
+        text="city",
+        description="Cities or municipalities.")
+    utility_service_territory = PermissibleValue(
+        text="utility_service_territory",
+        description="Service territories of electric or gas utilities.")
+    state_province = PermissibleValue(
+        text="state_province",
+        description="States, provinces or equivalent first-level administrative units.")
+    climate_zone = PermissibleValue(
+        text="climate_zone",
+        description="Climate zones (for example ASHRAE or IECC zones).")
+    census_region_division = PermissibleValue(
+        text="census_region_division",
+        description="U.S. census regions or divisions.")
+    nation = PermissibleValue(
+        text="nation",
+        description="Whole countries, with no finer location.")
     none = PermissibleValue(
         text="none",
         description="No location released")
@@ -674,7 +756,9 @@ class SpatialGranularity(EnumDefinitionImpl):
     )
 
 class StatisticalNature(EnumDefinitionImpl):
-
+    """
+    How the data were generated; decides the statistical treatment they need.
+    """
     census_complete = PermissibleValue(
         text="census_complete",
         description="Complete enumeration of a population.")
@@ -714,88 +798,178 @@ class StatisticalNature(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="StatisticalNature",
+        description="How the data were generated; decides the statistical treatment they need.",
     )
 
 class AccessLevel(EnumDefinitionImpl):
-
-    open_download = PermissibleValue(text="open_download")
-    open_api = PermissibleValue(text="open_api")
-    registration_required = PermissibleValue(text="registration_required")
-    request_or_agreement = PermissibleValue(text="request_or_agreement")
-    restricted_commercial = PermissibleValue(text="restricted_commercial")
+    """
+    How the data can be obtained.
+    """
+    open_download = PermissibleValue(
+        text="open_download",
+        description="Files can be downloaded by anyone without registration.")
+    open_api = PermissibleValue(
+        text="open_api",
+        description="Data can be retrieved by anyone through an open programmatic interface.")
+    registration_required = PermissibleValue(
+        text="registration_required",
+        description="Free, but users must register or sign in.")
+    request_or_agreement = PermissibleValue(
+        text="request_or_agreement",
+        description="Access requires an application, a data-use agreement or approval.")
+    restricted_commercial = PermissibleValue(
+        text="restricted_commercial",
+        description="Access requires payment or is restricted to specific users.")
 
     _defn = EnumDefinition(
         name="AccessLevel",
+        description="How the data can be obtained.",
     )
 
 class JoinKey(EnumDefinitionImpl):
-
-    lat_lon = PermissibleValue(text="lat_lon")
-    geometry = PermissibleValue(text="geometry")
-    address = PermissibleValue(text="address")
-    parcel_id = PermissibleValue(text="parcel_id")
-    building_id = PermissibleValue(text="building_id")
-    ubid = PermissibleValue(text="ubid")
-    station_id = PermissibleValue(text="station_id")
-    grid_cell = PermissibleValue(text="grid_cell")
-    census_block_group = PermissibleValue(text="census_block_group")
-    census_tract = PermissibleValue(text="census_tract")
+    """
+    Keys in the public data through which records can be linked to other datasets.
+    """
+    lat_lon = PermissibleValue(
+        text="lat_lon",
+        description="Latitude and longitude of the record.")
+    geometry = PermissibleValue(
+        text="geometry",
+        description="A point, line or polygon geometry of the record.")
+    address = PermissibleValue(
+        text="address",
+        description="Street address of the building or site.")
+    parcel_id = PermissibleValue(
+        text="parcel_id",
+        description="Cadastral parcel or lot identifier shared with other datasets (for example BBL).")
+    building_id = PermissibleValue(
+        text="building_id",
+        description="""Building identifier shared with other datasets (for example BIN, UPRN); not a dataset-internal row id.""")
+    ubid = PermissibleValue(
+        text="ubid",
+        description="Unique Building Identifier derived from the footprint.")
+    station_id = PermissibleValue(
+        text="station_id",
+        description="Identifier of a weather or measurement station (for example WMO or USAF id).")
+    grid_cell = PermissibleValue(
+        text="grid_cell",
+        description="Identifier or coordinates of a raster or grid cell.")
+    census_block_group = PermissibleValue(
+        text="census_block_group",
+        description="U.S. census block group code.")
+    census_tract = PermissibleValue(
+        text="census_tract",
+        description="U.S. census tract code.")
     small_statistical_area = PermissibleValue(
         text="small_statistical_area",
         description="Non-U.S. small statistical areas such as UK LSOA/MSOA or national census grid ids")
-    postal_code = PermissibleValue(text="postal_code")
-    fips_county = PermissibleValue(text="fips_county")
-    fips_state = PermissibleValue(text="fips_state")
-    census_region_division = PermissibleValue(text="census_region_division")
-    nuts_region = PermissibleValue(text="nuts_region")
-    country_iso = PermissibleValue(text="country_iso")
-    utility_id = PermissibleValue(text="utility_id")
-    balancing_authority = PermissibleValue(text="balancing_authority")
-    climate_zone_ashrae = PermissibleValue(text="climate_zone_ashrae")
-    climate_zone_iecc = PermissibleValue(text="climate_zone_iecc")
-    building_type = PermissibleValue(text="building_type")
-    vintage = PermissibleValue(text="vintage")
-    timestamp = PermissibleValue(text="timestamp")
+    postal_code = PermissibleValue(
+        text="postal_code",
+        description="Postal or ZIP code.")
+    fips_county = PermissibleValue(
+        text="fips_county",
+        description="U.S. FIPS county code.")
+    fips_state = PermissibleValue(
+        text="fips_state",
+        description="U.S. FIPS state code.")
+    census_region_division = PermissibleValue(
+        text="census_region_division",
+        description="U.S. census region or division code.")
+    nuts_region = PermissibleValue(
+        text="nuts_region",
+        description="European NUTS region code.")
+    country_iso = PermissibleValue(
+        text="country_iso",
+        description="ISO 3166 country code.")
+    utility_id = PermissibleValue(
+        text="utility_id",
+        description="Identifier of an electric or gas utility (for example EIA utility id).")
+    balancing_authority = PermissibleValue(
+        text="balancing_authority",
+        description="Identifier of an electricity balancing authority.")
+    climate_zone_ashrae = PermissibleValue(
+        text="climate_zone_ashrae",
+        description="ASHRAE Standard 169 climate zone.")
+    climate_zone_iecc = PermissibleValue(
+        text="climate_zone_iecc",
+        description="IECC climate zone.")
+    building_type = PermissibleValue(
+        text="building_type",
+        description="Building type or use class (attribute key for statistical matching only).")
+    vintage = PermissibleValue(
+        text="vintage",
+        description="Construction period (attribute key for statistical matching only).")
+    timestamp = PermissibleValue(
+        text="timestamp",
+        description="Date and time of an observation.")
 
     _defn = EnumDefinition(
         name="JoinKey",
+        description="Keys in the public data through which records can be linked to other datasets.",
     )
 
 class VariableDatatype(EnumDefinitionImpl):
-
-    integer = PermissibleValue(text="integer")
-    float = PermissibleValue(text="float")
-    string = PermissibleValue(text="string")
-    categorical = PermissibleValue(text="categorical")
-    boolean = PermissibleValue(text="boolean")
-    datetime = PermissibleValue(text="datetime")
-    geometry = PermissibleValue(text="geometry")
-    identifier = PermissibleValue(text="identifier")
+    """
+    Data type of a variable's values.
+    """
+    integer = PermissibleValue(
+        text="integer",
+        description="Whole numbers, such as counts or years.")
+    float = PermissibleValue(
+        text="float",
+        description="Real numbers that may have decimals.")
+    string = PermissibleValue(
+        text="string",
+        description="Free text without a code list.")
+    categorical = PermissibleValue(
+        text="categorical",
+        description="Codes from a fixed list (see code_list).")
+    boolean = PermissibleValue(
+        text="boolean",
+        description="True or false.")
+    datetime = PermissibleValue(
+        text="datetime",
+        description="Dates or date-times (ISO 8601).")
+    geometry = PermissibleValue(
+        text="geometry",
+        description="Spatial geometries such as points, lines or polygons.")
+    identifier = PermissibleValue(
+        text="identifier",
+        description="Identifiers of records or entities.")
 
     _defn = EnumDefinition(
         name="VariableDatatype",
+        description="Data type of a variable's values.",
     )
 
 class MappingRelation(EnumDefinitionImpl):
-
+    """
+    SKOS mapping relation between a variable and a concept.
+    """
     exactMatch = PermissibleValue(
         text="exactMatch",
+        description="The variable measures exactly the concept.",
         meaning=SKOS["exactMatch"])
     closeMatch = PermissibleValue(
         text="closeMatch",
+        description="The variable measures nearly the concept and can be used in its place in most applications.",
         meaning=SKOS["closeMatch"])
     broadMatch = PermissibleValue(
         text="broadMatch",
+        description="The concept is more general than the variable.",
         meaning=SKOS["broadMatch"])
     narrowMatch = PermissibleValue(
         text="narrowMatch",
+        description="The concept is more specific than the variable.",
         meaning=SKOS["narrowMatch"])
     relatedMatch = PermissibleValue(
         text="relatedMatch",
+        description="The variable is associated with the concept but does not measure it.",
         meaning=SKOS["relatedMatch"])
 
     _defn = EnumDefinition(
         name="MappingRelation",
+        description="SKOS mapping relation between a variable and a concept.",
     )
 
 class Aggregation(EnumDefinitionImpl):
@@ -805,11 +979,21 @@ class Aggregation(EnumDefinitionImpl):
     static = PermissibleValue(
         text="static",
         description="Attribute that does not vary in the observation period.")
-    instantaneous = PermissibleValue(text="instantaneous")
-    total_over_period = PermissibleValue(text="total_over_period")
-    average_over_period = PermissibleValue(text="average_over_period")
-    count = PermissibleValue(text="count")
-    share = PermissibleValue(text="share")
+    instantaneous = PermissibleValue(
+        text="instantaneous",
+        description="Value at a point in time (for example a temperature reading).")
+    total_over_period = PermissibleValue(
+        text="total_over_period",
+        description="Sum over the reporting period (for example annual energy use).")
+    average_over_period = PermissibleValue(
+        text="average_over_period",
+        description="Mean over the reporting period.")
+    count = PermissibleValue(
+        text="count",
+        description="Number of items (for example number of floors or occupants).")
+    share = PermissibleValue(
+        text="share",
+        description="Fraction or percentage of a whole.")
 
     _defn = EnumDefinition(
         name="Aggregation",
@@ -820,17 +1004,39 @@ class EntityType(EnumDefinitionImpl):
     """
     What a concept or variable describes.
     """
-    site = PermissibleValue(text="site")
-    building = PermissibleValue(text="building")
-    zone = PermissibleValue(text="zone")
-    system = PermissibleValue(text="system")
-    envelope = PermissibleValue(text="envelope")
-    household = PermissibleValue(text="household")
-    occupant = PermissibleValue(text="occupant")
-    meter = PermissibleValue(text="meter")
-    region = PermissibleValue(text="region")
-    weather_station = PermissibleValue(text="weather_station")
-    grid_cell = PermissibleValue(text="grid_cell")
+    site = PermissibleValue(
+        text="site",
+        description="A property or campus that may contain several buildings.")
+    building = PermissibleValue(
+        text="building",
+        description="A single building.")
+    zone = PermissibleValue(
+        text="zone",
+        description="A thermal zone or space within a building.")
+    system = PermissibleValue(
+        text="system",
+        description="A building system or piece of equipment (HVAC, water heating, lighting, ...).")
+    envelope = PermissibleValue(
+        text="envelope",
+        description="Walls, roofs, windows and other parts of the building envelope.")
+    household = PermissibleValue(
+        text="household",
+        description="A household occupying a housing unit.")
+    occupant = PermissibleValue(
+        text="occupant",
+        description="A person using a building.")
+    meter = PermissibleValue(
+        text="meter",
+        description="An energy or water meter.")
+    region = PermissibleValue(
+        text="region",
+        description="A geographic area.")
+    weather_station = PermissibleValue(
+        text="weather_station",
+        description="A weather or climate observation station.")
+    grid_cell = PermissibleValue(
+        text="grid_cell",
+        description="A cell of a raster or model grid.")
     dataset_record = PermissibleValue(
         text="dataset_record",
         description="Record bookkeeping (identifiers, weights, flags).")
@@ -897,6 +1103,18 @@ slots.api = Slot(uri=META_URBAN.api, name="api", curie=META_URBAN.curie('api'),
 
 slots.registration_required = Slot(uri=META_URBAN.registration_required, name="registration_required", curie=META_URBAN.curie('registration_required'),
                    model_uri=META_URBAN.registration_required, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.conventions = Slot(uri=META_URBAN.conventions, name="conventions", curie=META_URBAN.curie('conventions'),
+                   model_uri=META_URBAN.conventions, domain=None, range=Optional[Union[Union[dict, Convention], list[Union[dict, Convention]]]])
+
+slots.applies_to = Slot(uri=META_URBAN.applies_to, name="applies_to", curie=META_URBAN.curie('applies_to'),
+                   model_uri=META_URBAN.applies_to, domain=None, range=Optional[str])
+
+slots.rule = Slot(uri=META_URBAN.rule, name="rule", curie=META_URBAN.curie('rule'),
+                   model_uri=META_URBAN.rule, domain=None, range=Optional[str])
+
+slots.example = Slot(uri=META_URBAN.example, name="example", curie=META_URBAN.curie('example'),
+                   model_uri=META_URBAN.example, domain=None, range=Optional[str])
 
 slots.ubem_roles = Slot(uri=META_URBAN.ubem_roles, name="ubem_roles", curie=META_URBAN.curie('ubem_roles'),
                    model_uri=META_URBAN.ubem_roles, domain=None, range=Optional[Union[Union[str, "UBEMRole"], list[Union[str, "UBEMRole"]]]])
@@ -1092,6 +1310,9 @@ slots.DatasetProfile_spatial_granularity = Slot(uri=META_URBAN.spatial_granulari
 
 slots.DatasetProfile_access_level = Slot(uri=META_URBAN.access_level, name="DatasetProfile_access_level", curie=META_URBAN.curie('access_level'),
                    model_uri=META_URBAN.DatasetProfile_access_level, domain=DatasetProfile, range=Union[str, "AccessLevel"])
+
+slots.Convention_rule = Slot(uri=META_URBAN.rule, name="Convention_rule", curie=META_URBAN.curie('rule'),
+                   model_uri=META_URBAN.Convention_rule, domain=Convention, range=str)
 
 slots.VariableProfile_name = Slot(uri=CSVW.name, name="VariableProfile_name", curie=CSVW.curie('name'),
                    model_uri=META_URBAN.VariableProfile_name, domain=VariableProfile, range=str)

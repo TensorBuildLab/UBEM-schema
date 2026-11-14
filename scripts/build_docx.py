@@ -1,4 +1,4 @@
-"""Build the submission files for Automation in Construction (pip install pypandoc_binary python-docx).
+"""Build the submission files for Engineering Applications of Artificial Intelligence (pip install pypandoc_binary python-docx).
 
     python scripts/build_docx.py
 
@@ -8,7 +8,7 @@ Writes paper/build/*.docx and assembles paper/submission/:
     highlights.docx       separate highlights file
     cover_letter.docx
     graphical_abstract.tif / .pdf
-    Figure_1..5.pdf / .png  each figure as a separate file, vector PDF and 600-dpi PNG
+    Figure_1..8.pdf / .png  each figure as a separate file, vector PDF and 600-dpi PNG
 """
 import shutil
 import subprocess
@@ -21,8 +21,8 @@ from docx.oxml.ns import qn
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPER, BUILD, SUB = ROOT / "paper", ROOT / "paper" / "build", ROOT / "paper" / "submission"
-FIGURES = ["fig_role_by_granularity", "fig_role_by_access", "fig_t2_levels", "fig_t2_coverage",
-           "fig_weights_eui_error"]  # order of appearance in the manuscript
+FIGURES = ["fig_architecture", "fig_class_diagram", "fig_worked_example", "fig_role_by_granularity",
+           "fig_design_conditions", "fig_standards", "fig_t2_coverage", "fig_weights_eui_error"]  # order of appearance in the manuscript
 PANDOC = pypandoc.get_pandoc_path()
 
 
@@ -86,6 +86,8 @@ def main() -> None:
         shutil.copy(BUILD / f, SUB / f)
     for ext in (".tif", ".pdf"):
         shutil.copy(PAPER / "figures" / f"graphical_abstract{ext}", SUB / f"graphical_abstract{ext}")
+    for old in SUB.glob("Figure_*"):
+        old.unlink()
     for i, name in enumerate(FIGURES, 1):
         for ext in (".pdf", ".png"):
             shutil.copy(PAPER / "figures" / f"{name}{ext}", SUB / f"Figure_{i}{ext}")

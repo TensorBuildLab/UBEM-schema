@@ -24,6 +24,7 @@ import json
 import os
 import re
 import time
+from functools import lru_cache
 from pathlib import Path
 
 import requests
@@ -83,10 +84,25 @@ def _variable_block(item: dict, max_codes: int = 8) -> str:
     return "\n".join(parts)
 
 
+TRANSPLANT = {"XBR": "brick", "XBE": "bedes", "XEA": "energy_ade"}
+
+
+def _transplant_block(standard: str, concepts: list[dict]) -> str:
+    """Each concept documented by the best-matching term of another standard (its own label and definition);
+    concepts the standard does not cover appear as bare ids."""
+    from .standards import transplant_docs
+
+    docs = transplant_docs(standard)
+    return "\n".join(f"{c['id']}: {docs[c['id']]}" if c["id"] in docs else c["id"] for c in concepts)
+
+
 def t2_request(item: dict, level: str, candidates: list[str] | None = None) -> dict:
     """Return {system, user, schema} for task T2 at a given context level.
 
     L0 ids only; L1 ids + labels; L2 full semantics; L3 = L2 restricted to retrieved candidates.
+    Schema-design ablations (Section 5): L2D definitions only (no hierarchy, entity, unit or synonyms);
+    L2U full semantics without the closed-vocabulary constraint on the output; XBR / XBE / XEA the same concept
+    ids documented with the matching terms of Brick, BEDES or the CityGML Energy ADE instead of Meta-Urban's.
     For L3 the system prompt varies per item (no prefix caching); that cost is reported.
     """
     concepts = leaf_concepts()
@@ -95,19 +111,26 @@ def t2_request(item: dict, level: str, candidates: list[str] | None = None) -> d
         keep = set(candidates or [])
         concepts = [c for c in concepts if c["id"] in keep]
         block_level = "L2"
+    if level in TRANSPLANT:
+        block = _transplant_block(TRANSPLANT[level], concepts)
+    elif level == "L2D":
+        block = "\n".join(f"{c['id']}: {c['pref_label']}. {c['definition']}" for c in concepts)
+    else:
+        block = _concept_block("L2" if level == "L2U" else block_level, concepts)
     ids = [c["id"] for c in concepts] + ["none"]
     system = (
         f"{ROLE}\n\nTask: map one survey variable to the single most specific concept in the target vocabulary "
         "that the variable measures or records. Answer \"none\" if no concept applies.\n\n"
-        f"TARGET VOCABULARY\n{_concept_block(block_level, concepts)}\n\n"
+        f"TARGET VOCABULARY\n{block}\n\n"
         'Output: {"concept": <id or "none">, "alternatives": [<up to two other ids, best first>], '
         '"confidence": <0 to 1>}'
     )
+    concept_type = {"type": "string"} if level == "L2U" else {"type": "string", "enum": ids}
     schema = {
         "type": "object",
         "properties": {
-            "concept": {"type": "string", "enum": ids},
-            "alternatives": {"type": "array", "items": {"type": "string", "enum": ids}},
+            "concept": concept_type,
+            "alternatives": {"type": "array", "items": concept_type},
             "confidence": {"type": "number"},
         },
         "required": ["concept", "alternatives", "confidence"],
@@ -151,10 +174,30 @@ T3_SCHEMA = {
 }
 
 
-def t3_request(item: dict) -> dict:
+PROFILE_ID = {"cbecs2018": "chr-cbecs-2018", "recs2020": "chr-recs-2020"}
+
+
+@lru_cache
+def _profile_card(dataset_id: str) -> str:
+    from .ai_docs import dataset_card
+    from .io import load_catalog
+
+    return dataset_card(next(e for e in load_catalog() if e["id"] == dataset_id))
+
+
+def t3_request(item: dict, profile: bool = False) -> dict:
+    """T3 prompt. With profile=True the system prompt also carries the dataset's Meta-Urban card (facets, weights
+    and conventions), one card per survey, so prefix caching still applies."""
     user = (f"dataset: {item['dataset']}\nvariable name: {item['name']}\nlabel: {item.get('label')}\n"
             f"values/format codes (verbatim):\n{item.get('codes_raw') or '(none)'}")
-    return {"system": T3_SYSTEM, "user": user, "schema": T3_SCHEMA}
+    system = T3_SYSTEM
+    if profile:
+        from .ai_docs import dataset_card
+        from .io import load_catalog
+
+        entry = next(e for e in load_catalog() if e["id"] == PROFILE_ID[item["dataset"]])
+        system = f"{T3_SYSTEM}\n\nDATASET PROFILE (Meta-Urban)\n{dataset_card(entry)}"
+    return {"system": system, "user": user, "schema": T3_SCHEMA}
 
 
 # ======================================================================================== providers

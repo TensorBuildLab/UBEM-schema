@@ -1,4 +1,4 @@
-"""Meta-Urban: metadata schema, open-data catalog and LLM alignment benchmark for UBEM."""
+"""Meta-Urban: an AI-ready semantic schema, open-data catalog and benchmark for UBEM."""
 
 from pathlib import Path
 

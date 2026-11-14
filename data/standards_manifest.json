@@ -1,0 +1,38 @@
+{
+ "Brick.ttl": {
+  "url": "https://github.com/BrickSchema/Brick/releases/download/v1.4.4/Brick.ttl",
+  "downloaded": "2026-11-13",
+  "sha256": "b65720b7b9b64c646745c689777e6138c0d59ce0088df0aeb78fbd444d04d8e7",
+  "bytes": 1749633
+ },
+ "bedes_v2.5_terms.xml": {
+  "url": "https://raw.githubusercontent.com/BuildingSync/BuildingSync-website/8cc6b42445de05bc25afc7327a0059da12ef2a69/bsyncviewer/lib/bedes/v2.5/bedes_online_dictionary_uuid-terms.xml",
+  "downloaded": "2026-11-13",
+  "sha256": "74159dea60af9e054ed587be3b197a0d3b882d5da4e0018238cbacaa1bb9af28",
+  "bytes": 378069
+ },
+ "bedes_v2.5_list_options.xml": {
+  "url": "https://raw.githubusercontent.com/BuildingSync/BuildingSync-website/8cc6b42445de05bc25afc7327a0059da12ef2a69/bsyncviewer/lib/bedes/v2.5/bedes_online_dictionary_uuid-lo.xml",
+  "downloaded": "2026-11-13",
+  "sha256": "5cfdddf2e40626e5e893aa9e5442f5786dd1d04d28ead915914b041a213701a9",
+  "bytes": 3322171
+ },
+ "EnergyADE.xsd": {
+  "url": "https://www.sig3d.org/citygml/2.0/energy/1.0/EnergyADE.xsd",
+  "downloaded": "2026-11-13",
+  "sha256": "5a771f5ef702f86fedcabb24fce9a1d6ac3c0761a89aad3ea0ab7891ed280817",
+  "bytes": 136101
+ },
+ "dcat3.ttl": {
+  "url": "https://www.w3.org/ns/dcat3.ttl",
+  "downloaded": "2026-11-13",
+  "sha256": "d1624d3bbf364f6fc1d43b9a188bbb9e67639b1a7d46a5cb7ea3f5d47d02b62f",
+  "bytes": 200345
+ },
+ "schemaorg-current-https.jsonld": {
+  "url": "https://schema.org/version/latest/schemaorg-current-https.jsonld",
+  "downloaded": "2026-11-13",
+  "sha256": "0a4b8c4c910fc831ec8695196510973390906a5ee34dc6b862dfec4d21a12f74",
+  "bytes": 1521575
+ }
+}

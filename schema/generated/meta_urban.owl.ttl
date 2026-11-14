@@ -12,125 +12,157 @@
 @prefix pav: <http://purl.org/pav/> .
 skos:broadMatch a owl:Class ;
 	rdfs:label "broadMatch" ;
-	rdfs:subClassOf meta_urban:MappingRelation .
+	rdfs:subClassOf meta_urban:MappingRelation ;
+	skos:definition "The concept is more general than the variable." .
 skos:closeMatch a owl:Class ;
 	rdfs:label "closeMatch" ;
-	rdfs:subClassOf meta_urban:MappingRelation .
+	rdfs:subClassOf meta_urban:MappingRelation ;
+	skos:definition "The variable measures nearly the concept and can be used in its place in most applications." .
 skos:exactMatch a owl:Class ;
 	rdfs:label "exactMatch" ;
-	rdfs:subClassOf meta_urban:MappingRelation .
+	rdfs:subClassOf meta_urban:MappingRelation ;
+	skos:definition "The variable measures exactly the concept." .
 skos:narrowMatch a owl:Class ;
 	rdfs:label "narrowMatch" ;
-	rdfs:subClassOf meta_urban:MappingRelation .
+	rdfs:subClassOf meta_urban:MappingRelation ;
+	skos:definition "The concept is more specific than the variable." .
 skos:relatedMatch a owl:Class ;
 	rdfs:label "relatedMatch" ;
-	rdfs:subClassOf meta_urban:MappingRelation .
+	rdfs:subClassOf meta_urban:MappingRelation ;
+	skos:definition "The variable is associated with the concept but does not measure it." .
 meta_urban:AccessLevel\#open_api a owl:Class ;
 	rdfs:label "open_api" ;
-	rdfs:subClassOf meta_urban:AccessLevel .
+	rdfs:subClassOf meta_urban:AccessLevel ;
+	skos:definition "Data can be retrieved by anyone through an open programmatic interface." .
 meta_urban:AccessLevel\#open_download a owl:Class ;
 	rdfs:label "open_download" ;
-	rdfs:subClassOf meta_urban:AccessLevel .
+	rdfs:subClassOf meta_urban:AccessLevel ;
+	skos:definition "Files can be downloaded by anyone without registration." .
 meta_urban:AccessLevel\#registration_required a owl:Class ;
 	rdfs:label "registration_required" ;
-	rdfs:subClassOf meta_urban:AccessLevel .
+	rdfs:subClassOf meta_urban:AccessLevel ;
+	skos:definition "Free, but users must register or sign in." .
 meta_urban:AccessLevel\#request_or_agreement a owl:Class ;
 	rdfs:label "request_or_agreement" ;
-	rdfs:subClassOf meta_urban:AccessLevel .
+	rdfs:subClassOf meta_urban:AccessLevel ;
+	skos:definition "Access requires an application, a data-use agreement or approval." .
 meta_urban:AccessLevel\#restricted_commercial a owl:Class ;
 	rdfs:label "restricted_commercial" ;
-	rdfs:subClassOf meta_urban:AccessLevel .
+	rdfs:subClassOf meta_urban:AccessLevel ;
+	skos:definition "Access requires payment or is restricted to specific users." .
 meta_urban:AccessLevel a owl:Class ;
 	rdfs:label "AccessLevel" ;
-	owl:unionOf _:c14n60 ;
+	owl:unionOf _:c14n61 ;
+	skos:definition "How the data can be obtained." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:AccessLevel\#open_api , meta_urban:AccessLevel\#open_download , meta_urban:AccessLevel\#registration_required , meta_urban:AccessLevel\#request_or_agreement , meta_urban:AccessLevel\#restricted_commercial .
 meta_urban:Aggregation\#average_over_period a owl:Class ;
 	rdfs:label "average_over_period" ;
-	rdfs:subClassOf meta_urban:Aggregation .
+	rdfs:subClassOf meta_urban:Aggregation ;
+	skos:definition "Mean over the reporting period." .
 meta_urban:Aggregation\#count a owl:Class ;
 	rdfs:label "count" ;
-	rdfs:subClassOf meta_urban:Aggregation .
+	rdfs:subClassOf meta_urban:Aggregation ;
+	skos:definition "Number of items (for example number of floors or occupants)." .
 meta_urban:Aggregation\#instantaneous a owl:Class ;
 	rdfs:label "instantaneous" ;
-	rdfs:subClassOf meta_urban:Aggregation .
+	rdfs:subClassOf meta_urban:Aggregation ;
+	skos:definition "Value at a point in time (for example a temperature reading)." .
 meta_urban:Aggregation\#share a owl:Class ;
 	rdfs:label "share" ;
-	rdfs:subClassOf meta_urban:Aggregation .
+	rdfs:subClassOf meta_urban:Aggregation ;
+	skos:definition "Fraction or percentage of a whole." .
 meta_urban:Aggregation\#static a owl:Class ;
 	rdfs:label "static" ;
 	rdfs:subClassOf meta_urban:Aggregation ;
 	skos:definition "Attribute that does not vary in the observation period." .
 meta_urban:Aggregation\#total_over_period a owl:Class ;
 	rdfs:label "total_over_period" ;
-	rdfs:subClassOf meta_urban:Aggregation .
+	rdfs:subClassOf meta_urban:Aggregation ;
+	skos:definition "Sum over the reporting period (for example annual energy use)." .
 meta_urban:Aggregation a owl:Class ;
 	rdfs:label "Aggregation" ;
-	owl:unionOf _:c14n258 ;
+	owl:unionOf _:c14n265 ;
 	skos:definition "How a value relates to time." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:Aggregation\#average_over_period , meta_urban:Aggregation\#count , meta_urban:Aggregation\#instantaneous , meta_urban:Aggregation\#share , meta_urban:Aggregation\#static , meta_urban:Aggregation\#total_over_period .
 meta_urban:Catalog a owl:Class ;
 	rdfs:label "Catalog" ;
-	rdfs:subClassOf _:c14n279 , _:c14n300 , _:c14n315 , _:c14n5 ;
+	rdfs:subClassOf _:c14n288 , _:c14n310 , _:c14n326 , _:c14n5 ;
 	skos:definition "A collection of dataset profiles and the concept vocabulary they refer to." ;
 	skos:exactMatch dcat:Catalog ;
 	skos:inScheme meta_urban:schema .
 meta_urban:CodeEntry a owl:Class ;
 	rdfs:label "CodeEntry" ;
-	rdfs:subClassOf _:c14n149 , _:c14n164 , _:c14n207 , _:c14n236 , _:c14n243 , _:c14n261 , _:c14n264 , _:c14n59 , _:c14n69 ;
+	rdfs:subClassOf _:c14n154 , _:c14n170 , _:c14n214 , _:c14n243 , _:c14n250 , _:c14n268 , _:c14n271 , _:c14n60 , _:c14n70 ;
 	skos:definition "One code of a categorical variable and its meaning." ;
 	skos:exactMatch skos:Concept ;
 	skos:inScheme meta_urban:schema .
+meta_urban:Convention a owl:Class ;
+	rdfs:label "Convention" ;
+	rdfs:subClassOf _:c14n135 , _:c14n165 , _:c14n197 , _:c14n275 , _:c14n282 , _:c14n300 , _:c14n315 , _:c14n38 , _:c14n75 ;
+	skos:definition "A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a code that means \"not applicable\", or a unit used for all energy totals. Conventions are usually stated once in a user guide and never in the individual codebook entries, so a person or an AI system reading one entry cannot infer them; the profile states them explicitly." ;
+	skos:inScheme meta_urban:schema .
 meta_urban:DatasetProfile a owl:Class ;
 	rdfs:label "DatasetProfile" ;
-	rdfs:subClassOf _:c14n102 , _:c14n105 , _:c14n108 , _:c14n117 , _:c14n124 , _:c14n129 , _:c14n13 , _:c14n131 , _:c14n135 , _:c14n138 , _:c14n14 , _:c14n140 , _:c14n147 , _:c14n153 , _:c14n156 , _:c14n161 , _:c14n163 , _:c14n166 , _:c14n168 , _:c14n170 , _:c14n171 , _:c14n173 , _:c14n177 , _:c14n179 , _:c14n180 , _:c14n187 , _:c14n191 , _:c14n193 , _:c14n194 , _:c14n197 , _:c14n2 , _:c14n202 , _:c14n206 , _:c14n212 , _:c14n213 , _:c14n215 , _:c14n216 , _:c14n219 , _:c14n220 , _:c14n223 , _:c14n225 , _:c14n227 , _:c14n229 , _:c14n23 , _:c14n233 , _:c14n238 , _:c14n240 , _:c14n25 , _:c14n262 , _:c14n268 , _:c14n270 , _:c14n275 , _:c14n277 , _:c14n280 , _:c14n281 , _:c14n282 , _:c14n283 , _:c14n284 , _:c14n285 , _:c14n287 , _:c14n288 , _:c14n29 , _:c14n293 , _:c14n296 , _:c14n299 , _:c14n301 , _:c14n302 , _:c14n304 , _:c14n305 , _:c14n308 , _:c14n31 , _:c14n323 , _:c14n327 , _:c14n331 , _:c14n34 , _:c14n46 , _:c14n50 , _:c14n51 , _:c14n53 , _:c14n57 , _:c14n62 , _:c14n63 , _:c14n64 , _:c14n71 , _:c14n73 , _:c14n75 , _:c14n78 , _:c14n8 , _:c14n82 , _:c14n84 , _:c14n87 , _:c14n90 , _:c14n95 , _:c14n96 ;
+	rdfs:subClassOf _:c14n105 , _:c14n108 , _:c14n109 , _:c14n112 , _:c14n121 , _:c14n128 , _:c14n13 , _:c14n133 , _:c14n136 , _:c14n14 , _:c14n140 , _:c14n143 , _:c14n145 , _:c14n152 , _:c14n158 , _:c14n161 , _:c14n167 , _:c14n169 , _:c14n172 , _:c14n174 , _:c14n176 , _:c14n177 , _:c14n179 , _:c14n183 , _:c14n185 , _:c14n186 , _:c14n193 , _:c14n198 , _:c14n2 , _:c14n200 , _:c14n201 , _:c14n204 , _:c14n209 , _:c14n213 , _:c14n219 , _:c14n220 , _:c14n222 , _:c14n223 , _:c14n226 , _:c14n227 , _:c14n23 , _:c14n230 , _:c14n232 , _:c14n234 , _:c14n236 , _:c14n240 , _:c14n245 , _:c14n247 , _:c14n25 , _:c14n269 , _:c14n276 , _:c14n278 , _:c14n284 , _:c14n286 , _:c14n289 , _:c14n29 , _:c14n290 , _:c14n291 , _:c14n292 , _:c14n293 , _:c14n294 , _:c14n296 , _:c14n297 , _:c14n303 , _:c14n306 , _:c14n309 , _:c14n31 , _:c14n311 , _:c14n312 , _:c14n314 , _:c14n316 , _:c14n319 , _:c14n334 , _:c14n338 , _:c14n34 , _:c14n342 , _:c14n47 , _:c14n51 , _:c14n52 , _:c14n54 , _:c14n58 , _:c14n63 , _:c14n64 , _:c14n65 , _:c14n72 , _:c14n74 , _:c14n77 , _:c14n8 , _:c14n80 , _:c14n84 , _:c14n85 , _:c14n87 , _:c14n90 , _:c14n93 , _:c14n98 , _:c14n99 ;
 	skos:definition "Dataset-level description of one open dataset, sufficient to decide whether and how it can feed a UBEM workflow, and to join it with other datasets." ;
 	skos:exactMatch dcat:Dataset ;
 	skos:inScheme meta_urban:schema .
 meta_urban:Distribution a owl:Class ;
 	rdfs:label "Distribution" ;
-	rdfs:subClassOf _:c14n10 , _:c14n142 , _:c14n148 , _:c14n176 , _:c14n190 , _:c14n200 , _:c14n214 , _:c14n245 , _:c14n310 , _:c14n37 , _:c14n47 , _:c14n58 ;
+	rdfs:subClassOf _:c14n10 , _:c14n147 , _:c14n153 , _:c14n182 , _:c14n196 , _:c14n207 , _:c14n221 , _:c14n252 , _:c14n321 , _:c14n37 , _:c14n48 , _:c14n59 ;
 	skos:definition "One way of obtaining the data." ;
 	skos:exactMatch dcat:Distribution ;
 	skos:inScheme meta_urban:schema .
 meta_urban:EntityType\#building a owl:Class ;
 	rdfs:label "building" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A single building." .
 meta_urban:EntityType\#dataset_record a owl:Class ;
 	rdfs:label "dataset_record" ;
 	rdfs:subClassOf meta_urban:EntityType ;
 	skos:definition "Record bookkeeping (identifiers, weights, flags)." .
 meta_urban:EntityType\#envelope a owl:Class ;
 	rdfs:label "envelope" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "Walls, roofs, windows and other parts of the building envelope." .
 meta_urban:EntityType\#grid_cell a owl:Class ;
 	rdfs:label "grid_cell" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A cell of a raster or model grid." .
 meta_urban:EntityType\#household a owl:Class ;
 	rdfs:label "household" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A household occupying a housing unit." .
 meta_urban:EntityType\#meter a owl:Class ;
 	rdfs:label "meter" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "An energy or water meter." .
 meta_urban:EntityType\#occupant a owl:Class ;
 	rdfs:label "occupant" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A person using a building." .
 meta_urban:EntityType\#region a owl:Class ;
 	rdfs:label "region" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A geographic area." .
 meta_urban:EntityType\#site a owl:Class ;
 	rdfs:label "site" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A property or campus that may contain several buildings." .
 meta_urban:EntityType\#system a owl:Class ;
 	rdfs:label "system" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A building system or piece of equipment (HVAC, water heating, lighting, ...)." .
 meta_urban:EntityType\#weather_station a owl:Class ;
 	rdfs:label "weather_station" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A weather or climate observation station." .
 meta_urban:EntityType\#zone a owl:Class ;
 	rdfs:label "zone" ;
-	rdfs:subClassOf meta_urban:EntityType .
+	rdfs:subClassOf meta_urban:EntityType ;
+	skos:definition "A thermal zone or space within a building." .
 meta_urban:EntityType a owl:Class ;
 	rdfs:label "EntityType" ;
 	owl:unionOf _:c14n20 ;
@@ -139,153 +171,193 @@ meta_urban:EntityType a owl:Class ;
 	linkml:permissible_values meta_urban:EntityType\#building , meta_urban:EntityType\#dataset_record , meta_urban:EntityType\#envelope , meta_urban:EntityType\#grid_cell , meta_urban:EntityType\#household , meta_urban:EntityType\#meter , meta_urban:EntityType\#occupant , meta_urban:EntityType\#region , meta_urban:EntityType\#site , meta_urban:EntityType\#system , meta_urban:EntityType\#weather_station , meta_urban:EntityType\#zone .
 meta_urban:GeographicScope\#city a owl:Class ;
 	rdfs:label "city" ;
-	rdfs:subClassOf meta_urban:GeographicScope .
+	rdfs:subClassOf meta_urban:GeographicScope ;
+	skos:definition "Covers one city or metropolitan area." .
 meta_urban:GeographicScope\#global a owl:Class ;
 	rdfs:label "global" ;
-	rdfs:subClassOf meta_urban:GeographicScope .
+	rdfs:subClassOf meta_urban:GeographicScope ;
+	skos:definition "Covers (nearly) the whole world." .
 meta_urban:GeographicScope\#multinational a owl:Class ;
 	rdfs:label "multinational" ;
-	rdfs:subClassOf meta_urban:GeographicScope .
+	rdfs:subClassOf meta_urban:GeographicScope ;
+	skos:definition "Covers several countries, such as the European Union." .
 meta_urban:GeographicScope\#national a owl:Class ;
 	rdfs:label "national" ;
-	rdfs:subClassOf meta_urban:GeographicScope .
+	rdfs:subClassOf meta_urban:GeographicScope ;
+	skos:definition "Covers one country." .
 meta_urban:GeographicScope\#subnational a owl:Class ;
 	rdfs:label "subnational" ;
-	rdfs:subClassOf meta_urban:GeographicScope .
+	rdfs:subClassOf meta_urban:GeographicScope ;
+	skos:definition "Covers part of a country, such as a state, province or utility territory." .
 meta_urban:GeographicScope a owl:Class ;
 	rdfs:label "GeographicScope" ;
-	owl:unionOf _:c14n146 ;
+	owl:unionOf _:c14n151 ;
+	skos:definition "Extent of the area a dataset covers." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:GeographicScope\#city , meta_urban:GeographicScope\#global , meta_urban:GeographicScope\#multinational , meta_urban:GeographicScope\#national , meta_urban:GeographicScope\#subnational .
 meta_urban:JoinKey\#address a owl:Class ;
 	rdfs:label "address" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Street address of the building or site." .
 meta_urban:JoinKey\#balancing_authority a owl:Class ;
 	rdfs:label "balancing_authority" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Identifier of an electricity balancing authority." .
 meta_urban:JoinKey\#building_id a owl:Class ;
 	rdfs:label "building_id" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Building identifier shared with other datasets (for example BIN, UPRN); not a dataset-internal row id." .
 meta_urban:JoinKey\#building_type a owl:Class ;
 	rdfs:label "building_type" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Building type or use class (attribute key for statistical matching only)." .
 meta_urban:JoinKey\#census_block_group a owl:Class ;
 	rdfs:label "census_block_group" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "U.S. census block group code." .
 meta_urban:JoinKey\#census_region_division a owl:Class ;
 	rdfs:label "census_region_division" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "U.S. census region or division code." .
 meta_urban:JoinKey\#census_tract a owl:Class ;
 	rdfs:label "census_tract" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "U.S. census tract code." .
 meta_urban:JoinKey\#climate_zone_ashrae a owl:Class ;
 	rdfs:label "climate_zone_ashrae" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "ASHRAE Standard 169 climate zone." .
 meta_urban:JoinKey\#climate_zone_iecc a owl:Class ;
 	rdfs:label "climate_zone_iecc" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "IECC climate zone." .
 meta_urban:JoinKey\#country_iso a owl:Class ;
 	rdfs:label "country_iso" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "ISO 3166 country code." .
 meta_urban:JoinKey\#fips_county a owl:Class ;
 	rdfs:label "fips_county" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "U.S. FIPS county code." .
 meta_urban:JoinKey\#fips_state a owl:Class ;
 	rdfs:label "fips_state" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "U.S. FIPS state code." .
 meta_urban:JoinKey\#geometry a owl:Class ;
 	rdfs:label "geometry" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "A point, line or polygon geometry of the record." .
 meta_urban:JoinKey\#grid_cell a owl:Class ;
 	rdfs:label "grid_cell" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Identifier or coordinates of a raster or grid cell." .
 meta_urban:JoinKey\#lat_lon a owl:Class ;
 	rdfs:label "lat_lon" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Latitude and longitude of the record." .
 meta_urban:JoinKey\#nuts_region a owl:Class ;
 	rdfs:label "nuts_region" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "European NUTS region code." .
 meta_urban:JoinKey\#parcel_id a owl:Class ;
 	rdfs:label "parcel_id" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Cadastral parcel or lot identifier shared with other datasets (for example BBL)." .
 meta_urban:JoinKey\#postal_code a owl:Class ;
 	rdfs:label "postal_code" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Postal or ZIP code." .
 meta_urban:JoinKey\#small_statistical_area a owl:Class ;
 	rdfs:label "small_statistical_area" ;
 	rdfs:subClassOf meta_urban:JoinKey ;
 	skos:definition "Non-U.S. small statistical areas such as UK LSOA/MSOA or national census grid ids" .
 meta_urban:JoinKey\#station_id a owl:Class ;
 	rdfs:label "station_id" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Identifier of a weather or measurement station (for example WMO or USAF id)." .
 meta_urban:JoinKey\#timestamp a owl:Class ;
 	rdfs:label "timestamp" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Date and time of an observation." .
 meta_urban:JoinKey\#ubid a owl:Class ;
 	rdfs:label "ubid" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Unique Building Identifier derived from the footprint." .
 meta_urban:JoinKey\#utility_id a owl:Class ;
 	rdfs:label "utility_id" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Identifier of an electric or gas utility (for example EIA utility id)." .
 meta_urban:JoinKey\#vintage a owl:Class ;
 	rdfs:label "vintage" ;
-	rdfs:subClassOf meta_urban:JoinKey .
+	rdfs:subClassOf meta_urban:JoinKey ;
+	skos:definition "Construction period (attribute key for statistical matching only)." .
 meta_urban:JoinKey a owl:Class ;
 	rdfs:label "JoinKey" ;
-	owl:unionOf _:c14n137 ;
+	owl:unionOf _:c14n142 ;
+	skos:definition "Keys in the public data through which records can be linked to other datasets." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:JoinKey\#address , meta_urban:JoinKey\#balancing_authority , meta_urban:JoinKey\#building_id , meta_urban:JoinKey\#building_type , meta_urban:JoinKey\#census_block_group , meta_urban:JoinKey\#census_region_division , meta_urban:JoinKey\#census_tract , meta_urban:JoinKey\#climate_zone_ashrae , meta_urban:JoinKey\#climate_zone_iecc , meta_urban:JoinKey\#country_iso , meta_urban:JoinKey\#fips_county , meta_urban:JoinKey\#fips_state , meta_urban:JoinKey\#geometry , meta_urban:JoinKey\#grid_cell , meta_urban:JoinKey\#lat_lon , meta_urban:JoinKey\#nuts_region , meta_urban:JoinKey\#parcel_id , meta_urban:JoinKey\#postal_code , meta_urban:JoinKey\#small_statistical_area , meta_urban:JoinKey\#station_id , meta_urban:JoinKey\#timestamp , meta_urban:JoinKey\#ubid , meta_urban:JoinKey\#utility_id , meta_urban:JoinKey\#vintage .
 meta_urban:MappingRelation a owl:Class ;
 	rdfs:label "MappingRelation" ;
 	owl:unionOf _:c14n22 ;
+	skos:definition "SKOS mapping relation between a variable and a concept." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values skos:broadMatch , skos:closeMatch , skos:exactMatch , skos:narrowMatch , skos:relatedMatch .
 meta_urban:SpatialCoverage a owl:Class ;
 	rdfs:label "SpatialCoverage" ;
-	rdfs:subClassOf _:c14n103 , _:c14n114 , _:c14n126 , _:c14n188 , _:c14n195 , _:c14n199 , _:c14n239 , _:c14n79 ;
+	rdfs:subClassOf _:c14n106 , _:c14n118 , _:c14n130 , _:c14n194 , _:c14n202 , _:c14n206 , _:c14n246 , _:c14n81 ;
+	skos:definition "Geographic area a dataset covers." ;
 	skos:exactMatch dct:Location ;
 	skos:inScheme meta_urban:schema .
 meta_urban:SpatialGranularity\#building a owl:Class ;
 	rdfs:label "building" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Individual buildings or footprints." ;
 	meta_urban:rank 1 .
 meta_urban:SpatialGranularity\#census_block_group a owl:Class ;
 	rdfs:label "census_block_group" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "U.S. census block groups (about 600 to 3,000 people)." ;
 	meta_urban:rank 4 .
 meta_urban:SpatialGranularity\#census_region_division a owl:Class ;
 	rdfs:label "census_region_division" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "U.S. census regions or divisions." ;
 	meta_urban:rank 10 .
 meta_urban:SpatialGranularity\#census_tract a owl:Class ;
 	rdfs:label "census_tract" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "U.S. census tracts (about 4,000 people)." ;
 	meta_urban:rank 5 .
 meta_urban:SpatialGranularity\#city a owl:Class ;
 	rdfs:label "city" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Cities or municipalities." ;
 	meta_urban:rank 7 .
 meta_urban:SpatialGranularity\#climate_zone a owl:Class ;
 	rdfs:label "climate_zone" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Climate zones (for example ASHRAE or IECC zones)." ;
 	meta_urban:rank 10 .
 meta_urban:SpatialGranularity\#county a owl:Class ;
 	rdfs:label "county" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Counties or equivalent second-level administrative units." ;
 	meta_urban:rank 7 .
 meta_urban:SpatialGranularity\#grid_cell_coarse a owl:Class ;
 	rdfs:label "grid_cell_coarse" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
-	skos:definition "> 1 km" ;
+	skos:definition "Raster or model grid cells coarser than 1 km." ;
 	meta_urban:rank 6 .
 meta_urban:SpatialGranularity\#grid_cell_fine a owl:Class ;
 	rdfs:label "grid_cell_fine" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
-	skos:definition "<= 1 km" ;
+	skos:definition "Raster or model grid cells of 1 km or finer." ;
 	meta_urban:rank 3 .
 meta_urban:SpatialGranularity\#nation a owl:Class ;
 	rdfs:label "nation" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Whole countries, with no finer location." ;
 	meta_urban:rank 11 .
 meta_urban:SpatialGranularity\#none a owl:Class ;
 	rdfs:label "none" ;
@@ -295,18 +367,22 @@ meta_urban:SpatialGranularity\#none a owl:Class ;
 meta_urban:SpatialGranularity\#parcel a owl:Class ;
 	rdfs:label "parcel" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Individual land parcels or lots." ;
 	meta_urban:rank 2 .
 meta_urban:SpatialGranularity\#point_station a owl:Class ;
 	rdfs:label "point_station" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Individual measurement points such as weather stations." ;
 	meta_urban:rank 1 .
 meta_urban:SpatialGranularity\#postal_code a owl:Class ;
 	rdfs:label "postal_code" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Postal or ZIP codes." ;
 	meta_urban:rank 5 .
 meta_urban:SpatialGranularity\#state_province a owl:Class ;
 	rdfs:label "state_province" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "States, provinces or equivalent first-level administrative units." ;
 	meta_urban:rank 9 .
 meta_urban:SpatialGranularity\#unknown a owl:Class ;
 	rdfs:label "unknown" ;
@@ -316,10 +392,11 @@ meta_urban:SpatialGranularity\#unknown a owl:Class ;
 meta_urban:SpatialGranularity\#utility_service_territory a owl:Class ;
 	rdfs:label "utility_service_territory" ;
 	rdfs:subClassOf meta_urban:SpatialGranularity ;
+	skos:definition "Service territories of electric or gas utilities." ;
 	meta_urban:rank 8 .
 meta_urban:SpatialGranularity a owl:Class ;
 	rdfs:label "SpatialGranularity" ;
-	owl:unionOf _:c14n314 ;
+	owl:unionOf _:c14n325 ;
 	skos:definition "Ordered from finest to coarsest (see `rank` annotation)." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:SpatialGranularity\#building , meta_urban:SpatialGranularity\#census_block_group , meta_urban:SpatialGranularity\#census_region_division , meta_urban:SpatialGranularity\#census_tract , meta_urban:SpatialGranularity\#city , meta_urban:SpatialGranularity\#climate_zone , meta_urban:SpatialGranularity\#county , meta_urban:SpatialGranularity\#grid_cell_coarse , meta_urban:SpatialGranularity\#grid_cell_fine , meta_urban:SpatialGranularity\#nation , meta_urban:SpatialGranularity\#none , meta_urban:SpatialGranularity\#parcel , meta_urban:SpatialGranularity\#point_station , meta_urban:SpatialGranularity\#postal_code , meta_urban:SpatialGranularity\#state_province , meta_urban:SpatialGranularity\#unknown , meta_urban:SpatialGranularity\#utility_service_territory .
@@ -373,17 +450,19 @@ meta_urban:StatisticalNature\#typical_year_synthetic a owl:Class ;
 	skos:definition "Typical meteorological year assembled from observations." .
 meta_urban:StatisticalNature a owl:Class ;
 	rdfs:label "StatisticalNature" ;
-	owl:unionOf _:c14n136 ;
+	owl:unionOf _:c14n141 ;
+	skos:definition "How the data were generated; decides the statistical treatment they need." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:StatisticalNature\#administrative_record , meta_urban:StatisticalNature\#census_complete , meta_urban:StatisticalNature\#climate_projection , meta_urban:StatisticalNature\#compilation , meta_urban:StatisticalNature\#crowdsourced , meta_urban:StatisticalNature\#measured_monitoring , meta_urban:StatisticalNature\#reanalysis_model , meta_urban:StatisticalNature\#remote_sensing_derived , meta_urban:StatisticalNature\#sample_survey_weighted , meta_urban:StatisticalNature\#simulation_synthetic , meta_urban:StatisticalNature\#standard_or_code , meta_urban:StatisticalNature\#typical_year_synthetic .
 meta_urban:TemporalCoverage a owl:Class ;
 	rdfs:label "TemporalCoverage" ;
-	rdfs:subClassOf _:c14n100 , _:c14n132 , _:c14n172 , _:c14n231 , _:c14n256 , _:c14n30 ;
+	rdfs:subClassOf _:c14n103 , _:c14n137 , _:c14n178 , _:c14n238 , _:c14n263 , _:c14n30 ;
+	skos:definition "Period of time a dataset covers." ;
 	skos:exactMatch dct:PeriodOfTime ;
 	skos:inScheme meta_urban:schema .
 meta_urban:UBEMConcept a owl:Class ;
 	rdfs:label "UBEMConcept" ;
-	rdfs:subClassOf _:c14n106 , _:c14n112 , _:c14n115 , _:c14n116 , _:c14n123 , _:c14n141 , _:c14n162 , _:c14n181 , _:c14n185 , _:c14n189 , _:c14n201 , _:c14n218 , _:c14n235 , _:c14n24 , _:c14n246 , _:c14n250 , _:c14n265 , _:c14n266 , _:c14n289 , _:c14n291 , _:c14n297 , _:c14n298 , _:c14n311 , _:c14n316 , _:c14n318 , _:c14n319 , _:c14n325 , _:c14n326 , _:c14n332 , _:c14n39 , _:c14n52 , _:c14n70 , _:c14n89 , _:c14n91 , _:c14n92 , _:c14n97 ;
+	rdfs:subClassOf _:c14n100 , _:c14n110 , _:c14n116 , _:c14n119 , _:c14n120 , _:c14n127 , _:c14n146 , _:c14n168 , _:c14n187 , _:c14n191 , _:c14n195 , _:c14n208 , _:c14n225 , _:c14n24 , _:c14n242 , _:c14n253 , _:c14n257 , _:c14n272 , _:c14n273 , _:c14n298 , _:c14n301 , _:c14n307 , _:c14n308 , _:c14n322 , _:c14n327 , _:c14n329 , _:c14n330 , _:c14n336 , _:c14n337 , _:c14n343 , _:c14n40 , _:c14n53 , _:c14n71 , _:c14n92 , _:c14n94 , _:c14n95 ;
 	skos:definition "A concept in the Meta-Urban vocabulary: a quantity or attribute that a UBEM workflow consumes or produces (for example floor area, principal building activity, dry-bulb temperature, annual electricity use). Concepts form a hierarchy through `broader` and point to equivalent terms in other standards." ;
 	skos:exactMatch skos:Concept ;
 	skos:inScheme meta_urban:schema .
@@ -423,62 +502,80 @@ meta_urban:UBEMRole a owl:Class ;
 	linkml:permissible_values meta_urban:UBEMRole\#boundary_conditions , meta_urban:UBEMRole\#building_characteristics , meta_urban:UBEMRole\#calibration_validation , meta_urban:UBEMRole\#context_coupling , meta_urban:UBEMRole\#geometry_inventory , meta_urban:UBEMRole\#operation_use , meta_urban:UBEMRole\#reference_simulation .
 meta_urban:VariableDatatype\#boolean a owl:Class ;
 	rdfs:label "boolean" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "True or false." .
 meta_urban:VariableDatatype\#categorical a owl:Class ;
 	rdfs:label "categorical" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Codes from a fixed list (see code_list)." .
 meta_urban:VariableDatatype\#datetime a owl:Class ;
 	rdfs:label "datetime" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Dates or date-times (ISO 8601)." .
 meta_urban:VariableDatatype\#float a owl:Class ;
 	rdfs:label "float" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Real numbers that may have decimals." .
 meta_urban:VariableDatatype\#geometry a owl:Class ;
 	rdfs:label "geometry" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Spatial geometries such as points, lines or polygons." .
 meta_urban:VariableDatatype\#identifier a owl:Class ;
 	rdfs:label "identifier" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Identifiers of records or entities." .
 meta_urban:VariableDatatype\#integer a owl:Class ;
 	rdfs:label "integer" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Whole numbers, such as counts or years." .
 meta_urban:VariableDatatype\#string a owl:Class ;
 	rdfs:label "string" ;
-	rdfs:subClassOf meta_urban:VariableDatatype .
+	rdfs:subClassOf meta_urban:VariableDatatype ;
+	skos:definition "Free text without a code list." .
 meta_urban:VariableDatatype a owl:Class ;
 	rdfs:label "VariableDatatype" ;
-	owl:unionOf _:c14n94 ;
+	owl:unionOf _:c14n97 ;
+	skos:definition "Data type of a variable's values." ;
 	skos:inScheme meta_urban:schema ;
 	linkml:permissible_values meta_urban:VariableDatatype\#boolean , meta_urban:VariableDatatype\#categorical , meta_urban:VariableDatatype\#datetime , meta_urban:VariableDatatype\#float , meta_urban:VariableDatatype\#geometry , meta_urban:VariableDatatype\#identifier , meta_urban:VariableDatatype\#integer , meta_urban:VariableDatatype\#string .
 meta_urban:VariableProfile a owl:Class ;
 	rdfs:label "VariableProfile" ;
-	rdfs:subClassOf _:c14n109 , _:c14n110 , _:c14n119 , _:c14n120 , _:c14n121 , _:c14n128 , _:c14n134 , _:c14n15 , _:c14n150 , _:c14n157 , _:c14n159 , _:c14n16 , _:c14n165 , _:c14n17 , _:c14n183 , _:c14n184 , _:c14n186 , _:c14n19 , _:c14n211 , _:c14n224 , _:c14n230 , _:c14n244 , _:c14n248 , _:c14n249 , _:c14n251 , _:c14n257 , _:c14n263 , _:c14n28 , _:c14n290 , _:c14n295 , _:c14n303 , _:c14n307 , _:c14n312 , _:c14n324 , _:c14n38 , _:c14n4 , _:c14n43 , _:c14n6 , _:c14n72 , _:c14n76 , _:c14n77 , _:c14n85 , _:c14n9 ;
+	rdfs:subClassOf _:c14n113 , _:c14n114 , _:c14n123 , _:c14n124 , _:c14n125 , _:c14n132 , _:c14n139 , _:c14n15 , _:c14n155 , _:c14n16 , _:c14n162 , _:c14n164 , _:c14n17 , _:c14n171 , _:c14n189 , _:c14n19 , _:c14n190 , _:c14n192 , _:c14n218 , _:c14n231 , _:c14n237 , _:c14n251 , _:c14n255 , _:c14n256 , _:c14n258 , _:c14n264 , _:c14n270 , _:c14n28 , _:c14n299 , _:c14n305 , _:c14n313 , _:c14n318 , _:c14n323 , _:c14n335 , _:c14n39 , _:c14n4 , _:c14n44 , _:c14n6 , _:c14n73 , _:c14n78 , _:c14n79 , _:c14n88 , _:c14n9 ;
 	skos:definition "Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a gridded dataset." ;
 	skos:exactMatch csvw:Column ;
 	skos:inScheme meta_urban:schema .
 meta_urban:Verification a owl:Class ;
 	rdfs:label "Verification" ;
-	rdfs:subClassOf _:c14n0 , _:c14n222 , _:c14n27 , _:c14n273 , _:c14n276 , _:c14n330 , _:c14n83 , _:c14n98 ;
+	rdfs:subClassOf _:c14n0 , _:c14n101 , _:c14n229 , _:c14n27 , _:c14n281 , _:c14n285 , _:c14n341 , _:c14n86 ;
 	skos:definition "Provenance of the profile itself (who checked it, when, against which sources)." ;
 	skos:exactMatch prov:Activity ;
 	skos:inScheme meta_urban:schema .
 meta_urban:access_level a owl:ObjectProperty ;
 	rdfs:label "access_level" ;
 	rdfs:range meta_urban:AccessLevel ;
+	skos:definition "How the data can be obtained, from open download to restricted or commercial access." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:access_url a owl:DatatypeProperty ;
 	rdfs:label "access_url" ;
+	skos:definition "URL from which a distribution can be accessed or downloaded." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:aggregation a owl:ObjectProperty ;
 	rdfs:label "aggregation" ;
 	rdfs:range meta_urban:Aggregation ;
+	skos:definition "How each value relates to time: static, instantaneous, total or average over a period, count or share." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:alt_labels a owl:DatatypeProperty ;
 	rdfs:label "alt_labels" ;
+	skos:definition "Generic synonyms of the concept." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:api a owl:DatatypeProperty ;
 	rdfs:label "api" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the distribution is a programmatic interface (API or web service) rather than a file." ;
+	skos:inScheme meta_urban:schema .
+meta_urban:applies_to a owl:DatatypeProperty ;
+	rdfs:label "applies_to" ;
+	skos:definition "Which variables the convention applies to (a name pattern or a description)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:bbox a owl:DatatypeProperty ;
 	rdfs:label "bbox" ;
@@ -486,13 +583,16 @@ meta_urban:bbox a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:broad_match a owl:DatatypeProperty ;
 	rdfs:label "broad_match" ;
+	skos:definition "Term in another standard that is more general (SKOS broadMatch)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:broader a owl:ObjectProperty ;
 	rdfs:label "broader" ;
 	rdfs:range meta_urban:UBEMConcept ;
+	skos:definition "The more general concept in the hierarchy (SKOS broader)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:by a owl:DatatypeProperty ;
 	rdfs:label "by" ;
+	skos:definition "Person or agent who carried out the verification." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:canonical_unit a owl:DatatypeProperty ;
 	rdfs:label "canonical_unit" ;
@@ -500,16 +600,20 @@ meta_urban:canonical_unit a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:citation a owl:DatatypeProperty ;
 	rdfs:label "citation" ;
+	skos:definition "Citation text the publisher asks users to give." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:close_match a owl:DatatypeProperty ;
 	rdfs:label "close_match" ;
+	skos:definition "Term in another standard with nearly the same meaning (SKOS closeMatch)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:code a owl:DatatypeProperty ;
 	rdfs:label "code" ;
+	skos:definition "A value as stored in the data." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:code_list a owl:ObjectProperty ;
 	rdfs:label "code_list" ;
 	rdfs:range meta_urban:CodeEntry ;
+	skos:definition "Codes of a categorical variable with their meanings." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:concept a owl:DatatypeProperty ;
 	rdfs:label "concept" ;
@@ -518,6 +622,7 @@ meta_urban:concept a owl:DatatypeProperty ;
 meta_urban:concept_role a owl:ObjectProperty ;
 	rdfs:label "concept_role" ;
 	rdfs:range meta_urban:UBEMRole ;
+	skos:definition "UBEM workflow role the concept belongs to." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:concept_value a owl:DatatypeProperty ;
 	rdfs:label "concept_value" ;
@@ -526,9 +631,16 @@ meta_urban:concept_value a owl:DatatypeProperty ;
 meta_urban:concepts a owl:ObjectProperty ;
 	rdfs:label "concepts" ;
 	rdfs:range meta_urban:UBEMConcept ;
+	skos:definition "Concepts of the vocabulary held in the catalog." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:content_types a owl:DatatypeProperty ;
 	rdfs:label "content_types" ;
+	skos:definition "Kinds of content in the dataset (for example footprints, microdata, hourly loads)." ;
+	skos:inScheme meta_urban:schema .
+meta_urban:conventions a owl:ObjectProperty ;
+	rdfs:label "conventions" ;
+	rdfs:range meta_urban:Convention ;
+	skos:definition "Dataset-wide rules for naming, coding and units that apply to many variables." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:countries a owl:DatatypeProperty ;
 	rdfs:label "countries" ;
@@ -538,38 +650,51 @@ meta_urban:countries a owl:DatatypeProperty ;
 meta_urban:datasets a owl:ObjectProperty ;
 	rdfs:label "datasets" ;
 	rdfs:range meta_urban:DatasetProfile ;
+	skos:definition "Dataset profiles held in the catalog." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:datatype a owl:ObjectProperty ;
 	rdfs:label "datatype" ;
 	rdfs:range meta_urban:VariableDatatype ;
+	skos:definition "Data type of the variable's values." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:date a owl:DatatypeProperty ;
 	rdfs:label "date" ;
+	skos:definition "Date of the verification (ISO 8601)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:definition a owl:DatatypeProperty ;
 	rdfs:label "definition" ;
+	skos:definition "What the concept means, written so that a person or an AI system can apply it without other context." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:description a owl:DatatypeProperty ;
 	rdfs:label "description" ;
+	skos:definition "Longer description of the variable, such as the question text." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:distributions a owl:ObjectProperty ;
 	rdfs:label "distributions" ;
 	rdfs:range meta_urban:Distribution ;
+	skos:definition "The downloadable files or services through which the data are released." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:doi a owl:DatatypeProperty ;
 	rdfs:label "doi" ;
-	rdfs:range _:c14n160 ;
+	rdfs:range _:c14n166 ;
 	skos:definition "DOI of the dataset itself (bare form, e.g. 10.1234/abc)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:end a owl:DatatypeProperty ;
 	rdfs:label "end" ;
+	skos:definition "Last period covered (ISO 8601), or 'present' for an ongoing series." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:entity a owl:ObjectProperty ;
 	rdfs:label "entity" ;
 	rdfs:range meta_urban:EntityType ;
+	skos:definition "What the variable or concept describes (building, household, system, meter, region, ...)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:exact_match a owl:DatatypeProperty ;
 	rdfs:label "exact_match" ;
+	skos:definition "Term in another standard with the same meaning (SKOS exactMatch)." ;
+	skos:inScheme meta_urban:schema .
+meta_urban:example a owl:DatatypeProperty ;
+	rdfs:label "example" ;
+	skos:definition "One concrete example of the rule from the dataset." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:flags_variable a owl:DatatypeProperty ;
 	rdfs:label "flags_variable" ;
@@ -577,47 +702,59 @@ meta_urban:flags_variable a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:format a owl:DatatypeProperty ;
 	rdfs:label "format" ;
+	skos:definition "File format or media type of a distribution (for example CSV, GeoParquet, NetCDF)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:geographic_scope a owl:ObjectProperty ;
 	rdfs:label "geographic_scope" ;
 	rdfs:range meta_urban:GeographicScope ;
+	skos:definition "Extent of the area covered, from city to global." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:id a owl:DatatypeProperty ;
 	rdfs:label "id" ;
-	rdfs:range _:c14n320 ;
+	rdfs:range _:c14n331 ;
+	skos:definition "Stable lowercase identifier of the record (letters, digits, '_', '.', '-')." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:is_imputation_flag a owl:DatatypeProperty ;
 	rdfs:label "is_imputation_flag" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the variable records whether another variable was imputed." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:is_weight a owl:DatatypeProperty ;
 	rdfs:label "is_weight" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the variable is a sampling or analysis weight; such variables are not observations." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:join_keys a owl:ObjectProperty ;
 	rdfs:label "join_keys" ;
 	rdfs:range meta_urban:JoinKey ;
+	skos:definition "Keys present in the public data that allow records to be linked to other datasets." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:known_limitations a owl:DatatypeProperty ;
 	rdfs:label "known_limitations" ;
+	skos:definition "Limitations a user must know before using the data (bias, coverage gaps, suppression)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:label a owl:DatatypeProperty ;
 	rdfs:label "label" ;
+	skos:definition "Short human-readable label of the variable as given in the codebook." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:landing_page a owl:DatatypeProperty ;
 	rdfs:label "landing_page" ;
 	rdfs:range xsd:anyURI ;
+	skos:definition "Web page of the dataset maintained by the publisher." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:license a owl:DatatypeProperty ;
 	rdfs:label "license" ;
+	skos:definition "License or terms of use, as stated by the publisher (SPDX identifier where one exists)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:machine_readable a owl:DatatypeProperty ;
 	rdfs:label "machine_readable" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the data are released in a machine-readable format, not only as reports." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:mapping_relation a owl:ObjectProperty ;
 	rdfs:label "mapping_relation" ;
 	rdfs:range meta_urban:MappingRelation ;
+	skos:definition "SKOS relation between the variable and its concept (exact, close, broad, narrow, related)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:missing_codes a owl:DatatypeProperty ;
 	rdfs:label "missing_codes" ;
@@ -625,22 +762,28 @@ meta_urban:missing_codes a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:name a owl:DatatypeProperty ;
 	rdfs:label "name" ;
+	skos:definition "Variable name exactly as it appears in the data file." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:narrow_match a owl:DatatypeProperty ;
 	rdfs:label "narrow_match" ;
+	skos:definition "Term in another standard that is more specific (SKOS narrowMatch)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:notes a owl:DatatypeProperty ;
 	rdfs:label "notes" ;
+	skos:definition "Other information about the dataset or about how its profile was verified." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:persistent_identifier a owl:DatatypeProperty ;
 	rdfs:label "persistent_identifier" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the dataset has a persistent identifier such as a DOI." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:pref_label a owl:DatatypeProperty ;
 	rdfs:label "pref_label" ;
+	skos:definition "Preferred human-readable label of the concept." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:publisher a owl:DatatypeProperty ;
 	rdfs:label "publisher" ;
+	skos:definition "Organization that publishes and maintains the dataset." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:quantity_kind a owl:DatatypeProperty ;
 	rdfs:label "quantity_kind" ;
@@ -649,21 +792,29 @@ meta_urban:quantity_kind a owl:DatatypeProperty ;
 meta_urban:record_count a owl:DatatypeProperty ;
 	rdfs:label "record_count" ;
 	rdfs:range xsd:integer ;
+	skos:definition "Number of records (rows, buildings, meters or stations) in the dataset." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:record_count_note a owl:DatatypeProperty ;
 	rdfs:label "record_count_note" ;
+	skos:definition "What the record count counts and its source." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:reference_paper_doi a owl:DatatypeProperty ;
 	rdfs:label "reference_paper_doi" ;
-	rdfs:range _:c14n49 ;
+	rdfs:range _:c14n50 ;
 	skos:definition "DOI of a peer-reviewed paper that describes the dataset." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:registration_required a owl:DatatypeProperty ;
 	rdfs:label "registration_required" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if users must register or sign in before downloading." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:related_match a owl:DatatypeProperty ;
 	rdfs:label "related_match" ;
+	skos:definition "Term in another standard that is associated but not equivalent (SKOS relatedMatch)." ;
+	skos:inScheme meta_urban:schema .
+meta_urban:rule a owl:DatatypeProperty ;
+	rdfs:label "rule" ;
+	skos:definition "The convention, stated as a rule that can be applied without other context." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:sampling_weights a owl:DatatypeProperty ;
 	rdfs:label "sampling_weights" ;
@@ -678,14 +829,17 @@ meta_urban:schema.owl.ttl dct:license "CC-BY-4.0" ;
 	skos:definition "Meta-Urban describes open datasets used in urban building energy modeling (UBEM) at two levels. The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets: the UBEM workflow role, statistical nature, spatial granularity, temporal resolution, access level and join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it maps to in the Meta-Urban vocabulary, its unit (QUDT), its code list, its aggregation semantics, and whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects." .
 meta_urban:short_name a owl:DatatypeProperty ;
 	rdfs:label "short_name" ;
+	skos:definition "Common short name or acronym of the dataset (for example CBECS 2018)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:sources_checked a owl:DatatypeProperty ;
 	rdfs:label "sources_checked" ;
 	rdfs:range xsd:anyURI ;
+	skos:definition "Pages and documents consulted during verification." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:spatial_coverage a owl:ObjectProperty ;
 	rdfs:label "spatial_coverage" ;
 	rdfs:range meta_urban:SpatialCoverage ;
+	skos:definition "Area the dataset covers, as countries and optional regions." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:spatial_granularity a owl:ObjectProperty ;
 	rdfs:label "spatial_granularity" ;
@@ -694,22 +848,26 @@ meta_urban:spatial_granularity a owl:ObjectProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:start a owl:DatatypeProperty ;
 	rdfs:label "start" ;
+	skos:definition "First period covered (ISO 8601 year, month or date)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:statistical_nature a owl:ObjectProperty ;
 	rdfs:label "statistical_nature" ;
 	rdfs:range meta_urban:StatisticalNature ;
+	skos:definition "How the data were generated, which decides how they may be analyzed (for example a weighted sample survey must be analyzed with its weights)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:temporal_coverage a owl:ObjectProperty ;
 	rdfs:label "temporal_coverage" ;
 	rdfs:range meta_urban:TemporalCoverage ;
+	skos:definition "Period the data describe." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:temporal_resolution a owl:DatatypeProperty ;
 	rdfs:label "temporal_resolution" ;
-	rdfs:range _:c14n154 ;
+	rdfs:range _:c14n159 ;
 	skos:definition "ISO 8601 duration of the finest time step, or \"static\" or \"irregular\"." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:title a owl:DatatypeProperty ;
 	rdfs:label "title" ;
+	skos:definition "Full title of the dataset as given by its publisher." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:ubem_roles a owl:ObjectProperty ;
 	rdfs:label "ubem_roles" ;
@@ -731,750 +889,765 @@ meta_urban:unit_of_observation a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:update_frequency a owl:DatatypeProperty ;
 	rdfs:label "update_frequency" ;
+	skos:definition "How often the publisher releases new data (for example annual, irregular)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:variables a owl:ObjectProperty ;
 	rdfs:label "variables" ;
 	rdfs:range meta_urban:VariableProfile ;
+	skos:definition "Variable-level profiles of the dataset's columns." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:variables_documented a owl:DatatypeProperty ;
 	rdfs:label "variables_documented" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the publisher documents every variable (codebook or data dictionary)." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:verified a owl:ObjectProperty ;
 	rdfs:label "verified" ;
 	rdfs:range meta_urban:Verification ;
+	skos:definition "Provenance of the profile: who checked it, when and against which sources." ;
 	skos:inScheme meta_urban:schema .
 meta_urban:versioned a owl:DatatypeProperty ;
 	rdfs:label "versioned" ;
 	rdfs:range xsd:boolean ;
+	skos:definition "True if the publisher identifies releases with versions." ;
 	skos:inScheme meta_urban:schema .
 _:c14n0 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:date .
 _:c14n1 rdf:first meta_urban:UBEMRole\#boundary_conditions ;
-	rdf:rest _:c14n272 .
+	rdf:rest _:c14n280 .
 _:c14n10 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:access_url .
 _:c14n100 a owl:Restriction ;
 	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:quantity_kind .
+_:c14n101 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:by .
+_:c14n102 rdf:first meta_urban:SpatialGranularity\#census_block_group ;
+	rdf:rest _:c14n339 .
+_:c14n103 a owl:Restriction ;
+	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:end .
-_:c14n101 rdf:first meta_urban:StatisticalNature\#simulation_synthetic ;
-	rdf:rest _:c14n196 .
-_:c14n102 a owl:Restriction ;
+_:c14n104 rdf:first meta_urban:StatisticalNature\#simulation_synthetic ;
+	rdf:rest _:c14n203 .
+_:c14n105 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:spatial_granularity .
-_:c14n103 a owl:Restriction ;
+_:c14n106 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:countries .
-_:c14n104 a owl:Restriction ;
+_:c14n107 a owl:Restriction ;
 	owl:onProperty meta_urban:sampling_weights ;
 	owl:someValuesFrom xsd:string .
-_:c14n105 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:UBEMRole ;
-	owl:onProperty meta_urban:ubem_roles .
-_:c14n106 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:UBEMConcept ;
-	owl:onProperty meta_urban:broader .
-_:c14n107 rdf:first meta_urban:VariableDatatype\#boolean ;
-	rdf:rest _:c14n254 .
 _:c14n108 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:license .
+	owl:onProperty meta_urban:conventions .
 _:c14n109 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:UBEMRole ;
+	owl:onProperty meta_urban:ubem_roles .
+_:c14n11 rdf:first meta_urban:JoinKey\#fips_state ;
+	rdf:rest _:c14n244 .
+_:c14n110 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:UBEMConcept ;
+	owl:onProperty meta_urban:broader .
+_:c14n111 rdf:first meta_urban:VariableDatatype\#boolean ;
+	rdf:rest _:c14n261 .
+_:c14n112 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:license .
+_:c14n113 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:unit .
-_:c14n11 rdf:first meta_urban:JoinKey\#fips_state ;
-	rdf:rest _:c14n237 .
-_:c14n110 a owl:Restriction ;
+_:c14n114 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:name .
-_:c14n111 rdf:first "sample_survey_weighted" ;
+_:c14n115 rdf:first "sample_survey_weighted" ;
 	rdf:rest rdf:nil .
-_:c14n112 a owl:Restriction ;
-	owl:allValuesFrom _:c14n343 ;
+_:c14n116 a owl:Restriction ;
+	owl:allValuesFrom _:c14n360 ;
 	owl:onProperty meta_urban:id .
-_:c14n113 rdf:first meta_urban:SpatialGranularity\#none ;
-	rdf:rest _:c14n74 .
-_:c14n114 a owl:Restriction ;
+_:c14n117 rdf:first meta_urban:SpatialGranularity\#none ;
+	rdf:rest _:c14n76 .
+_:c14n118 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:description .
-_:c14n115 a owl:Restriction ;
+_:c14n119 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:entity .
-_:c14n116 a owl:Restriction ;
+_:c14n12 rdf:first meta_urban:JoinKey\#address ;
+	rdf:rest _:c14n180 .
+_:c14n120 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:quantity_kind .
-_:c14n117 a owl:Restriction ;
+_:c14n121 a owl:Restriction ;
 	owl:allValuesFrom xsd:integer ;
 	owl:onProperty meta_urban:record_count .
-_:c14n118 rdf:first meta_urban:StatisticalNature\#climate_projection ;
-	rdf:rest _:c14n101 .
-_:c14n119 a owl:Restriction ;
+_:c14n122 rdf:first meta_urban:StatisticalNature\#climate_projection ;
+	rdf:rest _:c14n104 .
+_:c14n123 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:is_weight .
-_:c14n12 rdf:first meta_urban:JoinKey\#address ;
-	rdf:rest _:c14n174 .
-_:c14n120 a owl:Restriction ;
+_:c14n124 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:is_weight .
-_:c14n121 a owl:Restriction ;
+_:c14n125 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:missing_codes .
-_:c14n122 rdf:first _:c14n232 ;
-	rdf:rest _:c14n151 .
-_:c14n123 a owl:Restriction ;
+_:c14n126 rdf:first _:c14n239 ;
+	rdf:rest _:c14n156 .
+_:c14n127 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:alt_labels .
-_:c14n124 a owl:Restriction ;
+_:c14n128 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty meta_urban:versioned .
-_:c14n125 rdf:first meta_urban:UBEMRole\#reference_simulation ;
-	rdf:rest _:c14n203 .
-_:c14n126 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:bbox .
-_:c14n127 rdf:first meta_urban:StatisticalNature\#administrative_record ;
-	rdf:rest _:c14n204 .
-_:c14n128 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:mapping_relation .
-_:c14n129 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:spatial_granularity .
+_:c14n129 rdf:first meta_urban:UBEMRole\#reference_simulation ;
+	rdf:rest _:c14n210 .
 _:c14n13 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:doi .
-_:c14n130 rdf:first meta_urban:GeographicScope\#subnational ;
-	rdf:rest _:c14n175 .
-_:c14n131 a owl:Restriction ;
+_:c14n130 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:bbox .
+_:c14n131 rdf:first meta_urban:StatisticalNature\#administrative_record ;
+	rdf:rest _:c14n211 .
+_:c14n132 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:mapping_relation .
+_:c14n133 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:spatial_granularity .
+_:c14n134 rdf:first meta_urban:GeographicScope\#subnational ;
+	rdf:rest _:c14n181 .
+_:c14n135 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:example .
+_:c14n136 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:notes .
-_:c14n132 a owl:Restriction ;
+_:c14n137 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:start .
-_:c14n133 rdf:first meta_urban:SpatialGranularity\#parcel ;
-	rdf:rest _:c14n55 .
-_:c14n134 a owl:Restriction ;
+_:c14n138 rdf:first meta_urban:SpatialGranularity\#parcel ;
+	rdf:rest _:c14n56 .
+_:c14n139 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:mapping_relation .
-_:c14n135 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:citation .
-_:c14n136 rdf:first meta_urban:StatisticalNature\#census_complete ;
-	rdf:rest _:c14n45 .
-_:c14n137 rdf:first meta_urban:JoinKey\#lat_lon ;
-	rdf:rest _:c14n205 .
-_:c14n138 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:known_limitations .
-_:c14n139 rdf:first meta_urban:EntityType\#meter ;
-	rdf:rest _:c14n192 .
 _:c14n14 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:title .
 _:c14n140 a owl:Restriction ;
 	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:citation .
+_:c14n141 rdf:first meta_urban:StatisticalNature\#census_complete ;
+	rdf:rest _:c14n46 .
+_:c14n142 rdf:first meta_urban:JoinKey\#lat_lon ;
+	rdf:rest _:c14n212 .
+_:c14n143 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:known_limitations .
+_:c14n144 rdf:first meta_urban:EntityType\#meter ;
+	rdf:rest _:c14n199 .
+_:c14n145 a owl:Restriction ;
+	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:machine_readable .
-_:c14n141 a owl:Restriction ;
+_:c14n146 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:broad_match .
-_:c14n142 a owl:Restriction ;
+_:c14n147 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:registration_required .
-_:c14n143 rdf:first meta_urban:JoinKey\#small_statistical_area ;
-	rdf:rest _:c14n93 .
-_:c14n144 rdf:first meta_urban:StatisticalNature\#crowdsourced ;
-	rdf:rest _:c14n152 .
-_:c14n145 rdf:first meta_urban:VariableDatatype\#float ;
-	rdf:rest _:c14n322 .
-_:c14n146 rdf:first meta_urban:GeographicScope\#global ;
-	rdf:rest _:c14n18 .
-_:c14n147 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:record_count_note .
-_:c14n148 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:registration_required .
-_:c14n149 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:code .
+_:c14n148 rdf:first meta_urban:JoinKey\#small_statistical_area ;
+	rdf:rest _:c14n96 .
+_:c14n149 rdf:first meta_urban:StatisticalNature\#crowdsourced ;
+	rdf:rest _:c14n157 .
 _:c14n15 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:label .
-_:c14n150 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:is_imputation_flag .
-_:c14n151 rdf:first meta_urban:DatasetProfile ;
-	rdf:rest rdf:nil .
-_:c14n152 rdf:first meta_urban:StatisticalNature\#reanalysis_model ;
-	rdf:rest _:c14n269 .
+_:c14n150 rdf:first meta_urban:VariableDatatype\#float ;
+	rdf:rest _:c14n333 .
+_:c14n151 rdf:first meta_urban:GeographicScope\#global ;
+	rdf:rest _:c14n18 .
+_:c14n152 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:record_count_note .
 _:c14n153 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:spatial_coverage .
-_:c14n154 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n368 .
-_:c14n155 rdf:first meta_urban:AccessLevel\#restricted_commercial ;
-	rdf:rest rdf:nil .
-_:c14n156 a owl:Restriction ;
+	owl:onProperty meta_urban:registration_required .
+_:c14n154 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:citation .
-_:c14n157 a owl:Restriction ;
+	owl:onProperty meta_urban:code .
+_:c14n155 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:missing_codes .
-_:c14n158 rdf:first meta_urban:GeographicScope\#national ;
-	rdf:rest _:c14n130 .
-_:c14n159 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:concept .
+	owl:onProperty meta_urban:is_imputation_flag .
+_:c14n156 rdf:first meta_urban:DatasetProfile ;
+	rdf:rest rdf:nil .
+_:c14n157 rdf:first meta_urban:StatisticalNature\#reanalysis_model ;
+	rdf:rest _:c14n277 .
+_:c14n158 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:spatial_coverage .
+_:c14n159 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n379 .
 _:c14n16 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:CodeEntry ;
 	owl:onProperty meta_urban:code_list .
-_:c14n160 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n367 .
+_:c14n160 rdf:first meta_urban:AccessLevel\#restricted_commercial ;
+	rdf:rest rdf:nil .
 _:c14n161 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:unit_of_observation .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:citation .
 _:c14n162 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:concept_role .
-_:c14n163 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:known_limitations .
+	owl:onProperty meta_urban:missing_codes .
+_:c14n163 rdf:first meta_urban:GeographicScope\#national ;
+	rdf:rest _:c14n134 .
 _:c14n164 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:concept_value .
+	owl:onProperty meta_urban:concept .
 _:c14n165 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:applies_to .
+_:c14n166 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n378 .
+_:c14n167 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:description .
-_:c14n166 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:Verification ;
-	owl:onProperty meta_urban:verified .
-_:c14n167 rdf:first meta_urban:EntityType\#household ;
-	rdf:rest _:c14n36 .
+	owl:onProperty meta_urban:unit_of_observation .
 _:c14n168 a owl:Restriction ;
-	owl:allValuesFrom _:c14n358 ;
-	owl:onProperty meta_urban:reference_paper_doi .
-_:c14n169 rdf:first meta_urban:JoinKey\#grid_cell ;
-	rdf:rest _:c14n306 .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:concept_role .
+_:c14n169 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:known_limitations .
 _:c14n17 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:EntityType ;
 	owl:onProperty meta_urban:entity .
 _:c14n170 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:record_count_note .
+	owl:onProperty meta_urban:concept_value .
 _:c14n171 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:update_frequency .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:description .
 _:c14n172 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:end .
-_:c14n173 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:versioned .
-_:c14n174 rdf:first meta_urban:JoinKey\#parcel_id ;
-	rdf:rest _:c14n21 .
-_:c14n175 rdf:first meta_urban:GeographicScope\#city ;
-	rdf:rest rdf:nil .
+	owl:allValuesFrom meta_urban:Verification ;
+	owl:onProperty meta_urban:verified .
+_:c14n173 rdf:first meta_urban:EntityType\#household ;
+	rdf:rest _:c14n36 .
+_:c14n174 a owl:Restriction ;
+	owl:allValuesFrom _:c14n369 ;
+	owl:onProperty meta_urban:reference_paper_doi .
+_:c14n175 rdf:first meta_urban:JoinKey\#grid_cell ;
+	rdf:rest _:c14n317 .
 _:c14n176 a owl:Restriction ;
-	owl:allValuesFrom xsd:boolean ;
-	owl:onProperty meta_urban:registration_required .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:record_count_note .
 _:c14n177 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:title .
-_:c14n178 rdf:first meta_urban:UBEMRole\#calibration_validation ;
-	rdf:rest _:c14n125 .
+	owl:onProperty meta_urban:update_frequency .
+_:c14n178 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:end .
 _:c14n179 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:versioned .
+_:c14n18 rdf:first meta_urban:GeographicScope\#multinational ;
+	rdf:rest _:c14n163 .
+_:c14n180 rdf:first meta_urban:JoinKey\#parcel_id ;
+	rdf:rest _:c14n21 .
+_:c14n181 rdf:first meta_urban:GeographicScope\#city ;
+	rdf:rest rdf:nil .
+_:c14n182 a owl:Restriction ;
+	owl:allValuesFrom xsd:boolean ;
+	owl:onProperty meta_urban:registration_required .
+_:c14n183 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:title .
+_:c14n184 rdf:first meta_urban:UBEMRole\#calibration_validation ;
+	rdf:rest _:c14n129 .
+_:c14n185 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:JoinKey ;
 	owl:onProperty meta_urban:join_keys .
-_:c14n18 rdf:first meta_urban:GeographicScope\#multinational ;
-	rdf:rest _:c14n158 .
-_:c14n180 a owl:Restriction ;
+_:c14n186 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:join_keys .
-_:c14n181 a owl:Restriction ;
+_:c14n187 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:broader .
-_:c14n182 rdf:first meta_urban:SpatialGranularity\#grid_cell_coarse ;
-	rdf:rest _:c14n309 .
-_:c14n183 a owl:Restriction ;
+_:c14n188 rdf:first meta_urban:SpatialGranularity\#grid_cell_coarse ;
+	rdf:rest _:c14n320 .
+_:c14n189 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:aggregation .
-_:c14n184 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:label .
-_:c14n185 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:canonical_unit .
-_:c14n186 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:is_imputation_flag .
-_:c14n187 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty meta_urban:access_level .
-_:c14n188 a owl:Restriction ;
-	owl:allValuesFrom _:c14n354 ;
-	owl:onProperty meta_urban:countries .
-_:c14n189 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:UBEMRole ;
-	owl:onProperty meta_urban:concept_role .
 _:c14n19 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:entity .
 _:c14n190 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:format .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:label .
 _:c14n191 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:access_level .
-_:c14n192 rdf:first meta_urban:EntityType\#region ;
-	rdf:rest _:c14n260 .
+	owl:onProperty meta_urban:canonical_unit .
+_:c14n192 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:is_imputation_flag .
 _:c14n193 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:Distribution ;
-	owl:onProperty meta_urban:distributions .
+	owl:minCardinality 1 ;
+	owl:onProperty meta_urban:access_level .
 _:c14n194 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:short_name .
+	owl:allValuesFrom _:c14n363 ;
+	owl:onProperty meta_urban:countries .
 _:c14n195 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:description .
-_:c14n196 rdf:first meta_urban:StatisticalNature\#standard_or_code ;
-	rdf:rest _:c14n274 .
+	owl:allValuesFrom meta_urban:UBEMRole ;
+	owl:onProperty meta_urban:concept_role .
+_:c14n196 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:format .
 _:c14n197 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:spatial_coverage .
-_:c14n198 rdf:first skos:closeMatch ;
-	rdf:rest _:c14n278 .
-_:c14n199 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:bbox .
+	owl:onProperty meta_urban:rule .
+_:c14n198 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:access_level .
+_:c14n199 rdf:first meta_urban:EntityType\#region ;
+	rdf:rest _:c14n267 .
 _:c14n2 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:geographic_scope .
 _:c14n20 rdf:first meta_urban:EntityType\#site ;
-	rdf:rest _:c14n321 .
+	rdf:rest _:c14n332 .
 _:c14n200 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:Distribution ;
+	owl:onProperty meta_urban:distributions .
+_:c14n201 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:short_name .
+_:c14n202 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:description .
+_:c14n203 rdf:first meta_urban:StatisticalNature\#standard_or_code ;
+	rdf:rest _:c14n283 .
+_:c14n204 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:spatial_coverage .
+_:c14n205 rdf:first skos:closeMatch ;
+	rdf:rest _:c14n287 .
+_:c14n206 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:bbox .
+_:c14n207 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:api .
-_:c14n201 a owl:Restriction ;
+_:c14n208 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:quantity_kind .
-_:c14n202 a owl:Restriction ;
-	owl:allValuesFrom _:c14n349 ;
+_:c14n209 a owl:Restriction ;
+	owl:allValuesFrom _:c14n354 ;
 	owl:onProperty meta_urban:id .
-_:c14n203 rdf:first meta_urban:UBEMRole\#context_coupling ;
+_:c14n21 rdf:first meta_urban:JoinKey\#building_id ;
+	rdf:rest _:c14n295 .
+_:c14n210 rdf:first meta_urban:UBEMRole\#context_coupling ;
 	rdf:rest rdf:nil .
-_:c14n204 rdf:first meta_urban:StatisticalNature\#measured_monitoring ;
-	rdf:rest _:c14n247 .
-_:c14n205 rdf:first meta_urban:JoinKey\#geometry ;
+_:c14n211 rdf:first meta_urban:StatisticalNature\#measured_monitoring ;
+	rdf:rest _:c14n254 .
+_:c14n212 rdf:first meta_urban:JoinKey\#geometry ;
 	rdf:rest _:c14n12 .
-_:c14n206 a owl:Restriction ;
+_:c14n213 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:content_types .
-_:c14n207 a owl:Restriction ;
+_:c14n214 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:code .
-_:c14n208 rdf:first meta_urban:AccessLevel\#request_or_agreement ;
-	rdf:rest _:c14n155 .
-_:c14n209 rdf:first meta_urban:JoinKey\#balancing_authority ;
-	rdf:rest _:c14n242 .
-_:c14n21 rdf:first meta_urban:JoinKey\#building_id ;
-	rdf:rest _:c14n286 .
-_:c14n210 rdf:first meta_urban:EntityType\#envelope ;
-	rdf:rest _:c14n167 .
-_:c14n211 a owl:Restriction ;
+_:c14n215 rdf:first meta_urban:AccessLevel\#request_or_agreement ;
+	rdf:rest _:c14n160 .
+_:c14n216 rdf:first meta_urban:JoinKey\#balancing_authority ;
+	rdf:rest _:c14n249 .
+_:c14n217 rdf:first meta_urban:EntityType\#envelope ;
+	rdf:rest _:c14n173 .
+_:c14n218 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:name .
-_:c14n212 a owl:Restriction ;
+_:c14n219 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:content_types .
-_:c14n213 a owl:Restriction ;
+_:c14n22 rdf:first skos:exactMatch ;
+	rdf:rest _:c14n205 .
+_:c14n220 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:persistent_identifier .
-_:c14n214 a owl:Restriction ;
+_:c14n221 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:format .
-_:c14n215 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:reference_paper_doi .
-_:c14n216 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:versioned .
-_:c14n217 rdf:first meta_urban:JoinKey\#timestamp ;
-	rdf:rest rdf:nil .
-_:c14n218 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:exact_match .
-_:c14n219 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:landing_page .
-_:c14n22 rdf:first skos:exactMatch ;
-	rdf:rest _:c14n198 .
-_:c14n220 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:short_name .
-_:c14n221 rdf:first meta_urban:SpatialGranularity\#climate_zone ;
-	rdf:rest _:c14n88 .
 _:c14n222 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:date .
+	owl:onProperty meta_urban:reference_paper_doi .
 _:c14n223 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:machine_readable .
-_:c14n224 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:name .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:versioned .
+_:c14n224 rdf:first meta_urban:JoinKey\#timestamp ;
+	rdf:rest rdf:nil .
 _:c14n225 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:temporal_coverage .
-_:c14n226 rdf:first meta_urban:JoinKey\#vintage ;
-	rdf:rest _:c14n217 .
+	owl:onProperty meta_urban:exact_match .
+_:c14n226 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:landing_page .
 _:c14n227 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:StatisticalNature ;
-	owl:onProperty meta_urban:statistical_nature .
-_:c14n228 rdfs:subClassOf _:c14n104 ;
-	owl:intersectionOf _:c14n122 .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:short_name .
+_:c14n228 rdf:first meta_urban:SpatialGranularity\#climate_zone ;
+	rdf:rest _:c14n91 .
 _:c14n229 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:license .
+	owl:onProperty meta_urban:date .
 _:c14n23 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:record_count .
 _:c14n230 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:unit .
+	owl:onProperty meta_urban:machine_readable .
 _:c14n231 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:start .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:name .
 _:c14n232 a owl:Restriction ;
-	owl:onProperty meta_urban:statistical_nature ;
-	owl:someValuesFrom _:c14n253 .
-_:c14n233 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:known_limitations .
-_:c14n234 rdf:first meta_urban:EntityType\#system ;
-	rdf:rest _:c14n210 .
-_:c14n235 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:broad_match .
+	owl:onProperty meta_urban:temporal_coverage .
+_:c14n233 rdf:first meta_urban:JoinKey\#vintage ;
+	rdf:rest _:c14n224 .
+_:c14n234 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:StatisticalNature ;
+	owl:onProperty meta_urban:statistical_nature .
+_:c14n235 rdfs:subClassOf _:c14n107 ;
+	owl:intersectionOf _:c14n126 .
 _:c14n236 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:label .
-_:c14n237 rdf:first meta_urban:JoinKey\#census_region_division ;
-	rdf:rest _:c14n40 .
+	owl:onProperty meta_urban:license .
+_:c14n237 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:unit .
 _:c14n238 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:variables_documented .
+	owl:onProperty meta_urban:start .
 _:c14n239 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:bbox .
+	owl:onProperty meta_urban:statistical_nature ;
+	owl:someValuesFrom _:c14n260 .
 _:c14n24 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:close_match .
 _:c14n240 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:known_limitations .
+_:c14n241 rdf:first meta_urban:EntityType\#system ;
+	rdf:rest _:c14n217 .
+_:c14n242 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:broad_match .
+_:c14n243 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:label .
+_:c14n244 rdf:first meta_urban:JoinKey\#census_region_division ;
+	rdf:rest _:c14n41 .
+_:c14n245 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:variables_documented .
+_:c14n246 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:bbox .
+_:c14n247 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:sampling_weights .
-_:c14n241 rdf:first meta_urban:JoinKey\#utility_id ;
-	rdf:rest _:c14n209 .
-_:c14n242 rdf:first meta_urban:JoinKey\#climate_zone_ashrae ;
-	rdf:rest _:c14n259 .
-_:c14n243 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:concept_value .
-_:c14n244 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:unit .
-_:c14n245 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:access_url .
-_:c14n246 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty meta_urban:pref_label .
-_:c14n247 rdf:first meta_urban:StatisticalNature\#remote_sensing_derived ;
-	rdf:rest _:c14n144 .
-_:c14n248 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:description .
-_:c14n249 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:entity .
+_:c14n248 rdf:first meta_urban:JoinKey\#utility_id ;
+	rdf:rest _:c14n216 .
+_:c14n249 rdf:first meta_urban:JoinKey\#climate_zone_ashrae ;
+	rdf:rest _:c14n266 .
 _:c14n25 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:GeographicScope ;
 	owl:onProperty meta_urban:geographic_scope .
 _:c14n250 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:canonical_unit .
-_:c14n251 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:label .
-_:c14n252 rdf:first meta_urban:JoinKey\#census_tract ;
-	rdf:rest _:c14n143 .
-_:c14n253 a rdfs:Datatype ;
-	owl:oneOf _:c14n111 .
-_:c14n254 rdf:first meta_urban:VariableDatatype\#datetime ;
-	rdf:rest _:c14n44 .
-_:c14n255 rdf:first meta_urban:JoinKey\#building_type ;
-	rdf:rest _:c14n226 .
+	owl:onProperty meta_urban:concept_value .
+_:c14n251 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:unit .
+_:c14n252 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:access_url .
+_:c14n253 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty meta_urban:pref_label .
+_:c14n254 rdf:first meta_urban:StatisticalNature\#remote_sensing_derived ;
+	rdf:rest _:c14n149 .
+_:c14n255 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:description .
 _:c14n256 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:start .
+	owl:onProperty meta_urban:entity .
 _:c14n257 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:VariableDatatype ;
-	owl:onProperty meta_urban:datatype .
-_:c14n258 rdf:first meta_urban:Aggregation\#static ;
-	rdf:rest _:c14n66 .
-_:c14n259 rdf:first meta_urban:JoinKey\#climate_zone_iecc ;
-	rdf:rest _:c14n255 .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:canonical_unit .
+_:c14n258 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:label .
+_:c14n259 rdf:first meta_urban:JoinKey\#census_tract ;
+	rdf:rest _:c14n148 .
 _:c14n26 rdf:first meta_urban:UBEMRole\#building_characteristics ;
 	rdf:rest _:c14n33 .
-_:c14n260 rdf:first meta_urban:EntityType\#weather_station ;
-	rdf:rest _:c14n86 .
-_:c14n261 a owl:Restriction ;
+_:c14n260 a rdfs:Datatype ;
+	owl:oneOf _:c14n115 .
+_:c14n261 rdf:first meta_urban:VariableDatatype\#datetime ;
+	rdf:rest _:c14n45 .
+_:c14n262 rdf:first meta_urban:JoinKey\#building_type ;
+	rdf:rest _:c14n233 .
+_:c14n263 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:start .
+_:c14n264 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:VariableDatatype ;
+	owl:onProperty meta_urban:datatype .
+_:c14n265 rdf:first meta_urban:Aggregation\#static ;
+	rdf:rest _:c14n67 .
+_:c14n266 rdf:first meta_urban:JoinKey\#climate_zone_iecc ;
+	rdf:rest _:c14n262 .
+_:c14n267 rdf:first meta_urban:EntityType\#weather_station ;
+	rdf:rest _:c14n89 .
+_:c14n268 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:label .
-_:c14n262 a owl:Restriction ;
+_:c14n269 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:statistical_nature .
-_:c14n263 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:datatype .
-_:c14n264 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:concept_value .
-_:c14n265 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:definition .
-_:c14n266 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:broader .
-_:c14n267 rdf:first meta_urban:EntityType\#zone ;
-	rdf:rest _:c14n234 .
-_:c14n268 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty meta_urban:ubem_roles .
-_:c14n269 rdf:first meta_urban:StatisticalNature\#typical_year_synthetic ;
-	rdf:rest _:c14n118 .
 _:c14n27 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:by .
 _:c14n270 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:datatype .
+_:c14n271 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:concept_value .
+_:c14n272 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:definition .
+_:c14n273 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:broader .
+_:c14n274 rdf:first meta_urban:EntityType\#zone ;
+	rdf:rest _:c14n241 .
+_:c14n275 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:applies_to .
+_:c14n276 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty meta_urban:ubem_roles .
+_:c14n277 rdf:first meta_urban:StatisticalNature\#typical_year_synthetic ;
+	rdf:rest _:c14n122 .
+_:c14n278 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:id .
-_:c14n271 rdf:first meta_urban:Aggregation\#total_over_period ;
-	rdf:rest _:c14n54 .
-_:c14n272 rdf:first meta_urban:UBEMRole\#geometry_inventory ;
-	rdf:rest _:c14n26 .
-_:c14n273 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:by .
-_:c14n274 rdf:first meta_urban:StatisticalNature\#compilation ;
-	rdf:rest rdf:nil .
-_:c14n275 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:distributions .
-_:c14n276 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty meta_urban:sources_checked .
-_:c14n277 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:sampling_weights .
-_:c14n278 rdf:first skos:broadMatch ;
-	rdf:rest _:c14n67 .
-_:c14n279 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:datasets .
+_:c14n279 rdf:first meta_urban:Aggregation\#total_over_period ;
+	rdf:rest _:c14n55 .
 _:c14n28 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:datatype .
-_:c14n280 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:unit_of_observation .
+_:c14n280 rdf:first meta_urban:UBEMRole\#geometry_inventory ;
+	rdf:rest _:c14n26 .
 _:c14n281 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:landing_page .
-_:c14n282 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:verified .
-_:c14n283 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:AccessLevel ;
-	owl:onProperty meta_urban:access_level .
+	owl:onProperty meta_urban:by .
+_:c14n282 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty meta_urban:rule .
+_:c14n283 rdf:first meta_urban:StatisticalNature\#compilation ;
+	rdf:rest rdf:nil .
 _:c14n284 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:temporal_resolution .
+	owl:onProperty meta_urban:distributions .
 _:c14n285 a owl:Restriction ;
-	owl:allValuesFrom xsd:boolean ;
-	owl:onProperty meta_urban:persistent_identifier .
-_:c14n286 rdf:first meta_urban:JoinKey\#ubid ;
-	rdf:rest _:c14n48 .
-_:c14n287 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:reference_paper_doi .
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty meta_urban:sources_checked .
+_:c14n286 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:sampling_weights .
+_:c14n287 rdf:first skos:broadMatch ;
+	rdf:rest _:c14n68 .
 _:c14n288 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:variables_documented .
-_:c14n289 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:concept_role .
+	owl:onProperty meta_urban:datasets .
+_:c14n289 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:unit_of_observation .
 _:c14n29 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:SpatialCoverage ;
 	owl:onProperty meta_urban:spatial_coverage .
 _:c14n290 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:flags_variable .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:landing_page .
 _:c14n291 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:alt_labels .
-_:c14n292 rdf:first meta_urban:Aggregation\#count ;
-	rdf:rest _:c14n61 .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:verified .
+_:c14n292 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:AccessLevel ;
+	owl:onProperty meta_urban:access_level .
 _:c14n293 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:publisher .
-_:c14n294 rdf:first meta_urban:EntityType\#dataset_record ;
-	rdf:rest rdf:nil .
-_:c14n295 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:Aggregation ;
-	owl:onProperty meta_urban:aggregation .
+	owl:onProperty meta_urban:temporal_resolution .
+_:c14n294 a owl:Restriction ;
+	owl:allValuesFrom xsd:boolean ;
+	owl:onProperty meta_urban:persistent_identifier .
+_:c14n295 rdf:first meta_urban:JoinKey\#ubid ;
+	rdf:rest _:c14n49 .
 _:c14n296 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:SpatialGranularity ;
-	owl:onProperty meta_urban:spatial_granularity .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:reference_paper_doi .
 _:c14n297 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:definition .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:variables_documented .
 _:c14n298 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty meta_urban:definition .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:concept_role .
 _:c14n299 a owl:Restriction ;
-	owl:allValuesFrom _:c14n361 ;
-	owl:onProperty meta_urban:doi .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:flags_variable .
 _:c14n3 rdf:first meta_urban:SpatialGranularity\#building ;
-	rdf:rest _:c14n133 .
+	rdf:rest _:c14n138 .
 _:c14n30 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:end .
 _:c14n300 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:DatasetProfile ;
-	owl:onProperty meta_urban:datasets .
-_:c14n301 a owl:Restriction ;
-	owl:allValuesFrom xsd:anyURI ;
-	owl:onProperty meta_urban:landing_page .
-_:c14n302 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:update_frequency .
-_:c14n303 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:description .
-_:c14n304 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:short_name .
-_:c14n305 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:update_frequency .
-_:c14n306 rdf:first meta_urban:JoinKey\#census_block_group ;
-	rdf:rest _:c14n252 .
+	owl:onProperty meta_urban:example .
+_:c14n301 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:alt_labels .
+_:c14n302 rdf:first meta_urban:Aggregation\#count ;
+	rdf:rest _:c14n62 .
+_:c14n303 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:publisher .
+_:c14n304 rdf:first meta_urban:EntityType\#dataset_record ;
+	rdf:rest rdf:nil .
+_:c14n305 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:Aggregation ;
+	owl:onProperty meta_urban:aggregation .
+_:c14n306 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:SpatialGranularity ;
+	owl:onProperty meta_urban:spatial_granularity .
 _:c14n307 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:concept .
+	owl:onProperty meta_urban:definition .
 _:c14n308 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:TemporalCoverage ;
-	owl:onProperty meta_urban:temporal_coverage .
-_:c14n309 rdf:first meta_urban:SpatialGranularity\#county ;
-	rdf:rest _:c14n80 .
+	owl:minCardinality 1 ;
+	owl:onProperty meta_urban:definition .
+_:c14n309 a owl:Restriction ;
+	owl:allValuesFrom _:c14n372 ;
+	owl:onProperty meta_urban:doi .
 _:c14n31 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:statistical_nature .
 _:c14n310 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:api .
+	owl:allValuesFrom meta_urban:DatasetProfile ;
+	owl:onProperty meta_urban:datasets .
 _:c14n311 a owl:Restriction ;
-	owl:allValuesFrom meta_urban:EntityType ;
-	owl:onProperty meta_urban:entity .
+	owl:allValuesFrom xsd:anyURI ;
+	owl:onProperty meta_urban:landing_page .
 _:c14n312 a owl:Restriction ;
-	owl:allValuesFrom xsd:boolean ;
-	owl:onProperty meta_urban:is_imputation_flag .
-_:c14n313 rdf:first meta_urban:SpatialGranularity\#state_province ;
-	rdf:rest _:c14n221 .
-_:c14n314 rdf:first meta_urban:SpatialGranularity\#point_station ;
-	rdf:rest _:c14n3 .
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:update_frequency .
+_:c14n313 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:description .
+_:c14n314 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:short_name .
 _:c14n315 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:concepts .
+	owl:onProperty meta_urban:applies_to .
 _:c14n316 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:related_match .
-_:c14n317 rdf:first meta_urban:VariableDatatype\#categorical ;
-	rdf:rest _:c14n107 .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:update_frequency .
+_:c14n317 rdf:first meta_urban:JoinKey\#census_block_group ;
+	rdf:rest _:c14n259 .
 _:c14n318 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:narrow_match .
+	owl:onProperty meta_urban:concept .
 _:c14n319 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:narrow_match .
+	owl:allValuesFrom meta_urban:TemporalCoverage ;
+	owl:onProperty meta_urban:temporal_coverage .
 _:c14n32 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n351 .
-_:c14n320 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n337 .
-_:c14n321 rdf:first meta_urban:EntityType\#building ;
-	rdf:rest _:c14n267 .
-_:c14n322 rdf:first meta_urban:VariableDatatype\#string ;
-	rdf:rest _:c14n317 .
-_:c14n323 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:notes .
-_:c14n324 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:flags_variable .
-_:c14n325 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:canonical_unit .
-_:c14n326 a owl:Restriction ;
-	owl:minCardinality 1 ;
-	owl:onProperty meta_urban:id .
-_:c14n327 a owl:Restriction ;
+	owl:withRestrictions _:c14n365 .
+_:c14n320 rdf:first meta_urban:SpatialGranularity\#county ;
+	rdf:rest _:c14n82 .
+_:c14n321 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:temporal_resolution .
-_:c14n328 rdf:first meta_urban:SpatialGranularity\#census_tract ;
-	rdf:rest _:c14n41 .
-_:c14n329 rdf:first meta_urban:VariableDatatype\#identifier ;
-	rdf:rest rdf:nil .
+	owl:onProperty meta_urban:api .
+_:c14n322 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:EntityType ;
+	owl:onProperty meta_urban:entity .
+_:c14n323 a owl:Restriction ;
+	owl:allValuesFrom xsd:boolean ;
+	owl:onProperty meta_urban:is_imputation_flag .
+_:c14n324 rdf:first meta_urban:SpatialGranularity\#state_province ;
+	rdf:rest _:c14n228 .
+_:c14n325 rdf:first meta_urban:SpatialGranularity\#point_station ;
+	rdf:rest _:c14n3 .
+_:c14n326 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:concepts .
+_:c14n327 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:related_match .
+_:c14n328 rdf:first meta_urban:VariableDatatype\#categorical ;
+	rdf:rest _:c14n111 .
+_:c14n329 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:narrow_match .
 _:c14n33 rdf:first meta_urban:UBEMRole\#operation_use ;
-	rdf:rest _:c14n178 .
+	rdf:rest _:c14n184 .
 _:c14n330 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:date .
-_:c14n331 a owl:Restriction ;
+	owl:onProperty meta_urban:narrow_match .
+_:c14n331 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n348 .
+_:c14n332 rdf:first meta_urban:EntityType\#building ;
+	rdf:rest _:c14n274 .
+_:c14n333 rdf:first meta_urban:VariableDatatype\#string ;
+	rdf:rest _:c14n328 .
+_:c14n334 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:notes .
+_:c14n335 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:flags_variable .
+_:c14n336 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:license .
-_:c14n332 a owl:Restriction ;
-	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:canonical_unit .
+_:c14n337 a owl:Restriction ;
+	owl:minCardinality 1 ;
 	owl:onProperty meta_urban:id .
-_:c14n333 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n334 rdf:first _:c14n333 ;
-	rdf:rest rdf:nil .
-_:c14n335 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n334 .
-_:c14n336 rdf:first _:c14n335 ;
-	rdf:rest rdf:nil .
-_:c14n337 rdf:first xsd:string ;
-	rdf:rest _:c14n336 .
-_:c14n338 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n339 rdf:first _:c14n338 ;
-	rdf:rest rdf:nil .
+_:c14n338 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:temporal_resolution .
+_:c14n339 rdf:first meta_urban:SpatialGranularity\#census_tract ;
+	rdf:rest _:c14n42 .
 _:c14n34 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:sampling_weights .
-_:c14n340 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n339 .
-_:c14n341 rdf:first _:c14n340 ;
+_:c14n340 rdf:first meta_urban:VariableDatatype\#identifier ;
 	rdf:rest rdf:nil .
-_:c14n342 rdf:first xsd:string ;
-	rdf:rest _:c14n341 .
-_:c14n343 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n342 .
+_:c14n341 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:date .
+_:c14n342 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:license .
+_:c14n343 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:id .
 _:c14n344 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
 _:c14n345 rdf:first _:c14n344 ;
 	rdf:rest rdf:nil .
@@ -1485,229 +1658,252 @@ _:c14n347 rdf:first _:c14n346 ;
 	rdf:rest rdf:nil .
 _:c14n348 rdf:first xsd:string ;
 	rdf:rest _:c14n347 .
-_:c14n349 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n348 .
+_:c14n349 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
 _:c14n35 rdf:first meta_urban:AccessLevel\#registration_required ;
-	rdf:rest _:c14n208 .
-_:c14n350 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
-_:c14n351 rdf:first _:c14n350 ;
+	rdf:rest _:c14n215 .
+_:c14n350 rdf:first _:c14n349 ;
 	rdf:rest rdf:nil .
-_:c14n352 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
-_:c14n353 rdf:first _:c14n352 ;
-	rdf:rest rdf:nil .
-_:c14n354 a rdfs:Datatype ;
+_:c14n351 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n353 .
-_:c14n355 a rdfs:Datatype ;
+	owl:withRestrictions _:c14n350 .
+_:c14n352 rdf:first _:c14n351 ;
+	rdf:rest rdf:nil .
+_:c14n353 rdf:first xsd:string ;
+	rdf:rest _:c14n352 .
+_:c14n354 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n353 .
+_:c14n355 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
+_:c14n356 rdf:first _:c14n355 ;
+	rdf:rest rdf:nil .
+_:c14n357 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n356 .
-_:c14n356 rdf:first _:c14n357 ;
+_:c14n358 rdf:first _:c14n357 ;
 	rdf:rest rdf:nil .
-_:c14n357 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
-_:c14n358 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n359 .
-_:c14n359 rdf:first _:c14n360 ;
-	rdf:rest rdf:nil .
+_:c14n359 rdf:first xsd:string ;
+	rdf:rest _:c14n358 .
 _:c14n36 rdf:first meta_urban:EntityType\#occupant ;
-	rdf:rest _:c14n139 .
-_:c14n360 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
-_:c14n361 a rdfs:Datatype ;
+	rdf:rest _:c14n144 .
+_:c14n360 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n359 .
+_:c14n361 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
+_:c14n362 rdf:first _:c14n361 ;
+	rdf:rest rdf:nil .
+_:c14n363 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n362 .
-_:c14n362 rdf:first _:c14n363 ;
-	rdf:rest rdf:nil .
-_:c14n363 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
-_:c14n364 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n364 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
 _:c14n365 rdf:first _:c14n364 ;
 	rdf:rest rdf:nil .
-_:c14n366 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
-_:c14n367 rdf:first _:c14n366 ;
+_:c14n366 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n367 .
+_:c14n367 rdf:first _:c14n368 ;
 	rdf:rest rdf:nil .
-_:c14n368 rdf:first _:c14n369 ;
-	rdf:rest rdf:nil .
-_:c14n369 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
+_:c14n368 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
+_:c14n369 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n370 .
 _:c14n37 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:format .
+_:c14n370 rdf:first _:c14n371 ;
+	rdf:rest rdf:nil .
+_:c14n371 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n372 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n373 .
+_:c14n373 rdf:first _:c14n374 ;
+	rdf:rest rdf:nil .
+_:c14n374 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n375 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n376 rdf:first _:c14n375 ;
+	rdf:rest rdf:nil .
+_:c14n377 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n378 rdf:first _:c14n377 ;
+	rdf:rest rdf:nil .
+_:c14n379 rdf:first _:c14n380 ;
+	rdf:rest rdf:nil .
 _:c14n38 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:example .
+_:c14n380 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
+_:c14n39 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:code_list .
-_:c14n39 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:pref_label .
 _:c14n4 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:unit_multiplier .
-_:c14n40 rdf:first meta_urban:JoinKey\#nuts_region ;
-	rdf:rest _:c14n42 .
-_:c14n41 rdf:first meta_urban:SpatialGranularity\#postal_code ;
-	rdf:rest _:c14n182 .
-_:c14n42 rdf:first meta_urban:JoinKey\#country_iso ;
-	rdf:rest _:c14n241 .
-_:c14n43 a owl:Restriction ;
+_:c14n40 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:pref_label .
+_:c14n41 rdf:first meta_urban:JoinKey\#nuts_region ;
+	rdf:rest _:c14n43 .
+_:c14n42 rdf:first meta_urban:SpatialGranularity\#postal_code ;
+	rdf:rest _:c14n188 .
+_:c14n43 rdf:first meta_urban:JoinKey\#country_iso ;
+	rdf:rest _:c14n248 .
+_:c14n44 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:MappingRelation ;
 	owl:onProperty meta_urban:mapping_relation .
-_:c14n44 rdf:first meta_urban:VariableDatatype\#geometry ;
-	rdf:rest _:c14n329 .
-_:c14n45 rdf:first meta_urban:StatisticalNature\#sample_survey_weighted ;
-	rdf:rest _:c14n127 .
-_:c14n46 a owl:Restriction ;
+_:c14n45 rdf:first meta_urban:VariableDatatype\#geometry ;
+	rdf:rest _:c14n340 .
+_:c14n46 rdf:first meta_urban:StatisticalNature\#sample_survey_weighted ;
+	rdf:rest _:c14n131 .
+_:c14n47 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:notes .
-_:c14n47 a owl:Restriction ;
+_:c14n48 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty meta_urban:api .
-_:c14n48 rdf:first meta_urban:JoinKey\#station_id ;
-	rdf:rest _:c14n169 .
-_:c14n49 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n365 .
+_:c14n49 rdf:first meta_urban:JoinKey\#station_id ;
+	rdf:rest _:c14n175 .
 _:c14n5 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:UBEMConcept ;
 	owl:onProperty meta_urban:concepts .
-_:c14n50 a owl:Restriction ;
+_:c14n50 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n376 .
+_:c14n51 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty meta_urban:machine_readable .
-_:c14n51 a owl:Restriction ;
+_:c14n52 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:title .
-_:c14n52 a owl:Restriction ;
+_:c14n53 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:related_match .
-_:c14n53 a owl:Restriction ;
+_:c14n54 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:record_count .
-_:c14n54 rdf:first meta_urban:Aggregation\#average_over_period ;
-	rdf:rest _:c14n292 .
-_:c14n55 rdf:first meta_urban:SpatialGranularity\#grid_cell_fine ;
-	rdf:rest _:c14n99 .
-_:c14n56 rdf:first meta_urban:SpatialGranularity\#utility_service_territory ;
-	rdf:rest _:c14n313 .
-_:c14n57 a owl:Restriction ;
+_:c14n55 rdf:first meta_urban:Aggregation\#average_over_period ;
+	rdf:rest _:c14n302 .
+_:c14n56 rdf:first meta_urban:SpatialGranularity\#grid_cell_fine ;
+	rdf:rest _:c14n102 .
+_:c14n57 rdf:first meta_urban:SpatialGranularity\#utility_service_territory ;
+	rdf:rest _:c14n324 .
+_:c14n58 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:id .
-_:c14n58 a owl:Restriction ;
+_:c14n59 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:access_url .
-_:c14n59 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:label .
 _:c14n6 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:flags_variable .
-_:c14n60 rdf:first meta_urban:AccessLevel\#open_download ;
-	rdf:rest _:c14n65 .
-_:c14n61 rdf:first meta_urban:Aggregation\#share ;
+_:c14n60 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:label .
+_:c14n61 rdf:first meta_urban:AccessLevel\#open_download ;
+	rdf:rest _:c14n66 .
+_:c14n62 rdf:first meta_urban:Aggregation\#share ;
 	rdf:rest rdf:nil .
-_:c14n62 a owl:Restriction ;
+_:c14n63 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:publisher .
-_:c14n63 a owl:Restriction ;
+_:c14n64 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:unit_of_observation .
-_:c14n64 a owl:Restriction ;
+_:c14n65 a owl:Restriction ;
 	owl:allValuesFrom meta_urban:VariableProfile ;
 	owl:onProperty meta_urban:variables .
-_:c14n65 rdf:first meta_urban:AccessLevel\#open_api ;
+_:c14n66 rdf:first meta_urban:AccessLevel\#open_api ;
 	rdf:rest _:c14n35 .
-_:c14n66 rdf:first meta_urban:Aggregation\#instantaneous ;
-	rdf:rest _:c14n271 .
-_:c14n67 rdf:first skos:narrowMatch ;
+_:c14n67 rdf:first meta_urban:Aggregation\#instantaneous ;
+	rdf:rest _:c14n279 .
+_:c14n68 rdf:first skos:narrowMatch ;
 	rdf:rest _:c14n7 .
-_:c14n68 rdf:first meta_urban:JoinKey\#fips_county ;
+_:c14n69 rdf:first meta_urban:JoinKey\#fips_county ;
 	rdf:rest _:c14n11 .
-_:c14n69 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:code .
 _:c14n7 rdf:first skos:relatedMatch ;
 	rdf:rest rdf:nil .
 _:c14n70 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:entity .
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:code .
 _:c14n71 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:temporal_coverage .
+	owl:onProperty meta_urban:entity .
 _:c14n72 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:temporal_coverage .
+_:c14n73 a owl:Restriction ;
 	owl:allValuesFrom xsd:float ;
 	owl:onProperty meta_urban:unit_multiplier .
-_:c14n73 a owl:Restriction ;
+_:c14n74 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:doi .
-_:c14n74 rdf:first meta_urban:SpatialGranularity\#unknown ;
-	rdf:rest rdf:nil .
 _:c14n75 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:rule .
+_:c14n76 rdf:first meta_urban:SpatialGranularity\#unknown ;
+	rdf:rest rdf:nil .
+_:c14n77 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:variables .
-_:c14n76 a owl:Restriction ;
+_:c14n78 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:unit_multiplier .
-_:c14n77 a owl:Restriction ;
+_:c14n79 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:concept .
-_:c14n78 a owl:Restriction ;
-	owl:allValuesFrom xsd:boolean ;
-	owl:onProperty meta_urban:variables_documented .
-_:c14n79 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty meta_urban:description .
 _:c14n8 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:persistent_identifier .
-_:c14n80 rdf:first meta_urban:SpatialGranularity\#city ;
-	rdf:rest _:c14n56 .
-_:c14n81 rdf:first meta_urban:SpatialGranularity\#nation ;
-	rdf:rest _:c14n113 .
-_:c14n82 a owl:Restriction ;
+_:c14n80 a owl:Restriction ;
+	owl:allValuesFrom xsd:boolean ;
+	owl:onProperty meta_urban:variables_documented .
+_:c14n81 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty meta_urban:description .
+_:c14n82 rdf:first meta_urban:SpatialGranularity\#city ;
+	rdf:rest _:c14n57 .
+_:c14n83 rdf:first meta_urban:SpatialGranularity\#nation ;
+	rdf:rest _:c14n117 .
+_:c14n84 a owl:Restriction ;
+	owl:allValuesFrom meta_urban:Convention ;
+	owl:onProperty meta_urban:conventions .
+_:c14n85 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:publisher .
-_:c14n83 a owl:Restriction ;
+_:c14n86 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:sources_checked .
-_:c14n84 a owl:Restriction ;
+_:c14n87 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:record_count_note .
-_:c14n85 a owl:Restriction ;
+_:c14n88 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty meta_urban:is_weight .
-_:c14n86 rdf:first meta_urban:EntityType\#grid_cell ;
-	rdf:rest _:c14n294 .
-_:c14n87 a owl:Restriction ;
-	owl:allValuesFrom _:c14n355 ;
-	owl:onProperty meta_urban:temporal_resolution .
-_:c14n88 rdf:first meta_urban:SpatialGranularity\#census_region_division ;
-	rdf:rest _:c14n81 .
-_:c14n89 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:pref_label .
+_:c14n89 rdf:first meta_urban:EntityType\#grid_cell ;
+	rdf:rest _:c14n304 .
 _:c14n9 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:aggregation .
 _:c14n90 a owl:Restriction ;
+	owl:allValuesFrom _:c14n366 ;
+	owl:onProperty meta_urban:temporal_resolution .
+_:c14n91 rdf:first meta_urban:SpatialGranularity\#census_region_division ;
+	rdf:rest _:c14n83 .
+_:c14n92 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty meta_urban:pref_label .
+_:c14n93 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty meta_urban:citation .
-_:c14n91 a owl:Restriction ;
+_:c14n94 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty meta_urban:close_match .
-_:c14n92 a owl:Restriction ;
+_:c14n95 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty meta_urban:exact_match .
-_:c14n93 rdf:first meta_urban:JoinKey\#postal_code ;
-	rdf:rest _:c14n68 .
-_:c14n94 rdf:first meta_urban:VariableDatatype\#integer ;
-	rdf:rest _:c14n145 .
-_:c14n95 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:verified .
-_:c14n96 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:geographic_scope .
-_:c14n97 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty meta_urban:quantity_kind .
+_:c14n96 rdf:first meta_urban:JoinKey\#postal_code ;
+	rdf:rest _:c14n69 .
+_:c14n97 rdf:first meta_urban:VariableDatatype\#integer ;
+	rdf:rest _:c14n150 .
 _:c14n98 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty meta_urban:by .
-_:c14n99 rdf:first meta_urban:SpatialGranularity\#census_block_group ;
-	rdf:rest _:c14n328 .
+	owl:onProperty meta_urban:verified .
+_:c14n99 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty meta_urban:geographic_scope .
 

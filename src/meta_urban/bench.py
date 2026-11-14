@@ -189,9 +189,10 @@ def t3_items() -> list[dict]:
     return base + extra
 
 
-def _t3_jobs(repeats, limit):
+def _t3_jobs(repeats, limit, profile: bool = False):
     items = t3_items()[:limit] if limit else t3_items()
-    return [(t3_request(it), {"task": "T3", "dataset": it["dataset"], "name": it["name"]}, rep)
+    task = "T3P" if profile else "T3"
+    return [(t3_request(it, profile=profile), {"task": task, "dataset": it["dataset"], "name": it["name"]}, rep)
             for rep in range(repeats) for it in items]
 
 
@@ -301,11 +302,11 @@ def _norm(field, v):
     return bool(v)
 
 
-def t3_score(model: str) -> pd.DataFrame:
+def t3_score(model: str, task: str = "T3") -> pd.DataFrame:
     df = _records(model)
     if df.empty or "task" not in df:
         return pd.DataFrame()
-    df = df[df.task == "T3"]
+    df = df[df.task == task]
     items = {(i["dataset"], i["name"]): i for i in t3_items()}
     rows = []
     for r in df.itertuples():
@@ -366,6 +367,7 @@ def main(argv=None) -> int:
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=1)
     ap.add_argument("--embedding", action="store_true")
+    ap.add_argument("--profile", action="store_true", help="T3 with the dataset's Meta-Urban profile in context")
     a = ap.parse_args(argv)
     if a.cmd == "items":
         s = build_items()
@@ -378,8 +380,8 @@ def main(argv=None) -> int:
         run_jobs(a.model, _t2_jobs(a.levels, a.repeats, a.limit), a.workers)
         print(t2_score(a.model).round(3).to_string(index=False))
     elif a.cmd == "t3":
-        run_jobs(a.model, _t3_jobs(a.repeats, a.limit), a.workers)
-        s3 = t3_score(a.model)
+        run_jobs(a.model, _t3_jobs(a.repeats, a.limit, a.profile), a.workers)
+        s3 = t3_score(a.model, "T3P" if a.profile else "T3")
         print(s3.filter(like="ok_").mean().round(3).to_string(), "\ncodes_jaccard", round(s3.codes_jaccard.mean(), 3))
     elif a.cmd == "score":
         score_all()

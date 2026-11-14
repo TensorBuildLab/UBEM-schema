@@ -1,0 +1,14 @@
+# 2020 Residential Energy Consumption Survey (RECS) public-use microdata (chr-recs-2020)
+- UBEM workflow roles: building_characteristics, operation_use, calibration_validation
+- Statistical nature: sample_survey_weighted
+- Finest public spatial granularity: state_province
+- Temporal resolution: P1Y
+- Access: open_download
+- Join keys: fips_state, census_region_division, climate_zone_iecc, building_type
+- License: US-Government-Public-Domain
+- Survey weights: NWEIGHT plus 60 jackknife replicate weights (NWEIGHT1-NWEIGHT60); confirmed in the public CSV header; EIA methodology brief states replicates were built with the Jackknife method
+- Conventions (apply to many variables; individual codebook entries do not repeat them):
+  - variables whose name starts with Z: Z<NAME> is the imputation flag for the variable <NAME>; codes 1 = imputed, 0 = not imputed, -2 = not applicable. Example: ZACEQUIPAGE flags ACEQUIPAGE.
+  - NWEIGHT, NWEIGHT1 to NWEIGHT60: NWEIGHT is the final analysis weight and NWEIGHT1 to NWEIGHT60 are jackknife replicate weights; weights are not observations and every estimate must be weighted by NWEIGHT. Example: The sum of NWEIGHT over all records estimates the number of U.S. housing units.
+  - all categorical and numeric variables: Code -2 means not applicable and -4 means don't know; both are missing codes, not values. Example: ATTIC -2 = Not applicable.
+  - energy consumption and expenditure variables: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars. Example: BTUEL is annual electricity use in thousand Btu.

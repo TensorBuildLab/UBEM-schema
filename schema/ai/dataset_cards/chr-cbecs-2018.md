@@ -1,0 +1,16 @@
+# 2018 Commercial Buildings Energy Consumption Survey (CBECS) public-use microdata (chr-cbecs-2018)
+- UBEM workflow roles: building_characteristics, calibration_validation
+- Statistical nature: sample_survey_weighted
+- Finest public spatial granularity: census_region_division
+- Temporal resolution: P1Y
+- Access: open_download
+- Join keys: census_region_division, building_type
+- License: US-Government-Public-Domain
+- Survey weights: FINALWT plus 151 replicate weights (FINALWT1-FINALWT151); variable names confirmed in the public CSV header
+- Conventions (apply to many variables; individual codebook entries do not repeat them):
+  - variables whose name starts with Z: Z<NAME> is the imputation flag for the variable <NAME>; codes 0 = reported, 1 = imputed, 9 = inapplicable. Example: ZMONUSE flags MONUSE (months in use).
+  - FINALWT, FINALWT1 to FINALWT151: FINALWT is the final analysis weight and FINALWT1 to FINALWT151 are replicate weights for variance estimation; weights are not observations and every estimate must be weighted by FINALWT. Example: The sum of FINALWT over all records estimates the number of U.S. commercial buildings.
+  - categorical and numeric variables with "Missing=Not applicable" in the codebook: A blank cell means not applicable (the question was not asked); record it as a missing code "". Example: RENADD (addition or annex) is coded 1 = Yes, 2 = No, Missing = Not applicable.
+  - yes/no questions that offer "Don't know": Code 5 means "Don't know" and is a missing code, not a category. Example: DRVTHRU 5 = Don't know.
+  - count and category variables with codes in the 990s, and code 7 in PUBCLIM: Codes 994 and 995 are top-codes (ranges), not numbers; codes such as 996 and PUBCLIM 7 mark values withheld to protect confidentiality and are missing codes. Example: NFLOOR 994 = 10 to 14 floors and 995 = 15 or more floors; NOCCAT 996 = withheld.
+  - energy consumption and expenditure variables: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars. Example: MFBTU is annual major-fuel consumption in thousand Btu.

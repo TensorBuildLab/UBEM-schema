@@ -46,6 +46,28 @@ record_count_note: 6,436 sampled buildings representing about 5.9 million U.S. c
 join_keys:
 - census_region_division
 - building_type
+conventions:
+- applies_to: variables whose name starts with Z
+  rule: Z<NAME> is the imputation flag for the variable <NAME>; codes 0 = reported, 1 = imputed, 9 = inapplicable.
+  example: ZMONUSE flags MONUSE (months in use).
+- applies_to: FINALWT, FINALWT1 to FINALWT151
+  rule: FINALWT is the final analysis weight and FINALWT1 to FINALWT151 are replicate weights for variance estimation;
+    weights are not observations and every estimate must be weighted by FINALWT.
+  example: The sum of FINALWT over all records estimates the number of U.S. commercial buildings.
+- applies_to: categorical and numeric variables with "Missing=Not applicable" in the codebook
+  rule: A blank cell means not applicable (the question was not asked); record it as a missing code "".
+  example: RENADD (addition or annex) is coded 1 = Yes, 2 = No, Missing = Not applicable.
+- applies_to: yes/no questions that offer "Don't know"
+  rule: Code 5 means "Don't know" and is a missing code, not a category.
+  example: DRVTHRU 5 = Don't know.
+- applies_to: count and category variables with codes in the 990s, and code 7 in PUBCLIM
+  rule: Codes 994 and 995 are top-codes (ranges), not numbers; codes such as 996 and PUBCLIM 7 mark values withheld
+    to protect confidentiality and are missing codes.
+  example: NFLOOR 994 = 10 to 14 floors and 995 = 15 or more floors; NOCCAT 996 = withheld.
+- applies_to: energy consumption and expenditure variables
+  rule: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred
+    cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars.
+  example: MFBTU is annual major-fuel consumption in thousand Btu.
 variables_documented: true
 machine_readable: true
 versioned: true
