@@ -74,3 +74,15 @@ def test_mcnemar_and_gold_ok():
     assert (n01, n10) == (8, 0) and abs(p - 2 / 2 ** 8) < 1e-12
     items = load_items()
     assert len(items) == 300 and all(i["gold"] in i["gold_ok"] for i in items)
+
+
+def test_endtoend_profile_checks():
+    from meta_urban.endtoend import _items, gold_profile, profile_check
+
+    items = _items()
+    assert all(not profile_check(it, gold_profile(it)) for it in items.values())
+    el = items[("cbecs2018", "ELBTU")]
+    bad = dict(gold_profile(el), unit_multiplier=1_000_000)
+    assert "multiplier disagrees with label" in profile_check(el, bad)
+    gas = items[("recs2020", "BTUNG")]
+    assert profile_check(gas, dict(gold_profile(gas), missing_codes=["0"]))

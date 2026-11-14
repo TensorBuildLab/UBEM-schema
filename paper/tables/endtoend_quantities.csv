@@ -1,0 +1,89 @@
+model,condition,dataset,quantity,reference,ai_pipeline,rel_error_pct
+qwen3:8b,codebook entry only,cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+qwen3:8b,codebook entry only,cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+qwen3:8b,codebook entry only,cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+qwen3:8b,codebook entry only,cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133421.63105373114,99900.00000000001
+qwen3:8b,codebook entry only,cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+qwen3:8b,codebook entry only,cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+qwen3:8b,codebook entry only,recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+qwen3:8b,codebook entry only,recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+qwen3:8b,codebook entry only,recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
+qwen3:8b,codebook entry only,recs2020,Natural gas per household (MWh),10.061172435198454,10.061172435198454,0.0
+qwen3:8b,codebook entry only,recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+qwen3:8b,with dataset card,cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+qwen3:8b,with dataset card,cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+qwen3:8b,with dataset card,cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+qwen3:8b,with dataset card,cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+qwen3:8b,with dataset card,cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+qwen3:8b,with dataset card,cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+qwen3:8b,with dataset card,recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+qwen3:8b,with dataset card,recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+qwen3:8b,with dataset card,recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
+qwen3:8b,with dataset card,recs2020,Natural gas per household (MWh),10.061172435198454,10.061172435198454,0.0
+qwen3:8b,with dataset card,recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",recs2020,Natural gas per household (MWh),10.061172435198454,10.061172435198454,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 1",recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
+qwen3:8b,"codebook entry only, T=0.7 run 2",recs2020,Natural gas per household (MWh),10.061172435198454,16.597085349836544,64.96174234895886
+qwen3:8b,"codebook entry only, T=0.7 run 2",recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+llama3.1:8b,codebook entry only,cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+llama3.1:8b,codebook entry only,cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+llama3.1:8b,codebook entry only,cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+llama3.1:8b,codebook entry only,cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+llama3.1:8b,codebook entry only,cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.2017615696002,-4.3615396392057767e-07
+llama3.1:8b,codebook entry only,cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.491126800303686,-2.453631082129589
+llama3.1:8b,codebook entry only,recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+llama3.1:8b,codebook entry only,recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+llama3.1:8b,codebook entry only,recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
+llama3.1:8b,codebook entry only,recs2020,Natural gas per household (MWh),10.061172435198454,16.597085349836544,64.96174234895886
+llama3.1:8b,codebook entry only,recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+llama3.1:8b,with dataset card,cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+llama3.1:8b,with dataset card,cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+llama3.1:8b,with dataset card,cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452448605904,-2.1827639647250956e-06
+llama3.1:8b,with dataset card,cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42162621051557,-3.630007751553305e-06
+llama3.1:8b,with dataset card,cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.2017615696002,-4.3615396392057767e-07
+llama3.1:8b,with dataset card,cbecs2018,Share in hot or very hot zone (%),13.830475649649859,0.0,-100.0
+llama3.1:8b,with dataset card,recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+llama3.1:8b,with dataset card,recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
+llama3.1:8b,with dataset card,recs2020,Electricity per household (MWh),10.56536192339636,36.05051128653368,241.2141633
+llama3.1:8b,with dataset card,recs2020,Natural gas per household (MWh),10.061172435198454,10.061172435198454,0.0
+llama3.1:8b,with dataset card,recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",recs2020,Site energy per household (MWh),22.494011713099276,76.75275385945571,241.21416330000008
+llama3.1:8b,"codebook entry only, T=0.7 run 1",recs2020,Electricity per household (MWh),10.56536192339636,1.0565361923396361e-05,-99.9999
+llama3.1:8b,"codebook entry only, T=0.7 run 1",recs2020,Natural gas per household (MWh),10.061172435198454,16.597085349836544,64.96174234895886
+llama3.1:8b,"codebook entry only, T=0.7 run 1",recs2020,Site EUI (kWh/m2),133.12550170532964,454.24306678276776,241.21416330000002
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Floor area (million m2),8967.67002022729,8967.67002022729,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, major fuels (kWh/m2)",221.88452932927459,221.88452932927459,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, electricity (kWh/m2)",133.42163105373112,133.42163105373112,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,"EUI, natural gas (kWh/m2)",75.20176189759566,75.20176189759566,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",cbecs2018,Share in hot or very hot zone (%),13.830475649649859,13.830475649649859,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",recs2020,Site energy per household (MWh),22.494011713099276,76752.75385945571,341114.1633000001
+llama3.1:8b,"codebook entry only, T=0.7 run 2",recs2020,Electricity per household (MWh),10.56536192339636,36.05051128653368,241.2141633
+llama3.1:8b,"codebook entry only, T=0.7 run 2",recs2020,Natural gas per household (MWh),10.061172435198454,16.597085349836544,64.96174234895886
+llama3.1:8b,"codebook entry only, T=0.7 run 2",recs2020,Site EUI (kWh/m2),133.12550170532964,454243.06678276777,341114.1633

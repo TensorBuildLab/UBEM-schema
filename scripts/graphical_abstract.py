@@ -22,6 +22,11 @@ mean = cond.groupby("level")["acc@1"].mean()
 oov = cond.loc[cond.level == "L2U", "out_of_vocabulary_pct"].mean()
 flag0 = conv.loc[conv.context == "codebook entry only", "flagged variable cbecs2018"].mean()
 flag1 = conv.loc[conv.context == "with dataset card", "flagged variable cbecs2018"].mean()
+e2e = pd.read_csv(TAB / "endtoend_summary.csv")
+cons, caught = int(e2e.consequential.sum()), int(e2e.consequential_flagged.sum())
+false_alarms = int(e2e.correct_flagged.sum())
+q = pd.read_csv(TAB / "endtoend_quantities.csv")
+worst = 1 + q.loc[q.condition.isin(["codebook entry only", "with dataset card"]), "rel_error_pct"].max() / 100
 
 fig = plt.figure(figsize=(13.28, 5.0), dpi=200)  # 2656 x 1000 px
 fig.patch.set_facecolor(SURF)
@@ -79,15 +84,15 @@ for s in ("left", "bottom"):
 ax.tick_params(length=0)
 ax.set_facecolor(PANEL)
 
-# 3. conventions and closed vocabulary
-c = panel(0.685, "3  Conventions and checks")
-c.text(0.05, 0.79, "Imputation flags linked to their variable", fontsize=12.5, color=INK2)
-c.text(0.05, 0.64, f"{100 * flag0:.0f}% → {100 * flag1:.0f}%", fontsize=27, weight="bold", color=INK)
-c.text(0.05, 0.56, "when the schema states the convention", fontsize=11.5, color=INK2)
-c.text(0.05, 0.40, "Invented concept identifiers", fontsize=12.5, color=INK2)
-c.text(0.05, 0.25, f"{oov:.1f}% → 0%", fontsize=27, weight="bold", color=INK)
-c.text(0.05, 0.215, "with a closed vocabulary (JSON Schema),\nat no cost in accuracy", fontsize=11.5, color=INK2,
-       va="top", linespacing=1.25)
+# 3. end-to-end: AI-built inputs in a national building-stock pipeline
+c = panel(0.685, "3  Energy results")
+c.text(0.05, 0.80, "AI-built inputs in a national\nbuilding-stock pipeline", fontsize=12.5, color=INK2, va="top",
+       linespacing=1.25)
+c.text(0.05, 0.53, f"\u00d7{worst:,.0f}", fontsize=27, weight="bold", color=INK)
+c.text(0.05, 0.46, "worst error, electricity use intensity", fontsize=11.5, color=INK2)
+c.text(0.05, 0.25, f"{caught} of {cons}", fontsize=27, weight="bold", color=INK)
+c.text(0.05, 0.215, f"such errors flagged by schema checks,\n{false_alarms} false alarms", fontsize=11.5,
+       color=INK2, va="top", linespacing=1.25)
 
 for x0, x1 in [(0.318, 0.348), (0.653, 0.683)]:
     fig.add_artist(FancyArrowPatch((x0, 0.49), (x1, 0.49), transform=fig.transFigure, arrowstyle="-|>",

@@ -1,4 +1,4 @@
-"""Build the submission files for Engineering Applications of Artificial Intelligence (pip install pypandoc_binary python-docx).
+"""Build the submission files for Energy (Elsevier) (pip install pypandoc_binary python-docx).
 
     python scripts/build_docx.py
 
@@ -72,10 +72,27 @@ def finish(path: Path, line_numbers: bool) -> None:
     d.save(path)
 
 
+def word_counts(path: Path) -> dict:
+    """Words as a reader counts them: main text from the Introduction to the end matter, tables included,
+    abstract, nomenclature and references excluded."""
+    d = docx.Document(path)
+    paras = [p.text for p in d.paragraphs]
+    start = next(i for i, t in enumerate(paras) if t.strip().startswith("1. Introduction") or t.strip() == "Introduction")
+    end = next(i for i, t in enumerate(paras) if t.strip().startswith("CRediT"))
+    a0 = paras.index("Abstract")
+    abstract = len(paras[a0 + 1].split())
+    text = sum(len(t.split()) for t in paras[start:end])
+    tables = sum(len(c.text.split()) for t in d.tables for r in t.rows for c in r.cells)
+    nomen = sum(len(c.text.split()) for r in d.tables[0].rows for c in r.cells)  # first table is the nomenclature
+    return {"abstract": abstract, "main text": text, "tables (excluding nomenclature)": tables - nomen,
+            "main text + tables": text + tables - nomen}
+
+
 def main() -> None:
     BUILD.mkdir(exist_ok=True)
     pandoc("manuscript.md", BUILD / "manuscript.docx", cite=True)
     finish(BUILD / "manuscript.docx", line_numbers=True)
+    print("word counts:", word_counts(BUILD / "manuscript.docx"))
     pandoc("highlights.md", BUILD / "highlights.docx")
     pandoc("cover_letter.md", BUILD / "cover_letter.docx")
     for f in ("highlights.docx", "cover_letter.docx"):

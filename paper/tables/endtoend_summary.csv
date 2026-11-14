@@ -1,0 +1,9 @@
+model,condition,profiles,wrong,consequential,consequential_flagged,correct_flagged
+llama3.1:8b,codebook entry only,11,10,2,2,0
+llama3.1:8b,"codebook entry only, T=0.7 run 1",11,8,3,3,0
+llama3.1:8b,"codebook entry only, T=0.7 run 2",11,9,3,3,0
+llama3.1:8b,with dataset card,11,11,2,2,0
+qwen3:8b,codebook entry only,11,3,1,1,0
+qwen3:8b,"codebook entry only, T=0.7 run 1",11,3,0,0,0
+qwen3:8b,"codebook entry only, T=0.7 run 2",11,5,1,1,0
+qwen3:8b,with dataset card,11,3,0,0,0
