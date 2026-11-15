@@ -1,4 +1,4 @@
-"""Build the submission files for Energy (Elsevier) (pip install pypandoc_binary python-docx).
+"""Build the submission files for Computers, Environment and Urban Systems (Elsevier) (pip install pypandoc_binary python-docx).
 
     python scripts/build_docx.py
 
@@ -78,7 +78,7 @@ def word_counts(path: Path) -> dict:
     d = docx.Document(path)
     paras = [p.text for p in d.paragraphs]
     start = next(i for i, t in enumerate(paras) if t.strip().startswith("1. Introduction") or t.strip() == "Introduction")
-    end = next(i for i, t in enumerate(paras) if t.strip().startswith("CRediT"))
+    end = next(i for i, t in enumerate(paras) if t.strip().startswith(("CRediT", "Acknowledgement", "Acknowledgments")))
     a0 = paras.index("Abstract")
     abstract = len(paras[a0 + 1].split())
     text = sum(len(t.split()) for t in paras[start:end])

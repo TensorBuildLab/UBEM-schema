@@ -17,24 +17,31 @@ Liang Zhang^a,b,\*^, Jianli Chen^c^, Jia Zou^d^
 
 ^\*^ Corresponding author. Email: liangzhang1@arizona.edu
 
+## Highlights {.unnumbered}
+
+- An AI-ready schema for integrating open data in urban building energy modeling
+- Concept definitions, not labels, drive AI mapping accuracy for urban building data
+- Only 3 of 48 open non-geometric building datasets link to individual buildings
+- AI-built inputs reproduce national stock totals or err by up to a factor of 1,000
+- Schema-derived checks flagged every AI error that changed an energy result
+
 ## Abstract {.unnumbered}
 
-Urban building energy modeling (UBEM) depends on integrating open weather, geometry, survey and meter data, a
-task still done largely by hand and increasingly delegated to generative artificial intelligence (AI). We
-define an AI-ready schema, one whose machine-readable artifacts let an AI system understand, produce and check
-data descriptions without human explanation while remaining faithful to domain knowledge, and derive six
-design principles. By them we build Meta-Urban, a schema for open UBEM data with a dataset level, a variable
-level and an 81-concept vocabulary linked to Brick, BEDES and the CityGML Energy ADE, compiled into
-documentation for people and into context cards, JSON Schema and SHACL shapes for AI. On two national
-building energy surveys with two locally run language models, concept definitions raised mapping accuracy
-from 0.42-0.43 to 0.53-0.55 (p < 0.001), and stated conventions let both models link every imputation flag
-to its variable. Fed into a national building-stock pipeline, AI-built variable profiles either reproduced
-the reference results or changed them by 2.5% to a factor of 1,000, as for electricity use intensity.
-Schema-derived checks flagged all 12 such profiles and no correct one. AI-ready schemas make AI-assisted UBEM
-data integration both more accurate and checkable.
+Computational models of cities depend on integrating heterogeneous open data, a task still done largely by
+hand and increasingly delegated to generative artificial intelligence (AI). We study it in urban building
+energy modeling (UBEM), which combines weather, geometry, survey and meter data. We define an AI-ready schema,
+one whose machine-readable artifacts let an AI system understand, produce and check data descriptions without
+human explanation while remaining faithful to domain knowledge, and derive six design principles. By them we
+build Meta-Urban, a schema with a dataset level, a variable level and an 81-concept vocabulary linked to
+Brick, BEDES and the CityGML Energy ADE, compiled into documentation for people and into context cards, JSON
+Schema and SHACL shapes for AI. Applied to 91 open datasets, it shows that only 3 of 48 non-geometric building
+datasets link to individual buildings. On two national building surveys with two locally run language models,
+concept definitions raised mapping accuracy from 0.42-0.43 to 0.53-0.55 (p < 0.001). In a national
+building-stock pipeline, AI-built inputs mostly reproduced the reference but otherwise erred by 2.5% to a
+factor of 1,000, and schema-derived checks flagged all 12 such errors and no correct input.
 
-**Keywords:** Urban building energy modeling; Building stock; Open data; Data schema; Generative artificial
-intelligence; Large language models; Semantic interoperability
+**Keywords:** Urban building energy modeling; Open data; Data schema; Generative artificial intelligence; Large
+language models; Semantic interoperability
 
 ## Nomenclature {.unnumbered}
 
@@ -61,9 +68,11 @@ intelligence; Large language models; Semantic interoperability
 
 ## 1. Introduction
 
-Buildings and construction account for 32% of global energy use and 34% of energy-related CO2 emissions
-[@unep2025gsr]. Urban building energy modeling (UBEM) estimates how policies, technologies and climate change
-will affect the energy use of a whole building stock, and it underpins city decarbonization plans, building
+Computational models of cities, from land use and mobility to energy, depend on integrating heterogeneous
+open data, and urban building energy modeling (UBEM) is among the most data-hungry of them. Buildings and
+construction account for 32% of global energy use and 34% of energy-related CO2 emissions [@unep2025gsr], and
+UBEM estimates how policies, technologies and climate change will affect the energy use of a whole building
+stock, and it underpins city decarbonization plans, building
 performance standards and grid planning [@reinhart2016urban; @ferrando2020urban; @johari2020urban;
 @hong2020ten]. It depends on combining many datasets: weather, the location and shape of every building,
 non-geometric characteristics such as use type, vintage and systems, assumptions on how buildings are
@@ -638,13 +647,15 @@ consequential error.
 
 ## 8. Discussion
 
-**Implications for UBEM.** For modelers, the end-to-end results argue for a division of labor: a small local
+**Implications for UBEM and urban data infrastructure.** For modelers, the end-to-end results argue for a division of labor: a small local
 model drafts the variable profiles, the schema checks them, and a person reviews only what is flagged, which
 here was every profile that would have changed an energy result. For data publishers, one machine-readable
 profile per dataset, stating its weights and conventions, removes errors that no model can avoid and serves
 human analysts equally. For the field, identifiers matter more than more datasets: only 3 of 48 non-geometric
 building datasets can be linked to individual buildings, so characteristics and energy are joined to
-geometry statistically, and survey weights decide whether such a join is right (Fig. 8).
+geometry statistically, and survey weights decide whether such a join is right (Fig. 8). None of this is specific to energy: census,
+land-use, mobility and building-register data that AI systems will read share the same undefined terms,
+conventions hidden in user guides and unlinkable records, and the checklist below applies to them unchanged.
 
 **What makes a schema AI-ready.** Three results generalize beyond this case. First, definitions are the active
 ingredient. They produced about four-fifths of the gain of full concept cards at half the tokens (E1), and
@@ -698,24 +709,16 @@ documentation from standards that give labels without definitions did no better 
 conventions supplied what no model could infer from a record. In a national building-stock pipeline,
 AI-built inputs mostly reproduced the reference, but the remaining errors changed indicators such as
 electricity use intensity by up to a factor of 1,000, and rules derived from the schema flagged every one of
-them without false alarms. The recommendation for UBEM is to describe every dataset with an AI-ready profile,
-generated for people and AI from one source, and to validate every AI-built input against it. The schema, its
+them without false alarms. The recommendation for UBEM, and for urban data infrastructure generally, is to describe
+every dataset with an AI-ready profile, generated for people and AI from one source, and to validate every
+AI-built input against it. The schema, its
 AI documentation layer, the catalog of 91 datasets, the benchmark and all model outputs are open.
 
-## CRediT authorship contribution statement
+## Acknowledgement
 
-**Liang Zhang:** Conceptualization, Methodology, Software, Investigation, Data curation, Formal analysis,
-Visualization, Writing - original draft, Writing - review and editing. **Jianli Chen:** Investigation,
-Writing - review and editing. **Jia Zou:** Investigation, Writing - review and editing.
-
-## Declaration of competing interest
-
-The authors declare that they have no known competing financial interests or personal relationships that
-could have appeared to influence the work reported in this paper.
-
-## Funding
-
-[Funding statement]
+This material is based upon work supported by the U.S. National Science Foundation under Grant No. 2623038.
+Any opinions, findings, and conclusions or recommendations expressed in this material are those of the
+author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 ## Data availability
 
@@ -735,9 +738,5 @@ catalog entries (Section 4.6), to produce and adjudicate the mapping gold labels
 references and standard mappings, to write the analysis and plotting code from which all figures are
 generated, and to draft and edit text. After using this tool, the authors reviewed and edited the content as
 needed and take full responsibility for the content of the published article.
-
-## Acknowledgments
-
-[Acknowledgments]
 
 ## References
