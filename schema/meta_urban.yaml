@@ -1,7 +1,7 @@
 id: https://w3id.org/meta-urban/schema
 name: meta_urban
 title: Meta-Urban metadata schema for open data in urban building energy modeling
-version: 2.0.0
+version: 1.0.0
 description: >-
   Meta-Urban describes open datasets used in urban building energy modeling (UBEM) at two levels.
   The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets:
@@ -13,7 +13,6 @@ description: >-
 license: CC-BY-4.0
 see_also:
   - https://github.com/TensorBuildLab/UBEM-schema
-  - https://arxiv.org/abs/2311.08535
 prefixes:
   linkml: https://w3id.org/linkml/
   meta_urban: https://w3id.org/meta-urban/

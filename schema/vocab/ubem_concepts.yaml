@@ -1,4 +1,4 @@
-# Meta-Urban concept vocabulary v0.1 (Catalog instance with `concepts` only).
+# Meta-Urban concept vocabulary (Catalog instance with `concepts` only).
 # Each concept: id, pref_label, definition, broader, concept_role, entity, quantity_kind, canonical_unit,
 # alt_labels (generic synonyms; deliberately NOT copied from any benchmark dataset's variable names, to avoid
 # leakage into the lexical baseline), and mappings to other standards.

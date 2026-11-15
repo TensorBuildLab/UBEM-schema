@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-__version__ = "2.0.0.dev0"
+__version__ = "1.0.0"
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA_YAML = ROOT / "schema" / "meta_urban.yaml"

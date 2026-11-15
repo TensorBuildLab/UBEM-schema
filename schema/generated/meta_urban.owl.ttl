@@ -822,10 +822,10 @@ meta_urban:sampling_weights a owl:DatatypeProperty ;
 	skos:inScheme meta_urban:schema .
 meta_urban:schema.owl.ttl dct:license "CC-BY-4.0" ;
 	dct:title "Meta-Urban metadata schema for open data in urban building energy modeling" ;
-	pav:version "2.0.0" ;
+	pav:version "1.0.0" ;
 	a owl:Ontology ;
 	rdfs:label "meta_urban" ;
-	rdfs:seeAlso <https://arxiv.org/abs/2311.08535> , <https://github.com/TensorBuildLab/UBEM-schema> ;
+	rdfs:seeAlso <https://github.com/TensorBuildLab/UBEM-schema> ;
 	skos:definition "Meta-Urban describes open datasets used in urban building energy modeling (UBEM) at two levels. The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets: the UBEM workflow role, statistical nature, spatial granularity, temporal resolution, access level and join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it maps to in the Meta-Urban vocabulary, its unit (QUDT), its code list, its aggregation semantics, and whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects." .
 meta_urban:short_name a owl:DatatypeProperty ;
 	rdfs:label "short_name" ;

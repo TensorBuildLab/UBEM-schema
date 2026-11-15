@@ -3,7 +3,7 @@
     python -m meta_urban.schema_figures
 
 fig_architecture      one LinkML source, domain knowledge in, two audiences out (people and AI systems)
-fig_class_diagram     classes, key fields and relations of Meta-Urban 2.0
+fig_class_diagram     classes, key fields and relations of Meta-Urban
 fig_worked_example    CBECS 2018 described with the schema: dataset card, three variable profiles, concept cards
 """
 

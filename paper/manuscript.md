@@ -105,14 +105,14 @@ errors matter for energy results. This paper therefore asks one question: **can 
 to be AI-ready, so that generative AI integrates open building energy data correctly without a person
 explaining it while the schema remains a faithful encoding of domain knowledge, and does the difference reach
 the energy results that UBEM produces?** We define AI-readiness and derive six design principles (Section 3),
-build Meta-Urban 2.0 by them and show it concretely, including a verified catalog of 91 open UBEM datasets
+build Meta-Urban by them and show it concretely, including a verified catalog of 91 open UBEM datasets
 (Section 4), test each principle with controlled experiments on two national building energy surveys using
 two open-weight LLMs that a city or utility can run on its own hardware (Sections 5 and 6), and feed the
 AI-built inputs into a national building-stock pipeline (Section 7).
 
 The contributions are:
 
-1. Meta-Urban 2.0, an AI-ready schema for open UBEM data: a LinkML source with a dataset level (a DCAT 3
+1. Meta-Urban, an AI-ready schema for open UBEM data: a LinkML source with a dataset level (a DCAT 3
    profile with six UBEM facets and explicit conventions), a variable level (concept, unit, codes, weights and
    imputation flags) and an 81-concept vocabulary with 168 verified links to Brick, BEDES and the CityGML
    Energy ADE, compiled into documentation for people and into context cards, JSON Schema and SHACL shapes
@@ -190,7 +190,6 @@ Table 1. Position of this work. Y: yes; P: partly; -: no.
 | DCAT 3, schema.org Dataset | - | Y | - | - | - | - |
 | Croissant, datasheets, data cards | - | Y | P | P (training) | P | - |
 | LLM schema matching [@sheetrit2024rematch; @liu2025magneto] | - | - | P | - | P | P (context size) |
-| Zhang et al. 2023 preprint [@zhang2023taxonomy] | P | P | P | - | - | - |
 | This paper | Y | Y | Y | Y | Y | Y |
 
 ## 3. AI-ready schemas
@@ -225,7 +224,7 @@ P1 and P6 are the classical virtues of a good vocabulary, made complete; P2 and 
 contract that output can be held to; P3 targets conventions written once in a user guide and never in the
 codebook entry a model reads; P5 makes the schema divisible into self-contained parts.
 
-## 4. Meta-Urban 2.0
+## 4. Meta-Urban
 
 ### 4.1 Architecture
 
@@ -240,20 +239,19 @@ card, concept cards and dataset cards for their context, JSON Schema for constra
 shapes to check what they produce. Because both audiences are served from one source, an improvement made
 for one reaches the other.
 
-![Fig. 1. Architecture of Meta-Urban 2.0: domain knowledge is encoded once in a LinkML source with three
+![Fig. 1. Architecture of Meta-Urban: domain knowledge is encoded once in a LinkML source with three
 parts and compiled into artifacts for people and for AI systems; AI output is checked against the same
 schema. Drawn with code written with AI assistance (see the generative AI declaration).](figures/fig_architecture.png)
 
 ### 4.2 Classes and facets
 
-Fig. 2 shows the classes, their key fields and relations. The dataset level separates six facets that the
-2023 version of this work mixed in one list of categories [@zhang2023taxonomy], so that each dataset is a
+Fig. 2 shows the classes, their key fields and relations. The dataset level separates six facets, so that each dataset is a
 point in a six-dimensional space and gaps can be counted along each (Table 3). A schema rule requires every
 weighted sample survey to name its weights, because a pipeline that ignores them is wrong even when every
 value is transcribed correctly (Section 7). The `Convention` class (P3) records rules that the publisher
 applies to many variables at once, each with the variables it applies to, the rule and an example.
 
-![Fig. 2. Classes, key fields and relations of Meta-Urban 2.0. Every class, field and enumeration value
+![Fig. 2. Classes, key fields and relations of Meta-Urban. Every class, field and enumeration value
 carries a definition. Drawn with code written with AI assistance (see the generative AI declaration).](figures/fig_class_diagram.png)
 
 Table 3. Facets of the dataset level (all values defined in `schema/meta_urban.yaml`).
@@ -323,7 +321,7 @@ Tokens: approximate size of all labels and definitions.
 
 | Standard | Terms | Defined (%) | Enum values defined (%) | Statistical-design terms | Tokens (thousands) | JSON Schema | Validation |
 |---|---|---|---|---|---|---|---|
-| Meta-Urban 2.0 | 271 | 100 | 100 | 7 | 5.3 | yes | JSON Schema, SHACL |
+| Meta-Urban | 271 | 100 | 100 | 7 | 5.3 | yes | JSON Schema, SHACL |
 | Brick 1.4.4 | 1,434 | 74 | - | 0 | 32.0 | no | SHACL |
 | BEDES 2.5 | 6,217 | 45 | 58 | 0 | 157.6 | no | none |
 | CityGML Energy ADE 1.0 | 665 | 22 | 51 | 0 | 6.4 | no | XML Schema |
@@ -693,8 +691,8 @@ value of schema properties, which held for both. (3) The experiments use two U.S
 other languages and administrative registers may behave differently. (4) The documentation transplant gives
 other standards the same concept ids and therefore measures their documentation, not their structure. (5)
 The catalog is a purposive sample drafted with an LLM; its verified error rate is 2% wrong and 16% partly
-correct fields. (6) The vocabulary is version 0.1; annotators found topics it lacks (energy insecurity,
-electric vehicles, outages, internet access), which version 0.2 should add. (7) The end-to-end pipeline uses
+correct fields. (6) Annotators found topics the vocabulary lacks (energy insecurity, electric vehicles,
+outages, internet access), which a future release should add. (7) The end-to-end pipeline uses
 11 variables and national indicators; urban-scale pipelines join more datasets and may expose other errors.
 
 ## 9. Conclusions
@@ -702,7 +700,7 @@ electric vehicles, outages, internet access), which version 0.2 should add. (7) 
 Urban building energy modeling depends on open data that generative AI is now asked to integrate, but the
 schemas describing those data are written for people. We defined an AI-ready schema as one whose artifacts let
 an AI system understand, produce and check data descriptions without human explanation while remaining a
-faithful encoding of domain knowledge, derived six design principles, and built Meta-Urban 2.0 for open UBEM
+faithful encoding of domain knowledge, derived six design principles, and built Meta-Urban for open UBEM
 data by them. Tested on two national building energy surveys with two local language models, definitions were
 the property that mattered most, raising top-1 mapping accuracy from 0.42-0.43 to 0.53-0.55, while
 documentation from standards that give labels without definitions did no better than bare identifiers. Stated

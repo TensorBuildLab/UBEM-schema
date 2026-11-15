@@ -59,7 +59,7 @@ from linkml_runtime.linkml_model.types import Boolean, Float, Integer, String, U
 from linkml_runtime.utils.metamodelcore import Bool, URI
 
 metamodel_version = "1.12.0"
-version = "2.0.0"
+version = "1.0.0"
 
 # Namespaces
 BEDES = CurieNamespace('bedes', 'https://bedes.lbl.gov/node/')

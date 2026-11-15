@@ -182,7 +182,7 @@ def meta_urban_terms() -> list[dict]:
 
 
 STANDARDS = {
-    "Meta-Urban 2.0": meta_urban_terms,
+    "Meta-Urban": meta_urban_terms,
     "Brick 1.4.4": brick_terms,
     "BEDES 2.5": bedes_terms,
     "CityGML Energy ADE 1.0": energy_ade_terms,
@@ -194,7 +194,7 @@ STANDARDS = {
 AUDIT_FACTS = {
     # json_schema: official JSON Schema usable as a constrained-decoding grammar
     # validation: machine-checkable constraints published with the standard
-    "Meta-Urban 2.0": {"json_schema": "yes", "validation": "JSON Schema + SHACL", "level": "dataset + variable"},
+    "Meta-Urban": {"json_schema": "yes", "validation": "JSON Schema + SHACL", "level": "dataset + variable"},
     "Brick 1.4.4": {"json_schema": "no", "validation": "SHACL shapes in Brick.ttl", "level": "building points, equipment"},
     "BEDES 2.5": {"json_schema": "no", "validation": "none (dictionary)", "level": "building characteristics"},
     "CityGML Energy ADE 1.0": {"json_schema": "no", "validation": "XML Schema", "level": "building objects"},

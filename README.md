@@ -1,8 +1,6 @@
 # Meta-Urban: an AI-ready semantic schema, open-data catalog and benchmark for urban building energy modeling
 
-TensorBuild Lab, University of Arizona. Companion repository for the manuscript in `paper/` (draft), which
-replaces the preprint *Taxonomy, Semantic Data Schema, and Schema Alignment for Open Data in Urban Building
-Energy Modeling* (Zhang, Chen, Zou; arXiv:2311.08535).
+TensorBuild Lab, University of Arizona. Companion repository for the manuscript in `paper/`.
 
 Every number and figure in the paper is regenerated from this repository.
 
@@ -10,9 +8,9 @@ Every number and figure in the paper is regenerated from this repository.
 
 | Path | Content |
 |---|---|
-| `schema/meta_urban.yaml` | **Meta-Urban 2.0** schema (LinkML): dataset level (DCAT 3 profile with six UBEM facets) and variable level (concept, QUDT unit, code list, aggregation, weights, imputation flags) |
+| `schema/meta_urban.yaml` | **Meta-Urban** schema (LinkML): dataset level (DCAT 3 profile with six UBEM facets) and variable level (concept, QUDT unit, code list, aggregation, weights, imputation flags) |
 | `schema/generated/` | JSON Schema, SHACL shapes and OWL ontology compiled from the schema |
-| `schema/vocab/ubem_concepts.yaml` | Concept vocabulary v0.1 (81 concepts, SKOS hierarchy, CityGML and EPW mappings) |
+| `schema/vocab/ubem_concepts.yaml` | Concept vocabulary (81 concepts, SKOS hierarchy, CityGML and EPW mappings) |
 | `catalog/datasets/*.yaml` | **91 verified open-dataset profiles** (weather, geometry, characteristics, operation, energy, simulation, context) |
 | `src/meta_urban/` | Python package: validation, catalog analytics and competency questions, codebook parsing, benchmark, baselines, LLM runners, downstream analysis |
 | `benchmark/` | Items, evaluation sample, gold labels (T3 automatic; T2 draft awaiting two-annotator verification), cached model outputs |
@@ -68,8 +66,8 @@ desk-rejected by *Energy* on scope). New in v0.3: definitions for all 271 schema
 `Convention` class, the AI documentation layer (`schema/ai/`, `python -m meta_urban.ai_docs`), an
 AI-readiness audit of five standards (`python -m meta_urban.standards`) and the schema-design experiments
 E1-E6 (`bash scripts/run_ai_ready.sh`, then `python -m meta_urban.design_report`) and the end-to-end
-building-stock experiment E7 (`python -m meta_urban.endtoend`). Also done: schema v2.0,
-vocabulary v0.1 with verified external mappings, 91-entry catalog with a field-level verification of a random
+building-stock experiment E7 (`python -m meta_urban.endtoend`). Also done: the schema,
+the vocabulary with verified external mappings, 91-entry catalog with a field-level verification of a random
 20-entry sample (`catalog/verification_2026-11-13.csv`), T2 gold from two blind LLM annotators plus blind
 adjudication (kappa 0.91; `benchmark/gold/annotation/`), T3 gold from the codebooks, open-weight runs
 (Qwen3 8B, Llama 3.1 8B), downstream analysis, cover letter (`paper/cover_letter.md`) and a Word build
