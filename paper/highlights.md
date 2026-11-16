@@ -1,7 +1,7 @@
 # Highlights
 
-- An AI-ready schema for integrating open data in urban building energy modeling
-- Concept definitions, not labels, drive AI mapping accuracy for urban building data
-- Only 3 of 48 open non-geometric building datasets link to individual buildings
-- AI-built inputs reproduce national stock totals or err by up to a factor of 1,000
-- Schema-derived checks flagged every AI error that changed an energy result
+- An AI-ready schema for open urban building energy data, tested with local models
+- Concept definitions alone matched full concept cards for variable mapping
+- Only 3 of 48 cataloged building datasets share a key with footprints or parcels
+- In New York City, models read kBtu as kWh and overstated energy intensity by 215%
+- Dataset conventions were also applied where they did not belong

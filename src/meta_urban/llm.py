@@ -136,7 +136,13 @@ def t2_request(item: dict, level: str, candidates: list[str] | None = None) -> d
     """
     concepts = leaf_concepts()
     block_level = level
-    if level == "L3":
+    if level == "L2S":  # robustness: full cards in a fixed random order instead of the grouped order
+        import random
+
+        concepts = list(concepts)
+        random.Random(20261115).shuffle(concepts)
+        block_level = "L2"
+    if level in ("L3", "L3E"):  # L3E: candidates from the dense (embedding) retriever
         keep = set(candidates or [])
         concepts = [c for c in concepts if c["id"] in keep]
         block_level = "L2"

@@ -1,0 +1,42 @@
+source,model,column,unit,multiplier,missing_codes,unit_wrong,drops_valid_values,status,flagged_v1,flagged_v2,flagged_v2_without_ll84_terms,flags_v2
+main,qwen3:8b,property_gfa_calculated,unit:FT2,1,,False,False,exact,False,False,False,
+main,qwen3:8b,site_energy_use_kbtu,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,qwen3:8b,electricity_weather_normalized_1,unit:KiloW-HR,1,Not Available,True,False,error,True,False,True,
+main,qwen3:8b,natural_gas_weather_normalized_1,unit:FT2,1,Not Available,True,False,error,True,False,True,
+main,qwen3:8b,property_gfa_calculated,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+main,qwen3:8b,site_energy_use_kbtu,unit:KiloW-HR,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+main,qwen3:8b,natural_gas_weather_normalized_1,unit:DEG_F,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,qwen3:8b,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,False,False,exact,True,False,True,
+main,qwen3:8b,natural_gas_use_kbtu,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,qwen3:8b,natural_gas_use_kbtu,unit:KiloW-HR,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+main,llama3.1:8b,largest_property_use_type_1,unit:FT2,1,Not Available,False,False,exact,True,False,True,
+main,llama3.1:8b,site_eui_kbtu_ft,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,llama3.1:8b,electricity_weather_normalized_1,unit:KiloW-HR,1,Not Available,True,False,error,True,False,True,
+main,llama3.1:8b,natural_gas_weather_normalized_1,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,llama3.1:8b,site_eui_kbtu_ft,unit:KiloW-HR,0,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,llama3.1:8b,natural_gas_weather_normalized_1,unit:FT2,1,Not Available,True,False,error,True,False,True,
+main,llama3.1:8b,property_gfa_calculated,unit:FT2,1,; NA; DK; REFUSED,False,False,harmless deviation,True,True,True,missing code 'NA' is neither a listed code nor a missing-value label; missing code 'DK' is neither a listed code nor a missing-value label
+main,llama3.1:8b,site_energy_use_kbtu,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,llama3.1:8b,property_gfa_calculated,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+main,llama3.1:8b,site_energy_use_kbtu,unit:KiloW-HR,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+main,qwen3:8b,property_gfa_calculated_1,unit:FT2,1,0,False,True,error,True,True,True,missing code '0' inside the valid range
+main,qwen3:8b,property_gfa_calculated_1,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+post hoc units,qwen3:8b,property_gfa_calculated_1,unit:FT2,1,,False,False,exact,False,False,False,
+post hoc units,qwen3:8b,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,False,False,exact,True,True,True,unit disagrees with label
+post hoc units,qwen3:8b,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,False,False,exact,True,False,True,
+post hoc units,qwen3:8b,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,False,False,exact,True,True,True,unit disagrees with label
+post hoc units,qwen3:8b,property_gfa_calculated_1,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+post hoc units,qwen3:8b,site_energy_use_kbtu,unit:KiloBTU_IT,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+post hoc units,qwen3:8b,natural_gas_use_kbtu,unit:KiloBTU_IT,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+main,llama3.1:8b,property_gfa_calculated_1,unit:FT2,1,; NA; WK; WD,False,False,harmless deviation,True,True,True,missing code 'NA' is neither a listed code nor a missing-value label; missing code 'WK' is neither a listed code nor a missing-value label; missing code 'WD' is neither a listed code nor a missing-value label
+main,llama3.1:8b,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,False,False,exact,True,False,True,
+main,llama3.1:8b,natural_gas_use_kbtu,unit:KiloW-HR,1,Not Available,True,False,error,True,True,True,unit disagrees with label
+main,llama3.1:8b,property_gfa_calculated_1,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+main,llama3.1:8b,natural_gas_use_kbtu,unit:KiloW-HR,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+post hoc units,llama3.1:8b,property_gfa_calculated_1,unit:FT2,1,; NA; WK; WD,False,False,harmless deviation,True,True,True,missing code 'NA' is neither a listed code nor a missing-value label; missing code 'WK' is neither a listed code nor a missing-value label; missing code 'WD' is neither a listed code nor a missing-value label
+post hoc units,llama3.1:8b,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,False,False,exact,True,True,True,unit disagrees with label
+post hoc units,llama3.1:8b,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,False,False,exact,True,False,True,
+post hoc units,llama3.1:8b,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,False,False,exact,True,True,True,unit disagrees with label
+post hoc units,llama3.1:8b,property_gfa_calculated_1,unit:FT2,1,Not Available,False,False,harmless deviation,True,False,True,
+post hoc units,llama3.1:8b,site_energy_use_kbtu,unit:KiloBTU_IT,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label
+post hoc units,llama3.1:8b,natural_gas_use_kbtu,unit:KiloBTU_IT,1000,Not Available,True,False,error,True,True,True,unit disagrees with label; multiplier disagrees with label

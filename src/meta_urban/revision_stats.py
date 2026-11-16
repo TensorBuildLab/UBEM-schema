@@ -37,7 +37,7 @@ from .io import leaf_concepts
 
 TAB = PAPER / "tables"
 RNG = np.random.default_rng(20261115)
-CONDITIONS = ["L0", "L1", "L2D", "L2", "L2N", "O0", "O2D", "L2U", "L3", "XBR", "XBE", "XEA"]
+CONDITIONS = ["L0", "L1", "L2D", "L2", "L2N", "O0", "O2D", "L2S", "L2U", "L3", "L3E", "XBR", "XBE", "XEA"]
 COMPARISONS = [  # (condition, versus, experiment, question)
     ("L1", "L0", "E1", "labels over identifiers"),
     ("L2D", "L1", "E1", "definitions over labels"),
@@ -47,7 +47,9 @@ COMPARISONS = [  # (condition, versus, experiment, question)
     ("O2D", "O0", "E1", "definitions with opaque codes"),
     ("L0", "O0", "E1", "meaningful identifiers over opaque codes"),
     ("L2U", "L2", "E2", "open versus closed output"),
-    ("L3", "L2", "E5", "ten retrieved cards versus all cards"),
+    ("L2S", "L2", "R", "shuffled versus grouped order of the cards"),
+    ("L3", "L2", "E5", "ten lexically retrieved cards versus all cards"),
+    ("L3E", "L2", "E5", "ten densely retrieved cards versus all cards"),
     ("XBR", "L0", "E6", "Brick documentation over identifiers"),
     ("XBE", "L0", "E6", "BEDES documentation over identifiers"),
     ("XEA", "L0", "E6", "Energy ADE documentation over identifiers"),
@@ -140,9 +142,21 @@ def tests_table(tabs) -> pd.DataFrame:
                 ha = np.array([ta.at[k, "pred0"] == lab[k][0] for k in idx])
                 hb = np.array([tb.at[k, "pred0"] == lab[k][0] for k in idx])
                 n01, n10, p = mcnemar_exact(hb, ha)
+                clus = np.array([lab[k][0] for k in idx])
+                ids_ = np.unique(clus)
+                da = {c: ha[clus == c] for c in ids_}
+                db = {c: hb[clus == c] for c in ids_}
+                draws = RNG.integers(0, len(ids_), (1000, len(ids_)))
+                deltas = []
+                for row in draws:
+                    sa = np.concatenate([da[ids_[j]] for j in row])
+                    sb = np.concatenate([db[ids_[j]] for j in row])
+                    deltas.append(sa.mean() - sb.mean())
+                dlo, dhi = np.quantile(deltas, [0.025, 0.975])
                 block.append({"label_set": src, "model": short(model), "experiment": exp, "condition": a,
                               "versus": b, "question": q, "n": len(idx), "acc_condition": ha.mean(),
-                              "acc_versus": hb.mean(), "delta": ha.mean() - hb.mean(), "gained": n01, "lost": n10,
+                              "acc_versus": hb.mean(), "delta": ha.mean() - hb.mean(),
+                              "delta_cluster_lo": dlo, "delta_cluster_hi": dhi, "gained": n01, "lost": n10,
                               "p_exact": p})
         adj = holm([r["p_exact"] for r in block])
         for r, pa in zip(block, adj):
@@ -252,7 +266,7 @@ def e4_verification(tabs) -> pd.DataFrame:
 
 
 def e7_tables() -> tuple[pd.DataFrame, pd.DataFrame]:
-    import json as _json
+    import ast as _ast
 
     from .checks import check as check_v2
     from .endtoend import _items
@@ -260,8 +274,7 @@ def e7_tables() -> tuple[pd.DataFrame, pd.DataFrame]:
     e = pd.read_csv(TAB / "endtoend_profile_errors.csv")
     items = _items()
     e["flagged"] = e["flags"].fillna("") != ""
-    e["flagged_v2"] = [bool(check_v2(items[(d, v)], _json.loads(p.replace("'", '"').replace("False", "false")
-                                                                .replace("True", "true"))))
+    e["flagged_v2"] = [bool(check_v2(items[(d, v)], _ast.literal_eval(p)))
                        for d, v, p in zip(e.dataset, e.variable, e.ai_profile)]
     e["deviates"] = e["fields_wrong"].fillna("") != ""
     e["class"] = np.where(e.consequential, "changes an indicator",

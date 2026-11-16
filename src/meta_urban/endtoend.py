@@ -175,9 +175,53 @@ def run() -> tuple[pd.DataFrame, pd.DataFrame]:
     return pd.DataFrame(rows), pd.DataFrame(errs)
 
 
+REPLICATES = {  # EIA microdata user guides: CBECS 2018 JK2 with alpha_r = 1; RECS 2020 jackknife, (R-1)/R
+    "cbecs2018": ("FINALWT", 151, 1.0),
+    "recs2020": ("NWEIGHT", 60, 59 / 60),
+}
+
+
+def reference_uncertainty() -> pd.DataFrame:
+    """Design-based standard errors of the reference indicators from the surveys' replicate weights."""
+    data = {ds: pd.read_csv(DATA_RAW / f, low_memory=False) for ds, f in FILES.items()}
+    gold = {k: gold_profile(it) for k, it in _items().items()}
+    rows = []
+    for ds, (w, R, coef) in REPLICATES.items():
+        base = quantities(ds, gold, data[ds])
+        reps = []
+        for r in range(1, R + 1):
+            d = data[ds].copy()
+            d[w] = d[f"{w}{r}"]
+            reps.append(quantities(ds, gold, d))
+        for name, v in base.items():
+            var = coef * sum((q[name] - v) ** 2 for q in reps)
+            rows.append({"dataset": ds, "quantity": name, "reference": v, "se": var ** 0.5,
+                         "rse_pct": 100 * var ** 0.5 / v})
+    return pd.DataFrame(rows)
+
+
+def topcode_sensitivity() -> pd.DataFrame:
+    """Weighted mean floors of CBECS 2018 under alternative values for the top-codes 994 (10 to 14 floors) and
+    995 (15 or more), against reading the codes as numbers."""
+    df = pd.read_csv(DATA_RAW / FILES["cbecs2018"], low_memory=False, usecols=["NFLOOR", "FINALWT"])
+    w = df.FINALWT
+    rows = []
+    for a, b, lab in ((10, 15, "lower bounds"), (12, 15, "midpoint, lower bound (paper's central case)"),
+                      (14, 20, "upper bound, 20 floors"), (14, 30, "upper bound, 30 floors")):
+        nf = df.NFLOOR.replace({994: a, 995: b})
+        rows.append({"assumption": lab, "code_994": a, "code_995": b, "weighted_mean_floors": (w * nf).sum() / w.sum()})
+    raw = (w * df.NFLOOR).sum() / w.sum()
+    out = pd.DataFrame(rows)
+    out["codes_read_as_numbers"] = raw
+    out["relative_error_pct"] = 100 * (raw - out.weighted_mean_floors) / out.weighted_mean_floors
+    return out
+
+
 def main() -> int:
     res, errs = run()
     out = PAPER / "tables"
+    reference_uncertainty().to_csv(out / "endtoend_reference_se.csv", index=False)
+    topcode_sensitivity().to_csv(out / "downstream_topcode_sensitivity.csv", index=False)
     res.to_csv(out / "endtoend_quantities.csv", index=False)
     errs.to_csv(out / "endtoend_profile_errors.csv", index=False)
     pd.set_option("display.width", 220)

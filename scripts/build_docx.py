@@ -8,7 +8,7 @@ Writes paper/build/*.docx and assembles paper/submission/:
     highlights.docx       separate highlights file
     cover_letter.docx
     graphical_abstract.tif / .pdf
-    Figure_1..8.pdf / .png  each figure as a separate file, vector PDF and 600-dpi PNG
+    Figure_1..9.pdf / .png  each figure as a separate file, vector PDF and 600-dpi PNG
 """
 import shutil
 import subprocess
@@ -22,7 +22,8 @@ from docx.oxml.ns import qn
 ROOT = Path(__file__).resolve().parents[1]
 PAPER, BUILD, SUB = ROOT / "paper", ROOT / "paper" / "build", ROOT / "paper" / "submission"
 FIGURES = ["fig_architecture", "fig_class_diagram", "fig_worked_example", "fig_role_by_granularity",
-           "fig_design_conditions", "fig_standards", "fig_t2_coverage", "fig_weights_eui_error"]  # order of appearance in the manuscript
+           "fig_design_conditions", "fig_standards", "fig_t2_coverage", "fig_weights_eui_error",
+           "fig_city_map"]  # order of appearance in the manuscript
 PANDOC = pypandoc.get_pandoc_path()
 
 
@@ -88,18 +89,50 @@ def word_counts(path: Path) -> dict:
             "main text + tables": text + tables - nomen}
 
 
+ANON_DROP = ("## Acknowledgement", "## Data availability",
+             "## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process")
+
+
+def anonymize(md: str) -> str:
+    """Manuscript for double-anonymized review: no author block, no acknowledgement, data availability or AI
+    declaration (these are on the separate title page), no repository link."""
+    head, rest = md.split("## Highlights", 1)
+    head = head[:head.index("Liang Zhang")] + "\n"  # drop the author and affiliation block
+    md = head + "## Highlights" + rest
+    for h in ANON_DROP:
+        if h in md:
+            a = md.index(h)
+            b = md.index("\n## ", a + 3)
+            md = md[:a] + md[b + 1:]
+    assert "github.com" not in md and "liangzhang1" not in md, "identifying text left in the anonymized manuscript"
+    return md
+
+
+def strip_properties(path: Path) -> None:
+    d = docx.Document(path)
+    cp = d.core_properties
+    cp.author = cp.last_modified_by = cp.comments = cp.keywords = cp.subject = ""
+    d.save(path)
+
+
 def main() -> None:
     BUILD.mkdir(exist_ok=True)
     pandoc("manuscript.md", BUILD / "manuscript.docx", cite=True)
     finish(BUILD / "manuscript.docx", line_numbers=True)
     print("word counts:", word_counts(BUILD / "manuscript.docx"))
+    anon = PAPER / "_manuscript_anonymous.md"
+    anon.write_text(anonymize((PAPER / "manuscript.md").read_text(encoding="utf-8")), encoding="utf-8")
+    pandoc(anon.name, BUILD / "manuscript_without_author_info.docx", cite=True)
+    anon.unlink()
+    finish(BUILD / "manuscript_without_author_info.docx", line_numbers=True)
+    strip_properties(BUILD / "manuscript_without_author_info.docx")
     pandoc("highlights.md", BUILD / "highlights.docx")
     pandoc("cover_letter.md", BUILD / "cover_letter.docx")
     for f in ("highlights.docx", "cover_letter.docx"):
         finish(BUILD / f, line_numbers=False)
 
     SUB.mkdir(exist_ok=True)
-    for f in ("manuscript.docx", "highlights.docx", "cover_letter.docx"):
+    for f in ("manuscript.docx", "manuscript_without_author_info.docx", "highlights.docx", "cover_letter.docx"):
         shutil.copy(BUILD / f, SUB / f)
     for ext in (".tif", ".pdf"):
         shutil.copy(PAPER / "figures" / f"graphical_abstract{ext}", SUB / f"graphical_abstract{ext}")

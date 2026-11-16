@@ -1,4 +1,4 @@
-# Meta-Urban catalog entry template (DatasetProfile, schema v2.0).
+# Meta-Urban catalog entry template (DatasetProfile).
 # One file per dataset: catalog/datasets/<id>.yaml
 # Allowed values for every enum field are defined in schema/meta_urban.yaml and listed in catalog/README.md.
 # Rule: never guess. If a value cannot be verified from an official page or a peer-reviewed source, write null

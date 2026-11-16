@@ -16,17 +16,16 @@ TAB, OUT = ROOT / "paper" / "tables", ROOT / "paper" / "figures" / "graphical_ab
 INK, INK2, MUTED, GRID, SURF, PANEL = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#ffffff", "#f4f4f1"
 COL = {"ids": "#c9c7bf", "std": "#3a9a8f", "mu": "#1f3f73"}
 
-cond = pd.read_csv(TAB / "bench_design_conditions.csv")
-conv = pd.read_csv(TAB / "bench_t3_conventions.csv")
-mean = cond.groupby("level")["acc@1"].mean()
-oov = cond.loc[cond.level == "L2U", "out_of_vocabulary_pct"].mean()
-flag0 = conv.loc[conv.context == "codebook entry only", "flagged variable cbecs2018"].mean()
-flag1 = conv.loc[conv.context == "with dataset card", "flagged variable cbecs2018"].mean()
-e2e = pd.read_csv(TAB / "endtoend_summary.csv")
-cons, caught = int(e2e.consequential.sum()), int(e2e.consequential_flagged.sum())
-false_alarms = int(e2e.correct_flagged.sum())
+cond = pd.read_csv(TAB / "stats_conditions.csv")
+mean = cond.groupby("condition")["acc@1"].mean()
 q = pd.read_csv(TAB / "endtoend_quantities.csv")
 worst = 1 + q.loc[q.condition.isin(["codebook entry only", "with dataset card"]), "rel_error_pct"].max() / 100
+dec = pd.read_csv(TAB / "city_decomposition.csv")
+city_unit = dec.loc[(dec.variant == "normalization only") & (dec.card == False), "eui_city_err_pct"].mean()  # noqa: E712
+sel = pd.read_csv(TAB / "city_district_errors_selection.csv")
+ref_d = pd.read_csv(TAB / "city_reference_districts.csv").set_index("cd")
+keep = set(ref_d.index[ref_d.records >= 20])
+district_max = sel[sel.cd.isin(keep)].err_pct.abs().max()
 
 fig = plt.figure(figsize=(13.28, 5.0), dpi=200)  # 2656 x 1000 px
 fig.patch.set_facecolor(SURF)
@@ -56,16 +55,16 @@ for x, head, body in ((0.05, "for people", "documentation\nOWL ontology\nlinks t
     a.text(x + 0.21, 0.335, body, ha="center", va="top", fontsize=11, color=INK2, linespacing=1.3)
     a.annotate("", xy=(x + 0.21, 0.47), xytext=(0.50, 0.59),
                arrowprops={"arrowstyle": "-|>", "color": MUTED, "lw": 1.6, "mutation_scale": 14})
-a.text(0.05, 0.80, "6 design principles, each tested", fontsize=12, color=INK2)
+a.text(0.05, 0.80, "6 design principles, measurable criteria", fontsize=12, color=INK2)
 a.text(0.50, 0.05, "AI output checked against the same schema", ha="center", fontsize=10.5, color=INK2,
        style="italic")
 
 # 2. what helps a model: definitions
-b = panel(0.35, "2  Definitions are the core")
+b = panel(0.35, "2  Terms need definitions")
 b.text(0.05, 0.82, "Mapping survey variables to concepts,\ntwo local 8B models (mean)", fontsize=11.5,
        color=INK2, va="top", linespacing=1.3)
 ax = fig.add_axes([0.392, 0.17, 0.245, 0.47])
-order = [("L0", "ids", "ids"), ("L1", "labels", "ids"), ("L2D", "+ defini-\ntions", "mu"),
+order = [("O0", "opaque\ncodes", "ids"), ("L1", "labels", "ids"), ("O2D", "defini-\ntions", "mu"),
          ("L2", "full\ncards", "mu"), ("STD", "other\nstandards", "std")]
 vals = [mean[["XBR", "XBE", "XEA"]].mean() if lv == "STD" else mean[lv] for lv, _, _ in order]
 ax.bar(range(len(order)), vals, width=0.72, color=[COL[o[2]] for o in order], edgecolor=SURF, linewidth=1.5)
@@ -84,15 +83,16 @@ for s in ("left", "bottom"):
 ax.tick_params(length=0)
 ax.set_facecolor(PANEL)
 
-# 3. end-to-end: AI-built inputs in a national building-stock pipeline
+# 3. energy results: national survey pipeline and New York City
 c = panel(0.685, "3  Energy results")
-c.text(0.05, 0.80, "AI-built inputs in a national\nbuilding-stock pipeline", fontsize=12.5, color=INK2, va="top",
-       linespacing=1.25)
-c.text(0.05, 0.53, f"\u00d7{worst:,.0f}", fontsize=27, weight="bold", color=INK)
-c.text(0.05, 0.46, "worst error, electricity use intensity", fontsize=11.5, color=INK2)
-c.text(0.05, 0.25, f"{caught} of {cons}", fontsize=27, weight="bold", color=INK)
-c.text(0.05, 0.215, f"such errors flagged by schema checks,\n{false_alarms} false alarms", fontsize=11.5,
-       color=INK2, va="top", linespacing=1.25)
+c.text(0.05, 0.82, "AI-built inputs, same two models", fontsize=12.5, color=INK2, va="top")
+rows = [(f"+{city_unit:.0f}%", "NYC energy intensity: kBtu\nread as kWh by both models"),
+        (f"up to {district_max:.0f}%", "district bias from a plausible\nfloor-area column choice"),
+        (f"×{worst:,.0f}", "national electricity intensity,\none wrong multiplier")]
+for i, (big, small) in enumerate(rows):
+    y = 0.66 - i * 0.235
+    c.text(0.05, y, big, fontsize=23, weight="bold", color=INK, va="center")
+    c.text(0.05, y - 0.075, small, fontsize=10.5, color=INK2, va="top", linespacing=1.2)
 
 for x0, x1 in [(0.318, 0.348), (0.653, 0.683)]:
     fig.add_artist(FancyArrowPatch((x0, 0.49), (x1, 0.49), transform=fig.transFigure, arrowstyle="-|>",

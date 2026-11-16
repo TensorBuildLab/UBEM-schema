@@ -20,10 +20,14 @@ from .analytics import GRID, INK2, MUTED, SURFACE, _style, save_fig  # noqa: E40
 from .bench import t3_items, t3_score  # noqa: E402
 from .bench_report import FIG, MODEL_COLOR, TAB, boot_ci, item_table, mcnemar_exact, models, short, t2_frame  # noqa: E402
 from .io import leaf_concepts  # noqa: E402
+from .revision_stats import cluster_boot  # noqa: E402
 
 CONDITIONS = [  # (level, label, experiment)
-    ("L0", "ids only", "E1"), ("L1", "ids + labels", "E1"), ("L2D", "+ definitions", "E1"),
-    ("L2", "full concept cards", "E1"), ("L2U", "cards, open output", "E2"), ("L3", "retrieved cards", "E5"),
+    ("O0", "opaque codes", "E1"), ("L0", "ids", "E1"), ("L1", "ids + labels", "E1"),
+    ("O2D", "codes + definitions", "E1"), ("L2D", "ids + labels + definitions", "E1"),
+    ("L2N", "cards without definitions", "E1"), ("L2", "full concept cards", "E1"),
+    ("L2S", "cards, shuffled order", "R"), ("L2U", "cards, open output", "E2"),
+    ("L3", "10 cards, lexical retrieval", "E5"), ("L3E", "10 cards, dense retrieval", "E5"),
     ("XBR", "Brick documentation", "E6"), ("XBE", "BEDES documentation", "E6"),
     ("XEA", "Energy ADE documentation", "E6")]
 NAME = {"qwen3:8b": "Qwen3 8B", "llama3.1:8b": "Llama 3.1 8B"}
@@ -45,7 +49,7 @@ def conditions_table(frames) -> tuple[pd.DataFrame, pd.DataFrame]:
             tabs[lv] = it
             m = it[it.gold != "none"]
             h = (m.pred0 == m.gold).values
-            lo, hi = boot_ci(h)
+            lo, hi = cluster_boot(h, m.gold.values)
             g = df[(df.level == lv) & (df.repeat == 0)]
             rows.append({"model": short(model), "level": lv, "condition": lab, "experiment": exp, "n": len(m),
                          "acc@1": h.mean(), "lo": lo, "hi": hi,
@@ -128,32 +132,35 @@ def conventions_table() -> pd.DataFrame:
 
 
 def fig_conditions(tab: pd.DataFrame, path) -> None:
-    order = [c for c in CONDITIONS if c[0] in set(tab.level) and not c[0].startswith("X")]
-    fig, ax = plt.subplots(figsize=(7.2, 3.3), dpi=200)
+    """(a) E1 factorial on concept documentation; (b) closed output, order, retrieval. Intervals resample concepts."""
+    panels = [("(a) What the concept documentation contains (E1)", ["O0", "L0", "L1", "O2D", "L2D", "L2N", "L2"]),
+              ("(b) Full cards: order, output and retrieval (E2, E5)", ["L2", "L2S", "L2U", "L3", "L3E"])]
+    lab = {c[0]: c[1] for c in CONDITIONS}
     ms = [m for m in ("qwen3:8b", "llama3.1:8b") if m in set(tab.model)]
+    fig, axes = plt.subplots(1, 2, figsize=(7.4, 3.4), dpi=200, gridspec_kw={"width_ratios": [7, 5]})
     w = 0.38
-    x = np.arange(len(order))
-    for k, m in enumerate(ms):
-        d = tab[tab.model == m].set_index("level").reindex([c[0] for c in order])
-        xs = x + (k - 0.5) * w
-        ax.bar(xs, d["acc@1"], width=w * 0.92, color=MODEL_COLOR[f"ollama:{m}"], label=NAME[m], edgecolor=SURFACE)
-        ax.errorbar(xs, d["acc@1"], yerr=[d["acc@1"] - d["lo"], d["hi"] - d["acc@1"]], fmt="none", ecolor=INK2,
-                    elinewidth=0.8, capsize=2)
-        for xi, v, h in zip(xs, d["acc@1"], d["hi"]):
-            ax.text(xi, h + 0.012, f"{v:.2f}", ha="center", fontsize=6.2, color=INK2)
-    seps = [i - 0.5 for i in range(1, len(order)) if order[i][2] != order[i - 1][2]]
-    for s_ in seps:
-        ax.axvline(s_, color=GRID, lw=1)
-    for exp in dict.fromkeys(c[2] for c in order):
-        xs_ = [i for i, c in enumerate(order) if c[2] == exp]
-        ax.text(np.mean(xs_), 0.94, exp, ha="center", fontsize=7.5, color=MUTED, weight="bold")
-    ax.set_xticks(x, [c[1].replace(" + ", "\n+ ").replace("cards, ", "cards,\n") for c in order], fontsize=7)
-    ax.set_ylim(0, 1)
-    ax.set_ylabel("Top-1 accuracy", fontsize=8, color=INK2)
-    ax.yaxis.grid(True, color=GRID, lw=0.6)
-    ax.set_axisbelow(True)
-    _style(ax)
-    ax.legend(fontsize=7, frameon=False, loc="upper left", bbox_to_anchor=(0.0, 0.92))
+    for ax, (title, levels) in zip(axes, panels):
+        levels = [lv for lv in levels if lv in set(tab.level)]
+        x = np.arange(len(levels))
+        for k, m in enumerate(ms):
+            d = tab[tab.model == m].set_index("level").reindex(levels)
+            xs = x + (k - 0.5) * w
+            ax.bar(xs, d["acc@1"], width=w * 0.92, color=MODEL_COLOR[f"ollama:{m}"], label=NAME[m],
+                   edgecolor=SURFACE)
+            ax.errorbar(xs, d["acc@1"], yerr=[d["acc@1"] - d["lo"], d["hi"] - d["acc@1"]], fmt="none",
+                        ecolor=INK2, elinewidth=0.7, capsize=1.5)
+            for xi, v in zip(xs, d["acc@1"]):
+                ax.text(xi, 0.02, f"{v:.2f}", ha="center", fontsize=5.6, color=SURFACE, rotation=90, va="bottom")
+        ax.set_xticks(x, [lab[lv].replace(" + ", "\n+ ").replace(", ", ",\n").replace(" without", "\nwithout")
+                          for lv in levels], fontsize=6.2)
+        ax.set_ylim(0, 0.9)
+        ax.set_title(title, fontsize=7.5, color=INK2, loc="left")
+        ax.yaxis.grid(True, color=GRID, lw=0.6)
+        ax.set_axisbelow(True)
+        _style(ax)
+    axes[0].set_ylabel("Top-1 accuracy", fontsize=8, color=INK2)
+    axes[1].set_yticklabels([])
+    axes[0].legend(fontsize=6.5, frameon=False, loc="upper left", ncol=2)
     fig.tight_layout()
     save_fig(fig, path)
     plt.close(fig)

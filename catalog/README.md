@@ -1,7 +1,7 @@
 # Meta-Urban open-data catalog
 
 One YAML file per dataset in `datasets/`, following `TEMPLATE.yaml`. Each file is a `DatasetProfile`
-instance of the Meta-Urban 2.0 schema (`../schema/meta_urban.yaml`). Validate with:
+instance of the Meta-Urban schema (`../schema/meta_urban.yaml`). Validate with:
 
 ```bash
 python -m meta_urban.validate catalog/datasets
@@ -20,9 +20,9 @@ python -m meta_urban.validate catalog/datasets
 
 ## Faceted taxonomy (controlled values)
 
-The 2023 taxonomy mixed three different things in one list: what the data describe (weather, geometry),
-how coarse they are (macroscopic vs. microscopic energy data), and how they are distributed (data lake).
-Version 2.0 separates them into independent facets.
+The facets are independent: what the data describe, how fine they are, and how they are distributed are
+recorded separately, so that each dataset is a point in a multi-dimensional space and gaps can be counted
+along each facet.
 
 ### `ubem_roles` (UBEMRole): which UBEM workflow step the data feed
 | value | meaning |

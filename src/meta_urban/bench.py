@@ -121,7 +121,9 @@ def t2_baselines(embedding: bool = False) -> pd.DataFrame:
     items = load_items()
     gold = [i["gold"] for i in items]
     rows = []
-    retrievers = {"B1_lexical_tfidf": LexicalRetriever()}
+    from .baselines import OllamaEmbeddingRetriever
+
+    retrievers = {"B1_lexical_tfidf": LexicalRetriever(), "B3_embedding_nomic": OllamaEmbeddingRetriever()}
     if embedding:
         from .baselines import EmbeddingRetriever
         retrievers["B2_embedding_minilm"] = EmbeddingRetriever()
@@ -153,11 +155,16 @@ K_CANDIDATES = 10
 def _t2_jobs(levels, repeats, limit):
     items = load_items()[:limit] if limit else load_items()
     cands = LexicalRetriever().rank(items, k=K_CANDIDATES)
+    if "L3E" in levels:
+        from .baselines import OllamaEmbeddingRetriever
+
+        dense = OllamaEmbeddingRetriever().rank(items, k=K_CANDIDATES)
     jobs = []
     for level in levels:
         for rep in range(repeats):
-            for it, cand in zip(items, cands):
-                req = t2_request(it, level, cand if level == "L3" else None)
+            for k, (it, cand) in enumerate(zip(items, cands)):
+                cand = dense[k] if level == "L3E" else cand
+                req = t2_request(it, level, cand if level in ("L3", "L3E") else None)
                 meta = {"task": "T2", "level": level, "dataset": it["dataset"], "name": it["name"]}
                 jobs.append((req, meta, rep))
     return jobs

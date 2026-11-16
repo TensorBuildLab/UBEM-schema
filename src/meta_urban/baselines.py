@@ -5,6 +5,8 @@ B1 lexical: TF-IDF over word unigrams/bigrams plus character 3-5 grams. A variab
 definition. Concepts are ranked by cosine similarity.
 
 B2 embedding (optional, needs `pip install meta-urban[embed]`): sentence-transformers model, same texts.
+B3 embedding through Ollama (nomic-embed-text, 137M parameters, run locally like the evaluated models): same
+   texts, with the model's task prefixes ("search_query: " for variables, "search_document: " for concepts).
 """
 
 from __future__ import annotations
@@ -61,4 +63,22 @@ class EmbeddingRetriever(LexicalRetriever):
 
     def scores(self, items: list[dict]) -> np.ndarray:
         X = self.model.encode([variable_text(i) for i in items], normalize_embeddings=True)
+        return X @ self.C.T
+
+
+class OllamaEmbeddingRetriever(LexicalRetriever):
+    def __init__(self, model: str = "nomic-embed-text", concepts: list[dict] | None = None,
+                 url: str = "http://localhost:11434/api/embed"):
+        import requests
+
+        self._post = lambda texts: np.asarray(requests.post(url, json={"model": model, "input": texts},
+                                                             timeout=600).json()["embeddings"])
+        self.concepts = concepts or leaf_concepts()
+        self.ids = [c["id"] for c in self.concepts]
+        C = self._post([f"search_document: {concept_text(c)}" for c in self.concepts])
+        self.C = C / np.linalg.norm(C, axis=1, keepdims=True)
+
+    def scores(self, items: list[dict]) -> np.ndarray:
+        X = self._post([f"search_query: {variable_text(i)}" for i in items])
+        X = X / np.linalg.norm(X, axis=1, keepdims=True)
         return X @ self.C.T
