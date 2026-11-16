@@ -9,5 +9,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
-      - run: python -m meta_urban.validate
+      - run: python -m ubem_link.validate
       - run: pytest -q

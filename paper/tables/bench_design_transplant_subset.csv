@@ -1,4 +1,4 @@
-model,standard,concepts_documented,with_definition,n_variables,acc_standard_docs,acc_meta_urban_cards,acc_ids_only,p_standard_vs_meta_urban
+model,standard,concepts_documented,with_definition,n_variables,acc_standard_docs,acc_ubem_link_cards,acc_ids_only,p_standard_vs_ubem_link
 llama3.1:8b,brick,34,31,111,0.5765765765765766,0.6036036036036037,0.6396396396396397,0.6636238098144531
 llama3.1:8b,bedes,57,54,270,0.44814814814814813,0.562962962962963,0.43333333333333335,0.00015210657584807544
 llama3.1:8b,energy_ade,35,10,168,0.35714285714285715,0.49404761904761907,0.3630952380952381,0.0008240823595997426

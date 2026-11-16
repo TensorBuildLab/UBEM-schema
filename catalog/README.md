@@ -1,10 +1,10 @@
-# Meta-Urban open-data catalog
+# UBEM-Link open-data catalog
 
 One YAML file per dataset in `datasets/`, following `TEMPLATE.yaml`. Each file is a `DatasetProfile`
-instance of the Meta-Urban schema (`../schema/meta_urban.yaml`). Validate with:
+instance of the UBEM-Link schema (`../schema/ubem_link.yaml`). Validate with:
 
 ```bash
-python -m meta_urban.validate catalog/datasets
+python -m ubem_link.validate catalog/datasets
 ```
 
 ## Inclusion criteria

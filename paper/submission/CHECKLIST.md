@@ -27,12 +27,12 @@ length) **must be confirmed against the guide** before submission. Rebuild every
 | Requirement | Status |
 |---|---|
 | Abstract | 200 words; **confirm** the limit |
-| Main text and tables | About 8,000 words (6,823 main text including headings and captions, 1,200 in tables); **confirm** the limit |
+| Main text and tables | About 8,000 words (6,799 main text including headings and captions, 1,200 in tables); **confirm** the limit |
 | Keywords | 6 |
 | Use of AI in the research | Section 5.5 (Methods) |
 | Declaration of generative AI and AI-assisted technologies | On the title page (anonymized review) |
 | References numbered in order of citation, DOIs, [dataset] marks | Done |
-| Prior preprint (arXiv:2311.08535) | **Decision pending** (see the response document): cite in the third person, rename, or keep as is |
+| Schema name | Renamed UBEM-Link (independent of earlier work); card-bearing model calls rerun with the new name |
 
 ## Classifications or keywords in the submission system
 

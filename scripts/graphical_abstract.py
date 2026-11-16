@@ -45,7 +45,7 @@ def panel(x, title):
 a = panel(0.015, "1  AI-ready schema")
 a.add_patch(FancyBboxPatch((0.22, 0.60), 0.56, 0.14, boxstyle="round,pad=0.01,rounding_size=0.02", fc=COL["mu"],
                            ec="none"))
-a.text(0.50, 0.67, "Meta-Urban\none LinkML source", ha="center", va="center", fontsize=12, color=SURF,
+a.text(0.50, 0.67, "UBEM-Link\none LinkML source", ha="center", va="center", fontsize=12, color=SURF,
        weight="bold", linespacing=1.2)
 for x, head, body in ((0.05, "for people", "documentation\nOWL ontology\nlinks to Brick,\nBEDES, Energy ADE"),
                       (0.53, "for AI", "concept cards\ndataset cards\nJSON Schema\nSHACL checks")):

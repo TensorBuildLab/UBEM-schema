@@ -1,4 +1,4 @@
-model,standard,relation,n_variables,concepts,acc_standard_docs,acc_meta_urban_cards,acc_ids_only
+model,standard,relation,n_variables,concepts,acc_standard_docs,acc_ubem_link_cards,acc_ids_only
 llama3.1:8b,brick,exact or close match,24,7,0.7916666666666666,0.7916666666666666,0.8333333333333334
 llama3.1:8b,brick,"broad, narrow or related match",87,12,0.5172413793103449,0.5517241379310345,0.5862068965517241
 llama3.1:8b,bedes,exact or close match,133,16,0.5338345864661654,0.5939849624060151,0.41353383458646614

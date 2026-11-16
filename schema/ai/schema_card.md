@@ -1,4 +1,4 @@
-# Meta-Urban: schema card for AI systems
+# UBEM-Link: schema card for AI systems
 
 Purpose: describe open datasets for urban building energy modeling (UBEM) so that they can be found, judged and joined, and describe their variables so that values are interpreted correctly. Use only the fields and values defined here; write null when the source does not state a value; never guess.
 

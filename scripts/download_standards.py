@@ -1,4 +1,4 @@
-"""Download the release files of the standards Meta-Urban is compared with (data/raw/standards/, git-ignored).
+"""Download the release files of the standards UBEM-Link is compared with (data/raw/standards/, git-ignored).
 
     python scripts/download_standards.py           # download and record SHA-256 in data/standards_manifest.json
     python scripts/download_standards.py --verify  # check files against the manifest
@@ -48,7 +48,7 @@ def main() -> int:
     for name, url in FILES.items():
         p = OUT / name
         if not p.exists():
-            r = requests.get(url, timeout=120, headers={"User-Agent": "meta-urban-research/1.0"})
+            r = requests.get(url, timeout=120, headers={"User-Agent": "ubem-link-research/1.0"})
             r.raise_for_status()
             p.write_bytes(r.content)
         man[name] = {"url": url, "downloaded": str(date.today()), "sha256": sha(p), "bytes": p.stat().st_size}

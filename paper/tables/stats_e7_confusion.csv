@@ -1,10 +1,10 @@
 temperature,class,profiles,flagged_v1,flagged_v2
-0.0,changes an indicator,5,5,4
+0.0,changes an indicator,4,4,3
 0.0,"deviates, no effect on indicators",22,14,11
-0.0,identical to gold,17,0,0
+0.0,identical to gold,18,0,0
 0.7,changes an indicator,7,7,7
 0.7,"deviates, no effect on indicators",18,14,6
 0.7,identical to gold,19,0,0
-all,changes an indicator,12,12,11
+all,changes an indicator,11,11,10
 all,"deviates, no effect on indicators",40,28,17
-all,identical to gold,36,0,0
+all,identical to gold,37,0,0

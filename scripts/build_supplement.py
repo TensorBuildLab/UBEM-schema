@@ -49,9 +49,9 @@ def section_runs() -> str:
 
 
 def section_prompts() -> str:
-    from meta_urban.bench import load_items, t3_items
-    from meta_urban.city import norm_item, select_request
-    from meta_urban.llm import t2_request, t3_request
+    from ubem_link.bench import load_items, t3_items
+    from ubem_link.city import norm_item, select_request
+    from ubem_link.llm import t2_request, t3_request
 
     it = next(i for i in load_items() if i["name"] == "SQFT")
     t3 = next(i for i in t3_items() if i["name"] == "MFBTU")
@@ -80,7 +80,7 @@ def section_prompts() -> str:
 def section_vocabulary() -> str:
     import csv
 
-    from meta_urban.io import leaf_concepts
+    from ubem_link.io import leaf_concepts
 
     links = {}
     with open(ROOT / "schema" / "vocab" / "mappings_2026-11-13.csv", encoding="utf-8") as fh:
@@ -98,7 +98,7 @@ def section_vocabulary() -> str:
 def section_rules() -> str:
     import inspect
 
-    from meta_urban import checks, endtoend
+    from ubem_link import checks, endtoend
 
     return ("## S4. Profile checks\n\nVersion 1 was written on the 11 variables of the national pipeline (E7). "
             "Version 2 was written after applying version 1 to all normalization outputs of the benchmark, and "
@@ -137,7 +137,7 @@ def section_tables() -> str:
         ("S17. Effect of single normalization errors on CBECS 2018 quantities", "downstream_d3_sensitivity.csv", ""),
         ("S18. City case: columns selected by the models", "city_selection.csv",
          "The tax-lot key is described by the JoinKey value parcel_id. Correct columns per role are listed in "
-         "meta_urban.city.ROLES; for floor area, the variants with and without parking are accepted."),
+         "ubem_link.city.ROLES; for floor area, the variants with and without parking are accepted."),
         ("S19. City case: AI-built profiles and profile checks",
          ["city_profiles.csv", "city_checks_heldout.csv"],
          "Second table: every distinct profile of the city runs. Error: a wrong conversion to SI units, a unit "
@@ -183,15 +183,15 @@ def section_catalog() -> str:
 
 def section_reproducibility() -> str:
     rows = [
-        ("Table 5", "meta_urban.standards", "ai_readiness_audit.csv"),
-        ("Table 6, Fig. 5, Fig. 6", "meta_urban.design_report", "bench_design_conditions.csv, bench_design_tests.csv"),
-        ("Table 7", "meta_urban.design_report", "bench_t3_conventions.csv"),
-        ("Fig. 7", "meta_urban.bench_report", "bench_t2_coverage.csv"),
-        ("Table 8, Fig. 8, S14 to S17", "meta_urban.endtoend, meta_urban.downstream", "endtoend_*.csv, downstream_*.csv"),
-        ("Table 9, Fig. 9, S18 to S20", "meta_urban.city", "city_*.csv"),
-        ("S5 to S13", "meta_urban.revision_stats", "stats_*.csv"),
-        ("Fig. 4, S21", "meta_urban.analytics", "catalog_*.csv"),
-        ("Figs. 1 to 3", "meta_urban.schema_figures", "figure files"),
+        ("Table 5", "ubem_link.standards", "ai_readiness_audit.csv"),
+        ("Table 6, Fig. 5, Fig. 6", "ubem_link.design_report", "bench_design_conditions.csv, bench_design_tests.csv"),
+        ("Table 7", "ubem_link.design_report", "bench_t3_conventions.csv"),
+        ("Fig. 7", "ubem_link.bench_report", "bench_t2_coverage.csv"),
+        ("Table 8, Fig. 8, S14 to S17", "ubem_link.endtoend, ubem_link.downstream", "endtoend_*.csv, downstream_*.csv"),
+        ("Table 9, Fig. 9, S18 to S20", "ubem_link.city", "city_*.csv"),
+        ("S5 to S13", "ubem_link.revision_stats", "stats_*.csv"),
+        ("Fig. 4, S21", "ubem_link.analytics", "catalog_*.csv"),
+        ("Figs. 1 to 3", "ubem_link.schema_figures", "figure files"),
     ]
     return ("## S22. Reproducibility map\n\nEach table and figure is produced by one module of the released package "
             "(`python -m <module>`), from cached model outputs, without new model calls.\n\n"
@@ -200,7 +200,7 @@ def section_reproducibility() -> str:
 
 def main() -> None:
     parts = ["---\ntitle: \"Supplementary material\"\n---\n",
-             "Meta-Urban: an AI-ready semantic schema for integrating open data in urban building energy modeling\n",
+             "UBEM-Link: an AI-ready semantic schema for integrating open data in urban building energy modeling\n",
              section_runs(), section_prompts(), section_vocabulary(), section_rules(), section_tables(),
              section_catalog(), section_reproducibility()]
     src = PAPER / "supplement.md"

@@ -1,7 +1,7 @@
 # Auditing 50 gold labels (about 30 minutes)
 
 The file `human_audit.csv` (opens in Excel) lists 50 randomly chosen variables from the CBECS 2018 and RECS 2020
-codebooks. Each has been assigned a concept from the Meta-Urban vocabulary. We need a building-energy expert to
+codebooks. Each has been assigned a concept from the UBEM-Link vocabulary. We need a building-energy expert to
 say whether the assignment is reasonable.
 
 For each row, read:
@@ -25,5 +25,5 @@ the space heating system. You do not need to check spelling, coding or the other
 When done, return the file (or save it in place) and run:
 
 ```bash
-python -m meta_urban.gold_sheets audit_report
+python -m ubem_link.gold_sheets audit_report
 ```

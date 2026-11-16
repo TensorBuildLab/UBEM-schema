@@ -2,7 +2,7 @@
 
 Dear Editor,
 
-We submit the manuscript "Meta-Urban: an AI-ready semantic schema for integrating open data in urban building
+We submit the manuscript "UBEM-Link: an AI-ready semantic schema for integrating open data in urban building
 energy modeling" for consideration as a research article in *Computers, Environment and Urban Systems*.
 
 Computational models of cities depend on integrating heterogeneous open data, and urban building energy

@@ -5,3 +5,8 @@
 - Temporal resolution: P1Y
 - Access: open_api
 - Join keys: building_id, parcel_id, address, postal_code, lat_lon, building_type
+- Conventions (apply to many variables; individual codebook entries do not repeat them):
+  - numeric fields (energy, water, emissions, intensities, scores): The text "Not Available" marks a missing value; record it as a missing code, not as a category or zero. Example: Site Energy Use (kBtu) is "Not Available" for properties that did not report complete energy data.
+  - field names that end with a unit in parentheses: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area. Example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
+  - NYC Borough, Block and Lot (BBL): A property may cover several tax lots; the field then lists several BBLs separated by semicolons, written either as 10 digits or as borough-block-lot with hyphens (1-00819-0014). Example: "1008190014; 1008190015" and "1-00819-0014" both refer to tax-lot identifiers.
+  - Property GFA fields: Gross floor area is self-reported or calculated by Portfolio Manager from the property uses; the calculated value is given with and without parking, and the parking-only area separately. Example: Property GFA - Calculated (Buildings) (ft²) excludes parking.

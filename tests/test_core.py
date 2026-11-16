@@ -2,12 +2,12 @@ from pathlib import Path
 
 import pytest
 
-from meta_urban import DATA_RAW
-from meta_urban.codebooks import parse_codes, unit_of
-from meta_urban.gold_draft import draft_label
-from meta_urban.io import concept_index, load_concepts
-from meta_urban.metrics import acc_at_k, cohen_kappa, mrr, run_agreement
-from meta_urban.validate import validate
+from ubem_link import DATA_RAW
+from ubem_link.codebooks import parse_codes, unit_of
+from ubem_link.gold_draft import draft_label
+from ubem_link.io import concept_index, load_concepts
+from ubem_link.metrics import acc_at_k, cohen_kappa, mrr, run_agreement
+from ubem_link.validate import validate
 
 
 def test_catalog_validates():
@@ -55,7 +55,7 @@ def test_metrics():
 
 @pytest.mark.skipif(not (DATA_RAW / "cbecs2018_final_public.csv").exists(), reason="run scripts/download_data.py")
 def test_weighted_totals_match_eia():
-    from meta_urban.downstream import d1_reference, load_cbecs
+    from ubem_link.downstream import d1_reference, load_cbecs
 
     df, _ = load_cbecs()
     d1 = d1_reference(df)
@@ -65,8 +65,8 @@ def test_weighted_totals_match_eia():
 def test_mcnemar_and_gold_ok():
     import numpy as np
 
-    from meta_urban.bench import load_items
-    from meta_urban.bench_report import mcnemar_exact
+    from ubem_link.bench import load_items
+    from ubem_link.bench_report import mcnemar_exact
 
     a = np.array([True] * 10 + [False] * 10)
     b = np.array([True] * 10 + [True] * 8 + [False] * 2)
@@ -77,7 +77,7 @@ def test_mcnemar_and_gold_ok():
 
 
 def test_endtoend_profile_checks():
-    from meta_urban.endtoend import _items, gold_profile, profile_check
+    from ubem_link.endtoend import _items, gold_profile, profile_check
 
     items = _items()
     assert all(not profile_check(it, gold_profile(it)) for it in items.values())

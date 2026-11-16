@@ -38,7 +38,7 @@ FILES = {
     "mer_table_2_3.xlsx": f"{EIA}/totalenergy/data/browser/xls.php?tbl=T02.03",
 }
 
-HEADERS = {"User-Agent": "meta-urban-benchmark/2.0 (research data download)"}
+HEADERS = {"User-Agent": "ubem-link-benchmark/1.0 (research data download)"}
 
 
 def sha256(path: Path) -> str:

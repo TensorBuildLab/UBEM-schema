@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "meta-urban"
-version = "2.0.0.dev0"
-description = "Meta-Urban: metadata schema, open-data catalog and LLM alignment benchmark for urban building energy modeling"
+name = "ubem-link"
+version = "1.0.0"
+description = "UBEM-Link: metadata schema, open-data catalog and LLM alignment benchmark for urban building energy modeling"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT (code); CC-BY-4.0 (schema, catalog, gold labels)"}

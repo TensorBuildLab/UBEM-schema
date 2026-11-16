@@ -62,7 +62,7 @@ llama3.1:8b,with dataset card,cbecs2018,"EUI, natural gas (kWh/m2)",75.201761897
 llama3.1:8b,with dataset card,cbecs2018,Share in hot or very hot zone (%),13.830475649649859,0.0,-100.0
 llama3.1:8b,with dataset card,recs2020,Households (million),123.52902500075469,123.52902500075469,0.0
 llama3.1:8b,with dataset card,recs2020,Site energy per household (MWh),22.494011713099276,22.494011713099276,0.0
-llama3.1:8b,with dataset card,recs2020,Electricity per household (MWh),10.56536192339636,36.05051128653368,241.2141633
+llama3.1:8b,with dataset card,recs2020,Electricity per household (MWh),10.56536192339636,10.56536192339636,0.0
 llama3.1:8b,with dataset card,recs2020,Natural gas per household (MWh),10.061172435198454,10.061172435198454,0.0
 llama3.1:8b,with dataset card,recs2020,Site EUI (kWh/m2),133.12550170532964,133.12550170532964,0.0
 llama3.1:8b,"codebook entry only, T=0.7 run 1",cbecs2018,Buildings (thousand),5918.211220000001,5918.211220000001,0.0

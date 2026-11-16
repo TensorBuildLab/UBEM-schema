@@ -1,6 +1,6 @@
 # Competency questions answered from the catalog
 
-Each question is executed by `meta_urban.analytics.competency()` over the YAML catalog.
+Each question is executed by `ubem_link.analytics.competency()` over the YAML catalog.
 
 **CQ1. Which open weather datasets give hourly or finer data for the United States at station or <= 1 km resolution?**  
 wx-bsrn, wx-climate-onebuilding, wx-energyplus-weather, wx-noaa-isd

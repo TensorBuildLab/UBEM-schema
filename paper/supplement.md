@@ -3,7 +3,7 @@ title: "Supplementary material"
 ---
 
 
-Meta-Urban: an AI-ready semantic schema for integrating open data in urban building energy modeling
+UBEM-Link: an AI-ready semantic schema for integrating open data in urban building energy modeling
 
 
 ## S1. Runs
@@ -172,7 +172,7 @@ unit_multiplier: factor applied to raw values before the unit applies (1000 for 
 missing_codes: codes meaning not applicable, withheld, refused, don't know or missing; use "" for a blank ("Missing=...").
 codes: every categorical code as [code, label]; [] if the variable is not categorical.
 
-DATASET PROFILE (Meta-Urban)
+DATASET PROFILE (UBEM-Link)
 # 2018 Commercial Buildings Energy Consumption Survey (CBECS) public-use microdata (chr-cbecs-2018)
 - UBEM workflow roles: building_characteristics, calibration_validation
 - Statistical nature: sample_survey_weighted
@@ -181,7 +181,7 @@ DATASET PROFILE (Meta-Urban)
 - Access: open_download
 - Join keys: census_region_division, building_type
 - License: US-Government-Public-Domain
-- Survey weights: FINALWT plus 151 replicate weights (FINALWT1-FINALWT151); variabl
+- Survey weights: FINALWT plus 151 replicate weights (FINALWT1-FINALWT151); variable
 [... dataset card continues ...]
 ---
 dataset: cbecs2018
@@ -464,9 +464,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | adjudicated gold | llama3.1:8b | E6 | XBR | L0 | Brick documentation over identifiers | 295 | 0.349 | 0.427 | -0.078 | -0.135 | -0.016 | 9 | 32 | 0.000 | 0.009 |
 | adjudicated gold | llama3.1:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 295 | 0.427 | 0.427 | 0.000 | -0.115 | 0.117 | 32 | 32 | 1.000 | 1.000 |
 | adjudicated gold | llama3.1:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 295 | 0.420 | 0.427 | -0.007 | -0.076 | 0.059 | 25 | 27 | 0.890 | 1.000 |
-| adjudicated gold | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 295 | 0.349 | 0.546 | -0.197 | -0.332 | -0.078 | 11 | 69 | 0.000 | 0.000 |
-| adjudicated gold | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 295 | 0.427 | 0.546 | -0.119 | -0.217 | -0.026 | 17 | 52 | 0.000 | 0.001 |
-| adjudicated gold | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 295 | 0.420 | 0.546 | -0.125 | -0.269 | -0.003 | 24 | 61 | 0.000 | 0.002 |
+| adjudicated gold | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 295 | 0.349 | 0.546 | -0.197 | -0.332 | -0.078 | 11 | 69 | 0.000 | 0.000 |
+| adjudicated gold | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 295 | 0.427 | 0.546 | -0.119 | -0.217 | -0.026 | 17 | 52 | 0.000 | 0.001 |
+| adjudicated gold | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 295 | 0.420 | 0.546 | -0.125 | -0.269 | -0.003 | 24 | 61 | 0.000 | 0.002 |
 | adjudicated gold | qwen3:8b | E1 | L1 | L0 | labels over identifiers | 295 | 0.471 | 0.417 | 0.054 | 0.011 | 0.098 | 23 | 7 | 0.005 | 0.099 |
 | adjudicated gold | qwen3:8b | E1 | L2D | L1 | definitions over labels | 295 | 0.549 | 0.471 | 0.078 | -0.012 | 0.164 | 36 | 13 | 0.001 | 0.028 |
 | adjudicated gold | qwen3:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 295 | 0.586 | 0.549 | 0.037 | -0.053 | 0.127 | 32 | 21 | 0.169 | 1.000 |
@@ -481,9 +481,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | adjudicated gold | qwen3:8b | E6 | XBR | L0 | Brick documentation over identifiers | 295 | 0.424 | 0.417 | 0.007 | -0.050 | 0.048 | 16 | 14 | 0.856 | 1.000 |
 | adjudicated gold | qwen3:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 295 | 0.475 | 0.417 | 0.058 | -0.011 | 0.123 | 29 | 12 | 0.012 | 0.207 |
 | adjudicated gold | qwen3:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 295 | 0.461 | 0.417 | 0.044 | -0.016 | 0.101 | 25 | 12 | 0.047 | 0.752 |
-| adjudicated gold | qwen3:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 295 | 0.424 | 0.586 | -0.163 | -0.278 | -0.034 | 13 | 61 | 0.000 | 0.000 |
-| adjudicated gold | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 295 | 0.475 | 0.586 | -0.112 | -0.183 | -0.023 | 13 | 46 | 0.000 | 0.000 |
-| adjudicated gold | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 295 | 0.461 | 0.586 | -0.125 | -0.273 | 0.005 | 17 | 54 | 0.000 | 0.000 |
+| adjudicated gold | qwen3:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 295 | 0.424 | 0.586 | -0.163 | -0.278 | -0.034 | 13 | 61 | 0.000 | 0.000 |
+| adjudicated gold | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 295 | 0.475 | 0.586 | -0.112 | -0.183 | -0.023 | 13 | 46 | 0.000 | 0.000 |
+| adjudicated gold | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 295 | 0.461 | 0.586 | -0.125 | -0.273 | 0.005 | 17 | 54 | 0.000 | 0.000 |
 | annotator 1 alone | llama3.1:8b | E1 | L1 | L0 | labels over identifiers | 297 | 0.407 | 0.438 | -0.030 | -0.097 | 0.032 | 17 | 26 | 0.222 | 1.000 |
 | annotator 1 alone | llama3.1:8b | E1 | L2D | L1 | definitions over labels | 297 | 0.532 | 0.407 | 0.125 | 0.007 | 0.256 | 52 | 15 | 0.000 | 0.000 |
 | annotator 1 alone | llama3.1:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 297 | 0.545 | 0.532 | 0.013 | -0.048 | 0.076 | 26 | 22 | 0.665 | 1.000 |
@@ -498,9 +498,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | annotator 1 alone | llama3.1:8b | E6 | XBR | L0 | Brick documentation over identifiers | 297 | 0.360 | 0.438 | -0.077 | -0.137 | -0.013 | 9 | 32 | 0.000 | 0.009 |
 | annotator 1 alone | llama3.1:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 297 | 0.441 | 0.438 | 0.003 | -0.121 | 0.129 | 33 | 32 | 1.000 | 1.000 |
 | annotator 1 alone | llama3.1:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 297 | 0.428 | 0.438 | -0.010 | -0.080 | 0.052 | 25 | 28 | 0.784 | 1.000 |
-| annotator 1 alone | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 297 | 0.360 | 0.545 | -0.185 | -0.299 | -0.055 | 11 | 66 | 0.000 | 0.000 |
-| annotator 1 alone | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 297 | 0.441 | 0.545 | -0.104 | -0.200 | -0.017 | 19 | 50 | 0.000 | 0.005 |
-| annotator 1 alone | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 297 | 0.428 | 0.545 | -0.118 | -0.264 | 0.004 | 24 | 59 | 0.000 | 0.004 |
+| annotator 1 alone | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 297 | 0.360 | 0.545 | -0.185 | -0.299 | -0.055 | 11 | 66 | 0.000 | 0.000 |
+| annotator 1 alone | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 297 | 0.441 | 0.545 | -0.104 | -0.200 | -0.017 | 19 | 50 | 0.000 | 0.005 |
+| annotator 1 alone | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 297 | 0.428 | 0.545 | -0.118 | -0.264 | 0.004 | 24 | 59 | 0.000 | 0.004 |
 | annotator 1 alone | qwen3:8b | E1 | L1 | L0 | labels over identifiers | 297 | 0.461 | 0.421 | 0.040 | -0.010 | 0.092 | 20 | 8 | 0.036 | 0.607 |
 | annotator 1 alone | qwen3:8b | E1 | L2D | L1 | definitions over labels | 297 | 0.559 | 0.461 | 0.098 | 0.016 | 0.185 | 38 | 9 | 0.000 | 0.001 |
 | annotator 1 alone | qwen3:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 297 | 0.586 | 0.559 | 0.027 | -0.057 | 0.112 | 30 | 22 | 0.332 | 1.000 |
@@ -515,9 +515,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | annotator 1 alone | qwen3:8b | E6 | XBR | L0 | Brick documentation over identifiers | 297 | 0.414 | 0.421 | -0.007 | -0.075 | 0.045 | 16 | 18 | 0.864 | 1.000 |
 | annotator 1 alone | qwen3:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 297 | 0.458 | 0.421 | 0.037 | -0.038 | 0.099 | 27 | 16 | 0.126 | 1.000 |
 | annotator 1 alone | qwen3:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 297 | 0.444 | 0.421 | 0.024 | -0.032 | 0.074 | 22 | 15 | 0.324 | 1.000 |
-| annotator 1 alone | qwen3:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 297 | 0.414 | 0.586 | -0.172 | -0.286 | -0.048 | 10 | 61 | 0.000 | 0.000 |
-| annotator 1 alone | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 297 | 0.458 | 0.586 | -0.128 | -0.196 | -0.053 | 10 | 48 | 0.000 | 0.000 |
-| annotator 1 alone | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 297 | 0.444 | 0.586 | -0.141 | -0.264 | 0.000 | 14 | 56 | 0.000 | 0.000 |
+| annotator 1 alone | qwen3:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 297 | 0.414 | 0.586 | -0.172 | -0.286 | -0.048 | 10 | 61 | 0.000 | 0.000 |
+| annotator 1 alone | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 297 | 0.458 | 0.586 | -0.128 | -0.196 | -0.053 | 10 | 48 | 0.000 | 0.000 |
+| annotator 1 alone | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 297 | 0.444 | 0.586 | -0.141 | -0.264 | 0.000 | 14 | 56 | 0.000 | 0.000 |
 | annotator 2 alone | llama3.1:8b | E1 | L1 | L0 | labels over identifiers | 296 | 0.395 | 0.436 | -0.041 | -0.112 | 0.021 | 17 | 29 | 0.104 | 1.000 |
 | annotator 2 alone | llama3.1:8b | E1 | L2D | L1 | definitions over labels | 296 | 0.534 | 0.395 | 0.139 | 0.015 | 0.276 | 56 | 15 | 0.000 | 0.000 |
 | annotator 2 alone | llama3.1:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 296 | 0.537 | 0.534 | 0.003 | -0.071 | 0.069 | 27 | 26 | 1.000 | 1.000 |
@@ -532,9 +532,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | annotator 2 alone | llama3.1:8b | E6 | XBR | L0 | Brick documentation over identifiers | 296 | 0.348 | 0.436 | -0.088 | -0.151 | -0.023 | 9 | 35 | 0.000 | 0.002 |
 | annotator 2 alone | llama3.1:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 296 | 0.426 | 0.436 | -0.010 | -0.137 | 0.106 | 32 | 35 | 0.807 | 1.000 |
 | annotator 2 alone | llama3.1:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 296 | 0.416 | 0.436 | -0.020 | -0.099 | 0.046 | 24 | 30 | 0.497 | 1.000 |
-| annotator 2 alone | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 296 | 0.348 | 0.537 | -0.189 | -0.320 | -0.067 | 12 | 68 | 0.000 | 0.000 |
-| annotator 2 alone | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 296 | 0.426 | 0.537 | -0.111 | -0.212 | -0.016 | 18 | 51 | 0.000 | 0.002 |
-| annotator 2 alone | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 296 | 0.416 | 0.537 | -0.122 | -0.283 | 0.000 | 24 | 60 | 0.000 | 0.002 |
+| annotator 2 alone | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 296 | 0.348 | 0.537 | -0.189 | -0.320 | -0.067 | 12 | 68 | 0.000 | 0.000 |
+| annotator 2 alone | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 296 | 0.426 | 0.537 | -0.111 | -0.212 | -0.016 | 18 | 51 | 0.000 | 0.002 |
+| annotator 2 alone | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 296 | 0.416 | 0.537 | -0.122 | -0.283 | 0.000 | 24 | 60 | 0.000 | 0.002 |
 | annotator 2 alone | qwen3:8b | E1 | L1 | L0 | labels over identifiers | 296 | 0.476 | 0.422 | 0.054 | 0.004 | 0.099 | 24 | 8 | 0.007 | 0.127 |
 | annotator 2 alone | qwen3:8b | E1 | L2D | L1 | definitions over labels | 296 | 0.554 | 0.476 | 0.078 | -0.010 | 0.161 | 37 | 14 | 0.002 | 0.035 |
 | annotator 2 alone | qwen3:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 296 | 0.588 | 0.554 | 0.034 | -0.052 | 0.118 | 32 | 22 | 0.220 | 1.000 |
@@ -549,9 +549,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | annotator 2 alone | qwen3:8b | E6 | XBR | L0 | Brick documentation over identifiers | 296 | 0.429 | 0.422 | 0.007 | -0.052 | 0.050 | 16 | 14 | 0.856 | 1.000 |
 | annotator 2 alone | qwen3:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 296 | 0.483 | 0.422 | 0.061 | -0.014 | 0.132 | 31 | 13 | 0.010 | 0.163 |
 | annotator 2 alone | qwen3:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 296 | 0.466 | 0.422 | 0.044 | -0.015 | 0.104 | 25 | 12 | 0.047 | 0.752 |
-| annotator 2 alone | qwen3:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 296 | 0.429 | 0.588 | -0.159 | -0.274 | -0.022 | 14 | 61 | 0.000 | 0.000 |
-| annotator 2 alone | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 296 | 0.483 | 0.588 | -0.105 | -0.179 | -0.028 | 15 | 46 | 0.000 | 0.002 |
-| annotator 2 alone | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 296 | 0.466 | 0.588 | -0.122 | -0.255 | 0.025 | 18 | 54 | 0.000 | 0.001 |
+| annotator 2 alone | qwen3:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 296 | 0.429 | 0.588 | -0.159 | -0.274 | -0.022 | 14 | 61 | 0.000 | 0.000 |
+| annotator 2 alone | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 296 | 0.483 | 0.588 | -0.105 | -0.179 | -0.028 | 15 | 46 | 0.000 | 0.002 |
+| annotator 2 alone | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 296 | 0.466 | 0.588 | -0.122 | -0.255 | 0.025 | 18 | 54 | 0.000 | 0.001 |
 | rule-based draft (keyword rules) | llama3.1:8b | E1 | L1 | L0 | labels over identifiers | 277 | 0.375 | 0.397 | -0.022 | -0.086 | 0.041 | 16 | 22 | 0.418 | 1.000 |
 | rule-based draft (keyword rules) | llama3.1:8b | E1 | L2D | L1 | definitions over labels | 277 | 0.531 | 0.375 | 0.155 | 0.033 | 0.275 | 54 | 11 | 0.000 | 0.000 |
 | rule-based draft (keyword rules) | llama3.1:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 277 | 0.534 | 0.531 | 0.004 | -0.061 | 0.077 | 24 | 23 | 1.000 | 1.000 |
@@ -566,9 +566,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | rule-based draft (keyword rules) | llama3.1:8b | E6 | XBR | L0 | Brick documentation over identifiers | 277 | 0.347 | 0.397 | -0.051 | -0.115 | 0.023 | 12 | 26 | 0.034 | 0.604 |
 | rule-based draft (keyword rules) | llama3.1:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 277 | 0.430 | 0.397 | 0.032 | -0.085 | 0.152 | 35 | 26 | 0.306 | 1.000 |
 | rule-based draft (keyword rules) | llama3.1:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 277 | 0.419 | 0.397 | 0.022 | -0.034 | 0.073 | 26 | 20 | 0.461 | 1.000 |
-| rule-based draft (keyword rules) | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 277 | 0.347 | 0.534 | -0.188 | -0.318 | -0.049 | 13 | 65 | 0.000 | 0.000 |
-| rule-based draft (keyword rules) | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 277 | 0.430 | 0.534 | -0.105 | -0.189 | -0.023 | 19 | 48 | 0.001 | 0.011 |
-| rule-based draft (keyword rules) | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 277 | 0.419 | 0.534 | -0.116 | -0.249 | 0.000 | 22 | 54 | 0.000 | 0.007 |
+| rule-based draft (keyword rules) | llama3.1:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 277 | 0.347 | 0.534 | -0.188 | -0.318 | -0.049 | 13 | 65 | 0.000 | 0.000 |
+| rule-based draft (keyword rules) | llama3.1:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 277 | 0.430 | 0.534 | -0.105 | -0.189 | -0.023 | 19 | 48 | 0.001 | 0.011 |
+| rule-based draft (keyword rules) | llama3.1:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 277 | 0.419 | 0.534 | -0.116 | -0.249 | 0.000 | 22 | 54 | 0.000 | 0.007 |
 | rule-based draft (keyword rules) | qwen3:8b | E1 | L1 | L0 | labels over identifiers | 277 | 0.412 | 0.379 | 0.032 | -0.023 | 0.081 | 18 | 9 | 0.122 | 1.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E1 | L2D | L1 | definitions over labels | 277 | 0.531 | 0.412 | 0.119 | 0.023 | 0.198 | 42 | 9 | 0.000 | 0.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 277 | 0.574 | 0.531 | 0.043 | -0.044 | 0.134 | 29 | 17 | 0.104 | 1.000 |
@@ -583,9 +583,9 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XBR | L0 | Brick documentation over identifiers | 277 | 0.390 | 0.379 | 0.011 | -0.035 | 0.054 | 15 | 12 | 0.701 | 1.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XBE | L0 | BEDES documentation over identifiers | 277 | 0.433 | 0.379 | 0.054 | -0.020 | 0.118 | 26 | 11 | 0.020 | 0.381 |
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XEA | L0 | Energy ADE documentation over identifiers | 277 | 0.412 | 0.379 | 0.032 | -0.039 | 0.102 | 22 | 13 | 0.175 | 1.000 |
-| rule-based draft (keyword rules) | qwen3:8b | E6 | XBR | L2 | Brick documentation versus Meta-Urban cards | 277 | 0.390 | 0.574 | -0.184 | -0.288 | -0.068 | 9 | 60 | 0.000 | 0.000 |
-| rule-based draft (keyword rules) | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus Meta-Urban cards | 277 | 0.433 | 0.574 | -0.141 | -0.197 | -0.084 | 7 | 46 | 0.000 | 0.000 |
-| rule-based draft (keyword rules) | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus Meta-Urban cards | 277 | 0.412 | 0.574 | -0.162 | -0.288 | -0.027 | 9 | 54 | 0.000 | 0.000 |
+| rule-based draft (keyword rules) | qwen3:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 277 | 0.390 | 0.574 | -0.184 | -0.288 | -0.068 | 9 | 60 | 0.000 | 0.000 |
+| rule-based draft (keyword rules) | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 277 | 0.433 | 0.574 | -0.141 | -0.197 | -0.084 | 7 | 46 | 0.000 | 0.000 |
+| rule-based draft (keyword rules) | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 277 | 0.412 | 0.574 | -0.162 | -0.288 | -0.027 | 9 | 54 | 0.000 | 0.000 |
 
 ## S7. Run-to-run variation (temperature 0.7 runs only)
 
@@ -641,7 +641,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 
 
 
-| model | standard | relation | n_variables | concepts | acc_standard_docs | acc_meta_urban_cards | acc_ids_only |
+| model | standard | relation | n_variables | concepts | acc_standard_docs | acc_ubem_link_cards | acc_ids_only |
 |---|---|---|---|---|---|---|---|
 | llama3.1:8b | brick | exact or close match | 24 | 7 | 0.792 | 0.792 | 0.833 |
 | llama3.1:8b | brick | broad, narrow or related match | 87 | 12 | 0.517 | 0.552 | 0.586 |
@@ -673,15 +673,15 @@ Overlap: the label contains the concept's label or one of its synonyms.
 
 | temperature | class | profiles | flagged_v1 | flagged_v2 |
 |---|---|---|---|---|
-| 0.0 | changes an indicator | 5 | 5 | 4 |
+| 0.0 | changes an indicator | 4 | 4 | 3 |
 | 0.0 | deviates, no effect on indicators | 22 | 14 | 11 |
-| 0.0 | identical to gold | 17 | 0 | 0 |
+| 0.0 | identical to gold | 18 | 0 | 0 |
 | 0.7 | changes an indicator | 7 | 7 | 7 |
 | 0.7 | deviates, no effect on indicators | 18 | 14 | 6 |
 | 0.7 | identical to gold | 19 | 0 | 0 |
-| all | changes an indicator | 12 | 12 | 11 |
+| all | changes an indicator | 11 | 11 | 10 |
 | all | deviates, no effect on indicators | 40 | 28 | 17 |
-| all | identical to gold | 36 | 0 | 0 |
+| all | identical to gold | 37 | 0 | 0 |
 
 ## S12. Every E7 profile that changed a national indicator
 
@@ -694,7 +694,6 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | llama3.1:8b | codebook entry only | cbecs2018 | PUBCLIM | missing_codes | 2.454 | missing code '7=Withheld for confidentiality' not in code list | {'is_weight': False, 'unit': 'none', 'unit_multiplier': 0, 'missing_codes': ['7=Withheld for confidentiality']} |
 | llama3.1:8b | codebook entry only | recs2020 | BTUNG | missing_codes | 64.962 | missing code '0' inside the valid range | {'is_weight': False, 'unit': 'unit:BTU_IT', 'unit_multiplier': 1000, 'missing_codes': ['0']} |
 | llama3.1:8b | with dataset card | cbecs2018 | PUBCLIM | missing_codes | 100.000 | missing code '5' is a substantive category | {'is_weight': False, 'unit': 'none', 'unit_multiplier': 0, 'missing_codes': ['', '5']} |
-| llama3.1:8b | with dataset card | recs2020 | BTUEL | unit; unit_multiplier; missing_codes | 241.214 | unit disagrees with label; multiplier disagrees with label | {'is_weight': False, 'unit': 'unit:KiloW-HR', 'unit_multiplier': 1, 'missing_codes': ['-2', '-4']} |
 | llama3.1:8b | codebook entry only, T=0.7 run 1 | recs2020 | TOTALBTU | unit; unit_multiplier | 241.214 | unit disagrees with label; multiplier disagrees with label | {'is_weight': False, 'unit': 'unit:KiloW-HR', 'unit_multiplier': 0, 'missing_codes': ['']} |
 | llama3.1:8b | codebook entry only, T=0.7 run 1 | recs2020 | BTUEL | unit_multiplier; missing_codes | 100.000 | multiplier disagrees with label; missing code 'Missing=...' is not a code | {'is_weight': False, 'unit': 'unit:BTU_IT', 'unit_multiplier': 0.001, 'missing_codes': ['Missing=...']} |
 | llama3.1:8b | codebook entry only, T=0.7 run 1 | recs2020 | BTUNG | missing_codes | 64.962 | missing code '0' inside the valid range | {'is_weight': False, 'unit': 'unit:BTU_IT', 'unit_multiplier': 1000, 'missing_codes': ['0']} |
@@ -708,13 +707,13 @@ Excludes the 11 variables the version 1 rules were written on. Version 2 results
 
 | rules | model | temperature | profiles | unit_or_multiplier_errors | flagged_pct_of_those | missing_code_errors_only | flagged_pct_of_missing_code_errors | correct_profiles | false_alarm_pct |
 |---|---|---|---|---|---|---|---|---|---|
-| v1 (frozen, held-out) | llama3.1:8b | 0.000 | 766 | 25 | 28.000 | 525 | 91.048 | 216 | 29.167 |
+| v1 (frozen, held-out) | llama3.1:8b | 0.000 | 766 | 21 | 33.333 | 523 | 90.440 | 222 | 28.378 |
 | v1 (frozen, held-out) | llama3.1:8b | 0.700 | 766 | 44 | 79.545 | 547 | 94.333 | 175 | 17.143 |
-| v1 (frozen, held-out) | qwen3:8b | 0.000 | 766 | 13 | 15.385 | 267 | 58.427 | 486 | 13.580 |
+| v1 (frozen, held-out) | qwen3:8b | 0.000 | 766 | 13 | 15.385 | 265 | 58.113 | 488 | 13.525 |
 | v1 (frozen, held-out) | qwen3:8b | 0.700 | 766 | 8 | 25.000 | 332 | 60.241 | 426 | 15.728 |
-| v2 (revised, in-sample) | llama3.1:8b | 0.000 | 766 | 25 | 44.000 | 525 | 34.286 | 216 | 0.000 |
+| v2 (revised, in-sample) | llama3.1:8b | 0.000 | 766 | 21 | 52.381 | 523 | 33.461 | 222 | 0.000 |
 | v2 (revised, in-sample) | llama3.1:8b | 0.700 | 766 | 44 | 88.636 | 547 | 40.219 | 175 | 0.000 |
-| v2 (revised, in-sample) | qwen3:8b | 0.000 | 766 | 13 | 38.462 | 267 | 41.573 | 486 | 0.000 |
+| v2 (revised, in-sample) | qwen3:8b | 0.000 | 766 | 13 | 38.462 | 265 | 41.887 | 488 | 0.000 |
 | v2 (revised, in-sample) | qwen3:8b | 0.700 | 766 | 8 | 25.000 | 332 | 55.723 | 426 | 0.000 |
 
 ## S14. National indicators: reference values and design-based standard errors
@@ -804,7 +803,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 | llama3.1:8b | with dataset card | cbecs2018 | Share in hot or very hot zone (%) | 13.830 | 0.000 | -100.000 |
 | llama3.1:8b | with dataset card | recs2020 | Households (million) | 123.529 | 123.529 | 0.000 |
 | llama3.1:8b | with dataset card | recs2020 | Site energy per household (MWh) | 22.494 | 22.494 | 0.000 |
-| llama3.1:8b | with dataset card | recs2020 | Electricity per household (MWh) | 10.565 | 36.051 | 241.214 |
+| llama3.1:8b | with dataset card | recs2020 | Electricity per household (MWh) | 10.565 | 10.565 | 0.000 |
 | llama3.1:8b | with dataset card | recs2020 | Natural gas per household (MWh) | 10.061 | 10.061 | 0.000 |
 | llama3.1:8b | with dataset card | recs2020 | Site EUI (kWh/m2) | 133.126 | 133.126 | 0.000 |
 | llama3.1:8b | codebook entry only, T=0.7 run 1 | cbecs2018 | Buildings (thousand) | 5918.211 | 5918.211 | 0.000 |
@@ -856,7 +855,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 
 ## S18. City case: columns selected by the models
 
-The tax-lot key is described by the JoinKey value parcel_id. Correct columns per role are listed in meta_urban.city.ROLES; for floor area, the variants with and without parking are accepted.
+The tax-lot key is described by the JoinKey value parcel_id. Correct columns per role are listed in ubem_link.city.ROLES; for floor area, the variants with and without parking are accepted.
 
 | model | selection | card | role | column | correct | confidence |
 |---|---|---|---|---|---|---|
@@ -1189,12 +1188,12 @@ Each table and figure is produced by one module of the released package (`python
 
 | Item | Module | Output |
 |---|---|---|
-| Table 5 | meta_urban.standards | ai_readiness_audit.csv |
-| Table 6, Fig. 5, Fig. 6 | meta_urban.design_report | bench_design_conditions.csv, bench_design_tests.csv |
-| Table 7 | meta_urban.design_report | bench_t3_conventions.csv |
-| Fig. 7 | meta_urban.bench_report | bench_t2_coverage.csv |
-| Table 8, Fig. 8, S14 to S17 | meta_urban.endtoend, meta_urban.downstream | endtoend_*.csv, downstream_*.csv |
-| Table 9, Fig. 9, S18 to S20 | meta_urban.city | city_*.csv |
-| S5 to S13 | meta_urban.revision_stats | stats_*.csv |
-| Fig. 4, S21 | meta_urban.analytics | catalog_*.csv |
-| Figs. 1 to 3 | meta_urban.schema_figures | figure files |
+| Table 5 | ubem_link.standards | ai_readiness_audit.csv |
+| Table 6, Fig. 5, Fig. 6 | ubem_link.design_report | bench_design_conditions.csv, bench_design_tests.csv |
+| Table 7 | ubem_link.design_report | bench_t3_conventions.csv |
+| Fig. 7 | ubem_link.bench_report | bench_t2_coverage.csv |
+| Table 8, Fig. 8, S14 to S17 | ubem_link.endtoend, ubem_link.downstream | endtoend_*.csv, downstream_*.csv |
+| Table 9, Fig. 9, S18 to S20 | ubem_link.city | city_*.csv |
+| S5 to S13 | ubem_link.revision_stats | stats_*.csv |
+| Fig. 4, S21 | ubem_link.analytics | catalog_*.csv |
+| Figs. 1 to 3 | ubem_link.schema_figures | figure files |

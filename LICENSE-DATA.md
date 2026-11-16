@@ -3,7 +3,7 @@
 The following are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0),
 https://creativecommons.org/licenses/by/4.0/:
 
-- `schema/` (Meta-Urban schema, generated artifacts and concept vocabulary with its mappings)
+- `schema/` (UBEM-Link schema, generated artifacts and concept vocabulary with its mappings)
 - `catalog/` (dataset profiles and verification record)
 - `benchmark/` (items, gold labels, annotations and cached model outputs)
 - `paper/tables/` and `paper/figures/`

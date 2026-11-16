@@ -1,5 +1,5 @@
 ---
-title: "Meta-Urban: an AI-ready semantic schema for integrating open data in urban building energy modeling"
+title: "UBEM-Link: an AI-ready semantic schema for integrating open data in urban building energy modeling"
 bibliography: references.bib
 ---
 
@@ -29,7 +29,7 @@ Liang Zhang^a,b,\*^, Jianli Chen^c^, Jia Zou^d^
 
 Urban building energy modeling (UBEM) integrates heterogeneous open data, a task increasingly
 delegated to language models that read data schemas written for people. We define AI-ready schemas, state six
-design principles with measurable criteria, implement them in Meta-Urban, a LinkML schema for open UBEM data
+design principles with measurable criteria, implement them in UBEM-Link, a LinkML schema for open UBEM data
 applied to a catalog of 91 datasets, and test them with two locally run 8-billion-parameter models. Mapping 295
 survey variables to concepts, opaque codes alone gave near-zero accuracy, definitions alone reached 0.55–0.62,
 labels added nothing significant, and documentation transplanted from Brick, BEDES and the CityGML Energy ADE was
@@ -103,7 +103,7 @@ remaining errors matter for urban energy results. This paper asks **which proper
 help small, locally run language models integrate open building energy data, and whether the errors that
 remain reach national and city-scale energy indicators.** The contributions, in the order of the paper, are:
 
-1. Meta-Urban, a LinkML schema for open UBEM data with a dataset level, a variable level and an 81-concept
+1. UBEM-Link, a LinkML schema for open UBEM data with a dataset level, a variable level and an 81-concept
    vocabulary linked to Brick, BEDES and the CityGML Energy ADE, compiled into artifacts for people and for AI
    and applied to a catalog of 91 open datasets (Section 4).
 2. A definition of AI-ready schemas and six design principles with measurable criteria and a verdict on each
@@ -209,10 +209,10 @@ are limited by context length [@parciak2024schema]; and from the practice of reu
 Each principle has a domain-knowledge counterpart and a measurable criterion (Table 2). The experiments test
 selected operationalizations of them; the last column gives the verdict reached in Section 8.
 
-Table 2. Design principles, their mechanism in Meta-Urban, the criterion by which they are measured, the
+Table 2. Design principles, their mechanism in UBEM-Link, the criterion by which they are measured, the
 experiment, and the verdict for the tested models and tasks.
 
-| Principle | Mechanism in Meta-Urban | Measured by | Test | Verdict |
+| Principle | Mechanism in UBEM-Link | Measured by | Test | Verdict |
 |---|---|---|---|---|
 | P1 Define every term | A definition for every class, field, value and concept | Share of terms defined; mapping accuracy with and without definitions | E1, E6 | Supported: descriptive content beyond labels raised accuracy by 0.08–0.18; definitions alone matched full cards; on new data they improved column choice |
 | P2 Close the vocabulary | Enumerations compiled to JSON Schema for constrained output | Share of invalid identifiers; accuracy | E2 | Supported as a guarantee at no accuracy cost (5 of 300 invented identifiers without it); the closed unit list must include the source's own units (E8) |
@@ -221,11 +221,11 @@ experiment, and the verdict for the tested models and tasks.
 | P5 Fit the context window | Self-contained cards (concept cards of about 60 tokens) | Token budget; accuracy with retrieved cards | E5 | Supported when retrieval recall is high: ten cards kept accuracy at a fifth of the tokens |
 | P6 Ground in domain standards | Links to Brick, BEDES and the Energy ADE; reuse of DCAT, QUDT, SKOS | Accuracy with other standards' documentation | E6 | Not supported for reusing documentation: transplanted definitions were no better than identifiers; the links themselves were not tested |
 
-## 4. Meta-Urban
+## 4. UBEM-Link
 
 ### 4.1 Architecture
 
-Meta-Urban is written once, in LinkML [@moxon2025linkml], and compiled for two audiences (Fig. 1). The
+UBEM-Link is written once, in LinkML [@moxon2025linkml], and compiled for two audiences (Fig. 1). The
 dataset level profiles `dcat:Dataset` [@w3c2024dcat3] with six UBEM facets (Table 3), coverage, license,
 access, sampling weights, conventions and the provenance of the profile. The variable level profiles
 `csvw:Column`: each variable is linked to a concept and carries its QUDT unit and multiplier, code list,
@@ -236,7 +236,7 @@ for constrained output, and SHACL shapes. The generated JSON Schema and SHACL ch
 required fields, closed enumerations). Checks of meaning, such as whether a unit agrees with a variable's label,
 are separate Python functions that use the schema's unit vocabulary (Section 7.2).
 
-![Fig. 1. Architecture of Meta-Urban: domain knowledge is encoded once in a LinkML source with three parts and
+![Fig. 1. Architecture of UBEM-Link: domain knowledge is encoded once in a LinkML source with three parts and
 compiled into artifacts for people and for AI systems.](figures/fig_architecture.png)
 
 ### 4.2 Classes and facets
@@ -246,7 +246,7 @@ so that each dataset is a point in a six-dimensional space and gaps can be count
 schema rule requires every weighted sample survey to name its weights. The `Convention` class (P3) records a
 rule that a publisher applies to many variables, with the variables it applies to and an example.
 
-![Fig. 2. Classes, key fields and relations of Meta-Urban. Every class, field and enumeration value carries a
+![Fig. 2. Classes, key fields and relations of UBEM-Link. Every class, field and enumeration value carries a
 definition.](figures/fig_class_diagram.png)
 
 Table 3. Facets of the dataset level.
@@ -270,7 +270,7 @@ lexical overlap with survey labels matters. Sixty-three targets and two groups h
 BEDES 2.5 and the CityGML Energy ADE 1.0 (the latest released version; version 3.0 exists as a beta
 [@agugiaro2025energyade3]); each linked term was checked to exist in the release files, and the relation type
 was assigned with AI assistance and has not been audited by an independent expert. Only 4 links are exact
-matches, because those standards describe equipment, points and objects while Meta-Urban concepts describe
+matches, because those standards describe equipment, points and objects while UBEM-Link concepts describe
 what a dataset column measures. Ten targets have no counterpart, among them survey and replicate weights.
 Further links go to CityGML 2.0 building attributes and EnergyPlus weather fields.
 
@@ -296,21 +296,21 @@ self-contained unit of about 60 tokens, and all of them take about 4,300 tokens 
 per token, as in Section 4.5; Table 6 gives the models' own counts). Each of the 91 dataset cards states a dataset's facets, weights and
 conventions. Fig. 3 shows these artifacts for the 2018 Commercial Buildings Energy Consumption Survey (CBECS).
 
-![Fig. 3. Meta-Urban applied to CBECS 2018. (a) Excerpt of the dataset card, including conventions that the
+![Fig. 3. UBEM-Link applied to CBECS 2018. (a) Excerpt of the dataset card, including conventions that the
 publisher states only in its user guide. (b) Three variable profiles: an energy total with its unit and
 multiplier, a top-coded count, and an imputation flag linked to the variable it flags. (c) The concept cards an
 AI system receives for these variables.](figures/fig_worked_example.png)
 
 ### 4.5 Audit of machine-readable releases
 
-Table 5 compares the released term files of Meta-Urban and five standards on properties a language model needs.
+Table 5 compares the released term files of UBEM-Link and five standards on properties a language model needs.
 A term is a class, property, enumeration value or concept; it counts as defined when it carries a
 natural-language definition (`skos:definition`, `rdfs:comment`, `xs:documentation` or the BEDES definition
-field). Meta-Urban defines all 271 of its terms, against 74% for Brick, 55% for BEDES and 22% for the
+field). UBEM-Link defines all 271 of its terms, against 74% for Brick, 55% for BEDES and 22% for the
 Energy ADE. It is the only one of the six with a JSON Schema usable for constrained output and with terms for
 a survey's statistical design; survey-metadata standards such as DDI-Codebook also have such terms
 [@ddi2025codebook] but no UBEM vocabulary. Its vocabulary fits in about 5,300 tokens, against about 32,000 for
-Brick and about 174,000 for BEDES. The audit reflects the authors' choice of properties, on which Meta-Urban was
+Brick and about 174,000 for BEDES. The audit reflects the authors' choice of properties, on which UBEM-Link was
 designed to score well; it shows what a schema built for language models must add, not the quality of
 standards designed for other purposes.
 
@@ -318,7 +318,7 @@ Table 5. Audit of the released term files (tokens: all labels and definitions, a
 
 | Standard | Terms | Defined (%) | Enum values defined (%) | Statistical-design terms | Tokens (thousands) | JSON Schema | Validation artifact |
 |---|---|---|---|---|---|---|---|
-| Meta-Urban | 271 | 100 | 100 | 7 | 5.3 | yes | JSON Schema, SHACL |
+| UBEM-Link | 271 | 100 | 100 | 7 | 5.3 | yes | JSON Schema, SHACL |
 | Brick 1.4.4 | 1,434 | 74 | – | 0 | 32.0 | no | SHACL |
 | BEDES 2.5 | 6,217 | 55 | 58 | 0 | 174.1 | no | none |
 | CityGML Energy ADE 1.0 | 665 | 22 | 51 | 0 | 6.4 | no | XML Schema |
@@ -379,7 +379,7 @@ alternatives for variables fitting two concepts; a separate adjudicator resolved
 adjudicator were LLM agents in fresh contexts (Claude Opus 5.5 and Claude Sonnet 5.5 as annotators, Claude
 Opus 5.5 as adjudicator), from a developer other than those of the evaluated models. Agreement was high
 (κ = 0.91; 276 of 300 variables), but agreement between related models is not evidence of correctness
-[@ziems2024css]. Because the annotators read Meta-Urban's definitions, the gold encodes one reading of them,
+[@ziems2024css]. Because the annotators read UBEM-Link's definitions, the gold encodes one reading of them,
 and conditions that show a model the same definitions may be favored. We therefore re-score every comparison
 against three further label sets, including deterministic keyword rules that were fixed before any model ran
 and do not use the definitions (Section 6.7). The adjudicated gold uses 44 concepts; 5 variables have no
@@ -493,9 +493,9 @@ Their errors concern what the entry does not state. CBECS gives an imputation fl
 variable it flags, and the link (ZMONUSE flags MONUSE) is a naming convention stated only in the user guide.
 Without the card, neither model identified the flagged variable for any of the 30 CBECS flags; with it, both
 identified all 30 (p < 0.001 for each model). With the card, Qwen3's exact missing-code accuracy rose from
-0.32 to 0.49 (CBECS 0.25 to 0.52; p < 0.001) and its multiplier accuracy on the 31 scaled units from 0.94 to
-1.00. The card also introduced errors: Qwen3 no longer recognized 4 of the 30 RECS replicate weights, and Llama
-3.1 did not apply the missing-code conventions (0.26 against 0.24, p = 0.34). Sections 7.2 and 7.3 show further
+0.32 to 0.50 (CBECS 0.25 to 0.52; p < 0.001) and its multiplier accuracy on the 31 scaled units from 0.94 to
+1.00. The card also introduced errors: Qwen3 no longer recognized 3 of the 30 RECS replicate weights, and Llama
+3.1 did not apply the missing-code conventions (0.26 with and without the card, p = 1.00). Sections 7.2 and 7.3 show further
 card-induced errors.
 
 Table 7. Code and unit normalization with and without the dataset card (T = 0). Detection rows give recall on
@@ -504,15 +504,15 @@ the positives and the number of false alarms among the other items (390 items in
 | Field (number of positives) | Qwen3, entry only | Qwen3, with card | Llama 3.1, entry only | Llama 3.1, with card |
 |---|---|---|---|---|
 | Final weight (2): recall / false alarms (of 358) | 1.00 / 1 | 1.00 / 0 | 1.00 / 0 | 1.00 / 0 |
-| Replicate weight (30): recall | 1.00 | 0.87 | 1.00 | 1.00 |
+| Replicate weight (30): recall | 1.00 | 0.90 | 1.00 | 1.00 |
 | Imputation flag (60): recall / false alarms (of 330) | 1.00 / 0 | 1.00 / 0 | 1.00 / 0 | 1.00 / 0 |
 | Flagged variable, CBECS (30) | 0.00 | 1.00 | 0.00 | 1.00 |
 | Flagged variable, RECS (30) | 1.00 | 1.00 | 1.00 | 1.00 |
 | Unit (65 variables with a unit) | 0.97 | 0.97 | 0.98 | 0.98 |
 | Multiplier (31 scaled units) | 0.94 | 1.00 | 0.97 | 0.97 |
-| Missing codes, exact (390; CBECS / RECS) | 0.32 (0.25 / 0.38) | 0.49 (0.52 / 0.47) | 0.26 (0.24 / 0.27) | 0.24 (0.25 / 0.23) |
-| Missing codes, ignoring blank codes | 0.57 | 0.73 | 0.28 | 0.29 |
-| Code list, Jaccard | 0.74 | 0.78 | 0.71 | 0.73 |
+| Missing codes, exact (390; CBECS / RECS) | 0.32 (0.25 / 0.38) | 0.50 (0.52 / 0.48) | 0.26 (0.24 / 0.27) | 0.26 (0.28 / 0.24) |
+| Missing codes, ignoring blank codes | 0.57 | 0.74 | 0.28 | 0.31 |
+| Code list, Jaccard | 0.74 | 0.79 | 0.71 | 0.73 |
 
 ### 6.4 E4: checks on mappings
 
@@ -531,17 +531,17 @@ retrieval (L3E; p_Holm = 1.00). The retriever bounds the result: the gold concep
 
 ### 6.6 E6: documentation from existing standards
 
-Documenting Meta-Urban's concepts with the matching terms of Brick, BEDES or the Energy ADE (a
+Documenting UBEM-Link's concepts with the matching terms of Brick, BEDES or the Energy ADE (a
 documentation transplant; 34, 57 and 35 of the 73 concepts covered) gave accuracies of 0.35–0.48: for neither
 model better than identifiers alone (largest gain: BEDES for Qwen3, +0.06, p_Holm = 0.21), worse for Llama 3.1
-with Brick (−0.08, p_Holm = 0.009), and 0.11–0.20 below Meta-Urban's cards (p_Holm ≤ 0.002; Fig. 6a). Coverage
+with Brick (−0.08, p_Holm = 0.009), and 0.11–0.20 below UBEM-Link's cards (p_Holm ≤ 0.002; Fig. 6a). Coverage
 explains part of this, since uncovered concepts appear as identifiers only. On the variables whose gold concept
 a standard documents (Fig. 6b), BEDES terms (54 of 57 defined) improved on identifiers by 0.02 and 0.06 but stayed
-0.12–0.13 below Meta-Urban's cards (p < 0.001), also for exact and close matches only (S9); Energy ADE terms (10 of
+0.12–0.13 below UBEM-Link's cards (p < 0.001), also for exact and close matches only (S9); Energy ADE terms (10 of
 35 defined) did no better than identifiers; and on the Brick subset the three conditions did not differ
 significantly. The transplant cannot separate the purpose of a definition from its wording and length.
 
-![Fig. 6. Mapping accuracy when the same concepts are documented by Meta-Urban or by the matching terms of
+![Fig. 6. Mapping accuracy when the same concepts are documented by UBEM-Link or by the matching terms of
 existing standards. (a) All 295 mappable variables; in parentheses, the share of concepts each standard
 documents. (b) Only the variables whose gold concept the standard documents, with the number of matched terms
 that carry a definition. Bars show the mean of the two models, markers each model.](figures/fig_standards.png)
@@ -590,21 +590,19 @@ multiplier of one million instead of one thousand, which multiplied commercial e
 Llama 3.1 declared zero a missing code for residential natural gas, which dropped the households that use none
 and raised gas use per household by 65%, and wrote the withheld climate-zone code as "7=Withheld for
 confidentiality", which the pipeline could not match (−2.5% in the hot-zone share, well within that share's
-18% standard error). With the card, every Qwen3 profile was correct. Llama 3.1 fixed both of its errors but
-read residential electricity as kilowatt-hours (+241%), although the card states that it is in thousand Btu
-next to a rule for variables that are in kilowatt-hours, and it applied the CBECS rule "code 5 means Don't
-know", which the card states for yes/no questions, to the climate-zone variable, where code 5 means hot or very
-hot; no building remained in a hot zone. At T = 0.7, Llama 3.1's residential site energy was off by +241% in
+18% standard error). With the card, no Qwen3 profile changed an indicator. Llama 3.1 fixed both of its errors but applied
+the CBECS rule "code 5 means Don't know", which the card states for yes/no questions, to the climate-zone
+variable, where code 5 means hot or very hot; no building remained in a hot zone. At T = 0.7, Llama 3.1's residential site energy was off by +241% in
 one run and by a factor of 3,412 in the other (S15).
 
 Of the 88 AI-built profiles (two models; entry only and with the card at T = 0; two runs at T = 0.7 without the
-card; 11 variables), 52 deviated from the gold profile and 12 changed an indicator (S12). Profile checks written
-after inspecting these outputs (version 1) flagged all 12, 28 of the 40 harmless deviations and none of the 36
+card; 11 variables), 51 deviated from the gold profile and 11 changed an indicator (S12). Profile checks written
+after inspecting these outputs (version 1) flagged all 11, 28 of the 40 harmless deviations and none of the 37
 exact profiles (S11). Applied unchanged to the 766 other benchmark profiles per model and temperature, they
-flagged 15–80% of unit or multiplier errors and 14–29% of correct profiles (S13), because they did not recognize
+flagged 15–80% of unit or multiplier errors and 14–28% of correct profiles (S13), because they did not recognize
 "Inapplicable" as a missing-value label, flagged binned variables whose label names a unit, and did not read
-"ccf". Version 2 corrects these causes; in-sample, it flags 25–89% of those errors without false alarms, and 11
-of the 12 indicator-changing national profiles. Section 7.3 tests both versions on new data.
+"ccf". Version 2 corrects these causes; in-sample, it flags 25–89% of those errors without false alarms, and 10
+of the 11 indicator-changing national profiles. Section 7.3 tests both versions on new data.
 
 Table 8. National indicators from gold and from AI-built variable profiles (relative error, T = 0; 0 means
 within 0.01%). Reference values with design-based standard errors from the surveys' replicate weights.
@@ -619,7 +617,7 @@ within 0.01%). Reference values with design-based standard errors from the surve
 | | Share in hot or very hot zones (%) | 13.8 ± 2.5 | 0 | 0 | −2.5% | −100% |
 | RECS 2020 | Households (million) | 123.5^a^ | 0 | 0 | 0 | 0 |
 | | Site energy per household (MWh) | 22.49 ± 0.09 | 0 | 0 | 0 | 0 |
-| | Electricity per household (MWh) | 10.57 ± 0.04 | 0 | 0 | 0 | +241% |
+| | Electricity per household (MWh) | 10.57 ± 0.04 | 0 | 0 | 0 | 0 |
 | | Natural gas per household (MWh) | 10.06 ± 0.09 | 0 | 0 | +65% | 0 |
 | | Site EUI (kWh/(m²·yr)) | 133.1 ± 0.6 | 0 | 0 | 0 | 0 |
 
@@ -639,7 +637,7 @@ The models performed both integration steps. For each quantity the pipeline need
 energy, electricity, natural gas) they chose one of the 265 columns, given the schema element as an identifier
 (L0) or with its definition (L2) and the purpose; they then built each chosen column's profile from its name,
 description and a summary of its values, without and with the LL84 dataset card. The tax-lot key is described by
-Meta-Urban's join-key type `parcel_id`. In a first run we described it by the concept `record_identifier`,
+UBEM-Link's join-key type `parcel_id`. In a first run we described it by the concept `record_identifier`,
 defined as an identifier "within the dataset"; both models then chose the internal Property ID and nothing could
 be joined. The models followed the definition; the specification error was ours (S20).
 
@@ -702,7 +700,7 @@ sources publish and leave conversion to QUDT factors downstream.
 
 Documentation borrowed from Brick, BEDES and the Energy ADE did not help, which says less about those standards
 than about purpose: they describe equipment, points and objects, whereas integration needs definitions of what a
-column measures. Their value for Meta-Urban lies in the links into their ecosystems, which were not tested here.
+column measures. Their value for UBEM-Link lies in the links into their ecosystems, which were not tested here.
 Profile checks must be validated on data they were not written on: version 1 was perfect on its own errors and
 raised false alarms on most held-out profiles. On the city data, generic rules flagged every error but also most
 correct profiles, and knowing the source's missing-value label made them precise. Checks should therefore read
@@ -717,7 +715,7 @@ district EUI by up to 21%; it would pass a city-wide check and still distort a d
 where building performance standards bind. The catalog shows why integration is hard to begin with: 3 of 48
 non-geometric building datasets share an identifier with footprints or parcels. Identifier systems such as UBID
 [@wang2019ubid] and GERS [@overture2025gers] and exchange schemas between urban models [@luo2025schema] address
-linkage; Meta-Urban complements them by describing in one machine-readable profile what a dataset contains, how
+linkage; UBEM-Link complements them by describing in one machine-readable profile what a dataset contains, how
 it is coded and through which keys it links, so that integration efforts such as that of @rehmann2025enhancing
 can be repeated by a person or a model.
 
@@ -736,7 +734,7 @@ pipelines aggregate data; they do not simulate buildings.
 ## 9. Conclusions
 
 This paper defined AI-ready schemas for integrating open UBEM data, implemented six design principles in
-Meta-Urban, and tested them with two small local language models on national surveys and on New York City's
+UBEM-Link, and tested them with two small local language models on national surveys and on New York City's
 benchmarking and tax-lot data. Descriptions of each term beyond its name made concept mapping possible, a closed
 vocabulary made output valid at no cost, retrieval kept accuracy at a fifth of the context, and documentation
 borrowed from other standards did not help. Stated conventions supplied what codebook entries leave out but were
@@ -758,7 +756,7 @@ author(s) and do not necessarily reflect the views of the National Science Found
 All code, the schema and its generated artifacts (including the AI documentation layer), the catalog and its
 verification record, gold labels with annotations and rationales, prompts, cached model outputs, and the
 scripts that produce every table and figure are openly available at
-https://github.com/TensorBuildLab/UBEM-schema [@zhang2026metaurbanrepo] (code under the MIT License; schema,
+https://github.com/TensorBuildLab/UBEM-schema [@zhang2026ubemlinkrepo] (code under the MIT License; schema,
 catalog and benchmark under CC BY 4.0). The CBECS 2018, RECS 2020, LL84 and PLUTO source data are public
 [@eia2018cbecs; @eia2020recs; @nycdob2023ll84; @nycdcp2026pluto] and are downloaded by scripts that record
 SHA-256 checksums.
