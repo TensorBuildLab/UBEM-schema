@@ -73,14 +73,15 @@ def bedes_terms() -> list[dict]:
     from lxml import etree
 
     out = []
+    # Definitions are wrapped in HTML (<Definition><p>...</p></Definition>), so read all inner text
     for n in etree.parse(str(STD / "bedes_v2.5_terms.xml")).getroot():
-        f = {c.tag: (c.text or "") for c in n}
+        f = {c.tag: "".join(c.itertext()) for c in n}
         uom = f.get("Unit-of-Measure", "").strip()
         out.append({"id": f.get("URL", ""), "label": f.get("Term", ""), "definition": _clean(f.get("Definition")),
                     "kind": "term", "unit": uom not in ("", "None", "none"), "enum_value": False,
                     "uuid": f.get("Content-UUID", "")})
     for n in etree.parse(str(STD / "bedes_v2.5_list_options.xml")).getroot():
-        f = {c.tag: (c.text or "") for c in n}
+        f = {c.tag: "".join(c.itertext()) for c in n}
         out.append({"id": f.get("URL", ""), "label": f"{f.get('List-Option', '')} (list option of "
                     f"{f.get('Related-Term', '')})", "definition": _clean(f.get("List-Option-Definition")),
                     "kind": "value", "unit": False, "enum_value": True, "uuid": f.get("Content-UUID", "")})

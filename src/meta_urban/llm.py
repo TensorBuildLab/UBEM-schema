@@ -85,6 +85,35 @@ def _variable_block(item: dict, max_codes: int = 8) -> str:
 
 
 TRANSPLANT = {"XBR": "brick", "XBE": "bedes", "XEA": "energy_ade"}
+# Factorial controls for E1 (revision): opaque identifiers carry no meaning of their own
+OPAQUE = {"O0", "O2D"}
+
+
+@lru_cache
+def opaque_codes() -> dict[str, str]:
+    """Concept id -> opaque code (C001, C002, ... in vocabulary order)."""
+    return {c["id"]: f"C{k:03d}" for k, c in enumerate(leaf_concepts(), 1)}
+
+
+def decode_concept(level: str, value):
+    """Map a model answer back to a concept id (opaque conditions answer with codes)."""
+    if level in OPAQUE and isinstance(value, str):
+        back = {v: k for k, v in opaque_codes().items()}
+        return back.get(value, value)
+    return value
+
+
+def _card_without_definition(c: dict) -> str:
+    extra = []
+    if c.get("broader"):
+        extra.append(f"broader={c['broader']}")
+    if c.get("entity"):
+        extra.append(f"describes={c['entity']}")
+    if c.get("canonical_unit"):
+        extra.append(f"unit={c['canonical_unit']}")
+    if c.get("alt_labels"):
+        extra.append("also called: " + ", ".join(c["alt_labels"][:6]))
+    return f"{c['id']}: {c['pref_label']}. [{'; '.join(extra)}]"
 
 
 def _transplant_block(standard: str, concepts: list[dict]) -> str:
@@ -115,9 +144,15 @@ def t2_request(item: dict, level: str, candidates: list[str] | None = None) -> d
         block = _transplant_block(TRANSPLANT[level], concepts)
     elif level == "L2D":
         block = "\n".join(f"{c['id']}: {c['pref_label']}. {c['definition']}" for c in concepts)
+    elif level == "L2N":
+        block = "\n".join(_card_without_definition(c) for c in concepts)
+    elif level == "O0":
+        block = "\n".join(opaque_codes()[c["id"]] for c in concepts)
+    elif level == "O2D":
+        block = "\n".join(f"{opaque_codes()[c['id']]}: {c['definition']}" for c in concepts)
     else:
         block = _concept_block("L2" if level == "L2U" else block_level, concepts)
-    ids = [c["id"] for c in concepts] + ["none"]
+    ids = [opaque_codes()[c["id"]] if level in OPAQUE else c["id"] for c in concepts] + ["none"]
     system = (
         f"{ROLE}\n\nTask: map one survey variable to the single most specific concept in the target vocabulary "
         "that the variable measures or records. Answer \"none\" if no concept applies.\n\n"
@@ -174,7 +209,7 @@ T3_SCHEMA = {
 }
 
 
-PROFILE_ID = {"cbecs2018": "chr-cbecs-2018", "recs2020": "chr-recs-2020"}
+PROFILE_ID = {"cbecs2018": "chr-cbecs-2018", "recs2020": "chr-recs-2020", "nyc_ll84": "chr-nyc-ll84"}
 
 
 @lru_cache

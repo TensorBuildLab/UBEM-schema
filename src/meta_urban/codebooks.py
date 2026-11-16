@@ -29,7 +29,7 @@ UNIT_RULES: list[tuple[re.Pattern, str, float]] = [
     (re.compile(r"\(kWh\)|in kilowatt-?hours", re.I), "unit:KiloW-HR", 1.0),
     (re.compile(r"\(ccf\)|in hundred cubic feet", re.I), "unit:FT3", 100.0),
     (re.compile(r"\(gallons\)|in gallons", re.I), "unit:GAL_US", 1.0),
-    (re.compile(r"\(\$\)|in dollars", re.I), "iso4217:USD", 1.0),
+    (re.compile(r"\(\$\)|in (?:US )?dollars", re.I), "iso4217:USD", 1.0),
     (re.compile(r"square f(?:ee|oo)t(?:age)?(?! category)(?! range)", re.I), "unit:FT2", 1.0),
     (re.compile(r"base 65", re.I), "unit:DEG_F", 1.0),
     (re.compile(r"hours (?:open )?per week|hours per week", re.I), "unit:HR", 1.0),
@@ -82,7 +82,7 @@ def parse_codes(text: str, style: str) -> tuple[list[list[str]], float | None, f
 def unit_of(label: str, codes: list, vmin, vmax) -> tuple[str | None, float | None]:
     if codes and not (vmin is not None or vmax is not None):
         return None, None                      # purely categorical
-    if re.search(r"category|range", label, re.I):
+    if re.search(r"\bcategory\b|\brange\b", label, re.I):  # binned values ("ranges" of a cooktop is not a bin)
         return None, None
     for pat, unit, mult in UNIT_RULES:
         if pat.search(label):

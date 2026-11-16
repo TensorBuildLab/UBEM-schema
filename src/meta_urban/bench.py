@@ -24,7 +24,7 @@ import pandas as pd
 from . import BENCH
 from .baselines import LexicalRetriever
 from .codebooks import load_all
-from .llm import approx_tokens, complete, load_cache, parse_json, t2_request, t3_request
+from .llm import approx_tokens, complete, decode_concept, load_cache, parse_json, t2_request, t3_request
 from .metrics import acc_at_k, macro_f1, majority, mrr, none_pr, run_agreement
 
 ITEMS = BENCH / "inputs" / "t2_t3_items.jsonl"
@@ -247,9 +247,10 @@ def t2_score(model: str) -> pd.DataFrame:
     df = df[[(d, n) in gold for d, n in zip(df.dataset, df.name)]].copy()
     df["gold"] = [gold[(d, n)] for d, n in zip(df.dataset, df.name)]
     parsed = df.response.map(parse_json)
-    df["pred"] = parsed.map(lambda j: j.get("concept", "INVALID") if j else "INVALID")
-    df["ranked"] = parsed.map(lambda j: ([j.get("concept")] + [a for a in j.get("alternatives", []) if isinstance(a, str)])
-                              if j else ["INVALID"])
+    df["pred"] = [decode_concept(lv, j.get("concept", "INVALID")) if j else "INVALID" for lv, j in zip(df.level, parsed)]
+    df["ranked"] = [[decode_concept(lv, x) for x in [j.get("concept")] + [a for a in j.get("alternatives", [])
+                                                                         if isinstance(a, str)]] if j else ["INVALID"]
+                    for lv, j in zip(df.level, parsed)]
     rows = []
     for level, g in df.groupby("level"):
         piv = g.pivot_table(index=["dataset", "name"], columns="repeat", values="pred", aggfunc="first").dropna()

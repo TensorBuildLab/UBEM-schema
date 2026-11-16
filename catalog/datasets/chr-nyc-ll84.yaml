@@ -75,3 +75,19 @@ verified:
   - https://data.cityofnewyork.us/api/views/5zyy-y8am.json (metadata inspected)
   - https://data.cityofnewyork.us/resource/5zyy-y8am.json?$select=count(*)
   - https://catalog.data.gov/dataset/energy-and-water-data-disclosure-for-local-law-84-2011-data-for-calendar-year-2010-dab50
+conventions:
+- applies_to: numeric fields (energy, water, emissions, intensities, scores)
+  rule: The text "Not Available" marks a missing value; record it as a missing code, not as a category or zero.
+  example: Site Energy Use (kBtu) is "Not Available" for properties that did not report complete energy data.
+- applies_to: field names that end with a unit in parentheses
+  rule: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is
+    kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area.
+  example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
+- applies_to: NYC Borough, Block and Lot (BBL)
+  rule: A property may cover several tax lots; the field then lists several BBLs separated by semicolons, written
+    either as 10 digits or as borough-block-lot with hyphens (1-00819-0014).
+  example: '"1008190014; 1008190015" and "1-00819-0014" both refer to tax-lot identifiers.'
+- applies_to: Property GFA fields
+  rule: Gross floor area is self-reported or calculated by Portfolio Manager from the property uses; the calculated
+    value is given with and without parking, and the parking-only area separately.
+  example: Property GFA - Calculated (Buildings) (ft²) excludes parking.

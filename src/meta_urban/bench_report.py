@@ -33,7 +33,7 @@ from .analytics import GRID, INK2, MUTED, SURFACE, _style, save_fig  # noqa: E40
 from .baselines import LexicalRetriever  # noqa: E402
 from .bench import K_CANDIDATES, LEVELS, RES, _records, load_items, t3_items, t3_score  # noqa: E402
 from .io import concept_index  # noqa: E402
-from .llm import CACHE_DIR, parse_json  # noqa: E402
+from .llm import CACHE_DIR, decode_concept, parse_json  # noqa: E402
 from .metrics import acc_at_k, macro_f1, majority, mrr, none_pr, run_agreement  # noqa: E402
 
 TAB, FIG = PAPER / "tables", PAPER / "figures"
@@ -83,9 +83,10 @@ def t2_frame(model: str) -> pd.DataFrame:
     df["gold"] = [items[(d, n)]["gold"] for d, n in zip(df.dataset, df.name)]
     df["gold_ok"] = [items[(d, n)]["gold_ok"] for d, n in zip(df.dataset, df.name)]
     js = df.response.map(parse_json)
-    df["pred"] = js.map(lambda j: j.get("concept", "INVALID") if j else "INVALID")
-    df["ranked"] = js.map(lambda j: [j.get("concept")] + [a for a in j.get("alternatives", []) if isinstance(a, str)]
-                          if j else ["INVALID"])
+    df["pred"] = [decode_concept(lv, j.get("concept", "INVALID")) if j else "INVALID" for lv, j in zip(df.level, js)]
+    df["ranked"] = [[decode_concept(lv, x) for x in [j.get("concept")] + [a for a in j.get("alternatives", [])
+                                                                         if isinstance(a, str)]] if j else ["INVALID"]
+                    for lv, j in zip(df.level, js)]
     df["conf"] = js.map(lambda j: float(j.get("confidence", np.nan)) if j else np.nan)
     df["model"] = model
     return df

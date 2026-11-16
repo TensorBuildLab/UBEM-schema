@@ -1,0 +1,30 @@
+{
+  "downloaded": "2026-11-15",
+  "files": {
+    "ll84_2023.csv": {
+      "url": "https://data.cityofnewyork.us/resource/5zyy-y8am.csv?$where=report_year=2023&$limit=100000",
+      "bytes": 120133016,
+      "sha256": "3dc78011fc673d76e5bcf277558c636858d949ecd3cd1a86c43903984d8c341c"
+    },
+    "ll84_columns.json": {
+      "url": "https://data.cityofnewyork.us/api/views/5zyy-y8am.json",
+      "bytes": 620097,
+      "sha256": "31af66ecd8bf7907daa8bf18496f6bf88826520b909d0462e688edcdc50e17e7"
+    },
+    "pluto.csv": {
+      "url": "https://data.cityofnewyork.us/resource/64uk-42ks.csv?$select=bbl,borough,cd,bct2020,zipcode,bldgclass,landuse,yearbuilt,numfloors,numbldgs,bldgarea,resarea,comarea,latitude,longitude,version&$limit=2000000",
+      "bytes": 114942699,
+      "sha256": "7e3571550b186cca143d24d0b63cbe3c03e3424ae292881012bf562576d0b804"
+    },
+    "pluto_columns.json": {
+      "url": "https://data.cityofnewyork.us/api/views/64uk-42ks.json",
+      "bytes": 202683,
+      "sha256": "aa365176bbb37b58ea562f998401b2c4a14e9d0313144fd318d3020a632a3718"
+    },
+    "community_districts.geojson": {
+      "url": "https://data.cityofnewyork.us/resource/5crt-au7u.geojson?$limit=1000",
+      "bytes": 3791565,
+      "sha256": "69b82cfa7c8fcc640b8f86a43cdf2fd4d8f20e874f9c8ee18bb139f761b94226"
+    }
+  }
+}
