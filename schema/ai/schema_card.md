@@ -149,6 +149,7 @@ A rule the publisher applies to many variables at once, such as a naming pattern
 - applies_to (string): Which variables the convention applies to (a name pattern or a description).
 - applies_to_variables (string, list): Exact names of the variables a convention applies to (machine-readable scope).
 - applies_to_pattern (string): Regular expression over variable names giving the variables a convention applies to (machine-readable scope).
+- applies_to_codes (string, list): Codes or code labels that must all occur in a variable's documented codes for the convention to apply (machine-readable scope by code list, for example Yes, No and Don't know for yes/no questions).
 - rule (string, required): The convention, stated as a rule that can be applied without other context.
 - example (string): One concrete example of the rule from the dataset.
 - missing_codes (string, list): Raw values that mean missing, not applicable, or suppressed.
@@ -177,7 +178,7 @@ Weather and climate data used as boundary conditions: observed station records, 
     - grib: GRIB gridded files.
     - csv: Other tabular text files.
     - api_json: Responses of a web API in JSON.
-    - other: Other format.
+    - other: Another format not listed here.
 - timestamp_convention (TimestampConvention): Whether a timestamp marks the end, the start or the instant of the interval it describes.
     - interval_ending: The timestamp is the end of the interval (EPW hour 1 covers 00:00 to 01:00).
     - interval_beginning: The timestamp is the start of the interval.
@@ -218,7 +219,7 @@ Building stock geometry and inventory: footprints, heights, 3D city models and p
     - plans_or_records: Taken from building plans or administrative records.
     - model_estimated: Estimated by a statistical or machine-learning model.
     - derived_from_floors: Computed from the number of floors and an assumed floor height.
-    - none: No heights.
+    - none: The dataset has no building heights.
 - height_reference (HeightReference): Reference points between which a building height is measured.
     - ground_to_roof_top: From ground level to the highest point of the roof.
     - ground_to_eave: From ground level to the eave.
@@ -259,7 +260,7 @@ Occupancy, occupant behavior, schedules, setpoints and time use.
 - building_sectors (BuildingSector, list): Building sectors covered.
     - residential: Dwellings and residential buildings.
     - commercial: Commercial, public and institutional buildings.
-    - industrial: Industrial buildings.
+    - industrial: Industrial and manufacturing buildings.
     - all: All building sectors.
 
 ## CharacteristicsProfile
@@ -273,7 +274,7 @@ Non-geometric building characteristics (use type, vintage, envelope, systems, fu
 - building_sectors (BuildingSector, list): Building sectors covered.
     - residential: Dwellings and residential buildings.
     - commercial: Commercial, public and institutional buildings.
-    - industrial: Industrial buildings.
+    - industrial: Industrial and manufacturing buildings.
     - all: All building sectors.
 - representativeness (Representativeness): How the covered buildings relate to the building stock, which decides whether results generalize.
     - probability_sample: A probability sample; weighted estimates represent the stock.
@@ -293,12 +294,12 @@ Measured or reported energy use for calibration and validation, from national ba
 - energy_sectors (EnergySector, list): Energy-using sectors covered.
     - residential: Households and residential buildings.
     - commercial: Commercial and public buildings.
-    - industrial: Industry.
-    - transportation: Transportation.
+    - industrial: Industry and manufacturing.
+    - transportation: Transportation of people and goods.
     - all: All sectors or the whole economy.
 - energy_carriers (EnergyCarrier, list): Energy carriers reported.
-    - electricity: Electricity.
-    - natural_gas: Natural gas.
+    - electricity: Electricity from the grid.
+    - natural_gas: Natural gas from a pipeline network.
     - fuel_oil: Fuel oil and other petroleum liquids.
     - propane: Propane and liquefied petroleum gas.
     - district_energy: District steam, hot water or chilled water.
@@ -313,7 +314,7 @@ Measured or reported energy use for calibration and validation, from national ba
     - load_profile: Time series of demand.
     - peak_demand: Maximum demand over a period.
     - emissions: Greenhouse gas emissions.
-    - expenditure: Energy cost.
+    - expenditure: Cost of the energy used.
 - metering_level (MeteringLevel): Finest level at which energy is measured or reported.
     - area_aggregate: Totals over an area or sector.
     - utility_territory: Totals over a utility service territory or balancing authority.
@@ -340,7 +341,7 @@ Reference simulations and model libraries: synthetic building-stock outputs and 
 - building_sectors (BuildingSector, list): Building sectors covered.
     - residential: Dwellings and residential buildings.
     - commercial: Commercial, public and institutional buildings.
-    - industrial: Industrial buildings.
+    - industrial: Industrial and manufacturing buildings.
     - all: All building sectors.
 
 ## ContextProfile

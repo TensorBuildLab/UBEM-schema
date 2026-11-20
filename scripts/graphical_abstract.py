@@ -17,7 +17,15 @@ INK, INK2, MUTED, GRID, SURF, PANEL = "#0b0b0b", "#52514e", "#898781", "#e1e0d9"
 COL = {"ids": "#c9c7bf", "std": "#3a9a8f", "mu": "#1f3f73"}
 
 cond = pd.read_csv(TAB / "stats_conditions.csv")
+cond = cond[cond.model.isin(["qwen3:8b", "llama3.1:8b"])]  # panel 2 shows the two 8B models
 mean = cond.groupby("condition")["acc@1"].mean()
+c4 = pd.read_csv(TAB / "city4_indicators.csv")
+c4ref = c4[c4.model == "reference"].iloc[0]
+n_complete = int(c4ref["complete"])
+tool_exact = c4[c4.condition == "tool, reference columns"]
+assert (tool_exact["complete"] == n_complete).all()
+entry = c4[c4.condition == "entry, reference columns"]
+height_factor = (entry["median_height_m"] / c4ref["median_height_m"]).max()
 q = pd.read_csv(TAB / "endtoend_quantities.csv")
 worst = 1 + q.loc[q.condition.isin(["codebook entry only", "with dataset card"]), "rel_error_pct"].max() / 100
 dec = pd.read_csv(TAB / "city_decomposition.csv")
@@ -42,20 +50,21 @@ def panel(x, title):
 
 
 # 1. the schema: one source, two audiences
-a = panel(0.015, "1  AI-ready schema")
+a = panel(0.015, "1  Taxonomy and schema")
 a.add_patch(FancyBboxPatch((0.22, 0.60), 0.56, 0.14, boxstyle="round,pad=0.01,rounding_size=0.02", fc=COL["mu"],
                            ec="none"))
 a.text(0.50, 0.67, "UBEM-Link\none LinkML source", ha="center", va="center", fontsize=12, color=SURF,
        weight="bold", linespacing=1.2)
-for x, head, body in ((0.05, "for people", "documentation\nOWL ontology\nlinks to Brick,\nBEDES, Energy ADE"),
-                      (0.53, "for AI", "concept cards\ndataset cards\nJSON Schema\nSHACL checks")):
+for x, head, body in ((0.05, "for people", "documentation\nOWL ontology\n93-dataset catalog\nSSSOM mappings"),
+                      (0.53, "for AI", "concept cards\ndataset cards\nJSON Schema\nubem-link tool")):
     a.add_patch(FancyBboxPatch((x, 0.13), 0.42, 0.33, boxstyle="round,pad=0.01,rounding_size=0.02", fc=SURF,
                                ec=GRID, lw=1.2))
     a.text(x + 0.21, 0.42, head, ha="center", va="top", fontsize=12.5, weight="bold", color=INK)
     a.text(x + 0.21, 0.335, body, ha="center", va="top", fontsize=11, color=INK2, linespacing=1.3)
     a.annotate("", xy=(x + 0.21, 0.47), xytext=(0.50, 0.59),
                arrowprops={"arrowstyle": "-|>", "color": MUTED, "lw": 1.6, "mutation_scale": 14})
-a.text(0.05, 0.80, "6 design principles, measurable criteria", fontsize=12, color=INK2)
+a.text(0.05, 0.835, "7 data categories → 6 facets and\n7 typed category profiles", fontsize=12, color=INK2,
+       va="center", linespacing=1.25)
 a.text(0.50, 0.05, "AI output checked against the same schema", ha="center", fontsize=10.5, color=INK2,
        style="italic")
 
@@ -84,11 +93,11 @@ ax.tick_params(length=0)
 ax.set_facecolor(PANEL)
 
 # 3. energy results: national survey pipeline and New York City
-c = panel(0.685, "3  Energy results")
-c.text(0.05, 0.82, "AI-built inputs, same two models", fontsize=12.5, color=INK2, va="top")
-rows = [(f"+{city_unit:.0f}%", "NYC energy intensity: kBtu\nread as kWh by both models"),
-        (f"up to {district_max:.0f}%", "district bias from a plausible\nfloor-area column choice"),
-        (f"×{worst:,.0f}", "national electricity intensity,\none wrong multiplier")]
+c = panel(0.685, "3  City-scale integration")
+c.text(0.05, 0.82, "New York City, two local 8B models", fontsize=12.5, color=INK2, va="top")
+rows = [(f"+{city_unit:.0f}%", "energy intensity when kBtu is\nmissing from the unit list"),
+        (f"×{height_factor:.1f}", "building heights without the\npublisher's conventions"),
+        (f"{n_complete:,}", "buildings, 4 sources: exact with\nconventions applied by the tool")]
 for i, (big, small) in enumerate(rows):
     y = 0.66 - i * 0.235
     c.text(0.05, y, big, fontsize=23, weight="bold", color=INK, va="center")

@@ -419,6 +419,7 @@ class Convention(YAMLRoot):
     applies_to: Optional[str] = None
     applies_to_variables: Optional[Union[str, list[str]]] = empty_list()
     applies_to_pattern: Optional[str] = None
+    applies_to_codes: Optional[Union[str, list[str]]] = empty_list()
     example: Optional[str] = None
     missing_codes: Optional[Union[str, list[str]]] = empty_list()
     unit: Optional[str] = None
@@ -442,6 +443,10 @@ class Convention(YAMLRoot):
 
         if self.applies_to_pattern is not None and not isinstance(self.applies_to_pattern, str):
             self.applies_to_pattern = str(self.applies_to_pattern)
+
+        if not isinstance(self.applies_to_codes, list):
+            self.applies_to_codes = [self.applies_to_codes] if self.applies_to_codes is not None else []
+        self.applies_to_codes = [v if isinstance(v, str) else str(v) for v in self.applies_to_codes]
 
         if self.example is not None and not isinstance(self.example, str):
             self.example = str(self.example)
@@ -1512,7 +1517,7 @@ class WeatherFileFormat(EnumDefinitionImpl):
         description="Responses of a web API in JSON.")
     other = PermissibleValue(
         text="other",
-        description="Other format.")
+        description="Another format not listed here.")
 
     _defn = EnumDefinition(
         name="WeatherFileFormat",
@@ -1659,7 +1664,7 @@ class HeightSource(EnumDefinitionImpl):
         description="Computed from the number of floors and an assumed floor height.")
     none = PermissibleValue(
         text="none",
-        description="No heights.")
+        description="The dataset has no building heights.")
 
     _defn = EnumDefinition(
         name="HeightSource",
@@ -1796,7 +1801,7 @@ class BuildingSector(EnumDefinitionImpl):
         description="Commercial, public and institutional buildings.")
     industrial = PermissibleValue(
         text="industrial",
-        description="Industrial buildings.")
+        description="Industrial and manufacturing buildings.")
     all = PermissibleValue(
         text="all",
         description="All building sectors.")
@@ -1887,10 +1892,10 @@ class EnergySector(EnumDefinitionImpl):
         description="Commercial and public buildings.")
     industrial = PermissibleValue(
         text="industrial",
-        description="Industry.")
+        description="Industry and manufacturing.")
     transportation = PermissibleValue(
         text="transportation",
-        description="Transportation.")
+        description="Transportation of people and goods.")
     all = PermissibleValue(
         text="all",
         description="All sectors or the whole economy.")
@@ -1906,10 +1911,10 @@ class EnergyCarrier(EnumDefinitionImpl):
     """
     electricity = PermissibleValue(
         text="electricity",
-        description="Electricity.")
+        description="Electricity from the grid.")
     natural_gas = PermissibleValue(
         text="natural_gas",
-        description="Natural gas.")
+        description="Natural gas from a pipeline network.")
     fuel_oil = PermissibleValue(
         text="fuel_oil",
         description="Fuel oil and other petroleum liquids.")
@@ -1961,7 +1966,7 @@ class EnergyMetric(EnumDefinitionImpl):
         description="Greenhouse gas emissions.")
     expenditure = PermissibleValue(
         text="expenditure",
-        description="Energy cost.")
+        description="Cost of the energy used.")
 
     _defn = EnumDefinition(
         name="EnergyMetric",
@@ -2399,6 +2404,9 @@ slots.applies_to_variables = Slot(uri=UBEM_LINK.applies_to_variables, name="appl
 
 slots.applies_to_pattern = Slot(uri=UBEM_LINK.applies_to_pattern, name="applies_to_pattern", curie=UBEM_LINK.curie('applies_to_pattern'),
                    model_uri=UBEM_LINK.applies_to_pattern, domain=None, range=Optional[str])
+
+slots.applies_to_codes = Slot(uri=UBEM_LINK.applies_to_codes, name="applies_to_codes", curie=UBEM_LINK.curie('applies_to_codes'),
+                   model_uri=UBEM_LINK.applies_to_codes, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.name = Slot(uri=CSVW.name, name="name", curie=CSVW.curie('name'),
                    model_uri=UBEM_LINK.name, domain=None, range=Optional[str])

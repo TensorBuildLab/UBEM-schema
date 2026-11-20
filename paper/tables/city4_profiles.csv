@@ -1,0 +1,113 @@
+model,condition,dataset,column,unit,multiplier,missing_codes,model_unit,model_multiplier,status,status_model_answer,review_flags_on_answer,review_flags_frozen
+qwen3:8b,entry,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+qwen3:8b,entry,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+qwen3:8b,entry,ll84,property_gfa_calculated_1,unit:FT2,1,17,unit:FT2,1,harmless deviation,harmless deviation,,
+qwen3:8b,entry,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1,exact,exact,,
+qwen3:8b,entry,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+qwen3:8b,entry,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1,exact,exact,,
+qwen3:8b,entry,pluto,bbl,none,1,,none,1,exact,exact,,
+qwen3:8b,entry,pluto,yearbuilt,none,1,0,none,1,exact,exact,,
+qwen3:8b,entry,pluto,numfloors,none,1,,none,1,exact,exact,,
+qwen3:8b,entry,pluto,latitude,none,1,,none,1,exact,exact,,
+qwen3:8b,entry,pluto,longitude,none,1,,none,1,exact,exact,,
+qwen3:8b,entry,footprints,bin,none,1,0,none,1,error,error,,
+qwen3:8b,entry,footprints,height_roof,none,1,0,none,1,error,error,,
+qwen3:8b,entry,footprints,construction_year,none,1,,none,1,harmless deviation,harmless deviation,,
+qwen3:8b,card,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+qwen3:8b,card,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+qwen3:8b,card,ll84,property_gfa_calculated_1,unit:FT2,1,,unit:FT2,1,exact,exact,,
+qwen3:8b,card,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1,exact,exact,,
+qwen3:8b,card,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+qwen3:8b,card,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1,exact,exact,,
+qwen3:8b,card,pluto,bbl,none,1,,none,1,exact,exact,,
+qwen3:8b,card,pluto,yearbuilt,none,1,0,none,1,exact,exact,,
+qwen3:8b,card,pluto,numfloors,none,1,,none,1,exact,exact,,
+qwen3:8b,card,pluto,latitude,none,1,,none,1,exact,exact,,
+qwen3:8b,card,pluto,longitude,none,1,,none,1,exact,exact,,
+qwen3:8b,card,footprints,bin,none,1,0,none,1,error,error,,
+qwen3:8b,card,footprints,height_roof,unit:FT,1,0,unit:FT,1,exact,exact,,
+qwen3:8b,card,footprints,construction_year,none,1,,none,1,harmless deviation,harmless deviation,,
+qwen3:8b,scoped,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+qwen3:8b,scoped,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+qwen3:8b,scoped,ll84,property_gfa_calculated_1,unit:FT2,1,0,unit:FT2,1,harmless deviation,harmless deviation,,
+qwen3:8b,scoped,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1000,Not Available,unit:KiloBTU_IT,1000,error,error,,
+qwen3:8b,scoped,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+qwen3:8b,scoped,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1000,Not Available,unit:KiloBTU_IT,1000,error,error,,
+qwen3:8b,scoped,pluto,bbl,none,1,,none,1,exact,exact,,
+qwen3:8b,scoped,pluto,yearbuilt,none,1,0,none,1,exact,exact,,
+qwen3:8b,scoped,pluto,numfloors,none,1,,none,1,exact,exact,,
+qwen3:8b,scoped,pluto,latitude,none,1,,none,1,exact,exact,,
+qwen3:8b,scoped,pluto,longitude,none,1,,none,1,exact,exact,,
+qwen3:8b,scoped,footprints,bin,none,1,,none,1,error,error,,
+qwen3:8b,scoped,footprints,height_roof,unit:FT,1,0,unit:FT,1,exact,exact,,
+qwen3:8b,scoped,footprints,construction_year,none,1,,none,1,harmless deviation,harmless deviation,,
+qwen3:8b,tool,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+qwen3:8b,tool,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+qwen3:8b,tool,ll84,property_gfa_calculated_1,unit:FT2,1,0; Not Available,unit:FT2,1,harmless deviation,harmless deviation,numeric missing code '0' is not documented as missing,numeric missing code '0' is not documented as missing
+qwen3:8b,tool,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1000,exact,error,convention set unit unit:KiloBTU_IT,convention set unit unit:KiloBTU_IT
+qwen3:8b,tool,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+qwen3:8b,tool,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1000,exact,error,convention set unit unit:KiloBTU_IT,convention set unit unit:KiloBTU_IT
+qwen3:8b,tool,pluto,bbl,none,1,,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+qwen3:8b,tool,pluto,yearbuilt,none,1,0; ,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+qwen3:8b,tool,pluto,numfloors,none,1,,none,1,exact,exact,,"no unit, but the documentation names unit:FT"
+qwen3:8b,tool,pluto,latitude,none,1,,none,1,exact,exact,,"no unit, but the documentation names unit:PA"
+qwen3:8b,tool,pluto,longitude,none,1,,none,1,exact,exact,,"no unit, but the documentation names unit:PA"
+qwen3:8b,tool,footprints,bin,none,1,; 1000000; 2000000; 3000000; 4000000; 5000000,none,1,exact,error,,"no unit, but the documentation names unit:W-HR"
+qwen3:8b,tool,footprints,height_roof,unit:FT,1,0; ,unit:FT,1,exact,exact,,
+qwen3:8b,tool,footprints,construction_year,none,1,; 0,none,1,exact,harmless deviation,,
+llama3.1:8b,entry,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+llama3.1:8b,entry,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,entry,ll84,property_gfa_calculated_1,unit:FT2,1,"; ], // 17 zeros and 12 empty values are considered missing codes for this column, as they are not valid observations of property gross floor area in square feet (ft²) and are likely errors or missing data points in the dataset. The empty values are represented by an empty string (",unit:FT2,1,harmless deviation,harmless deviation,,
+llama3.1:8b,entry,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1,exact,exact,,
+llama3.1:8b,entry,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+llama3.1:8b,entry,ll84,natural_gas_use_kbtu,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,entry,pluto,bbl,none,1,,none,1,exact,exact,,
+llama3.1:8b,entry,pluto,yearbuilt,none,1,; :-1; :-2,none,1,error,error,,
+llama3.1:8b,entry,pluto,numfloors,none,1,"; ,; 0",none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,entry,pluto,latitude,none,1,; 0; NULL,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,entry,pluto,longitude,none,1,937,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,entry,footprints,bin,none,1,,none,1,error,error,,
+llama3.1:8b,entry,footprints,height_roof,none,1,714,none,1,error,error,,
+llama3.1:8b,entry,footprints,construction_year,none,1,,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,card,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+llama3.1:8b,card,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,card,ll84,property_gfa_calculated_1,none,1,; 0,none,1,error,error,,
+llama3.1:8b,card,ll84,site_energy_use_kbtu,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,card,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+llama3.1:8b,card,ll84,natural_gas_use_kbtu,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,card,pluto,bbl,none,1,,none,1,exact,exact,,
+llama3.1:8b,card,pluto,yearbuilt,none,1,; :-1,none,1,error,error,,
+llama3.1:8b,card,pluto,numfloors,none,1,"; , 0, 0, 0",none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,card,pluto,latitude,none,1,,none,1,exact,exact,,
+llama3.1:8b,card,pluto,longitude,none,1,,none,1,exact,exact,,
+llama3.1:8b,card,footprints,bin,none,1,,none,1,error,error,,
+llama3.1:8b,card,footprints,height_roof,none,1,0,none,1,error,error,,
+llama3.1:8b,card,footprints,construction_year,none,1,0,none,1,exact,exact,,
+llama3.1:8b,scoped,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,
+llama3.1:8b,scoped,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,scoped,ll84,property_gfa_calculated_1,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,scoped,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1000,Not Available,unit:KiloBTU_IT,1000,error,error,,
+llama3.1:8b,scoped,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+llama3.1:8b,scoped,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1000,Not Available,unit:KiloBTU_IT,1000,error,error,,
+llama3.1:8b,scoped,pluto,bbl,none,1,,none,1,exact,exact,,
+llama3.1:8b,scoped,pluto,yearbuilt,none,1,0; ,none,1,exact,exact,,
+llama3.1:8b,scoped,pluto,numfloors,none,1,"; ,; 0",none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,scoped,pluto,latitude,none,1,; 0; NULL,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,scoped,pluto,longitude,none,1,937,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,scoped,footprints,bin,none,1,,none,1,error,error,,
+llama3.1:8b,scoped,footprints,height_roof,none,1,0,none,1,error,error,,
+llama3.1:8b,scoped,footprints,construction_year,none,1,,none,1,harmless deviation,harmless deviation,,
+llama3.1:8b,tool,ll84,nyc_borough_block_and_lot,none,1,Not Available,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+llama3.1:8b,tool,ll84,nyc_building_identification,none,1,Not Available,none,1,error,error,,
+llama3.1:8b,tool,ll84,property_gfa_calculated_1,unit:FT2,1,Not Available,none,1,harmless deviation,error,no unit for a concept measured in unit:M2; convention set unit unit:FT2,no unit for a concept measured in unit:M2; convention set unit unit:FT2
+llama3.1:8b,tool,ll84,site_energy_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1000,exact,error,convention set unit unit:KiloBTU_IT,convention set unit unit:KiloBTU_IT
+llama3.1:8b,tool,ll84,electricity_use_grid_purchase_1,unit:KiloW-HR,1,Not Available,unit:KiloW-HR,1,exact,exact,,
+llama3.1:8b,tool,ll84,natural_gas_use_kbtu,unit:KiloBTU_IT,1,Not Available,unit:KiloBTU_IT,1000,exact,error,convention set unit unit:KiloBTU_IT,convention set unit unit:KiloBTU_IT
+llama3.1:8b,tool,pluto,bbl,none,1,,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+llama3.1:8b,tool,pluto,yearbuilt,none,1,0; ,none,1,exact,exact,,"no unit, but the documentation names unit:W-HR"
+llama3.1:8b,tool,pluto,numfloors,none,1,"; ,; 0",none,1,harmless deviation,harmless deviation,"missing code ',' is not a missing-value label","no unit, but the documentation names unit:FT; missing code ',' is not a missing-value label"
+llama3.1:8b,tool,pluto,latitude,none,1,; 0; NULL,none,1,harmless deviation,harmless deviation,numeric missing code '0' is not documented as missing,"no unit, but the documentation names unit:PA; numeric missing code '0' is not documented as missing"
+llama3.1:8b,tool,pluto,longitude,none,1,937,none,1,harmless deviation,harmless deviation,numeric missing code '937' is not documented as missing,"no unit, but the documentation names unit:PA; numeric missing code '937' is not documented as missing"
+llama3.1:8b,tool,footprints,bin,none,1,1000000; 2000000; 3000000; 4000000; 5000000,none,1,exact,error,,"no unit, but the documentation names unit:W-HR"
+llama3.1:8b,tool,footprints,height_roof,unit:FT,1,0; ,none,1,exact,error,no unit for a concept measured in unit:M; convention set unit unit:FT,no unit for a concept measured in unit:M; convention set unit unit:FT
+llama3.1:8b,tool,footprints,construction_year,none,1,; 0,none,1,exact,harmless deviation,,

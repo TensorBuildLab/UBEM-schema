@@ -21,7 +21,7 @@ from docx.oxml.ns import qn
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPER, BUILD, SUB = ROOT / "paper", ROOT / "paper" / "build", ROOT / "paper" / "submission"
-FIGURES = ["fig_architecture", "fig_class_diagram", "fig_worked_example", "fig_role_by_granularity",
+FIGURES = ["fig_role_by_granularity", "fig_architecture", "fig_class_diagram", "fig_worked_example",
            "fig_design_conditions", "fig_standards", "fig_t2_coverage", "fig_weights_eui_error",
            "fig_city_map"]  # order of appearance in the manuscript
 PANDOC = pypandoc.get_pandoc_path()

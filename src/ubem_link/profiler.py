@@ -51,19 +51,36 @@ class Settings:
 
 
 # ------------------------------------------------------------------------------------------------ conventions
-def convention_matches(conv: dict, name: str, label: str = "") -> bool:
-    """True if the convention's machine-readable scope covers the column."""
+def convention_matches(conv: dict, name: str, label: str = "", codes: str = "") -> bool:
+    """True if the convention's machine-readable scope covers the column: its name is listed, or matches the
+    pattern (name or label), and every code or label of applies_to_codes occurs in its documented codes."""
     names = conv.get("applies_to_variables") or []
-    if name in names or name.lower() in {n.lower() for n in names}:
-        return True
     pat = conv.get("applies_to_pattern")
-    if pat:
-        return bool(re.search(pat, name, re.I) or (label and re.search(pat, label, re.I)))
-    return False
+    need = conv.get("applies_to_codes") or []
+    if not names and not pat and not need:
+        return False
+    if names and name.lower() not in {n.lower() for n in names}:
+        return False
+    if pat and not (re.search(pat, name, re.I) or (label and re.search(pat, label, re.I))):
+        return False
+    if need:
+        low = codes.lower()
+        def has(c: str) -> bool:  # word boundaries only where the code starts or ends with a letter or digit
+            c = c.lower()
+            pat = ("(?<![0-9a-z])" if c[:1].isalnum() else "") + re.escape(c) + ("(?![0-9a-z])" if c[-1:].isalnum() else "")
+            return bool(re.search(pat, low))
+
+        return all(has(c) for c in need)
+    return True
+
+
+def _codes_text(col: Column) -> str:
+    return " ; ".join([col.codes_text or ""] + [f"{c}={lab}" for c, lab in col.code_list])
 
 
 def scoped_conventions(entry: dict | None, col: Column) -> list[dict]:
-    return [c for c in (entry or {}).get("conventions") or [] if convention_matches(c, col.name, col.label)]
+    return [c for c in (entry or {}).get("conventions") or []
+            if convention_matches(c, col.name, col.label, _codes_text(col))]
 
 
 def _convention_text(convs: list[dict]) -> str:
@@ -188,6 +205,15 @@ def select_request(columns: list[Column], target: str, purpose: str) -> dict:
 
 
 # ------------------------------------------------------------------------------------------------ checks
+def _names(word: str, text: str) -> bool:
+    """True if a unit word occurs in the text as a word, not inside another word ('wh' in 'which')."""
+    w = word.strip().lower()
+    if not w:
+        return False
+    pat = ("(?<![a-z0-9])" if w[0].isalnum() else "") + re.escape(w) + ("(?![a-z0-9])" if w[-1].isalnum() else "")
+    return bool(re.search(pat, text))
+
+
 def _missing_like(text: str) -> bool:
     t = text.lower()
     return any(w in t for w in NON_SUBSTANTIVE) or bool(re.search(r"\bunknown\b|\bn/?a\b|\bnull\b", t))
@@ -198,11 +224,13 @@ def profile_checks(col: Column, prof: dict, concept: str | None, convs: list[dic
     out = []
     doc = f"{col.name} {col.label} {col.description} {col.unit_text}".lower()
     u, m = prof.get("unit") or "none", float(prof.get("unit_multiplier") or 1)
-    named = [k for k, words in unit_words().items() if any(w.strip() and w in doc for w in words)]
+    named = [k for k, words in unit_words().items() if any(_names(w, doc) for w in words)]
     stated = [c for c in convs if c.get("unit")]
+    keyish = bool(concept and concept.startswith("join:")) or prof.get("datatype") == "identifier" or \
+        (concept or "") in ("record_identifier", "geographic_coordinates", "administrative_region", "year_of_construction")
     if u != "none" and named and u not in named and not stated:
         out.append(f"unit {u} is not named in the documentation (named: {', '.join(named[:3])})")
-    if u == "none" and named and col.value_min is not None and not stated and len(col.code_list) <= 2:
+    if u == "none" and named and col.value_min is not None and not stated and len(col.code_list) <= 2 and not keyish:
         out.append(f"no unit, but the documentation names {named[0]}")
     if re.search(r"\bthousands?\b|\bhundreds?\b|\bmillions?\b", doc) and m == 1 and u != "none" and \
             not re.search(r"kbtu|mmbtu|ccf|mcf|thousand btu|million btu", doc):

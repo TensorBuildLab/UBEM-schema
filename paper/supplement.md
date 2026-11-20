@@ -8,7 +8,7 @@ UBEM-Link: an AI-ready semantic schema for integrating open data in urban buildi
 
 ## S1. Runs
 
-Both models (Qwen3 8B, Ollama tag qwen3:8b, digest 500a1f067a9f; Llama 3.1 8B, tag llama3.1:8b, digest 46e0c10c039e; both Q4_K_M quantization) were run through Ollama 0.40.16 on one NVIDIA GeForce RTX 3050 (8 GB), with an 8,192-token context, thinking disabled, seed equal to the run index, and output constrained by JSON Schema. Repeatability statistics use only the runs at T = 0.7.
+The models (Qwen3 8B, Ollama tag qwen3:8b, digest 500a1f067a9f; Llama 3.1 8B, tag llama3.1:8b, digest 46e0c10c039e; Qwen3 14B, tag qwen3:14b, digest bdbd181c33f2, with partial CPU offload; all Q4_K_M quantization) were run through Ollama 0.40.16 on one NVIDIA GeForce RTX 3050 (8 GB), with an 8,192-token context, thinking disabled, seed equal to the run index, and output constrained by JSON Schema. Repeatability statistics use only the runs at T = 0.7.
 
 | Task | Conditions | Temperature | Runs per item | Items |
 |---|---|---|---|---|
@@ -19,6 +19,9 @@ Both models (Qwen3 8B, Ollama tag qwen3:8b, digest 500a1f067a9f; Llama 3.1 8B, t
 | National pipeline (E7) | entry only; with card | 0 and 0.7 | as T3/T3P | 11 |
 | City case (E8): selection | L0, L2 | 0 | 1 | 6 concepts |
 | City case (E8): normalization | entry only; with card | 0 | 1 | 4 to 5 columns |
+| Four-source case (E8b): selection | L2 | 0 | 1 | 16 inputs |
+| Four-source case (E8b): normalization | entry; card; scoped | 0 | 1 | 14 to 15 columns |
+| Mapping, Qwen3 14B | L0, L1, L2D, L2, L3E | 0 | 1 | 300 |
 
 ## S2. Prompts
 
@@ -224,8 +227,153 @@ values/format codes (verbatim):
 numeric values from -403,402 to 47,279,141,222; "Not Available" (2,784 records)
 ```
 
+### Four-source case: the tool's normalization prompt (scoped conventions)
 
-## S3. Concept vocabulary
+```
+You are an expert in urban building energy modeling (UBEM) and in building energy survey data. Answer with one JSON object that follows the required schema.
+
+Task: read the documentation of one column of a dataset and a summary of its values, and state how its values must be read. Fields:
+datatype: one of ['integer', 'float', 'string', 'categorical', 'boolean', 'datetime', 'geometry', 'identifier'].
+unit: the unit of numeric quantities, chosen from the UNIT LIST exactly as the source publishes it (kBtu is unit:KiloBTU_IT, therms are unit:THM_US, feet are unit:FT); "none" for categorical, identifier, text or unitless columns and for counts and calendar years.
+unit_multiplier: 1 unless the documentation says values are in thousands, hundreds or millions of the unit (for example "in thousands of dollars": unit:CCY_USD with multiplier 1000).
+missing_codes: values that mean missing, unknown, not applicable or withheld (use "" for an empty value). Do not list a value that is a valid observation.
+codes: every categorical code as [code, label]; [] if the column is not categorical.
+is_weight, is_replicate_weight: true for sampling or analysis weights.
+is_imputation_flag and flags_variable: true and the column it flags, if it records whether another column was imputed; otherwise false and "none".
+aggregation: one of ['static', 'instantaneous', 'total_over_period', 'average_over_period', 'count', 'share', 'none'].
+
+UNIT LIST
+unit:KiloW-HR: kilowatt-hour (kWh) [energy]
+unit:W-HR: watt-hour (Wh) [energy]
+unit:MegaW-HR: megawatt-hour (MWh) [energy]
+unit:GigaW-HR: gigawatt-hour (GWh) [energy]
+unit:BTU_IT: British thermal unit (Btu) [energy]
+unit:KiloBTU_IT: thousand Btu (kBtu) [energy]
+[... 39 more units ...]
+
+CONVENTIONS OF THIS DATASET THAT APPLY TO THIS COLUMN
+- roof height and ground elevation: Heights and elevations are in feet; the roof height is measured above the ground elevation, not above sea level. Example: height_roof = 33.49 means a roof 33.49 ft (10.2 m) above the ground.
+- roof height and construction year: A value of zero or an empty value means that the information was not available. Example: construction_year = 0 means the construction year is unknown.
+---
+COLUMN
+dataset: nyc_footprints
+column name: height_roof
+label: Height Roof
+values in the data: numeric values from 0 to 1,550 (median 26.15), 714 zeros
+```
+
+
+## S3. Category profiles
+
+Every field of the seven category profiles, generated from the schema. The category profiles of the catalog were drafted by agents from the verified entries: 88 from the entry text alone, 3 also against a publisher page, and the New York City PLUTO and footprint entries from the publishers' metadata; fields that could not be established were left empty (provenance per entry in the repository).
+
+Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its "comprehensive data lake" is a Catalog of profiles rather than a category.
+
+Every category profile also has `provides_concepts` (ids of UBEM-Link concepts the dataset provides) and `metadata_standards` (standards the publisher already uses).
+
+### WeatherProfile
+
+Key in a dataset profile: `weather_profile`; UBEM role: `boundary_conditions`.
+
+Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and actual meteorological years, and climate projections.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `weather_year_type` | required, list | Kind of weather year or series: actual series, actual or typical meteorological year, normals, or projection. | `actual_series`, `actual_meteorological_year`, `typical_meteorological_year`, `climate_normals`, `future_typical_year`, `projection_series`, `design_conditions` |
+| `weather_file_format` | list | Formats in which weather is released, which decide whether a simulation engine can read it directly. | `epw`, `tmy3_csv`, `netcdf`, `grib`, `csv`, `api_json`, `other` |
+| `timestamp_convention` |  | Whether a timestamp marks the end, the start or the instant of the interval it describes. | `interval_ending`, `interval_beginning`, `instantaneous`, `unknown` |
+| `time_basis` |  | Clock to which timestamps refer (UTC, local standard time, or local time with daylight saving). | `utc`, `local_standard_time`, `local_time_with_dst`, `unknown` |
+| `gap_filling` |  | How missing or sub-interval values were filled by the publisher. | `none`, `linear_interpolation`, `model_based`, `unknown` |
+| `grid_resolution_km` |  | Horizontal resolution of a gridded product in kilometres. |  |
+| `station_id_scheme` |  | Identifier system of the stations (for example WMO, USAF-WBAN, GHCN). |  |
+| `climate_scenarios` | list | Emission or socio-economic scenarios of a projection (for example SSP2-4.5, RCP8.5). |  |
+
+### GeometryProfile
+
+Key in a dataset profile: `geometry_profile`; UBEM role: `geometry_inventory`.
+
+Building stock geometry and inventory: footprints, heights, 3D city models and parcels.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `geometry_dimension` | required | Geometric representation of buildings, from points and footprints to 3D solids. | `point`, `footprint_2d`, `footprint_with_height`, `solid_3d`, `raster`, `parcel_polygon` |
+| `levels_of_detail` | list | CityGML levels of detail provided. | `lod0`, `lod1`, `lod2`, `lod3`, `lod4` |
+| `height_source` | list | How building heights were obtained. | `lidar`, `photogrammetry`, `plans_or_records`, `model_estimated`, `derived_from_floors`, `none` |
+| `height_reference` |  | Reference points between which a building height is measured. | `ground_to_roof_top`, `ground_to_eave`, `ground_to_mean_roof`, `above_sea_level`, `unknown` |
+| `coordinate_reference_system` |  | Coordinate reference system of the published geometry, as an EPSG code (for example EPSG:4326). |  |
+| `crs_linear_unit` |  | Linear unit of the coordinate reference system and of lengths and areas derived from it (QUDT CURIE, for example unit:FT_US or unit:M). |  |
+| `building_id_scheme` |  | Building identifier system used (for example BIN, UPRN, BAG, UBID); null if none. |  |
+| `minimum_building_size` |  | Capture threshold for buildings, as stated by the publisher (for example 'larger than 400 sq ft'). |  |
+
+### OperationProfile
+
+Key in a dataset profile: `operation_profile`; UBEM role: `operation_use`.
+
+Occupancy, occupant behavior, schedules, setpoints and time use.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `behavior_types` | required, list | Kinds of occupant behavior or building operation recorded. | `occupancy_presence`, `hvac_operation`, `thermostat_setpoint`, `window_operation`, `lighting_operation`, `appliance_plug_loads`, `hot_water_use`, `thermal_comfort`, `time_use_activities`, `mobility` |
+| `control_actions` | list | Occupant control actions recorded. | `thermostat_adjustment`, `hvac_on_off`, `lighting_on_off`, `window_open_close`, `shading_adjustment`, `appliance_on_off` |
+| `collection_method` | list | How the behavior or operation data were collected. | `sensors_or_logs`, `connected_devices`, `survey_or_diary`, `field_study_compilation`, `mobile_location` |
+| `building_sectors` | list | Building sectors covered. | `residential`, `commercial`, `industrial`, `all` |
+
+### CharacteristicsProfile
+
+Key in a dataset profile: `characteristics_profile`; UBEM role: `building_characteristics`.
+
+Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys, administrative records, certificates and dictionaries.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `data_form` | required, list | Whether the data are records of individual units (microdata or building records) or published distributions (aggregate tables). | `microdata`, `building_records`, `aggregate_tables`, `dictionary_or_standard`, `archetype_library` |
+| `building_sectors` | list | Building sectors covered. | `residential`, `commercial`, `industrial`, `all` |
+| `representativeness` |  | How the covered buildings relate to the building stock, which decides whether results generalize. | `probability_sample`, `complete_population`, `mandated_subset`, `voluntary_or_convenience`, `synthetic`, `unknown` |
+| `coverage_threshold` |  | Size or other threshold that decides which buildings are covered (for example 'more than 25,000 ft²'). |  |
+| `cross_tabulations` | list | For aggregate tables, the joint distributions published, each as concept ids joined by ' x '. |  |
+
+### EnergyProfile
+
+Key in a dataset profile: `energy_profile`; UBEM role: `calibration_validation`.
+
+Measured or reported energy use for calibration and validation, from national balances (macroscopic) to buildings, meters and appliances (microscopic).
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `energy_data_scale` | required | Macroscopic (aggregates over many buildings) or microscopic (buildings, meters, circuits or appliances). | `macroscopic`, `microscopic` |
+| `energy_sectors` | list | Energy-using sectors covered. | `residential`, `commercial`, `industrial`, `transportation`, `all` |
+| `energy_carriers` | list | Energy carriers reported. | `electricity`, `natural_gas`, `fuel_oil`, `propane`, `district_energy`, `biomass`, `onsite_renewables`, `all_carriers` |
+| `energy_metrics` | list | Kinds of energy quantity reported. | `site_energy`, `source_energy`, `primary_energy`, `end_use_energy`, `load_profile`, `peak_demand`, `emissions`, `expenditure` |
+| `metering_level` |  | Finest level at which energy is measured or reported. | `area_aggregate`, `utility_territory`, `whole_building`, `submeter_end_use`, `circuit_or_appliance` |
+| `measurement_basis` |  | Whether values are metered, billed, self-reported or modeled. | `metered`, `billed`, `self_reported`, `modeled_or_estimated`, `mixed` |
+| `weather_normalized_available` |  | True if weather-normalized values are published alongside the actual ones. |  |
+| `reporting_period` |  | Period one value covers (for example calendar year, billing month). |  |
+
+### SimulationProfile
+
+Key in a dataset profile: `simulation_profile`; UBEM role: `reference_simulation`.
+
+Reference simulations and model libraries: synthetic building-stock outputs and prototype models.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `simulation_engine` |  | Simulation engine that produced the data (for example EnergyPlus). |  |
+| `stock_representation` |  | How the simulated building stock is represented. | `sampled_models`, `building_by_building`, `prototype_library` |
+| `weather_basis` |  | Weather used for the simulations (for example AMY 2018, TMY3). |  |
+| `building_sectors` | list | Building sectors covered. | `residential`, `commercial`, `industrial`, `all` |
+
+### ContextProfile
+
+Key in a dataset profile: `context_profile`; UBEM role: `context_coupling`.
+
+Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate.
+
+| Field | | Meaning | Allowed values |
+|---|---|---|---|
+| `context_kind` | list | Kind of context or coupling data. | `grid_emissions`, `energy_tariffs`, `land_use`, `socio_economic`, `urban_climate_zones` |
+
+
+## S4. Concept vocabulary
 
 The 73 mapping targets with their definitions, canonical units and links to Brick 1.4.4, BEDES 2.5 and the CityGML Energy ADE 1.0. Each linked term was checked to exist in the release files; the relation type was assigned with AI assistance and has not been audited by an independent expert.
 
@@ -305,9 +453,9 @@ The 73 mapping targets with their definitions, canonical units and links to Bric
 | energy_price | context | Price per unit energy or demand, or tariff structure. |  | bedes:closeMatch; bedes:narrowMatch |
 | land_use | context | Land use class or land cover of the parcel or cell. |  |  |
 
-## S4. Profile checks
+## S5. Profile checks
 
-Version 1 was written on the 11 variables of the national pipeline (E7). Version 2 was written after applying version 1 to all normalization outputs of the benchmark, and committed before any profile of the New York City data was generated, but in the same commit as the LL84 catalog entry; three of its terms ('Not Available', kBtu, ft²) occur in LL84 and in neither survey, and S19 also reports version 2 without them. Both are Python functions; they use the codebook entry and the schema's unit vocabulary and are not generated from the LinkML source.
+Version 1 was written on the 11 variables of the national pipeline (E7). Version 2 was written after applying version 1 to all normalization outputs of the benchmark, and committed before any profile of the New York City data was generated, but in the same commit as the LL84 catalog entry; three of its terms ('Not Available', kBtu, ft²) occur in LL84 and in neither survey, and S20 also reports version 2 without them. Both are Python functions; they use the codebook entry and the schema's unit vocabulary and are not generated from the LinkML source.
 
 ### Version 1
 
@@ -409,7 +557,7 @@ def check(item: dict, prof: dict) -> list[str]:
 ```
 
 
-## S5. Mapping accuracy by condition: intervals, surveys, concepts, design weights and abstention
+## S6. Mapping accuracy by condition: intervals, surveys, concepts, design weights and abstention
 
 Cluster intervals resample gold concepts. Design-weighted accuracy weights each variable by the inverse sampling fraction of its stratum (survey x rule-based draft concept).
 
@@ -444,7 +592,7 @@ Cluster intervals resample gold concepts. Design-weighted accuracy weights each 
 | qwen3:8b | XBE | 295 | 0.475 | 0.323 | 0.633 | 0.563 | 0.510 | 0.438 | 0.706 | 44 | 0.456 | 5 | 0 | 21 |
 | qwen3:8b | XEA | 295 | 0.461 | 0.336 | 0.630 | 0.549 | 0.544 | 0.377 | 0.751 | 44 | 0.450 | 5 | 3 | 29 |
 
-## S6. Paired comparisons under four label sets
+## S7. Paired comparisons under four label sets
 
 Exact McNemar tests; Holm adjustment over all comparisons and both models within each label set.
 
@@ -587,7 +735,7 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 277 | 0.433 | 0.574 | -0.141 | -0.197 | -0.084 | 7 | 46 | 0.000 | 0.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 277 | 0.412 | 0.574 | -0.162 | -0.288 | -0.027 | 9 | 54 | 0.000 | 0.000 |
 
-## S7. Run-to-run variation (temperature 0.7 runs only)
+## S8. Run-to-run variation (temperature 0.7 runs only)
 
 
 
@@ -602,7 +750,7 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | qwen3:8b | L2 | 4 | 0.586 | 0.588 | 0.002 | 0.957 | 0.997 |
 | qwen3:8b | L3 | 4 | 0.512 | 0.512 | 0.003 | 0.967 | 1.000 |
 
-## S8. Accuracy with and without lexical overlap between the variable label and the gold concept
+## S9. Accuracy with and without lexical overlap between the variable label and the gold concept
 
 Overlap: the label contains the concept's label or one of its synonyms.
 
@@ -637,7 +785,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | qwen3:8b | XBE | 71 | 224 | 0.648 | 0.420 |
 | qwen3:8b | XEA | 71 | 224 | 0.676 | 0.393 |
 
-## S9. Documentation transplant by SKOS relation of the transplanted term
+## S10. Documentation transplant by SKOS relation of the transplanted term
 
 
 
@@ -656,7 +804,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | qwen3:8b | energy_ade | exact or close match | 94 | 9 | 0.298 | 0.415 | 0.202 |
 | qwen3:8b | energy_ade | broad, narrow or related match | 74 | 10 | 0.338 | 0.554 | 0.378 |
 
-## S10. Quantity-kind checks on mappings (E4), strict and lenient error basis
+## S11. Quantity-kind checks on mappings (E4), strict and lenient error basis
 
 
 
@@ -667,7 +815,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | qwen3:8b | strict, 295 mappable variables | 122 | 20 | 16.393 | 173 | 4 | 2.312 | 83.333 |
 | qwen3:8b | lenient, all 300 variables | 96 | 20 | 20.833 | 204 | 4 | 1.961 | 83.333 |
 
-## S11. Profile checks on the national pipeline profiles (E7)
+## S12. Profile checks on the national pipeline profiles (E7)
 
 
 
@@ -683,7 +831,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | all | deviates, no effect on indicators | 40 | 28 | 17 |
 | all | identical to gold | 37 | 0 | 0 |
 
-## S12. Every E7 profile that changed a national indicator
+## S13. Every E7 profile that changed a national indicator
 
 
 
@@ -701,7 +849,7 @@ Overlap: the label contains the concept's label or one of its synonyms.
 | llama3.1:8b | codebook entry only, T=0.7 run 2 | recs2020 | BTUEL | unit; unit_multiplier; missing_codes | 241.214 | unit disagrees with label; multiplier disagrees with label; missing code 'N/A' is not a code; missing code 'NA' is not a code | {'is_weight': False, 'unit': 'unit:KiloW-HR', 'unit_multiplier': 0, 'missing_codes': ['', 'N/A', 'NA', '-1', '-9', '-99' |
 | llama3.1:8b | codebook entry only, T=0.7 run 2 | recs2020 | BTUNG | missing_codes | 64.962 | missing code '0' inside the valid range | {'is_weight': False, 'unit': 'unit:BTU_IT', 'unit_multiplier': 1000, 'missing_codes': ['0']} |
 
-## S13. Profile checks on all benchmark normalization outputs
+## S14. Profile checks on all benchmark normalization outputs
 
 Excludes the 11 variables the version 1 rules were written on. Version 2 results on these data are in-sample.
 
@@ -716,7 +864,7 @@ Excludes the 11 variables the version 1 rules were written on. Version 2 results
 | v2 (revised, in-sample) | qwen3:8b | 0.000 | 766 | 13 | 38.462 | 265 | 41.887 | 488 | 0.000 |
 | v2 (revised, in-sample) | qwen3:8b | 0.700 | 766 | 8 | 25.000 | 332 | 55.723 | 426 | 0.000 |
 
-## S14. National indicators: reference values and design-based standard errors
+## S15. National indicators: reference values and design-based standard errors
 
 Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replicates with coefficient 1; RECS 2020, 60 jackknife replicates with coefficient 59/60.
 
@@ -734,7 +882,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 | recs2020 | Natural gas per household (MWh) | 10.061 | 0.091 | 0.908 |
 | recs2020 | Site EUI (kWh/m2) | 133.126 | 0.568 | 0.427 |
 
-## S15. National indicators from AI-built profiles at all temperatures
+## S16. National indicators from AI-built profiles at all temperatures
 
 
 
@@ -829,7 +977,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 | llama3.1:8b | codebook entry only, T=0.7 run 2 | recs2020 | Natural gas per household (MWh) | 10.061 | 16.597 | 64.962 |
 | llama3.1:8b | codebook entry only, T=0.7 run 2 | recs2020 | Site EUI (kWh/m2) | 133.126 | 454243.067 | 341114.163 |
 
-## S16. Top-code sensitivity (CBECS 2018 floors)
+## S17. Top-code sensitivity (CBECS 2018 floors)
 
 
 
@@ -840,7 +988,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 | upper bound, 20 floors | 14 | 20 | 1.472 | 4.082 | 177.263 |
 | upper bound, 30 floors | 14 | 30 | 1.483 | 4.082 | 175.245 |
 
-## S17. Effect of single normalization errors on CBECS 2018 quantities
+## S18. Effect of single normalization errors on CBECS 2018 quantities
 
 
 
@@ -853,7 +1001,7 @@ Replicate-weight variance as specified by EIA: CBECS 2018, 151 jackknife replica
 | withheld code kept as data (PUBCLIM 7) | share of buildings in hot/very hot zone | 0.138 | 0.135 | -2.454 |
 | survey weights ignored | number of buildings [thousand] | 5918.211 | 6.436 | -99.891 |
 
-## S18. City case: columns selected by the models
+## S19. City case: columns selected by the models
 
 The tax-lot key is described by the JoinKey value parcel_id. Correct columns per role are listed in ubem_link.city.ROLES; for floor area, the variants with and without parking are accepted.
 
@@ -908,7 +1056,7 @@ The tax-lot key is described by the JoinKey value parcel_id. Correct columns per
 | llama3.1:8b | L2 | True | gas | natural_gas_weather_normalized_1 | False | 0.900 |
 | llama3.1:8b | L2 | True | pluto_bbl | bbl | True |  |
 
-## S19. City case: AI-built profiles and profile checks
+## S20. City case: AI-built profiles and profile checks
 
 Second table: every distinct profile of the city runs. Error: a wrong conversion to SI units, a unit given to a column that has none in the vocabulary (an intensity), or a numeric missing code that occurs in the data. Rows with source 'post hoc units' come from the exploratory variant whose unit vocabulary also offers kBtu and therms, which version 2 of the checks does not know; they are not part of the held-out evaluation.
 
@@ -991,7 +1139,7 @@ Second table: every distinct profile of the city runs. Error: a wrong conversion
 | post hoc units | llama3.1:8b | site_energy_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | True | False | error | True | True | True | unit disagrees with label; multiplier disagrees with label |
 | post hoc units | llama3.1:8b | natural_gas_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | True | False | error | True | True | True | unit disagrees with label; multiplier disagrees with label |
 
-## S20. City case: pipeline results, decomposition and the first run
+## S21. City case: pipeline results, decomposition and the first run
 
 First table: model columns and model profiles. Second: model columns with gold profiles (selection only), reference columns with model profiles (normalization only), and the post hoc unit variant. Third and fourth: the first run, in which the tax-lot key was described by the concept record_identifier ('Identifier of a record, building, meter, station or respondent within the dataset'); with that definition both models chose the internal Property ID and no property was joined.
 
@@ -1084,7 +1232,207 @@ First table: model columns and model profiles. Second: model columns with gold p
 | llama3.1:8b | L2 | True | pluto_bbl | bbl | True |  |
 
 
-## S21. Catalog
+## S22. Four-source city integration (E8b)
+
+LL84 benchmarking, PLUTO tax lots, building footprints (polygons and roof heights) and TMYx weather files of four stations. Columns chosen by each model (definitions given, L2) and the profiles built with the tool's normalization prompt under four context conditions: entry (portal description and values only), card (all dataset conventions as prose), scoped (only the conventions whose machine-readable scope covers the column) and tool (scoped, with the conventions' stated values applied by the tool). Status compares a profile with the reference: error (a wrong conversion to SI units, a missing code of the reference not declared while it occurs in the data, or a frequent valid value declared missing), harmless deviation, or exact.
+
+### Reference pipeline
+
+| links | records | usable | linked_pluto | linked_footprints | linked_weather | complete |
+|---|---|---|---|---|---|---|
+| reference | 33684 | 30439 | 30071 | 29692 | 30061 | 29077 |
+
+### Weather stations
+
+| station | state | country | wmo | latitude | longitude | tz | elevation_m | file | hdd18 | cdd18 | mean_temp_c |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| New.York-Central.Park.Obs-Belvedere.Castle | NY | USA | 725053 | 40.779 | -73.969 | -5.000 | 48.000 | USA_NY_New.York-Central.Park.Obs-Belvedere.Castle.725053_TMYx.2009-2023.zip | 2463.679 | 717.675 | 13.216 |
+| New.York-Downtown.Manhattan.Heli | NY | USA | 720553 | 40.701 | -74.009 | -5.000 | 2.100 | USA_NY_New.York-Downtown.Manhattan.Heli.720553_TMYx.2009-2023.zip | 2377.446 | 755.600 | 13.557 |
+| New.York-Kennedy.Intl.AP | NY | USA | 744860 | 40.639 | -73.764 | -5.000 | 3.400 | USA_NY_New.York-Kennedy.Intl.AP.744860_TMYx.2009-2023.zip | 2437.863 | 641.796 | 13.079 |
+| New.York-LaGuardia.AP | NY | USA | 725030 | 40.779 | -73.880 | -5.000 | 3.400 | USA_NY_New.York-LaGuardia.AP.725030_TMYx.2009-2023.zip | 2418.192 | 767.104 | 13.476 |
+
+### Columns selected
+
+| model | role | column | reference | correct |
+|---|---|---|---|---|
+| qwen3:8b | ll84.bbl | nyc_borough_block_and_lot | nyc_borough_block_and_lot | True |
+| qwen3:8b | ll84.bin | nyc_building_identification | nyc_building_identification | True |
+| qwen3:8b | ll84.area | property_gfa_calculated | property_gfa_calculated_1 | True |
+| qwen3:8b | ll84.site | site_energy_use_kbtu | site_energy_use_kbtu | True |
+| qwen3:8b | ll84.elec | electricity_use_grid_purchase_1 | electricity_use_grid_purchase_1 | True |
+| qwen3:8b | ll84.gas | natural_gas_use_kbtu | natural_gas_use_kbtu | True |
+| qwen3:8b | pluto.bbl | bbl | bbl | True |
+| qwen3:8b | pluto.cd | cd | cd | True |
+| qwen3:8b | pluto.year | yearbuilt | yearbuilt | True |
+| qwen3:8b | pluto.floors | numfloors | numfloors | True |
+| qwen3:8b | pluto.lat | latitude | latitude | True |
+| qwen3:8b | pluto.lon | longitude | longitude | True |
+| qwen3:8b | footprints.bin | bin | bin | True |
+| qwen3:8b | footprints.height | height_roof | height_roof | True |
+| qwen3:8b | footprints.footprint | shape_area | the_geom | False |
+| qwen3:8b | footprints.year | construction_year | construction_year | True |
+| llama3.1:8b | ll84.bbl | nyc_borough_block_and_lot | nyc_borough_block_and_lot | True |
+| llama3.1:8b | ll84.bin | nyc_building_identification | nyc_building_identification | True |
+| llama3.1:8b | ll84.area | property_gfa_calculated | property_gfa_calculated_1 | True |
+| llama3.1:8b | ll84.site | site_energy_use_kbtu | site_energy_use_kbtu | True |
+| llama3.1:8b | ll84.elec | electricity_weather_normalized_1 | electricity_use_grid_purchase_1 | False |
+| llama3.1:8b | ll84.gas | natural_gas_weather_normalized_1 | natural_gas_use_kbtu | False |
+| llama3.1:8b | pluto.bbl | bbl | bbl | True |
+| llama3.1:8b | pluto.cd | cd | cd | True |
+| llama3.1:8b | pluto.year | yearbuilt | yearbuilt | True |
+| llama3.1:8b | pluto.floors | numfloors | numfloors | True |
+| llama3.1:8b | pluto.lat | latitude | latitude | True |
+| llama3.1:8b | pluto.lon | longitude | longitude | True |
+| llama3.1:8b | footprints.bin | base_bbl | bin | False |
+| llama3.1:8b | footprints.height | height_roof | height_roof | True |
+| llama3.1:8b | footprints.footprint | the_geom | the_geom | True |
+| llama3.1:8b | footprints.year | construction_year | construction_year | True |
+
+### Profiles of the reference columns
+
+| model | condition | dataset | column | unit | multiplier | missing_codes | model_unit | model_multiplier | status | status_model_answer | review_flags_on_answer | review_flags_frozen |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| qwen3:8b | entry | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| qwen3:8b | entry | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | 17 | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:8b | entry | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:8b | entry | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:8b | entry | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:8b | entry | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | pluto | yearbuilt | none | 1 | 0 | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | pluto | numfloors | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | pluto | latitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | pluto | longitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | entry | footprints | bin | none | 1 | 0 | none | 1 | error | error |  |  |
+| qwen3:8b | entry | footprints | height_roof | none | 1 | 0 | none | 1 | error | error |  |  |
+| qwen3:8b | entry | footprints | construction_year | none | 1 |  | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:8b | card | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| qwen3:8b | card | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 |  | unit:FT2 | 1 | exact | exact |  |  |
+| qwen3:8b | card | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:8b | card | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:8b | card | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:8b | card | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | pluto | yearbuilt | none | 1 | 0 | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | pluto | numfloors | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | pluto | latitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | pluto | longitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | card | footprints | bin | none | 1 | 0 | none | 1 | error | error |  |  |
+| qwen3:8b | card | footprints | height_roof | unit:FT | 1 | 0 | unit:FT | 1 | exact | exact |  |  |
+| qwen3:8b | card | footprints | construction_year | none | 1 |  | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:8b | scoped | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| qwen3:8b | scoped | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | 0 | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:8b | scoped | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | unit:KiloBTU_IT | 1000 | error | error |  |  |
+| qwen3:8b | scoped | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | unit:KiloBTU_IT | 1000 | error | error |  |  |
+| qwen3:8b | scoped | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | pluto | yearbuilt | none | 1 | 0 | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | pluto | numfloors | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | pluto | latitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | pluto | longitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | footprints | bin | none | 1 |  | none | 1 | error | error |  |  |
+| qwen3:8b | scoped | footprints | height_roof | unit:FT | 1 | 0 | unit:FT | 1 | exact | exact |  |  |
+| qwen3:8b | scoped | footprints | construction_year | none | 1 |  | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:8b | tool | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:8b | tool | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| qwen3:8b | tool | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | 0; Not Available | unit:FT2 | 1 | harmless deviation | harmless deviation | numeric missing code '0' is not documented as missing | numeric missing code '0' is not documented as missing |
+| qwen3:8b | tool | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1000 | exact | error | convention set unit unit:KiloBTU_IT | convention set unit unit:KiloBTU_IT |
+| qwen3:8b | tool | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:8b | tool | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1000 | exact | error | convention set unit unit:KiloBTU_IT | convention set unit unit:KiloBTU_IT |
+| qwen3:8b | tool | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:8b | tool | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:8b | tool | pluto | numfloors | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:FT |
+| qwen3:8b | tool | pluto | latitude | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:PA |
+| qwen3:8b | tool | pluto | longitude | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:PA |
+| qwen3:8b | tool | footprints | bin | none | 1 | ; 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | error |  | no unit, but the documentation names unit:W-HR |
+| qwen3:8b | tool | footprints | height_roof | unit:FT | 1 | 0;  | unit:FT | 1 | exact | exact |  |  |
+| qwen3:8b | tool | footprints | construction_year | none | 1 | ; 0 | none | 1 | exact | harmless deviation |  |  |
+| llama3.1:8b | entry | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| llama3.1:8b | entry | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | entry | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | ; ], // 17 zeros and 12 empty values are considered missing codes for this column, as they are not valid observations of property gross floor area in square feet (ft²) and are likely errors or missing data points in the dataset. The empty values are represented by an empty string ( | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | entry | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| llama3.1:8b | entry | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| llama3.1:8b | entry | ll84 | natural_gas_use_kbtu | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | entry | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | entry | pluto | yearbuilt | none | 1 | ; :-1; :-2 | none | 1 | error | error |  |  |
+| llama3.1:8b | entry | pluto | numfloors | none | 1 | ; ,; 0 | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | entry | pluto | latitude | none | 1 | ; 0; NULL | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | entry | pluto | longitude | none | 1 | 937 | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | entry | footprints | bin | none | 1 |  | none | 1 | error | error |  |  |
+| llama3.1:8b | entry | footprints | height_roof | none | 1 | 714 | none | 1 | error | error |  |  |
+| llama3.1:8b | entry | footprints | construction_year | none | 1 |  | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | card | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| llama3.1:8b | card | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | card | ll84 | property_gfa_calculated_1 | none | 1 | ; 0 | none | 1 | error | error |  |  |
+| llama3.1:8b | card | ll84 | site_energy_use_kbtu | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | card | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| llama3.1:8b | card | ll84 | natural_gas_use_kbtu | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | card | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | card | pluto | yearbuilt | none | 1 | ; :-1 | none | 1 | error | error |  |  |
+| llama3.1:8b | card | pluto | numfloors | none | 1 | ; , 0, 0, 0 | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | card | pluto | latitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | card | pluto | longitude | none | 1 |  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | card | footprints | bin | none | 1 |  | none | 1 | error | error |  |  |
+| llama3.1:8b | card | footprints | height_roof | none | 1 | 0 | none | 1 | error | error |  |  |
+| llama3.1:8b | card | footprints | construction_year | none | 1 | 0 | none | 1 | exact | exact |  |  |
+| llama3.1:8b | scoped | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| llama3.1:8b | scoped | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | scoped | ll84 | property_gfa_calculated_1 | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | scoped | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | unit:KiloBTU_IT | 1000 | error | error |  |  |
+| llama3.1:8b | scoped | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| llama3.1:8b | scoped | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1000 | Not Available | unit:KiloBTU_IT | 1000 | error | error |  |  |
+| llama3.1:8b | scoped | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | scoped | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  |  |
+| llama3.1:8b | scoped | pluto | numfloors | none | 1 | ; ,; 0 | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | scoped | pluto | latitude | none | 1 | ; 0; NULL | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | scoped | pluto | longitude | none | 1 | 937 | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | scoped | footprints | bin | none | 1 |  | none | 1 | error | error |  |  |
+| llama3.1:8b | scoped | footprints | height_roof | none | 1 | 0 | none | 1 | error | error |  |  |
+| llama3.1:8b | scoped | footprints | construction_year | none | 1 |  | none | 1 | harmless deviation | harmless deviation |  |  |
+| llama3.1:8b | tool | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| llama3.1:8b | tool | ll84 | nyc_building_identification | none | 1 | Not Available | none | 1 | error | error |  |  |
+| llama3.1:8b | tool | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | Not Available | none | 1 | harmless deviation | error | no unit for a concept measured in unit:M2; convention set unit unit:FT2 | no unit for a concept measured in unit:M2; convention set unit unit:FT2 |
+| llama3.1:8b | tool | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1000 | exact | error | convention set unit unit:KiloBTU_IT | convention set unit unit:KiloBTU_IT |
+| llama3.1:8b | tool | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| llama3.1:8b | tool | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1000 | exact | error | convention set unit unit:KiloBTU_IT | convention set unit unit:KiloBTU_IT |
+| llama3.1:8b | tool | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| llama3.1:8b | tool | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| llama3.1:8b | tool | pluto | numfloors | none | 1 | ; ,; 0 | none | 1 | harmless deviation | harmless deviation | missing code ',' is not a missing-value label | no unit, but the documentation names unit:FT; missing code ',' is not a missing-value label |
+| llama3.1:8b | tool | pluto | latitude | none | 1 | ; 0; NULL | none | 1 | harmless deviation | harmless deviation | numeric missing code '0' is not documented as missing | no unit, but the documentation names unit:PA; numeric missing code '0' is not documented as missing |
+| llama3.1:8b | tool | pluto | longitude | none | 1 | 937 | none | 1 | harmless deviation | harmless deviation | numeric missing code '937' is not documented as missing | no unit, but the documentation names unit:PA; numeric missing code '937' is not documented as missing |
+| llama3.1:8b | tool | footprints | bin | none | 1 | 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | error |  | no unit, but the documentation names unit:W-HR |
+| llama3.1:8b | tool | footprints | height_roof | unit:FT | 1 | 0;  | none | 1 | exact | error | no unit for a concept measured in unit:M; convention set unit unit:FT | no unit for a concept measured in unit:M; convention set unit unit:FT |
+| llama3.1:8b | tool | footprints | construction_year | none | 1 | ; 0 | none | 1 | exact | harmless deviation |  |  |
+
+### Indicators of the integrated table
+
+| model | condition | linked_pluto | linked_footprints | linked_weather | complete_inputs | floor_area_share_before 1940 | eui_before 1940 | floor_area_share_1940-1979 | eui_1940-1979 | floor_area_share_1980-2009 | eui_1980-2009 | floor_area_share_2010 or later | eui_2010 or later | median_height_m | median_height_per_floor_m | median_gfa_to_footprint_x_floors | total_volume_million_m3 | gas_per_m2_hdd | usable | complete |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| reference | reference | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| qwen3:8b | selection only (gold profiles) | 30069 | 29691 | 30059 | 0 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 |  | 0.000 | 0.061 | 30437 | 0 |
+| qwen3:8b | entry, model columns | 30069 | 29702 | 30059 | 29087 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 67.860 | 11.600 | 0.598 | 8527.844 | 0.061 | 30437 | 29087 |
+| qwen3:8b | entry, reference columns | 30071 | 29703 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 67.860 | 11.600 | 1.040 | 4883.397 | 0.062 | 30439 | 29077 |
+| qwen3:8b | card, model columns | 30069 | 29702 | 30059 | 29087 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 | 0.598 | 2599.287 | 0.061 | 30437 | 29087 |
+| qwen3:8b | card, reference columns | 30071 | 29703 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| qwen3:8b | scoped, model columns | 105 | 97 | 105 | 95 | 26.205 | 1594.024 | 59.995 | 1247.723 | 1.597 | 1367.936 | 12.202 | 1327.814 | 19.297 | 3.962 | 0.591 | 9.966 | 0.601 | 109 | 95 |
+| qwen3:8b | scoped, reference columns | 105 | 97 | 105 | 94 | 26.283 | 1594.024 | 60.125 | 1248.713 | 1.602 | 1367.936 | 11.991 | 1355.208 | 19.297 | 3.962 | 1.032 | 5.712 | 0.601 | 109 | 94 |
+| qwen3:8b | tool, model columns | 30069 | 29691 | 30059 | 0 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 |  | 0.000 | 0.061 | 30437 | 0 |
+| qwen3:8b | tool, reference columns | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| llama3.1:8b | selection only (gold profiles) | 30069 | 1 | 30059 | 0 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 18.288 | 4.572 |  | 0.000 | 0.000 | 30437 | 0 |
+| llama3.1:8b | entry, model columns | 28621 | 0 | 28609 | 0 | 35.370 | 24.453 | 40.377 | 27.816 | 15.288 | 23.151 | 8.965 | 18.229 |  |  |  | 0.000 | 0.000 | 28913 | 0 |
+| llama3.1:8b | entry, reference columns | 30075 | 29703 | 30061 | 29132 | 36.204 | 248.025 | 40.101 | 286.827 | 14.772 | 250.016 | 8.923 | 191.518 | 67.860 | 11.600 | 1.040 | 4883.397 | 0.212 | 30439 | 29132 |
+| llama3.1:8b | card, model columns | 29915 | 0 | 29901 | 0 | 35.492 | 79.945 | 40.418 | 90.379 | 15.052 | 77.549 | 9.038 | 59.254 |  |  |  | 0.000 | 0.000 | 30252 | 0 |
+| llama3.1:8b | card, reference columns | 29922 | 29554 | 29908 | 28951 | 36.037 | 80.335 | 40.227 | 92.655 | 14.824 | 80.350 | 8.912 | 61.311 | 67.881 | 11.596 | 11.195 | 4859.733 | 0.020 | 30259 | 28951 |
+| llama3.1:8b | scoped, model columns | 737 | 1 | 736 | 0 | 35.640 | 1201.180 | 42.643 | 1108.339 | 9.600 | 1429.963 | 12.117 | 1442.899 | 60.000 | 15.000 |  | 0.000 | 0.000 | 789 | 0 |
+| llama3.1:8b | scoped, reference columns | 724 | 678 | 723 | 647 | 36.744 | 1194.594 | 42.942 | 1082.844 | 8.288 | 1476.966 | 12.026 | 1469.336 | 58.714 | 12.923 | 11.195 | 102.073 | 0.241 | 776 | 647 |
+| llama3.1:8b | tool, model columns | 30069 | 1 | 30059 | 0 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 18.288 | 4.572 |  | 0.000 | 0.000 | 30437 | 0 |
+| llama3.1:8b | tool, reference columns | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+
+
+
+
+## S24. Catalog
 
 Every dataset with its primary UBEM role, finest public spatial granularity and best linkage to buildings. Linkage classes: shared_identifier (a field holding the same building or parcel identifier as a footprint or parcel dataset of the same jurisdiction); building_location (coordinates or addresses of individual buildings); area_code (only an area such as a census unit, postal code or climate zone); attribute_only (records of individual buildings described only by attributes, with no location); none (no usable key).
 
@@ -1104,6 +1452,7 @@ Every dataset with its primary UBEM role, finest public spatial granularity and 
 | chr-hotmaps | building_characteristics | grid_cell_fine | area_code |
 | chr-ireland-ber | building_characteristics | unknown | none |
 | chr-nyc-ll84 | calibration_validation | building | shared_identifier |
+| chr-nyc-pluto | building_characteristics | parcel | shared_identifier |
 | chr-recs-2020 | building_characteristics | state_province | area_code |
 | chr-tabula-episcope | building_characteristics | nation | area_code |
 | chr-uk-epc | building_characteristics | building | shared_identifier |
@@ -1125,6 +1474,7 @@ Every dataset with its primary UBEM role, finest public spatial granularity and 
 | geo-heris-raster-footprints | geometry_inventory | grid_cell_fine | area_code |
 | geo-ms-global-footprints | geometry_inventory | building | building_location |
 | geo-ms-us-footprints | geometry_inventory | building | building_location |
+| geo-nyc-footprints | geometry_inventory | building | shared_identifier |
 | geo-open-city-model | geometry_inventory | building | building_location |
 | geo-osm | geometry_inventory | building | building_location |
 | geo-overture-buildings | geometry_inventory | building | building_location |
@@ -1182,18 +1532,20 @@ Every dataset with its primary UBEM role, finest public spatial granularity and 
 | wx-nsrdb | boundary_conditions | grid_cell_coarse | area_code |
 | wx-pvgis | boundary_conditions | grid_cell_coarse | area_code |
 
-## S22. Reproducibility map
+## S25. Reproducibility map
 
 Each table and figure is produced by one module of the released package (`python -m <module>`), from cached model outputs, without new model calls.
 
 | Item | Module | Output |
 |---|---|---|
-| Table 5 | ubem_link.standards | ai_readiness_audit.csv |
-| Table 6, Fig. 5, Fig. 6 | ubem_link.design_report | bench_design_conditions.csv, bench_design_tests.csv |
-| Table 7 | ubem_link.design_report | bench_t3_conventions.csv |
+| Fig. 1, Section 2.3, S24 | ubem_link.analytics | catalog_*.csv |
+| Figs. 2 to 4 | ubem_link.schema_figures | figure files |
+| Table 4 | ubem_link.standards | ai_readiness_audit.csv |
+| Table 5, Figs. 5 and 6, S23 | ubem_link.design_report, ubem_link.revision_stats | bench_design_conditions.csv, stats_conditions.csv |
+| Table 6 | ubem_link.design_report | bench_t3_conventions.csv |
 | Fig. 7 | ubem_link.bench_report | bench_t2_coverage.csv |
-| Table 8, Fig. 8, S14 to S17 | ubem_link.endtoend, ubem_link.downstream | endtoend_*.csv, downstream_*.csv |
-| Table 9, Fig. 9, S18 to S20 | ubem_link.city | city_*.csv |
-| S5 to S13 | ubem_link.revision_stats | stats_*.csv |
-| Fig. 4, S21 | ubem_link.analytics | catalog_*.csv |
-| Figs. 1 to 3 | ubem_link.schema_figures | figure files |
+| Table 7, Fig. 8, S15 to S18 | ubem_link.endtoend, ubem_link.downstream | endtoend_*.csv, downstream_*.csv |
+| Table 8, Fig. 9, S19 to S21 | ubem_link.city | city_*.csv |
+| Table 9, S22 | ubem_link.city_integration | city4_*.csv |
+| S6 to S14 | ubem_link.revision_stats | stats_*.csv |
+| S3 | scripts/make_docs.py (category profiles) | docs/category-profiles.md |

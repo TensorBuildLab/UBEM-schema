@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use UBEM-Link, please cite it as below."
+title: "UBEM-Link: an AI-ready semantic schema, open-data catalog and tool for urban building energy modeling"
+version: 1.0.0
+license: [MIT, CC-BY-4.0]
+repository-code: "https://github.com/TensorBuildLab/UBEM-schema"
+authors:
+  - family-names: Zhang
+    given-names: Liang
+    affiliation: University of Arizona
+  - family-names: Chen
+    given-names: Jianli
+    affiliation: Tongji University
+  - family-names: Zou
+    given-names: Jia
+    affiliation: Arizona State University
+references:
+  - type: article
+    title: "Taxonomy, semantic data schema, and schema alignment for open data in urban building energy modeling"
+    authors:
+      - family-names: Zhang
+        given-names: Liang
+      - family-names: Chen
+        given-names: Jianli
+      - family-names: Zou
+        given-names: Jia
+    year: 2023
+    identifiers:
+      - type: other
+        value: "arXiv:2311.08535"

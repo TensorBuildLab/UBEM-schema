@@ -157,6 +157,7 @@ classes:
       - applies_to
       - applies_to_variables
       - applies_to_pattern
+      - applies_to_codes
       - rule
       - example
       - missing_codes
@@ -684,6 +685,9 @@ slots:
     multivalued: true
   applies_to_pattern:
     description: "Regular expression over variable names giving the variables a convention applies to (machine-readable scope)."
+  applies_to_codes:
+    description: "Codes or code labels that must all occur in a variable's documented codes for the convention to apply (machine-readable scope by code list, for example Yes, No and Don't know for yes/no questions)."
+    multivalued: true
 
   # variable level
   name:
@@ -969,7 +973,7 @@ enums:
       grib: {description: "GRIB gridded files."}
       csv: {description: "Other tabular text files."}
       api_json: {description: "Responses of a web API in JSON."}
-      other: {description: "Other format."}
+      other: {description: "Another format not listed here."}
 
   TimestampConvention:
     description: "What a timestamp marks within its interval."
@@ -1022,7 +1026,7 @@ enums:
       plans_or_records: {description: "Taken from building plans or administrative records."}
       model_estimated: {description: "Estimated by a statistical or machine-learning model."}
       derived_from_floors: {description: "Computed from the number of floors and an assumed floor height."}
-      none: {description: "No heights."}
+      none: {description: "The dataset has no building heights."}
 
   HeightReference:
     description: "Reference points of a building height."
@@ -1071,7 +1075,7 @@ enums:
     permissible_values:
       residential: {description: "Dwellings and residential buildings."}
       commercial: {description: "Commercial, public and institutional buildings."}
-      industrial: {description: "Industrial buildings."}
+      industrial: {description: "Industrial and manufacturing buildings."}
       all: {description: "All building sectors."}
 
   DataForm:
@@ -1104,15 +1108,15 @@ enums:
     permissible_values:
       residential: {description: "Households and residential buildings."}
       commercial: {description: "Commercial and public buildings."}
-      industrial: {description: "Industry."}
-      transportation: {description: "Transportation."}
+      industrial: {description: "Industry and manufacturing."}
+      transportation: {description: "Transportation of people and goods."}
       all: {description: "All sectors or the whole economy."}
 
   EnergyCarrier:
     description: "Energy carrier."
     permissible_values:
-      electricity: {description: "Electricity."}
-      natural_gas: {description: "Natural gas."}
+      electricity: {description: "Electricity from the grid."}
+      natural_gas: {description: "Natural gas from a pipeline network."}
       fuel_oil: {description: "Fuel oil and other petroleum liquids."}
       propane: {description: "Propane and liquefied petroleum gas."}
       district_energy: {description: "District steam, hot water or chilled water."}
@@ -1130,7 +1134,7 @@ enums:
       load_profile: {description: "Time series of demand."}
       peak_demand: {description: "Maximum demand over a period."}
       emissions: {description: "Greenhouse gas emissions."}
-      expenditure: {description: "Energy cost."}
+      expenditure: {description: "Cost of the energy used."}
 
   MeteringLevel:
     description: "Finest level at which energy is measured or reported."

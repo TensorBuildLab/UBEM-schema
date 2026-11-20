@@ -47,24 +47,93 @@ join_keys:
 - census_region_division
 - building_type
 conventions:
-- applies_to: variables whose name starts with Z
+- convention_type: imputation_flag
+  applies_to: variables whose name starts with Z
+  applies_to_pattern: ^Z[A-Z0-9]+$
+  missing_codes:
+  - '9'
   rule: Z<NAME> is the imputation flag for the variable <NAME>; codes 0 = reported, 1 = imputed, 9 = inapplicable.
   example: ZMONUSE flags MONUSE (months in use).
-- applies_to: FINALWT, FINALWT1 to FINALWT151
+- convention_type: weight
+  applies_to: FINALWT, FINALWT1 to FINALWT151
+  applies_to_pattern: ^FINALWT[0-9]*$
   rule: FINALWT is the final analysis weight and FINALWT1 to FINALWT151 are replicate weights for variance estimation;
     weights are not observations and every estimate must be weighted by FINALWT.
   example: The sum of FINALWT over all records estimates the number of U.S. commercial buildings.
-- applies_to: categorical and numeric variables with "Missing=Not applicable" in the codebook
+- convention_type: missing_code
+  applies_to: categorical and numeric variables with "Missing=Not applicable" in the codebook
+  applies_to_codes:
+  - Missing=
+  missing_codes:
+  - ''
   rule: A blank cell means not applicable (the question was not asked); record it as a missing code "".
   example: RENADD (addition or annex) is coded 1 = Yes, 2 = No, Missing = Not applicable.
-- applies_to: yes/no questions that offer "Don't know"
+- convention_type: missing_code
+  applies_to: yes/no questions that offer "Don't know"
+  applies_to_codes:
+  - 'Yes'
+  - 'No'
+  - Don't know
+  missing_codes:
+  - '5'
   rule: Code 5 means "Don't know" and is a missing code, not a category.
   example: DRVTHRU 5 = Don't know.
-- applies_to: count and category variables with codes in the 990s, and code 7 in PUBCLIM
+- convention_type: top_or_bottom_code
+  applies_to: count and category variables with codes in the 990s, and code 7 in PUBCLIM
+  applies_to_codes:
+  - '994'
   rule: Codes 994 and 995 are top-codes (ranges), not numbers; codes such as 996 and PUBCLIM 7 mark values withheld
     to protect confidentiality and are missing codes.
   example: NFLOOR 994 = 10 to 14 floors and 995 = 15 or more floors; NOCCAT 996 = withheld.
-- applies_to: energy consumption and expenditure variables
+- convention_type: missing_code
+  applies_to: count and category variables with codes in the 990s, and code 7 in PUBCLIM
+  applies_to_codes:
+  - '996'
+  missing_codes:
+  - '996'
+  rule: Codes 994 and 995 are top-codes (ranges), not numbers; codes such as 996 and PUBCLIM 7 mark values withheld
+    to protect confidentiality and are missing codes.
+  example: NFLOOR 994 = 10 to 14 floors and 995 = 15 or more floors; NOCCAT 996 = withheld.
+- convention_type: missing_code
+  applies_to: count and category variables with codes in the 990s, and code 7 in PUBCLIM
+  applies_to_variables:
+  - PUBCLIM
+  missing_codes:
+  - '7'
+  rule: Codes 994 and 995 are top-codes (ranges), not numbers; codes such as 996 and PUBCLIM 7 mark values withheld
+    to protect confidentiality and are missing codes.
+  example: NFLOOR 994 = 10 to 14 floors and 995 = 15 or more floors; NOCCAT 996 = withheld.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: BTU$
+  unit: unit:KiloBTU_IT
+  unit_multiplier: 1
+  rule: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred
+    cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars.
+  example: MFBTU is annual major-fuel consumption in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_variables:
+  - NGCNS
+  unit: unit:FT3
+  unit_multiplier: 100
+  rule: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred
+    cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars.
+  example: MFBTU is annual major-fuel consumption in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_variables:
+  - SQFT
+  unit: unit:FT2
+  unit_multiplier: 1
+  rule: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred
+    cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars.
+  example: MFBTU is annual major-fuel consumption in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: EXP$
+  unit: unit:CCY_USD
+  unit_multiplier: 1
   rule: Energy is reported in thousand Btu ("thous Btu", multiply by 1,000 for Btu), natural gas volumes in hundred
     cubic feet (multiply by 100), floor area in square feet and expenditures in U.S. dollars.
   example: MFBTU is annual major-fuel consumption in thousand Btu.

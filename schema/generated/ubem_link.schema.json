@@ -300,6 +300,16 @@
                         "null"
                     ]
                 },
+                "applies_to_codes": {
+                    "description": "Codes or code labels that must all occur in a variable's documented codes for the convention to apply (machine-readable scope by code list, for example Yes, No and Don't know for yes/no questions).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "applies_to_pattern": {
                     "description": "Regular expression over variable names giving the variables a convention applies to (machine-readable scope).",
                     "type": [

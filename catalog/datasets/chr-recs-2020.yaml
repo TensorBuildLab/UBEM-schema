@@ -55,17 +55,64 @@ join_keys:
 - climate_zone_iecc
 - building_type
 conventions:
-- applies_to: variables whose name starts with Z
+- convention_type: imputation_flag
+  applies_to: variables whose name starts with Z
+  applies_to_pattern: ^Z[A-Z0-9_]+$
+  missing_codes:
+  - '-2'
   rule: Z<NAME> is the imputation flag for the variable <NAME>; codes 1 = imputed, 0 = not imputed, -2 = not applicable.
   example: ZACEQUIPAGE flags ACEQUIPAGE.
-- applies_to: NWEIGHT, NWEIGHT1 to NWEIGHT60
-  rule: NWEIGHT is the final analysis weight and NWEIGHT1 to NWEIGHT60 are jackknife replicate weights; weights are
-    not observations and every estimate must be weighted by NWEIGHT.
+- convention_type: weight
+  applies_to: NWEIGHT, NWEIGHT1 to NWEIGHT60
+  applies_to_pattern: ^NWEIGHT[0-9]*$
+  rule: NWEIGHT is the final analysis weight and NWEIGHT1 to NWEIGHT60 are jackknife replicate weights; weights
+    are not observations and every estimate must be weighted by NWEIGHT.
   example: The sum of NWEIGHT over all records estimates the number of U.S. housing units.
-- applies_to: all categorical and numeric variables
+- convention_type: missing_code
+  applies_to: all categorical and numeric variables
+  applies_to_pattern: .*
+  missing_codes:
+  - '-2'
+  - '-4'
   rule: Code -2 means not applicable and -4 means don't know; both are missing codes, not values.
   example: ATTIC -2 = Not applicable.
-- applies_to: energy consumption and expenditure variables
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: ^BTU
+  unit: unit:KiloBTU_IT
+  unit_multiplier: 1
+  rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
+    cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
+  example: BTUEL is annual electricity use in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: ^KWH
+  unit: unit:KiloW-HR
+  unit_multiplier: 1
+  rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
+    cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
+  example: BTUEL is annual electricity use in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: ^CUFEET
+  unit: unit:FT3
+  unit_multiplier: 100
+  rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
+    cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
+  example: BTUEL is annual electricity use in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: ^GALLON
+  unit: unit:GAL_US
+  unit_multiplier: 1
+  rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
+    cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
+  example: BTUEL is annual electricity use in thousand Btu.
+- convention_type: unit
+  applies_to: energy consumption and expenditure variables
+  applies_to_pattern: ^DOL
+  unit: unit:CCY_USD
+  unit_multiplier: 1
   rule: BTU* variables are in thousand Btu (multiply by 1,000 for Btu), KWH* in kilowatt-hours, CUFEET* in hundred
     cubic feet (multiply by 100), GALLON* in gallons and DOL* in U.S. dollars.
   example: BTUEL is annual electricity use in thousand Btu.

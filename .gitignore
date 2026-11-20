@@ -11,3 +11,10 @@ __pycache__/
 .env
 # live run log (results tables and the response cache are committed)
 benchmark/results/run_log.txt
+# ubem-link tool outputs
+.ubem_link_cache/
+ubem_link_out/
+ubem_link_cards/
+out/
+work/
+src/ubem_link/_data/

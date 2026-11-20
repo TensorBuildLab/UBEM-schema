@@ -1,0 +1,20 @@
+site_name: UBEM-Link
+site_description: AI-ready schema, catalog and tool for open urban building energy modeling data
+repo_url: https://github.com/TensorBuildLab/UBEM-schema
+docs_dir: docs
+theme:
+  name: readthedocs
+nav:
+  - Home: index.md
+  - Taxonomy: taxonomy.md
+  - Category profiles: category-profiles.md
+  - Concept vocabulary: vocabulary.md
+  - Catalog: catalog.md
+  - The tool: tool.md
+  - Tutorials:
+      - 1. Quickstart: tutorials/01-quickstart.md
+      - 2. Survey microdata: tutorials/02-survey-codebook.md
+      - 3. Integrate city data: tutorials/03-integrate-city-data.md
+      - 4. Assistants and APIs: tutorials/04-assistants-and-apis.md
+      - 5. Extend the schema: tutorials/05-extend-the-schema.md
+  - Schema reference: reference/index.md

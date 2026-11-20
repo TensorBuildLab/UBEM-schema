@@ -197,10 +197,10 @@ def _from_generic_table(df: pd.DataFrame) -> dict[str, Column]:
             out = {}
             for vals in body.astype(str).values.tolist():
                 get = lambda r: (vals[roles[r]] if r in roles and roles[r] < len(vals) else "")  # noqa: E731
-                nm = get("name").strip()
+                nm = str(get("name")).strip()
                 if not nm or nm.lower() in ("nan", "none") or re.search(HEADER_WORDS["name"], nm.lower()):
                     continue
-                clean = lambda x: "" if x.strip().lower() == "nan" else x.strip()  # noqa: E731
+                clean = lambda x: "" if str(x).strip().lower() in ("nan", "none") else str(x).strip()  # noqa: E731
                 out[nm] = Column(nm, label=clean(get("label")), description=clean(get("description")),
                                  unit_text=clean(get("unit")), codes_text=clean(get("codes")))
             return out

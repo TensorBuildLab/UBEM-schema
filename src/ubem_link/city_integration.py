@@ -35,7 +35,8 @@ from .city import EUI_RANGE, columns, gold_profile, ll84, select_request
 from .integrate import nearest, polygon_area_m2, stations
 from .io import load_catalog
 from .llm import complete, load_cache, parse_json
-from .profiler import normalize_request, scoped_conventions
+from ._profiler_frozen import profile_checks as frozen_checks  # checks as frozen before this test
+from .profiler import normalize_request, profile_checks, scoped_conventions
 from .readers import Column, summarize
 from .units import to_canonical
 
@@ -162,6 +163,8 @@ def _clean(s: pd.Series, prof: dict) -> pd.Series:
 def quantity(ds: str, field: str, prof: dict, kind_hint: str) -> pd.Series:
     """Values of a column in canonical units under a profile. kind_hint: 'kwh', 'm2', 'm' or 'raw'."""
     x = pd.to_numeric(_clean(table(ds)[field], prof), errors="coerce")
+    if prof.get("do_not_use"):  # as in `ubem-link apply`: a column the publisher says not to use gives no values
+        return pd.Series(np.nan, index=x.index)
     u, m = prof.get("unit") or "none", prof.get("unit_multiplier") or 1
     if kind_hint == "raw":
         if u != "none":
@@ -236,8 +239,9 @@ def run(sel: dict, prof: dict) -> dict:
         fp = fp.dropna(subset=["_k"])
         ex = lb.explode().dropna()
         m = pd.DataFrame({"row": ex.index, "_k": ex.values}).merge(fp, on="_k", how="inner")
-        agg = {"height": "max", "fp_area": "sum", "fp_year": "min"}
-        g = m.groupby("row").agg({k: v for k, v in agg.items() if k in m})
+        gb = m.groupby("row")
+        g = pd.DataFrame({k: (gb[k].sum(min_count=1) if f == "sum" else gb[k].agg(f))
+                          for k, f in {"height": "max", "fp_area": "sum", "fp_year": "min"}.items() if k in m})
         if {"height", "fp_area"} <= set(m):
             m["vol"] = m.height * m.fp_area
             g["volume"] = m.groupby("row").vol.sum(min_count=1)
@@ -342,7 +346,10 @@ def profile_status(ds: str, field: str, p: dict) -> str:
                  (gf is None and pf is not None and p["unit"] not in ("unit:DEG",) and abs(pf - 1) > 1e-9)
     counts = s.value_counts()
     keeps_invalid = any(counts.get(c, 0) > 0 and c not in p["missing_codes"] for c in g["missing_codes"] if c)
-    drops_valid = any(counts.get(c, 0) >= 10 and c not in g["missing_codes"] and
+    # a frequent numeric value declared missing drops valid records, except a zero floor area, which the
+    # pipeline excludes anyway (it cannot be a denominator of energy use intensity)
+    zero_ok = {"0"} if ds == "ll84" and "gfa" in field or field == "bldgarea" else set()
+    drops_valid = any(counts.get(c, 0) >= 10 and c not in g["missing_codes"] and c not in zero_ok and
                       pd.notna(pd.to_numeric(c, errors="coerce")) for c in p["missing_codes"] if c)
     if unit_wrong or keeps_invalid or drops_valid:
         return "error"
@@ -386,13 +393,26 @@ def main() -> int:
                         continue
                     ans, used = profile_column(model, ds, c, condition, cache)
                     prof[(ds, c)] = used
+                    if variant == "reference columns" and condition == "tool":
+                        # the tool's review flags on the model's own answer (before conventions are applied)
+                        col = column_doc(ds, c)
+                        convs = scoped_conventions(entry(ds), col)
+                        disagree = [f"convention set unit {cv['unit']}" for cv in convs
+                                    if cv.get("unit") and (cv["unit"], float(cv.get("unit_multiplier") or 1))
+                                    != (ans["unit"], float(ans["unit_multiplier"] or 1))]
+                        flags = profile_checks(col, ans, ROLES[role][1], convs) + disagree
+                        flags_frozen = frozen_checks(col, ans, ROLES[role][1], convs) + disagree
+                    else:
+                        flags = flags_frozen = None
                     if variant == "reference columns":
                         rows_prof.append({"model": mname, "condition": condition, "dataset": ds, "column": c,
                                           "unit": used["unit"], "multiplier": used["unit_multiplier"],
                                           "missing_codes": "; ".join(used["missing_codes"]),
                                           "model_unit": ans["unit"], "model_multiplier": ans["unit_multiplier"],
                                           "status": profile_status(ds, c, used),
-                                          "status_model_answer": profile_status(ds, c, ans)})
+                                          "status_model_answer": profile_status(ds, c, ans),
+                                          "review_flags_on_answer": None if flags is None else "; ".join(flags),
+                                          "review_flags_frozen": None if flags_frozen is None else "; ".join(flags_frozen)})
                 res = run(columns_, prof)
                 rows_ind.append({"model": mname, "condition": f"{condition}, {variant}", **indicators(res),
                                  "usable": res.get("usable"), "complete": res.get("complete")})

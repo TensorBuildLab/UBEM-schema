@@ -52,7 +52,7 @@ ubem_link:AccessLevel\#restricted_commercial a owl:Class ;
 	skos:definition "Access requires payment or is restricted to specific users." .
 ubem_link:AccessLevel a owl:Class ;
 	rdfs:label "AccessLevel" ;
-	owl:unionOf _:c14n561 ;
+	owl:unionOf _:c14n563 ;
 	skos:definition "How the data can be obtained." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:AccessLevel\#open_api , ubem_link:AccessLevel\#open_download , ubem_link:AccessLevel\#registration_required , ubem_link:AccessLevel\#request_or_agreement , ubem_link:AccessLevel\#restricted_commercial .
@@ -143,36 +143,36 @@ ubem_link:BuildingSector\#commercial a owl:Class ;
 ubem_link:BuildingSector\#industrial a owl:Class ;
 	rdfs:label "industrial" ;
 	rdfs:subClassOf ubem_link:BuildingSector ;
-	skos:definition "Industrial buildings." .
+	skos:definition "Industrial and manufacturing buildings." .
 ubem_link:BuildingSector\#residential a owl:Class ;
 	rdfs:label "residential" ;
 	rdfs:subClassOf ubem_link:BuildingSector ;
 	skos:definition "Dwellings and residential buildings." .
 ubem_link:BuildingSector a owl:Class ;
 	rdfs:label "BuildingSector" ;
-	owl:unionOf _:c14n594 ;
+	owl:unionOf _:c14n596 ;
 	skos:definition "Building sector." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:BuildingSector\#all , ubem_link:BuildingSector\#commercial , ubem_link:BuildingSector\#industrial , ubem_link:BuildingSector\#residential .
 ubem_link:Catalog a owl:Class ;
 	rdfs:label "Catalog" ;
-	rdfs:subClassOf _:c14n162 , _:c14n539 , _:c14n56 , _:c14n59 ;
+	rdfs:subClassOf _:c14n162 , _:c14n541 , _:c14n56 , _:c14n59 ;
 	skos:definition "A collection of dataset profiles and the concept vocabulary they refer to." ;
 	skos:exactMatch dcat:Catalog ;
 	skos:inScheme ubem_link:schema .
 ubem_link:CategoryProfile a owl:Class ;
 	rdfs:label "CategoryProfile" ;
-	rdfs:subClassOf _:c14n202 , _:c14n293 , _:c14n350 , _:c14n382 , _:c14n587 ;
+	rdfs:subClassOf _:c14n202 , _:c14n293 , _:c14n351 , _:c14n384 , _:c14n589 ;
 	skos:definition "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its \"macroscopic\" and \"microscopic\" energy data share EnergyProfile and differ in energy_data_scale, and its \"comprehensive data lake\" is a Catalog of profiles rather than a category." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:CharacteristicsProfile a owl:Class ;
 	rdfs:label "CharacteristicsProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n116 , _:c14n203 , _:c14n285 , _:c14n305 , _:c14n342 , _:c14n372 , _:c14n393 , _:c14n395 , _:c14n428 , _:c14n468 , _:c14n545 , _:c14n66 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n116 , _:c14n203 , _:c14n285 , _:c14n305 , _:c14n343 , _:c14n374 , _:c14n395 , _:c14n397 , _:c14n430 , _:c14n470 , _:c14n547 , _:c14n66 ;
 	skos:definition "Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys, administrative records, certificates and dictionaries." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:CodeEntry a owl:Class ;
 	rdfs:label "CodeEntry" ;
-	rdfs:subClassOf _:c14n103 , _:c14n24 , _:c14n264 , _:c14n416 , _:c14n423 , _:c14n43 , _:c14n473 , _:c14n483 , _:c14n509 ;
+	rdfs:subClassOf _:c14n103 , _:c14n24 , _:c14n264 , _:c14n418 , _:c14n425 , _:c14n43 , _:c14n475 , _:c14n485 , _:c14n511 ;
 	skos:definition "One code of a categorical variable and its meaning." ;
 	skos:exactMatch skos:Concept ;
 	skos:inScheme ubem_link:schema .
@@ -198,7 +198,7 @@ ubem_link:CollectionMethod\#survey_or_diary a owl:Class ;
 	skos:definition "Questionnaires or time-use diaries." .
 ubem_link:CollectionMethod a owl:Class ;
 	rdfs:label "CollectionMethod" ;
-	owl:unionOf _:c14n409 ;
+	owl:unionOf _:c14n411 ;
 	skos:definition "How behavior or operation data were collected." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:CollectionMethod\#connected_devices , ubem_link:CollectionMethod\#field_study_compilation , ubem_link:CollectionMethod\#mobile_location , ubem_link:CollectionMethod\#sensors_or_logs , ubem_link:CollectionMethod\#survey_or_diary .
@@ -230,7 +230,7 @@ ubem_link:ContextKind a owl:Class ;
 	linkml:permissible_values ubem_link:ContextKind\#energy_tariffs , ubem_link:ContextKind\#grid_emissions , ubem_link:ContextKind\#land_use , ubem_link:ContextKind\#socio_economic , ubem_link:ContextKind\#urban_climate_zones .
 ubem_link:ContextProfile a owl:Class ;
 	rdfs:label "ContextProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n244 , _:c14n455 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n244 , _:c14n457 ;
 	skos:definition "Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:ControlAction\#appliance_on_off a owl:Class ;
@@ -259,13 +259,13 @@ ubem_link:ControlAction\#window_open_close a owl:Class ;
 	skos:definition "Opening or closing a window." .
 ubem_link:ControlAction a owl:Class ;
 	rdfs:label "ControlAction" ;
-	owl:unionOf _:c14n369 ;
+	owl:unionOf _:c14n371 ;
 	skos:definition "Occupant control action." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:ControlAction\#appliance_on_off , ubem_link:ControlAction\#hvac_on_off , ubem_link:ControlAction\#lighting_on_off , ubem_link:ControlAction\#shading_adjustment , ubem_link:ControlAction\#thermostat_adjustment , ubem_link:ControlAction\#window_open_close .
 ubem_link:Convention a owl:Class ;
 	rdfs:label "Convention" ;
-	rdfs:subClassOf _:c14n107 , _:c14n109 , _:c14n131 , _:c14n133 , _:c14n145 , _:c14n165 , _:c14n170 , _:c14n196 , _:c14n216 , _:c14n224 , _:c14n282 , _:c14n283 , _:c14n316 , _:c14n325 , _:c14n376 , _:c14n441 , _:c14n463 , _:c14n470 , _:c14n53 , _:c14n547 , _:c14n584 , _:c14n599 , _:c14n602 , _:c14n9 , _:c14n95 ;
+	rdfs:subClassOf _:c14n107 , _:c14n109 , _:c14n131 , _:c14n133 , _:c14n145 , _:c14n165 , _:c14n170 , _:c14n196 , _:c14n216 , _:c14n224 , _:c14n282 , _:c14n283 , _:c14n316 , _:c14n325 , _:c14n338 , _:c14n364 , _:c14n378 , _:c14n443 , _:c14n465 , _:c14n472 , _:c14n53 , _:c14n549 , _:c14n586 , _:c14n601 , _:c14n604 , _:c14n9 , _:c14n95 ;
 	skos:definition "A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a code that means \"not applicable\", or a unit used for all energy totals. Conventions are usually stated once in a user guide and never in the individual codebook entries, so a person or an AI system reading one entry cannot infer them; the profile states them explicitly." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:ConventionType\#definition a owl:Class ;
@@ -334,13 +334,13 @@ ubem_link:DataForm a owl:Class ;
 	linkml:permissible_values ubem_link:DataForm\#aggregate_tables , ubem_link:DataForm\#archetype_library , ubem_link:DataForm\#building_records , ubem_link:DataForm\#dictionary_or_standard , ubem_link:DataForm\#microdata .
 ubem_link:DatasetProfile a owl:Class ;
 	rdfs:label "DatasetProfile" ;
-	rdfs:subClassOf _:c14n100 , _:c14n105 , _:c14n106 , _:c14n111 , _:c14n112 , _:c14n119 , _:c14n137 , _:c14n140 , _:c14n146 , _:c14n148 , _:c14n152 , _:c14n155 , _:c14n157 , _:c14n159 , _:c14n160 , _:c14n161 , _:c14n163 , _:c14n17 , _:c14n176 , _:c14n18 , _:c14n181 , _:c14n184 , _:c14n189 , _:c14n20 , _:c14n205 , _:c14n206 , _:c14n213 , _:c14n215 , _:c14n217 , _:c14n220 , _:c14n223 , _:c14n23 , _:c14n230 , _:c14n232 , _:c14n249 , _:c14n260 , _:c14n261 , _:c14n278 , _:c14n284 , _:c14n288 , _:c14n301 , _:c14n302 , _:c14n307 , _:c14n308 , _:c14n313 , _:c14n314 , _:c14n319 , _:c14n321 , _:c14n322 , _:c14n323 , _:c14n328 , _:c14n340 , _:c14n341 , _:c14n349 , _:c14n361 , _:c14n365 , _:c14n37 , _:c14n371 , _:c14n373 , _:c14n375 , _:c14n377 , _:c14n383 , _:c14n385 , _:c14n398 , _:c14n402 , _:c14n404 , _:c14n405 , _:c14n408 , _:c14n41 , _:c14n414 , _:c14n418 , _:c14n422 , _:c14n435 , _:c14n454 , _:c14n457 , _:c14n46 , _:c14n460 , _:c14n461 , _:c14n465 , _:c14n466 , _:c14n469 , _:c14n471 , _:c14n482 , _:c14n489 , _:c14n501 , _:c14n504 , _:c14n506 , _:c14n51 , _:c14n511 , _:c14n518 , _:c14n520 , _:c14n522 , _:c14n553 , _:c14n556 , _:c14n558 , _:c14n567 , _:c14n569 , _:c14n571 , _:c14n572 , _:c14n580 , _:c14n585 , _:c14n591 , _:c14n592 , _:c14n597 , _:c14n603 , _:c14n604 , _:c14n612 , _:c14n62 , _:c14n622 , _:c14n625 , _:c14n639 , _:c14n70 , _:c14n76 , _:c14n84 , _:c14n91 , _:c14n96 , _:c14n98 ;
+	rdfs:subClassOf _:c14n100 , _:c14n105 , _:c14n106 , _:c14n111 , _:c14n112 , _:c14n119 , _:c14n137 , _:c14n140 , _:c14n146 , _:c14n148 , _:c14n152 , _:c14n155 , _:c14n157 , _:c14n159 , _:c14n160 , _:c14n161 , _:c14n163 , _:c14n17 , _:c14n176 , _:c14n18 , _:c14n181 , _:c14n184 , _:c14n189 , _:c14n20 , _:c14n205 , _:c14n206 , _:c14n213 , _:c14n215 , _:c14n217 , _:c14n220 , _:c14n223 , _:c14n23 , _:c14n230 , _:c14n232 , _:c14n249 , _:c14n260 , _:c14n261 , _:c14n278 , _:c14n284 , _:c14n288 , _:c14n301 , _:c14n302 , _:c14n307 , _:c14n308 , _:c14n313 , _:c14n314 , _:c14n319 , _:c14n321 , _:c14n322 , _:c14n323 , _:c14n328 , _:c14n341 , _:c14n342 , _:c14n350 , _:c14n362 , _:c14n367 , _:c14n37 , _:c14n373 , _:c14n375 , _:c14n377 , _:c14n379 , _:c14n385 , _:c14n387 , _:c14n400 , _:c14n404 , _:c14n406 , _:c14n407 , _:c14n41 , _:c14n410 , _:c14n416 , _:c14n420 , _:c14n424 , _:c14n437 , _:c14n456 , _:c14n459 , _:c14n46 , _:c14n462 , _:c14n463 , _:c14n467 , _:c14n468 , _:c14n471 , _:c14n473 , _:c14n484 , _:c14n491 , _:c14n503 , _:c14n506 , _:c14n508 , _:c14n51 , _:c14n513 , _:c14n520 , _:c14n522 , _:c14n524 , _:c14n555 , _:c14n558 , _:c14n560 , _:c14n569 , _:c14n571 , _:c14n573 , _:c14n574 , _:c14n582 , _:c14n587 , _:c14n593 , _:c14n594 , _:c14n599 , _:c14n605 , _:c14n606 , _:c14n614 , _:c14n62 , _:c14n624 , _:c14n627 , _:c14n641 , _:c14n70 , _:c14n76 , _:c14n84 , _:c14n91 , _:c14n96 , _:c14n98 ;
 	skos:definition "Dataset-level description of one open dataset, sufficient to decide whether and how it can feed a UBEM workflow, and to join it with other datasets." ;
 	skos:exactMatch dcat:Dataset ;
 	skos:inScheme ubem_link:schema .
 ubem_link:Distribution a owl:Class ;
 	rdfs:label "Distribution" ;
-	rdfs:subClassOf _:c14n108 , _:c14n127 , _:c14n199 , _:c14n267 , _:c14n299 , _:c14n363 , _:c14n419 , _:c14n425 , _:c14n429 , _:c14n499 , _:c14n600 , _:c14n635 ;
+	rdfs:subClassOf _:c14n108 , _:c14n127 , _:c14n199 , _:c14n267 , _:c14n299 , _:c14n365 , _:c14n421 , _:c14n427 , _:c14n431 , _:c14n501 , _:c14n602 , _:c14n637 ;
 	skos:definition "One way of obtaining the data." ;
 	skos:exactMatch dcat:Distribution ;
 	skos:inScheme ubem_link:schema .
@@ -359,7 +359,7 @@ ubem_link:EnergyCarrier\#district_energy a owl:Class ;
 ubem_link:EnergyCarrier\#electricity a owl:Class ;
 	rdfs:label "electricity" ;
 	rdfs:subClassOf ubem_link:EnergyCarrier ;
-	skos:definition "Electricity." .
+	skos:definition "Electricity from the grid." .
 ubem_link:EnergyCarrier\#fuel_oil a owl:Class ;
 	rdfs:label "fuel_oil" ;
 	rdfs:subClassOf ubem_link:EnergyCarrier ;
@@ -367,7 +367,7 @@ ubem_link:EnergyCarrier\#fuel_oil a owl:Class ;
 ubem_link:EnergyCarrier\#natural_gas a owl:Class ;
 	rdfs:label "natural_gas" ;
 	rdfs:subClassOf ubem_link:EnergyCarrier ;
-	skos:definition "Natural gas." .
+	skos:definition "Natural gas from a pipeline network." .
 ubem_link:EnergyCarrier\#onsite_renewables a owl:Class ;
 	rdfs:label "onsite_renewables" ;
 	rdfs:subClassOf ubem_link:EnergyCarrier ;
@@ -407,7 +407,7 @@ ubem_link:EnergyMetric\#end_use_energy a owl:Class ;
 ubem_link:EnergyMetric\#expenditure a owl:Class ;
 	rdfs:label "expenditure" ;
 	rdfs:subClassOf ubem_link:EnergyMetric ;
-	skos:definition "Energy cost." .
+	skos:definition "Cost of the energy used." .
 ubem_link:EnergyMetric\#load_profile a owl:Class ;
 	rdfs:label "load_profile" ;
 	rdfs:subClassOf ubem_link:EnergyMetric ;
@@ -436,7 +436,7 @@ ubem_link:EnergyMetric a owl:Class ;
 	linkml:permissible_values ubem_link:EnergyMetric\#emissions , ubem_link:EnergyMetric\#end_use_energy , ubem_link:EnergyMetric\#expenditure , ubem_link:EnergyMetric\#load_profile , ubem_link:EnergyMetric\#peak_demand , ubem_link:EnergyMetric\#primary_energy , ubem_link:EnergyMetric\#site_energy , ubem_link:EnergyMetric\#source_energy .
 ubem_link:EnergyProfile a owl:Class ;
 	rdfs:label "EnergyProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n132 , _:c14n153 , _:c14n187 , _:c14n2 , _:c14n211 , _:c14n254 , _:c14n275 , _:c14n281 , _:c14n344 , _:c14n345 , _:c14n356 , _:c14n384 , _:c14n396 , _:c14n406 , _:c14n433 , _:c14n528 , _:c14n552 , _:c14n577 , _:c14n596 , _:c14n615 , _:c14n63 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n132 , _:c14n153 , _:c14n187 , _:c14n2 , _:c14n211 , _:c14n254 , _:c14n275 , _:c14n281 , _:c14n345 , _:c14n346 , _:c14n357 , _:c14n386 , _:c14n398 , _:c14n408 , _:c14n435 , _:c14n530 , _:c14n554 , _:c14n579 , _:c14n598 , _:c14n617 , _:c14n63 ;
 	skos:definition "Measured or reported energy use for calibration and validation, from national balances (macroscopic) to buildings, meters and appliances (microscopic)." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:EnergySector\#all a owl:Class ;
@@ -450,7 +450,7 @@ ubem_link:EnergySector\#commercial a owl:Class ;
 ubem_link:EnergySector\#industrial a owl:Class ;
 	rdfs:label "industrial" ;
 	rdfs:subClassOf ubem_link:EnergySector ;
-	skos:definition "Industry." .
+	skos:definition "Industry and manufacturing." .
 ubem_link:EnergySector\#residential a owl:Class ;
 	rdfs:label "residential" ;
 	rdfs:subClassOf ubem_link:EnergySector ;
@@ -458,10 +458,10 @@ ubem_link:EnergySector\#residential a owl:Class ;
 ubem_link:EnergySector\#transportation a owl:Class ;
 	rdfs:label "transportation" ;
 	rdfs:subClassOf ubem_link:EnergySector ;
-	skos:definition "Transportation." .
+	skos:definition "Transportation of people and goods." .
 ubem_link:EnergySector a owl:Class ;
 	rdfs:label "EnergySector" ;
-	owl:unionOf _:c14n440 ;
+	owl:unionOf _:c14n442 ;
 	skos:definition "Energy-using sector." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:EnergySector\#all , ubem_link:EnergySector\#commercial , ubem_link:EnergySector\#industrial , ubem_link:EnergySector\#residential , ubem_link:EnergySector\#transportation .
@@ -599,7 +599,7 @@ ubem_link:GeometryDimension a owl:Class ;
 	linkml:permissible_values ubem_link:GeometryDimension\#footprint_2d , ubem_link:GeometryDimension\#footprint_with_height , ubem_link:GeometryDimension\#parcel_polygon , ubem_link:GeometryDimension\#point , ubem_link:GeometryDimension\#raster , ubem_link:GeometryDimension\#solid_3d .
 ubem_link:GeometryProfile a owl:Class ;
 	rdfs:label "GeometryProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n124 , _:c14n15 , _:c14n171 , _:c14n183 , _:c14n185 , _:c14n218 , _:c14n255 , _:c14n368 , _:c14n394 , _:c14n431 , _:c14n432 , _:c14n434 , _:c14n467 , _:c14n5 , _:c14n546 , _:c14n583 , _:c14n611 , _:c14n613 , _:c14n631 , _:c14n8 , _:c14n88 , _:c14n97 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n124 , _:c14n15 , _:c14n171 , _:c14n183 , _:c14n185 , _:c14n218 , _:c14n255 , _:c14n370 , _:c14n396 , _:c14n433 , _:c14n434 , _:c14n436 , _:c14n469 , _:c14n5 , _:c14n548 , _:c14n585 , _:c14n613 , _:c14n615 , _:c14n633 , _:c14n8 , _:c14n88 , _:c14n97 ;
 	skos:definition "Building stock geometry and inventory: footprints, heights, 3D city models and parcels." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:HeightReference\#above_sea_level a owl:Class ;
@@ -643,7 +643,7 @@ ubem_link:HeightSource\#model_estimated a owl:Class ;
 ubem_link:HeightSource\#none a owl:Class ;
 	rdfs:label "none" ;
 	rdfs:subClassOf ubem_link:HeightSource ;
-	skos:definition "No heights." .
+	skos:definition "The dataset has no building heights." .
 ubem_link:HeightSource\#photogrammetry a owl:Class ;
 	rdfs:label "photogrammetry" ;
 	rdfs:subClassOf ubem_link:HeightSource ;
@@ -654,7 +654,7 @@ ubem_link:HeightSource\#plans_or_records a owl:Class ;
 	skos:definition "Taken from building plans or administrative records." .
 ubem_link:HeightSource a owl:Class ;
 	rdfs:label "HeightSource" ;
-	owl:unionOf _:c14n508 ;
+	owl:unionOf _:c14n510 ;
 	skos:definition "How building heights were obtained." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:HeightSource\#derived_from_floors , ubem_link:HeightSource\#lidar , ubem_link:HeightSource\#model_estimated , ubem_link:HeightSource\#none , ubem_link:HeightSource\#photogrammetry , ubem_link:HeightSource\#plans_or_records .
@@ -814,7 +814,7 @@ ubem_link:MeasurementBasis\#self_reported a owl:Class ;
 	skos:definition "Reported by owners or respondents (for example through benchmarking software)." .
 ubem_link:MeasurementBasis a owl:Class ;
 	rdfs:label "MeasurementBasis" ;
-	owl:unionOf _:c14n514 ;
+	owl:unionOf _:c14n516 ;
 	skos:definition "How energy values were obtained." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:MeasurementBasis\#billed , ubem_link:MeasurementBasis\#metered , ubem_link:MeasurementBasis\#mixed , ubem_link:MeasurementBasis\#modeled_or_estimated , ubem_link:MeasurementBasis\#self_reported .
@@ -840,13 +840,13 @@ ubem_link:MeteringLevel\#whole_building a owl:Class ;
 	skos:definition "One value per building or property." .
 ubem_link:MeteringLevel a owl:Class ;
 	rdfs:label "MeteringLevel" ;
-	owl:unionOf _:c14n510 ;
+	owl:unionOf _:c14n512 ;
 	skos:definition "Finest level at which energy is measured or reported." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:MeteringLevel\#area_aggregate , ubem_link:MeteringLevel\#circuit_or_appliance , ubem_link:MeteringLevel\#submeter_end_use , ubem_link:MeteringLevel\#utility_territory , ubem_link:MeteringLevel\#whole_building .
 ubem_link:OperationProfile a owl:Class ;
 	rdfs:label "OperationProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n126 , _:c14n291 , _:c14n312 , _:c14n362 , _:c14n367 , _:c14n560 , _:c14n565 , _:c14n69 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n126 , _:c14n291 , _:c14n312 , _:c14n363 , _:c14n369 , _:c14n562 , _:c14n567 , _:c14n69 ;
 	skos:definition "Occupancy, occupant behavior, schedules, setpoints and time use." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:Representativeness\#complete_population a owl:Class ;
@@ -875,18 +875,18 @@ ubem_link:Representativeness\#voluntary_or_convenience a owl:Class ;
 	skos:definition "Buildings that chose to participate or were available." .
 ubem_link:Representativeness a owl:Class ;
 	rdfs:label "Representativeness" ;
-	owl:unionOf _:c14n449 ;
+	owl:unionOf _:c14n451 ;
 	skos:definition "How the covered buildings relate to the building stock." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:Representativeness\#complete_population , ubem_link:Representativeness\#mandated_subset , ubem_link:Representativeness\#probability_sample , ubem_link:Representativeness\#synthetic , ubem_link:Representativeness\#unknown , ubem_link:Representativeness\#voluntary_or_convenience .
 ubem_link:SimulationProfile a owl:Class ;
 	rdfs:label "SimulationProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n151 , _:c14n221 , _:c14n231 , _:c14n236 , _:c14n358 , _:c14n366 , _:c14n458 , _:c14n555 , _:c14n557 , _:c14n586 , _:c14n94 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n151 , _:c14n221 , _:c14n231 , _:c14n236 , _:c14n359 , _:c14n368 , _:c14n460 , _:c14n557 , _:c14n559 , _:c14n588 , _:c14n94 ;
 	skos:definition "Reference simulations and model libraries: synthetic building-stock outputs and prototype models." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:SpatialCoverage a owl:Class ;
 	rdfs:label "SpatialCoverage" ;
-	rdfs:subClassOf _:c14n14 , _:c14n167 , _:c14n174 , _:c14n252 , _:c14n256 , _:c14n476 , _:c14n50 , _:c14n90 ;
+	rdfs:subClassOf _:c14n14 , _:c14n167 , _:c14n174 , _:c14n252 , _:c14n256 , _:c14n478 , _:c14n50 , _:c14n90 ;
 	skos:definition "Geographic area a dataset covers." ;
 	skos:exactMatch dct:Location ;
 	skos:inScheme ubem_link:schema .
@@ -977,7 +977,7 @@ ubem_link:SpatialGranularity\#utility_service_territory a owl:Class ;
 	ubem_link:rank 8 .
 ubem_link:SpatialGranularity a owl:Class ;
 	rdfs:label "SpatialGranularity" ;
-	owl:unionOf _:c14n359 ;
+	owl:unionOf _:c14n360 ;
 	skos:definition "Ordered from finest to coarsest (see `rank` annotation)." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:SpatialGranularity\#building , ubem_link:SpatialGranularity\#census_block_group , ubem_link:SpatialGranularity\#census_region_division , ubem_link:SpatialGranularity\#census_tract , ubem_link:SpatialGranularity\#city , ubem_link:SpatialGranularity\#climate_zone , ubem_link:SpatialGranularity\#county , ubem_link:SpatialGranularity\#grid_cell_coarse , ubem_link:SpatialGranularity\#grid_cell_fine , ubem_link:SpatialGranularity\#nation , ubem_link:SpatialGranularity\#none , ubem_link:SpatialGranularity\#parcel , ubem_link:SpatialGranularity\#point_station , ubem_link:SpatialGranularity\#postal_code , ubem_link:SpatialGranularity\#state_province , ubem_link:SpatialGranularity\#unknown , ubem_link:SpatialGranularity\#utility_service_territory .
@@ -1031,7 +1031,7 @@ ubem_link:StatisticalNature\#typical_year_synthetic a owl:Class ;
 	skos:definition "Typical meteorological year assembled from observations." .
 ubem_link:StatisticalNature a owl:Class ;
 	rdfs:label "StatisticalNature" ;
-	owl:unionOf _:c14n519 ;
+	owl:unionOf _:c14n521 ;
 	skos:definition "How the data were generated; decides the statistical treatment they need." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:StatisticalNature\#administrative_record , ubem_link:StatisticalNature\#census_complete , ubem_link:StatisticalNature\#climate_projection , ubem_link:StatisticalNature\#compilation , ubem_link:StatisticalNature\#crowdsourced , ubem_link:StatisticalNature\#measured_monitoring , ubem_link:StatisticalNature\#reanalysis_model , ubem_link:StatisticalNature\#remote_sensing_derived , ubem_link:StatisticalNature\#sample_survey_weighted , ubem_link:StatisticalNature\#simulation_synthetic , ubem_link:StatisticalNature\#standard_or_code , ubem_link:StatisticalNature\#typical_year_synthetic .
@@ -1055,7 +1055,7 @@ ubem_link:StockRepresentation a owl:Class ;
 	linkml:permissible_values ubem_link:StockRepresentation\#building_by_building , ubem_link:StockRepresentation\#prototype_library , ubem_link:StockRepresentation\#sampled_models .
 ubem_link:TemporalCoverage a owl:Class ;
 	rdfs:label "TemporalCoverage" ;
-	rdfs:subClassOf _:c14n115 , _:c14n121 , _:c14n200 , _:c14n247 , _:c14n548 , _:c14n588 ;
+	rdfs:subClassOf _:c14n115 , _:c14n121 , _:c14n200 , _:c14n247 , _:c14n550 , _:c14n590 ;
 	skos:definition "Period of time a dataset covers." ;
 	skos:exactMatch dct:PeriodOfTime ;
 	skos:inScheme ubem_link:schema .
@@ -1077,7 +1077,7 @@ ubem_link:TimeBasis\#utc a owl:Class ;
 	skos:definition "Coordinated Universal Time." .
 ubem_link:TimeBasis a owl:Class ;
 	rdfs:label "TimeBasis" ;
-	owl:unionOf _:c14n381 ;
+	owl:unionOf _:c14n383 ;
 	skos:definition "Clock to which timestamps refer." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:TimeBasis\#local_standard_time , ubem_link:TimeBasis\#local_time_with_dst , ubem_link:TimeBasis\#unknown , ubem_link:TimeBasis\#utc .
@@ -1105,7 +1105,7 @@ ubem_link:TimestampConvention a owl:Class ;
 	linkml:permissible_values ubem_link:TimestampConvention\#instantaneous , ubem_link:TimestampConvention\#interval_beginning , ubem_link:TimestampConvention\#interval_ending , ubem_link:TimestampConvention\#unknown .
 ubem_link:UBEMConcept a owl:Class ;
 	rdfs:label "UBEMConcept" ;
-	rdfs:subClassOf _:c14n102 , _:c14n120 , _:c14n172 , _:c14n179 , _:c14n195 , _:c14n214 , _:c14n219 , _:c14n228 , _:c14n229 , _:c14n233 , _:c14n238 , _:c14n250 , _:c14n258 , _:c14n279 , _:c14n295 , _:c14n309 , _:c14n354 , _:c14n360 , _:c14n387 , _:c14n389 , _:c14n403 , _:c14n407 , _:c14n442 , _:c14n443 , _:c14n462 , _:c14n464 , _:c14n477 , _:c14n484 , _:c14n494 , _:c14n505 , _:c14n551 , _:c14n559 , _:c14n562 , _:c14n607 , _:c14n64 , _:c14n68 ;
+	rdfs:subClassOf _:c14n102 , _:c14n120 , _:c14n172 , _:c14n179 , _:c14n195 , _:c14n214 , _:c14n219 , _:c14n228 , _:c14n229 , _:c14n233 , _:c14n238 , _:c14n250 , _:c14n258 , _:c14n279 , _:c14n295 , _:c14n309 , _:c14n355 , _:c14n361 , _:c14n389 , _:c14n391 , _:c14n405 , _:c14n409 , _:c14n444 , _:c14n445 , _:c14n464 , _:c14n466 , _:c14n479 , _:c14n486 , _:c14n496 , _:c14n507 , _:c14n553 , _:c14n561 , _:c14n564 , _:c14n609 , _:c14n64 , _:c14n68 ;
 	skos:definition "A concept in the UBEM-Link vocabulary: a quantity or attribute that a UBEM workflow consumes or produces (for example floor area, principal building activity, dry-bulb temperature, annual electricity use). Concepts form a hierarchy through `broader` and point to equivalent terms in other standards." ;
 	skos:exactMatch skos:Concept ;
 	skos:inScheme ubem_link:schema .
@@ -1139,7 +1139,7 @@ ubem_link:UBEMRole\#reference_simulation a owl:Class ;
 	skos:definition "Synthetic building-stock model outputs and model libraries." .
 ubem_link:UBEMRole a owl:Class ;
 	rdfs:label "UBEMRole" ;
-	owl:unionOf _:c14n507 ;
+	owl:unionOf _:c14n509 ;
 	skos:definition "The UBEM workflow step a dataset or concept serves." ;
 	skos:inScheme ubem_link:schema ;
 	linkml:permissible_values ubem_link:UBEMRole\#boundary_conditions , ubem_link:UBEMRole\#building_characteristics , ubem_link:UBEMRole\#calibration_validation , ubem_link:UBEMRole\#context_coupling , ubem_link:UBEMRole\#geometry_inventory , ubem_link:UBEMRole\#operation_use , ubem_link:UBEMRole\#reference_simulation .
@@ -1183,13 +1183,13 @@ ubem_link:VariableDatatype a owl:Class ;
 	linkml:permissible_values ubem_link:VariableDatatype\#boolean , ubem_link:VariableDatatype\#categorical , ubem_link:VariableDatatype\#datetime , ubem_link:VariableDatatype\#float , ubem_link:VariableDatatype\#geometry , ubem_link:VariableDatatype\#identifier , ubem_link:VariableDatatype\#integer , ubem_link:VariableDatatype\#string .
 ubem_link:VariableProfile a owl:Class ;
 	rdfs:label "VariableProfile" ;
-	rdfs:subClassOf _:c14n12 , _:c14n13 , _:c14n134 , _:c14n141 , _:c14n149 , _:c14n150 , _:c14n158 , _:c14n164 , _:c14n177 , _:c14n186 , _:c14n192 , _:c14n198 , _:c14n239 , _:c14n246 , _:c14n248 , _:c14n262 , _:c14n28 , _:c14n286 , _:c14n290 , _:c14n296 , _:c14n297 , _:c14n3 , _:c14n329 , _:c14n337 , _:c14n34 , _:c14n347 , _:c14n352 , _:c14n353 , _:c14n378 , _:c14n379 , _:c14n38 , _:c14n39 , _:c14n399 , _:c14n400 , _:c14n426 , _:c14n427 , _:c14n438 , _:c14n439 , _:c14n446 , _:c14n447 , _:c14n448 , _:c14n472 , _:c14n495 , _:c14n498 , _:c14n533 , _:c14n538 , _:c14n541 , _:c14n570 , _:c14n574 , _:c14n619 , _:c14n628 , _:c14n632 , _:c14n634 , _:c14n637 , _:c14n638 , _:c14n72 , _:c14n74 , _:c14n78 , _:c14n81 , _:c14n82 ;
+	rdfs:subClassOf _:c14n12 , _:c14n13 , _:c14n134 , _:c14n141 , _:c14n149 , _:c14n150 , _:c14n158 , _:c14n164 , _:c14n177 , _:c14n186 , _:c14n192 , _:c14n198 , _:c14n239 , _:c14n246 , _:c14n248 , _:c14n262 , _:c14n28 , _:c14n286 , _:c14n290 , _:c14n296 , _:c14n297 , _:c14n3 , _:c14n329 , _:c14n337 , _:c14n34 , _:c14n348 , _:c14n353 , _:c14n354 , _:c14n38 , _:c14n380 , _:c14n381 , _:c14n39 , _:c14n401 , _:c14n402 , _:c14n428 , _:c14n429 , _:c14n440 , _:c14n441 , _:c14n448 , _:c14n449 , _:c14n450 , _:c14n474 , _:c14n497 , _:c14n500 , _:c14n535 , _:c14n540 , _:c14n543 , _:c14n572 , _:c14n576 , _:c14n621 , _:c14n630 , _:c14n634 , _:c14n636 , _:c14n639 , _:c14n640 , _:c14n72 , _:c14n74 , _:c14n78 , _:c14n81 , _:c14n82 ;
 	skos:definition "Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a gridded dataset." ;
 	skos:exactMatch csvw:Column ;
 	skos:inScheme ubem_link:schema .
 ubem_link:Verification a owl:Class ;
 	rdfs:label "Verification" ;
-	rdfs:subClassOf _:c14n147 , _:c14n30 , _:c14n326 , _:c14n485 , _:c14n534 , _:c14n579 , _:c14n627 , _:c14n629 ;
+	rdfs:subClassOf _:c14n147 , _:c14n30 , _:c14n326 , _:c14n487 , _:c14n536 , _:c14n581 , _:c14n629 , _:c14n631 ;
 	skos:definition "Provenance of the profile itself (who checked it, when, against which sources)." ;
 	skos:exactMatch prov:Activity ;
 	skos:inScheme ubem_link:schema .
@@ -1216,7 +1216,7 @@ ubem_link:WeatherFileFormat\#netcdf a owl:Class ;
 ubem_link:WeatherFileFormat\#other a owl:Class ;
 	rdfs:label "other" ;
 	rdfs:subClassOf ubem_link:WeatherFileFormat ;
-	skos:definition "Other format." .
+	skos:definition "Another format not listed here." .
 ubem_link:WeatherFileFormat\#tmy3_csv a owl:Class ;
 	rdfs:label "tmy3_csv" ;
 	rdfs:subClassOf ubem_link:WeatherFileFormat ;
@@ -1229,7 +1229,7 @@ ubem_link:WeatherFileFormat a owl:Class ;
 	linkml:permissible_values ubem_link:WeatherFileFormat\#api_json , ubem_link:WeatherFileFormat\#csv , ubem_link:WeatherFileFormat\#epw , ubem_link:WeatherFileFormat\#grib , ubem_link:WeatherFileFormat\#netcdf , ubem_link:WeatherFileFormat\#other , ubem_link:WeatherFileFormat\#tmy3_csv .
 ubem_link:WeatherProfile a owl:Class ;
 	rdfs:label "WeatherProfile" ;
-	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n0 , _:c14n130 , _:c14n175 , _:c14n182 , _:c14n188 , _:c14n197 , _:c14n235 , _:c14n31 , _:c14n410 , _:c14n412 , _:c14n44 , _:c14n475 , _:c14n481 , _:c14n52 , _:c14n531 , _:c14n537 , _:c14n550 , _:c14n568 , _:c14n576 , _:c14n75 , _:c14n86 ;
+	rdfs:subClassOf ubem_link:CategoryProfile , _:c14n0 , _:c14n130 , _:c14n175 , _:c14n182 , _:c14n188 , _:c14n197 , _:c14n235 , _:c14n31 , _:c14n412 , _:c14n414 , _:c14n44 , _:c14n477 , _:c14n483 , _:c14n52 , _:c14n533 , _:c14n539 , _:c14n552 , _:c14n570 , _:c14n578 , _:c14n75 , _:c14n86 ;
 	skos:definition "Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and actual meteorological years, and climate projections." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:WeatherYearType\#actual_meteorological_year a owl:Class ;
@@ -1292,6 +1292,10 @@ ubem_link:api a owl:DatatypeProperty ;
 ubem_link:applies_to a owl:DatatypeProperty ;
 	rdfs:label "applies_to" ;
 	skos:definition "Which variables the convention applies to (a name pattern or a description)." ;
+	skos:inScheme ubem_link:schema .
+ubem_link:applies_to_codes a owl:DatatypeProperty ;
+	rdfs:label "applies_to_codes" ;
+	skos:definition "Codes or code labels that must all occur in a variable's documented codes for the convention to apply (machine-readable scope by code list, for example Yes, No and Don't know for yes/no questions)." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:applies_to_pattern a owl:DatatypeProperty ;
 	rdfs:label "applies_to_pattern" ;
@@ -1426,7 +1430,7 @@ ubem_link:coordinate_reference_system a owl:DatatypeProperty ;
 	skos:inScheme ubem_link:schema .
 ubem_link:countries a owl:DatatypeProperty ;
 	rdfs:label "countries" ;
-	rdfs:range _:c14n623 ;
+	rdfs:range _:c14n625 ;
 	skos:definition "ISO 3166-1 alpha-2 codes, or GLOBAL." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:coverage_threshold a owl:DatatypeProperty ;
@@ -1480,7 +1484,7 @@ ubem_link:do_not_use a owl:DatatypeProperty ;
 	skos:inScheme ubem_link:schema .
 ubem_link:doi a owl:DatatypeProperty ;
 	rdfs:label "doi" ;
-	rdfs:range _:c14n598 ;
+	rdfs:range _:c14n600 ;
 	skos:definition "DOI of the dataset itself (bare form, e.g. 10.1234/abc)." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:end a owl:DatatypeProperty ;
@@ -1570,7 +1574,7 @@ ubem_link:height_source a owl:ObjectProperty ;
 	skos:inScheme ubem_link:schema .
 ubem_link:id a owl:DatatypeProperty ;
 	rdfs:label "id" ;
-	rdfs:range _:c14n618 ;
+	rdfs:range _:c14n620 ;
 	skos:definition "Stable lowercase identifier of the record (letters, digits, '_', '.', '-')." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:is_imputation_flag a owl:DatatypeProperty ;
@@ -1705,7 +1709,7 @@ ubem_link:record_count_note a owl:DatatypeProperty ;
 	skos:inScheme ubem_link:schema .
 ubem_link:reference_paper_doi a owl:DatatypeProperty ;
 	rdfs:label "reference_paper_doi" ;
-	rdfs:range _:c14n390 ;
+	rdfs:range _:c14n392 ;
 	skos:definition "DOI of a peer-reviewed paper that describes the dataset." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:registration_required a owl:DatatypeProperty ;
@@ -1887,7 +1891,7 @@ _:c14n0 a owl:Restriction ;
 _:c14n1 rdf:first ubem_link:EnergySector\#all ;
 	rdf:rest rdf:nil .
 _:c14n10 rdf:first ubem_link:ConventionType\#weight ;
-	rdf:rest _:c14n578 .
+	rdf:rest _:c14n580 .
 _:c14n100 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:access_level .
@@ -1927,9 +1931,9 @@ _:c14n112 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:versioned .
 _:c14n113 rdf:first ubem_link:WeatherYearType\#actual_series ;
-	rdf:rest _:c14n338 .
+	rdf:rest _:c14n339 .
 _:c14n114 rdf:first ubem_link:SpatialGranularity\#postal_code ;
-	rdf:rest _:c14n536 .
+	rdf:rest _:c14n538 .
 _:c14n115 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:start .
@@ -1937,7 +1941,7 @@ _:c14n116 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:coverage_threshold .
 _:c14n117 rdf:first ubem_link:BehaviorType\#thermal_comfort ;
-	rdf:rest _:c14n606 .
+	rdf:rest _:c14n608 .
 _:c14n118 rdf:first ubem_link:VariableDatatype\#string ;
 	rdf:rest _:c14n87 .
 _:c14n119 a owl:Restriction ;
@@ -1953,14 +1957,14 @@ _:c14n121 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:end .
 _:c14n122 rdf:first ubem_link:SpatialGranularity\#county ;
-	rdf:rest _:c14n391 .
+	rdf:rest _:c14n393 .
 _:c14n123 rdf:first ubem_link:JoinKey\#station_id ;
-	rdf:rest _:c14n523 .
+	rdf:rest _:c14n525 .
 _:c14n124 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:minimum_building_size .
 _:c14n125 rdf:first ubem_link:ContextKind\#grid_emissions ;
-	rdf:rest _:c14n450 .
+	rdf:rest _:c14n452 .
 _:c14n126 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:control_actions .
@@ -1990,16 +1994,16 @@ _:c14n134 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:aggregation .
 _:c14n135 rdf:first ubem_link:SpatialGranularity\#utility_service_territory ;
-	rdf:rest _:c14n388 .
+	rdf:rest _:c14n390 .
 _:c14n136 rdf:first ubem_link:HeightSource\#photogrammetry ;
-	rdf:rest _:c14n633 .
+	rdf:rest _:c14n635 .
 _:c14n137 a owl:Restriction ;
-	owl:allValuesFrom _:c14n663 ;
+	owl:allValuesFrom _:c14n665 ;
 	owl:onProperty ubem_link:doi .
 _:c14n138 rdf:first ubem_link:LevelOfDetail\#lod0 ;
 	rdf:rest _:c14n257 .
 _:c14n139 rdf:first ubem_link:EnergyMetric\#load_profile ;
-	rdf:rest _:c14n386 .
+	rdf:rest _:c14n388 .
 _:c14n14 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:description .
@@ -2025,7 +2029,7 @@ _:c14n147 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:sources_checked .
 _:c14n148 a owl:Restriction ;
-	owl:allValuesFrom _:c14n666 ;
+	owl:allValuesFrom _:c14n671 ;
 	owl:onProperty ubem_link:temporal_resolution .
 _:c14n149 a owl:Restriction ;
 	owl:allValuesFrom xsd:float ;
@@ -2062,7 +2066,7 @@ _:c14n159 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:geometry_profile .
 _:c14n16 rdf:first ubem_link:JoinKey\#parcel_id ;
-	rdf:rest _:c14n581 .
+	rdf:rest _:c14n583 .
 _:c14n160 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:conventions .
@@ -2082,7 +2086,7 @@ _:c14n165 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:example .
 _:c14n166 rdf:first ubem_link:ContextProfile ;
-	rdf:rest _:c14n351 .
+	rdf:rest _:c14n352 .
 _:c14n167 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:description .
@@ -2100,10 +2104,10 @@ _:c14n171 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:geometry_dimension .
 _:c14n172 a owl:Restriction ;
-	owl:allValuesFrom _:c14n651 ;
+	owl:allValuesFrom _:c14n648 ;
 	owl:onProperty ubem_link:id .
 _:c14n173 rdf:first ubem_link:GapFilling\#none ;
-	rdf:rest _:c14n424 .
+	rdf:rest _:c14n426 .
 _:c14n174 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:countries .
@@ -2118,7 +2122,7 @@ _:c14n177 a owl:Restriction ;
 	owl:onProperty ubem_link:review_flags .
 _:c14n178 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n681 .
+	owl:withRestrictions _:c14n683 .
 _:c14n179 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:related_match .
@@ -2155,7 +2159,7 @@ _:c14n189 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:SimulationProfile ;
 	owl:onProperty ubem_link:simulation_profile .
 _:c14n19 rdf:first ubem_link:DataForm\#aggregate_tables ;
-	rdf:rest _:c14n430 .
+	rdf:rest _:c14n432 .
 _:c14n190 rdf:first ubem_link:GeometryDimension\#point ;
 	rdf:rest _:c14n310 .
 _:c14n191 rdf:first ubem_link:SpatialGranularity\#census_region_division ;
@@ -2208,21 +2212,21 @@ _:c14n206 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:ContextProfile ;
 	owl:onProperty ubem_link:context_profile .
 _:c14n207 rdf:first ubem_link:ControlAction\#window_open_close ;
-	rdf:rest _:c14n575 .
+	rdf:rest _:c14n577 .
 _:c14n208 rdf:first ubem_link:MeasurementBasis\#billed ;
 	rdf:rest _:c14n306 .
 _:c14n209 rdf:first ubem_link:GeographicScope\#city ;
 	rdf:rest rdf:nil .
 _:c14n21 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n676 .
+	owl:withRestrictions _:c14n678 .
 _:c14n210 rdf:first ubem_link:GeometryDimension\#solid_3d ;
-	rdf:rest _:c14n640 .
+	rdf:rest _:c14n642 .
 _:c14n211 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:weather_normalized_available .
 _:c14n212 rdf:first ubem_link:AccessLevel\#registration_required ;
-	rdf:rest _:c14n420 .
+	rdf:rest _:c14n422 .
 _:c14n213 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:SpatialGranularity ;
 	owl:onProperty ubem_link:spatial_granularity .
@@ -2239,7 +2243,7 @@ _:c14n217 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:temporal_coverage .
 _:c14n218 a owl:Restriction ;
-	owl:allValuesFrom _:c14n672 ;
+	owl:allValuesFrom _:c14n674 ;
 	owl:onProperty ubem_link:coordinate_reference_system .
 _:c14n219 a owl:Restriction ;
 	owl:minCardinality 0 ;
@@ -2253,7 +2257,7 @@ _:c14n221 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:weather_basis .
 _:c14n222 rdf:first ubem_link:EnergyCarrier\#propane ;
-	rdf:rest _:c14n530 .
+	rdf:rest _:c14n532 .
 _:c14n223 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:spatial_coverage .
@@ -2261,7 +2265,7 @@ _:c14n224 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:convention_type .
 _:c14n225 rdf:first ubem_link:JoinKey\#geometry ;
-	rdf:rest _:c14n535 .
+	rdf:rest _:c14n537 .
 _:c14n226 rdf:first ubem_link:WeatherFileFormat\#other ;
 	rdf:rest rdf:nil .
 _:c14n227 rdf:first "sample_survey_weighted" ;
@@ -2288,7 +2292,7 @@ _:c14n233 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:definition .
 _:c14n234 rdf:first ubem_link:BehaviorType\#lighting_operation ;
-	rdf:rest _:c14n474 .
+	rdf:rest _:c14n476 .
 _:c14n235 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:weather_year_type .
@@ -2296,7 +2300,7 @@ _:c14n236 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:simulation_engine .
 _:c14n237 rdf:first _:c14n259 ;
-	rdf:rest _:c14n601 .
+	rdf:rest _:c14n603 .
 _:c14n238 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:definition .
@@ -2307,13 +2311,13 @@ _:c14n24 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:concept_value .
 _:c14n240 rdf:first skos:exactMatch ;
-	rdf:rest _:c14n380 .
+	rdf:rest _:c14n382 .
 _:c14n241 rdf:first ubem_link:LevelOfDetail\#lod3 ;
 	rdf:rest _:c14n142 .
 _:c14n242 rdf:first ubem_link:Aggregation\#static ;
-	rdf:rest _:c14n453 .
+	rdf:rest _:c14n455 .
 _:c14n243 rdf:first ubem_link:UBEMRole\#operation_use ;
-	rdf:rest _:c14n595 .
+	rdf:rest _:c14n597 .
 _:c14n244 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:context_kind .
@@ -2332,7 +2336,7 @@ _:c14n249 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:TemporalCoverage ;
 	owl:onProperty ubem_link:temporal_coverage .
 _:c14n25 rdf:first ubem_link:JoinKey\#fips_state ;
-	rdf:rest _:c14n609 .
+	rdf:rest _:c14n611 .
 _:c14n250 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:entity .
@@ -2342,7 +2346,7 @@ _:c14n252 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:bbox .
 _:c14n253 rdf:first ubem_link:EntityType\#site ;
-	rdf:rest _:c14n617 .
+	rdf:rest _:c14n619 .
 _:c14n254 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:energy_sectors .
@@ -2353,13 +2357,13 @@ _:c14n256 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:description .
 _:c14n257 rdf:first ubem_link:LevelOfDetail\#lod1 ;
-	rdf:rest _:c14n355 .
+	rdf:rest _:c14n356 .
 _:c14n258 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:narrow_match .
 _:c14n259 a owl:Restriction ;
 	owl:onProperty ubem_link:statistical_nature ;
-	owl:someValuesFrom _:c14n479 .
+	owl:someValuesFrom _:c14n481 .
 _:c14n26 rdf:first ubem_link:StatisticalNature\#compilation ;
 	rdf:rest rdf:nil .
 _:c14n260 a owl:Restriction ;
@@ -2377,14 +2381,14 @@ _:c14n264 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:label .
 _:c14n265 rdf:first ubem_link:MeteringLevel\#submeter_end_use ;
-	rdf:rest _:c14n630 .
+	rdf:rest _:c14n632 .
 _:c14n266 rdf:first ubem_link:HeightReference\#ground_to_roof_top ;
-	rdf:rest _:c14n517 .
+	rdf:rest _:c14n519 .
 _:c14n267 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:access_url .
 _:c14n268 rdf:first ubem_link:StatisticalNature\#remote_sensing_derived ;
-	rdf:rest _:c14n608 .
+	rdf:rest _:c14n610 .
 _:c14n269 rdf:first ubem_link:EnergyCarrier\#electricity ;
 	rdf:rest _:c14n79 .
 _:c14n27 rdf:first ubem_link:Aggregation\#share ;
@@ -2392,13 +2396,13 @@ _:c14n27 rdf:first ubem_link:Aggregation\#share ;
 _:c14n270 rdf:first ubem_link:EnergyCarrier\#all_carriers ;
 	rdf:rest rdf:nil .
 _:c14n271 rdf:first ubem_link:JoinKey\#country_iso ;
-	rdf:rest _:c14n582 .
+	rdf:rest _:c14n584 .
 _:c14n272 rdf:first ubem_link:EnergyMetric\#primary_energy ;
 	rdf:rest _:c14n60 .
 _:c14n273 rdf:first ubem_link:StockRepresentation\#sampled_models ;
-	rdf:rest _:c14n339 .
+	rdf:rest _:c14n340 .
 _:c14n274 rdf:first ubem_link:EnergyMetric\#site_energy ;
-	rdf:rest _:c14n374 .
+	rdf:rest _:c14n376 .
 _:c14n275 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:MeteringLevel ;
 	owl:onProperty ubem_link:metering_level .
@@ -2443,7 +2447,7 @@ _:c14n288 a owl:Restriction ;
 _:c14n289 rdf:first ubem_link:TimestampConvention\#interval_beginning ;
 	rdf:rest _:c14n315 .
 _:c14n29 rdf:first ubem_link:JoinKey\#vintage ;
-	rdf:rest _:c14n521 .
+	rdf:rest _:c14n523 .
 _:c14n290 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:do_not_use .
@@ -2493,7 +2497,7 @@ _:c14n305 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:BuildingSector ;
 	owl:onProperty ubem_link:building_sectors .
 _:c14n306 rdf:first ubem_link:MeasurementBasis\#self_reported ;
-	rdf:rest _:c14n516 .
+	rdf:rest _:c14n518 .
 _:c14n307 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:variables_documented .
@@ -2507,7 +2511,7 @@ _:c14n31 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:timestamp_convention .
 _:c14n310 rdf:first ubem_link:GeometryDimension\#footprint_2d ;
-	rdf:rest _:c14n343 .
+	rdf:rest _:c14n344 .
 _:c14n311 rdf:first ubem_link:AccessLevel\#restricted_commercial ;
 	rdf:rest rdf:nil .
 _:c14n312 a owl:Restriction ;
@@ -2520,19 +2524,19 @@ _:c14n314 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:machine_readable .
 _:c14n315 rdf:first ubem_link:TimestampConvention\#instantaneous ;
-	rdf:rest _:c14n413 .
+	rdf:rest _:c14n415 .
 _:c14n316 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:rule .
 _:c14n317 rdf:first ubem_link:SpatialGranularity\#nation ;
-	rdf:rest _:c14n620 .
+	rdf:rest _:c14n622 .
 _:c14n318 rdf:first ubem_link:MeasurementBasis\#mixed ;
 	rdf:rest rdf:nil .
 _:c14n319 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:temporal_resolution .
 _:c14n32 rdf:first ubem_link:MeteringLevel\#utility_territory ;
-	rdf:rest _:c14n590 .
+	rdf:rest _:c14n592 .
 _:c14n320 rdf:first ubem_link:JoinKey\#climate_zone_iecc ;
 	rdf:rest _:c14n92 .
 _:c14n321 a owl:Restriction ;
@@ -2553,7 +2557,7 @@ _:c14n326 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:date .
 _:c14n327 rdf:first ubem_link:EnergyDataScale\#macroscopic ;
-	rdf:rest _:c14n502 .
+	rdf:rest _:c14n504 .
 _:c14n328 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:WeatherProfile ;
 	owl:onProperty ubem_link:weather_profile .
@@ -2565,13 +2569,13 @@ _:c14n33 rdf:first ubem_link:VariableDatatype\#float ;
 _:c14n330 rdf:first ubem_link:EntityType\#system ;
 	rdf:rest _:c14n85 .
 _:c14n331 rdf:first ubem_link:SpatialGranularity\#grid_cell_fine ;
-	rdf:rest _:c14n573 .
+	rdf:rest _:c14n575 .
 _:c14n332 rdf:first ubem_link:CollectionMethod\#field_study_compilation ;
-	rdf:rest _:c14n636 .
+	rdf:rest _:c14n638 .
 _:c14n333 rdf:first ubem_link:HeightSource\#none ;
 	rdf:rest rdf:nil .
 _:c14n334 rdf:first ubem_link:EntityType\#region ;
-	rdf:rest _:c14n348 .
+	rdf:rest _:c14n349 .
 _:c14n335 rdf:first ubem_link:VariableDatatype\#geometry ;
 	rdf:rest _:c14n154 .
 _:c14n336 rdf:first ubem_link:EntityType\#zone ;
@@ -2579,961 +2583,964 @@ _:c14n336 rdf:first ubem_link:EntityType\#zone ;
 _:c14n337 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:missing_codes .
-_:c14n338 rdf:first ubem_link:WeatherYearType\#actual_meteorological_year ;
+_:c14n338 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:applies_to_codes .
+_:c14n339 rdf:first ubem_link:WeatherYearType\#actual_meteorological_year ;
 	rdf:rest _:c14n6 .
-_:c14n339 rdf:first ubem_link:StockRepresentation\#building_by_building ;
-	rdf:rest _:c14n42 .
 _:c14n34 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:description .
-_:c14n340 a owl:Restriction ;
+_:c14n340 rdf:first ubem_link:StockRepresentation\#building_by_building ;
+	rdf:rest _:c14n42 .
+_:c14n341 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:publisher .
-_:c14n341 a owl:Restriction ;
+_:c14n342 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:energy_profile .
-_:c14n342 a owl:Restriction ;
+_:c14n343 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:cross_tabulations .
-_:c14n343 rdf:first ubem_link:GeometryDimension\#footprint_with_height ;
+_:c14n344 rdf:first ubem_link:GeometryDimension\#footprint_with_height ;
 	rdf:rest _:c14n210 .
-_:c14n344 a owl:Restriction ;
+_:c14n345 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:metering_level .
-_:c14n345 a owl:Restriction ;
+_:c14n346 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:weather_normalized_available .
-_:c14n346 rdf:first ubem_link:UBEMRole\#geometry_inventory ;
+_:c14n347 rdf:first ubem_link:UBEMRole\#geometry_inventory ;
 	rdf:rest _:c14n280 .
-_:c14n347 a owl:Restriction ;
+_:c14n348 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:is_replicate_weight .
-_:c14n348 rdf:first ubem_link:EntityType\#weather_station ;
-	rdf:rest _:c14n415 .
-_:c14n349 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:publisher .
+_:c14n349 rdf:first ubem_link:EntityType\#weather_station ;
+	rdf:rest _:c14n417 .
 _:c14n35 rdf:first ubem_link:JoinKey\#nuts_region ;
 	rdf:rest _:c14n271 .
-_:c14n350 owl:unionOf _:c14n324 .
-_:c14n351 rdf:first ubem_link:EnergyProfile ;
-	rdf:rest _:c14n610 .
-_:c14n352 a owl:Restriction ;
+_:c14n350 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:publisher .
+_:c14n351 owl:unionOf _:c14n324 .
+_:c14n352 rdf:first ubem_link:EnergyProfile ;
+	rdf:rest _:c14n612 .
+_:c14n353 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:is_imputation_flag .
-_:c14n353 a owl:Restriction ;
+_:c14n354 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:is_weight .
-_:c14n354 a owl:Restriction ;
+_:c14n355 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:pref_label .
-_:c14n355 rdf:first ubem_link:LevelOfDetail\#lod2 ;
+_:c14n356 rdf:first ubem_link:LevelOfDetail\#lod2 ;
 	rdf:rest _:c14n241 .
-_:c14n356 a owl:Restriction ;
+_:c14n357 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:reporting_period .
-_:c14n357 a owl:Restriction ;
+_:c14n358 a owl:Restriction ;
 	owl:onProperty ubem_link:sampling_weights ;
 	owl:someValuesFrom xsd:string .
-_:c14n358 a owl:Restriction ;
+_:c14n359 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:StockRepresentation ;
 	owl:onProperty ubem_link:stock_representation .
-_:c14n359 rdf:first ubem_link:SpatialGranularity\#point_station ;
-	rdf:rest _:c14n500 .
 _:c14n36 rdf:first ubem_link:TimeBasis\#unknown ;
 	rdf:rest rdf:nil .
-_:c14n360 a owl:Restriction ;
+_:c14n360 rdf:first ubem_link:SpatialGranularity\#point_station ;
+	rdf:rest _:c14n502 .
+_:c14n361 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:canonical_unit .
-_:c14n361 a owl:Restriction ;
+_:c14n362 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:title .
-_:c14n362 a owl:Restriction ;
+_:c14n363 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:CollectionMethod ;
 	owl:onProperty ubem_link:collection_method .
-_:c14n363 a owl:Restriction ;
+_:c14n364 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:access_url .
-_:c14n364 rdf:first ubem_link:ConventionType\#imputation_flag ;
-	rdf:rest _:c14n10 .
+	owl:onProperty ubem_link:applies_to_codes .
 _:c14n365 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:spatial_coverage .
-_:c14n366 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:simulation_engine .
+	owl:onProperty ubem_link:access_url .
+_:c14n366 rdf:first ubem_link:ConventionType\#imputation_flag ;
+	rdf:rest _:c14n10 .
 _:c14n367 a owl:Restriction ;
-	owl:allValuesFrom ubem_link:BehaviorType ;
-	owl:onProperty ubem_link:behavior_types .
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:spatial_coverage .
 _:c14n368 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:height_reference .
-_:c14n369 rdf:first ubem_link:ControlAction\#thermostat_adjustment ;
-	rdf:rest _:c14n411 .
+	owl:onProperty ubem_link:simulation_engine .
+_:c14n369 a owl:Restriction ;
+	owl:allValuesFrom ubem_link:BehaviorType ;
+	owl:onProperty ubem_link:behavior_types .
 _:c14n37 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:characteristics_profile .
-_:c14n370 rdf:first ubem_link:EntityType\#household ;
-	rdf:rest _:c14n529 .
-_:c14n371 a owl:Restriction ;
+_:c14n370 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:height_reference .
+_:c14n371 rdf:first ubem_link:ControlAction\#thermostat_adjustment ;
+	rdf:rest _:c14n413 .
+_:c14n372 rdf:first ubem_link:EntityType\#household ;
+	rdf:rest _:c14n531 .
+_:c14n373 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:spatial_granularity .
-_:c14n372 a owl:Restriction ;
+_:c14n374 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:data_form .
-_:c14n373 a owl:Restriction ;
+_:c14n375 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:versioned .
-_:c14n374 rdf:first ubem_link:EnergyMetric\#source_energy ;
+_:c14n376 rdf:first ubem_link:EnergyMetric\#source_energy ;
 	rdf:rest _:c14n272 .
-_:c14n375 a owl:Restriction ;
+_:c14n377 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:license .
-_:c14n376 a owl:Restriction ;
+_:c14n378 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:applies_to_variables .
-_:c14n377 a owl:Restriction ;
+_:c14n379 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:spatial_granularity .
-_:c14n378 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:flags_variable .
-_:c14n379 a owl:Restriction ;
-	owl:allValuesFrom ubem_link:MappingRelation ;
-	owl:onProperty ubem_link:mapping_relation .
 _:c14n38 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:label .
-_:c14n380 rdf:first skos:closeMatch ;
-	rdf:rest _:c14n525 .
-_:c14n381 rdf:first ubem_link:TimeBasis\#utc ;
-	rdf:rest _:c14n564 .
-_:c14n382 a owl:Restriction ;
+_:c14n380 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:flags_variable .
+_:c14n381 a owl:Restriction ;
+	owl:allValuesFrom ubem_link:MappingRelation ;
+	owl:onProperty ubem_link:mapping_relation .
+_:c14n382 rdf:first skos:closeMatch ;
+	rdf:rest _:c14n527 .
+_:c14n383 rdf:first ubem_link:TimeBasis\#utc ;
+	rdf:rest _:c14n566 .
+_:c14n384 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:metadata_standards .
-_:c14n383 a owl:Restriction ;
+_:c14n385 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:short_name .
-_:c14n384 a owl:Restriction ;
+_:c14n386 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:measurement_basis .
-_:c14n385 a owl:Restriction ;
+_:c14n387 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:SpatialCoverage ;
 	owl:onProperty ubem_link:spatial_coverage .
-_:c14n386 rdf:first ubem_link:EnergyMetric\#peak_demand ;
-	rdf:rest _:c14n436 .
-_:c14n387 a owl:Restriction ;
+_:c14n388 rdf:first ubem_link:EnergyMetric\#peak_demand ;
+	rdf:rest _:c14n438 .
+_:c14n389 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:pref_label .
-_:c14n388 rdf:first ubem_link:SpatialGranularity\#state_province ;
-	rdf:rest _:c14n497 .
-_:c14n389 a owl:Restriction ;
-	owl:allValuesFrom ubem_link:UBEMConcept ;
-	owl:onProperty ubem_link:broader .
 _:c14n39 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:code_list .
-_:c14n390 a rdfs:Datatype ;
+_:c14n390 rdf:first ubem_link:SpatialGranularity\#state_province ;
+	rdf:rest _:c14n499 .
+_:c14n391 a owl:Restriction ;
+	owl:allValuesFrom ubem_link:UBEMConcept ;
+	owl:onProperty ubem_link:broader .
+_:c14n392 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
 	owl:withRestrictions _:c14n680 .
-_:c14n391 rdf:first ubem_link:SpatialGranularity\#city ;
+_:c14n393 rdf:first ubem_link:SpatialGranularity\#city ;
 	rdf:rest _:c14n135 .
-_:c14n392 rdf:first ubem_link:EnergyCarrier\#fuel_oil ;
+_:c14n394 rdf:first ubem_link:EnergyCarrier\#fuel_oil ;
 	rdf:rest _:c14n222 .
-_:c14n393 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:representativeness .
-_:c14n394 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:crs_linear_unit .
 _:c14n395 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:cross_tabulations .
+	owl:onProperty ubem_link:representativeness .
 _:c14n396 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:crs_linear_unit .
+_:c14n397 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:cross_tabulations .
+_:c14n398 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:MeasurementBasis ;
 	owl:onProperty ubem_link:measurement_basis .
-_:c14n397 rdf:first ubem_link:WeatherYearType\#future_typical_year ;
+_:c14n399 rdf:first ubem_link:WeatherYearType\#future_typical_year ;
 	rdf:rest _:c14n40 .
-_:c14n398 a owl:Restriction ;
+_:c14n4 rdf:first ubem_link:Representativeness\#complete_population ;
+	rdf:rest _:c14n446 .
+_:c14n40 rdf:first ubem_link:WeatherYearType\#projection_series ;
+	rdf:rest _:c14n482 .
+_:c14n400 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:notes .
-_:c14n399 a owl:Restriction ;
+_:c14n401 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:name .
-_:c14n4 rdf:first ubem_link:Representativeness\#complete_population ;
-	rdf:rest _:c14n444 .
-_:c14n40 rdf:first ubem_link:WeatherYearType\#projection_series ;
-	rdf:rest _:c14n480 .
-_:c14n400 a owl:Restriction ;
+_:c14n402 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:label .
-_:c14n401 rdf:first ubem_link:OperationProfile ;
+_:c14n403 rdf:first ubem_link:OperationProfile ;
 	rdf:rest _:c14n58 .
-_:c14n402 a owl:Restriction ;
+_:c14n404 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:AccessLevel ;
 	owl:onProperty ubem_link:access_level .
-_:c14n403 a owl:Restriction ;
+_:c14n405 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:alt_labels .
-_:c14n404 a owl:Restriction ;
+_:c14n406 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:sampling_weights .
-_:c14n405 a owl:Restriction ;
+_:c14n407 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:CharacteristicsProfile ;
 	owl:onProperty ubem_link:characteristics_profile .
-_:c14n406 a owl:Restriction ;
+_:c14n408 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:EnergyMetric ;
 	owl:onProperty ubem_link:energy_metrics .
-_:c14n407 a owl:Restriction ;
+_:c14n409 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:related_match .
-_:c14n408 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:distributions .
-_:c14n409 rdf:first ubem_link:CollectionMethod\#sensors_or_logs ;
-	rdf:rest _:c14n459 .
 _:c14n41 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:weather_profile .
 _:c14n410 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:gap_filling .
-_:c14n411 rdf:first ubem_link:ControlAction\#hvac_on_off ;
-	rdf:rest _:c14n93 .
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:distributions .
+_:c14n411 rdf:first ubem_link:CollectionMethod\#sensors_or_logs ;
+	rdf:rest _:c14n461 .
 _:c14n412 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:station_id_scheme .
-_:c14n413 rdf:first ubem_link:TimestampConvention\#unknown ;
-	rdf:rest rdf:nil .
+	owl:onProperty ubem_link:gap_filling .
+_:c14n413 rdf:first ubem_link:ControlAction\#hvac_on_off ;
+	rdf:rest _:c14n93 .
 _:c14n414 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:machine_readable .
-_:c14n415 rdf:first ubem_link:EntityType\#grid_cell ;
-	rdf:rest _:c14n493 .
+	owl:onProperty ubem_link:station_id_scheme .
+_:c14n415 rdf:first ubem_link:TimestampConvention\#unknown ;
+	rdf:rest rdf:nil .
 _:c14n416 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:code .
-_:c14n417 rdf:first ubem_link:BehaviorType\#hvac_operation ;
-	rdf:rest _:c14n169 .
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:machine_readable .
+_:c14n417 rdf:first ubem_link:EntityType\#grid_cell ;
+	rdf:rest _:c14n495 .
 _:c14n418 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:reference_paper_doi .
-_:c14n419 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:format .
+	owl:onProperty ubem_link:code .
+_:c14n419 rdf:first ubem_link:BehaviorType\#hvac_operation ;
+	rdf:rest _:c14n169 .
 _:c14n42 rdf:first ubem_link:StockRepresentation\#prototype_library ;
 	rdf:rest rdf:nil .
-_:c14n420 rdf:first ubem_link:AccessLevel\#request_or_agreement ;
+_:c14n420 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:reference_paper_doi .
+_:c14n421 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:format .
+_:c14n422 rdf:first ubem_link:AccessLevel\#request_or_agreement ;
 	rdf:rest _:c14n311 .
-_:c14n421 rdf:first ubem_link:WeatherYearType\#climate_normals ;
-	rdf:rest _:c14n397 .
-_:c14n422 a owl:Restriction ;
+_:c14n423 rdf:first ubem_link:WeatherYearType\#climate_normals ;
+	rdf:rest _:c14n399 .
+_:c14n424 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:EnergyProfile ;
 	owl:onProperty ubem_link:energy_profile .
-_:c14n423 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:concept_value .
-_:c14n424 rdf:first ubem_link:GapFilling\#linear_interpolation ;
-	rdf:rest _:c14n104 .
 _:c14n425 a owl:Restriction ;
 	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:concept_value .
+_:c14n426 rdf:first ubem_link:GapFilling\#linear_interpolation ;
+	rdf:rest _:c14n104 .
+_:c14n427 a owl:Restriction ;
+	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:format .
-_:c14n426 a owl:Restriction ;
+_:c14n428 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:do_not_use .
-_:c14n427 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:concept .
-_:c14n428 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:representativeness .
 _:c14n429 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:access_url .
+	owl:onProperty ubem_link:concept .
 _:c14n43 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:code .
-_:c14n430 rdf:first ubem_link:DataForm\#dictionary_or_standard ;
-	rdf:rest _:c14n566 .
+_:c14n430 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:representativeness .
 _:c14n431 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:access_url .
+_:c14n432 rdf:first ubem_link:DataForm\#dictionary_or_standard ;
+	rdf:rest _:c14n568 .
+_:c14n433 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:HeightSource ;
 	owl:onProperty ubem_link:height_source .
-_:c14n432 a owl:Restriction ;
+_:c14n434 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:height_source .
-_:c14n433 a owl:Restriction ;
+_:c14n435 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:EnergyCarrier ;
 	owl:onProperty ubem_link:energy_carriers .
-_:c14n434 a owl:Restriction ;
+_:c14n436 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:geometry_dimension .
-_:c14n435 a owl:Restriction ;
+_:c14n437 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:content_types .
-_:c14n436 rdf:first ubem_link:EnergyMetric\#emissions ;
+_:c14n438 rdf:first ubem_link:EnergyMetric\#emissions ;
 	rdf:rest _:c14n180 .
-_:c14n437 rdfs:subClassOf _:c14n357 ;
+_:c14n439 rdfs:subClassOf _:c14n358 ;
 	owl:intersectionOf _:c14n237 .
-_:c14n438 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:concept .
-_:c14n439 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:join_key .
 _:c14n44 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:station_id_scheme .
-_:c14n440 rdf:first ubem_link:EnergySector\#residential ;
-	rdf:rest _:c14n614 .
+_:c14n440 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:concept .
 _:c14n441 a owl:Restriction ;
 	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:join_key .
+_:c14n442 rdf:first ubem_link:EnergySector\#residential ;
+	rdf:rest _:c14n616 .
+_:c14n443 a owl:Restriction ;
+	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:applies_to .
-_:c14n442 a owl:Restriction ;
+_:c14n444 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:broader .
-_:c14n443 a owl:Restriction ;
+_:c14n445 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:entity .
-_:c14n444 rdf:first ubem_link:Representativeness\#mandated_subset ;
-	rdf:rest _:c14n593 .
-_:c14n445 rdf:first ubem_link:ContextKind\#socio_economic ;
+_:c14n446 rdf:first ubem_link:Representativeness\#mandated_subset ;
+	rdf:rest _:c14n595 .
+_:c14n447 rdf:first ubem_link:ContextKind\#socio_economic ;
 	rdf:rest _:c14n11 .
-_:c14n446 a owl:Restriction ;
+_:c14n448 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:unit .
-_:c14n447 a owl:Restriction ;
+_:c14n449 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:mapping_relation .
-_:c14n448 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:profiled_by .
-_:c14n449 rdf:first ubem_link:Representativeness\#probability_sample ;
-	rdf:rest _:c14n4 .
 _:c14n45 rdf:first ubem_link:Representativeness\#synthetic ;
 	rdf:rest _:c14n168 .
-_:c14n450 rdf:first ubem_link:ContextKind\#energy_tariffs ;
-	rdf:rest _:c14n496 .
-_:c14n451 rdf:first ubem_link:WeatherProfile ;
+_:c14n450 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:profiled_by .
+_:c14n451 rdf:first ubem_link:Representativeness\#probability_sample ;
+	rdf:rest _:c14n4 .
+_:c14n452 rdf:first ubem_link:ContextKind\#energy_tariffs ;
+	rdf:rest _:c14n498 .
+_:c14n453 rdf:first ubem_link:WeatherProfile ;
 	rdf:rest rdf:nil .
-_:c14n452 rdf:first ubem_link:BuildingSector\#commercial ;
-	rdf:rest _:c14n621 .
-_:c14n453 rdf:first ubem_link:Aggregation\#instantaneous ;
-	rdf:rest _:c14n526 .
-_:c14n454 a owl:Restriction ;
+_:c14n454 rdf:first ubem_link:BuildingSector\#commercial ;
+	rdf:rest _:c14n623 .
+_:c14n455 rdf:first ubem_link:Aggregation\#instantaneous ;
+	rdf:rest _:c14n528 .
+_:c14n456 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:weather_profile .
-_:c14n455 a owl:Restriction ;
+_:c14n457 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:ContextKind ;
 	owl:onProperty ubem_link:context_kind .
-_:c14n456 rdf:first ubem_link:ConventionType\#do_not_use ;
+_:c14n458 rdf:first ubem_link:ConventionType\#do_not_use ;
 	rdf:rest _:c14n193 .
-_:c14n457 a owl:Restriction ;
+_:c14n459 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:operation_profile .
-_:c14n458 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:building_sectors .
-_:c14n459 rdf:first ubem_link:CollectionMethod\#connected_devices ;
-	rdf:rest _:c14n486 .
 _:c14n46 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:notes .
 _:c14n460 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:landing_page .
-_:c14n461 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:short_name .
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:building_sectors .
+_:c14n461 rdf:first ubem_link:CollectionMethod\#connected_devices ;
+	rdf:rest _:c14n488 .
 _:c14n462 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:id .
+	owl:onProperty ubem_link:landing_page .
 _:c14n463 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:example .
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:short_name .
 _:c14n464 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:narrow_match .
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:id .
 _:c14n465 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:context_profile .
+	owl:onProperty ubem_link:example .
 _:c14n466 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:variables .
+	owl:onProperty ubem_link:narrow_match .
 _:c14n467 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:building_id_scheme .
+	owl:onProperty ubem_link:context_profile .
 _:c14n468 a owl:Restriction ;
-	owl:allValuesFrom ubem_link:Representativeness ;
-	owl:onProperty ubem_link:representativeness .
-_:c14n469 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:doi .
+	owl:onProperty ubem_link:variables .
+_:c14n469 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:building_id_scheme .
 _:c14n47 rdf:first ubem_link:Aggregation\#count ;
 	rdf:rest _:c14n27 .
 _:c14n470 a owl:Restriction ;
+	owl:allValuesFrom ubem_link:Representativeness ;
+	owl:onProperty ubem_link:representativeness .
+_:c14n471 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:doi .
+_:c14n472 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:applies_to_pattern .
-_:c14n471 a owl:Restriction ;
+_:c14n473 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:known_limitations .
-_:c14n472 a owl:Restriction ;
+_:c14n474 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:review_flags .
-_:c14n473 a owl:Restriction ;
+_:c14n475 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:code .
-_:c14n474 rdf:first ubem_link:BehaviorType\#appliance_plug_loads ;
-	rdf:rest _:c14n624 .
-_:c14n475 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:weather_file_format .
-_:c14n476 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:bbox .
+_:c14n476 rdf:first ubem_link:BehaviorType\#appliance_plug_loads ;
+	rdf:rest _:c14n626 .
 _:c14n477 a owl:Restriction ;
 	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:weather_file_format .
+_:c14n478 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:bbox .
+_:c14n479 a owl:Restriction ;
+	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:broad_match .
-_:c14n478 rdf:first ubem_link:HeightReference\#ground_to_mean_roof ;
-	rdf:rest _:c14n491 .
-_:c14n479 a rdfs:Datatype ;
-	owl:oneOf _:c14n227 .
 _:c14n48 rdf:first ubem_link:BehaviorType\#window_operation ;
 	rdf:rest _:c14n234 .
-_:c14n480 rdf:first ubem_link:WeatherYearType\#design_conditions ;
+_:c14n480 rdf:first ubem_link:HeightReference\#ground_to_mean_roof ;
+	rdf:rest _:c14n493 .
+_:c14n481 a rdfs:Datatype ;
+	owl:oneOf _:c14n227 .
+_:c14n482 rdf:first ubem_link:WeatherYearType\#design_conditions ;
 	rdf:rest rdf:nil .
-_:c14n481 a owl:Restriction ;
+_:c14n483 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:climate_scenarios .
-_:c14n482 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:join_keys .
-_:c14n483 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:label .
 _:c14n484 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:canonical_unit .
+	owl:onProperty ubem_link:join_keys .
 _:c14n485 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:label .
+_:c14n486 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:canonical_unit .
+_:c14n487 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:by .
-_:c14n486 rdf:first ubem_link:CollectionMethod\#survey_or_diary ;
+_:c14n488 rdf:first ubem_link:CollectionMethod\#survey_or_diary ;
 	rdf:rest _:c14n332 .
-_:c14n487 rdf:first ubem_link:StatisticalNature\#administrative_record ;
+_:c14n489 rdf:first ubem_link:StatisticalNature\#administrative_record ;
 	rdf:rest _:c14n128 .
-_:c14n488 rdf:first ubem_link:StatisticalNature\#simulation_synthetic ;
-	rdf:rest _:c14n7 .
-_:c14n489 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:known_limitations .
 _:c14n49 rdf:first ubem_link:JoinKey\#climate_zone_ashrae ;
 	rdf:rest _:c14n320 .
-_:c14n490 rdf:first ubem_link:WeatherFileFormat\#tmy3_csv ;
-	rdf:rest _:c14n540 .
-_:c14n491 rdf:first ubem_link:HeightReference\#above_sea_level ;
+_:c14n490 rdf:first ubem_link:StatisticalNature\#simulation_synthetic ;
+	rdf:rest _:c14n7 .
+_:c14n491 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:known_limitations .
+_:c14n492 rdf:first ubem_link:WeatherFileFormat\#tmy3_csv ;
+	rdf:rest _:c14n542 .
+_:c14n493 rdf:first ubem_link:HeightReference\#above_sea_level ;
 	rdf:rest _:c14n292 .
-_:c14n492 rdf:first ubem_link:JoinKey\#census_tract ;
-	rdf:rest _:c14n513 .
-_:c14n493 rdf:first ubem_link:EntityType\#dataset_record ;
+_:c14n494 rdf:first ubem_link:JoinKey\#census_tract ;
+	rdf:rest _:c14n515 .
+_:c14n495 rdf:first ubem_link:EntityType\#dataset_record ;
 	rdf:rest rdf:nil .
-_:c14n494 a owl:Restriction ;
+_:c14n496 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:close_match .
-_:c14n495 a owl:Restriction ;
+_:c14n497 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:is_replicate_weight .
-_:c14n496 rdf:first ubem_link:ContextKind\#land_use ;
-	rdf:rest _:c14n445 .
-_:c14n497 rdf:first ubem_link:SpatialGranularity\#climate_zone ;
+_:c14n498 rdf:first ubem_link:ContextKind\#land_use ;
+	rdf:rest _:c14n447 .
+_:c14n499 rdf:first ubem_link:SpatialGranularity\#climate_zone ;
 	rdf:rest _:c14n191 .
-_:c14n498 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:aggregation .
-_:c14n499 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:format .
 _:c14n5 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:LevelOfDetail ;
 	owl:onProperty ubem_link:levels_of_detail .
 _:c14n50 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:bbox .
-_:c14n500 rdf:first ubem_link:SpatialGranularity\#building ;
-	rdf:rest _:c14n512 .
+_:c14n500 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:aggregation .
 _:c14n501 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:format .
+_:c14n502 rdf:first ubem_link:SpatialGranularity\#building ;
+	rdf:rest _:c14n514 .
+_:c14n503 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:ubem_roles .
-_:c14n502 rdf:first ubem_link:EnergyDataScale\#microscopic ;
+_:c14n504 rdf:first ubem_link:EnergyDataScale\#microscopic ;
 	rdf:rest rdf:nil .
-_:c14n503 rdf:first ubem_link:ControlAction\#appliance_on_off ;
+_:c14n505 rdf:first ubem_link:ControlAction\#appliance_on_off ;
 	rdf:rest rdf:nil .
-_:c14n504 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:characteristics_profile .
-_:c14n505 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:alt_labels .
 _:c14n506 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:temporal_coverage .
-_:c14n507 rdf:first ubem_link:UBEMRole\#boundary_conditions ;
-	rdf:rest _:c14n346 .
-_:c14n508 rdf:first ubem_link:HeightSource\#lidar ;
-	rdf:rest _:c14n136 .
-_:c14n509 a owl:Restriction ;
+	owl:onProperty ubem_link:characteristics_profile .
+_:c14n507 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:alt_labels .
+_:c14n508 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:label .
+	owl:onProperty ubem_link:temporal_coverage .
+_:c14n509 rdf:first ubem_link:UBEMRole\#boundary_conditions ;
+	rdf:rest _:c14n347 .
 _:c14n51 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:geometry_profile .
-_:c14n510 rdf:first ubem_link:MeteringLevel\#area_aggregate ;
-	rdf:rest _:c14n32 .
+_:c14n510 rdf:first ubem_link:HeightSource\#lidar ;
+	rdf:rest _:c14n136 .
 _:c14n511 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:label .
+_:c14n512 rdf:first ubem_link:MeteringLevel\#area_aggregate ;
+	rdf:rest _:c14n32 .
+_:c14n513 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:title .
-_:c14n512 rdf:first ubem_link:SpatialGranularity\#parcel ;
+_:c14n514 rdf:first ubem_link:SpatialGranularity\#parcel ;
 	rdf:rest _:c14n331 .
-_:c14n513 rdf:first ubem_link:JoinKey\#small_statistical_area ;
-	rdf:rest _:c14n549 .
-_:c14n514 rdf:first ubem_link:MeasurementBasis\#metered ;
+_:c14n515 rdf:first ubem_link:JoinKey\#small_statistical_area ;
+	rdf:rest _:c14n551 .
+_:c14n516 rdf:first ubem_link:MeasurementBasis\#metered ;
 	rdf:rest _:c14n208 .
-_:c14n515 rdf:first ubem_link:SpatialGranularity\#census_tract ;
+_:c14n517 rdf:first ubem_link:SpatialGranularity\#census_tract ;
 	rdf:rest _:c14n114 .
-_:c14n516 rdf:first ubem_link:MeasurementBasis\#modeled_or_estimated ;
+_:c14n518 rdf:first ubem_link:MeasurementBasis\#modeled_or_estimated ;
 	rdf:rest _:c14n318 .
-_:c14n517 rdf:first ubem_link:HeightReference\#ground_to_eave ;
-	rdf:rest _:c14n478 .
-_:c14n518 a owl:Restriction ;
-	owl:allValuesFrom xsd:boolean ;
-	owl:onProperty ubem_link:persistent_identifier .
-_:c14n519 rdf:first ubem_link:StatisticalNature\#census_complete ;
-	rdf:rest _:c14n77 .
+_:c14n519 rdf:first ubem_link:HeightReference\#ground_to_eave ;
+	rdf:rest _:c14n480 .
 _:c14n52 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:grid_resolution_km .
 _:c14n520 a owl:Restriction ;
+	owl:allValuesFrom xsd:boolean ;
+	owl:onProperty ubem_link:persistent_identifier .
+_:c14n521 rdf:first ubem_link:StatisticalNature\#census_complete ;
+	rdf:rest _:c14n77 .
+_:c14n522 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:title .
-_:c14n521 rdf:first ubem_link:JoinKey\#timestamp ;
+_:c14n523 rdf:first ubem_link:JoinKey\#timestamp ;
 	rdf:rest rdf:nil .
-_:c14n522 a owl:Restriction ;
+_:c14n524 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:GeometryProfile ;
 	owl:onProperty ubem_link:geometry_profile .
-_:c14n523 rdf:first ubem_link:JoinKey\#grid_cell ;
+_:c14n525 rdf:first ubem_link:JoinKey\#grid_cell ;
 	rdf:rest _:c14n57 .
-_:c14n524 rdf:first ubem_link:GeographicScope\#multinational ;
+_:c14n526 rdf:first ubem_link:GeographicScope\#multinational ;
 	rdf:rest _:c14n54 .
-_:c14n525 rdf:first skos:broadMatch ;
+_:c14n527 rdf:first skos:broadMatch ;
 	rdf:rest _:c14n143 .
-_:c14n526 rdf:first ubem_link:Aggregation\#total_over_period ;
+_:c14n528 rdf:first ubem_link:Aggregation\#total_over_period ;
 	rdf:rest _:c14n287 .
-_:c14n527 rdf:first ubem_link:JoinKey\#fips_county ;
+_:c14n529 rdf:first ubem_link:JoinKey\#fips_county ;
 	rdf:rest _:c14n25 .
-_:c14n528 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:energy_data_scale .
-_:c14n529 rdf:first ubem_link:EntityType\#occupant ;
-	rdf:rest _:c14n276 .
 _:c14n53 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:applies_to_pattern .
-_:c14n530 rdf:first ubem_link:EnergyCarrier\#district_energy ;
-	rdf:rest _:c14n626 .
-_:c14n531 a owl:Restriction ;
+_:c14n530 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:energy_data_scale .
+_:c14n531 rdf:first ubem_link:EntityType\#occupant ;
+	rdf:rest _:c14n276 .
+_:c14n532 rdf:first ubem_link:EnergyCarrier\#district_energy ;
+	rdf:rest _:c14n628 .
+_:c14n533 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:timestamp_convention .
-_:c14n532 rdf:first ubem_link:DataForm\#building_records ;
+_:c14n534 rdf:first ubem_link:DataForm\#building_records ;
 	rdf:rest _:c14n19 .
-_:c14n533 a owl:Restriction ;
+_:c14n535 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:flags_variable .
-_:c14n534 a owl:Restriction ;
+_:c14n536 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:by .
-_:c14n535 rdf:first ubem_link:JoinKey\#address ;
+_:c14n537 rdf:first ubem_link:JoinKey\#address ;
 	rdf:rest _:c14n16 .
-_:c14n536 rdf:first ubem_link:SpatialGranularity\#grid_cell_coarse ;
+_:c14n538 rdf:first ubem_link:SpatialGranularity\#grid_cell_coarse ;
 	rdf:rest _:c14n122 .
-_:c14n537 a owl:Restriction ;
+_:c14n539 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:TimestampConvention ;
 	owl:onProperty ubem_link:timestamp_convention .
-_:c14n538 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:entity .
-_:c14n539 a owl:Restriction ;
-	owl:allValuesFrom ubem_link:UBEMConcept ;
-	owl:onProperty ubem_link:concepts .
 _:c14n54 rdf:first ubem_link:GeographicScope\#national ;
 	rdf:rest _:c14n303 .
-_:c14n540 rdf:first ubem_link:WeatherFileFormat\#netcdf ;
-	rdf:rest _:c14n65 .
+_:c14n540 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:entity .
 _:c14n541 a owl:Restriction ;
+	owl:allValuesFrom ubem_link:UBEMConcept ;
+	owl:onProperty ubem_link:concepts .
+_:c14n542 rdf:first ubem_link:WeatherFileFormat\#netcdf ;
+	rdf:rest _:c14n65 .
+_:c14n543 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:mapping_relation .
-_:c14n542 rdf:first ubem_link:EnergyCarrier\#onsite_renewables ;
+_:c14n544 rdf:first ubem_link:EnergyCarrier\#onsite_renewables ;
 	rdf:rest _:c14n270 .
-_:c14n543 rdf:first ubem_link:VariableDatatype\#boolean ;
-	rdf:rest _:c14n589 .
-_:c14n544 rdf:first ubem_link:EnergySector\#transportation ;
+_:c14n545 rdf:first ubem_link:VariableDatatype\#boolean ;
+	rdf:rest _:c14n591 .
+_:c14n546 rdf:first ubem_link:EnergySector\#transportation ;
 	rdf:rest _:c14n1 .
-_:c14n545 a owl:Restriction ;
+_:c14n547 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:coverage_threshold .
-_:c14n546 a owl:Restriction ;
+_:c14n548 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:HeightReference ;
 	owl:onProperty ubem_link:height_reference .
-_:c14n547 a owl:Restriction ;
+_:c14n549 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:rule .
-_:c14n548 a owl:Restriction ;
+_:c14n55 rdf:first ubem_link:BehaviorType\#occupancy_presence ;
+	rdf:rest _:c14n419 .
+_:c14n550 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:end .
-_:c14n549 rdf:first ubem_link:JoinKey\#postal_code ;
-	rdf:rest _:c14n527 .
-_:c14n55 rdf:first ubem_link:BehaviorType\#occupancy_presence ;
-	rdf:rest _:c14n417 .
-_:c14n550 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:station_id_scheme .
-_:c14n551 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:concept_role .
+_:c14n551 rdf:first ubem_link:JoinKey\#postal_code ;
+	rdf:rest _:c14n529 .
 _:c14n552 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:energy_carriers .
+	owl:onProperty ubem_link:station_id_scheme .
 _:c14n553 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:concept_role .
+_:c14n554 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:energy_carriers .
+_:c14n555 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:verified .
-_:c14n554 rdf:first ubem_link:JoinKey\#ubid ;
+_:c14n556 rdf:first ubem_link:JoinKey\#ubid ;
 	rdf:rest _:c14n123 .
-_:c14n555 a owl:Restriction ;
+_:c14n557 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:weather_basis .
-_:c14n556 a owl:Restriction ;
-	owl:allValuesFrom _:c14n657 ;
+_:c14n558 a owl:Restriction ;
+	owl:allValuesFrom _:c14n659 ;
 	owl:onProperty ubem_link:id .
-_:c14n557 a owl:Restriction ;
+_:c14n559 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:stock_representation .
-_:c14n558 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:persistent_identifier .
-_:c14n559 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:definition .
 _:c14n56 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:DatasetProfile ;
 	owl:onProperty ubem_link:datasets .
 _:c14n560 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:collection_method .
-_:c14n561 rdf:first ubem_link:AccessLevel\#open_download ;
-	rdf:rest _:c14n263 .
+	owl:onProperty ubem_link:persistent_identifier .
+_:c14n561 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:definition .
 _:c14n562 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:collection_method .
+_:c14n563 rdf:first ubem_link:AccessLevel\#open_download ;
+	rdf:rest _:c14n263 .
+_:c14n564 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:concept_role .
-_:c14n563 rdf:first ubem_link:StatisticalNature\#climate_projection ;
-	rdf:rest _:c14n488 .
-_:c14n564 rdf:first ubem_link:TimeBasis\#local_standard_time ;
+_:c14n565 rdf:first ubem_link:StatisticalNature\#climate_projection ;
+	rdf:rest _:c14n490 .
+_:c14n566 rdf:first ubem_link:TimeBasis\#local_standard_time ;
 	rdf:rest _:c14n204 .
-_:c14n565 a owl:Restriction ;
+_:c14n567 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:ControlAction ;
 	owl:onProperty ubem_link:control_actions .
-_:c14n566 rdf:first ubem_link:DataForm\#archetype_library ;
+_:c14n568 rdf:first ubem_link:DataForm\#archetype_library ;
 	rdf:rest rdf:nil .
-_:c14n567 a owl:Restriction ;
+_:c14n569 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:variables_documented .
-_:c14n568 a owl:Restriction ;
+_:c14n57 rdf:first ubem_link:JoinKey\#census_block_group ;
+	rdf:rest _:c14n494 .
+_:c14n570 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:time_basis .
-_:c14n569 a owl:Restriction ;
+_:c14n571 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:short_name .
-_:c14n57 rdf:first ubem_link:JoinKey\#census_block_group ;
-	rdf:rest _:c14n492 .
-_:c14n570 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:profiled_by .
-_:c14n571 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:record_count .
 _:c14n572 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:id .
-_:c14n573 rdf:first ubem_link:SpatialGranularity\#census_block_group ;
-	rdf:rest _:c14n515 .
+	owl:onProperty ubem_link:profiled_by .
+_:c14n573 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:record_count .
 _:c14n574 a owl:Restriction ;
 	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:do_not_use .
-_:c14n575 rdf:first ubem_link:ControlAction\#shading_adjustment ;
-	rdf:rest _:c14n503 .
+	owl:onProperty ubem_link:id .
+_:c14n575 rdf:first ubem_link:SpatialGranularity\#census_block_group ;
+	rdf:rest _:c14n517 .
 _:c14n576 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:do_not_use .
+_:c14n577 rdf:first ubem_link:ControlAction\#shading_adjustment ;
+	rdf:rest _:c14n505 .
+_:c14n578 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:WeatherYearType ;
 	owl:onProperty ubem_link:weather_year_type .
-_:c14n577 a owl:Restriction ;
+_:c14n579 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:EnergyDataScale ;
 	owl:onProperty ubem_link:energy_data_scale .
-_:c14n578 rdf:first ubem_link:ConventionType\#identifier_format ;
-	rdf:rest _:c14n456 .
-_:c14n579 a owl:Restriction ;
+_:c14n58 rdf:first ubem_link:SimulationProfile ;
+	rdf:rest _:c14n453 .
+_:c14n580 rdf:first ubem_link:ConventionType\#identifier_format ;
+	rdf:rest _:c14n458 .
+_:c14n581 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:date .
-_:c14n58 rdf:first ubem_link:SimulationProfile ;
-	rdf:rest _:c14n451 .
-_:c14n580 a owl:Restriction ;
+_:c14n582 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:record_count_note .
-_:c14n581 rdf:first ubem_link:JoinKey\#building_id ;
-	rdf:rest _:c14n554 .
-_:c14n582 rdf:first ubem_link:JoinKey\#utility_id ;
+_:c14n583 rdf:first ubem_link:JoinKey\#building_id ;
+	rdf:rest _:c14n556 .
+_:c14n584 rdf:first ubem_link:JoinKey\#utility_id ;
 	rdf:rest _:c14n61 .
-_:c14n583 a owl:Restriction ;
+_:c14n585 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:building_id_scheme .
-_:c14n584 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:example .
-_:c14n585 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:access_level .
 _:c14n586 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:stock_representation .
+	owl:onProperty ubem_link:example .
 _:c14n587 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:access_level .
+_:c14n588 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:stock_representation .
+_:c14n589 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:provides_concepts .
-_:c14n588 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:start .
-_:c14n589 rdf:first ubem_link:VariableDatatype\#datetime ;
-	rdf:rest _:c14n335 .
 _:c14n59 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:concepts .
-_:c14n590 rdf:first ubem_link:MeteringLevel\#whole_building ;
+_:c14n590 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:start .
+_:c14n591 rdf:first ubem_link:VariableDatatype\#datetime ;
+	rdf:rest _:c14n335 .
+_:c14n592 rdf:first ubem_link:MeteringLevel\#whole_building ;
 	rdf:rest _:c14n265 .
-_:c14n591 a owl:Restriction ;
+_:c14n593 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:versioned .
-_:c14n592 a owl:Restriction ;
+_:c14n594 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:update_frequency .
-_:c14n593 rdf:first ubem_link:Representativeness\#voluntary_or_convenience ;
+_:c14n595 rdf:first ubem_link:Representativeness\#voluntary_or_convenience ;
 	rdf:rest _:c14n45 .
-_:c14n594 rdf:first ubem_link:BuildingSector\#residential ;
-	rdf:rest _:c14n452 .
-_:c14n595 rdf:first ubem_link:UBEMRole\#calibration_validation ;
+_:c14n596 rdf:first ubem_link:BuildingSector\#residential ;
+	rdf:rest _:c14n454 .
+_:c14n597 rdf:first ubem_link:UBEMRole\#calibration_validation ;
 	rdf:rest _:c14n129 .
-_:c14n596 a owl:Restriction ;
+_:c14n598 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:metering_level .
-_:c14n597 a owl:Restriction ;
-	owl:allValuesFrom _:c14n669 ;
-	owl:onProperty ubem_link:reference_paper_doi .
-_:c14n598 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n678 .
 _:c14n599 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:unit .
+	owl:allValuesFrom _:c14n668 ;
+	owl:onProperty ubem_link:reference_paper_doi .
 _:c14n6 rdf:first ubem_link:WeatherYearType\#typical_meteorological_year ;
-	rdf:rest _:c14n421 .
+	rdf:rest _:c14n423 .
 _:c14n60 rdf:first ubem_link:EnergyMetric\#end_use_energy ;
 	rdf:rest _:c14n139 .
-_:c14n600 a owl:Restriction ;
+_:c14n600 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n682 .
+_:c14n601 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:unit .
+_:c14n602 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:registration_required .
-_:c14n601 rdf:first ubem_link:DatasetProfile ;
+_:c14n603 rdf:first ubem_link:DatasetProfile ;
 	rdf:rest rdf:nil .
-_:c14n602 a owl:Restriction ;
+_:c14n604 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:applies_to_pattern .
-_:c14n603 a owl:Restriction ;
+_:c14n605 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:geographic_scope .
-_:c14n604 a owl:Restriction ;
+_:c14n606 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:simulation_profile .
-_:c14n605 rdf:first ubem_link:GeometryDimension\#parcel_polygon ;
+_:c14n607 rdf:first ubem_link:GeometryDimension\#parcel_polygon ;
 	rdf:rest rdf:nil .
-_:c14n606 rdf:first ubem_link:BehaviorType\#time_use_activities ;
+_:c14n608 rdf:first ubem_link:BehaviorType\#time_use_activities ;
 	rdf:rest _:c14n245 .
-_:c14n607 a owl:Restriction ;
+_:c14n609 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:quantity_kind .
-_:c14n608 rdf:first ubem_link:StatisticalNature\#crowdsourced ;
-	rdf:rest _:c14n300 .
-_:c14n609 rdf:first ubem_link:JoinKey\#census_region_division ;
-	rdf:rest _:c14n35 .
 _:c14n61 rdf:first ubem_link:JoinKey\#balancing_authority ;
 	rdf:rest _:c14n49 .
-_:c14n610 rdf:first ubem_link:GeometryProfile ;
-	rdf:rest _:c14n401 .
-_:c14n611 a owl:Restriction ;
+_:c14n610 rdf:first ubem_link:StatisticalNature\#crowdsourced ;
+	rdf:rest _:c14n300 .
+_:c14n611 rdf:first ubem_link:JoinKey\#census_region_division ;
+	rdf:rest _:c14n35 .
+_:c14n612 rdf:first ubem_link:GeometryProfile ;
+	rdf:rest _:c14n403 .
+_:c14n613 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:crs_linear_unit .
-_:c14n612 a owl:Restriction ;
+_:c14n614 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:Convention ;
 	owl:onProperty ubem_link:conventions .
-_:c14n613 a owl:Restriction ;
+_:c14n615 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:coordinate_reference_system .
-_:c14n614 rdf:first ubem_link:EnergySector\#commercial ;
+_:c14n616 rdf:first ubem_link:EnergySector\#commercial ;
 	rdf:rest _:c14n83 .
-_:c14n615 a owl:Restriction ;
+_:c14n617 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:weather_normalized_available .
-_:c14n616 rdf:first ubem_link:ConventionType\#top_or_bottom_code ;
-	rdf:rest _:c14n364 .
-_:c14n617 rdf:first ubem_link:EntityType\#building ;
+_:c14n618 rdf:first ubem_link:ConventionType\#top_or_bottom_code ;
+	rdf:rest _:c14n366 .
+_:c14n619 rdf:first ubem_link:EntityType\#building ;
 	rdf:rest _:c14n336 .
-_:c14n618 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n645 .
-_:c14n619 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:description .
 _:c14n62 a owl:Restriction ;
 	owl:allValuesFrom xsd:anyURI ;
 	owl:onProperty ubem_link:landing_page .
-_:c14n620 rdf:first ubem_link:SpatialGranularity\#none ;
+_:c14n620 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n653 .
+_:c14n621 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:description .
+_:c14n622 rdf:first ubem_link:SpatialGranularity\#none ;
 	rdf:rest _:c14n110 .
-_:c14n621 rdf:first ubem_link:BuildingSector\#industrial ;
+_:c14n623 rdf:first ubem_link:BuildingSector\#industrial ;
 	rdf:rest _:c14n201 .
-_:c14n622 a owl:Restriction ;
+_:c14n624 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:UBEMRole ;
 	owl:onProperty ubem_link:ubem_roles .
-_:c14n623 a rdfs:Datatype ;
+_:c14n625 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n662 .
-_:c14n624 rdf:first ubem_link:BehaviorType\#hot_water_use ;
+	owl:withRestrictions _:c14n664 .
+_:c14n626 rdf:first ubem_link:BehaviorType\#hot_water_use ;
 	rdf:rest _:c14n117 .
-_:c14n625 a owl:Restriction ;
+_:c14n627 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:statistical_nature .
-_:c14n626 rdf:first ubem_link:EnergyCarrier\#biomass ;
-	rdf:rest _:c14n542 .
-_:c14n627 a owl:Restriction ;
+_:c14n628 rdf:first ubem_link:EnergyCarrier\#biomass ;
+	rdf:rest _:c14n544 .
+_:c14n629 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:by .
-_:c14n628 a owl:Restriction ;
-	owl:allValuesFrom xsd:string ;
-	owl:onProperty ubem_link:profiled_by .
-_:c14n629 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:date .
 _:c14n63 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:energy_metrics .
-_:c14n630 rdf:first ubem_link:MeteringLevel\#circuit_or_appliance ;
-	rdf:rest rdf:nil .
+_:c14n630 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty ubem_link:profiled_by .
 _:c14n631 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:date .
+_:c14n632 rdf:first ubem_link:MeteringLevel\#circuit_or_appliance ;
+	rdf:rest rdf:nil .
+_:c14n633 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:minimum_building_size .
-_:c14n632 a owl:Restriction ;
+_:c14n634 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:is_replicate_weight .
-_:c14n633 rdf:first ubem_link:HeightSource\#plans_or_records ;
+_:c14n635 rdf:first ubem_link:HeightSource\#plans_or_records ;
 	rdf:rest _:c14n101 .
-_:c14n634 a owl:Restriction ;
+_:c14n636 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:EntityType ;
 	owl:onProperty ubem_link:entity .
-_:c14n635 a owl:Restriction ;
+_:c14n637 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:api .
-_:c14n636 rdf:first ubem_link:CollectionMethod\#mobile_location ;
+_:c14n638 rdf:first ubem_link:CollectionMethod\#mobile_location ;
 	rdf:rest rdf:nil .
-_:c14n637 a owl:Restriction ;
-	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:flags_variable .
-_:c14n638 a owl:Restriction ;
-	owl:maxCardinality 1 ;
-	owl:onProperty ubem_link:unit .
 _:c14n639 a owl:Restriction ;
 	owl:minCardinality 0 ;
-	owl:onProperty ubem_link:sampling_weights .
+	owl:onProperty ubem_link:flags_variable .
 _:c14n64 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:pref_label .
-_:c14n640 rdf:first ubem_link:GeometryDimension\#raster ;
-	rdf:rest _:c14n605 .
-_:c14n641 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n642 rdf:first _:c14n641 ;
-	rdf:rest rdf:nil .
-_:c14n643 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n642 .
+_:c14n640 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty ubem_link:unit .
+_:c14n641 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty ubem_link:sampling_weights .
+_:c14n642 rdf:first ubem_link:GeometryDimension\#raster ;
+	rdf:rest _:c14n607 .
+_:c14n643 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
 _:c14n644 rdf:first _:c14n643 ;
 	rdf:rest rdf:nil .
-_:c14n645 rdf:first xsd:string ;
-	rdf:rest _:c14n644 .
-_:c14n646 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n647 rdf:first _:c14n646 ;
-	rdf:rest rdf:nil .
-_:c14n648 a rdfs:Datatype ;
+_:c14n645 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n647 .
-_:c14n649 rdf:first _:c14n648 ;
+	owl:withRestrictions _:c14n644 .
+_:c14n646 rdf:first _:c14n645 ;
 	rdf:rest rdf:nil .
+_:c14n647 rdf:first xsd:string ;
+	rdf:rest _:c14n646 .
+_:c14n648 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n647 .
+_:c14n649 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
 _:c14n65 rdf:first ubem_link:WeatherFileFormat\#grib ;
 	rdf:rest _:c14n194 .
-_:c14n650 rdf:first xsd:string ;
-	rdf:rest _:c14n649 .
-_:c14n651 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n650 .
-_:c14n652 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
-_:c14n653 rdf:first _:c14n652 ;
+_:c14n650 rdf:first _:c14n649 ;
 	rdf:rest rdf:nil .
-_:c14n654 a rdfs:Datatype ;
+_:c14n651 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n653 .
+	owl:withRestrictions _:c14n650 .
+_:c14n652 rdf:first _:c14n651 ;
+	rdf:rest rdf:nil .
+_:c14n653 rdf:first xsd:string ;
+	rdf:rest _:c14n652 .
+_:c14n654 xsd:pattern "^[a-z0-9][a-z0-9_.-]*$" .
 _:c14n655 rdf:first _:c14n654 ;
 	rdf:rest rdf:nil .
-_:c14n656 rdf:first xsd:string ;
-	rdf:rest _:c14n655 .
-_:c14n657 a rdfs:Datatype ;
-	owl:intersectionOf _:c14n656 .
-_:c14n658 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
-_:c14n659 rdf:first _:c14n658 ;
+_:c14n656 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n655 .
+_:c14n657 rdf:first _:c14n656 ;
 	rdf:rest rdf:nil .
+_:c14n658 rdf:first xsd:string ;
+	rdf:rest _:c14n657 .
+_:c14n659 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n658 .
 _:c14n66 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:building_sectors .
-_:c14n660 a rdfs:Datatype ;
-	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n659 .
-_:c14n661 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
-_:c14n662 rdf:first _:c14n661 ;
+_:c14n660 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
+_:c14n661 rdf:first _:c14n660 ;
 	rdf:rest rdf:nil .
-_:c14n663 a rdfs:Datatype ;
+_:c14n662 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n664 .
-_:c14n664 rdf:first _:c14n665 ;
+	owl:withRestrictions _:c14n661 .
+_:c14n663 xsd:pattern "^([A-Z]{2}|GLOBAL|EU)$" .
+_:c14n664 rdf:first _:c14n663 ;
 	rdf:rest rdf:nil .
-_:c14n665 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
-_:c14n666 a rdfs:Datatype ;
+_:c14n665 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n667 .
-_:c14n667 rdf:first _:c14n668 ;
+	owl:withRestrictions _:c14n666 .
+_:c14n666 rdf:first _:c14n667 ;
 	rdf:rest rdf:nil .
-_:c14n668 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
-_:c14n669 a rdfs:Datatype ;
+_:c14n667 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n668 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n670 .
+	owl:withRestrictions _:c14n669 .
+_:c14n669 rdf:first _:c14n670 ;
+	rdf:rest rdf:nil .
 _:c14n67 rdf:first ubem_link:ConventionType\#unit ;
-	rdf:rest _:c14n616 .
-_:c14n670 rdf:first _:c14n671 ;
-	rdf:rest rdf:nil .
-_:c14n671 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
-_:c14n672 a rdfs:Datatype ;
+	rdf:rest _:c14n618 .
+_:c14n670 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n671 a rdfs:Datatype ;
 	owl:onDatatype xsd:string ;
-	owl:withRestrictions _:c14n673 .
-_:c14n673 rdf:first _:c14n674 ;
+	owl:withRestrictions _:c14n672 .
+_:c14n672 rdf:first _:c14n673 ;
 	rdf:rest rdf:nil .
-_:c14n674 xsd:pattern "^EPSG:[0-9]+$" .
-_:c14n675 xsd:pattern "^EPSG:[0-9]+$" .
-_:c14n676 rdf:first _:c14n675 ;
+_:c14n673 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
+_:c14n674 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n675 .
+_:c14n675 rdf:first _:c14n676 ;
 	rdf:rest rdf:nil .
-_:c14n677 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n676 xsd:pattern "^EPSG:[0-9]+$" .
+_:c14n677 xsd:pattern "^EPSG:[0-9]+$" .
 _:c14n678 rdf:first _:c14n677 ;
 	rdf:rest rdf:nil .
 _:c14n679 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
@@ -3542,9 +3549,12 @@ _:c14n68 a owl:Restriction ;
 	owl:onProperty ubem_link:broad_match .
 _:c14n680 rdf:first _:c14n679 ;
 	rdf:rest rdf:nil .
-_:c14n681 rdf:first _:c14n682 ;
+_:c14n681 xsd:pattern "^10\\.\\d{4,9}/\\S+$" .
+_:c14n682 rdf:first _:c14n681 ;
 	rdf:rest rdf:nil .
-_:c14n682 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
+_:c14n683 rdf:first _:c14n684 ;
+	rdf:rest rdf:nil .
+_:c14n684 xsd:pattern "^(P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?|static|irregular)$" .
 _:c14n69 a owl:Restriction ;
 	owl:minCardinality 1 ;
 	owl:onProperty ubem_link:behavior_types .
@@ -3554,12 +3564,12 @@ _:c14n70 a owl:Restriction ;
 	owl:allValuesFrom xsd:integer ;
 	owl:onProperty ubem_link:record_count .
 _:c14n71 rdf:first ubem_link:GeographicScope\#global ;
-	rdf:rest _:c14n524 .
+	rdf:rest _:c14n526 .
 _:c14n72 a owl:Restriction ;
 	owl:allValuesFrom xsd:string ;
 	owl:onProperty ubem_link:description .
 _:c14n73 rdf:first ubem_link:WeatherFileFormat\#epw ;
-	rdf:rest _:c14n490 .
+	rdf:rest _:c14n492 .
 _:c14n74 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:datatype .
@@ -3570,17 +3580,17 @@ _:c14n76 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:known_limitations .
 _:c14n77 rdf:first ubem_link:StatisticalNature\#sample_survey_weighted ;
-	rdf:rest _:c14n487 .
+	rdf:rest _:c14n489 .
 _:c14n78 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:concept .
 _:c14n79 rdf:first ubem_link:EnergyCarrier\#natural_gas ;
-	rdf:rest _:c14n392 .
+	rdf:rest _:c14n394 .
 _:c14n8 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:minimum_building_size .
 _:c14n80 rdf:first ubem_link:StatisticalNature\#typical_year_synthetic ;
-	rdf:rest _:c14n563 .
+	rdf:rest _:c14n565 .
 _:c14n81 a owl:Restriction ;
 	owl:allValuesFrom xsd:boolean ;
 	owl:onProperty ubem_link:is_weight .
@@ -3588,17 +3598,17 @@ _:c14n82 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:unit_multiplier .
 _:c14n83 rdf:first ubem_link:EnergySector\#industrial ;
-	rdf:rest _:c14n544 .
+	rdf:rest _:c14n546 .
 _:c14n84 a owl:Restriction ;
 	owl:maxCardinality 1 ;
 	owl:onProperty ubem_link:unit_of_observation .
 _:c14n85 rdf:first ubem_link:EntityType\#envelope ;
-	rdf:rest _:c14n370 .
+	rdf:rest _:c14n372 .
 _:c14n86 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:GapFilling ;
 	owl:onProperty ubem_link:gap_filling .
 _:c14n87 rdf:first ubem_link:VariableDatatype\#categorical ;
-	rdf:rest _:c14n543 .
+	rdf:rest _:c14n545 .
 _:c14n88 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:crs_linear_unit .
@@ -3608,7 +3618,7 @@ _:c14n9 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:applies_to .
 _:c14n90 a owl:Restriction ;
-	owl:allValuesFrom _:c14n660 ;
+	owl:allValuesFrom _:c14n662 ;
 	owl:onProperty ubem_link:countries .
 _:c14n91 a owl:Restriction ;
 	owl:allValuesFrom ubem_link:Verification ;
@@ -3633,5 +3643,5 @@ _:c14n98 a owl:Restriction ;
 	owl:minCardinality 0 ;
 	owl:onProperty ubem_link:energy_profile .
 _:c14n99 rdf:first ubem_link:DataForm\#microdata ;
-	rdf:rest _:c14n532 .
+	rdf:rest _:c14n534 .
 

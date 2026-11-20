@@ -50,8 +50,8 @@ def canvas(w=7.2, h=4.4):
 
 # ------------------------------------------------------------------------------------------ architecture
 def fig_architecture(path):
-    fig, ax = canvas(7.2, 3.7)
-    L = 0.046  # line height in axes units
+    fig, ax = canvas(7.2, 5.0)
+    L = 0.0344  # line height in axes units
     T, S = 7.4, 6.3  # title and line font sizes
 
     def col(x, w, y_top, blocks, gap=0.03):
@@ -74,24 +74,28 @@ def fig_architecture(path):
     for x, t in heads:
         ax.text(x, 0.985, t, fontsize=7.8, weight="bold", color=INK, va="top")
     top = 0.925
-    src = col(0.01, 0.195, top, [("Sources", ["UBEM workflow roles", "survey methodology:", "  weights, imputation,",
-                                              "  top-codes", "CityGML, Energy ADE,", "  BEDES, Brick",
-                                              "DCAT 3, SKOS, QUDT,", "  CSVW", "codebooks and", "  user guides"],
+    src = col(0.01, 0.195, top, [("Sources", ["taxonomy of open UBEM", "  data (7 categories)", "UBEM workflow roles",
+                                              "survey methodology:", "  weights, imputation,", "  top-codes",
+                                              "CityGML, Energy ADE,", "  BEDES, Brick", "DCAT 3, SKOS, QUDT,",
+                                              "  CSVW, SSSOM", "codebooks and", "  user guides"],
                                    DOMAIN, LINE, INK)])
     mid = col(0.225, 0.26, top, [
         ("Dataset level", ["DCAT 3 profile; six facets:", "role, statistical nature,", "granularity, time step,",
-                           "access, join keys; weights,", "conventions, verification"], SOURCE, BLUE, BLUE),
-        ("Variable level", ["CSVW profile: concept,", "QUDT unit and multiplier,", "codes, missing codes,",
-                            "weight and imputation flags"], SOURCE, BLUE, BLUE),
-        ("Concept vocabulary", ["81 SKOS concepts, each defined;", "168 links to Brick, BEDES,",
-                                "Energy ADE (existence-checked)"], SOURCE, BLUE, BLUE)], gap=0.025)
+                           "access, join keys; weights;", "scoped conventions"], SOURCE, BLUE, BLUE),
+        ("Category profiles", ["one per role: weather, geometry,", "operation, characteristics,",
+                               "energy, simulation, context"], SOURCE, BLUE, BLUE),
+        ("Variable level", ["CSVW profile: concept or key,", "QUDT unit and multiplier,", "codes, missing codes,",
+                            "weights and imputation flags"], SOURCE, BLUE, BLUE),
+        ("Concept vocabulary", ["81 SKOS concepts, each defined;", "168 SSSOM links to Brick,",
+                                "BEDES, Energy ADE"], SOURCE, BLUE, BLUE)], gap=0.02)
     right = col(0.505, 0.265, top, [
         ("For people", ["YAML schema and catalog,", "documentation, OWL ontology"], HUMAN, LINE, INK),
-        ("For AI systems", ["schema card (~4k tokens)", "concept cards (~60 tokens each)",
-                            "dataset cards with conventions", "JSON Schema: constrained output",
-                            "SHACL: checks on AI output"], AIC, GREEN, GREEN)])
+        ("For AI systems", ["schema card, concept cards,", "dataset cards with conventions",
+                            "JSON Schema: constrained output", "SHACL: checks on AI output"], AIC, GREEN, GREEN),
+        ("ubem-link tool", ["describe, review, apply,", "integrate; local or hosted", "models, or any assistant"],
+         AIC, GREEN, GREEN)])
     use = col(0.79, 0.2, top, [
-        ("People", ["find, judge and join", "datasets; audit AI"], HUMAN, LINE, INK),
+        ("People", ["find, judge and join", "datasets; review AI", "  profiles"], HUMAN, LINE, INK),
         ("AI systems", ["profile datasets", "map variables", "normalize codes", "  and units",
                         "check own answers"], AIC, GREEN, GREEN)])
     sx = src[0][0] + 0.195
@@ -99,14 +103,15 @@ def fig_architecture(path):
         arrow(ax, (sx + 0.003, yc), (x - 0.003, yc))
     mx = mid[0][0] + 0.26
     arrow(ax, (mx + 0.003, mid[0][1]), (0.502, right[0][1]))
-    arrow(ax, (mx + 0.003, mid[1][1]), (0.502, right[1][1]), color=GREEN)
-    arrow(ax, (mx + 0.003, mid[2][1]), (0.502, right[1][1] - 0.04), color=GREEN)
-    for a_, b_, c in ((right[0], use[0], MUTED), (right[1], use[1], GREEN)):
-        arrow(ax, (0.505 + 0.265 + 0.003, a_[1]), (0.787, b_[1]), color=c)
-    yb = min(use[1][3], right[1][3]) - 0.035
+    arrow(ax, (mx + 0.003, mid[1][1]), (0.502, right[1][1] + 0.03), color=GREEN)
+    arrow(ax, (mx + 0.003, mid[2][1]), (0.502, right[1][1] - 0.01), color=GREEN)
+    arrow(ax, (mx + 0.003, mid[3][1]), (0.502, right[2][1]), color=GREEN)
+    for a_, b_, c in ((right[0], use[0], MUTED), (right[1], use[1], GREEN), (right[2], use[1], GREEN)):
+        arrow(ax, (0.505 + 0.265 + 0.003, a_[1]), (0.787, b_[1] - (0.04 if a_ is right[2] else 0)), color=c)
+    yb = min(use[1][3], right[2][3]) - 0.035
     arrow(ax, (0.89, use[1][3] - 0.005), (0.89, yb), color=GREEN, style="-")
     arrow(ax, (0.89, yb), (0.64, yb), color=GREEN, style="-")
-    arrow(ax, (0.64, yb), (0.64, right[1][3] - 0.004), color=GREEN)
+    arrow(ax, (0.64, yb), (0.64, right[2][3] - 0.004), color=GREEN)
     ax.text(0.765, yb - 0.012, "AI output checked against the same schema", fontsize=6, color=GREEN, ha="center",
             va="top")
     save_fig(fig, path)
@@ -114,67 +119,85 @@ def fig_architecture(path):
 
 
 # ------------------------------------------------------------------------------------------ class diagram
-def _cls(ax, x, y, w, name, fields, fc=SOURCE, ec=BLUE, fs=5.5):
-    h = 0.048 + 0.03 * len(fields)
+def _cls(ax, x, y, w, name, fields, fc=SOURCE, ec=BLUE, fs=5.5, H=4.5):
+    """A class box; vertical sizes are in inches so that boxes look the same on canvases of any height."""
+    k = 4.5 / H
+    head, line, base = 0.042 * k, 0.03 * k, 0.048 * k
+    h = base + line * len(fields)
     ax.add_patch(FancyBboxPatch((x, y - h), w, h, boxstyle="round,pad=0,rounding_size=0.008", fc=fc, ec=ec, lw=1.0))
-    ax.add_patch(FancyBboxPatch((x, y - 0.042), w, 0.042, boxstyle="round,pad=0,rounding_size=0.008", fc=ec, ec=ec))
-    ax.text(x + w / 2, y - 0.021, name, fontsize=7, weight="bold", color="white", ha="center", va="center")
-    for i, f in enumerate(fields):
-        ax.text(x + 0.007, y - 0.058 - 0.03 * i, f, fontsize=fs, color=INK2, va="center", family="DejaVu Sans Mono")
+    ax.add_patch(FancyBboxPatch((x, y - head), w, head, boxstyle="round,pad=0,rounding_size=0.008", fc=ec, ec=ec))
+    ax.text(x + w / 2, y - head / 2, name, fontsize=7, weight="bold", color="white", ha="center", va="center")
+    for n, f in enumerate(fields):
+        ax.text(x + 0.007, y - head - 0.016 * k - line * n, f, fontsize=fs, color=INK2, va="center",
+                family="DejaVu Sans Mono")
     return (x, y - h, w, h)
 
 
 def fig_class_diagram(path):
-    fig, ax = canvas(7.2, 4.5)
-    cat = _cls(ax, 0.01, 0.97, 0.16, "Catalog", ["datasets*", "concepts*"])
-    ds = _cls(ax, 0.215, 0.97, 0.32, "DatasetProfile (dcat:Dataset)", [
+    H = 6.0
+    fig, ax = canvas(7.2, H)
+    C = lambda *a, **kw: _cls(ax, *a, H=H, **kw)  # noqa: E731
+    cat = C(0.01, 0.975, 0.14, "Catalog", ["datasets*", "concepts*"])
+    ds = C(0.19, 0.975, 0.31, "DatasetProfile (dcat:Dataset)", [
         "id, title, publisher, license, doi", "access_level: AccessLevel", "ubem_roles: UBEMRole*",
         "statistical_nature: StatisticalNature", "spatial_granularity: SpatialGranularity",
         "temporal_resolution: ISO 8601 duration", "join_keys: JoinKey*",
         "sampling_weights  (required if survey)", "verified: date, by, sources_checked"])
-    dist = _cls(ax, 0.585, 0.97, 0.19, "Distribution", ["format, access_url", "api, registration"])
-    conv = _cls(ax, 0.585, 0.80, 0.19, "Convention", ["applies_to", "rule", "example"], fc="#eef6ee", ec=GREEN)
-    var = _cls(ax, 0.215, 0.58, 0.32, "VariableProfile (csvw:Column)", [
-        "name, label, description, datatype", "concept: UBEMConcept", "mapping_relation: SKOS relation",
-        "unit (QUDT), unit_multiplier", "aggregation, entity", "missing_codes",
-        "is_weight, is_replicate_weight", "is_imputation_flag, flags_variable"])
-    code = _cls(ax, 0.01, 0.43, 0.16, "CodeEntry", ["code", "meaning"])
-    con = _cls(ax, 0.585, 0.58, 0.23, "UBEMConcept (skos:Concept)", [
-        "id, pref_label, definition", "broader: UBEMConcept", "entity, quantity_kind", "canonical_unit (QUDT)",
-        "alt_labels", "exact/close/broad/narrow/", "  related_match"])
-    ext = _cls(ax, 0.86, 0.58, 0.13, "External", ["Brick 1.4", "BEDES 2.5", "Energy ADE", "CityGML, EPW"],
-               fc=DOMAIN, ec=MUTED)
-    _cls(ax, 0.585, 0.29, 0.405, "Enumerations (every value defined)", [
-        "UBEMRole (7)        StatisticalNature (12)", "SpatialGranularity (17, ranked)   JoinKey (24)",
-        "AccessLevel (5)     Aggregation (6)    EntityType (12)"], fc=DOMAIN, ec=MUTED)
+    dist = C(0.54, 0.975, 0.2, "Distribution", ["format, access_url", "api, registration"])
+    conv = C(0.54, 0.865, 0.25, "Convention", ["convention_type, applies_to", "applies_to_variables*",
+                                                "applies_to_pattern (regex)", "applies_to_codes*",
+                                                "rule, example", "missing_codes*, unit, multiplier"],
+             fc="#eef6ee", ec=GREEN)
+    ext = C(0.83, 0.975, 0.16, "External", ["Brick 1.4", "BEDES 2.5", "Energy ADE 1.0", "CityGML, EPW",
+                                             "(SSSOM mappings)"], fc=DOMAIN, ec=MUTED)
+    catp = C(0.54, 0.62, 0.45, "Category profiles (one per role)", [
+        "Weather: weather_year_type*, timestamp_convention,",
+        "  time_basis, gap_filling, climate_scenarios*",
+        "Geometry: geometry_dimension, levels_of_detail*,",
+        "  height_source*, height_reference, CRS and unit",
+        "Operation: behavior_types*, control_actions*",
+        "Characteristics: data_form*, representativeness",
+        "Energy: energy_data_scale (macro | micro),",
+        "  metering_level, measurement_basis, carriers*",
+        "Simulation: engine, stock; Context: context_kind*",
+        "all: provides_concepts* -> UBEMConcept"], fc="#fdf6e8", ec="#b07a12")
+    var = C(0.19, 0.60, 0.31, "VariableProfile (csvw:Column)", [
+        "name, label, description, datatype", "concept: UBEMConcept", "join_key: JoinKey",
+        "mapping_relation: SKOS relation", "unit (QUDT), unit_multiplier", "aggregation, missing_codes*",
+        "is_weight, is_replicate_weight", "is_imputation_flag, flags_variable", "do_not_use",
+        "profiled_by, confidence, review_flags*"])
+    code = C(0.01, 0.45, 0.14, "CodeEntry", ["code", "label"])
+    con = C(0.54, 0.255, 0.25, "UBEMConcept (skos:Concept)", [
+        "id, pref_label, definition", "broader, entity, quantity_kind", "canonical_unit (QUDT)", "alt_labels",
+        "exact/close/broad/narrow/related"])
+    C(0.81, 0.255, 0.18, "Enumerations", ["34 enums, every", "value defined", "(roles, facets,", " category fields,",
+                                          " units, keys)"], fc=DOMAIN, ec=MUTED)
 
-    def mid_r(b):
-        return (b[0] + b[2], b[1] + b[3] / 2)
-
-    def mid_l(b):
-        return (b[0], b[1] + b[3] / 2)
-
-    def lab(p0, p1, t, c=MUTED, dy=0.014):
+    def lab(p0, p1, t, c=MUTED, dy=0.011):
         ax.text((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2 + dy, t, fontsize=5.6, color=c, ha="center")
 
     p0, p1 = (cat[0] + cat[2], cat[1] + cat[3] / 2), (ds[0], cat[1] + cat[3] / 2)
     arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "1..*")
-    p0, p1 = (ds[0] + ds[2], dist[1] + dist[3] / 2), mid_l(dist)
+    p0, p1 = (ds[0] + ds[2], dist[1] + dist[3] / 2), (dist[0], dist[1] + dist[3] / 2)
     arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "1..*")
-    p0, p1 = (ds[0] + ds[2], conv[1] + conv[3] / 2), mid_l(conv)
+    p0, p1 = (ds[0] + ds[2], conv[1] + conv[3] * 0.7), (conv[0], conv[1] + conv[3] * 0.7)
     arrow(ax, p0, p1, color=GREEN, lw=1.0); lab(p0, p1, "0..*", GREEN)
+    p0, p1 = (ds[0] + ds[2], ds[1] + 0.01), (catp[0], catp[1] + catp[3] - 0.02)
+    arrow(ax, p0, p1, color="#b07a12", lw=1.0)
+    ax.text(p1[0] + 0.012, (p0[1] + p1[1]) / 2 + 0.02, "0..1 per role", fontsize=5.6, color="#b07a12", ha="left")
     p0, p1 = (ds[0] + ds[2] / 2, ds[1]), (ds[0] + ds[2] / 2, var[1] + var[3])
-    arrow(ax, p0, p1, lw=1.0); ax.text(p0[0] + 0.01, (p0[1] + p1[1]) / 2, "variables 0..*", fontsize=5.6, color=MUTED, va="center")
-    p0, p1 = mid_l(var), mid_r(code)
-    p0 = (var[0], code[1] + code[3] / 2)
+    arrow(ax, p0, p1, lw=1.0)
+    ax.text(p0[0] + 0.01, (p0[1] + p1[1]) / 2, "variables 0..*", fontsize=5.6, color=MUTED, va="center")
+    p0, p1 = (var[0], code[1] + code[3] / 2), (code[0] + code[2], code[1] + code[3] / 2)
     arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "0..*")
-    p0, p1 = (var[0] + var[2], con[1] + con[3] - 0.09), (con[0], con[1] + con[3] - 0.09)
-    arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "concept")
-    p0, p1 = (con[0] + con[2], ext[1] + ext[3] / 2), mid_l(ext)
-    arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "match", dy=0.012)
-    ax.text(0.215, 0.115, "* list.  Every class, field and enumeration value carries a definition; the same source\n"
-            "compiles to JSON Schema (structured output), SHACL (validation) and OWL.", fontsize=6.2, color=INK2,
-            va="top")
+    p0, p1 = (var[0] + var[2], var[1] + 0.03), (con[0], con[1] + con[3] - 0.03)
+    arrow(ax, p0, p1, lw=1.0); lab(p0, p1, "concept", dy=0.012)
+    p0, p1 = (catp[0] + 0.12, catp[1]), (catp[0] + 0.12, con[1] + con[3])
+    arrow(ax, p0, p1, color="#b07a12", lw=1.0)
+    p0, p1 = (ext[0] + ext[2] / 2, ext[1]), (ext[0] + ext[2] / 2, catp[1] + catp[3] + 0.004)
+    ax.text(0.01, 0.05, "* list.  Every class, field and enumeration value carries a definition; the same source compiles "
+            "to JSON Schema (structured output),\nSHACL (validation), OWL and Python. Concepts link to External terms "
+            "(match relations).", fontsize=6.2, color=INK2, va="top")
     save_fig(fig, path)
     plt.close(fig)
 
