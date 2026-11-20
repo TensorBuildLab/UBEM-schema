@@ -1,0 +1,58 @@
+base: ll84
+datasets:
+  ll84:
+    data: ll84_sample.csv
+    profile: ll84.reviewed.ubem.yaml
+  pluto:
+    data: pluto_sample.csv
+    profile: pluto.reviewed.ubem.yaml
+  footprints:
+    data: footprints_sample.csv
+    profile: footprints.reviewed.ubem.yaml
+  weather:
+    epw:
+    - ../../data/raw/nyc/weather/*.zip
+needs:
+  floor_area_m2:
+  - ll84
+  - gross_floor_area
+  - property_gfa_calculated_1
+  site_energy_kwh:
+  - ll84
+  - total_energy_consumption
+  gas_kwh:
+  - ll84
+  - natural_gas_consumption
+  - natural_gas_use_kbtu
+  use_type:
+  - ll84
+  - building_use_type
+  year_built:
+  - pluto
+  - year_of_construction
+  floors:
+  - pluto
+  - floors_above_ground
+  district:
+  - pluto
+  - administrative_region
+  - cd
+  roof_height_m:
+  - footprints
+  - building_height
+links:
+- from: ll84
+  to: pluto
+  key: parcel_id
+  multi: first
+- from: ll84
+  to: footprints
+  key: building_id
+  multi: all
+  aggregate:
+    roof_height_m: max
+- from: ll84
+  to: weather
+  nearest: true
+  lat: latitude
+  lon: longitude

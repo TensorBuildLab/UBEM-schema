@@ -50,3 +50,7 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://impact.ornl.gov/en/datasets/model-america-data-and-models-of-every-us-building/', 'https://api.datacite.org/dois/10.13139/ornlnccs/1774134']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+simulation_profile:
+  simulation_engine: EnergyPlus
+  stock_representation: building_by_building

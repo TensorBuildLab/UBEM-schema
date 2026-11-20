@@ -47,3 +47,26 @@ verified:
   by: agent
   sources_checked: ['https://www.eia.gov/totalenergy/data/monthly/', 'https://www.eia.gov/totalenergy/data/browser/csv.php?tbl=T02.03',
     'https://www.eia.gov/about/copyrights_reuse.php']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: macroscopic
+  energy_sectors:
+  - commercial
+  energy_carriers:
+  - electricity
+  - natural_gas
+  - fuel_oil
+  - propane
+  - biomass
+  - all_carriers
+  energy_metrics:
+  - site_energy
+  - primary_energy
+  metering_level: area_aggregate
+  measurement_basis: modeled_or_estimated
+  reporting_period: month and calendar year
+  provides_concepts:
+  - total_energy_consumption
+  - electricity_consumption
+  - natural_gas_consumption
+  - other_fuel_consumption

@@ -57,3 +57,6 @@ verified:
   sources_checked:
   - https://app.regrid.com/store/us
   - https://regrid.com/purpose/dewey
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: parcel_polygon

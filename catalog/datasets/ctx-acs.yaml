@@ -66,3 +66,10 @@ verified:
   sources_checked:
   - https://www.census.gov/programs-surveys/acs/about.html
   - https://www.census.gov/data/developers/data-sets/acs-5year.html
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+context_profile:
+  context_kind:
+  - socio_economic
+  provides_concepts:
+  - household_demographics
+  - ownership_tenure

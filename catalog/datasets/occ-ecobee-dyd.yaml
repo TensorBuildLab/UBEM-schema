@@ -52,3 +52,13 @@ verified:
   by: agent
   sources_checked:
   - https://www.ecobee.com/donate-your-data/
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - thermostat_setpoint
+  collection_method:
+  - connected_devices
+  building_sectors:
+  - residential
+  provides_concepts:
+  - thermostat_setpoint

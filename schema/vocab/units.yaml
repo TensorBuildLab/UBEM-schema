@@ -1,0 +1,78 @@
+# UBEM-Link unit vocabulary: QUDT units in which open UBEM data are published, with conversion to the canonical
+# unit of their quantity kind. Tools offer these units as a closed list, so that a source's own unit (kBtu,
+# therm, ft) can be recorded as published and converted downstream rather than decomposed by a model.
+#   factor: canonical = factor * (value * unit_multiplier) + offset
+#   difference_factor: factor for temperature differences (degree days), where the offset does not apply
+#   words: lower-case words that name the unit in labels and descriptions (used by the profile checks)
+canonical:
+  energy: unit:KiloW-HR
+  volume: unit:M3
+  area: unit:M2
+  length: unit:M
+  temperature: unit:DEG_C
+  power: unit:KiloW
+  energy_intensity: unit:KiloW-HR-PER-M2
+  irradiance: unit:W-PER-M2
+  money: unit:CCY_USD
+  ratio: unit:PERCENT
+  speed: unit:M-PER-SEC
+  pressure: unit:PA
+  time: unit:HR
+  angle: unit:DEG
+  mass: unit:TONNE
+units:
+  # energy
+  unit:KiloW-HR: {label: kilowatt-hour (kWh), kind: energy, factor: 1.0, words: [kwh, kilowatt-hour, kilowatt hour]}
+  unit:W-HR: {label: watt-hour (Wh), kind: energy, factor: 0.001, words: [wh, watt-hour]}
+  unit:MegaW-HR: {label: megawatt-hour (MWh), kind: energy, factor: 1000.0, words: [mwh, megawatt-hour]}
+  unit:GigaW-HR: {label: gigawatt-hour (GWh), kind: energy, factor: 1.0e6, words: [gwh, gigawatt-hour]}
+  unit:BTU_IT: {label: British thermal unit (Btu), kind: energy, factor: 2.930710702e-4, words: [btu, british thermal unit]}
+  unit:KiloBTU_IT: {label: thousand Btu (kBtu), kind: energy, factor: 0.2930710702, words: [kbtu, thousand btu]}
+  unit:MegaBTU_IT: {label: million Btu (MMBtu), kind: energy, factor: 293.0710702, words: [mmbtu, million btu]}
+  unit:THM_US: {label: US therm (100,000 Btu), kind: energy, factor: 29.30710702, words: [therm, therms]}
+  unit:DecaTHM_US: {label: dekatherm (1,000,000 Btu), kind: energy, factor: 293.0710702, words: [dekatherm, dth]}
+  unit:MegaJ: {label: megajoule (MJ), kind: energy, factor: 0.2777777778, words: [mj, megajoule]}
+  unit:GigaJ: {label: gigajoule (GJ), kind: energy, factor: 277.7777778, words: [gj, gigajoule]}
+  # volume (fuels and water)
+  unit:M3: {label: cubic metre (m³), kind: volume, factor: 1.0, words: [m3, m³, cubic met]}
+  unit:FT3: {label: cubic foot (ft³), kind: volume, factor: 0.028316846592, words: [cubic f, ft3, ft³, ccf, mcf]}
+  unit:GAL_US: {label: US gallon, kind: volume, factor: 0.003785411784, words: [gallon, gal]}
+  unit:L: {label: litre (L), kind: volume, factor: 0.001, words: [litre, liter]}
+  # area
+  unit:M2: {label: square metre (m²), kind: area, factor: 1.0, words: [m2, m², square met, sq m]}
+  unit:FT2: {label: square foot (ft²), kind: area, factor: 0.09290304, words: [square f, sq ft, sqft, ft2, ft²]}
+  # length
+  unit:M: {label: metre (m), kind: length, factor: 1.0, words: [meter, metre, " m "]}
+  unit:FT: {label: foot (ft), kind: length, factor: 0.3048, words: [feet, foot, " ft"]}
+  unit:FT_US: {label: US survey foot, kind: length, factor: 0.3048006096, words: [us survey foot, us foot]}
+  unit:IN: {label: inch (in), kind: length, factor: 0.0254, words: [inch, inches]}
+  unit:MilliM: {label: millimetre (mm), kind: length, factor: 0.001, words: [mm, millimet]}
+  unit:KiloM: {label: kilometre (km), kind: length, factor: 1000.0, words: [km, kilomet]}
+  # temperature
+  unit:DEG_C: {label: degree Celsius, kind: temperature, factor: 1.0, words: [celsius, °c, deg c]}
+  unit:DEG_F: {label: degree Fahrenheit, kind: temperature, factor: 0.5555555556, offset: -17.7777777778, difference_factor: 0.5555555556, words: [fahrenheit, °f, deg f]}
+  unit:K: {label: kelvin, kind: temperature, factor: 1.0, offset: -273.15, difference_factor: 1.0, words: [kelvin]}
+  # power
+  unit:KiloW: {label: kilowatt (kW), kind: power, factor: 1.0, words: [kw, kilowatt]}
+  unit:W: {label: watt (W), kind: power, factor: 0.001, words: [watt]}
+  unit:MegaW: {label: megawatt (MW), kind: power, factor: 1000.0, words: [mw, megawatt]}
+  # intensities
+  unit:KiloW-HR-PER-M2: {label: kWh per square metre, kind: energy_intensity, factor: 1.0, words: [kwh/m2, kwh/m²]}
+  unit:KiloBTU_IT-PER-FT2: {label: kBtu per square foot, kind: energy_intensity, factor: 3.154591186, words: [kbtu/ft², kbtu/ft2, kbtu/sq ft]}
+  unit:W-PER-M2: {label: watt per square metre, kind: irradiance, factor: 1.0, words: [w/m2, w/m²]}
+  # money, ratio, speed, pressure, time, angle, mass
+  unit:CCY_USD: {label: US dollar, kind: money, factor: 1.0, words: [dollar, usd, "$"]}
+  unit:PERCENT: {label: percent, kind: ratio, factor: 1.0, words: [percent, "%"]}
+  unit:FRACTION: {label: fraction (0 to 1), kind: ratio, factor: 100.0, words: [fraction, share]}
+  unit:M-PER-SEC: {label: metre per second, kind: speed, factor: 1.0, words: [m/s]}
+  unit:MI-PER-HR: {label: mile per hour, kind: speed, factor: 0.44704, words: [mph, miles per hour]}
+  unit:PA: {label: pascal, kind: pressure, factor: 1.0, words: [pascal, " pa"]}
+  unit:HectoPA: {label: hectopascal, kind: pressure, factor: 100.0, words: [hpa, millibar, mbar]}
+  unit:KiloPA: {label: kilopascal, kind: pressure, factor: 1000.0, words: [kpa]}
+  unit:HR: {label: hour, kind: time, factor: 1.0, words: [hour, hours]}
+  unit:DEG: {label: degree (angle), kind: angle, factor: 1.0, words: [degrees]}
+  unit:TONNE: {label: metric ton, kind: mass, factor: 1.0, words: [metric ton, tonne]}
+  unit:KiloGM: {label: kilogram, kind: mass, factor: 0.001, words: [kilogram, kg]}
+  unit:TON_SHORT: {label: short ton, kind: mass, factor: 0.90718474, words: [short ton]}
+# Concepts whose values are differences of temperature (the offset of a temperature unit does not apply)
+temperature_differences: [degree_days]

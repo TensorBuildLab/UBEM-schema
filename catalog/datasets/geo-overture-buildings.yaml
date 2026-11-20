@@ -58,3 +58,13 @@ verified:
   by: agent
   sources_checked:
   - https://docs.overturemaps.org/guides/buildings/
+# Category profiles drafted 2026-11-19 from this entry (documentation); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  provides_concepts:
+  - footprint
+  - building_height
+characteristics_profile:
+  data_form:
+  - building_records
+  representativeness: unknown

@@ -9,7 +9,12 @@ description: >-
   join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it
   maps to in the UBEM-Link vocabulary, its unit (QUDT), its code list, its aggregation semantics, and
   whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and
-  carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects.
+  carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects. Between the two levels, one
+  category profile per UBEM workflow role (WeatherProfile, GeometryProfile, OperationProfile,
+  CharacteristicsProfile, EnergyProfile, SimulationProfile, ContextProfile) records what a modeler must know
+  about that kind of data. The roles and category profiles refine an earlier seven-category taxonomy of open
+  UBEM data (weather information; building stock GIS; occupant behavior; building characteristics;
+  macroscopic energy; microscopic energy; comprehensive data lakes) and its per-category metadata table.
 license: CC-BY-4.0
 see_also:
   - https://github.com/TensorBuildLab/UBEM-schema
@@ -85,6 +90,13 @@ classes:
       - known_limitations
       - notes
       - verified
+      - weather_profile
+      - geometry_profile
+      - operation_profile
+      - characteristics_profile
+      - energy_profile
+      - simulation_profile
+      - context_profile
       - variables
     slot_usage:
       id:
@@ -141,9 +153,15 @@ classes:
       once in a user guide and never in the individual codebook entries, so a person or an AI system reading
       one entry cannot infer them; the profile states them explicitly.
     slots:
+      - convention_type
       - applies_to
+      - applies_to_variables
+      - applies_to_pattern
       - rule
       - example
+      - missing_codes
+      - unit
+      - unit_multiplier
     slot_usage:
       rule:
         required: true
@@ -155,6 +173,116 @@ classes:
       - date
       - by
       - sources_checked
+
+  CategoryProfile:
+    abstract: true
+    description: >-
+      Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before
+      using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata
+      table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value
+      lists, its "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale,
+      and its "comprehensive data lake" is a Catalog of profiles rather than a category.
+    slots:
+      - provides_concepts
+      - metadata_standards
+
+  WeatherProfile:
+    is_a: CategoryProfile
+    description: >-
+      Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and
+      actual meteorological years, and climate projections.
+    slots:
+      - weather_year_type
+      - weather_file_format
+      - timestamp_convention
+      - time_basis
+      - gap_filling
+      - grid_resolution_km
+      - station_id_scheme
+      - climate_scenarios
+    slot_usage:
+      weather_year_type:
+        required: true
+
+  GeometryProfile:
+    is_a: CategoryProfile
+    description: >-
+      Building stock geometry and inventory: footprints, heights, 3D city models and parcels.
+    slots:
+      - geometry_dimension
+      - levels_of_detail
+      - height_source
+      - height_reference
+      - coordinate_reference_system
+      - crs_linear_unit
+      - building_id_scheme
+      - minimum_building_size
+    slot_usage:
+      geometry_dimension:
+        required: true
+
+  OperationProfile:
+    is_a: CategoryProfile
+    description: >-
+      Occupancy, occupant behavior, schedules, setpoints and time use.
+    slots:
+      - behavior_types
+      - control_actions
+      - collection_method
+      - building_sectors
+    slot_usage:
+      behavior_types:
+        required: true
+
+  CharacteristicsProfile:
+    is_a: CategoryProfile
+    description: >-
+      Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys,
+      administrative records, certificates and dictionaries.
+    slots:
+      - data_form
+      - building_sectors
+      - representativeness
+      - coverage_threshold
+      - cross_tabulations
+    slot_usage:
+      data_form:
+        required: true
+
+  EnergyProfile:
+    is_a: CategoryProfile
+    description: >-
+      Measured or reported energy use for calibration and validation, from national balances (macroscopic) to
+      buildings, meters and appliances (microscopic).
+    slots:
+      - energy_data_scale
+      - energy_sectors
+      - energy_carriers
+      - energy_metrics
+      - metering_level
+      - measurement_basis
+      - weather_normalized_available
+      - reporting_period
+    slot_usage:
+      energy_data_scale:
+        required: true
+
+  SimulationProfile:
+    is_a: CategoryProfile
+    description: >-
+      Reference simulations and model libraries: synthetic building-stock outputs and prototype models.
+    slots:
+      - simulation_engine
+      - stock_representation
+      - weather_basis
+      - building_sectors
+
+  ContextProfile:
+    is_a: CategoryProfile
+    description: >-
+      Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate.
+    slots:
+      - context_kind
 
   VariableProfile:
     description: >-
@@ -175,8 +303,14 @@ classes:
       - code_list
       - missing_codes
       - is_weight
+      - is_replicate_weight
       - is_imputation_flag
       - flags_variable
+      - join_key
+      - do_not_use
+      - profiled_by
+      - confidence
+      - review_flags
     slot_usage:
       name:
         required: true
@@ -394,6 +528,163 @@ slots:
     multivalued: true
     inlined_as_list: true
 
+  # category profiles (one per UBEM workflow role)
+  weather_profile:
+    description: "Category profile for a dataset with the role boundary_conditions."
+    range: WeatherProfile
+    inlined: true
+  geometry_profile:
+    description: "Category profile for a dataset with the role geometry_inventory."
+    range: GeometryProfile
+    inlined: true
+  operation_profile:
+    description: "Category profile for a dataset with the role operation_use."
+    range: OperationProfile
+    inlined: true
+  characteristics_profile:
+    description: "Category profile for a dataset with the role building_characteristics."
+    range: CharacteristicsProfile
+    inlined: true
+  energy_profile:
+    description: "Category profile for a dataset with the role calibration_validation."
+    range: EnergyProfile
+    inlined: true
+  simulation_profile:
+    description: "Category profile for a dataset with the role reference_simulation."
+    range: SimulationProfile
+    inlined: true
+  context_profile:
+    description: "Category profile for a dataset with the role context_coupling."
+    range: ContextProfile
+    inlined: true
+  provides_concepts:
+    description: "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level)."
+    multivalued: true
+  metadata_standards:
+    description: "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML)."
+    multivalued: true
+  weather_year_type:
+    description: "Kind of weather year or series: actual series, actual or typical meteorological year, normals, or projection."
+    range: WeatherYearType
+    multivalued: true
+  weather_file_format:
+    description: "Formats in which weather is released, which decide whether a simulation engine can read it directly."
+    range: WeatherFileFormat
+    multivalued: true
+  timestamp_convention:
+    description: "Whether a timestamp marks the end, the start or the instant of the interval it describes."
+    range: TimestampConvention
+  time_basis:
+    description: "Clock to which timestamps refer (UTC, local standard time, or local time with daylight saving)."
+    range: TimeBasis
+  gap_filling:
+    description: "How missing or sub-interval values were filled by the publisher."
+    range: GapFilling
+  grid_resolution_km:
+    description: "Horizontal resolution of a gridded product in kilometres."
+    range: float
+  station_id_scheme:
+    description: "Identifier system of the stations (for example WMO, USAF-WBAN, GHCN)."
+  climate_scenarios:
+    description: "Emission or socio-economic scenarios of a projection (for example SSP2-4.5, RCP8.5)."
+    multivalued: true
+  geometry_dimension:
+    description: "Geometric representation of buildings, from points and footprints to 3D solids."
+    range: GeometryDimension
+  levels_of_detail:
+    description: "CityGML levels of detail provided."
+    range: LevelOfDetail
+    multivalued: true
+  height_source:
+    description: "How building heights were obtained."
+    range: HeightSource
+    multivalued: true
+  height_reference:
+    description: "Reference points between which a building height is measured."
+    range: HeightReference
+  coordinate_reference_system:
+    description: "Coordinate reference system of the published geometry, as an EPSG code (for example EPSG:4326)."
+    pattern: "^EPSG:[0-9]+$"
+  crs_linear_unit:
+    description: "Linear unit of the coordinate reference system and of lengths and areas derived from it (QUDT CURIE, for example unit:FT_US or unit:M)."
+  building_id_scheme:
+    description: "Building identifier system used (for example BIN, UPRN, BAG, UBID); null if none."
+  minimum_building_size:
+    description: "Capture threshold for buildings, as stated by the publisher (for example 'larger than 400 sq ft')."
+  behavior_types:
+    description: "Kinds of occupant behavior or building operation recorded."
+    range: BehaviorType
+    multivalued: true
+  control_actions:
+    description: "Occupant control actions recorded."
+    range: ControlAction
+    multivalued: true
+  collection_method:
+    description: "How the behavior or operation data were collected."
+    range: CollectionMethod
+    multivalued: true
+  building_sectors:
+    description: "Building sectors covered."
+    range: BuildingSector
+    multivalued: true
+  data_form:
+    description: "Whether the data are records of individual units (microdata or building records) or published distributions (aggregate tables)."
+    range: DataForm
+    multivalued: true
+  representativeness:
+    description: "How the covered buildings relate to the building stock, which decides whether results generalize."
+    range: Representativeness
+  coverage_threshold:
+    description: "Size or other threshold that decides which buildings are covered (for example 'more than 25,000 ft²')."
+  cross_tabulations:
+    description: "For aggregate tables, the joint distributions published, each as concept ids joined by ' x '."
+    multivalued: true
+  energy_data_scale:
+    description: "Macroscopic (aggregates over many buildings) or microscopic (buildings, meters, circuits or appliances)."
+    range: EnergyDataScale
+  energy_sectors:
+    description: "Energy-using sectors covered."
+    range: EnergySector
+    multivalued: true
+  energy_carriers:
+    description: "Energy carriers reported."
+    range: EnergyCarrier
+    multivalued: true
+  energy_metrics:
+    description: "Kinds of energy quantity reported."
+    range: EnergyMetric
+    multivalued: true
+  metering_level:
+    description: "Finest level at which energy is measured or reported."
+    range: MeteringLevel
+  measurement_basis:
+    description: "Whether values are metered, billed, self-reported or modeled."
+    range: MeasurementBasis
+  weather_normalized_available:
+    description: "True if weather-normalized values are published alongside the actual ones."
+    range: boolean
+  reporting_period:
+    description: "Period one value covers (for example calendar year, billing month)."
+  simulation_engine:
+    description: "Simulation engine that produced the data (for example EnergyPlus)."
+  stock_representation:
+    description: "How the simulated building stock is represented."
+    range: StockRepresentation
+  weather_basis:
+    description: "Weather used for the simulations (for example AMY 2018, TMY3)."
+  context_kind:
+    description: "Kind of context or coupling data."
+    range: ContextKind
+    multivalued: true
+  convention_type:
+    description: "What the convention concerns, so that tools can apply it (missing codes, units, flags, keys)."
+    range: ConventionType
+  applies_to_variables:
+    description: "Exact names of the variables a convention applies to (machine-readable scope)."
+    multivalued: true
+  applies_to_pattern:
+    description: "Regular expression over variable names giving the variables a convention applies to (machine-readable scope)."
+
   # variable level
   name:
     description: "Variable name exactly as it appears in the data file."
@@ -445,6 +736,23 @@ slots:
     range: boolean
   flags_variable:
     description: For an imputation or quality flag, the variable it refers to.
+  is_replicate_weight:
+    description: "True if the variable is a replicate weight used to estimate sampling variance."
+    range: boolean
+  join_key:
+    description: "Key type the variable holds, if it can link records to other datasets (for example parcel_id for a tax-lot number)."
+    range: JoinKey
+  do_not_use:
+    description: "True if the publisher says the variable must not be used (the reason is in a convention)."
+    range: boolean
+  profiled_by:
+    description: "Who or what produced this variable profile (a person, or a model id such as ollama:qwen3:8b), and whether it was reviewed."
+  confidence:
+    description: "Confidence of an automatically produced mapping, between 0 and 1."
+    range: float
+  review_flags:
+    description: "Reasons this profile should be reviewed by a person (failed checks, low confidence, disagreement)."
+    multivalued: true
 
   # vocabulary
   pref_label:
@@ -640,3 +948,232 @@ enums:
       weather_station: {description: "A weather or climate observation station."}
       grid_cell: {description: "A cell of a raster or model grid."}
       dataset_record: {description: "Record bookkeeping (identifiers, weights, flags)."}
+
+  WeatherYearType:
+    description: "Kind of weather year or weather series."
+    permissible_values:
+      actual_series: {description: "Observed or reanalysis time series of actual weather over one or more years."}
+      actual_meteorological_year: {description: "Simulation-ready file of one actual year (AMY)."}
+      typical_meteorological_year: {description: "Typical year assembled from months of several years (TMY, TMYx, IWEC)."}
+      climate_normals: {description: "Long-term averages such as 30-year normals."}
+      future_typical_year: {description: "Typical year for a future period, morphed or downscaled from climate models."}
+      projection_series: {description: "Time series from climate model projections."}
+      design_conditions: {description: "Design-day statistics for sizing equipment."}
+
+  WeatherFileFormat:
+    description: "Format of released weather data."
+    permissible_values:
+      epw: {description: "EnergyPlus weather file, readable by most simulation engines."}
+      tmy3_csv: {description: "TMY3 comma-separated format."}
+      netcdf: {description: "NetCDF gridded files."}
+      grib: {description: "GRIB gridded files."}
+      csv: {description: "Other tabular text files."}
+      api_json: {description: "Responses of a web API in JSON."}
+      other: {description: "Other format."}
+
+  TimestampConvention:
+    description: "What a timestamp marks within its interval."
+    permissible_values:
+      interval_ending: {description: "The timestamp is the end of the interval (EPW hour 1 covers 00:00 to 01:00)."}
+      interval_beginning: {description: "The timestamp is the start of the interval."}
+      instantaneous: {description: "The value was observed at the timestamp."}
+      unknown: {description: "Not stated by the publisher."}
+
+  TimeBasis:
+    description: "Clock to which timestamps refer."
+    permissible_values:
+      utc: {description: "Coordinated Universal Time."}
+      local_standard_time: {description: "Local standard time without daylight saving (as in EPW files)."}
+      local_time_with_dst: {description: "Local civil time including daylight saving."}
+      unknown: {description: "Not stated by the publisher."}
+
+  GapFilling:
+    description: "How missing or sub-interval values were filled."
+    permissible_values:
+      none: {description: "Gaps are left as missing values."}
+      linear_interpolation: {description: "Gaps filled by linear interpolation in time."}
+      model_based: {description: "Gaps filled from a model, reanalysis or neighboring stations."}
+      unknown: {description: "Not stated by the publisher."}
+
+  GeometryDimension:
+    description: "Geometric representation of buildings."
+    permissible_values:
+      point: {description: "Building locations as points only."}
+      footprint_2d: {description: "Building outlines without height."}
+      footprint_with_height: {description: "Building outlines with a height attribute (2.5D, extrudable to CityGML LoD1)."}
+      solid_3d: {description: "Three-dimensional building solids or surfaces (CityGML LoD1 or higher)."}
+      raster: {description: "Gridded built-up surface, volume or height."}
+      parcel_polygon: {description: "Parcel or lot outlines, not buildings."}
+
+  LevelOfDetail:
+    description: "CityGML level of detail."
+    permissible_values:
+      lod0: {description: "Footprint or roof-edge polygon."}
+      lod1: {description: "Block model: footprint extruded to one height."}
+      lod2: {description: "Roof shapes and wall surfaces."}
+      lod3: {description: "Architectural model with openings such as windows and doors."}
+      lod4: {description: "Interior structures (CityGML 2.0 only)."}
+
+  HeightSource:
+    description: "How building heights were obtained."
+    permissible_values:
+      lidar: {description: "Measured from airborne laser scanning."}
+      photogrammetry: {description: "Measured from stereo or oblique imagery."}
+      plans_or_records: {description: "Taken from building plans or administrative records."}
+      model_estimated: {description: "Estimated by a statistical or machine-learning model."}
+      derived_from_floors: {description: "Computed from the number of floors and an assumed floor height."}
+      none: {description: "No heights."}
+
+  HeightReference:
+    description: "Reference points of a building height."
+    permissible_values:
+      ground_to_roof_top: {description: "From ground level to the highest point of the roof."}
+      ground_to_eave: {description: "From ground level to the eave."}
+      ground_to_mean_roof: {description: "From ground level to the mean roof height."}
+      above_sea_level: {description: "Elevation above a vertical datum, not a building height."}
+      unknown: {description: "Not stated by the publisher."}
+
+  BehaviorType:
+    description: "Kind of occupant behavior or building operation."
+    permissible_values:
+      occupancy_presence: {description: "Whether or how many people are present."}
+      hvac_operation: {description: "Operation of heating, cooling or ventilation."}
+      thermostat_setpoint: {description: "Setpoints and their changes."}
+      window_operation: {description: "Opening and closing windows."}
+      lighting_operation: {description: "Switching or dimming lights."}
+      appliance_plug_loads: {description: "Use of appliances and plug loads."}
+      hot_water_use: {description: "Domestic hot water draws."}
+      thermal_comfort: {description: "Thermal sensation, preference or acceptability votes."}
+      time_use_activities: {description: "Activities of people over the day (time-use diaries)."}
+      mobility: {description: "Travel and location over the day."}
+
+  ControlAction:
+    description: "Occupant control action."
+    permissible_values:
+      thermostat_adjustment: {description: "Changing a thermostat setpoint."}
+      hvac_on_off: {description: "Switching heating, cooling or fans."}
+      lighting_on_off: {description: "Switching or dimming lights."}
+      window_open_close: {description: "Opening or closing a window."}
+      shading_adjustment: {description: "Moving blinds or shades."}
+      appliance_on_off: {description: "Switching an appliance."}
+
+  CollectionMethod:
+    description: "How behavior or operation data were collected."
+    permissible_values:
+      sensors_or_logs: {description: "Sensors, building automation logs or meters."}
+      connected_devices: {description: "Smart thermostats or other connected devices."}
+      survey_or_diary: {description: "Questionnaires or time-use diaries."}
+      field_study_compilation: {description: "Compilation of separate field studies."}
+      mobile_location: {description: "Mobile phone or other location traces."}
+
+  BuildingSector:
+    description: "Building sector."
+    permissible_values:
+      residential: {description: "Dwellings and residential buildings."}
+      commercial: {description: "Commercial, public and institutional buildings."}
+      industrial: {description: "Industrial buildings."}
+      all: {description: "All building sectors."}
+
+  DataForm:
+    description: "Form in which characteristics are released."
+    permissible_values:
+      microdata: {description: "One record per sampled unit (building or household), usually with weights."}
+      building_records: {description: "One record per identified real building or property (certificates, benchmarking, permits)."}
+      aggregate_tables: {description: "Published distributions or totals, not records of units."}
+      dictionary_or_standard: {description: "A data dictionary, standard or exchange schema, not data."}
+      archetype_library: {description: "Typical buildings or model templates by type and vintage."}
+
+  Representativeness:
+    description: "How the covered buildings relate to the building stock."
+    permissible_values:
+      probability_sample: {description: "A probability sample; weighted estimates represent the stock."}
+      complete_population: {description: "All buildings of the area."}
+      mandated_subset: {description: "Buildings covered by a mandate (for example above a size threshold)."}
+      voluntary_or_convenience: {description: "Buildings that chose to participate or were available."}
+      synthetic: {description: "Modeled or typical buildings, not real ones."}
+      unknown: {description: "Not stated by the publisher."}
+
+  EnergyDataScale:
+    description: "Scale of energy data."
+    permissible_values:
+      macroscopic: {description: "Aggregates over many buildings (national, state, utility or area totals)."}
+      microscopic: {description: "Individual buildings, meters, circuits or appliances."}
+
+  EnergySector:
+    description: "Energy-using sector."
+    permissible_values:
+      residential: {description: "Households and residential buildings."}
+      commercial: {description: "Commercial and public buildings."}
+      industrial: {description: "Industry."}
+      transportation: {description: "Transportation."}
+      all: {description: "All sectors or the whole economy."}
+
+  EnergyCarrier:
+    description: "Energy carrier."
+    permissible_values:
+      electricity: {description: "Electricity."}
+      natural_gas: {description: "Natural gas."}
+      fuel_oil: {description: "Fuel oil and other petroleum liquids."}
+      propane: {description: "Propane and liquefied petroleum gas."}
+      district_energy: {description: "District steam, hot water or chilled water."}
+      biomass: {description: "Wood and other biomass."}
+      onsite_renewables: {description: "Energy generated on site, such as rooftop solar."}
+      all_carriers: {description: "Totals over all carriers only."}
+
+  EnergyMetric:
+    description: "Kind of energy quantity."
+    permissible_values:
+      site_energy: {description: "Energy delivered to the site."}
+      source_energy: {description: "Site energy plus upstream generation and delivery losses."}
+      primary_energy: {description: "Primary energy as defined in national statistics."}
+      end_use_energy: {description: "Energy by end use (heating, cooling, lighting, ...)."}
+      load_profile: {description: "Time series of demand."}
+      peak_demand: {description: "Maximum demand over a period."}
+      emissions: {description: "Greenhouse gas emissions."}
+      expenditure: {description: "Energy cost."}
+
+  MeteringLevel:
+    description: "Finest level at which energy is measured or reported."
+    permissible_values:
+      area_aggregate: {description: "Totals over an area or sector."}
+      utility_territory: {description: "Totals over a utility service territory or balancing authority."}
+      whole_building: {description: "One value per building or property."}
+      submeter_end_use: {description: "Submeters or end uses within a building."}
+      circuit_or_appliance: {description: "Circuits or individual appliances."}
+
+  MeasurementBasis:
+    description: "How energy values were obtained."
+    permissible_values:
+      metered: {description: "Measured by meters at the stated resolution."}
+      billed: {description: "From utility bills or supplier records."}
+      self_reported: {description: "Reported by owners or respondents (for example through benchmarking software)."}
+      modeled_or_estimated: {description: "Estimated by models, imputation or engineering calculation."}
+      mixed: {description: "A combination of the above."}
+
+  StockRepresentation:
+    description: "How a simulated building stock is represented."
+    permissible_values:
+      sampled_models: {description: "A statistical sample of building models weighted to the stock."}
+      building_by_building: {description: "One model per real building."}
+      prototype_library: {description: "Typical or prototype buildings by type, vintage and climate."}
+
+  ContextKind:
+    description: "Kind of context or coupling data."
+    permissible_values:
+      grid_emissions: {description: "Emission factors of electricity supply."}
+      energy_tariffs: {description: "Energy prices and tariffs."}
+      land_use: {description: "Land use and zoning."}
+      socio_economic: {description: "Population, income and housing statistics."}
+      urban_climate_zones: {description: "Local climate zones and urban form classes."}
+
+  ConventionType:
+    description: "What a dataset convention concerns."
+    permissible_values:
+      missing_code: {description: "Codes that mean missing, not applicable, withheld or unknown."}
+      unit: {description: "The unit and multiplier of values."}
+      top_or_bottom_code: {description: "Codes that stand for ranges at the end of a scale."}
+      imputation_flag: {description: "How imputation flags are named and linked to their variables."}
+      weight: {description: "How weights are named and used."}
+      identifier_format: {description: "How identifiers and keys are written."}
+      do_not_use: {description: "A field the publisher says must not be used, or not for some purpose."}
+      definition: {description: "What a field includes or excludes."}

@@ -72,3 +72,10 @@ verified:
   sources_checked:
   - https://www.google.com/covid19/mobility/
   - https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv (header and headers inspected)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - mobility
+  collection_method:
+  - mobile_location
+context_profile: {}

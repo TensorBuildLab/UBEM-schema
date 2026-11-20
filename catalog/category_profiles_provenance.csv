@@ -1,0 +1,94 @@
+id,evidence,sources,notes
+chr-ahs,entry_only,,Concept list is from the entry's content types (housing unit and household characteristics); variable-level coverage was not opened.
+chr-bedes,entry_only,,"A term dictionary, not data; concepts are those for which it defines terms (building characteristics, efficiency measures, energy use). Sectors and representativeness omitted."
+chr-bps,entry_only,,Counts of authorized new residential units by structure type and permit-issuing place; context_kind socio_economic is the nearest enum value.
+chr-buildingsync,entry_only,,"XSD schema for audit and building data; concepts are those the schema has elements for, taken from the entry description, not a field-by-field check."
+chr-cbecs-2018,entry_only,,"Carriers, metrics and measurement basis rest on general knowledge of CBECS (supplier survey plus modeled end uses) and were not re-read from the 2018 documentation."
+chr-doe-bpd,entry_only,,"Source records are buildings but only peer-group aggregates are released; scale set microscopic by rule 3, arguably macroscopic as released. Sectors and carriers omitted."
+chr-doe-prototypes,entry_only,,"Weather basis not stated in the entry (omitted). Concepts are inferred from the content types (models, internal loads and schedules, code stringency)."
+chr-energy-codes-status,entry_only,,"State-level modeled code energy use indices; no ContextKind value fits code stringency, so context_kind is omitted. Files were not opened."
+chr-eu-bso,entry_only,,"Country-level indicators compiled from heterogeneous national sources; no variable list was inspected, so concepts are approximate. Sectors and carriers omitted."
+chr-france-dpe,entry_only,,"Consumption is calculated by the conventional DPE method, not metered. Site and primary energy fields are assumed from the conso_5_usages and primary-energy columns; sector taken from the dataset name (logements)."
+chr-germany-zensus-2022,entry_only,,"Grid counts (100 m, 1 km, 10 km) with confidentiality suppression; complete_population refers to the building and dwelling count, the overall design mixes register and sample parts."
+chr-hotmaps,entry_only,,"Top-down modeled estimates on a 100 m grid and NUTS0 stock data; the non-residential class is mapped to commercial, which is approximate. Heat demand density is not listed as a concept."
+chr-ireland-ber,entry_only,,Field list was not verified (entry gives content types only); concepts are approximate.
+chr-nyc-ll84,entry_only,,Sectors and carriers omitted (not stated in the entry). Self-reported through ENERGY STAR Portfolio Manager.
+chr-nyc-pluto,written with the entry,,
+chr-recs-2020,entry_only,,Consumption derived from supplier billing data via EIA modeling (hence mixed). Carrier list and behavior types rest on general RECS knowledge plus the entry's thermostat_behavior content type.
+chr-tabula-episcope,entry_only,,"Simulation engine and weather basis omitted (reference calculation procedure, not a named engine). Residential only."
+chr-uk-epc,entry_only,,Asset ratings are calculated; Display Energy Certificates give operational ratings (hence mixed). Domestic plus non-domestic assumed to map to residential and commercial.
+ctx-acs,entry_only,,Concepts limited to those the entry's content types name; housing_characteristics and occupancy not mapped to specific concepts. Evidence is the catalog entry only; no publisher page was opened.
+ctx-cambium,entry_only,,Entry says www.nrel.gov was not fetched; marginal energy cost mapped to energy_price. The energy_tariffs context kind is a judgment (cost projections). Evidence is the catalog entry only; no publisher page was opened.
+ctx-egrid,entry_only,,Generation and resource-mix content not mapped to a concept (no leaf concept). Evidence is the catalog entry only; no publisher page was opened.
+ctx-lcz-global,entry_only,,LCZ classes mapped to climate_zone as the closest leaf concept. Evidence is the catalog entry only; no publisher page was opened.
+ctx-urdb,entry_only,,Evidence is the catalog entry only; no publisher page was opened.
+geo-3d-globfp,entry_only,,Heights regressed with XGBoost per entry; CRS not established.
+geo-3dbag,documentation,https://docs.3dbag.nl/en/,"AHN lidar heights and LoD1.2/1.3/2.2 from docs.3dbag.nl; CRS, id scheme, height reference not stated there."
+geo-china-rooftop-2023,entry_only,,"Rooftop polygons only, no heights per entry."
+geo-cmab,entry_only,,Attributes AI-generated per entry; representativeness not stated.
+geo-eubucco,entry_only,,Entry: height ground-truth share 43.2% rest ML-estimated; attribute coverage varies by country.
+geo-ghs-obat,entry_only,,Attributes inferred from GHSL rasters per entry; footprints from Overture.
+geo-ghsl-built,entry_only,,"Raster built-up surface and average net building height; height source, CRS not established. Built-up surface has no leaf concept."
+geo-globalbuildingatlas,documentation,https://github.com/zhu-xlab/GlobalBuildingAtlas,README: ML monocular height estimation; polygons in EPSG:3857 (HuggingFace ODbL files may appear as 4326).
+geo-google-open-buildings-25d,entry_only,,Height is relative above ground capped at 100 m; height_reference not set.
+geo-google-open-buildings,entry_only,,Footprints only per entry (heights in 2.5D product).
+geo-heris-raster-footprints,entry_only,,30 m rasters from Microsoft 2018 footprints.
+geo-ms-global-footprints,entry_only,,"Heights neural-network estimates, partial coverage."
+geo-ms-us-footprints,entry_only,,Geometry only per README.
+geo-nyc-footprints,written with the entry,,
+geo-open-city-model,entry_only,,Height source not stated.
+geo-osm,entry_only,,Height/levels tags sparse per entry; OSM tag docs not opened.
+geo-overture-buildings,documentation,https://docs.overturemaps.org/guides/buildings/,Guide page names height only; class/subtype/floors not confirmed so characteristics profile has no concepts; heights only where a source supplies them.
+geo-plateau,entry_only,,LODs and attributes differ by city; specific attributes not read.
+geo-regrid-parcels,entry_only,,Commercial; attribute fields unverified so no concepts.
+geo-ubid,entry_only,,Identifier standard not data; dimension footprint_2d is the closest enum value (code derived from footprint bounding box).
+geo-usa-structures,entry_only,,Attribute fields not verified.
+geo-usgs-3dep,entry_only,,"Not a building inventory; lidar and DEM only, no building concepts."
+geo-ut-globus,entry_only,,Vector files in UTM (no single EPSG).
+geo-wsf3d,entry_only,,About 90 m grid; area and volume layers have no leaf concept; height source not established.
+nrg-ashrae-gepiii,entry_only,,"Built from the catalog entry only (publisher pages not opened). Weather, building metadata and meter concepts follow the entry content_types; the Kaggle page is not readable per the entry."
+nrg-bdg2,entry_only,,"Built from the catalog entry only. Meter types per entry include electricity, chilled water, hot water, steam, solar, water, irrigation; only energy carriers are mapped."
+nrg-desnz-subnational,entry_only,,"Built from the catalog entry only. Gas is weather corrected and electricity is not (entry), so weather_normalized_available left unset. Sector split is domestic/non-domestic."
+nrg-eia-861,entry_only,,Built from the catalog entry only. Sales and revenue per utility; no weather normalization documented in the entry.
+nrg-eia-930,entry_only,,Built from the catalog entry only. Includes net generation by source and CO2 estimates per the entry.
+nrg-eia-mer,entry_only,,Built from the catalog entry only. Table 2.3 is commercial-sector consumption (entry); values largely estimated from surveys and models.
+nrg-eia-seds,entry_only,,"Built from the catalog entry only. Fuel list not itemized in the entry, so all_carriers used; includes prices, expenditures and CO2."
+nrg-eurostat-energy-balances,entry_only,,Built from the catalog entry only. Fuel list not itemized in the entry.
+nrg-ferc-714,entry_only,,Built from the catalog entry only. Hourly demand by planning area; the annual forecast is not mapped.
+nrg-ideal,entry_only,,"Built from the catalog entry only. Electricity 1 s, gas pulse, room and boiler sensors 12 s, plus occupant and building surveys; 39 homes have plug-level monitoring."
+nrg-issda-cer,entry_only,,"Built from the catalog entry only; the 30-minute resolution was itself inferred in the entry. Surveys exist but their variables are not itemized, so household_demographics is provisional."
+nrg-lead,entry_only,,Built from the catalog entry only. Electricity meters only; anomaly labels have no matching concept.
+nrg-london-lcl,entry_only,,Built from the catalog entry only. No building characteristics or coordinates; tariff assignment mapped to energy_price.
+nrg-neea-rbsa-metering,entry_only,,"Built from the catalog entry only. Whole-house electricity and gas plus end-use load shapes for 101 single-family homes; the specific end uses are not itemized in the entry, so behavior types are conservative."
+nrg-pecan-street,entry_only,,"Built from the catalog entry only. Resolution not uniform (1 min, 1 s from 2019). EV charging and PV generation noted; behavior beyond appliance loads not documented in the entry."
+nrg-plegma,entry_only,,"Built from the catalog entry only. Whole-house and appliance power at 10 s, humidity/temperature sensors, and survey of demographics and practices per entry content types."
+nrg-redd,entry_only,,"Built from the catalog entry only; the official site was unreachable per the entry. Channels: mains, circuits, plugs."
+nrg-refit,entry_only,,Built from the catalog entry only. Appliance channels are partial (entry).
+nrg-smart-umass,entry_only,,Built from the catalog entry only. Heterogeneous sub-datasets with differing resolutions; occupancy ground truth and switch/motion events per entry.
+nrg-uk-dale,entry_only,,"Built from the catalog entry only. Behavior limited to appliance power, which is what the entry documents."
+occ-ashrae-ob-db,entry_only,,"Energy block is minimal: the database records behavior, not energy, so only the required scale (room/building sensors) is stated. Brick not listed as metadata standard (only named as a content type). Evidence is the catalog entry only; no publisher page was opened."
+occ-atus,entry_only,,Building sectors omitted: person-level survey. Evidence is the catalog entry only; no publisher page was opened.
+occ-comfort-db2,entry_only,,"Energy block is minimal: the dataset holds comfort votes and indoor measurements, no energy data. Evidence is the catalog entry only; no publisher page was opened."
+occ-ecobee-dyd,entry_only,,"Entry says fields are not stated on the program page; thermostat_setpoint and residential come from the entry's general description, not verified fields. Evidence is the catalog entry only; no publisher page was opened."
+occ-hetus,entry_only,,Evidence is the catalog entry only; no publisher page was opened.
+occ-mobility,entry_only,,"No leaf concept fits relative visit counts and no context_kind value fits mobility, so concept lists are empty and context_kind is omitted. Evidence is the catalog entry only; no publisher page was opened."
+occ-uk-tus,entry_only,,Evidence is the catalog entry only; no publisher page was opened.
+sim-buildings-900k,entry_only,,Engine omitted (not stated in entry; derived from EULP simulations). Sectors follow the EULP provenance in the entry. Evidence is the catalog entry only; no publisher page was opened.
+sim-comstock-eulp,entry_only,,"simulation_engine EnergyPlus is not stated in the entry (general knowledge of NREL stock models); submeter_end_use refers to modeled end-use load profiles, not metering. Evidence is the catalog entry only; no publisher page was opened."
+sim-model-america,entry_only,,Engine from the entry's content type (OpenStudio/EnergyPlus models); concept list empty because model inputs are not documented in the entry. Evidence is the catalog entry only; no publisher page was opened.
+sim-resstock-eulp,entry_only,,"simulation_engine EnergyPlus is not stated in the entry (general knowledge of NREL stock models); submeter_end_use refers to modeled end-use load profiles, not metering. Evidence is the catalog entry only; no publisher page was opened."
+wx-argonne-future-weather,entry_only,,"Built from catalog entry only; variables and file format not documented there, so provides_concepts is empty and weather_file_format omitted."
+wx-bsrn,entry_only,,Entry only. Format is tab-delimited text (mapped to other). Station-measured shortwave components; longwave has no concept in the vocabulary.
+wx-climate-onebuilding,entry_only,,Entry only. EPW variable list assumed from the standard EPW format; irradiance is not station-measured per entry.
+wx-cmip6,entry_only,,"Entry only. Grid about 100 km or coarser, varies by model, so grid_resolution_km omitted; scenarios not stated in the entry."
+wx-energyplus-weather,entry_only,,Entry only; publisher page returned 404. EPW variable list assumed from the standard EPW format.
+wx-era5-land,entry_only,,"Entry only. About 9 km native grid, land only. Concept list kept to what the entry content types support."
+wx-era5,entry_only,,"Entry only. 0.25 degree (about 31 km). NetCDF output exists per entry notes but is general knowledge, so only grib listed."
+wx-euro-cordex,entry_only,,"Entry only. EUR-11 about 12.5 km (EUR-44 is 50 km); emission scenarios not stated in the entry, so omitted."
+wx-merra2,entry_only,,Entry only. Roughly 50 km latitudinal resolution per entry; surface radiation and near-surface meteorology listed generally.
+wx-na-cordex,entry_only,,"Entry only. Resolution is 0.22 degree (about 25 km) or 0.44 degree (about 50 km), two values, so grid_resolution_km omitted."
+wx-nasa-power,entry_only,,"Entry only. Sources, start year and grid size not established; grid_resolution_km omitted."
+wx-noaa-isd,entry_only,,"Entry only. Format is ISD ASCII (other). Station id scheme USAF-WBAN is from general knowledge of ISD, not the entry; verify."
+wx-noaa-normals,entry_only,,"Entry only. Station normals, plus about 4 km gridded for CONUS."
+wx-nsrdb,entry_only,,"Entry only. About 4 km, 30 min; TMY products and meteorological variables per content types; full variable list not verified."
+wx-pvgis,entry_only,,"Entry only. SARAH3 about 5 km or ERA5 about 25 km depending on location, so grid_resolution_km omitted."

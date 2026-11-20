@@ -75,3 +75,12 @@ verified:
   sources_checked:
   - https://ec.europa.eu/eurostat/web/microdata/harmonised-european-time-use-surveys
   - https://ec.europa.eu/eurostat/web/time-use-surveys
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - time_use_activities
+  collection_method:
+  - survey_or_diary
+  provides_concepts:
+  - time_use_activity
+  - household_demographics

@@ -56,3 +56,12 @@ verified:
   by: agent
   sources_checked:
   - https://api.crossref.org/works/10.1007/s10113-013-0499-2
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - projection_series
+  weather_file_format:
+  - netcdf
+  grid_resolution_km: 12.5
+  provides_concepts:
+  - dry_bulb_temperature

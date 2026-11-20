@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ubem-link"
 version = "1.0.0"
-description = "UBEM-Link: metadata schema, open-data catalog and LLM alignment benchmark for urban building energy modeling"
+description = "UBEM-Link: an AI-ready schema, open-data catalog and tool that turns building and urban energy data and their codebooks into checked, joinable UBEM inputs"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT (code); CC-BY-4.0 (schema, catalog, gold labels)"}
@@ -21,12 +21,22 @@ dependencies = [
 
 [project.optional-dependencies]
 schema = ["linkml>=1.8"]
-llm = ["anthropic>=0.40", "openai>=1.50"]
+llm = ["anthropic>=0.40"]
 embed = ["sentence-transformers>=3"]
 dev = ["pytest>=8"]
 
+[project.scripts]
+ubem-link = "ubem_link.cli:main"
+
+[project.urls]
+Repository = "https://github.com/TensorBuildLab/UBEM-schema"
+Documentation = "https://github.com/TensorBuildLab/UBEM-schema/tree/main/docs"
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+ubem_link = ["_data/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

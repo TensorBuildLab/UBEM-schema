@@ -76,9 +76,13 @@ def dataset_card(entry: dict, conventions_only: bool = False) -> str:
     conv = entry.get("conventions") or []
     if conv:
         lines.append("- Conventions (apply to many variables; individual codebook entries do not repeat them):")
-        for c in conv:
+        seen = set()
+        for c in conv:  # conventions that share one prose statement (one per unit, say) are printed once
             ex = f" Example: {c['example']}" if c.get("example") else ""
-            lines.append(f"  - {c.get('applies_to', 'all variables')}: {c['rule']}{ex}")
+            line = f"  - {c.get('applies_to', 'all variables')}: {c['rule']}{ex}"
+            if line not in seen:
+                seen.add(line)
+                lines.append(line)
     return "\n".join(lines)
 
 
@@ -91,7 +95,8 @@ def schema_card() -> str:
            ""]
     slots = s["slots"]
     for cname in ("DatasetProfile", "Distribution", "SpatialCoverage", "TemporalCoverage", "Convention",
-                  "VariableProfile", "CodeEntry", "Verification"):
+                  "CategoryProfile", "WeatherProfile", "GeometryProfile", "OperationProfile", "CharacteristicsProfile",
+                  "EnergyProfile", "SimulationProfile", "ContextProfile", "VariableProfile", "CodeEntry", "Verification"):
         c = s["classes"].get(cname)
         if not c:
             continue

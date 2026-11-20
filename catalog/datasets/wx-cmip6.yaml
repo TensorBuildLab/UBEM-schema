@@ -57,3 +57,11 @@ verified:
   by: agent
   sources_checked:
   - https://api.crossref.org/works/10.5194/gmd-9-1937-2016
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - projection_series
+  weather_file_format:
+  - netcdf
+  provides_concepts:
+  - dry_bulb_temperature

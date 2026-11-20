@@ -59,3 +59,11 @@ verified:
   - https://essd.copernicus.org/articles/16/5357/2024/
   - https://zenodo.org/api/records/15459025
   - https://api.crossref.org/works/10.5194/essd-16-5357-2024
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  height_source:
+  - model_estimated
+  provides_concepts:
+  - footprint
+  - building_height

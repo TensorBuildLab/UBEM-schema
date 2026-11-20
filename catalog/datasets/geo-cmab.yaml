@@ -62,3 +62,18 @@ verified:
   - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-025-04730-5&resultType=core&format=json
   - https://api.figshare.com/v2/articles/27992417
   - https://api.crossref.org/works/10.1038/s41597-025-04730-5
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  height_source:
+  - model_estimated
+  provides_concepts:
+  - footprint
+  - building_height
+characteristics_profile:
+  data_form:
+  - building_records
+  representativeness: unknown
+  provides_concepts:
+  - building_use_type
+  - year_of_construction

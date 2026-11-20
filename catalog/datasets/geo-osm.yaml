@@ -63,3 +63,16 @@ verified:
   - https://www.openstreetmap.org/copyright
   - https://wiki.openstreetmap.org/wiki/Planet.osm
   - https://api.crossref.org/works/10.1038/s41467-023-39698-6
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_2d
+  provides_concepts:
+  - footprint
+  - building_height
+  - floors_above_ground
+characteristics_profile:
+  data_form:
+  - building_records
+  representativeness: voluntary_or_convenience
+  provides_concepts:
+  - floors_above_ground

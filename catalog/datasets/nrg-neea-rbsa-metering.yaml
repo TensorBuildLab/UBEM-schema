@@ -47,3 +47,32 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://neea.org/resource/2011-rbsa-metering-study/', 'https://neea.org/?p=4257', 'https://neea.org/wp-content/uploads/2025/03/residential-building-stock-assessment-metering-study.pdf']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - appliance_plug_loads
+  collection_method:
+  - sensors_or_logs
+  building_sectors:
+  - residential
+  provides_concepts:
+  - equipment_usage_behavior
+  - plug_and_process_equipment
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  - natural_gas
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: submeter_end_use
+  measurement_basis: metered
+  reporting_period: 15-minute, 27 months
+  provides_concepts:
+  - electricity_consumption
+  - natural_gas_consumption
+  - load_timeseries
+  - end_use_energy

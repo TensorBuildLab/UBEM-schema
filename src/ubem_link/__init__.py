@@ -5,6 +5,8 @@ from pathlib import Path
 __version__ = "1.0.0"
 
 ROOT = Path(__file__).resolve().parents[2]
+if not (ROOT / "schema" / "ubem_link.yaml").exists():  # installed as a wheel: schema and catalog ship inside
+    ROOT = Path(__file__).resolve().parent / "_data"
 SCHEMA_YAML = ROOT / "schema" / "ubem_link.yaml"
 SCHEMA_JSON = ROOT / "schema" / "generated" / "ubem_link.schema.json"
 CONCEPTS_YAML = ROOT / "schema" / "vocab" / "ubem_concepts.yaml"

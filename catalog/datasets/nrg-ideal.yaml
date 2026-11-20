@@ -45,3 +45,36 @@ verified:
   by: agent
   sources_checked: ['https://api.datacite.org/dois/10.7488/ds/2836', 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-021-00921-y',
     'https://api.crossref.org/works/10.1038/s41597-021-00921-y']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - appliance_plug_loads
+  - thermal_comfort
+  collection_method:
+  - sensors_or_logs
+  - survey_or_diary
+  building_sectors:
+  - residential
+  provides_concepts:
+  - equipment_usage_behavior
+  - plug_and_process_equipment
+  - indoor_environment
+  - household_demographics
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  - natural_gas
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: circuit_or_appliance
+  measurement_basis: metered
+  reporting_period: 1 s electricity, 12 s environment
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - end_use_energy
+  - natural_gas_consumption

@@ -6,7 +6,14 @@ Providers (credentials come from the environment, never from this repository):
                         to "low" (classification-style task) and recorded with every call.
     ollama:<model>      Local Ollama server, native /api/chat (OLLAMA_HOST, default http://localhost:11434).
                         num_ctx is set explicitly so long vocabularies are never silently truncated.
-    openai:<model>      OpenAI SDK (OPENAI_API_KEY); kept for completeness.
+    openai:<model>      Any OpenAI-compatible chat-completions server: the OpenAI API (OPENAI_API_KEY), or a local
+                        server such as LM Studio, vLLM or llama.cpp (set OPENAI_BASE_URL, for example
+                        http://localhost:1234/v1). Called with plain HTTP, no SDK needed.
+    files:<directory>   No model is called. Requests are written to <directory>/requests.jsonl; any assistant
+                        (Claude Code, a chat window, a person) writes answers to <directory>/responses.jsonl as
+                        {"key": ..., "response": "<JSON text>"}, and the next run reads them. Used by the
+                        `ubem-link` tool for assistants without an API.
+    The evaluation in the paper used only ollama models; the other providers are for users of the tool.
 
 Design for fairness and cost:
   * The task instructions and the target vocabulary form the SYSTEM prompt, identical across items of one
@@ -247,12 +254,12 @@ def _key(model: str, req: dict, settings: dict, repeat: int) -> str:
     return hashlib.sha256(blob.encode()).hexdigest()[:24]
 
 
-def cache_path(model: str) -> Path:
-    return CACHE_DIR / (re.sub(r"[^A-Za-z0-9._-]", "_", model) + ".jsonl")
+def cache_path(model: str, cache_dir: Path | str | None = None) -> Path:
+    return Path(cache_dir or CACHE_DIR) / (re.sub(r"[^A-Za-z0-9._-]", "_", model) + ".jsonl")
 
 
-def load_cache(model: str) -> dict:
-    p = cache_path(model)
+def load_cache(model: str, cache_dir: Path | str | None = None) -> dict:
+    p = cache_path(model, cache_dir)
     out = {}
     if p.exists():
         with open(p, encoding="utf-8") as fh:
@@ -320,23 +327,65 @@ def _call(model: str, req: dict, settings: dict) -> tuple[str, dict]:
                 out[k] = {"boolean": False, "number": 0.5, "string": "none", "array": []}[v["type"]]
         return json.dumps(out), {"input_tokens": approx_tokens(req["system"] + req["user"]), "output_tokens": 20}
     if provider == "openai":
-        from openai import OpenAI
-
-        r = OpenAI().chat.completions.create(
-            model=name, temperature=settings["temperature"], max_tokens=settings["max_tokens"],
-            response_format={"type": "json_schema", "json_schema": {"name": "answer", "schema": req["schema"]}},
-            messages=[{"role": "system", "content": req["system"]}, {"role": "user", "content": req["user"]}])
-        return r.choices[0].message.content, {"input_tokens": r.usage.prompt_tokens,
-                                              "output_tokens": r.usage.completion_tokens, "model_version": r.model}
+        base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+        headers = {"Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY', 'not-needed-for-local-servers')}"}
+        body = {"model": name, "temperature": settings["temperature"], "max_tokens": settings["max_tokens"],
+                "response_format": {"type": "json_schema",
+                                    "json_schema": {"name": "answer", "schema": req["schema"]}},
+                "messages": [{"role": "system", "content": req["system"]}, {"role": "user", "content": req["user"]}]}
+        r = requests.post(f"{base}/chat/completions", json=body, headers=headers, timeout=600)
+        r.raise_for_status()
+        js = r.json()
+        u = js.get("usage") or {}
+        return js["choices"][0]["message"]["content"], {"input_tokens": u.get("prompt_tokens"),
+                                                        "output_tokens": u.get("completion_tokens"),
+                                                        "model_version": js.get("model")}
     raise ValueError(f"unknown provider in {model!r}")
 
 
-def complete(model: str, req: dict, meta: dict, repeat: int = 0, cache: dict | None = None) -> dict:
-    cache = cache if cache is not None else load_cache(model)
+class PendingResponses(RuntimeError):
+    """Raised by the files backend when some requests still wait for an answer in responses.jsonl."""
+
+
+def _files_backend(model: str, req: dict, key: str, meta: dict) -> str | None:
+    """Return the answer for `key` from <dir>/responses.jsonl, or queue the request in <dir>/requests.jsonl."""
+    d = Path(model.split(":", 1)[1])
+    d.mkdir(parents=True, exist_ok=True)
+    resp = d / "responses.jsonl"
+    if resp.exists():
+        for line in resp.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                rec = json.loads(line)
+                if rec.get("key") == key:
+                    r = rec["response"]
+                    return r if isinstance(r, str) else json.dumps(r)
+    reqf = d / "requests.jsonl"
+    queued = set()
+    if reqf.exists():
+        queued = {json.loads(x)["key"] for x in reqf.read_text(encoding="utf-8").splitlines() if x.strip()}
+    if key not in queued:
+        with open(reqf, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps({"key": key, **{k: meta.get(k) for k in ("task", "dataset", "name")},
+                                 "system": req["system"], "user": req["user"], "schema": req["schema"]},
+                                ensure_ascii=False) + "\n")
+    return None
+
+
+def complete(model: str, req: dict, meta: dict, repeat: int = 0, cache: dict | None = None,
+             cache_dir: Path | str | None = None) -> dict:
+    """One cached model call. cache_dir defaults to the benchmark cache; the tool passes its own."""
+    cache = cache if cache is not None else load_cache(model, cache_dir)
     settings = default_settings(model, repeat)
     k = _key(model, req, settings, repeat)
     if k in cache:
         return cache[k]
+    if model.startswith("files:"):
+        text = _files_backend(model, req, k, meta)
+        if text is None:
+            raise PendingResponses(k)
+        rec = {"key": k, "model": model, "repeat": repeat, "settings": settings, **meta, "response": text}
+        cache[k] = rec
+        return rec
     err = None
     for attempt in range(4):
         try:
@@ -350,8 +399,8 @@ def complete(model: str, req: dict, meta: dict, repeat: int = 0, cache: dict | N
         raise RuntimeError(f"{model} failed after retries: {err}")
     rec = {"key": k, "model": model, "repeat": repeat, "settings": settings, **meta,
            "response": text, "latency_s": round(time.time() - t0, 2), **usage}
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    with open(cache_path(model), "a", encoding="utf-8") as fh:
+    cache_path(model, cache_dir).parent.mkdir(parents=True, exist_ok=True)
+    with open(cache_path(model, cache_dir), "a", encoding="utf-8") as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
     cache[k] = rec
     return rec

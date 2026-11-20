@@ -90,3 +90,66 @@ verified:
   - https://www.eia.gov/consumption/residential/data/2020/index.php?view=microdata
   - https://www.eia.gov/consumption/residential/data/2020/csv/recs2020_public_v7.csv (header and row count inspected)
   - https://www.eia.gov/consumption/residential/data/2020/pdf/microdata-guide.pdf (found via search, weights NWEIGHT, NWEIGHT1-NWEIGHT60)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - thermostat_setpoint
+  - hvac_operation
+  control_actions:
+  - thermostat_adjustment
+  collection_method:
+  - survey_or_diary
+  building_sectors:
+  - residential
+  provides_concepts:
+  - thermostat_setpoint
+  - equipment_usage_behavior
+  - occupant_count
+characteristics_profile:
+  data_form:
+  - microdata
+  building_sectors:
+  - residential
+  representativeness: probability_sample
+  provides_concepts:
+  - survey_weight
+  - replicate_weight
+  - imputation_flag
+  - household_demographics
+  - ownership_tenure
+  - building_use_type
+  - year_of_construction
+  - floor_area_category
+  - insulation
+  - window_properties
+  - heating_system
+  - cooling_system
+  - water_heating_system
+  - lighting_system
+  - plug_and_process_equipment
+  - climate_zone
+  - urban_rural_indicator
+  - administrative_region
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  - natural_gas
+  - fuel_oil
+  - propane
+  energy_metrics:
+  - site_energy
+  - end_use_energy
+  - expenditure
+  metering_level: whole_building
+  measurement_basis: mixed
+  reporting_period: annual
+  provides_concepts:
+  - total_energy_consumption
+  - electricity_consumption
+  - natural_gas_consumption
+  - other_fuel_consumption
+  - end_use_energy
+  - energy_expenditure

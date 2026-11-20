@@ -51,6 +51,16 @@ def _clean(entry: dict) -> dict:
     return out
 
 
+def validate_profile(doc: dict) -> list[str]:
+    """Errors of one dataset profile (for example one written by `ubem-link describe`)."""
+    d = _clean(doc)
+    errs = [f"{'/'.join(str(p) for p in e.absolute_path) or '(root)'}: {e.message[:200]}"
+            for e in _dataset_validator().iter_errors(d)]
+    if d.get("statistical_nature") == "sample_survey_weighted" and not d.get("sampling_weights"):
+        errs.append("rule: sample_survey_weighted requires sampling_weights")
+    return errs
+
+
 def validate(directory: Path | str = CATALOG_DIR) -> list[tuple[str, str]]:
     validator = _dataset_validator()
     problems: list[tuple[str, str]] = []

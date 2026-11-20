@@ -1,0 +1,12 @@
+# Primary Land Use Tax Lot Output (PLUTO) (chr-nyc-pluto)
+- UBEM workflow roles: building_characteristics, context_coupling
+- Statistical nature: administrative_record
+- Finest public spatial granularity: parcel
+- Temporal resolution: static
+- Access: open_api
+- Join keys: parcel_id, lat_lon, census_tract, postal_code, building_type
+- Conventions (apply to many variables; individual codebook entries do not repeat them):
+  - year built: If the year built is empty or 0, the value is unknown. Example: yearbuilt = 0 for a lot whose construction year is not recorded.
+  - floor areas: Areas are in square feet; a value of zero means not available (if the lot has buildings) or not applicable (if it has none). Example: bldgarea = 0 on a vacant lot.
+  - community district: Three digits, the borough code followed by the community district number; codes 64, 26-28, 55-56, 80-84 and 95 after the borough digit are joint interest areas (parks and airports), not community districts. Example: cd = 101 is Manhattan Community District 1; 483 is JFK International Airport.
+  - borough, block and lot (BBL): Ten digits, the borough code followed by the five-digit block and the four-digit lot. Example: bbl = 1008190014.

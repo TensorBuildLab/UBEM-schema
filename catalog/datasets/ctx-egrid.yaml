@@ -55,3 +55,9 @@ verified:
   by: agent
   sources_checked:
   - https://www.epa.gov/egrid
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+context_profile:
+  context_kind:
+  - grid_emissions
+  provides_concepts:
+  - grid_emission_factor

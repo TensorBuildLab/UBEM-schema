@@ -56,3 +56,9 @@ verified:
   by: agent
   sources_checked:
   - https://openei.org/wiki/Utility_Rate_Database
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+context_profile:
+  context_kind:
+  - energy_tariffs
+  provides_concepts:
+  - energy_price

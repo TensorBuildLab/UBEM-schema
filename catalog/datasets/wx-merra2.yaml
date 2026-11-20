@@ -55,3 +55,13 @@ verified:
   sources_checked:
   - https://gmao.gsfc.nasa.gov/gmao-products/merra-2/
   - https://api.crossref.org/works/10.1175/JCLI-D-16-0758.1
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - actual_series
+  weather_file_format:
+  - netcdf
+  grid_resolution_km: 50
+  provides_concepts:
+  - dry_bulb_temperature
+  - global_horizontal_irradiance

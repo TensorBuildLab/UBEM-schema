@@ -47,3 +47,19 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households', 'https://api.datacite.org/dois/10.5255/UKDA-SN-7857-1']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  metering_level: whole_building
+  measurement_basis: metered
+  reporting_period: half-hourly
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - energy_price

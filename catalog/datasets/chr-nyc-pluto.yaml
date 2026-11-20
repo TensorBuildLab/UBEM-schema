@@ -1,0 +1,121 @@
+# UBEM-Link catalog entry (DatasetProfile). Written 2026-11-19 from the publisher's metadata; null means not stated.
+id: chr-nyc-pluto
+title: Primary Land Use Tax Lot Output (PLUTO)
+short_name: NYC PLUTO
+publisher: New York City Department of City Planning (DCP), via NYC Open Data
+landing_page: https://data.cityofnewyork.us/d/64uk-42ks
+doi: null
+citation: City of New York, Department of City Planning. Primary Land Use Tax Lot Output (PLUTO). NYC Open Data,
+  dataset 64uk-42ks.
+reference_paper_doi: null
+license: null
+access_level: open_api
+distributions:
+- format: CSV / JSON via Socrata (SODA) API
+  access_url: https://data.cityofnewyork.us/resource/64uk-42ks.json
+  api: true
+  registration_required: false
+- format: CSV and MapPLUTO (shapefile, file geodatabase)
+  access_url: https://www.nyc.gov/content/planning/pages/resources/datasets/mappluto-pluto-change
+  api: false
+  registration_required: false
+ubem_roles:
+- building_characteristics
+- context_coupling
+content_types:
+- tax_lots
+- land_use
+- building_class
+- year_built
+- floor_area
+- number_of_floors
+geographic_scope: city
+spatial_coverage:
+  countries:
+  - US
+  description: New York City, all tax lots
+unit_of_observation: tax lot
+spatial_granularity: parcel
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: static
+update_frequency: several releases per year (version YYv#)
+statistical_nature: administrative_record
+sampling_weights: null
+record_count: 858284
+record_count_note: 858,284 tax lots in the version downloaded on 2026-11-15 (26v2)
+join_keys:
+- parcel_id
+- lat_lon
+- census_tract
+- postal_code
+- building_type
+variables_documented: true
+machine_readable: true
+versioned: true
+persistent_identifier: false
+known_limitations: One record per tax lot, so lots with several buildings report the tallest building's floors and the
+  lot's total floor area; condominium floor areas are net, not gross; year built is accurate to the decade.
+notes: Conventions taken from the column descriptions in the dataset metadata. Added for the city-scale integration
+  case per catalog criterion 3 (city dataset used as a reference).
+verified:
+  date: '2026-11-19'
+  by: agent
+  sources_checked:
+  - https://data.cityofnewyork.us/api/views/64uk-42ks.json
+characteristics_profile:
+  data_form:
+  - building_records
+  building_sectors:
+  - all
+  representativeness: complete_population
+  provides_concepts:
+  - building_use_type
+  - year_of_construction
+  - floors_above_ground
+  - gross_floor_area
+  - geographic_coordinates
+  - administrative_region
+  - land_use
+context_profile:
+  context_kind:
+  - land_use
+  provides_concepts:
+  - land_use
+conventions:
+- convention_type: missing_code
+  applies_to: year built
+  applies_to_variables:
+  - yearbuilt
+  rule: If the year built is empty or 0, the value is unknown.
+  example: yearbuilt = 0 for a lot whose construction year is not recorded.
+  missing_codes:
+  - '0'
+  - ''
+- convention_type: missing_code
+  applies_to: floor areas
+  applies_to_variables:
+  - bldgarea
+  - resarea
+  - comarea
+  rule: Areas are in square feet; a value of zero means not available (if the lot has buildings) or not applicable (if
+    it has none).
+  example: bldgarea = 0 on a vacant lot.
+  missing_codes:
+  - '0'
+  unit: unit:FT2
+  unit_multiplier: 1
+- convention_type: identifier_format
+  applies_to: community district
+  applies_to_variables:
+  - cd
+  rule: Three digits, the borough code followed by the community district number; codes 64, 26-28, 55-56, 80-84 and 95
+    after the borough digit are joint interest areas (parks and airports), not community districts.
+  example: cd = 101 is Manhattan Community District 1; 483 is JFK International Airport.
+- convention_type: identifier_format
+  applies_to: borough, block and lot (BBL)
+  applies_to_variables:
+  - bbl
+  rule: Ten digits, the borough code followed by the five-digit block and the four-digit lot.
+  example: bbl = 1008190014.

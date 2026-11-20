@@ -66,3 +66,23 @@ verified:
   - https://api.crossref.org/works/10.1038/s41597-022-01475-3
   - https://pmc.ncbi.nlm.nih.gov/articles/PMC9240009 (via Europe PMC REST abstract)
   - https://ashraeobdatabase.com/ (page text not readable by the fetcher)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - occupancy_presence
+  - thermostat_setpoint
+  - window_operation
+  - lighting_operation
+  control_actions:
+  - thermostat_adjustment
+  - window_open_close
+  - lighting_on_off
+  collection_method:
+  - sensors_or_logs
+  - field_study_compilation
+  provides_concepts:
+  - occupant_count
+  - thermostat_setpoint
+  - occupant_control_action
+energy_profile:
+  energy_data_scale: microscopic

@@ -59,3 +59,11 @@ verified:
   by: agent
   sources_checked:
   - https://github.com/microsoft/GlobalMLBuildingFootprints
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  height_source:
+  - model_estimated
+  provides_concepts:
+  - footprint
+  - building_height

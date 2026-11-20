@@ -62,3 +62,17 @@ verified:
   sources_checked:
   - https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database
   - https://api.crossref.org/works/10.1175/2011BAMS3015.1
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - actual_series
+  weather_file_format:
+  - other
+  station_id_scheme: USAF-WBAN
+  provides_concepts:
+  - dry_bulb_temperature
+  - dew_point_temperature
+  - atmospheric_pressure
+  - wind_speed
+  - wind_direction
+  - precipitation

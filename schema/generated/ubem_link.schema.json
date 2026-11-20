@@ -25,6 +25,34 @@
             "title": "Aggregation",
             "type": "string"
         },
+        "BehaviorType": {
+            "description": "Kind of occupant behavior or building operation.",
+            "enum": [
+                "occupancy_presence",
+                "hvac_operation",
+                "thermostat_setpoint",
+                "window_operation",
+                "lighting_operation",
+                "appliance_plug_loads",
+                "hot_water_use",
+                "thermal_comfort",
+                "time_use_activities",
+                "mobility"
+            ],
+            "title": "BehaviorType",
+            "type": "string"
+        },
+        "BuildingSector": {
+            "description": "Building sector.",
+            "enum": [
+                "residential",
+                "commercial",
+                "industrial",
+                "all"
+            ],
+            "title": "BuildingSector",
+            "type": "string"
+        },
         "Catalog": {
             "additionalProperties": false,
             "description": "A collection of dataset profiles and the concept vocabulary they refer to.",
@@ -51,6 +79,110 @@
                 }
             },
             "title": "Catalog",
+            "type": "object"
+        },
+        "CategoryProfile": {
+            "additionalProperties": false,
+            "description": "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its \"macroscopic\" and \"microscopic\" energy data share EnergyProfile and differ in energy_data_scale, and its \"comprehensive data lake\" is a Catalog of profiles rather than a category.",
+            "properties": {
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CategoryProfile",
+            "type": "object"
+        },
+        "CharacteristicsProfile": {
+            "additionalProperties": false,
+            "description": "Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys, administrative records, certificates and dictionaries.",
+            "properties": {
+                "building_sectors": {
+                    "description": "Building sectors covered.",
+                    "items": {
+                        "$ref": "#/$defs/BuildingSector"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "coverage_threshold": {
+                    "description": "Size or other threshold that decides which buildings are covered (for example 'more than 25,000 ft\u00b2').",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "cross_tabulations": {
+                    "description": "For aggregate tables, the joint distributions published, each as concept ids joined by ' x '.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "data_form": {
+                    "description": "Whether the data are records of individual units (microdata or building records) or published distributions (aggregate tables).",
+                    "items": {
+                        "$ref": "#/$defs/DataForm"
+                    },
+                    "type": "array"
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "representativeness": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Representativeness"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "How the covered buildings relate to the building stock, which decides whether results generalize."
+                }
+            },
+            "required": [
+                "data_form"
+            ],
+            "title": "CharacteristicsProfile",
             "type": "object"
         },
         "CodeEntry": {
@@ -82,6 +214,81 @@
             "title": "CodeEntry",
             "type": "object"
         },
+        "CollectionMethod": {
+            "description": "How behavior or operation data were collected.",
+            "enum": [
+                "sensors_or_logs",
+                "connected_devices",
+                "survey_or_diary",
+                "field_study_compilation",
+                "mobile_location"
+            ],
+            "title": "CollectionMethod",
+            "type": "string"
+        },
+        "ContextKind": {
+            "description": "Kind of context or coupling data.",
+            "enum": [
+                "grid_emissions",
+                "energy_tariffs",
+                "land_use",
+                "socio_economic",
+                "urban_climate_zones"
+            ],
+            "title": "ContextKind",
+            "type": "string"
+        },
+        "ContextProfile": {
+            "additionalProperties": false,
+            "description": "Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate.",
+            "properties": {
+                "context_kind": {
+                    "description": "Kind of context or coupling data.",
+                    "items": {
+                        "$ref": "#/$defs/ContextKind"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ContextProfile",
+            "type": "object"
+        },
+        "ControlAction": {
+            "description": "Occupant control action.",
+            "enum": [
+                "thermostat_adjustment",
+                "hvac_on_off",
+                "lighting_on_off",
+                "window_open_close",
+                "shading_adjustment",
+                "appliance_on_off"
+            ],
+            "title": "ControlAction",
+            "type": "string"
+        },
         "Convention": {
             "additionalProperties": false,
             "description": "A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a code that means \"not applicable\", or a unit used for all energy totals. Conventions are usually stated once in a user guide and never in the individual codebook entries, so a person or an AI system reading one entry cannot infer them; the profile states them explicitly.",
@@ -93,6 +300,34 @@
                         "null"
                     ]
                 },
+                "applies_to_pattern": {
+                    "description": "Regular expression over variable names giving the variables a convention applies to (machine-readable scope).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "applies_to_variables": {
+                    "description": "Exact names of the variables a convention applies to (machine-readable scope).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "convention_type": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ConventionType"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "What the convention concerns, so that tools can apply it (missing codes, units, flags, keys)."
+                },
                 "example": {
                     "description": "One concrete example of the rule from the dataset.",
                     "type": [
@@ -100,9 +335,33 @@
                         "null"
                     ]
                 },
+                "missing_codes": {
+                    "description": "Raw values that mean missing, not applicable, or suppressed.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "rule": {
                     "description": "The convention, stated as a rule that can be applied without other context.",
                     "type": "string"
+                },
+                "unit": {
+                    "description": "QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "unit_multiplier": {
+                    "description": "Factor applied to raw values before the unit applies (e.g., 1000 for \"thousand Btu\").",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
                 }
             },
             "required": [
@@ -110,6 +369,33 @@
             ],
             "title": "Convention",
             "type": "object"
+        },
+        "ConventionType": {
+            "description": "What a dataset convention concerns.",
+            "enum": [
+                "missing_code",
+                "unit",
+                "top_or_bottom_code",
+                "imputation_flag",
+                "weight",
+                "identifier_format",
+                "do_not_use",
+                "definition"
+            ],
+            "title": "ConventionType",
+            "type": "string"
+        },
+        "DataForm": {
+            "description": "Form in which characteristics are released.",
+            "enum": [
+                "microdata",
+                "building_records",
+                "aggregate_tables",
+                "dictionary_or_standard",
+                "archetype_library"
+            ],
+            "title": "DataForm",
+            "type": "string"
         },
         "DatasetProfile": {
             "additionalProperties": false,
@@ -129,6 +415,17 @@
                     "$ref": "#/$defs/AccessLevel",
                     "description": "How the data can be obtained, from open download to restricted or commercial access."
                 },
+                "characteristics_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CharacteristicsProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role building_characteristics."
+                },
                 "citation": {
                     "description": "Citation text the publisher asks users to give.",
                     "type": [
@@ -145,6 +442,17 @@
                         "array",
                         "null"
                     ]
+                },
+                "context_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ContextProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role context_coupling."
                 },
                 "conventions": {
                     "description": "Dataset-wide rules for naming, coding and units that apply to many variables.",
@@ -174,6 +482,17 @@
                         "null"
                     ]
                 },
+                "energy_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/EnergyProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role calibration_validation."
+                },
                 "geographic_scope": {
                     "anyOf": [
                         {
@@ -184,6 +503,17 @@
                         }
                     ],
                     "description": "Extent of the area covered, from city to global."
+                },
+                "geometry_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GeometryProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role geometry_inventory."
                 },
                 "id": {
                     "description": "Stable lowercase identifier of the record (letters, digits, '_', '.', '-').",
@@ -236,6 +566,17 @@
                         "null"
                     ]
                 },
+                "operation_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OperationProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role operation_use."
+                },
                 "persistent_identifier": {
                     "description": "True if the dataset has a persistent identifier such as a DOI.",
                     "type": [
@@ -285,6 +626,17 @@
                         "string",
                         "null"
                     ]
+                },
+                "simulation_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimulationProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role reference_simulation."
                 },
                 "spatial_coverage": {
                     "anyOf": [
@@ -383,6 +735,17 @@
                         "boolean",
                         "null"
                     ]
+                },
+                "weather_profile": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/WeatherProfile"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Category profile for a dataset with the role boundary_conditions."
                 }
             },
             "required": [
@@ -440,6 +803,158 @@
             "title": "Distribution",
             "type": "object"
         },
+        "EnergyCarrier": {
+            "description": "Energy carrier.",
+            "enum": [
+                "electricity",
+                "natural_gas",
+                "fuel_oil",
+                "propane",
+                "district_energy",
+                "biomass",
+                "onsite_renewables",
+                "all_carriers"
+            ],
+            "title": "EnergyCarrier",
+            "type": "string"
+        },
+        "EnergyDataScale": {
+            "description": "Scale of energy data.",
+            "enum": [
+                "macroscopic",
+                "microscopic"
+            ],
+            "title": "EnergyDataScale",
+            "type": "string"
+        },
+        "EnergyMetric": {
+            "description": "Kind of energy quantity.",
+            "enum": [
+                "site_energy",
+                "source_energy",
+                "primary_energy",
+                "end_use_energy",
+                "load_profile",
+                "peak_demand",
+                "emissions",
+                "expenditure"
+            ],
+            "title": "EnergyMetric",
+            "type": "string"
+        },
+        "EnergyProfile": {
+            "additionalProperties": false,
+            "description": "Measured or reported energy use for calibration and validation, from national balances (macroscopic) to buildings, meters and appliances (microscopic).",
+            "properties": {
+                "energy_carriers": {
+                    "description": "Energy carriers reported.",
+                    "items": {
+                        "$ref": "#/$defs/EnergyCarrier"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "energy_data_scale": {
+                    "$ref": "#/$defs/EnergyDataScale",
+                    "description": "Macroscopic (aggregates over many buildings) or microscopic (buildings, meters, circuits or appliances)."
+                },
+                "energy_metrics": {
+                    "description": "Kinds of energy quantity reported.",
+                    "items": {
+                        "$ref": "#/$defs/EnergyMetric"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "energy_sectors": {
+                    "description": "Energy-using sectors covered.",
+                    "items": {
+                        "$ref": "#/$defs/EnergySector"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "measurement_basis": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MeasurementBasis"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Whether values are metered, billed, self-reported or modeled."
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metering_level": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MeteringLevel"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Finest level at which energy is measured or reported."
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "reporting_period": {
+                    "description": "Period one value covers (for example calendar year, billing month).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "weather_normalized_available": {
+                    "description": "True if weather-normalized values are published alongside the actual ones.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "energy_data_scale"
+            ],
+            "title": "EnergyProfile",
+            "type": "object"
+        },
+        "EnergySector": {
+            "description": "Energy-using sector.",
+            "enum": [
+                "residential",
+                "commercial",
+                "industrial",
+                "transportation",
+                "all"
+            ],
+            "title": "EnergySector",
+            "type": "string"
+        },
         "EntityType": {
             "description": "What a concept or variable describes.",
             "enum": [
@@ -459,6 +974,17 @@
             "title": "EntityType",
             "type": "string"
         },
+        "GapFilling": {
+            "description": "How missing or sub-interval values were filled.",
+            "enum": [
+                "none",
+                "linear_interpolation",
+                "model_based",
+                "unknown"
+            ],
+            "title": "GapFilling",
+            "type": "string"
+        },
         "GeographicScope": {
             "description": "Extent of the area a dataset covers.",
             "enum": [
@@ -469,6 +995,139 @@
                 "city"
             ],
             "title": "GeographicScope",
+            "type": "string"
+        },
+        "GeometryDimension": {
+            "description": "Geometric representation of buildings.",
+            "enum": [
+                "point",
+                "footprint_2d",
+                "footprint_with_height",
+                "solid_3d",
+                "raster",
+                "parcel_polygon"
+            ],
+            "title": "GeometryDimension",
+            "type": "string"
+        },
+        "GeometryProfile": {
+            "additionalProperties": false,
+            "description": "Building stock geometry and inventory: footprints, heights, 3D city models and parcels.",
+            "properties": {
+                "building_id_scheme": {
+                    "description": "Building identifier system used (for example BIN, UPRN, BAG, UBID); null if none.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "coordinate_reference_system": {
+                    "description": "Coordinate reference system of the published geometry, as an EPSG code (for example EPSG:4326).",
+                    "pattern": "^EPSG:[0-9]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "crs_linear_unit": {
+                    "description": "Linear unit of the coordinate reference system and of lengths and areas derived from it (QUDT CURIE, for example unit:FT_US or unit:M).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "geometry_dimension": {
+                    "$ref": "#/$defs/GeometryDimension",
+                    "description": "Geometric representation of buildings, from points and footprints to 3D solids."
+                },
+                "height_reference": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/HeightReference"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Reference points between which a building height is measured."
+                },
+                "height_source": {
+                    "description": "How building heights were obtained.",
+                    "items": {
+                        "$ref": "#/$defs/HeightSource"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "levels_of_detail": {
+                    "description": "CityGML levels of detail provided.",
+                    "items": {
+                        "$ref": "#/$defs/LevelOfDetail"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "minimum_building_size": {
+                    "description": "Capture threshold for buildings, as stated by the publisher (for example 'larger than 400 sq ft').",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "geometry_dimension"
+            ],
+            "title": "GeometryProfile",
+            "type": "object"
+        },
+        "HeightReference": {
+            "description": "Reference points of a building height.",
+            "enum": [
+                "ground_to_roof_top",
+                "ground_to_eave",
+                "ground_to_mean_roof",
+                "above_sea_level",
+                "unknown"
+            ],
+            "title": "HeightReference",
+            "type": "string"
+        },
+        "HeightSource": {
+            "description": "How building heights were obtained.",
+            "enum": [
+                "lidar",
+                "photogrammetry",
+                "plans_or_records",
+                "model_estimated",
+                "derived_from_floors",
+                "none"
+            ],
+            "title": "HeightSource",
             "type": "string"
         },
         "JoinKey": {
@@ -502,6 +1161,18 @@
             "title": "JoinKey",
             "type": "string"
         },
+        "LevelOfDetail": {
+            "description": "CityGML level of detail.",
+            "enum": [
+                "lod0",
+                "lod1",
+                "lod2",
+                "lod3",
+                "lod4"
+            ],
+            "title": "LevelOfDetail",
+            "type": "string"
+        },
         "MappingRelation": {
             "description": "SKOS mapping relation between a variable and a concept.",
             "enum": [
@@ -513,6 +1184,174 @@
             ],
             "title": "MappingRelation",
             "type": "string"
+        },
+        "MeasurementBasis": {
+            "description": "How energy values were obtained.",
+            "enum": [
+                "metered",
+                "billed",
+                "self_reported",
+                "modeled_or_estimated",
+                "mixed"
+            ],
+            "title": "MeasurementBasis",
+            "type": "string"
+        },
+        "MeteringLevel": {
+            "description": "Finest level at which energy is measured or reported.",
+            "enum": [
+                "area_aggregate",
+                "utility_territory",
+                "whole_building",
+                "submeter_end_use",
+                "circuit_or_appliance"
+            ],
+            "title": "MeteringLevel",
+            "type": "string"
+        },
+        "OperationProfile": {
+            "additionalProperties": false,
+            "description": "Occupancy, occupant behavior, schedules, setpoints and time use.",
+            "properties": {
+                "behavior_types": {
+                    "description": "Kinds of occupant behavior or building operation recorded.",
+                    "items": {
+                        "$ref": "#/$defs/BehaviorType"
+                    },
+                    "type": "array"
+                },
+                "building_sectors": {
+                    "description": "Building sectors covered.",
+                    "items": {
+                        "$ref": "#/$defs/BuildingSector"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "collection_method": {
+                    "description": "How the behavior or operation data were collected.",
+                    "items": {
+                        "$ref": "#/$defs/CollectionMethod"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "control_actions": {
+                    "description": "Occupant control actions recorded.",
+                    "items": {
+                        "$ref": "#/$defs/ControlAction"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "behavior_types"
+            ],
+            "title": "OperationProfile",
+            "type": "object"
+        },
+        "Representativeness": {
+            "description": "How the covered buildings relate to the building stock.",
+            "enum": [
+                "probability_sample",
+                "complete_population",
+                "mandated_subset",
+                "voluntary_or_convenience",
+                "synthetic",
+                "unknown"
+            ],
+            "title": "Representativeness",
+            "type": "string"
+        },
+        "SimulationProfile": {
+            "additionalProperties": false,
+            "description": "Reference simulations and model libraries: synthetic building-stock outputs and prototype models.",
+            "properties": {
+                "building_sectors": {
+                    "description": "Building sectors covered.",
+                    "items": {
+                        "$ref": "#/$defs/BuildingSector"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "simulation_engine": {
+                    "description": "Simulation engine that produced the data (for example EnergyPlus).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stock_representation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/StockRepresentation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "How the simulated building stock is represented."
+                },
+                "weather_basis": {
+                    "description": "Weather used for the simulations (for example AMY 2018, TMY3).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SimulationProfile",
+            "type": "object"
         },
         "SpatialCoverage": {
             "additionalProperties": false,
@@ -590,6 +1429,16 @@
             "title": "StatisticalNature",
             "type": "string"
         },
+        "StockRepresentation": {
+            "description": "How a simulated building stock is represented.",
+            "enum": [
+                "sampled_models",
+                "building_by_building",
+                "prototype_library"
+            ],
+            "title": "StockRepresentation",
+            "type": "string"
+        },
         "TemporalCoverage": {
             "additionalProperties": false,
             "description": "Period of time a dataset covers.",
@@ -611,6 +1460,28 @@
             },
             "title": "TemporalCoverage",
             "type": "object"
+        },
+        "TimeBasis": {
+            "description": "Clock to which timestamps refer.",
+            "enum": [
+                "utc",
+                "local_standard_time",
+                "local_time_with_dst",
+                "unknown"
+            ],
+            "title": "TimeBasis",
+            "type": "string"
+        },
+        "TimestampConvention": {
+            "description": "What a timestamp marks within its interval.",
+            "enum": [
+                "interval_ending",
+                "interval_beginning",
+                "instantaneous",
+                "unknown"
+            ],
+            "title": "TimestampConvention",
+            "type": "string"
         },
         "UBEMConcept": {
             "additionalProperties": false,
@@ -802,6 +1673,13 @@
                         "null"
                     ]
                 },
+                "confidence": {
+                    "description": "Confidence of an automatically produced mapping, between 0 and 1.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
                 "datatype": {
                     "anyOf": [
                         {
@@ -817,6 +1695,13 @@
                     "description": "Longer description of the variable, such as the question text.",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "do_not_use": {
+                    "description": "True if the publisher says the variable must not be used (the reason is in a convention).",
+                    "type": [
+                        "boolean",
                         "null"
                     ]
                 },
@@ -845,12 +1730,30 @@
                         "null"
                     ]
                 },
+                "is_replicate_weight": {
+                    "description": "True if the variable is a replicate weight used to estimate sampling variance.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "is_weight": {
                     "description": "True if the variable is a sampling or analysis weight; such variables are not observations.",
                     "type": [
                         "boolean",
                         "null"
                     ]
+                },
+                "join_key": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JoinKey"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Key type the variable holds, if it can link records to other datasets (for example parcel_id for a tax-lot number)."
                 },
                 "label": {
                     "description": "Short human-readable label of the variable as given in the codebook.",
@@ -883,6 +1786,23 @@
                 "name": {
                     "description": "Variable name exactly as it appears in the data file.",
                     "type": "string"
+                },
+                "profiled_by": {
+                    "description": "Who or what produced this variable profile (a person, or a model id such as ollama:qwen3:8b), and whether it was reviewed.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "review_flags": {
+                    "description": "Reasons this profile should be reviewed by a person (failed checks, low confidence, disagreement).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
                 },
                 "unit": {
                     "description": "QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.",
@@ -937,6 +1857,139 @@
             },
             "title": "Verification",
             "type": "object"
+        },
+        "WeatherFileFormat": {
+            "description": "Format of released weather data.",
+            "enum": [
+                "epw",
+                "tmy3_csv",
+                "netcdf",
+                "grib",
+                "csv",
+                "api_json",
+                "other"
+            ],
+            "title": "WeatherFileFormat",
+            "type": "string"
+        },
+        "WeatherProfile": {
+            "additionalProperties": false,
+            "description": "Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and actual meteorological years, and climate projections.",
+            "properties": {
+                "climate_scenarios": {
+                    "description": "Emission or socio-economic scenarios of a projection (for example SSP2-4.5, RCP8.5).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "gap_filling": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GapFilling"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "How missing or sub-interval values were filled by the publisher."
+                },
+                "grid_resolution_km": {
+                    "description": "Horizontal resolution of a gridded product in kilometres.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "metadata_standards": {
+                    "description": "Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "provides_concepts": {
+                    "description": "Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "station_id_scheme": {
+                    "description": "Identifier system of the stations (for example WMO, USAF-WBAN, GHCN).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "time_basis": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TimeBasis"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Clock to which timestamps refer (UTC, local standard time, or local time with daylight saving)."
+                },
+                "timestamp_convention": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TimestampConvention"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Whether a timestamp marks the end, the start or the instant of the interval it describes."
+                },
+                "weather_file_format": {
+                    "description": "Formats in which weather is released, which decide whether a simulation engine can read it directly.",
+                    "items": {
+                        "$ref": "#/$defs/WeatherFileFormat"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "weather_year_type": {
+                    "description": "Kind of weather year or series: actual series, actual or typical meteorological year, normals, or projection.",
+                    "items": {
+                        "$ref": "#/$defs/WeatherYearType"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "weather_year_type"
+            ],
+            "title": "WeatherProfile",
+            "type": "object"
+        },
+        "WeatherYearType": {
+            "description": "Kind of weather year or weather series.",
+            "enum": [
+                "actual_series",
+                "actual_meteorological_year",
+                "typical_meteorological_year",
+                "climate_normals",
+                "future_typical_year",
+                "projection_series",
+                "design_conditions"
+            ],
+            "title": "WeatherYearType",
+            "type": "string"
         }
     },
     "$id": "https://w3id.org/ubem-link/schema",

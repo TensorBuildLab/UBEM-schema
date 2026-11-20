@@ -60,3 +60,11 @@ verified:
   by: agent
   sources_checked:
   - https://github.com/opencitymodel/opencitymodel
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: solid_3d
+  levels_of_detail:
+  - lod1
+  provides_concepts:
+  - footprint
+  - building_height

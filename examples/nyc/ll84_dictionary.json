@@ -1,0 +1,108 @@
+{
+ "name": "NYC Building Energy and Water Data Disclosure for Local Law 84 2023 to Present (Data for Calendar Year 2022-Present)",
+ "description": "Local Law 84 of 2009 (LL84) requires annual energy and water benchmarking data to be submitted by owners of buildings with more than 50,000 square feet. This data is collected via the Environmental Protection Agency's (EPA) <a href=\"https://www.energystar.gov/buildings/tools-and-resources/portfolio-manager-0\">Portfolio Manager website</a>\r\n\r\nEach property is identified by it's EPA assigned property ID, and can contain one or more tax lots identified by one or more BBLs (Borough, Block, Lot) or one or more buildings identified by one or more building identification numbers (BIN)\r\n\r\nPlease visit <a href=\"https://www1.nyc.gov/site/buildings/codes/benchmarking.page\">DOB's Benchmarking and Energy Efficiency Rating page</a>\r\n for additional information.",
+ "columns": [
+  {
+   "fieldName": "property_id",
+   "name": "Property ID",
+   "description": "Property IDs are unique identifiers for your property that can be used by EPA, you, or other organizations to track and manage your property. There are four main types of Property IDs: Portfolio Manager Property IDs - This is a unique ID assigned by EPA to each property. Portfolio Manager Parent Property IDs - If your property is a campus of buildings and you benchmark one or more \"\"child\"\" buildings individually, then each child building will be associated to its parent through this ID. Custom IDs - A custom ID is an ID that you can set, for example, it could be an ID associated with your company or an ID for a campaign in which you are participating. When you enter a Custom ID, you can enter both a name for the ID and its actual value. For example: (Company ABC Inventory ID, 01234). When you search for these custom IDs in reports, you will see them only as Custom ID 1, Custom ID 2, and Custom ID 3, because Custom ID 1 could be different for different properties in your portfolio. Standard IDs - A standard ID is a special type of ID with a set name that is available within Portfolio Manager. These are IDs associated with local legislation, national campaigns, or other large benchmarking activities. For example, New York City uses the Borough Block and Lot (BBL) number to track buildings in their jurisdiction. To enter a standard ID you can select the ID name from our dropdown list and then enter the value. See Standard ID for a full list.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "property_name",
+   "name": "Property Name",
+   "description": "Basic property information includes property name. The property name can be the property address.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "nyc_borough_block_and_lot",
+   "name": "NYC Borough, Block and Lot (BBL)",
+   "description": "10-digit property borough, block and lot identifier, originally entered into the \"Standard IDs\" field in Portfolio Manager and then verified and corrected, as necessary, by the Department of Finance (DOF). The first number represents the borough, where 1 is Manhattan, 2 is the Bronx, 3 is Brooklyn, 4 is Queens, and 5 is Staten Island. The following five numbers represent the tax block. If a property has a tax block that is less than 5 digits, then zeros are added before the block number so there are five digits in total.  The last four digits are the tax lot number.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "nyc_building_identification",
+   "name": "NYC Building Identification Number (BIN)",
+   "description": "A seven-digit identifier Example: 1234567 Find your BIN located at the top of each building\u2019s Property Profile Overview screen on the New York City Department of Buildings\u2019 Building Information System (BIS).",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "address_1",
+   "name": "Address 1",
+   "description": "Street Address 1 (self-reported)",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "postal_code",
+   "name": "Postal Code",
+   "description": "Postal zip code for the property, self-reported",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "largest_property_use_type",
+   "name": "Largest Property Use Type",
+   "description": "Name of the Property Type (ex: Office) that has the largest Gross Floor Area (GFA) for that property.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "year_built",
+   "name": "Year Built",
+   "description": "This is the year in which your property was constructed. If your property has undergone a complete renovation that included gutting and rebuilding the interior, then you can indicate the date of this renovation as the year built.\u00a0The year built is not used to calculate the ENERGY STAR Score;\u00a0it is simply for property information. If you don't know the exact year the property was built, enter an estimate.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "site_eui_kbtu_ft",
+   "name": "Site EUI (kBtu/ft\u00b2)",
+   "description": "The Site Energy Use divided by the property square foot.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "site_energy_use_kbtu",
+   "name": "Site Energy Use (kBtu)",
+   "description": "The annual amount of all the energy your property consumes on-site, regardless of the source. It includes energy purchased from the grid or in bulk (which are the amounts on utility bills), as well as renewable energy generated and consumed on-site such as from solar and wind (excess renewable energy generated on-site and sold to the utility is excluded from site energy use). Site Energy can be used to understand how the energy use for an individual property has changed over time.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "natural_gas_use_kbtu",
+   "name": "Natural Gas Use (kBtu)",
+   "description": "Energy Use by Type is a summary of the annual consumption of an individual type of energy (e.g. electricity or natural gas).",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "natural_gas_use_therms_",
+   "name": "Natural Gas Use (therms)",
+   "description": "",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "electricity_use_grid_purchase_1",
+   "name": "Electricity Use - Grid Purchase (kWh)",
+   "description": "Energy Use by Type is a summary of the annual consumption of an individual type of energy (e.g. electricity or natural gas).",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "property_gfa_self_reported",
+   "name": "Property GFA - Self-Reported (ft\u00b2)",
+   "description": "The number you enter when you first create a property. It can be edited on the Details tab, under \u201cBasic Information.\u201d This value does not change over time, and it is not time weighted. If you edit it, it deletes the previous value without saving a record of what it had been.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "property_gfa_calculated_1",
+   "name": "Property GFA - Calculated (Buildings) (ft\u00b2)",
+   "description": "The sum of the GFA of all the Property Uses that you entered on the Details tab, excluding parking GFA. This number should match your \u201cProperty GFA \u2013 Self-Reported.\u201d If you have Property Uses that change square footage frequently (like office space going vacant), this is a good check to make sure all of your Property Uses add up to the right number. This value is time weighted.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "latitude",
+   "name": "Latitude",
+   "description": "Latitude of the building's location",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "longitude",
+   "name": "Longitude",
+   "description": "Longitude of the building's location",
+   "dataTypeName": "number"
+  }
+ ]
+}

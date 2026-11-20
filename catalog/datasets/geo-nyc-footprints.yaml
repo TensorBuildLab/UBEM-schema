@@ -1,0 +1,130 @@
+# UBEM-Link catalog entry (DatasetProfile). Written 2026-11-19 from the publisher's metadata; null means not stated.
+id: geo-nyc-footprints
+title: Building Footprints (New York City)
+short_name: NYC building footprints
+publisher: New York City Office of Technology and Innovation (OTI), via NYC Open Data
+landing_page: https://data.cityofnewyork.us/d/5zhs-2jue
+doi: null
+citation: City of New York, Office of Technology and Innovation. Building Footprints. NYC Open Data, dataset 5zhs-2jue.
+reference_paper_doi: null
+license: null
+access_level: open_api
+distributions:
+- format: CSV / JSON / GeoJSON via Socrata (SODA) API
+  access_url: https://data.cityofnewyork.us/resource/5zhs-2jue.json
+  api: true
+  registration_required: false
+- format: Shapefile, GeoJSON, file geodatabase
+  access_url: https://nycmaps-nyc.hub.arcgis.com/
+  api: false
+  registration_required: false
+ubem_roles:
+- geometry_inventory
+content_types:
+- building_footprints
+- roof_heights
+- ground_elevation
+- construction_year
+geographic_scope: city
+spatial_coverage:
+  countries:
+  - US
+  description: New York City, all five boroughs
+unit_of_observation: building footprint
+spatial_granularity: building
+temporal_coverage:
+  start: null
+  end: present
+temporal_resolution: static
+update_frequency: continuously maintained
+statistical_nature: remote_sensing_derived
+sampling_weights: null
+record_count: 1082933
+record_count_note: 1,082,933 rows in dataset 5zhs-2jue on 2026-11-19 (Socrata count query)
+join_keys:
+- building_id
+- parcel_id
+- geometry
+variables_documented: true
+machine_readable: true
+versioned: false
+persistent_identifier: false
+known_limitations: BINs are not unique (placeholder "million BINs" and split buildings share a BIN); roof height is
+  missing (zero or null) where no source was available; the system-generated SHAPE_AREA is computed in Web Mercator
+  and must not be used.
+notes: Conventions taken from the publisher's metadata file on GitHub (CityOfNewYork/nyc-geo-metadata,
+  Metadata_BuildingFootprints.md), which the Socrata column descriptions do not repeat. Added for the city-scale
+  integration case per catalog criterion 3 (city dataset used as a reference).
+verified:
+  date: '2026-11-19'
+  by: agent
+  sources_checked:
+  - https://data.cityofnewyork.us/api/views/5zhs-2jue.json
+  - https://github.com/CityOfNewYork/nyc-geo-metadata/blob/main/Metadata/Metadata_BuildingFootprints.md
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  levels_of_detail:
+  - lod0
+  - lod1
+  height_source:
+  - photogrammetry
+  - plans_or_records
+  height_reference: ground_to_roof_top
+  coordinate_reference_system: EPSG:2263
+  crs_linear_unit: unit:FT_US
+  building_id_scheme: BIN (Building Identification Number)
+  minimum_building_size: buildings larger than 400 sq ft and taller than 12 ft, plus other buildings with a BIN
+  provides_concepts:
+  - footprint
+  - building_height
+  - year_of_construction
+  - record_identifier
+conventions:
+- convention_type: unit
+  applies_to: roof height and ground elevation
+  applies_to_variables:
+  - height_roof
+  - ground_elevation
+  rule: Heights and elevations are in feet; the roof height is measured above the ground elevation, not above sea level.
+  example: height_roof = 33.49 means a roof 33.49 ft (10.2 m) above the ground.
+  unit: unit:FT
+  unit_multiplier: 1
+- convention_type: missing_code
+  applies_to: roof height and construction year
+  applies_to_variables:
+  - height_roof
+  - construction_year
+  rule: A value of zero or an empty value means that the information was not available.
+  example: construction_year = 0 means the construction year is unknown.
+  missing_codes:
+  - '0'
+  - ''
+- convention_type: identifier_format
+  applies_to: Building Identification Number (BIN)
+  applies_to_variables:
+  - bin
+  rule: The first digit is the borough code; a BIN whose last six digits are zeros (1000000, 2000000, ... 5000000) is a
+    placeholder for an unassigned BIN and identifies no building.
+  example: bin = 3000000 is a placeholder in Brooklyn.
+  missing_codes:
+  - '1000000'
+  - '2000000'
+  - '3000000'
+  - '4000000'
+  - '5000000'
+- convention_type: do_not_use
+  applies_to: system-generated area and length
+  applies_to_variables:
+  - shape_area
+  - shape_length
+  rule: Do not use; these values are generated in Web Mercator, which does not preserve area or length. Compute areas from
+    the geometry in a projected coordinate system.
+  example: shape_area overstates footprint area at the latitude of New York City.
+- convention_type: identifier_format
+  applies_to: tax-lot identifiers
+  applies_to_variables:
+  - base_bbl
+  - mappluto_bbl
+  rule: base_bbl is the tax lot the footprint lies in; mappluto_bbl is the billing BBL to use when joining to MapPLUTO
+    (they differ for condominiums).
+  example: Both are 10-digit borough-block-lot numbers.

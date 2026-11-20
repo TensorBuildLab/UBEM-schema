@@ -57,3 +57,26 @@ verified:
   sources_checked: ['https://data.openei.org/submissions/4520', 'https://oedi-data-lake.s3.amazonaws.com/?prefix=nrel-pds-building-stock/end-use-load-profiles-for-us-building-stock/
       (directory listing)', 'https://api.datacite.org/dois/10.25984/1876417', 'https://api.crossref.org/works/10.2172/1967948',
     'https://api.crossref.org/works/10.2172/1854582']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - commercial
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: submeter_end_use
+  measurement_basis: modeled_or_estimated
+  reporting_period: 15 minutes
+  provides_concepts:
+  - end_use_energy
+  - load_timeseries
+simulation_profile:
+  simulation_engine: EnergyPlus
+  stock_representation: sampled_models
+  weather_basis: TMY3, AMY2012, AMY2018 (varies by release)
+  building_sectors:
+  - commercial
+  provides_concepts:
+  - end_use_energy
+  - load_timeseries

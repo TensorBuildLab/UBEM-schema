@@ -62,3 +62,11 @@ verified:
   - https://sites.research.google/gr/open-buildings/temporal/
   - https://sites.research.google/gr/open-buildings/
   - https://api.datacite.org/dois/10.48550/arXiv.2310.11622
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: raster
+  height_source:
+  - model_estimated
+  provides_concepts:
+  - building_height
+  - footprint

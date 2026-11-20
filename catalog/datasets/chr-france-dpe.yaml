@@ -68,3 +68,36 @@ verified:
   sources_checked:
   - https://data.ademe.fr/datasets/dpe03existant
   - https://data.ademe.fr/data-fair/api/v1/datasets/dpe03existant (schema, count, license inspected)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - building_records
+  building_sectors:
+  - residential
+  representativeness: mandated_subset
+  provides_concepts:
+  - record_identifier
+  - geographic_coordinates
+  - administrative_region
+  - building_use_type
+  - year_of_construction
+  - floor_area_category
+  - wall_construction
+  - insulation
+  - window_properties
+  - heating_system
+  - water_heating_system
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_metrics:
+  - site_energy
+  - primary_energy
+  metering_level: whole_building
+  measurement_basis: modeled_or_estimated
+  reporting_period: annual, conventional 3CL calculation
+  provides_concepts:
+  - total_energy_consumption
+  - end_use_energy
+  - primary_energy_or_emissions

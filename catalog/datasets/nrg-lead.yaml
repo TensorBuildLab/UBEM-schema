@@ -52,3 +52,18 @@ verified:
   by: agent
   sources_checked: ['https://github.com/samy101/lead-dataset', 'https://arxiv.org/pdf/2203.17256', 'https://api.crossref.org/works/10.1145/3538637.3539761',
     'https://api.github.com/repos/samy101/lead-dataset/contents/data']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - commercial
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  metering_level: whole_building
+  measurement_basis: metered
+  reporting_period: hourly meter readings
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries

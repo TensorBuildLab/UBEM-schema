@@ -107,3 +107,20 @@ verified:
   - https://pmc.ncbi.nlm.nih.gov/articles/PMC10027854/
   - https://zenodo.org/api/records/7225259
   - https://api.crossref.org/works/10.1038/s41597-023-02040-2
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  height_source:
+  - plans_or_records
+  - model_estimated
+  provides_concepts:
+  - footprint
+  - building_height
+  - floors_above_ground
+characteristics_profile:
+  data_form:
+  - building_records
+  representativeness: unknown
+  provides_concepts:
+  - building_use_type
+  - year_of_construction

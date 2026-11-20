@@ -65,3 +65,15 @@ verified:
   - https://re.jrc.ec.europa.eu/pvg_tools/en/
   - web search results on joint-research-centre.ec.europa.eu PVGIS 5.3 pages
   - https://api.crossref.org/works/10.1016/j.solener.2012.03.006
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - typical_meteorological_year
+  - actual_series
+  weather_file_format:
+  - epw
+  provides_concepts:
+  - global_horizontal_irradiance
+  - direct_normal_irradiance
+  - diffuse_horizontal_irradiance
+  - dry_bulb_temperature

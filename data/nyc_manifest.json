@@ -25,6 +25,48 @@
       "url": "https://data.cityofnewyork.us/resource/5crt-au7u.geojson?$limit=1000",
       "bytes": 3791565,
       "sha256": "69b82cfa7c8fcc640b8f86a43cdf2fd4d8f20e874f9c8ee18bb139f761b94226"
+    },
+    "footprints.csv": {
+      "url": "https://data.cityofnewyork.us/resource/5zhs-2jue.csv?$select=bin,base_bbl,mappluto_bbl,height_roof,ground_elevation,construction_year,feature_code,shape_area,geom_source,last_status_type&$limit=2000000",
+      "bytes": 118718708,
+      "sha256": "4f47590901e7d4cc88523c3c72ffb67d72354f8d5d45c914c8c72411ea7188ad",
+      "downloaded": "2026-11-19"
+    },
+    "footprints_columns.json": {
+      "url": "https://data.cityofnewyork.us/api/views/5zhs-2jue.json",
+      "bytes": 28828,
+      "sha256": "80d0d33f36548bb695459dce33bf0eadf982ff0edf2a12dc03850518b88b00e4",
+      "downloaded": "2026-11-19"
+    },
+    "weather/USA_NY_New.York-Central.Park.Obs-Belvedere.Castle.725053_TMYx.2009-2023.zip": {
+      "url": "https://climate.onebuilding.org/WMO_Region_4_North_and_Central_America/USA_United_States_of_America/NY_New_York/USA_NY_New.York-Central.Park.Obs-Belvedere.Castle.725053_TMYx.2009-2023.zip",
+      "bytes": 422747,
+      "sha256": "5343869775c820ffb6f5dafc576f8557a58ff430fdcbb85fe91c65b43cdc091d",
+      "downloaded": "2026-11-19"
+    },
+    "weather/USA_NY_New.York-LaGuardia.AP.725030_TMYx.2009-2023.zip": {
+      "url": "https://climate.onebuilding.org/WMO_Region_4_North_and_Central_America/USA_United_States_of_America/NY_New_York/USA_NY_New.York-LaGuardia.AP.725030_TMYx.2009-2023.zip",
+      "bytes": 401441,
+      "sha256": "5df8db7e133c93d33f3d83d7a0ebabc9480bb1fc559548955af904da5cea0b5c",
+      "downloaded": "2026-11-19"
+    },
+    "weather/USA_NY_New.York-Kennedy.Intl.AP.744860_TMYx.2009-2023.zip": {
+      "url": "https://climate.onebuilding.org/WMO_Region_4_North_and_Central_America/USA_United_States_of_America/NY_New_York/USA_NY_New.York-Kennedy.Intl.AP.744860_TMYx.2009-2023.zip",
+      "bytes": 398598,
+      "sha256": "bd297b73b00e414a1a718135fb20cee11223fea5e1d821a1057691bb989f2cab",
+      "downloaded": "2026-11-19"
+    },
+    "weather/USA_NY_New.York-Downtown.Manhattan.Heli.720553_TMYx.2009-2023.zip": {
+      "url": "https://climate.onebuilding.org/WMO_Region_4_North_and_Central_America/USA_United_States_of_America/NY_New_York/USA_NY_New.York-Downtown.Manhattan.Heli.720553_TMYx.2009-2023.zip",
+      "bytes": 415209,
+      "sha256": "a830f6aa5508279837ce6f2476636fbc79826af662af7efef783230344393efe",
+      "downloaded": "2026-11-19"
+    },
+    "footprints_ll84_geometry.geojson": {
+      "url": "https://data.cityofnewyork.us/resource/5zhs-2jue.geojson (bin in LL84 BINs, 41238 BINs)",
+      "bytes": 37208352,
+      "sha256": "156074fb65c9072f3c45c3a7f4d9ab1be01bcfc00992566a7bc908d6be5c6d1e",
+      "downloaded": "2026-11-19"
     }
   }
 }

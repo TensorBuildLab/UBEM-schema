@@ -49,3 +49,21 @@ verified:
   by: agent
   sources_checked: ['https://b2find.eudat.eu/dataset/be1df6ba-3124-5b96-9b8b-94434c7a61a9', 'https://api.datacite.org/dois?query=CER+Smart+Metering+Project',
     'https://www.ucd.ie/issda/data/commissionforenergyregulationcer/ (HTTP 403, content known only from search snippets)']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  - commercial
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  metering_level: whole_building
+  measurement_basis: metered
+  reporting_period: half-hourly
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - household_demographics
+  - energy_price

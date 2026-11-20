@@ -45,3 +45,30 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://jack-kelly.com/data/', 'https://api.crossref.org/works/10.1038/sdata.2015.7', 'https://api.datacite.org/dois/10.5286/ukerc.edc.000001']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - appliance_plug_loads
+  collection_method:
+  - sensors_or_logs
+  building_sectors:
+  - residential
+  provides_concepts:
+  - equipment_usage_behavior
+  - plug_and_process_equipment
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: circuit_or_appliance
+  measurement_basis: metered
+  reporting_period: 6 s whole-house and appliance power
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - end_use_energy

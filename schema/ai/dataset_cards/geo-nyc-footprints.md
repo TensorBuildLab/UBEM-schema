@@ -1,0 +1,13 @@
+# Building Footprints (New York City) (geo-nyc-footprints)
+- UBEM workflow roles: geometry_inventory
+- Statistical nature: remote_sensing_derived
+- Finest public spatial granularity: building
+- Temporal resolution: static
+- Access: open_api
+- Join keys: building_id, parcel_id, geometry
+- Conventions (apply to many variables; individual codebook entries do not repeat them):
+  - roof height and ground elevation: Heights and elevations are in feet; the roof height is measured above the ground elevation, not above sea level. Example: height_roof = 33.49 means a roof 33.49 ft (10.2 m) above the ground.
+  - roof height and construction year: A value of zero or an empty value means that the information was not available. Example: construction_year = 0 means the construction year is unknown.
+  - Building Identification Number (BIN): The first digit is the borough code; a BIN whose last six digits are zeros (1000000, 2000000, ... 5000000) is a placeholder for an unassigned BIN and identifies no building. Example: bin = 3000000 is a placeholder in Brooklyn.
+  - system-generated area and length: Do not use; these values are generated in Web Mercator, which does not preserve area or length. Compute areas from the geometry in a projected coordinate system. Example: shape_area overstates footprint area at the latitude of New York City.
+  - tax-lot identifiers: base_bbl is the tax lot the footprint lies in; mappluto_bbl is the billing BBL to use when joining to MapPLUTO (they differ for condominiums). Example: Both are 10-digit borough-block-lot numbers.

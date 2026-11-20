@@ -57,3 +57,16 @@ verified:
   sources_checked:
   - https://api.crossref.org/works/10.1016/j.rser.2018.03.003
   - web search snippets (catalog.data.gov NSRDB entry, nrel.gov solar resource maps); nsrdb.nrel.gov unreachable
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - typical_meteorological_year
+  - actual_series
+  weather_file_format:
+  - csv
+  grid_resolution_km: 4
+  provides_concepts:
+  - global_horizontal_irradiance
+  - direct_normal_irradiance
+  - diffuse_horizontal_irradiance
+  - dry_bulb_temperature

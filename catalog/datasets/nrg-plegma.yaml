@@ -43,3 +43,34 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://api.crossref.org/works/10.1038/s41597-024-03208-0', 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11014970/fullTextXML']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - appliance_plug_loads
+  collection_method:
+  - sensors_or_logs
+  - survey_or_diary
+  building_sectors:
+  - residential
+  provides_concepts:
+  - equipment_usage_behavior
+  - plug_and_process_equipment
+  - household_demographics
+  - indoor_environment
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: circuit_or_appliance
+  measurement_basis: metered
+  reporting_period: 10 s, one year
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - end_use_energy
+  - indoor_environment

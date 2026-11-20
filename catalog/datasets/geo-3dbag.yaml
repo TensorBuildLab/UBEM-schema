@@ -74,3 +74,17 @@ verified:
   - https://docs.3dbag.nl/en/
   - https://www.3dbag.nl/en/download
   - https://api.crossref.org/works/10.14358/pers.21-00032r2
+# Category profiles drafted 2026-11-19 from this entry (documentation); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: solid_3d
+  levels_of_detail:
+  - lod1
+  - lod2
+  height_source:
+  - lidar
+  metadata_standards:
+  - CityJSON
+  provides_concepts:
+  - footprint
+  - building_height
+  - roof_shape

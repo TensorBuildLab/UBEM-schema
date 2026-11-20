@@ -54,3 +54,20 @@ verified:
   by: agent
   sources_checked:
   - https://climate.onebuilding.org/default.html
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - typical_meteorological_year
+  - design_conditions
+  weather_file_format:
+  - epw
+  provides_concepts:
+  - dry_bulb_temperature
+  - dew_point_temperature
+  - relative_humidity
+  - atmospheric_pressure
+  - wind_speed
+  - wind_direction
+  - global_horizontal_irradiance
+  - direct_normal_irradiance
+  - diffuse_horizontal_irradiance

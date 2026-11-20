@@ -60,3 +60,13 @@ verified:
   sources_checked:
   - https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
   - https://api.crossref.org/works/10.1175/BAMS-D-11-00197.1
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - climate_normals
+  weather_file_format:
+  - csv
+  provides_concepts:
+  - dry_bulb_temperature
+  - precipitation
+  - degree_days

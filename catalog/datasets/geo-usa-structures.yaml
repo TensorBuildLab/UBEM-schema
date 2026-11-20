@@ -63,3 +63,9 @@ verified:
   - https://catalog.data.gov/dataset/usa-structures
   - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-025-05925-6&resultType=core&format=json
   - https://api.crossref.org/works/10.1038/s41597-025-05925-6
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_2d
+  minimum_building_size: 450 sq ft and larger
+  provides_concepts:
+  - footprint

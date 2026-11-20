@@ -65,3 +65,15 @@ verified:
   - https://datadryad.org/dataset/doi:10.6078/D1F671
   - https://api.crossref.org/works/10.1016/j.buildenv.2018.06.022
   - https://open.library.ubc.ca/collections/researchdata/items/1.0397701 (via search)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - thermal_comfort
+  collection_method:
+  - field_study_compilation
+  - survey_or_diary
+  provides_concepts:
+  - thermal_comfort_response
+  - indoor_environment
+energy_profile:
+  energy_data_scale: microscopic

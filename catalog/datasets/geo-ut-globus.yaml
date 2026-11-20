@@ -62,3 +62,11 @@ verified:
   - https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038/s41597-024-03719-w&resultType=core&format=json
   - https://zenodo.org/api/records/11156602
   - https://api.crossref.org/works/10.1038/s41597-024-03719-w
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_with_height
+  height_source:
+  - model_estimated
+  provides_concepts:
+  - footprint
+  - building_height

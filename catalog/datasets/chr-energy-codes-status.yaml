@@ -59,3 +59,18 @@ verified:
   sources_checked:
   - https://energycodes.gov/state-portal
   - https://www.energycodes.gov/status (HTTP 403, not readable)
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - aggregate_tables
+  building_sectors:
+  - residential
+  - commercial
+  representativeness: unknown
+  provides_concepts:
+  - administrative_region
+  - energy_use_intensity
+context_profile:
+  provides_concepts:
+  - administrative_region
+  - energy_use_intensity

@@ -62,3 +62,11 @@ verified:
   sources_checked:
   - https://climrr.anl.gov/ (HTTP 403)
   - 'web search results: osti.gov/biblio/2202668, data.openei.org/submissions/5974, catalog.data.gov'
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - projection_series
+  grid_resolution_km: 12
+  climate_scenarios:
+  - RCP4.5
+  - RCP8.5

@@ -58,3 +58,9 @@ verified:
   - https://www.pnnl.gov/unique-building-identification
   - https://www.osti.gov/doecode/biblio/7609
   - https://api.crossref.org/works/10.2172/1764638
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_2d
+  building_id_scheme: UBID
+  provides_concepts:
+  - record_identifier

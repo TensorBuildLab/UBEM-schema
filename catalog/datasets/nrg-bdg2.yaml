@@ -50,3 +50,31 @@ verified:
   sources_checked: ['https://github.com/buds-lab/building-data-genome-project-2', 'https://raw.githubusercontent.com/buds-lab/building-data-genome-project-2/master/LICENSE',
     'https://api.crossref.org/works/10.1038/s41597-020-00712-x', 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7591488/fullTextXML
       (data paper full text, Table 1)', 'https://api.datacite.org/dois/10.5281/zenodo.3887306']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - commercial
+  energy_carriers:
+  - electricity
+  - district_energy
+  - onsite_renewables
+  energy_metrics:
+  - site_energy
+  - load_profile
+  metering_level: whole_building
+  measurement_basis: metered
+  reporting_period: hourly meter readings
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - building_use_type
+  - year_of_construction
+  - floors_above_ground
+  - floor_area_category
+  - dry_bulb_temperature
+  - dew_point_temperature
+  - wind_speed
+  - wind_direction
+  - precipitation
+  - atmospheric_pressure

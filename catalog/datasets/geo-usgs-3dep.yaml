@@ -66,3 +66,8 @@ verified:
   - https://www.usgs.gov/3d-elevation-program
   - https://www.usgs.gov/3d-elevation-program/about-3dep-products-services
   - https://api.crossref.org/works/10.3390/rs14040940
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: raster
+  height_source:
+  - lidar

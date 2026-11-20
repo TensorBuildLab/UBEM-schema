@@ -59,3 +59,14 @@ verified:
   by: agent
   sources_checked:
   - 'web search results: data.ucar.edu/dataset/na-cordex-dataset, rda.ucar.edu/datasets/d316009, earthsystemgrid.org/project/NA-CORDEX.html'
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - projection_series
+  weather_file_format:
+  - netcdf
+  climate_scenarios:
+  - RCP4.5
+  - RCP8.5
+  provides_concepts:
+  - dry_bulb_temperature

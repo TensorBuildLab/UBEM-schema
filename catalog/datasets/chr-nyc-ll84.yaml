@@ -76,18 +76,84 @@ verified:
   - https://data.cityofnewyork.us/resource/5zyy-y8am.json?$select=count(*)
   - https://catalog.data.gov/dataset/energy-and-water-data-disclosure-for-local-law-84-2011-data-for-calendar-year-2010-dab50
 conventions:
-- applies_to: numeric fields (energy, water, emissions, intensities, scores)
+- convention_type: missing_code
+  applies_to: numeric fields (energy, water, emissions, intensities, scores)
+  applies_to_pattern: ".*"
   rule: The text "Not Available" marks a missing value; record it as a missing code, not as a category or zero.
   example: Site Energy Use (kBtu) is "Not Available" for properties that did not report complete energy data.
-- applies_to: field names that end with a unit in parentheses
+  missing_codes:
+  - Not Available
+- convention_type: unit
+  applies_to: field names that end with a unit in parentheses
+  applies_to_pattern: "kbtu(?!.*ft)"
   rule: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is
     kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area.
   example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
-- applies_to: NYC Borough, Block and Lot (BBL)
+  unit: unit:KiloBTU_IT
+  unit_multiplier: 1
+- convention_type: unit
+  applies_to: field names that end with a unit in parentheses
+  applies_to_pattern: "\\(kWh\\)"
+  rule: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is
+    kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area.
+  example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
+  unit: unit:KiloW-HR
+  unit_multiplier: 1
+- convention_type: unit
+  applies_to: field names that end with a unit in parentheses
+  applies_to_pattern: "\\(therms\\)"
+  rule: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is
+    kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area.
+  example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
+  unit: unit:THM_US
+  unit_multiplier: 1
+- convention_type: unit
+  applies_to: field names that end with a unit in parentheses
+  applies_to_pattern: "\\(ft²\\)\\s*$"
+  rule: The unit is given only in the field name; kBtu means thousand Btu (multiplier 1000 on Btu), kWh is
+    kilowatt-hours, therms are 100,000 Btu, and ft² is square feet of gross floor area.
+  example: Natural Gas Use (kBtu) and Natural Gas Use (therms) hold the same quantity in two units.
+  unit: unit:FT2
+  unit_multiplier: 1
+- convention_type: identifier_format
+  applies_to: NYC Borough, Block and Lot (BBL)
+  applies_to_variables:
+  - nyc_borough_block_and_lot
   rule: A property may cover several tax lots; the field then lists several BBLs separated by semicolons, written
     either as 10 digits or as borough-block-lot with hyphens (1-00819-0014).
   example: '"1008190014; 1008190015" and "1-00819-0014" both refer to tax-lot identifiers.'
-- applies_to: Property GFA fields
+- convention_type: definition
+  applies_to: Property GFA fields
+  applies_to_pattern: "gfa"
   rule: Gross floor area is self-reported or calculated by Portfolio Manager from the property uses; the calculated
     value is given with and without parking, and the parking-only area separately.
   example: Property GFA - Calculated (Buildings) (ft²) excludes parking.
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - building_records
+  building_sectors:
+  - all
+  representativeness: mandated_subset
+  coverage_threshold: large buildings only (threshold changed over time)
+  provides_concepts:
+  - record_identifier
+  - geographic_coordinates
+  - administrative_region
+  - year_of_construction
+  - building_use_type
+  - floor_area_category
+energy_profile:
+  energy_data_scale: microscopic
+  energy_metrics:
+  - site_energy
+  - source_energy
+  - emissions
+  metering_level: whole_building
+  measurement_basis: self_reported
+  weather_normalized_available: true
+  reporting_period: calendar year
+  provides_concepts:
+  - total_energy_consumption
+  - energy_use_intensity
+  - primary_energy_or_emissions

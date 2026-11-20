@@ -71,3 +71,32 @@ verified:
   - https://get-energy-performance-data.communities.gov.uk/
   - https://epc.opendatacommunities.org (redirects to the above)
   - https://mhclgdigital.blog.gov.uk/2024/01/29/changes-to-the-energy-performance-certificates-open-data-service/
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - building_records
+  building_sectors:
+  - residential
+  - commercial
+  representativeness: mandated_subset
+  provides_concepts:
+  - record_identifier
+  - administrative_region
+  - building_use_type
+  - year_of_construction
+  - floor_area_category
+  - wall_construction
+  - roof_construction
+  - window_properties
+  - heating_system
+  - water_heating_system
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  - commercial
+  metering_level: whole_building
+  measurement_basis: mixed
+  provides_concepts:
+  - energy_use_intensity
+  - primary_energy_or_emissions

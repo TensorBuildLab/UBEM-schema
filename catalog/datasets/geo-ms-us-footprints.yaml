@@ -54,3 +54,10 @@ verified:
   by: agent
   sources_checked:
   - https://github.com/microsoft/USBuildingFootprints
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: footprint_2d
+  height_source:
+  - none
+  provides_concepts:
+  - footprint

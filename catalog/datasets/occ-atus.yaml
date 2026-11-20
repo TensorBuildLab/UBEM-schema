@@ -66,3 +66,12 @@ verified:
   - https://www.bls.gov/tus/other-documentation/howto.htm
   - https://www.bls.gov/tus/atususersguide.pdf (via search)
   - https://api.crossref.org/works/10.1257/0895330053148029
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - time_use_activities
+  collection_method:
+  - survey_or_diary
+  provides_concepts:
+  - time_use_activity
+  - household_demographics

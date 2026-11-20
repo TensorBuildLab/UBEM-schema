@@ -107,6 +107,13 @@ Dataset-level description of one open dataset, sufficient to decide whether and 
 - known_limitations (string): Limitations a user must know before using the data (bias, coverage gaps, suppression).
 - notes (string): Other information about the dataset or about how its profile was verified.
 - verified (Verification): Provenance of the profile: who checked it, when and against which sources.
+- weather_profile (WeatherProfile): Category profile for a dataset with the role boundary_conditions.
+- geometry_profile (GeometryProfile): Category profile for a dataset with the role geometry_inventory.
+- operation_profile (OperationProfile): Category profile for a dataset with the role operation_use.
+- characteristics_profile (CharacteristicsProfile): Category profile for a dataset with the role building_characteristics.
+- energy_profile (EnergyProfile): Category profile for a dataset with the role calibration_validation.
+- simulation_profile (SimulationProfile): Category profile for a dataset with the role reference_simulation.
+- context_profile (ContextProfile): Category profile for a dataset with the role context_coupling.
 - variables (VariableProfile, list): Variable-level profiles of the dataset's columns.
 - Rule: A weighted sample survey must name its weights.
 
@@ -130,9 +137,220 @@ Period of time a dataset covers.
 
 ## Convention
 A rule the publisher applies to many variables at once, such as a naming pattern for imputation flags, a code that means "not applicable", or a unit used for all energy totals. Conventions are usually stated once in a user guide and never in the individual codebook entries, so a person or an AI system reading one entry cannot infer them; the profile states them explicitly.
+- convention_type (ConventionType): What the convention concerns, so that tools can apply it (missing codes, units, flags, keys).
+    - missing_code: Codes that mean missing, not applicable, withheld or unknown.
+    - unit: The unit and multiplier of values.
+    - top_or_bottom_code: Codes that stand for ranges at the end of a scale.
+    - imputation_flag: How imputation flags are named and linked to their variables.
+    - weight: How weights are named and used.
+    - identifier_format: How identifiers and keys are written.
+    - do_not_use: A field the publisher says must not be used, or not for some purpose.
+    - definition: What a field includes or excludes.
 - applies_to (string): Which variables the convention applies to (a name pattern or a description).
+- applies_to_variables (string, list): Exact names of the variables a convention applies to (machine-readable scope).
+- applies_to_pattern (string): Regular expression over variable names giving the variables a convention applies to (machine-readable scope).
 - rule (string, required): The convention, stated as a rule that can be applied without other context.
 - example (string): One concrete example of the rule from the dataset.
+- missing_codes (string, list): Raw values that mean missing, not applicable, or suppressed.
+- unit (string): QUDT unit CURIE, e.g. unit:FT2, unit:KiloBTU_IT, unit:KiloW-HR, unit:DEG_C.
+- unit_multiplier (float): Factor applied to raw values before the unit applies (e.g., 1000 for "thousand Btu").
+
+## CategoryProfile
+Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its "comprehensive data lake" is a Catalog of profiles rather than a category.
+- provides_concepts (string, list): Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).
+- metadata_standards (string, list): Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).
+
+## WeatherProfile
+Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and actual meteorological years, and climate projections.
+- weather_year_type (WeatherYearType, required, list): Kind of weather year or series: actual series, actual or typical meteorological year, normals, or projection.
+    - actual_series: Observed or reanalysis time series of actual weather over one or more years.
+    - actual_meteorological_year: Simulation-ready file of one actual year (AMY).
+    - typical_meteorological_year: Typical year assembled from months of several years (TMY, TMYx, IWEC).
+    - climate_normals: Long-term averages such as 30-year normals.
+    - future_typical_year: Typical year for a future period, morphed or downscaled from climate models.
+    - projection_series: Time series from climate model projections.
+    - design_conditions: Design-day statistics for sizing equipment.
+- weather_file_format (WeatherFileFormat, list): Formats in which weather is released, which decide whether a simulation engine can read it directly.
+    - epw: EnergyPlus weather file, readable by most simulation engines.
+    - tmy3_csv: TMY3 comma-separated format.
+    - netcdf: NetCDF gridded files.
+    - grib: GRIB gridded files.
+    - csv: Other tabular text files.
+    - api_json: Responses of a web API in JSON.
+    - other: Other format.
+- timestamp_convention (TimestampConvention): Whether a timestamp marks the end, the start or the instant of the interval it describes.
+    - interval_ending: The timestamp is the end of the interval (EPW hour 1 covers 00:00 to 01:00).
+    - interval_beginning: The timestamp is the start of the interval.
+    - instantaneous: The value was observed at the timestamp.
+    - unknown: Not stated by the publisher.
+- time_basis (TimeBasis): Clock to which timestamps refer (UTC, local standard time, or local time with daylight saving).
+    - utc: Coordinated Universal Time.
+    - local_standard_time: Local standard time without daylight saving (as in EPW files).
+    - local_time_with_dst: Local civil time including daylight saving.
+    - unknown: Not stated by the publisher.
+- gap_filling (GapFilling): How missing or sub-interval values were filled by the publisher.
+    - none: Gaps are left as missing values.
+    - linear_interpolation: Gaps filled by linear interpolation in time.
+    - model_based: Gaps filled from a model, reanalysis or neighboring stations.
+    - unknown: Not stated by the publisher.
+- grid_resolution_km (float): Horizontal resolution of a gridded product in kilometres.
+- station_id_scheme (string): Identifier system of the stations (for example WMO, USAF-WBAN, GHCN).
+- climate_scenarios (string, list): Emission or socio-economic scenarios of a projection (for example SSP2-4.5, RCP8.5).
+
+## GeometryProfile
+Building stock geometry and inventory: footprints, heights, 3D city models and parcels.
+- geometry_dimension (GeometryDimension, required): Geometric representation of buildings, from points and footprints to 3D solids.
+    - point: Building locations as points only.
+    - footprint_2d: Building outlines without height.
+    - footprint_with_height: Building outlines with a height attribute (2.5D, extrudable to CityGML LoD1).
+    - solid_3d: Three-dimensional building solids or surfaces (CityGML LoD1 or higher).
+    - raster: Gridded built-up surface, volume or height.
+    - parcel_polygon: Parcel or lot outlines, not buildings.
+- levels_of_detail (LevelOfDetail, list): CityGML levels of detail provided.
+    - lod0: Footprint or roof-edge polygon.
+    - lod1: Block model: footprint extruded to one height.
+    - lod2: Roof shapes and wall surfaces.
+    - lod3: Architectural model with openings such as windows and doors.
+    - lod4: Interior structures (CityGML 2.0 only).
+- height_source (HeightSource, list): How building heights were obtained.
+    - lidar: Measured from airborne laser scanning.
+    - photogrammetry: Measured from stereo or oblique imagery.
+    - plans_or_records: Taken from building plans or administrative records.
+    - model_estimated: Estimated by a statistical or machine-learning model.
+    - derived_from_floors: Computed from the number of floors and an assumed floor height.
+    - none: No heights.
+- height_reference (HeightReference): Reference points between which a building height is measured.
+    - ground_to_roof_top: From ground level to the highest point of the roof.
+    - ground_to_eave: From ground level to the eave.
+    - ground_to_mean_roof: From ground level to the mean roof height.
+    - above_sea_level: Elevation above a vertical datum, not a building height.
+    - unknown: Not stated by the publisher.
+- coordinate_reference_system (string): Coordinate reference system of the published geometry, as an EPSG code (for example EPSG:4326).
+- crs_linear_unit (string): Linear unit of the coordinate reference system and of lengths and areas derived from it (QUDT CURIE, for example unit:FT_US or unit:M).
+- building_id_scheme (string): Building identifier system used (for example BIN, UPRN, BAG, UBID); null if none.
+- minimum_building_size (string): Capture threshold for buildings, as stated by the publisher (for example 'larger than 400 sq ft').
+
+## OperationProfile
+Occupancy, occupant behavior, schedules, setpoints and time use.
+- behavior_types (BehaviorType, required, list): Kinds of occupant behavior or building operation recorded.
+    - occupancy_presence: Whether or how many people are present.
+    - hvac_operation: Operation of heating, cooling or ventilation.
+    - thermostat_setpoint: Setpoints and their changes.
+    - window_operation: Opening and closing windows.
+    - lighting_operation: Switching or dimming lights.
+    - appliance_plug_loads: Use of appliances and plug loads.
+    - hot_water_use: Domestic hot water draws.
+    - thermal_comfort: Thermal sensation, preference or acceptability votes.
+    - time_use_activities: Activities of people over the day (time-use diaries).
+    - mobility: Travel and location over the day.
+- control_actions (ControlAction, list): Occupant control actions recorded.
+    - thermostat_adjustment: Changing a thermostat setpoint.
+    - hvac_on_off: Switching heating, cooling or fans.
+    - lighting_on_off: Switching or dimming lights.
+    - window_open_close: Opening or closing a window.
+    - shading_adjustment: Moving blinds or shades.
+    - appliance_on_off: Switching an appliance.
+- collection_method (CollectionMethod, list): How the behavior or operation data were collected.
+    - sensors_or_logs: Sensors, building automation logs or meters.
+    - connected_devices: Smart thermostats or other connected devices.
+    - survey_or_diary: Questionnaires or time-use diaries.
+    - field_study_compilation: Compilation of separate field studies.
+    - mobile_location: Mobile phone or other location traces.
+- building_sectors (BuildingSector, list): Building sectors covered.
+    - residential: Dwellings and residential buildings.
+    - commercial: Commercial, public and institutional buildings.
+    - industrial: Industrial buildings.
+    - all: All building sectors.
+
+## CharacteristicsProfile
+Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys, administrative records, certificates and dictionaries.
+- data_form (DataForm, required, list): Whether the data are records of individual units (microdata or building records) or published distributions (aggregate tables).
+    - microdata: One record per sampled unit (building or household), usually with weights.
+    - building_records: One record per identified real building or property (certificates, benchmarking, permits).
+    - aggregate_tables: Published distributions or totals, not records of units.
+    - dictionary_or_standard: A data dictionary, standard or exchange schema, not data.
+    - archetype_library: Typical buildings or model templates by type and vintage.
+- building_sectors (BuildingSector, list): Building sectors covered.
+    - residential: Dwellings and residential buildings.
+    - commercial: Commercial, public and institutional buildings.
+    - industrial: Industrial buildings.
+    - all: All building sectors.
+- representativeness (Representativeness): How the covered buildings relate to the building stock, which decides whether results generalize.
+    - probability_sample: A probability sample; weighted estimates represent the stock.
+    - complete_population: All buildings of the area.
+    - mandated_subset: Buildings covered by a mandate (for example above a size threshold).
+    - voluntary_or_convenience: Buildings that chose to participate or were available.
+    - synthetic: Modeled or typical buildings, not real ones.
+    - unknown: Not stated by the publisher.
+- coverage_threshold (string): Size or other threshold that decides which buildings are covered (for example 'more than 25,000 ft²').
+- cross_tabulations (string, list): For aggregate tables, the joint distributions published, each as concept ids joined by ' x '.
+
+## EnergyProfile
+Measured or reported energy use for calibration and validation, from national balances (macroscopic) to buildings, meters and appliances (microscopic).
+- energy_data_scale (EnergyDataScale, required): Macroscopic (aggregates over many buildings) or microscopic (buildings, meters, circuits or appliances).
+    - macroscopic: Aggregates over many buildings (national, state, utility or area totals).
+    - microscopic: Individual buildings, meters, circuits or appliances.
+- energy_sectors (EnergySector, list): Energy-using sectors covered.
+    - residential: Households and residential buildings.
+    - commercial: Commercial and public buildings.
+    - industrial: Industry.
+    - transportation: Transportation.
+    - all: All sectors or the whole economy.
+- energy_carriers (EnergyCarrier, list): Energy carriers reported.
+    - electricity: Electricity.
+    - natural_gas: Natural gas.
+    - fuel_oil: Fuel oil and other petroleum liquids.
+    - propane: Propane and liquefied petroleum gas.
+    - district_energy: District steam, hot water or chilled water.
+    - biomass: Wood and other biomass.
+    - onsite_renewables: Energy generated on site, such as rooftop solar.
+    - all_carriers: Totals over all carriers only.
+- energy_metrics (EnergyMetric, list): Kinds of energy quantity reported.
+    - site_energy: Energy delivered to the site.
+    - source_energy: Site energy plus upstream generation and delivery losses.
+    - primary_energy: Primary energy as defined in national statistics.
+    - end_use_energy: Energy by end use (heating, cooling, lighting, ...).
+    - load_profile: Time series of demand.
+    - peak_demand: Maximum demand over a period.
+    - emissions: Greenhouse gas emissions.
+    - expenditure: Energy cost.
+- metering_level (MeteringLevel): Finest level at which energy is measured or reported.
+    - area_aggregate: Totals over an area or sector.
+    - utility_territory: Totals over a utility service territory or balancing authority.
+    - whole_building: One value per building or property.
+    - submeter_end_use: Submeters or end uses within a building.
+    - circuit_or_appliance: Circuits or individual appliances.
+- measurement_basis (MeasurementBasis): Whether values are metered, billed, self-reported or modeled.
+    - metered: Measured by meters at the stated resolution.
+    - billed: From utility bills or supplier records.
+    - self_reported: Reported by owners or respondents (for example through benchmarking software).
+    - modeled_or_estimated: Estimated by models, imputation or engineering calculation.
+    - mixed: A combination of the above.
+- weather_normalized_available (boolean): True if weather-normalized values are published alongside the actual ones.
+- reporting_period (string): Period one value covers (for example calendar year, billing month).
+
+## SimulationProfile
+Reference simulations and model libraries: synthetic building-stock outputs and prototype models.
+- simulation_engine (string): Simulation engine that produced the data (for example EnergyPlus).
+- stock_representation (StockRepresentation): How the simulated building stock is represented.
+    - sampled_models: A statistical sample of building models weighted to the stock.
+    - building_by_building: One model per real building.
+    - prototype_library: Typical or prototype buildings by type, vintage and climate.
+- weather_basis (string): Weather used for the simulations (for example AMY 2018, TMY3).
+- building_sectors (BuildingSector, list): Building sectors covered.
+    - residential: Dwellings and residential buildings.
+    - commercial: Commercial, public and institutional buildings.
+    - industrial: Industrial buildings.
+    - all: All building sectors.
+
+## ContextProfile
+Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate.
+- context_kind (ContextKind, list): Kind of context or coupling data.
+    - grid_emissions: Emission factors of electricity supply.
+    - energy_tariffs: Energy prices and tariffs.
+    - land_use: Land use and zoning.
+    - socio_economic: Population, income and housing statistics.
+    - urban_climate_zones: Local climate zones and urban form classes.
 
 ## VariableProfile
 Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a gridded dataset.
@@ -180,8 +398,38 @@ Variable-level (column-level) semantics. One VariableProfile per column of a tab
 - code_list (CodeEntry, list): Codes of a categorical variable with their meanings.
 - missing_codes (string, list): Raw values that mean missing, not applicable, or suppressed.
 - is_weight (boolean): True if the variable is a sampling or analysis weight; such variables are not observations.
+- is_replicate_weight (boolean): True if the variable is a replicate weight used to estimate sampling variance.
 - is_imputation_flag (boolean): True if the variable records whether another variable was imputed.
 - flags_variable (string): For an imputation or quality flag, the variable it refers to.
+- join_key (JoinKey): Key type the variable holds, if it can link records to other datasets (for example parcel_id for a tax-lot number).
+    - lat_lon: Latitude and longitude of the record.
+    - geometry: A point, line or polygon geometry of the record.
+    - address: Street address of the building or site.
+    - parcel_id: Cadastral parcel or lot identifier shared with other datasets (for example BBL).
+    - building_id: Building identifier shared with other datasets (for example BIN, UPRN); not a dataset-internal row id.
+    - ubid: Unique Building Identifier derived from the footprint.
+    - station_id: Identifier of a weather or measurement station (for example WMO or USAF id).
+    - grid_cell: Identifier or coordinates of a raster or grid cell.
+    - census_block_group: U.S. census block group code.
+    - census_tract: U.S. census tract code.
+    - small_statistical_area: Non-U.S. small statistical areas such as UK LSOA/MSOA or national census grid ids
+    - postal_code: Postal or ZIP code.
+    - fips_county: U.S. FIPS county code.
+    - fips_state: U.S. FIPS state code.
+    - census_region_division: U.S. census region or division code.
+    - nuts_region: European NUTS region code.
+    - country_iso: ISO 3166 country code.
+    - utility_id: Identifier of an electric or gas utility (for example EIA utility id).
+    - balancing_authority: Identifier of an electricity balancing authority.
+    - climate_zone_ashrae: ASHRAE Standard 169 climate zone.
+    - climate_zone_iecc: IECC climate zone.
+    - building_type: Building type or use class (attribute key for statistical matching only).
+    - vintage: Construction period (attribute key for statistical matching only).
+    - timestamp: Date and time of an observation.
+- do_not_use (boolean): True if the publisher says the variable must not be used (the reason is in a convention).
+- profiled_by (string): Who or what produced this variable profile (a person, or a model id such as ollama:qwen3:8b), and whether it was reviewed.
+- confidence (float): Confidence of an automatically produced mapping, between 0 and 1.
+- review_flags (string, list): Reasons this profile should be reviewed by a person (failed checks, low confidence, disagreement).
 
 ## CodeEntry
 One code of a categorical variable and its meaning.

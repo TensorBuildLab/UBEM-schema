@@ -50,3 +50,20 @@ verified:
   sources_checked: ['https://docs.catalyst.coop/pudl/en/stable/data_sources/ferc714.html', 'https://data.pnnl.gov/group/nodes/dataset/33306
       (via search result)', 'https://www.ferc.gov/industries-data/electric/general-information/electric-industry-forms/form-no-714-annual-electric/overview
       (HTTP 403, not readable)']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: macroscopic
+  energy_sectors:
+  - all
+  energy_carriers:
+  - electricity
+  energy_metrics:
+  - load_profile
+  - peak_demand
+  metering_level: utility_territory
+  measurement_basis: metered
+  reporting_period: hourly, annual filing
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - peak_demand

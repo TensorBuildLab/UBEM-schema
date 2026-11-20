@@ -61,3 +61,15 @@ verified:
   sources_checked:
   - https://www.mlit.go.jp/plateau/open-data/
   - https://www.mlit.go.jp/plateau/site-policy/
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: solid_3d
+  metadata_standards:
+  - CityGML
+  provides_concepts:
+  - footprint
+  - building_height
+characteristics_profile:
+  data_form:
+  - building_records
+  representativeness: unknown

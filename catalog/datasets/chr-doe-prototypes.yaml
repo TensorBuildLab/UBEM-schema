@@ -65,3 +65,44 @@ verified:
   by: agent
   sources_checked:
   - https://www.energycodes.gov/prototype-building-models
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - archetype_library
+  building_sectors:
+  - commercial
+  - residential
+  representativeness: synthetic
+  provides_concepts:
+  - building_use_type
+  - wall_construction
+  - roof_construction
+  - window_properties
+  - insulation
+  - heating_system
+  - cooling_system
+  - lighting_system
+simulation_profile:
+  simulation_engine: EnergyPlus
+  stock_representation: prototype_library
+  building_sectors:
+  - commercial
+  - residential
+  provides_concepts:
+  - building_use_type
+  - floor_area_category
+  - floors_above_ground
+  - window_to_wall_ratio
+  - wall_construction
+  - roof_construction
+  - window_properties
+  - insulation
+  - heating_system
+  - cooling_system
+  - ventilation_system
+  - water_heating_system
+  - lighting_system
+  - plug_and_process_equipment
+  - operating_hours
+  - end_use_energy
+  - energy_use_intensity

@@ -1,0 +1,102 @@
+{
+ "name": "BUILDING",
+ "description": "Footprint outlines of buildings in New York City. Please see the following link for additional documentation: https://github.com/CityOfNewYork/nyc-geo-metadata/blob/master/Metadata/Metadata_BuildingFootprints.md\n\nFor additional resources, please refer to: https://nycmaps-nyc.hub.arcgis.com/search?tags=building&type=feature%2520service%2Cfeature%2520layer",
+ "columns": [
+  {
+   "fieldName": "the_geom",
+   "name": "the_geom",
+   "description": "Geometry column used for mapping",
+   "dataTypeName": "multipolygon"
+  },
+  {
+   "fieldName": "name",
+   "name": "NAME",
+   "description": "Building name (limited to commonly known names). This field has not been actively maintained since the original creation of this dataset.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "bin",
+   "name": "BIN",
+   "description": "Building Identification Number. A number assigned by City Planning and used by Dept. of Buildings to reference information pertaining to an individual building. The first digit is a borough code (1 = Manhattan, 2 = The Bronx, 3 = Brooklyn, 4 = Queens, 5 = Staten Island). The remaining 6 digits are unique for buildings within that borough. In some cases where these 6 digits are all zeros (e.g. 1000000, 2000000, etc.) the BIN is unassigned or unknown.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "doitt_id",
+   "name": "DOITT_ID",
+   "description": "Consistent unique identifier assigned by OTI (formerly DOITT).",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "shape_area",
+   "name": "SHAPE_AREA",
+   "description": "Measures the enclosed area within a polygon.",
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "base_bbl",
+   "name": "BASE_BBL",
+   "description": "Borough, block, and lot number for the tax lot that the footprint is physically located within.",
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "objectid",
+   "name": "OBJECTID",
+   "description": null,
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "construction_year",
+   "name": "Construction Year",
+   "description": null,
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "feature_code",
+   "name": "Feature Code",
+   "description": null,
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "geom_source",
+   "name": "Geometry Source",
+   "description": null,
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "ground_elevation",
+   "name": "Ground Elevation",
+   "description": null,
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "height_roof",
+   "name": "Height Roof",
+   "description": null,
+   "dataTypeName": "number"
+  },
+  {
+   "fieldName": "last_edited_date",
+   "name": "LAST_EDITED_DATE",
+   "description": null,
+   "dataTypeName": "date"
+  },
+  {
+   "fieldName": "last_status_type",
+   "name": "LAST_STATUS_TYPE",
+   "description": null,
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "mappluto_bbl",
+   "name": "Map Pluto BBL",
+   "description": null,
+   "dataTypeName": "text"
+  },
+  {
+   "fieldName": "shape_length",
+   "name": "Length",
+   "description": null,
+   "dataTypeName": "number"
+  }
+ ]
+}

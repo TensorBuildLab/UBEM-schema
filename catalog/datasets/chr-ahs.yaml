@@ -62,3 +62,20 @@ verified:
   - https://www.census.gov/programs-surveys/ahs/data.html
   - https://www.census.gov/programs-surveys/ahs/data/2023/ahs-2023-public-use-file--puf-.html
   - https://www.census.gov/programs-surveys/ahs/tech-documentation/help-guides/2015-later/puf_start.html
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+characteristics_profile:
+  data_form:
+  - microdata
+  building_sectors:
+  - residential
+  representativeness: probability_sample
+  provides_concepts:
+  - survey_weight
+  - replicate_weight
+  - household_demographics
+  - ownership_tenure
+  - year_of_construction
+  - rooms_and_spaces
+  - heating_system
+  - cooling_system
+  - dwelling_units

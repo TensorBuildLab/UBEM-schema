@@ -64,3 +64,8 @@ verified:
   - https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_S
   - https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_H
   - https://api.crossref.org/works/10.1080/17538947.2024.2390454
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+geometry_profile:
+  geometry_dimension: raster
+  provides_concepts:
+  - building_height

@@ -2,7 +2,7 @@
 # Schema: ubem_link
 #
 # id: https://w3id.org/ubem-link/schema
-# description: UBEM-Link describes open datasets used in urban building energy modeling (UBEM) at two levels. The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets: the UBEM workflow role, statistical nature, spatial granularity, temporal resolution, access level and join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it maps to in the UBEM-Link vocabulary, its unit (QUDT), its code list, its aggregation semantics, and whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects.
+# description: UBEM-Link describes open datasets used in urban building energy modeling (UBEM) at two levels. The dataset level (DatasetProfile) is an application profile of W3C DCAT 3 with UBEM-specific facets: the UBEM workflow role, statistical nature, spatial granularity, temporal resolution, access level and join keys. The variable level (VariableProfile) records what each column means for UBEM: the concept it maps to in the UBEM-Link vocabulary, its unit (QUDT), its code list, its aggregation semantics, and whether it is a survey weight or an imputation flag. Concepts (UBEMConcept) form a SKOS hierarchy and carry mappings to BEDES, Brick, CityGML Energy ADE and EnergyPlus input objects. Between the two levels, one category profile per UBEM workflow role (WeatherProfile, GeometryProfile, OperationProfile, CharacteristicsProfile, EnergyProfile, SimulationProfile, ContextProfile) records what a modeler must know about that kind of data. The roles and category profiles refine an earlier seven-category taxonomy of open UBEM data (weather information; building stock GIS; occupant behavior; building characteristics; macroscopic energy; microscopic energy; comprehensive data lakes) and its per-category metadata table.
 # license: CC-BY-4.0
 
 import dataclasses
@@ -161,6 +161,13 @@ class DatasetProfile(YAMLRoot):
     known_limitations: Optional[str] = None
     notes: Optional[str] = None
     verified: Optional[Union[dict, "Verification"]] = None
+    weather_profile: Optional[Union[dict, "WeatherProfile"]] = None
+    geometry_profile: Optional[Union[dict, "GeometryProfile"]] = None
+    operation_profile: Optional[Union[dict, "OperationProfile"]] = None
+    characteristics_profile: Optional[Union[dict, "CharacteristicsProfile"]] = None
+    energy_profile: Optional[Union[dict, "EnergyProfile"]] = None
+    simulation_profile: Optional[Union[dict, "SimulationProfile"]] = None
+    context_profile: Optional[Union[dict, "ContextProfile"]] = None
     variables: Optional[Union[Union[dict, "VariableProfile"], list[Union[dict, "VariableProfile"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -278,6 +285,27 @@ class DatasetProfile(YAMLRoot):
         if self.verified is not None and not isinstance(self.verified, Verification):
             self.verified = Verification(**as_dict(self.verified))
 
+        if self.weather_profile is not None and not isinstance(self.weather_profile, WeatherProfile):
+            self.weather_profile = WeatherProfile(**as_dict(self.weather_profile))
+
+        if self.geometry_profile is not None and not isinstance(self.geometry_profile, GeometryProfile):
+            self.geometry_profile = GeometryProfile(**as_dict(self.geometry_profile))
+
+        if self.operation_profile is not None and not isinstance(self.operation_profile, OperationProfile):
+            self.operation_profile = OperationProfile(**as_dict(self.operation_profile))
+
+        if self.characteristics_profile is not None and not isinstance(self.characteristics_profile, CharacteristicsProfile):
+            self.characteristics_profile = CharacteristicsProfile(**as_dict(self.characteristics_profile))
+
+        if self.energy_profile is not None and not isinstance(self.energy_profile, EnergyProfile):
+            self.energy_profile = EnergyProfile(**as_dict(self.energy_profile))
+
+        if self.simulation_profile is not None and not isinstance(self.simulation_profile, SimulationProfile):
+            self.simulation_profile = SimulationProfile(**as_dict(self.simulation_profile))
+
+        if self.context_profile is not None and not isinstance(self.context_profile, ContextProfile):
+            self.context_profile = ContextProfile(**as_dict(self.context_profile))
+
         self._normalize_inlined_as_list(slot_name="variables", slot_type=VariableProfile, key_name="name", keyed=False)
 
         super().__post_init__(**kwargs)
@@ -387,8 +415,14 @@ class Convention(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = UBEM_LINK.Convention
 
     rule: str = None
+    convention_type: Optional[Union[str, "ConventionType"]] = None
     applies_to: Optional[str] = None
+    applies_to_variables: Optional[Union[str, list[str]]] = empty_list()
+    applies_to_pattern: Optional[str] = None
     example: Optional[str] = None
+    missing_codes: Optional[Union[str, list[str]]] = empty_list()
+    unit: Optional[str] = None
+    unit_multiplier: Optional[float] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.rule):
@@ -396,11 +430,31 @@ class Convention(YAMLRoot):
         if not isinstance(self.rule, str):
             self.rule = str(self.rule)
 
+        if self.convention_type is not None and not isinstance(self.convention_type, ConventionType):
+            self.convention_type = ConventionType(self.convention_type)
+
         if self.applies_to is not None and not isinstance(self.applies_to, str):
             self.applies_to = str(self.applies_to)
 
+        if not isinstance(self.applies_to_variables, list):
+            self.applies_to_variables = [self.applies_to_variables] if self.applies_to_variables is not None else []
+        self.applies_to_variables = [v if isinstance(v, str) else str(v) for v in self.applies_to_variables]
+
+        if self.applies_to_pattern is not None and not isinstance(self.applies_to_pattern, str):
+            self.applies_to_pattern = str(self.applies_to_pattern)
+
         if self.example is not None and not isinstance(self.example, str):
             self.example = str(self.example)
+
+        if not isinstance(self.missing_codes, list):
+            self.missing_codes = [self.missing_codes] if self.missing_codes is not None else []
+        self.missing_codes = [v if isinstance(v, str) else str(v) for v in self.missing_codes]
+
+        if self.unit is not None and not isinstance(self.unit, str):
+            self.unit = str(self.unit)
+
+        if self.unit_multiplier is not None and not isinstance(self.unit_multiplier, float):
+            self.unit_multiplier = float(self.unit_multiplier)
 
         super().__post_init__(**kwargs)
 
@@ -436,6 +490,338 @@ class Verification(YAMLRoot):
 
 
 @dataclass(repr=False)
+class CategoryProfile(YAMLRoot):
+    """
+    Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it.
+    There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an
+    earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its
+    "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its
+    "comprehensive data lake" is a Catalog of profiles rather than a category.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["CategoryProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:CategoryProfile"
+    class_name: ClassVar[str] = "CategoryProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.CategoryProfile
+
+    provides_concepts: Optional[Union[str, list[str]]] = empty_list()
+    metadata_standards: Optional[Union[str, list[str]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.provides_concepts, list):
+            self.provides_concepts = [self.provides_concepts] if self.provides_concepts is not None else []
+        self.provides_concepts = [v if isinstance(v, str) else str(v) for v in self.provides_concepts]
+
+        if not isinstance(self.metadata_standards, list):
+            self.metadata_standards = [self.metadata_standards] if self.metadata_standards is not None else []
+        self.metadata_standards = [v if isinstance(v, str) else str(v) for v in self.metadata_standards]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class WeatherProfile(CategoryProfile):
+    """
+    Weather and climate data used as boundary conditions: observed station records, reanalyses, typical and actual
+    meteorological years, and climate projections.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["WeatherProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:WeatherProfile"
+    class_name: ClassVar[str] = "WeatherProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.WeatherProfile
+
+    weather_year_type: Union[Union[str, "WeatherYearType"], list[Union[str, "WeatherYearType"]]] = None
+    weather_file_format: Optional[Union[Union[str, "WeatherFileFormat"], list[Union[str, "WeatherFileFormat"]]]] = empty_list()
+    timestamp_convention: Optional[Union[str, "TimestampConvention"]] = None
+    time_basis: Optional[Union[str, "TimeBasis"]] = None
+    gap_filling: Optional[Union[str, "GapFilling"]] = None
+    grid_resolution_km: Optional[float] = None
+    station_id_scheme: Optional[str] = None
+    climate_scenarios: Optional[Union[str, list[str]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.weather_year_type):
+            self.MissingRequiredField("weather_year_type")
+        if not isinstance(self.weather_year_type, list):
+            self.weather_year_type = [self.weather_year_type] if self.weather_year_type is not None else []
+        self.weather_year_type = [v if isinstance(v, WeatherYearType) else WeatherYearType(v) for v in self.weather_year_type]
+
+        if not isinstance(self.weather_file_format, list):
+            self.weather_file_format = [self.weather_file_format] if self.weather_file_format is not None else []
+        self.weather_file_format = [v if isinstance(v, WeatherFileFormat) else WeatherFileFormat(v) for v in self.weather_file_format]
+
+        if self.timestamp_convention is not None and not isinstance(self.timestamp_convention, TimestampConvention):
+            self.timestamp_convention = TimestampConvention(self.timestamp_convention)
+
+        if self.time_basis is not None and not isinstance(self.time_basis, TimeBasis):
+            self.time_basis = TimeBasis(self.time_basis)
+
+        if self.gap_filling is not None and not isinstance(self.gap_filling, GapFilling):
+            self.gap_filling = GapFilling(self.gap_filling)
+
+        if self.grid_resolution_km is not None and not isinstance(self.grid_resolution_km, float):
+            self.grid_resolution_km = float(self.grid_resolution_km)
+
+        if self.station_id_scheme is not None and not isinstance(self.station_id_scheme, str):
+            self.station_id_scheme = str(self.station_id_scheme)
+
+        if not isinstance(self.climate_scenarios, list):
+            self.climate_scenarios = [self.climate_scenarios] if self.climate_scenarios is not None else []
+        self.climate_scenarios = [v if isinstance(v, str) else str(v) for v in self.climate_scenarios]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class GeometryProfile(CategoryProfile):
+    """
+    Building stock geometry and inventory: footprints, heights, 3D city models and parcels.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["GeometryProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:GeometryProfile"
+    class_name: ClassVar[str] = "GeometryProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.GeometryProfile
+
+    geometry_dimension: Union[str, "GeometryDimension"] = None
+    levels_of_detail: Optional[Union[Union[str, "LevelOfDetail"], list[Union[str, "LevelOfDetail"]]]] = empty_list()
+    height_source: Optional[Union[Union[str, "HeightSource"], list[Union[str, "HeightSource"]]]] = empty_list()
+    height_reference: Optional[Union[str, "HeightReference"]] = None
+    coordinate_reference_system: Optional[str] = None
+    crs_linear_unit: Optional[str] = None
+    building_id_scheme: Optional[str] = None
+    minimum_building_size: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.geometry_dimension):
+            self.MissingRequiredField("geometry_dimension")
+        if not isinstance(self.geometry_dimension, GeometryDimension):
+            self.geometry_dimension = GeometryDimension(self.geometry_dimension)
+
+        if not isinstance(self.levels_of_detail, list):
+            self.levels_of_detail = [self.levels_of_detail] if self.levels_of_detail is not None else []
+        self.levels_of_detail = [v if isinstance(v, LevelOfDetail) else LevelOfDetail(v) for v in self.levels_of_detail]
+
+        if not isinstance(self.height_source, list):
+            self.height_source = [self.height_source] if self.height_source is not None else []
+        self.height_source = [v if isinstance(v, HeightSource) else HeightSource(v) for v in self.height_source]
+
+        if self.height_reference is not None and not isinstance(self.height_reference, HeightReference):
+            self.height_reference = HeightReference(self.height_reference)
+
+        if self.coordinate_reference_system is not None and not isinstance(self.coordinate_reference_system, str):
+            self.coordinate_reference_system = str(self.coordinate_reference_system)
+
+        if self.crs_linear_unit is not None and not isinstance(self.crs_linear_unit, str):
+            self.crs_linear_unit = str(self.crs_linear_unit)
+
+        if self.building_id_scheme is not None and not isinstance(self.building_id_scheme, str):
+            self.building_id_scheme = str(self.building_id_scheme)
+
+        if self.minimum_building_size is not None and not isinstance(self.minimum_building_size, str):
+            self.minimum_building_size = str(self.minimum_building_size)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class OperationProfile(CategoryProfile):
+    """
+    Occupancy, occupant behavior, schedules, setpoints and time use.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["OperationProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:OperationProfile"
+    class_name: ClassVar[str] = "OperationProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.OperationProfile
+
+    behavior_types: Union[Union[str, "BehaviorType"], list[Union[str, "BehaviorType"]]] = None
+    control_actions: Optional[Union[Union[str, "ControlAction"], list[Union[str, "ControlAction"]]]] = empty_list()
+    collection_method: Optional[Union[Union[str, "CollectionMethod"], list[Union[str, "CollectionMethod"]]]] = empty_list()
+    building_sectors: Optional[Union[Union[str, "BuildingSector"], list[Union[str, "BuildingSector"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.behavior_types):
+            self.MissingRequiredField("behavior_types")
+        if not isinstance(self.behavior_types, list):
+            self.behavior_types = [self.behavior_types] if self.behavior_types is not None else []
+        self.behavior_types = [v if isinstance(v, BehaviorType) else BehaviorType(v) for v in self.behavior_types]
+
+        if not isinstance(self.control_actions, list):
+            self.control_actions = [self.control_actions] if self.control_actions is not None else []
+        self.control_actions = [v if isinstance(v, ControlAction) else ControlAction(v) for v in self.control_actions]
+
+        if not isinstance(self.collection_method, list):
+            self.collection_method = [self.collection_method] if self.collection_method is not None else []
+        self.collection_method = [v if isinstance(v, CollectionMethod) else CollectionMethod(v) for v in self.collection_method]
+
+        if not isinstance(self.building_sectors, list):
+            self.building_sectors = [self.building_sectors] if self.building_sectors is not None else []
+        self.building_sectors = [v if isinstance(v, BuildingSector) else BuildingSector(v) for v in self.building_sectors]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class CharacteristicsProfile(CategoryProfile):
+    """
+    Non-geometric building characteristics (use type, vintage, envelope, systems, fuels) from surveys, administrative
+    records, certificates and dictionaries.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["CharacteristicsProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:CharacteristicsProfile"
+    class_name: ClassVar[str] = "CharacteristicsProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.CharacteristicsProfile
+
+    data_form: Union[Union[str, "DataForm"], list[Union[str, "DataForm"]]] = None
+    building_sectors: Optional[Union[Union[str, "BuildingSector"], list[Union[str, "BuildingSector"]]]] = empty_list()
+    representativeness: Optional[Union[str, "Representativeness"]] = None
+    coverage_threshold: Optional[str] = None
+    cross_tabulations: Optional[Union[str, list[str]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.data_form):
+            self.MissingRequiredField("data_form")
+        if not isinstance(self.data_form, list):
+            self.data_form = [self.data_form] if self.data_form is not None else []
+        self.data_form = [v if isinstance(v, DataForm) else DataForm(v) for v in self.data_form]
+
+        if not isinstance(self.building_sectors, list):
+            self.building_sectors = [self.building_sectors] if self.building_sectors is not None else []
+        self.building_sectors = [v if isinstance(v, BuildingSector) else BuildingSector(v) for v in self.building_sectors]
+
+        if self.representativeness is not None and not isinstance(self.representativeness, Representativeness):
+            self.representativeness = Representativeness(self.representativeness)
+
+        if self.coverage_threshold is not None and not isinstance(self.coverage_threshold, str):
+            self.coverage_threshold = str(self.coverage_threshold)
+
+        if not isinstance(self.cross_tabulations, list):
+            self.cross_tabulations = [self.cross_tabulations] if self.cross_tabulations is not None else []
+        self.cross_tabulations = [v if isinstance(v, str) else str(v) for v in self.cross_tabulations]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class EnergyProfile(CategoryProfile):
+    """
+    Measured or reported energy use for calibration and validation, from national balances (macroscopic) to buildings,
+    meters and appliances (microscopic).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["EnergyProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:EnergyProfile"
+    class_name: ClassVar[str] = "EnergyProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.EnergyProfile
+
+    energy_data_scale: Union[str, "EnergyDataScale"] = None
+    energy_sectors: Optional[Union[Union[str, "EnergySector"], list[Union[str, "EnergySector"]]]] = empty_list()
+    energy_carriers: Optional[Union[Union[str, "EnergyCarrier"], list[Union[str, "EnergyCarrier"]]]] = empty_list()
+    energy_metrics: Optional[Union[Union[str, "EnergyMetric"], list[Union[str, "EnergyMetric"]]]] = empty_list()
+    metering_level: Optional[Union[str, "MeteringLevel"]] = None
+    measurement_basis: Optional[Union[str, "MeasurementBasis"]] = None
+    weather_normalized_available: Optional[Union[bool, Bool]] = None
+    reporting_period: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.energy_data_scale):
+            self.MissingRequiredField("energy_data_scale")
+        if not isinstance(self.energy_data_scale, EnergyDataScale):
+            self.energy_data_scale = EnergyDataScale(self.energy_data_scale)
+
+        if not isinstance(self.energy_sectors, list):
+            self.energy_sectors = [self.energy_sectors] if self.energy_sectors is not None else []
+        self.energy_sectors = [v if isinstance(v, EnergySector) else EnergySector(v) for v in self.energy_sectors]
+
+        if not isinstance(self.energy_carriers, list):
+            self.energy_carriers = [self.energy_carriers] if self.energy_carriers is not None else []
+        self.energy_carriers = [v if isinstance(v, EnergyCarrier) else EnergyCarrier(v) for v in self.energy_carriers]
+
+        if not isinstance(self.energy_metrics, list):
+            self.energy_metrics = [self.energy_metrics] if self.energy_metrics is not None else []
+        self.energy_metrics = [v if isinstance(v, EnergyMetric) else EnergyMetric(v) for v in self.energy_metrics]
+
+        if self.metering_level is not None and not isinstance(self.metering_level, MeteringLevel):
+            self.metering_level = MeteringLevel(self.metering_level)
+
+        if self.measurement_basis is not None and not isinstance(self.measurement_basis, MeasurementBasis):
+            self.measurement_basis = MeasurementBasis(self.measurement_basis)
+
+        if self.weather_normalized_available is not None and not isinstance(self.weather_normalized_available, Bool):
+            self.weather_normalized_available = Bool(self.weather_normalized_available)
+
+        if self.reporting_period is not None and not isinstance(self.reporting_period, str):
+            self.reporting_period = str(self.reporting_period)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class SimulationProfile(CategoryProfile):
+    """
+    Reference simulations and model libraries: synthetic building-stock outputs and prototype models.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["SimulationProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:SimulationProfile"
+    class_name: ClassVar[str] = "SimulationProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.SimulationProfile
+
+    simulation_engine: Optional[str] = None
+    stock_representation: Optional[Union[str, "StockRepresentation"]] = None
+    weather_basis: Optional[str] = None
+    building_sectors: Optional[Union[Union[str, "BuildingSector"], list[Union[str, "BuildingSector"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.simulation_engine is not None and not isinstance(self.simulation_engine, str):
+            self.simulation_engine = str(self.simulation_engine)
+
+        if self.stock_representation is not None and not isinstance(self.stock_representation, StockRepresentation):
+            self.stock_representation = StockRepresentation(self.stock_representation)
+
+        if self.weather_basis is not None and not isinstance(self.weather_basis, str):
+            self.weather_basis = str(self.weather_basis)
+
+        if not isinstance(self.building_sectors, list):
+            self.building_sectors = [self.building_sectors] if self.building_sectors is not None else []
+        self.building_sectors = [v if isinstance(v, BuildingSector) else BuildingSector(v) for v in self.building_sectors]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class ContextProfile(CategoryProfile):
+    """
+    Context and coupling data: socio-economic data, land use, grid emissions, tariffs and urban climate.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = UBEM_LINK["ContextProfile"]
+    class_class_curie: ClassVar[str] = "ubem_link:ContextProfile"
+    class_name: ClassVar[str] = "ContextProfile"
+    class_model_uri: ClassVar[URIRef] = UBEM_LINK.ContextProfile
+
+    context_kind: Optional[Union[Union[str, "ContextKind"], list[Union[str, "ContextKind"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.context_kind, list):
+            self.context_kind = [self.context_kind] if self.context_kind is not None else []
+        self.context_kind = [v if isinstance(v, ContextKind) else ContextKind(v) for v in self.context_kind]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class VariableProfile(YAMLRoot):
     """
     Variable-level (column-level) semantics. One VariableProfile per column of a tabular dataset, or per variable of a
@@ -461,8 +847,14 @@ class VariableProfile(YAMLRoot):
     code_list: Optional[Union[Union[dict, "CodeEntry"], list[Union[dict, "CodeEntry"]]]] = empty_list()
     missing_codes: Optional[Union[str, list[str]]] = empty_list()
     is_weight: Optional[Union[bool, Bool]] = None
+    is_replicate_weight: Optional[Union[bool, Bool]] = None
     is_imputation_flag: Optional[Union[bool, Bool]] = None
     flags_variable: Optional[str] = None
+    join_key: Optional[Union[str, "JoinKey"]] = None
+    do_not_use: Optional[Union[bool, Bool]] = None
+    profiled_by: Optional[str] = None
+    confidence: Optional[float] = None
+    review_flags: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.name):
@@ -508,11 +900,30 @@ class VariableProfile(YAMLRoot):
         if self.is_weight is not None and not isinstance(self.is_weight, Bool):
             self.is_weight = Bool(self.is_weight)
 
+        if self.is_replicate_weight is not None and not isinstance(self.is_replicate_weight, Bool):
+            self.is_replicate_weight = Bool(self.is_replicate_weight)
+
         if self.is_imputation_flag is not None and not isinstance(self.is_imputation_flag, Bool):
             self.is_imputation_flag = Bool(self.is_imputation_flag)
 
         if self.flags_variable is not None and not isinstance(self.flags_variable, str):
             self.flags_variable = str(self.flags_variable)
+
+        if self.join_key is not None and not isinstance(self.join_key, JoinKey):
+            self.join_key = JoinKey(self.join_key)
+
+        if self.do_not_use is not None and not isinstance(self.do_not_use, Bool):
+            self.do_not_use = Bool(self.do_not_use)
+
+        if self.profiled_by is not None and not isinstance(self.profiled_by, str):
+            self.profiled_by = str(self.profiled_by)
+
+        if self.confidence is not None and not isinstance(self.confidence, float):
+            self.confidence = float(self.confidence)
+
+        if not isinstance(self.review_flags, list):
+            self.review_flags = [self.review_flags] if self.review_flags is not None else []
+        self.review_flags = [v if isinstance(v, str) else str(v) for v in self.review_flags]
 
         super().__post_init__(**kwargs)
 
@@ -1046,6 +1457,645 @@ class EntityType(EnumDefinitionImpl):
         description="What a concept or variable describes.",
     )
 
+class WeatherYearType(EnumDefinitionImpl):
+    """
+    Kind of weather year or weather series.
+    """
+    actual_series = PermissibleValue(
+        text="actual_series",
+        description="Observed or reanalysis time series of actual weather over one or more years.")
+    actual_meteorological_year = PermissibleValue(
+        text="actual_meteorological_year",
+        description="Simulation-ready file of one actual year (AMY).")
+    typical_meteorological_year = PermissibleValue(
+        text="typical_meteorological_year",
+        description="Typical year assembled from months of several years (TMY, TMYx, IWEC).")
+    climate_normals = PermissibleValue(
+        text="climate_normals",
+        description="Long-term averages such as 30-year normals.")
+    future_typical_year = PermissibleValue(
+        text="future_typical_year",
+        description="Typical year for a future period, morphed or downscaled from climate models.")
+    projection_series = PermissibleValue(
+        text="projection_series",
+        description="Time series from climate model projections.")
+    design_conditions = PermissibleValue(
+        text="design_conditions",
+        description="Design-day statistics for sizing equipment.")
+
+    _defn = EnumDefinition(
+        name="WeatherYearType",
+        description="Kind of weather year or weather series.",
+    )
+
+class WeatherFileFormat(EnumDefinitionImpl):
+    """
+    Format of released weather data.
+    """
+    epw = PermissibleValue(
+        text="epw",
+        description="EnergyPlus weather file, readable by most simulation engines.")
+    tmy3_csv = PermissibleValue(
+        text="tmy3_csv",
+        description="TMY3 comma-separated format.")
+    netcdf = PermissibleValue(
+        text="netcdf",
+        description="NetCDF gridded files.")
+    grib = PermissibleValue(
+        text="grib",
+        description="GRIB gridded files.")
+    csv = PermissibleValue(
+        text="csv",
+        description="Other tabular text files.")
+    api_json = PermissibleValue(
+        text="api_json",
+        description="Responses of a web API in JSON.")
+    other = PermissibleValue(
+        text="other",
+        description="Other format.")
+
+    _defn = EnumDefinition(
+        name="WeatherFileFormat",
+        description="Format of released weather data.",
+    )
+
+class TimestampConvention(EnumDefinitionImpl):
+    """
+    What a timestamp marks within its interval.
+    """
+    interval_ending = PermissibleValue(
+        text="interval_ending",
+        description="The timestamp is the end of the interval (EPW hour 1 covers 00:00 to 01:00).")
+    interval_beginning = PermissibleValue(
+        text="interval_beginning",
+        description="The timestamp is the start of the interval.")
+    instantaneous = PermissibleValue(
+        text="instantaneous",
+        description="The value was observed at the timestamp.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="Not stated by the publisher.")
+
+    _defn = EnumDefinition(
+        name="TimestampConvention",
+        description="What a timestamp marks within its interval.",
+    )
+
+class TimeBasis(EnumDefinitionImpl):
+    """
+    Clock to which timestamps refer.
+    """
+    utc = PermissibleValue(
+        text="utc",
+        description="Coordinated Universal Time.")
+    local_standard_time = PermissibleValue(
+        text="local_standard_time",
+        description="Local standard time without daylight saving (as in EPW files).")
+    local_time_with_dst = PermissibleValue(
+        text="local_time_with_dst",
+        description="Local civil time including daylight saving.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="Not stated by the publisher.")
+
+    _defn = EnumDefinition(
+        name="TimeBasis",
+        description="Clock to which timestamps refer.",
+    )
+
+class GapFilling(EnumDefinitionImpl):
+    """
+    How missing or sub-interval values were filled.
+    """
+    none = PermissibleValue(
+        text="none",
+        description="Gaps are left as missing values.")
+    linear_interpolation = PermissibleValue(
+        text="linear_interpolation",
+        description="Gaps filled by linear interpolation in time.")
+    model_based = PermissibleValue(
+        text="model_based",
+        description="Gaps filled from a model, reanalysis or neighboring stations.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="Not stated by the publisher.")
+
+    _defn = EnumDefinition(
+        name="GapFilling",
+        description="How missing or sub-interval values were filled.",
+    )
+
+class GeometryDimension(EnumDefinitionImpl):
+    """
+    Geometric representation of buildings.
+    """
+    point = PermissibleValue(
+        text="point",
+        description="Building locations as points only.")
+    footprint_2d = PermissibleValue(
+        text="footprint_2d",
+        description="Building outlines without height.")
+    footprint_with_height = PermissibleValue(
+        text="footprint_with_height",
+        description="Building outlines with a height attribute (2.5D, extrudable to CityGML LoD1).")
+    solid_3d = PermissibleValue(
+        text="solid_3d",
+        description="Three-dimensional building solids or surfaces (CityGML LoD1 or higher).")
+    raster = PermissibleValue(
+        text="raster",
+        description="Gridded built-up surface, volume or height.")
+    parcel_polygon = PermissibleValue(
+        text="parcel_polygon",
+        description="Parcel or lot outlines, not buildings.")
+
+    _defn = EnumDefinition(
+        name="GeometryDimension",
+        description="Geometric representation of buildings.",
+    )
+
+class LevelOfDetail(EnumDefinitionImpl):
+    """
+    CityGML level of detail.
+    """
+    lod0 = PermissibleValue(
+        text="lod0",
+        description="Footprint or roof-edge polygon.")
+    lod1 = PermissibleValue(
+        text="lod1",
+        description="Block model: footprint extruded to one height.")
+    lod2 = PermissibleValue(
+        text="lod2",
+        description="Roof shapes and wall surfaces.")
+    lod3 = PermissibleValue(
+        text="lod3",
+        description="Architectural model with openings such as windows and doors.")
+    lod4 = PermissibleValue(
+        text="lod4",
+        description="Interior structures (CityGML 2.0 only).")
+
+    _defn = EnumDefinition(
+        name="LevelOfDetail",
+        description="CityGML level of detail.",
+    )
+
+class HeightSource(EnumDefinitionImpl):
+    """
+    How building heights were obtained.
+    """
+    lidar = PermissibleValue(
+        text="lidar",
+        description="Measured from airborne laser scanning.")
+    photogrammetry = PermissibleValue(
+        text="photogrammetry",
+        description="Measured from stereo or oblique imagery.")
+    plans_or_records = PermissibleValue(
+        text="plans_or_records",
+        description="Taken from building plans or administrative records.")
+    model_estimated = PermissibleValue(
+        text="model_estimated",
+        description="Estimated by a statistical or machine-learning model.")
+    derived_from_floors = PermissibleValue(
+        text="derived_from_floors",
+        description="Computed from the number of floors and an assumed floor height.")
+    none = PermissibleValue(
+        text="none",
+        description="No heights.")
+
+    _defn = EnumDefinition(
+        name="HeightSource",
+        description="How building heights were obtained.",
+    )
+
+class HeightReference(EnumDefinitionImpl):
+    """
+    Reference points of a building height.
+    """
+    ground_to_roof_top = PermissibleValue(
+        text="ground_to_roof_top",
+        description="From ground level to the highest point of the roof.")
+    ground_to_eave = PermissibleValue(
+        text="ground_to_eave",
+        description="From ground level to the eave.")
+    ground_to_mean_roof = PermissibleValue(
+        text="ground_to_mean_roof",
+        description="From ground level to the mean roof height.")
+    above_sea_level = PermissibleValue(
+        text="above_sea_level",
+        description="Elevation above a vertical datum, not a building height.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="Not stated by the publisher.")
+
+    _defn = EnumDefinition(
+        name="HeightReference",
+        description="Reference points of a building height.",
+    )
+
+class BehaviorType(EnumDefinitionImpl):
+    """
+    Kind of occupant behavior or building operation.
+    """
+    occupancy_presence = PermissibleValue(
+        text="occupancy_presence",
+        description="Whether or how many people are present.")
+    hvac_operation = PermissibleValue(
+        text="hvac_operation",
+        description="Operation of heating, cooling or ventilation.")
+    thermostat_setpoint = PermissibleValue(
+        text="thermostat_setpoint",
+        description="Setpoints and their changes.")
+    window_operation = PermissibleValue(
+        text="window_operation",
+        description="Opening and closing windows.")
+    lighting_operation = PermissibleValue(
+        text="lighting_operation",
+        description="Switching or dimming lights.")
+    appliance_plug_loads = PermissibleValue(
+        text="appliance_plug_loads",
+        description="Use of appliances and plug loads.")
+    hot_water_use = PermissibleValue(
+        text="hot_water_use",
+        description="Domestic hot water draws.")
+    thermal_comfort = PermissibleValue(
+        text="thermal_comfort",
+        description="Thermal sensation, preference or acceptability votes.")
+    time_use_activities = PermissibleValue(
+        text="time_use_activities",
+        description="Activities of people over the day (time-use diaries).")
+    mobility = PermissibleValue(
+        text="mobility",
+        description="Travel and location over the day.")
+
+    _defn = EnumDefinition(
+        name="BehaviorType",
+        description="Kind of occupant behavior or building operation.",
+    )
+
+class ControlAction(EnumDefinitionImpl):
+    """
+    Occupant control action.
+    """
+    thermostat_adjustment = PermissibleValue(
+        text="thermostat_adjustment",
+        description="Changing a thermostat setpoint.")
+    hvac_on_off = PermissibleValue(
+        text="hvac_on_off",
+        description="Switching heating, cooling or fans.")
+    lighting_on_off = PermissibleValue(
+        text="lighting_on_off",
+        description="Switching or dimming lights.")
+    window_open_close = PermissibleValue(
+        text="window_open_close",
+        description="Opening or closing a window.")
+    shading_adjustment = PermissibleValue(
+        text="shading_adjustment",
+        description="Moving blinds or shades.")
+    appliance_on_off = PermissibleValue(
+        text="appliance_on_off",
+        description="Switching an appliance.")
+
+    _defn = EnumDefinition(
+        name="ControlAction",
+        description="Occupant control action.",
+    )
+
+class CollectionMethod(EnumDefinitionImpl):
+    """
+    How behavior or operation data were collected.
+    """
+    sensors_or_logs = PermissibleValue(
+        text="sensors_or_logs",
+        description="Sensors, building automation logs or meters.")
+    connected_devices = PermissibleValue(
+        text="connected_devices",
+        description="Smart thermostats or other connected devices.")
+    survey_or_diary = PermissibleValue(
+        text="survey_or_diary",
+        description="Questionnaires or time-use diaries.")
+    field_study_compilation = PermissibleValue(
+        text="field_study_compilation",
+        description="Compilation of separate field studies.")
+    mobile_location = PermissibleValue(
+        text="mobile_location",
+        description="Mobile phone or other location traces.")
+
+    _defn = EnumDefinition(
+        name="CollectionMethod",
+        description="How behavior or operation data were collected.",
+    )
+
+class BuildingSector(EnumDefinitionImpl):
+    """
+    Building sector.
+    """
+    residential = PermissibleValue(
+        text="residential",
+        description="Dwellings and residential buildings.")
+    commercial = PermissibleValue(
+        text="commercial",
+        description="Commercial, public and institutional buildings.")
+    industrial = PermissibleValue(
+        text="industrial",
+        description="Industrial buildings.")
+    all = PermissibleValue(
+        text="all",
+        description="All building sectors.")
+
+    _defn = EnumDefinition(
+        name="BuildingSector",
+        description="Building sector.",
+    )
+
+class DataForm(EnumDefinitionImpl):
+    """
+    Form in which characteristics are released.
+    """
+    microdata = PermissibleValue(
+        text="microdata",
+        description="One record per sampled unit (building or household), usually with weights.")
+    building_records = PermissibleValue(
+        text="building_records",
+        description="One record per identified real building or property (certificates, benchmarking, permits).")
+    aggregate_tables = PermissibleValue(
+        text="aggregate_tables",
+        description="Published distributions or totals, not records of units.")
+    dictionary_or_standard = PermissibleValue(
+        text="dictionary_or_standard",
+        description="A data dictionary, standard or exchange schema, not data.")
+    archetype_library = PermissibleValue(
+        text="archetype_library",
+        description="Typical buildings or model templates by type and vintage.")
+
+    _defn = EnumDefinition(
+        name="DataForm",
+        description="Form in which characteristics are released.",
+    )
+
+class Representativeness(EnumDefinitionImpl):
+    """
+    How the covered buildings relate to the building stock.
+    """
+    probability_sample = PermissibleValue(
+        text="probability_sample",
+        description="A probability sample; weighted estimates represent the stock.")
+    complete_population = PermissibleValue(
+        text="complete_population",
+        description="All buildings of the area.")
+    mandated_subset = PermissibleValue(
+        text="mandated_subset",
+        description="Buildings covered by a mandate (for example above a size threshold).")
+    voluntary_or_convenience = PermissibleValue(
+        text="voluntary_or_convenience",
+        description="Buildings that chose to participate or were available.")
+    synthetic = PermissibleValue(
+        text="synthetic",
+        description="Modeled or typical buildings, not real ones.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="Not stated by the publisher.")
+
+    _defn = EnumDefinition(
+        name="Representativeness",
+        description="How the covered buildings relate to the building stock.",
+    )
+
+class EnergyDataScale(EnumDefinitionImpl):
+    """
+    Scale of energy data.
+    """
+    macroscopic = PermissibleValue(
+        text="macroscopic",
+        description="Aggregates over many buildings (national, state, utility or area totals).")
+    microscopic = PermissibleValue(
+        text="microscopic",
+        description="Individual buildings, meters, circuits or appliances.")
+
+    _defn = EnumDefinition(
+        name="EnergyDataScale",
+        description="Scale of energy data.",
+    )
+
+class EnergySector(EnumDefinitionImpl):
+    """
+    Energy-using sector.
+    """
+    residential = PermissibleValue(
+        text="residential",
+        description="Households and residential buildings.")
+    commercial = PermissibleValue(
+        text="commercial",
+        description="Commercial and public buildings.")
+    industrial = PermissibleValue(
+        text="industrial",
+        description="Industry.")
+    transportation = PermissibleValue(
+        text="transportation",
+        description="Transportation.")
+    all = PermissibleValue(
+        text="all",
+        description="All sectors or the whole economy.")
+
+    _defn = EnumDefinition(
+        name="EnergySector",
+        description="Energy-using sector.",
+    )
+
+class EnergyCarrier(EnumDefinitionImpl):
+    """
+    Energy carrier.
+    """
+    electricity = PermissibleValue(
+        text="electricity",
+        description="Electricity.")
+    natural_gas = PermissibleValue(
+        text="natural_gas",
+        description="Natural gas.")
+    fuel_oil = PermissibleValue(
+        text="fuel_oil",
+        description="Fuel oil and other petroleum liquids.")
+    propane = PermissibleValue(
+        text="propane",
+        description="Propane and liquefied petroleum gas.")
+    district_energy = PermissibleValue(
+        text="district_energy",
+        description="District steam, hot water or chilled water.")
+    biomass = PermissibleValue(
+        text="biomass",
+        description="Wood and other biomass.")
+    onsite_renewables = PermissibleValue(
+        text="onsite_renewables",
+        description="Energy generated on site, such as rooftop solar.")
+    all_carriers = PermissibleValue(
+        text="all_carriers",
+        description="Totals over all carriers only.")
+
+    _defn = EnumDefinition(
+        name="EnergyCarrier",
+        description="Energy carrier.",
+    )
+
+class EnergyMetric(EnumDefinitionImpl):
+    """
+    Kind of energy quantity.
+    """
+    site_energy = PermissibleValue(
+        text="site_energy",
+        description="Energy delivered to the site.")
+    source_energy = PermissibleValue(
+        text="source_energy",
+        description="Site energy plus upstream generation and delivery losses.")
+    primary_energy = PermissibleValue(
+        text="primary_energy",
+        description="Primary energy as defined in national statistics.")
+    end_use_energy = PermissibleValue(
+        text="end_use_energy",
+        description="Energy by end use (heating, cooling, lighting, ...).")
+    load_profile = PermissibleValue(
+        text="load_profile",
+        description="Time series of demand.")
+    peak_demand = PermissibleValue(
+        text="peak_demand",
+        description="Maximum demand over a period.")
+    emissions = PermissibleValue(
+        text="emissions",
+        description="Greenhouse gas emissions.")
+    expenditure = PermissibleValue(
+        text="expenditure",
+        description="Energy cost.")
+
+    _defn = EnumDefinition(
+        name="EnergyMetric",
+        description="Kind of energy quantity.",
+    )
+
+class MeteringLevel(EnumDefinitionImpl):
+    """
+    Finest level at which energy is measured or reported.
+    """
+    area_aggregate = PermissibleValue(
+        text="area_aggregate",
+        description="Totals over an area or sector.")
+    utility_territory = PermissibleValue(
+        text="utility_territory",
+        description="Totals over a utility service territory or balancing authority.")
+    whole_building = PermissibleValue(
+        text="whole_building",
+        description="One value per building or property.")
+    submeter_end_use = PermissibleValue(
+        text="submeter_end_use",
+        description="Submeters or end uses within a building.")
+    circuit_or_appliance = PermissibleValue(
+        text="circuit_or_appliance",
+        description="Circuits or individual appliances.")
+
+    _defn = EnumDefinition(
+        name="MeteringLevel",
+        description="Finest level at which energy is measured or reported.",
+    )
+
+class MeasurementBasis(EnumDefinitionImpl):
+    """
+    How energy values were obtained.
+    """
+    metered = PermissibleValue(
+        text="metered",
+        description="Measured by meters at the stated resolution.")
+    billed = PermissibleValue(
+        text="billed",
+        description="From utility bills or supplier records.")
+    self_reported = PermissibleValue(
+        text="self_reported",
+        description="Reported by owners or respondents (for example through benchmarking software).")
+    modeled_or_estimated = PermissibleValue(
+        text="modeled_or_estimated",
+        description="Estimated by models, imputation or engineering calculation.")
+    mixed = PermissibleValue(
+        text="mixed",
+        description="A combination of the above.")
+
+    _defn = EnumDefinition(
+        name="MeasurementBasis",
+        description="How energy values were obtained.",
+    )
+
+class StockRepresentation(EnumDefinitionImpl):
+    """
+    How a simulated building stock is represented.
+    """
+    sampled_models = PermissibleValue(
+        text="sampled_models",
+        description="A statistical sample of building models weighted to the stock.")
+    building_by_building = PermissibleValue(
+        text="building_by_building",
+        description="One model per real building.")
+    prototype_library = PermissibleValue(
+        text="prototype_library",
+        description="Typical or prototype buildings by type, vintage and climate.")
+
+    _defn = EnumDefinition(
+        name="StockRepresentation",
+        description="How a simulated building stock is represented.",
+    )
+
+class ContextKind(EnumDefinitionImpl):
+    """
+    Kind of context or coupling data.
+    """
+    grid_emissions = PermissibleValue(
+        text="grid_emissions",
+        description="Emission factors of electricity supply.")
+    energy_tariffs = PermissibleValue(
+        text="energy_tariffs",
+        description="Energy prices and tariffs.")
+    land_use = PermissibleValue(
+        text="land_use",
+        description="Land use and zoning.")
+    socio_economic = PermissibleValue(
+        text="socio_economic",
+        description="Population, income and housing statistics.")
+    urban_climate_zones = PermissibleValue(
+        text="urban_climate_zones",
+        description="Local climate zones and urban form classes.")
+
+    _defn = EnumDefinition(
+        name="ContextKind",
+        description="Kind of context or coupling data.",
+    )
+
+class ConventionType(EnumDefinitionImpl):
+    """
+    What a dataset convention concerns.
+    """
+    missing_code = PermissibleValue(
+        text="missing_code",
+        description="Codes that mean missing, not applicable, withheld or unknown.")
+    unit = PermissibleValue(
+        text="unit",
+        description="The unit and multiplier of values.")
+    top_or_bottom_code = PermissibleValue(
+        text="top_or_bottom_code",
+        description="Codes that stand for ranges at the end of a scale.")
+    imputation_flag = PermissibleValue(
+        text="imputation_flag",
+        description="How imputation flags are named and linked to their variables.")
+    weight = PermissibleValue(
+        text="weight",
+        description="How weights are named and used.")
+    identifier_format = PermissibleValue(
+        text="identifier_format",
+        description="How identifiers and keys are written.")
+    do_not_use = PermissibleValue(
+        text="do_not_use",
+        description="A field the publisher says must not be used, or not for some purpose.")
+    definition = PermissibleValue(
+        text="definition",
+        description="What a field includes or excludes.")
+
+    _defn = EnumDefinition(
+        name="ConventionType",
+        description="What a dataset convention concerns.",
+    )
+
 # Slots
 class slots:
     pass
@@ -1205,6 +2255,151 @@ slots.sources_checked = Slot(uri=UBEM_LINK.sources_checked, name="sources_checke
 slots.variables = Slot(uri=UBEM_LINK.variables, name="variables", curie=UBEM_LINK.curie('variables'),
                    model_uri=UBEM_LINK.variables, domain=None, range=Optional[Union[Union[dict, VariableProfile], list[Union[dict, VariableProfile]]]])
 
+slots.weather_profile = Slot(uri=UBEM_LINK.weather_profile, name="weather_profile", curie=UBEM_LINK.curie('weather_profile'),
+                   model_uri=UBEM_LINK.weather_profile, domain=None, range=Optional[Union[dict, WeatherProfile]])
+
+slots.geometry_profile = Slot(uri=UBEM_LINK.geometry_profile, name="geometry_profile", curie=UBEM_LINK.curie('geometry_profile'),
+                   model_uri=UBEM_LINK.geometry_profile, domain=None, range=Optional[Union[dict, GeometryProfile]])
+
+slots.operation_profile = Slot(uri=UBEM_LINK.operation_profile, name="operation_profile", curie=UBEM_LINK.curie('operation_profile'),
+                   model_uri=UBEM_LINK.operation_profile, domain=None, range=Optional[Union[dict, OperationProfile]])
+
+slots.characteristics_profile = Slot(uri=UBEM_LINK.characteristics_profile, name="characteristics_profile", curie=UBEM_LINK.curie('characteristics_profile'),
+                   model_uri=UBEM_LINK.characteristics_profile, domain=None, range=Optional[Union[dict, CharacteristicsProfile]])
+
+slots.energy_profile = Slot(uri=UBEM_LINK.energy_profile, name="energy_profile", curie=UBEM_LINK.curie('energy_profile'),
+                   model_uri=UBEM_LINK.energy_profile, domain=None, range=Optional[Union[dict, EnergyProfile]])
+
+slots.simulation_profile = Slot(uri=UBEM_LINK.simulation_profile, name="simulation_profile", curie=UBEM_LINK.curie('simulation_profile'),
+                   model_uri=UBEM_LINK.simulation_profile, domain=None, range=Optional[Union[dict, SimulationProfile]])
+
+slots.context_profile = Slot(uri=UBEM_LINK.context_profile, name="context_profile", curie=UBEM_LINK.curie('context_profile'),
+                   model_uri=UBEM_LINK.context_profile, domain=None, range=Optional[Union[dict, ContextProfile]])
+
+slots.provides_concepts = Slot(uri=UBEM_LINK.provides_concepts, name="provides_concepts", curie=UBEM_LINK.curie('provides_concepts'),
+                   model_uri=UBEM_LINK.provides_concepts, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.metadata_standards = Slot(uri=UBEM_LINK.metadata_standards, name="metadata_standards", curie=UBEM_LINK.curie('metadata_standards'),
+                   model_uri=UBEM_LINK.metadata_standards, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.weather_year_type = Slot(uri=UBEM_LINK.weather_year_type, name="weather_year_type", curie=UBEM_LINK.curie('weather_year_type'),
+                   model_uri=UBEM_LINK.weather_year_type, domain=None, range=Optional[Union[Union[str, "WeatherYearType"], list[Union[str, "WeatherYearType"]]]])
+
+slots.weather_file_format = Slot(uri=UBEM_LINK.weather_file_format, name="weather_file_format", curie=UBEM_LINK.curie('weather_file_format'),
+                   model_uri=UBEM_LINK.weather_file_format, domain=None, range=Optional[Union[Union[str, "WeatherFileFormat"], list[Union[str, "WeatherFileFormat"]]]])
+
+slots.timestamp_convention = Slot(uri=UBEM_LINK.timestamp_convention, name="timestamp_convention", curie=UBEM_LINK.curie('timestamp_convention'),
+                   model_uri=UBEM_LINK.timestamp_convention, domain=None, range=Optional[Union[str, "TimestampConvention"]])
+
+slots.time_basis = Slot(uri=UBEM_LINK.time_basis, name="time_basis", curie=UBEM_LINK.curie('time_basis'),
+                   model_uri=UBEM_LINK.time_basis, domain=None, range=Optional[Union[str, "TimeBasis"]])
+
+slots.gap_filling = Slot(uri=UBEM_LINK.gap_filling, name="gap_filling", curie=UBEM_LINK.curie('gap_filling'),
+                   model_uri=UBEM_LINK.gap_filling, domain=None, range=Optional[Union[str, "GapFilling"]])
+
+slots.grid_resolution_km = Slot(uri=UBEM_LINK.grid_resolution_km, name="grid_resolution_km", curie=UBEM_LINK.curie('grid_resolution_km'),
+                   model_uri=UBEM_LINK.grid_resolution_km, domain=None, range=Optional[float])
+
+slots.station_id_scheme = Slot(uri=UBEM_LINK.station_id_scheme, name="station_id_scheme", curie=UBEM_LINK.curie('station_id_scheme'),
+                   model_uri=UBEM_LINK.station_id_scheme, domain=None, range=Optional[str])
+
+slots.climate_scenarios = Slot(uri=UBEM_LINK.climate_scenarios, name="climate_scenarios", curie=UBEM_LINK.curie('climate_scenarios'),
+                   model_uri=UBEM_LINK.climate_scenarios, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.geometry_dimension = Slot(uri=UBEM_LINK.geometry_dimension, name="geometry_dimension", curie=UBEM_LINK.curie('geometry_dimension'),
+                   model_uri=UBEM_LINK.geometry_dimension, domain=None, range=Optional[Union[str, "GeometryDimension"]])
+
+slots.levels_of_detail = Slot(uri=UBEM_LINK.levels_of_detail, name="levels_of_detail", curie=UBEM_LINK.curie('levels_of_detail'),
+                   model_uri=UBEM_LINK.levels_of_detail, domain=None, range=Optional[Union[Union[str, "LevelOfDetail"], list[Union[str, "LevelOfDetail"]]]])
+
+slots.height_source = Slot(uri=UBEM_LINK.height_source, name="height_source", curie=UBEM_LINK.curie('height_source'),
+                   model_uri=UBEM_LINK.height_source, domain=None, range=Optional[Union[Union[str, "HeightSource"], list[Union[str, "HeightSource"]]]])
+
+slots.height_reference = Slot(uri=UBEM_LINK.height_reference, name="height_reference", curie=UBEM_LINK.curie('height_reference'),
+                   model_uri=UBEM_LINK.height_reference, domain=None, range=Optional[Union[str, "HeightReference"]])
+
+slots.coordinate_reference_system = Slot(uri=UBEM_LINK.coordinate_reference_system, name="coordinate_reference_system", curie=UBEM_LINK.curie('coordinate_reference_system'),
+                   model_uri=UBEM_LINK.coordinate_reference_system, domain=None, range=Optional[str],
+                   pattern=re.compile(r'^EPSG:[0-9]+$'))
+
+slots.crs_linear_unit = Slot(uri=UBEM_LINK.crs_linear_unit, name="crs_linear_unit", curie=UBEM_LINK.curie('crs_linear_unit'),
+                   model_uri=UBEM_LINK.crs_linear_unit, domain=None, range=Optional[str])
+
+slots.building_id_scheme = Slot(uri=UBEM_LINK.building_id_scheme, name="building_id_scheme", curie=UBEM_LINK.curie('building_id_scheme'),
+                   model_uri=UBEM_LINK.building_id_scheme, domain=None, range=Optional[str])
+
+slots.minimum_building_size = Slot(uri=UBEM_LINK.minimum_building_size, name="minimum_building_size", curie=UBEM_LINK.curie('minimum_building_size'),
+                   model_uri=UBEM_LINK.minimum_building_size, domain=None, range=Optional[str])
+
+slots.behavior_types = Slot(uri=UBEM_LINK.behavior_types, name="behavior_types", curie=UBEM_LINK.curie('behavior_types'),
+                   model_uri=UBEM_LINK.behavior_types, domain=None, range=Optional[Union[Union[str, "BehaviorType"], list[Union[str, "BehaviorType"]]]])
+
+slots.control_actions = Slot(uri=UBEM_LINK.control_actions, name="control_actions", curie=UBEM_LINK.curie('control_actions'),
+                   model_uri=UBEM_LINK.control_actions, domain=None, range=Optional[Union[Union[str, "ControlAction"], list[Union[str, "ControlAction"]]]])
+
+slots.collection_method = Slot(uri=UBEM_LINK.collection_method, name="collection_method", curie=UBEM_LINK.curie('collection_method'),
+                   model_uri=UBEM_LINK.collection_method, domain=None, range=Optional[Union[Union[str, "CollectionMethod"], list[Union[str, "CollectionMethod"]]]])
+
+slots.building_sectors = Slot(uri=UBEM_LINK.building_sectors, name="building_sectors", curie=UBEM_LINK.curie('building_sectors'),
+                   model_uri=UBEM_LINK.building_sectors, domain=None, range=Optional[Union[Union[str, "BuildingSector"], list[Union[str, "BuildingSector"]]]])
+
+slots.data_form = Slot(uri=UBEM_LINK.data_form, name="data_form", curie=UBEM_LINK.curie('data_form'),
+                   model_uri=UBEM_LINK.data_form, domain=None, range=Optional[Union[Union[str, "DataForm"], list[Union[str, "DataForm"]]]])
+
+slots.representativeness = Slot(uri=UBEM_LINK.representativeness, name="representativeness", curie=UBEM_LINK.curie('representativeness'),
+                   model_uri=UBEM_LINK.representativeness, domain=None, range=Optional[Union[str, "Representativeness"]])
+
+slots.coverage_threshold = Slot(uri=UBEM_LINK.coverage_threshold, name="coverage_threshold", curie=UBEM_LINK.curie('coverage_threshold'),
+                   model_uri=UBEM_LINK.coverage_threshold, domain=None, range=Optional[str])
+
+slots.cross_tabulations = Slot(uri=UBEM_LINK.cross_tabulations, name="cross_tabulations", curie=UBEM_LINK.curie('cross_tabulations'),
+                   model_uri=UBEM_LINK.cross_tabulations, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.energy_data_scale = Slot(uri=UBEM_LINK.energy_data_scale, name="energy_data_scale", curie=UBEM_LINK.curie('energy_data_scale'),
+                   model_uri=UBEM_LINK.energy_data_scale, domain=None, range=Optional[Union[str, "EnergyDataScale"]])
+
+slots.energy_sectors = Slot(uri=UBEM_LINK.energy_sectors, name="energy_sectors", curie=UBEM_LINK.curie('energy_sectors'),
+                   model_uri=UBEM_LINK.energy_sectors, domain=None, range=Optional[Union[Union[str, "EnergySector"], list[Union[str, "EnergySector"]]]])
+
+slots.energy_carriers = Slot(uri=UBEM_LINK.energy_carriers, name="energy_carriers", curie=UBEM_LINK.curie('energy_carriers'),
+                   model_uri=UBEM_LINK.energy_carriers, domain=None, range=Optional[Union[Union[str, "EnergyCarrier"], list[Union[str, "EnergyCarrier"]]]])
+
+slots.energy_metrics = Slot(uri=UBEM_LINK.energy_metrics, name="energy_metrics", curie=UBEM_LINK.curie('energy_metrics'),
+                   model_uri=UBEM_LINK.energy_metrics, domain=None, range=Optional[Union[Union[str, "EnergyMetric"], list[Union[str, "EnergyMetric"]]]])
+
+slots.metering_level = Slot(uri=UBEM_LINK.metering_level, name="metering_level", curie=UBEM_LINK.curie('metering_level'),
+                   model_uri=UBEM_LINK.metering_level, domain=None, range=Optional[Union[str, "MeteringLevel"]])
+
+slots.measurement_basis = Slot(uri=UBEM_LINK.measurement_basis, name="measurement_basis", curie=UBEM_LINK.curie('measurement_basis'),
+                   model_uri=UBEM_LINK.measurement_basis, domain=None, range=Optional[Union[str, "MeasurementBasis"]])
+
+slots.weather_normalized_available = Slot(uri=UBEM_LINK.weather_normalized_available, name="weather_normalized_available", curie=UBEM_LINK.curie('weather_normalized_available'),
+                   model_uri=UBEM_LINK.weather_normalized_available, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.reporting_period = Slot(uri=UBEM_LINK.reporting_period, name="reporting_period", curie=UBEM_LINK.curie('reporting_period'),
+                   model_uri=UBEM_LINK.reporting_period, domain=None, range=Optional[str])
+
+slots.simulation_engine = Slot(uri=UBEM_LINK.simulation_engine, name="simulation_engine", curie=UBEM_LINK.curie('simulation_engine'),
+                   model_uri=UBEM_LINK.simulation_engine, domain=None, range=Optional[str])
+
+slots.stock_representation = Slot(uri=UBEM_LINK.stock_representation, name="stock_representation", curie=UBEM_LINK.curie('stock_representation'),
+                   model_uri=UBEM_LINK.stock_representation, domain=None, range=Optional[Union[str, "StockRepresentation"]])
+
+slots.weather_basis = Slot(uri=UBEM_LINK.weather_basis, name="weather_basis", curie=UBEM_LINK.curie('weather_basis'),
+                   model_uri=UBEM_LINK.weather_basis, domain=None, range=Optional[str])
+
+slots.context_kind = Slot(uri=UBEM_LINK.context_kind, name="context_kind", curie=UBEM_LINK.curie('context_kind'),
+                   model_uri=UBEM_LINK.context_kind, domain=None, range=Optional[Union[Union[str, "ContextKind"], list[Union[str, "ContextKind"]]]])
+
+slots.convention_type = Slot(uri=UBEM_LINK.convention_type, name="convention_type", curie=UBEM_LINK.curie('convention_type'),
+                   model_uri=UBEM_LINK.convention_type, domain=None, range=Optional[Union[str, "ConventionType"]])
+
+slots.applies_to_variables = Slot(uri=UBEM_LINK.applies_to_variables, name="applies_to_variables", curie=UBEM_LINK.curie('applies_to_variables'),
+                   model_uri=UBEM_LINK.applies_to_variables, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.applies_to_pattern = Slot(uri=UBEM_LINK.applies_to_pattern, name="applies_to_pattern", curie=UBEM_LINK.curie('applies_to_pattern'),
+                   model_uri=UBEM_LINK.applies_to_pattern, domain=None, range=Optional[str])
+
 slots.name = Slot(uri=CSVW.name, name="name", curie=CSVW.curie('name'),
                    model_uri=UBEM_LINK.name, domain=None, range=Optional[str])
 
@@ -1255,6 +2450,24 @@ slots.is_imputation_flag = Slot(uri=UBEM_LINK.is_imputation_flag, name="is_imput
 
 slots.flags_variable = Slot(uri=UBEM_LINK.flags_variable, name="flags_variable", curie=UBEM_LINK.curie('flags_variable'),
                    model_uri=UBEM_LINK.flags_variable, domain=None, range=Optional[str])
+
+slots.is_replicate_weight = Slot(uri=UBEM_LINK.is_replicate_weight, name="is_replicate_weight", curie=UBEM_LINK.curie('is_replicate_weight'),
+                   model_uri=UBEM_LINK.is_replicate_weight, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.join_key = Slot(uri=UBEM_LINK.join_key, name="join_key", curie=UBEM_LINK.curie('join_key'),
+                   model_uri=UBEM_LINK.join_key, domain=None, range=Optional[Union[str, "JoinKey"]])
+
+slots.do_not_use = Slot(uri=UBEM_LINK.do_not_use, name="do_not_use", curie=UBEM_LINK.curie('do_not_use'),
+                   model_uri=UBEM_LINK.do_not_use, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.profiled_by = Slot(uri=UBEM_LINK.profiled_by, name="profiled_by", curie=UBEM_LINK.curie('profiled_by'),
+                   model_uri=UBEM_LINK.profiled_by, domain=None, range=Optional[str])
+
+slots.confidence = Slot(uri=UBEM_LINK.confidence, name="confidence", curie=UBEM_LINK.curie('confidence'),
+                   model_uri=UBEM_LINK.confidence, domain=None, range=Optional[float])
+
+slots.review_flags = Slot(uri=UBEM_LINK.review_flags, name="review_flags", curie=UBEM_LINK.curie('review_flags'),
+                   model_uri=UBEM_LINK.review_flags, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.pref_label = Slot(uri=SKOS.prefLabel, name="pref_label", curie=SKOS.curie('prefLabel'),
                    model_uri=UBEM_LINK.pref_label, domain=None, range=Optional[str])
@@ -1313,6 +2526,21 @@ slots.DatasetProfile_access_level = Slot(uri=UBEM_LINK.access_level, name="Datas
 
 slots.Convention_rule = Slot(uri=UBEM_LINK.rule, name="Convention_rule", curie=UBEM_LINK.curie('rule'),
                    model_uri=UBEM_LINK.Convention_rule, domain=Convention, range=str)
+
+slots.WeatherProfile_weather_year_type = Slot(uri=UBEM_LINK.weather_year_type, name="WeatherProfile_weather_year_type", curie=UBEM_LINK.curie('weather_year_type'),
+                   model_uri=UBEM_LINK.WeatherProfile_weather_year_type, domain=WeatherProfile, range=Union[Union[str, "WeatherYearType"], list[Union[str, "WeatherYearType"]]])
+
+slots.GeometryProfile_geometry_dimension = Slot(uri=UBEM_LINK.geometry_dimension, name="GeometryProfile_geometry_dimension", curie=UBEM_LINK.curie('geometry_dimension'),
+                   model_uri=UBEM_LINK.GeometryProfile_geometry_dimension, domain=GeometryProfile, range=Union[str, "GeometryDimension"])
+
+slots.OperationProfile_behavior_types = Slot(uri=UBEM_LINK.behavior_types, name="OperationProfile_behavior_types", curie=UBEM_LINK.curie('behavior_types'),
+                   model_uri=UBEM_LINK.OperationProfile_behavior_types, domain=OperationProfile, range=Union[Union[str, "BehaviorType"], list[Union[str, "BehaviorType"]]])
+
+slots.CharacteristicsProfile_data_form = Slot(uri=UBEM_LINK.data_form, name="CharacteristicsProfile_data_form", curie=UBEM_LINK.curie('data_form'),
+                   model_uri=UBEM_LINK.CharacteristicsProfile_data_form, domain=CharacteristicsProfile, range=Union[Union[str, "DataForm"], list[Union[str, "DataForm"]]])
+
+slots.EnergyProfile_energy_data_scale = Slot(uri=UBEM_LINK.energy_data_scale, name="EnergyProfile_energy_data_scale", curie=UBEM_LINK.curie('energy_data_scale'),
+                   model_uri=UBEM_LINK.EnergyProfile_energy_data_scale, domain=EnergyProfile, range=Union[str, "EnergyDataScale"])
 
 slots.VariableProfile_name = Slot(uri=CSVW.name, name="VariableProfile_name", curie=CSVW.curie('name'),
                    model_uri=UBEM_LINK.VariableProfile_name, domain=VariableProfile, range=str)

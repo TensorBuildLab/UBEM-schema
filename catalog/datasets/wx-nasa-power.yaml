@@ -55,3 +55,12 @@ verified:
   by: agent
   sources_checked:
   - https://power.larc.nasa.gov/docs/
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - actual_series
+  weather_file_format:
+  - api_json
+  provides_concepts:
+  - global_horizontal_irradiance
+  - dry_bulb_temperature

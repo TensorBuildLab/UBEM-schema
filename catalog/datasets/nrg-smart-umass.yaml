@@ -44,3 +44,34 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://traces.cs.umass.edu/docs/traces/smartstar']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+operation_profile:
+  behavior_types:
+  - occupancy_presence
+  - appliance_plug_loads
+  collection_method:
+  - sensors_or_logs
+  building_sectors:
+  - residential
+  provides_concepts:
+  - occupant_count
+  - equipment_usage_behavior
+  - plug_and_process_equipment
+energy_profile:
+  energy_data_scale: microscopic
+  energy_sectors:
+  - residential
+  energy_carriers:
+  - electricity
+  - onsite_renewables
+  energy_metrics:
+  - load_profile
+  - end_use_energy
+  metering_level: circuit_or_appliance
+  measurement_basis: metered
+  reporting_period: minute-level (varies by sub-dataset)
+  provides_concepts:
+  - electricity_consumption
+  - load_timeseries
+  - end_use_energy
+  - onsite_generation

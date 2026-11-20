@@ -54,3 +54,13 @@ verified:
   sources_checked:
   - https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land
   - https://api.crossref.org/works/10.5194/essd-13-4349-2021
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+weather_profile:
+  weather_year_type:
+  - actual_series
+  weather_file_format:
+  - grib
+  grid_resolution_km: 9
+  provides_concepts:
+  - dry_bulb_temperature
+  - dew_point_temperature

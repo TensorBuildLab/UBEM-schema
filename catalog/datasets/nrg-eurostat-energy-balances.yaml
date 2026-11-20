@@ -46,3 +46,25 @@ verified:
   date: '2026-11-12'
   by: agent
   sources_checked: ['https://ec.europa.eu/eurostat/cache/metadata/en/nrg_bal_esms.htm']
+# Category profiles drafted 2026-11-19 from this entry (entry_only); see catalog/category_profiles_provenance.csv
+energy_profile:
+  energy_data_scale: macroscopic
+  energy_sectors:
+  - residential
+  - commercial
+  - industrial
+  - transportation
+  energy_carriers:
+  - all_carriers
+  energy_metrics:
+  - site_energy
+  - primary_energy
+  - end_use_energy
+  metering_level: area_aggregate
+  measurement_basis: mixed
+  reporting_period: calendar year
+  provides_concepts:
+  - total_energy_consumption
+  - electricity_consumption
+  - natural_gas_consumption
+  - other_fuel_consumption
