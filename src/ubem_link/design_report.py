@@ -192,7 +192,7 @@ def fig_standards(tab: pd.DataFrame, sub: pd.DataFrame, path) -> None:
     fig, (a, b) = plt.subplots(1, 2, figsize=(7.4, 3.2), dpi=200, gridspec_kw={"width_ratios": [5, 6.4]})
     # (a) all mappable variables
     order = [("L0", "ids only", "ids"), ("XEA", "Energy\nADE", "std"), ("XBR", "Brick", "std"),
-             ("XBE", "BEDES", "std"), ("L2", "Meta-\nUrban", "mu")]
+             ("XBE", "BEDES", "std"), ("L2", "UBEM-\nLink", "mu")]
     std_of = {"XEA": "energy_ade", "XBR": "brick", "XBE": "bedes"}
     vals = {m: tab[tab.model == m].set_index("level").reindex([o[0] for o in order])["acc@1"].values for m in ms}
     x = np.arange(len(order))

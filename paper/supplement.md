@@ -22,6 +22,7 @@ The models (Qwen3 8B, Ollama tag qwen3:8b, digest 500a1f067a9f; Llama 3.1 8B, ta
 | Four-source case (E8b): selection | L2 | 0 | 1 | 16 inputs |
 | Four-source case (E8b): normalization | entry; card; scoped | 0 | 1 | 14 to 15 columns |
 | Mapping, Qwen3 14B | L0, L1, L2D, L2, L3E | 0 | 1 | 300 |
+| Four-source case (E8b), Qwen3 14B | as for the 8B models | 0 | 1 | as above |
 
 ## S2. Prompts
 
@@ -591,6 +592,11 @@ Cluster intervals resample gold concepts. Design-weighted accuracy weights each 
 | qwen3:8b | XBR | 295 | 0.424 | 0.272 | 0.612 | 0.519 | 0.483 | 0.363 | 0.699 | 44 | 0.412 | 5 | 5 | 51 |
 | qwen3:8b | XBE | 295 | 0.475 | 0.323 | 0.633 | 0.563 | 0.510 | 0.438 | 0.706 | 44 | 0.456 | 5 | 0 | 21 |
 | qwen3:8b | XEA | 295 | 0.461 | 0.336 | 0.630 | 0.549 | 0.544 | 0.377 | 0.751 | 44 | 0.450 | 5 | 3 | 29 |
+| qwen3:14b | L0 | 295 | 0.515 | 0.410 | 0.633 | 0.586 | 0.570 | 0.459 | 0.708 | 44 | 0.488 | 5 | 5 | 88 |
+| qwen3:14b | L1 | 295 | 0.515 | 0.425 | 0.625 | 0.603 | 0.557 | 0.473 | 0.718 | 44 | 0.487 | 5 | 5 | 86 |
+| qwen3:14b | L2D | 295 | 0.614 | 0.514 | 0.725 | 0.708 | 0.664 | 0.562 | 0.744 | 44 | 0.594 | 5 | 5 | 59 |
+| qwen3:14b | L2 | 295 | 0.583 | 0.482 | 0.708 | 0.664 | 0.604 | 0.562 | 0.756 | 44 | 0.544 | 5 | 5 | 80 |
+| qwen3:14b | L3E | 295 | 0.525 | 0.445 | 0.631 | 0.590 | 0.584 | 0.466 | 0.728 | 44 | 0.499 | 5 | 5 | 81 |
 
 ## S7. Paired comparisons under four label sets
 
@@ -734,6 +740,22 @@ Exact McNemar tests; Holm adjustment over all comparisons and both models within
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XBR | L2 | Brick documentation versus UBEM-Link cards | 277 | 0.390 | 0.574 | -0.184 | -0.288 | -0.068 | 9 | 60 | 0.000 | 0.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XBE | L2 | BEDES documentation versus UBEM-Link cards | 277 | 0.433 | 0.574 | -0.141 | -0.197 | -0.084 | 7 | 46 | 0.000 | 0.000 |
 | rule-based draft (keyword rules) | qwen3:8b | E6 | XEA | L2 | Energy ADE documentation versus UBEM-Link cards | 277 | 0.412 | 0.574 | -0.162 | -0.288 | -0.027 | 9 | 54 | 0.000 | 0.000 |
+| adjudicated gold | qwen3:14b | E1 | L1 | L0 | labels over identifiers | 295 | 0.515 | 0.515 | 0.000 | -0.036 | 0.038 | 13 | 13 | 1.000 | 1.000 |
+| adjudicated gold | qwen3:14b | E1 | L2D | L1 | definitions over labels | 295 | 0.614 | 0.515 | 0.098 | 0.050 | 0.136 | 34 | 5 | 0.000 | 0.000 |
+| adjudicated gold | qwen3:14b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 295 | 0.583 | 0.614 | -0.031 | -0.098 | 0.042 | 13 | 22 | 0.175 | 0.351 |
+| adjudicated gold | qwen3:14b | E5 | L3E | L2 | ten densely retrieved cards versus all cards | 295 | 0.525 | 0.583 | -0.058 | -0.152 | 0.049 | 22 | 39 | 0.040 | 0.119 |
+| annotator 1 alone | qwen3:14b | E1 | L1 | L0 | labels over identifiers | 297 | 0.508 | 0.512 | -0.003 | -0.051 | 0.034 | 13 | 14 | 1.000 | 1.000 |
+| annotator 1 alone | qwen3:14b | E1 | L2D | L1 | definitions over labels | 297 | 0.609 | 0.508 | 0.101 | 0.048 | 0.137 | 35 | 5 | 0.000 | 0.000 |
+| annotator 1 alone | qwen3:14b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 297 | 0.576 | 0.609 | -0.034 | -0.099 | 0.039 | 12 | 22 | 0.121 | 0.277 |
+| annotator 1 alone | qwen3:14b | E5 | L3E | L2 | ten densely retrieved cards versus all cards | 297 | 0.529 | 0.576 | -0.047 | -0.144 | 0.052 | 23 | 37 | 0.092 | 0.277 |
+| annotator 2 alone | qwen3:14b | E1 | L1 | L0 | labels over identifiers | 296 | 0.510 | 0.510 | 0.000 | -0.038 | 0.035 | 13 | 13 | 1.000 | 1.000 |
+| annotator 2 alone | qwen3:14b | E1 | L2D | L1 | definitions over labels | 296 | 0.608 | 0.510 | 0.098 | 0.044 | 0.137 | 35 | 6 | 0.000 | 0.000 |
+| annotator 2 alone | qwen3:14b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 296 | 0.571 | 0.608 | -0.037 | -0.104 | 0.035 | 13 | 24 | 0.099 | 0.198 |
+| annotator 2 alone | qwen3:14b | E5 | L3E | L2 | ten densely retrieved cards versus all cards | 296 | 0.517 | 0.571 | -0.054 | -0.144 | 0.052 | 21 | 37 | 0.048 | 0.144 |
+| rule-based draft (keyword rules) | qwen3:14b | E1 | L1 | L0 | labels over identifiers | 277 | 0.513 | 0.502 | 0.011 | -0.030 | 0.048 | 14 | 11 | 0.690 | 0.690 |
+| rule-based draft (keyword rules) | qwen3:14b | E1 | L2D | L1 | definitions over labels | 277 | 0.603 | 0.513 | 0.090 | 0.046 | 0.128 | 29 | 4 | 0.000 | 0.000 |
+| rule-based draft (keyword rules) | qwen3:14b | E1 | L2 | L2D | group, entity, unit and synonyms over definitions | 277 | 0.563 | 0.603 | -0.040 | -0.117 | 0.036 | 10 | 21 | 0.071 | 0.212 |
+| rule-based draft (keyword rules) | qwen3:14b | E5 | L3E | L2 | ten densely retrieved cards versus all cards | 277 | 0.523 | 0.563 | -0.040 | -0.155 | 0.080 | 22 | 33 | 0.177 | 0.354 |
 
 ## S8. Run-to-run variation (temperature 0.7 runs only)
 
@@ -1287,6 +1309,22 @@ LL84 benchmarking, PLUTO tax lots, building footprints (polygons and roof height
 | llama3.1:8b | footprints.height | height_roof | height_roof | True |
 | llama3.1:8b | footprints.footprint | the_geom | the_geom | True |
 | llama3.1:8b | footprints.year | construction_year | construction_year | True |
+| qwen3:14b | ll84.bbl | nyc_borough_block_and_lot | nyc_borough_block_and_lot | True |
+| qwen3:14b | ll84.bin | nyc_building_identification | nyc_building_identification | True |
+| qwen3:14b | ll84.area | property_gfa_calculated | property_gfa_calculated_1 | True |
+| qwen3:14b | ll84.site | site_energy_use_kbtu | site_energy_use_kbtu | True |
+| qwen3:14b | ll84.elec | electricity_use_grid_purchase_1 | electricity_use_grid_purchase_1 | True |
+| qwen3:14b | ll84.gas | natural_gas_use_kbtu | natural_gas_use_kbtu | True |
+| qwen3:14b | pluto.bbl | bbl | bbl | True |
+| qwen3:14b | pluto.cd | cd | cd | True |
+| qwen3:14b | pluto.year | yearbuilt | yearbuilt | True |
+| qwen3:14b | pluto.floors | numfloors | numfloors | True |
+| qwen3:14b | pluto.lat | latitude | latitude | True |
+| qwen3:14b | pluto.lon | longitude | longitude | True |
+| qwen3:14b | footprints.bin | bin | bin | True |
+| qwen3:14b | footprints.height | height_roof | height_roof | True |
+| qwen3:14b | footprints.footprint | the_geom | the_geom | True |
+| qwen3:14b | footprints.year | construction_year | construction_year | True |
 
 ### Profiles of the reference columns
 
@@ -1404,6 +1442,62 @@ LL84 benchmarking, PLUTO tax lots, building footprints (polygons and roof height
 | llama3.1:8b | tool | footprints | bin | none | 1 | 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | error |  | no unit, but the documentation names unit:W-HR |
 | llama3.1:8b | tool | footprints | height_roof | unit:FT | 1 | 0;  | none | 1 | exact | error | no unit for a concept measured in unit:M; convention set unit unit:FT | no unit for a concept measured in unit:M; convention set unit unit:FT |
 | llama3.1:8b | tool | footprints | construction_year | none | 1 | ; 0 | none | 1 | exact | harmless deviation |  |  |
+| qwen3:14b | entry | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:14b | entry | ll84 | nyc_building_identification | none | 1 | Not Available;  | none | 1 | error | error |  |  |
+| qwen3:14b | entry | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | ; NaN; null | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | entry | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | entry | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:14b | entry | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | entry | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:14b | entry | pluto | yearbuilt | none | 1 | ; 0 | none | 1 | exact | exact |  |  |
+| qwen3:14b | entry | pluto | numfloors | none | 1 | ; NaN; null | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | entry | pluto | latitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | entry | pluto | longitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | entry | footprints | bin | none | 1 | 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | exact |  |  |
+| qwen3:14b | entry | footprints | height_roof | unit:M | 1 |  | unit:M | 1 | error | error |  |  |
+| qwen3:14b | entry | footprints | construction_year | none | 1 | ; NaN; null | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:14b | card | ll84 | nyc_building_identification | none | 1 | Not Available;  | none | 1 | error | error |  |  |
+| qwen3:14b | card | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | ; Not Available | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | card | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:14b | card | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | card | pluto | bbl | none | 1 | 0 | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  |  |
+| qwen3:14b | card | pluto | numfloors | none | 1 | ; 0 | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | pluto | latitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | pluto | longitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | card | footprints | bin | none | 1 | 0 | none | 1 | error | error |  |  |
+| qwen3:14b | card | footprints | height_roof | unit:FT | 1 | 0 | unit:FT | 1 | exact | exact |  |  |
+| qwen3:14b | card | footprints | construction_year | none | 1 | ;  | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | scoped | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | ll84 | nyc_building_identification | none | 1 | Not Available;  | none | 1 | error | error |  |  |
+| qwen3:14b | scoped | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | ; Not Available | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | scoped | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | pluto | numfloors | none | 1 | ; NaN; null | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | scoped | pluto | latitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | scoped | pluto | longitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | scoped | footprints | bin | none | 1 | 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | footprints | height_roof | unit:FT | 1 | 0 | unit:FT | 1 | exact | exact |  |  |
+| qwen3:14b | scoped | footprints | construction_year | none | 1 | ; 0 | none | 1 | exact | exact |  |  |
+| qwen3:14b | tool | ll84 | nyc_borough_block_and_lot | none | 1 | Not Available | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:14b | tool | ll84 | nyc_building_identification | none | 1 | Not Available;  | none | 1 | error | error |  |  |
+| qwen3:14b | tool | ll84 | property_gfa_calculated_1 | unit:FT2 | 1 | ; Not Available | unit:FT2 | 1 | harmless deviation | harmless deviation |  |  |
+| qwen3:14b | tool | ll84 | site_energy_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | tool | ll84 | electricity_use_grid_purchase_1 | unit:KiloW-HR | 1 | Not Available | unit:KiloW-HR | 1 | exact | exact |  |  |
+| qwen3:14b | tool | ll84 | natural_gas_use_kbtu | unit:KiloBTU_IT | 1 | Not Available | unit:KiloBTU_IT | 1 | exact | exact |  |  |
+| qwen3:14b | tool | pluto | bbl | none | 1 |  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:14b | tool | pluto | yearbuilt | none | 1 | 0;  | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:14b | tool | pluto | numfloors | none | 1 | ; NaN; null | none | 1 | harmless deviation | harmless deviation |  | no unit, but the documentation names unit:FT |
+| qwen3:14b | tool | pluto | latitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation | numeric missing code 'NaN' is not documented as missing | no unit, but the documentation names unit:PA; numeric missing code 'NaN' is not documented as missing |
+| qwen3:14b | tool | pluto | longitude | none | 1 | ; null; NaN | none | 1 | harmless deviation | harmless deviation | numeric missing code 'NaN' is not documented as missing | no unit, but the documentation names unit:PA; numeric missing code 'NaN' is not documented as missing |
+| qwen3:14b | tool | footprints | bin | none | 1 | 1000000; 2000000; 3000000; 4000000; 5000000 | none | 1 | exact | exact |  | no unit, but the documentation names unit:W-HR |
+| qwen3:14b | tool | footprints | height_roof | unit:FT | 1 | 0;  | unit:FT | 1 | exact | exact |  |  |
+| qwen3:14b | tool | footprints | construction_year | none | 1 | ; 0 | none | 1 | exact | exact |  |  |
 
 ### Indicators of the integrated table
 
@@ -1428,8 +1522,52 @@ LL84 benchmarking, PLUTO tax lots, building footprints (polygons and roof height
 | llama3.1:8b | scoped, reference columns | 724 | 678 | 723 | 647 | 36.744 | 1194.594 | 42.942 | 1082.844 | 8.288 | 1476.966 | 12.026 | 1469.336 | 58.714 | 12.923 | 11.195 | 102.073 | 0.241 | 776 | 647 |
 | llama3.1:8b | tool, model columns | 30069 | 1 | 30059 | 0 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 18.288 | 4.572 |  | 0.000 | 0.000 | 30437 | 0 |
 | llama3.1:8b | tool, reference columns | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| qwen3:14b | selection only (gold profiles) | 30069 | 29691 | 30059 | 29076 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 | 1.045 | 1488.384 | 0.061 | 30437 | 29076 |
+| qwen3:14b | entry, model columns | 30069 | 29691 | 30059 | 29117 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 67.860 | 11.600 | 1.045 | 4883.149 | 0.061 | 30437 | 29117 |
+| qwen3:14b | entry, reference columns | 30071 | 29692 | 30061 | 29118 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 67.860 | 11.600 | 1.040 | 4883.397 | 0.062 | 30439 | 29118 |
+| qwen3:14b | card, model columns | 30069 | 29702 | 30059 | 29076 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 | 1.045 | 1488.384 | 0.061 | 30437 | 29076 |
+| qwen3:14b | card, reference columns | 30071 | 29703 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| qwen3:14b | scoped, model columns | 30069 | 29691 | 30059 | 29076 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 | 1.045 | 1488.384 | 0.061 | 30437 | 29076 |
+| qwen3:14b | scoped, reference columns | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
+| qwen3:14b | tool, model columns | 30069 | 29691 | 30059 | 29076 | 34.977 | 243.007 | 40.707 | 279.680 | 15.167 | 241.017 | 9.149 | 184.896 | 20.684 | 3.536 | 1.045 | 1488.384 | 0.061 | 30437 | 29076 |
+| qwen3:14b | tool, reference columns | 30071 | 29692 | 30061 | 29077 | 35.538 | 244.159 | 40.520 | 286.827 | 14.926 | 250.016 | 9.016 | 191.518 | 20.684 | 3.536 | 1.040 | 1488.459 | 0.062 | 30439 | 29077 |
 
 
+## S23. Model size: Qwen3 8B and Qwen3 14B
+
+Core mapping conditions for the two Qwen3 models at T = 0 (Qwen3 14B with partial CPU offload on the same 8 GB GPU). Intervals for Qwen3 14B use their own random stream, so the 8B values are those of Table 5 and S6.
+
+| model | condition | n | acc@1 | cluster_lo | cluster_hi | lenient | acc_cbecs | acc_recs | macro_per_concept | concepts | design_weighted | none_items | none_answered_none | false_none_on_mappable |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| qwen3:8b | L0 | 295 | 0.417 | 0.289 | 0.587 | 0.522 | 0.443 | 0.390 | 0.699 | 44 | 0.389 | 5 | 0 | 9 |
+| qwen3:8b | L1 | 295 | 0.471 | 0.318 | 0.664 | 0.576 | 0.517 | 0.425 | 0.757 | 44 | 0.456 | 5 | 0 | 10 |
+| qwen3:8b | L2D | 295 | 0.549 | 0.386 | 0.713 | 0.668 | 0.597 | 0.500 | 0.797 | 44 | 0.535 | 5 | 1 | 9 |
+| qwen3:8b | L2 | 295 | 0.586 | 0.443 | 0.744 | 0.685 | 0.631 | 0.541 | 0.757 | 44 | 0.573 | 5 | 1 | 5 |
+| qwen3:8b | L2N | 295 | 0.553 | 0.404 | 0.736 | 0.647 | 0.564 | 0.541 | 0.804 | 44 | 0.531 | 5 | 0 | 13 |
+| qwen3:8b | O0 | 295 | 0.007 | 0.000 | 0.026 | 0.007 | 0.007 | 0.007 | 0.023 | 44 | 0.002 | 5 | 0 | 0 |
+| qwen3:8b | O2D | 295 | 0.620 | 0.525 | 0.729 | 0.715 | 0.631 | 0.610 | 0.772 | 44 | 0.609 | 5 | 0 | 0 |
+| qwen3:8b | L2S | 295 | 0.546 | 0.420 | 0.703 | 0.641 | 0.550 | 0.541 | 0.779 | 44 | 0.517 | 5 | 1 | 4 |
+| qwen3:8b | L2U | 295 | 0.593 | 0.442 | 0.745 | 0.692 | 0.644 | 0.541 | 0.758 | 44 | 0.585 | 5 | 1 | 6 |
+| qwen3:8b | L3 | 295 | 0.512 | 0.425 | 0.634 | 0.597 | 0.597 | 0.425 | 0.740 | 44 | 0.500 | 5 | 1 | 25 |
+| qwen3:8b | L3E | 295 | 0.563 | 0.449 | 0.687 | 0.661 | 0.604 | 0.521 | 0.778 | 44 | 0.542 | 5 | 0 | 20 |
+| qwen3:8b | XBR | 295 | 0.424 | 0.272 | 0.612 | 0.519 | 0.483 | 0.363 | 0.699 | 44 | 0.412 | 5 | 5 | 51 |
+| qwen3:8b | XBE | 295 | 0.475 | 0.323 | 0.633 | 0.563 | 0.510 | 0.438 | 0.706 | 44 | 0.456 | 5 | 0 | 21 |
+| qwen3:8b | XEA | 295 | 0.461 | 0.336 | 0.630 | 0.549 | 0.544 | 0.377 | 0.751 | 44 | 0.450 | 5 | 3 | 29 |
+| qwen3:14b | L0 | 295 | 0.515 | 0.410 | 0.633 | 0.586 | 0.570 | 0.459 | 0.708 | 44 | 0.488 | 5 | 5 | 88 |
+| qwen3:14b | L1 | 295 | 0.515 | 0.425 | 0.625 | 0.603 | 0.557 | 0.473 | 0.718 | 44 | 0.487 | 5 | 5 | 86 |
+| qwen3:14b | L2D | 295 | 0.614 | 0.514 | 0.725 | 0.708 | 0.664 | 0.562 | 0.744 | 44 | 0.594 | 5 | 5 | 59 |
+| qwen3:14b | L2 | 295 | 0.583 | 0.482 | 0.708 | 0.664 | 0.604 | 0.562 | 0.756 | 44 | 0.544 | 5 | 5 | 80 |
+| qwen3:14b | L3E | 295 | 0.525 | 0.445 | 0.631 | 0.590 | 0.584 | 0.466 | 0.728 | 44 | 0.499 | 5 | 5 | 81 |
+
+Paired comparison on the same variables (adjudicated gold, mappable variables, T = 0): gained and lost count variables that only the larger or only the smaller model mapped correctly; exact McNemar test, Holm-adjusted over the five conditions; false_none counts mappable variables answered "none".
+
+| model | versus | condition | n | acc_model | acc_versus | delta | gained | lost | p_exact | false_none_model | false_none_versus | p_holm |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| qwen3:14b | qwen3:8b | L0 | 295 | 0.515 | 0.417 | 0.098 | 57 | 28 | 0.002 | 88 | 9 | 0.011 |
+| qwen3:14b | qwen3:8b | L1 | 295 | 0.515 | 0.471 | 0.044 | 43 | 30 | 0.160 | 86 | 10 | 0.405 |
+| qwen3:14b | qwen3:8b | L2D | 295 | 0.614 | 0.549 | 0.064 | 53 | 34 | 0.053 | 59 | 9 | 0.212 |
+| qwen3:14b | qwen3:8b | L2 | 295 | 0.583 | 0.586 | -0.003 | 32 | 33 | 1.000 | 80 | 5 | 1.000 |
+| qwen3:14b | qwen3:8b | L3E | 295 | 0.525 | 0.563 | -0.037 | 17 | 28 | 0.135 | 81 | 20 | 0.405 |
 
 
 ## S24. Catalog

@@ -42,6 +42,7 @@ def section_runs() -> str:
         ("Four-source case (E8b): selection", "L2", "0", "1", "16 inputs"),
         ("Four-source case (E8b): normalization", "entry; card; scoped", "0", "1", "14 to 15 columns"),
         ("Mapping, Qwen3 14B", "L0, L1, L2D, L2, L3E", "0", "1", 300),
+        ("Four-source case (E8b), Qwen3 14B", "as for the 8B models", "0", "1", "as above"),
     ]
     t = pd.DataFrame(rows, columns=["Task", "Conditions", "Temperature", "Runs per item", "Items"])
     return ("## S1. Runs\n\nThe models (Qwen3 8B, Ollama tag qwen3:8b, digest 500a1f067a9f; Llama 3.1 8B, tag "
@@ -230,8 +231,16 @@ def section_larger_model() -> str:
     if "model" not in d or not d.model.astype(str).str.contains("14b").any():
         return ""
     keep = d[d.model.astype(str).str.contains("qwen3")]
-    return ("## S23. Model size: Qwen3 8B and Qwen3 14B\n\nCore mapping conditions for the two Qwen3 models at "
-            "T = 0 (Qwen3 14B with partial CPU offload on the same 8 GB GPU).\n\n" + md(keep) + "\n")
+    out = ("## S23. Model size: Qwen3 8B and Qwen3 14B\n\nCore mapping conditions for the two Qwen3 models at "
+           "T = 0 (Qwen3 14B with partial CPU offload on the same 8 GB GPU). Intervals for Qwen3 14B use their own "
+           "random stream, so the 8B values are those of Table 5 and S6.\n\n" + md(keep) + "\n")
+    q = TAB / "stats_model_size.csv"
+    if q.exists():
+        out += ("\nPaired comparison on the same variables (adjudicated gold, mappable variables, T = 0): gained and "
+                "lost count variables that only the larger or only the smaller model mapped correctly; exact "
+                "McNemar test, Holm-adjusted over the five conditions; false_none counts mappable variables "
+                "answered \"none\".\n\n" + md(pd.read_csv(q)) + "\n")
+    return out
 
 
 def section_catalog() -> str:

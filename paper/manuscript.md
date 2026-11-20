@@ -27,16 +27,16 @@ Liang Zhang^a,b,\*^, Jianli Chen^c^, Jia Zou^d^
 
 ## Abstract {.unnumbered}
 
-Urban building energy modeling (UBEM) combines heterogeneous open data, a task increasingly delegated to
+Urban building energy modeling (UBEM) combines heterogeneous open data, increasingly with help from
 language models that read schemas written for people. Building on an earlier seven-category taxonomy of open UBEM
 data, we present UBEM-Link: six facets and seven typed category profiles, a variable-level LinkML schema and an
 81-concept vocabulary compiled into artifacts for people and AI, a catalog of 93 datasets, and an open tool that turns
-a dataset and its codebook into a checked profile. In experiments with local open-weight models, concept definitions,
+a dataset and its codebook into a checked profile. In experiments with three local open-weight models (8B and 14B), concept definitions,
 not labels, made mapping possible (definitions alone matched full cards), a closed vocabulary prevented invalid
-answers at no cost, and documentation borrowed from Brick, BEDES and the CityGML Energy ADE did not help.[[ABS_14B]]
+answers at no cost, and documentation borrowed from Brick, BEDES and the CityGML Energy ADE did not help.
 Conventions given as prose were applied beyond their scope, and with kBtu missing from the unit list, two models
 overstated New York City's energy intensity by 215%. With source units in the vocabulary and conventions applied by
-the tool, both models reproduced a four-source integration of benchmarking, tax lots, building footprints and
+the tool, all three models reproduced a four-source integration of benchmarking, tax lots, building footprints and
 weather for 29,077 buildings exactly; without them, feet read as metres tripled building heights. Quantities that
 combine sources exposed such errors where single-source checks could not.
 
@@ -86,8 +86,7 @@ but the data lack common formats and keys [@chen2019development], and most UBEM 
 [@malhotra2022information].
 
 Reviews have classified open UBEM data by modeling input or data domain [@goy2020data; @wang2022data;
-@jin2023review; @bishop2024review]. An earlier taxonomy by the present authors sorted open data for physics-based
-UBEM into seven categories (weather; building stock GIS; occupant behavior; building characteristics; macroscopic
+@jin2023review; @bishop2024review]. An earlier taxonomy sorted open data for physics-based UBEM into seven categories (weather; building stock GIS; occupant behavior; building characteristics; macroscopic
 and microscopic energy data; comprehensive data lakes) and listed, for each category, the metadata a modeler needs
 [@zhang2023taxonomy]. That list was free text, and a classification does not by itself tell software how to read a
 dataset. Schemas exist at other levels. Brick, Project Haystack and BuildingSync describe building equipment,
@@ -233,10 +232,10 @@ tested models and tasks.
 
 | Principle | Mechanism | Test | Verdict |
 |---|---|---|---|
-| P1 Define every term | A definition for every class, field, value and concept | E1, E6, E8 | [[V1]] |
-| P2 Close the vocabulary | Enumerations compiled to JSON Schema for constrained output | E2, E8 | Supported as a guarantee at no accuracy cost (5 of 300 invented identifiers without it); the unit list must include the source's units (E8, E8b) |
-| P3 State the conventions | Conventions at dataset level with machine-readable scope; weights and flags at variable level | E3, E7, E8 | Supported when typed and applied by software: as prose, conventions were also applied beyond their scope (E7, E8, E8b); applied by the tool, they removed every indicator-changing profile error (E8b) |
-| P4 Make output checkable | Types and enumerations (JSON Schema, SHACL); units and quantity kinds; profile checks | E4, E7, E8 | Partly: mapping checks catch 5–16% of wrong mappings; profile checks catch most consequential errors once they know the source's conventions; cross-source quantities exposed every geometry unit error (E8b) |
+| P1 Define every term | A definition for every class, field, value and concept | E1, E6, E8 | Supported: descriptions beyond a name made mapping possible for all three models; definitions alone matched full cards, and other card fields could substitute for them; models read definitions literally (E8) |
+| P2 Close the vocabulary | Enumerations compiled to JSON Schema for constrained output | E2, E8, E8b | Supported as a guarantee at no accuracy cost (5 of 300 invented identifiers without it); the unit list must include the source's units (E8, E8b) |
+| P3 State the conventions | Conventions at dataset level with machine-readable scope; weights and flags at variable level | E3, E7, E8, E8b | Supported when typed and applied by software: as prose, conventions were also applied beyond their scope (E7, E8, E8b); applied by the tool, they removed every indicator-changing profile error (E8b) |
+| P4 Make output checkable | Types and enumerations (JSON Schema, SHACL); units and quantity kinds; profile checks | E4, E7, E8, E8b | Partly: mapping checks catch 5–16% of wrong mappings; profile checks catch most consequential errors once they know the source's conventions; cross-source quantities exposed every geometry unit error (E8b) |
 | P5 Fit the context window | Self-contained cards (about 60 tokens per concept) and retrieval | E5 | Supported when retrieval recall is high: ten cards kept accuracy at a fifth of the tokens |
 | P6 Ground in domain standards | SSSOM mappings to Brick, BEDES and the Energy ADE; reuse of DCAT, QUDT, SKOS | E6 | Not supported for reusing documentation: transplanted definitions were no better than identifiers; the mappings themselves were not tested |
 
@@ -270,7 +269,7 @@ linked term was checked to exist in the release files, the relation type was ass
 4 are exact matches, because those standards describe equipment, points and objects while UBEM-Link's concepts
 describe what a dataset column measures. Ten targets, among them survey and replicate weights, have no
 counterpart. The documentation layer is generated by one command and cannot drift from the source: a schema card
-of about 8,800 tokens, a card of about 60 tokens per concept (4,300 tokens for all), and a card per dataset with its
+of about 8,900 tokens, a card of about 60 tokens per concept (4,300 tokens for all), and a card per dataset with its
 facets, weights and conventions (Fig. 4).
 
 ![Fig. 4. UBEM-Link applied to CBECS 2018. (a) Excerpt of the dataset card, including conventions that the
@@ -362,7 +361,7 @@ accepted alternative.
 We evaluate three open-weight models run locally through Ollama 0.40.16 on one 8 GB laptop GPU (Q4_K_M
 quantization, thinking disabled, 8,192-token context, output constrained by JSON Schema): Qwen3 8B [@yang2025qwen3]
 and Llama 3.1 8B [@grattafiori2024llama3] in all experiments, and Qwen3 14B, from the same family as Qwen3 8B and
-run with partial CPU offload, in the core mapping conditions to separate the effect of model size from that of the
+run with partial CPU offload, in the core mapping conditions and the four-source integration (E8b) to separate the effect of model size from that of the
 schema. Small local models are what a city or utility can run on its own hardware at no per-call cost. Each
 condition is run at T = 0; the base mapping conditions were repeated four times and normalization twice at T = 0.7
 to measure run-to-run variation. Every prompt and raw response is cached and released.
@@ -414,12 +413,29 @@ contains neither the gold concept's label nor a synonym, the ordering is the sam
 codes, full cards: Qwen3 0.41, 0.59, 0.52; Llama 3.1 0.29, 0.50, 0.48; S9). Shuffling the cards left accuracy
 unchanged in aggregate (p_Holm = 1.00) but changed correctness for 20% and 28% of variables, so single answers
 depend on prompt order. Ranking cards by TF-IDF or embedding similarity, without a language model, reached 0.27 and
-0.29. [[E1_14B]]
+0.29. Qwen3 14B, run on the core conditions, showed the same pattern (Table 5, S23): definitions raised accuracy over labels by 0.10 (p_Holm < 0.001) and full cards did not improve on definitions (−0.03, p_Holm = 0.35). It beat Qwen3 8B with identifiers alone (+0.10, p_Holm = 0.011) but not significantly with definitions or cards (+0.06 and 0.00). It answered "none" for 59–88 of the 295 mappable variables (Qwen3 8B: 5–20), often listing the right concept as an alternative; when it chose a concept, it was right 72–80% of the time, against 43–60% for Qwen3 8B. The larger model traded coverage for precision; it did not make definitions unnecessary.
 
 Table 5. Variable mapping by schema condition (top-1 accuracy on 295 mappable variables, T = 0; intervals
-resample concepts; tokens are mean input tokens per call as counted by Qwen3).
+resample concepts; tokens are mean input tokens per call as counted by Qwen3; Qwen3 14B was run on the core
+conditions only).
 
-[[TABLE5]]
+| Condition | Concept list shown to the model | Qwen3 8B | Llama 3.1 8B | Qwen3 14B | Tokens |
+|---|---|---|---|---|---|
+| O0 | Opaque codes | 0.01 [0.00, 0.03] | 0.02 [0.00, 0.04] | – | 545 |
+| L0 | Identifiers | 0.42 [0.29, 0.59] | 0.43 [0.28, 0.61] | 0.52 [0.41, 0.63] | 486 |
+| L1 | Identifiers and labels | 0.47 [0.31, 0.65] | 0.40 [0.27, 0.59] | 0.52 [0.43, 0.63] | 809 |
+| O2D | Opaque codes and definitions | 0.62 [0.52, 0.73] | 0.55 [0.42, 0.68] | – | 1,559 |
+| L2D | Identifiers, labels and definitions | 0.55 [0.39, 0.72] | 0.53 [0.38, 0.69] | 0.61 [0.51, 0.73] | 1,823 |
+| L2N | Full cards without definitions | 0.55 [0.41, 0.73] | 0.58 [0.47, 0.70] | – | 2,871 |
+| L2 | Full concept cards | 0.59 [0.44, 0.74] | 0.55 [0.42, 0.69] | 0.58 [0.48, 0.71] | 3,884 |
+| L2S | Full cards, shuffled order | 0.55 [0.42, 0.70] | 0.55 [0.44, 0.68] | – | 3,884 |
+| L2U | Full cards, open output | 0.59 [0.44, 0.74] | 0.53 [0.42, 0.67] | – | 3,884 |
+| L3 | Ten cards, lexical retrieval | 0.51 [0.42, 0.63] | 0.52 [0.42, 0.65] | – | 710 |
+| L3E | Ten cards, dense retrieval | 0.56 [0.45, 0.69] | 0.58 [0.50, 0.69] | 0.53 [0.45, 0.63] | 726 |
+| XBR | Brick documentation | 0.42 [0.27, 0.61] | 0.35 [0.22, 0.53] | – | 1,123 |
+| XBE | BEDES documentation | 0.47 [0.32, 0.63] | 0.43 [0.30, 0.60] | – | 1,976 |
+| XEA | Energy ADE documentation | 0.46 [0.34, 0.63] | 0.42 [0.29, 0.60] | – | 762 |
+| Baselines | TF-IDF ranking 0.27; embedding ranking 0.29 | | | | |
 
 ![Fig. 5. Top-1 mapping accuracy by schema condition, with 95% intervals that resample concepts. (a) What the
 concept documentation contains. (b) Full cards in shuffled order, with open output, and with ten retrieved
@@ -632,14 +648,16 @@ columns; for footprint area it chose the system-generated area, which the footpr
 because it is computed in Web Mercator (1.74 times the true area). Used as square metres, it would have overstated
 building volume by 75%; the tool refused it and flagged it for review. Llama 3.1 chose 13: weather-normalized
 electricity and gas, as in Section 7.3, and the tax-lot number instead of the building number as the footprint key,
-so no footprint could be joined.
+so no footprint could be joined. Qwen3 14B, run afterwards with the same frozen prompts, chose all 16 columns
+correctly.
 
-Context decided the profiles (Table 9). Without the conventions, both models gave roof heights no unit; read as
+Context decided the profiles (Table 9). Without the conventions, both 8B models gave roof heights no unit; read as
 metres, feet overstated height per floor and building volume by 228%, and Llama 3.1 also read gas in kBtu as kWh
 (+241% in gas use per degree day). With all conventions as prose, Qwen3's profiles were right, but Llama 3.1 gave
 floor area no unit, so square feet became square metres and the floor-area ratio rose from 1.04 to 11.2. With only
-the matching conventions, both models again applied "multiplier 1,000 on Btu" to kBtu, and the plausibility filter
-left 94 and 647 properties. With the tool, every indicator was reproduced exactly for both models: the tool overwrote
+the matching conventions, both 8B models again applied "multiplier 1,000 on Btu" to kBtu, and the plausibility filter
+left 94 and 647 properties. Qwen3 14B also read feet as metres without the conventions, but with them, as prose or
+scoped, its remaining errors changed no indicator. With the tool, every indicator was reproduced exactly for all three models: the tool overwrote
 the units and missing codes that the conventions state, and 1 of 14 profiles per model remained wrong
 (placeholder building numbers in LL84, which no LL84 documentation declares and which matched nothing, because the
 footprint side's placeholders were removed). On the models' own answers, the fixed review checks flagged all
@@ -663,6 +681,10 @@ applied the conventions.
 | | card | 7 | 28,951 | 11.6 | 11.2 | −67% | −68% |
 | | scoped | 6 | 647 | 12.9 | 11.2 | +389% | +288% |
 | | tool | 6 → 1 | 29,077 | 3.5 | 1.04 | 0 | 0 |
+| Qwen3 14B | entry | 2 | 29,118 | 11.6 | 1.04 | 0 | 0 |
+| | card | 2 | 29,077 | 3.5 | 1.04 | 0 | 0 |
+| | scoped | 1 | 29,077 | 3.5 | 1.04 | 0 | 0 |
+| | tool | 1 → 1 | 29,077 | 3.5 | 1.04 | 0 | 0 |
 
 ## 8. Discussion
 
@@ -672,13 +694,13 @@ Table 3 gives a verdict for each principle; four results bear on schema design. 
 when the schema describes its terms beyond a name: opaque codes defeated both 8B models, labels added nothing
 significant, and definitions or the other descriptive fields of a card raised accuracy by 0.08–0.18. Because
 definitions alone matched full cards and the gains held on variables without lexical overlap, the effect is not
-only shared wording. [[DISC_14B]] The models also follow definitions literally: an identifier "within the dataset" led
+only shared wording. Qwen3 14B kept the pattern and was most accurate with definitions alone, so within the tested range the effect does not depend on model size; the larger model was more cautious rather than better informed, and its abstentions go to the tool's review queue. The models also follow definitions literally: an identifier "within the dataset" led
 them to an internal identifier, a join key defined as a shared parcel identifier to the tax-lot key. Definitions
 should be written for the integration task, and linking keys should be defined elements of a schema.
 
 Second, conventions help where they state what an entry does not (all 30 CBECS flags linked) but, given as prose,
 were applied beyond their scope: a missing-code rule for yes/no questions applied to a climate zone, a multiplier
-applied on top of a unit that already contains it. Machine-readable scopes alone did not solve this: shown only the conventions that concern a column, both models still applied "multiplier 1,000 on Btu" to kBtu (Section 7.4). What worked was to let the schema carry the value and software apply it: with the tool, both models' profiles reproduced every indicator of the four-source integration. A convention should therefore be a typed statement (this unit, these missing codes, for these variables), not only a sentence for a model to read. Third, a closed vocabulary guarantees valid output
+applied on top of a unit that already contains it. Machine-readable scopes alone did not solve this: shown only the conventions that concern a column, both 8B models still applied "multiplier 1,000 on Btu" to kBtu (Section 7.4); Qwen3 14B did not, so a larger model may need the tool less, but the tool makes the result independent of the model. What worked was to let the schema carry the value and software apply it: with the tool, both models' profiles reproduced every indicator of the four-source integration. A convention should therefore be a typed statement (this unit, these missing codes, for these variables), not only a sentence for a model to read. Third, a closed vocabulary guarantees valid output
 at no accuracy cost, but its content steers the answer: lacking kBtu, both models chose kilowatt-hours. Unit
 vocabularies should include the units in which sources publish and leave conversion to QUDT factors downstream.
 Fourth, profile checks must be validated on data they were not written on: version 1 was perfect on its own errors
@@ -708,7 +730,7 @@ repeated by a person or a model.
 
 The mapping gold was produced by LLM annotators who read the concept definitions that some conditions show the
 models; four label sets, including keyword rules that do not use the definitions, agree, but expert annotation
-remains the stronger test. [[LIM_MODELS]] The survey normalization gold comes from a parser that solves the task by
+remains the stronger test. Three open-weight models of 8B and 14B parameters were tested, the largest only on the core conditions and the city integration; larger or proprietary models may behave differently. The survey normalization gold comes from a parser that solves the task by
 construction; the city cases avoid this but cover one city and one year, and several design decisions were taken
 after seeing results (the description of the tax-lot key and the unit variant in Section 7.3; the tool's design in
 Section 7.4 follows from them and was frozen before its test). The catalog, its category profiles, the concept
@@ -723,10 +745,10 @@ typed category profiles, a variable-level schema and a concept vocabulary compil
 applied to 93 datasets and released with a tool and tutorials. Experiments with local open-weight models showed
 that descriptions of each term beyond its name made concept mapping possible, a closed vocabulary made output valid
 at no cost, retrieval kept accuracy at a fifth of the context, and documentation borrowed from other standards did
-not help.[[CONC_14B]] Conventions supplied what codebook entries leave out but, given as prose, were applied beyond
+not help. Qwen3 14B showed the same pattern, trading coverage for precision. Conventions supplied what codebook entries leave out but, given as prose, were applied beyond
 their scope, and a unit missing from the vocabulary made both models overstate New York City's energy intensity by
 215%. Built into the tool, these lessons held on new data: with the source's units in the vocabulary and
-conventions applied by software, both models reproduced a four-source integration of benchmarking, tax lots,
+conventions applied by software, all three models reproduced a four-source integration of benchmarking, tax lots,
 footprints and weather for 29,077 buildings exactly, and quantities combining sources exposed the geometry errors
 that remained without them. AI-assisted integration of urban building data is feasible with small local models
 when the schema defines its terms and keys for the task, records publishers' conventions as typed statements that

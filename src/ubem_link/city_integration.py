@@ -24,6 +24,7 @@ vocabulary, conventions of the PLUTO and footprint entries) was committed before
 from __future__ import annotations
 
 import json
+import os
 import re
 from functools import lru_cache
 
@@ -42,7 +43,8 @@ from .units import to_canonical
 
 NYC = DATA_RAW / "nyc"
 TAB, FIG = PAPER / "tables", PAPER / "figures"
-MODELS = ["ollama:qwen3:8b", "ollama:llama3.1:8b"]
+MODELS = os.environ.get("UBEM_CITY_MODELS", "ollama:qwen3:8b,ollama:llama3.1:8b,ollama:qwen3:14b").split(",")
+# Qwen3 14B was added after the 8B runs, with the same frozen prompts, as the larger-model check
 ENTRY = {"ll84": "chr-nyc-ll84", "pluto": "chr-nyc-pluto", "footprints": "geo-nyc-footprints"}
 
 # role -> (dataset, concept or join key, purpose, acceptable columns)

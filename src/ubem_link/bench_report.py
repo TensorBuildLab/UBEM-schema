@@ -42,12 +42,20 @@ MODEL_COLOR = {"ollama:qwen3:8b": "#256abf", "ollama:llama3.1:8b": "#e5803a"}
 RNG = np.random.default_rng(20261113)
 
 
-def models() -> list[str]:
+# The two 8B models of the main experiments. Models added later (Qwen3 14B, the larger-model check) are reported
+# separately (revision_stats) so that they do not change the random streams or test families of the 8B results.
+PRIMARY_MODELS = ("ollama:llama3.1:8b", "ollama:qwen3:8b")
+
+
+def models(include_secondary: bool = False) -> list[str]:
     out = []
     for p in sorted(CACHE_DIR.glob("*.jsonl")):
         with open(p, encoding="utf-8") as fh:
             out.append(json.loads(fh.readline())["model"])
-    return out
+    primary = [m for m in out if m in PRIMARY_MODELS]
+    if include_secondary or not primary:
+        return primary + [m for m in out if m not in PRIMARY_MODELS]
+    return primary
 
 
 def short(model: str) -> str:

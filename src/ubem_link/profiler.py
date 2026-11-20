@@ -271,6 +271,12 @@ def profile_checks(col: Column, prof: dict, concept: str | None, convs: list[dic
                 q, _ = to_canonical(q, u, m)
             if q is not None and (q[1] > hi * 10 or q[0] < lo - abs(hi)):
                 out.append(f"values outside the plausible range for {concept} after conversion")
+        if c.get("quantity_kind") and c.get("canonical_unit") and col.value_min is None and col.n_values:
+            out.append(f"{concept} is a quantity but the column has no numeric values")
+    if concept and concept.startswith("join:") and col.n_values >= 20 and concept != "join:timestamp":
+        n_distinct = len(col.distinct_values)
+        if n_distinct < 50 and n_distinct < 0.2 * col.n_values:
+            out.append(f"a key should identify records, but the column has only {n_distinct} distinct values")
     for c in convs:
         if c.get("convention_type") == "do_not_use":
             out.append(f"publisher says do not use: {c['rule'][:80]}")

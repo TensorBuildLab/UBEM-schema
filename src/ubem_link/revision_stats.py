@@ -333,6 +333,35 @@ def rules_heldout() -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
+def model_size(tabs, extra_tabs) -> pd.DataFrame:
+    """Each added model against the 8B model of the same family, per condition, on the same items (temperature 0,
+    adjudicated gold, mappable variables); exact McNemar with Holm adjustment over the conditions of each pair."""
+    rows = []
+    for big, tb in extra_tabs.items():
+        family = big.split(":")[1]
+        small = next((m for m in tabs if m.split(":")[1] == family), None)
+        if small is None:
+            continue
+        block = []
+        for lv in CONDITIONS:
+            if lv not in tb or lv not in tabs[small]:
+                continue
+            a, b = tb[lv], tabs[small][lv]
+            common = [k for k in a.index.intersection(b.index) if a.at[k, "gold"] != "none"]
+            ha = np.array([a.at[k, "pred0"] == a.at[k, "gold"] for k in common])
+            hb = np.array([b.at[k, "pred0"] == b.at[k, "gold"] for k in common])
+            n01, n10, p = mcnemar_exact(hb, ha)
+            block.append({"model": short(big), "versus": short(small), "condition": lv, "n": len(common),
+                          "acc_model": ha.mean(), "acc_versus": hb.mean(), "delta": ha.mean() - hb.mean(),
+                          "gained": n01, "lost": n10, "p_exact": p,
+                          "false_none_model": int(sum(a.at[k, "pred0"] == "none" for k in common)),
+                          "false_none_versus": int(sum(b.at[k, "pred0"] == "none" for k in common))})
+        for r, pa in zip(block, holm([r["p_exact"] for r in block])):
+            r["p_holm"] = pa
+        rows += block
+    return pd.DataFrame(rows)
+
+
 def main() -> int:
     frames = {m: f for m in models() if not (f := t2_frame(m)).empty}
     tabs = {m: {lv: item_table(df, lv) for lv in CONDITIONS if lv in set(df.level)} for m, df in frames.items()}
@@ -346,6 +375,15 @@ def main() -> int:
         "stats_rules_heldout": rules_heldout(),
     }
     out["stats_e7_confusion"], out["stats_e7_errors"] = e7_tables()
+    extra = [m for m in models(include_secondary=True) if m not in frames]
+    ef = {m: f for m in extra if not (f := t2_frame(m)).empty}
+    if ef:  # larger-model check: own random stream and own Holm family, so the 8B results are unchanged
+        global RNG
+        RNG = np.random.default_rng(20261119)
+        et = {m: {lv: item_table(df, lv) for lv in CONDITIONS if lv in set(df.level)} for m, df in ef.items()}
+        out["stats_conditions"] = pd.concat([out["stats_conditions"], conditions_table(ef, et)], ignore_index=True)
+        out["stats_tests"] = pd.concat([out["stats_tests"], tests_table(et)], ignore_index=True)
+        out["stats_model_size"] = model_size(tabs, et)
     pd.set_option("display.width", 220)
     for name, d in out.items():
         d.to_csv(TAB / f"{name}.csv", index=False)

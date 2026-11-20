@@ -1,7 +1,7 @@
 # Highlights
 
-- An AI-ready schema for open urban building energy data, tested with local models
+- Seven open-data categories refined into six facets and typed category profiles
 - Concept definitions alone matched full concept cards for variable mapping
-- Only 3 of 48 cataloged building datasets share a key with footprints or parcels
-- In New York City, models read kBtu as kWh and overstated energy intensity by 215%
-- Dataset conventions were also applied where they did not belong
+- Only 4 of 49 cataloged building datasets share a key with footprints or parcels
+- Models read kBtu as kWh and overstated New York City energy intensity by 215%
+- With conventions applied by software, a four-source city integration was exact

@@ -19,3 +19,10 @@ First release.
 - Tool: `ubem-link` (describe, conventions, validate, apply, integrate, select, catalog, cards, pending) with
   Ollama, OpenAI-compatible, Anthropic and files backends.
 - Generated artifacts: JSON Schema, SHACL, OWL, Python data model, documentation, AI documentation layer.
+
+### Tool changes found in testing (before 1.0.0)
+
+- Profile checks match unit words as whole words ("wh" no longer matches "which"); found in the four-source test of
+  the paper, which reports the frozen and the fixed checks.
+- New checks: a key column with few distinct values; a quantitative concept on a column without numeric values.
+- Conventions can be scoped by code list (`applies_to_codes`), for rules that apply to, say, yes/no questions.

@@ -55,6 +55,20 @@ The tool shows `height_roof` only the conventions that concern it, and writes `u
 answered; if the model disagreed, the review file says so. `shape_area` is marked `do_not_use`. (It is 1.74 times
 the true footprint area at New York's latitude.)
 
+With `ollama:qwen3:8b` on a laptop GPU this takes a few minutes. The review file of our run began:
+
+```
+name,concept,unit,multiplier,...,n_flags,flags
+shape_area,gross_floor_area,none,,...,2,"no unit for a concept measured in unit:M2 | publisher says do not use: ..."
+geom_source,join:geometry,none,,...,1,"a key should identify records, but the column has only 2 distinct values"
+last_status_type,renovation,none,,...,0,
+```
+
+Both flagged rows are wrong concept mappings, and the checks caught them: `shape_area` is not a floor area and must
+not be used, and `geom_source` (photogrammetric or other) is not a key. `last_status_type` mapped to `renovation`
+is debatable and unflagged; read the concept column of every row, not only the flagged ones. The units and missing
+codes (feet and zero for `height_roof`, placeholder BINs for `bin`) were right.
+
 ## 5. Validate, compare with the reviewed profile, apply
 
 ```bash
