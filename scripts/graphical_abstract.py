@@ -63,7 +63,7 @@ for x, head, body in ((0.05, "for people", "documentation\nOWL ontology\n93-data
     a.text(x + 0.21, 0.335, body, ha="center", va="top", fontsize=11, color=INK2, linespacing=1.3)
     a.annotate("", xy=(x + 0.21, 0.47), xytext=(0.50, 0.59),
                arrowprops={"arrowstyle": "-|>", "color": MUTED, "lw": 1.6, "mutation_scale": 14})
-a.text(0.05, 0.835, "7 data categories → 6 facets and\n7 typed category profiles", fontsize=12, color=INK2,
+a.text(0.05, 0.835, "A new taxonomy: 6 facets and\n7 typed category profiles", fontsize=12, color=INK2,
        va="center", linespacing=1.25)
 a.text(0.50, 0.05, "AI output checked against the same schema", ha="center", fontsize=10.5, color=INK2,
        style="italic")
@@ -94,10 +94,10 @@ ax.set_facecolor(PANEL)
 
 # 3. energy results: national survey pipeline and New York City
 c = panel(0.685, "3  City-scale integration")
-c.text(0.05, 0.82, "New York City, two local 8B models", fontsize=12.5, color=INK2, va="top")
-rows = [(f"+{city_unit:.0f}%", "energy intensity when kBtu is\nmissing from the unit list"),
+c.text(0.05, 0.82, "New York City, three local models", fontsize=12.5, color=INK2, va="top")
+rows = [(f"{n_complete:,}", "buildings from 4 sources, integrated\nexactly with the ubem-link tool"),
         (f"×{height_factor:.1f}", "building heights without the\npublisher's conventions"),
-        (f"{n_complete:,}", "buildings, 4 sources: exact with\nconventions applied by the tool")]
+        (f"+{city_unit:.0f}%", "energy intensity when kBtu is missing\nfrom the unit list (8B models)")]
 for i, (big, small) in enumerate(rows):
     y = 0.66 - i * 0.235
     c.text(0.05, y, big, fontsize=23, weight="bold", color=INK, va="center")
