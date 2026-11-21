@@ -157,7 +157,7 @@ A rule the publisher applies to many variables at once, such as a naming pattern
 - unit_multiplier (float): Factor applied to raw values before the unit applies (e.g., 1000 for "thousand Btu").
 
 ## CategoryProfile
-Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its "comprehensive data lake" is a Catalog of profiles rather than a category.
+Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. Existing classifications of open UBEM data record this information as free-text checklists; here every field is typed with a closed value list, macroscopic and microscopic energy data share EnergyProfile and differ in energy_data_scale, and a data lake is a Catalog of profiles rather than a category.
 - provides_concepts (string, list): Ids of the UBEM-Link concepts the dataset provides values for (its content at concept level).
 - metadata_standards (string, list): Metadata standards or schemas the publisher already uses (for example Brick, BuildingSync, DDI-Codebook, CityGML).
 

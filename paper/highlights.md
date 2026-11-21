@@ -1,7 +1,7 @@
 # Highlights
 
-- Seven open-data categories refined into six facets and typed category profiles
-- Concept definitions alone matched full concept cards for variable mapping
-- Only 4 of 49 cataloged building datasets share a key with footprints or parcels
-- Models read kBtu as kWh and overstated New York City energy intensity by 215%
-- With conventions applied by software, a four-source city integration was exact
+- A new taxonomy and schema, UBEM-Link, make open building energy data AI-ready
+- A catalog of 93 open datasets records each one's role, coverage and linking keys
+- Concept definitions raised AI mapping accuracy by up to 18 percentage points
+- An open tool turns a dataset and its codebook into a checked, AI-ready profile
+- With the tool, AI reproduced a four-source integration of 29,077 buildings exactly

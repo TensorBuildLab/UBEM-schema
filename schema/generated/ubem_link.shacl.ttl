@@ -58,7 +58,7 @@ prov:Activity a sh:NodeShape ;
 	sh:property _:c14n241 , _:c14n51 , _:c14n93 ;
 	sh:targetClass prov:Activity .
 ubem_link:CategoryProfile a sh:NodeShape ;
-	rdfs:comment "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its \"macroscopic\" and \"microscopic\" energy data share EnergyProfile and differ in energy_data_scale, and its \"comprehensive data lake\" is a Catalog of profiles rather than a category." ;
+	rdfs:comment "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. Existing classifications of open UBEM data record this information as free-text checklists; here every field is typed with a closed value list, macroscopic and microscopic energy data share EnergyProfile and differ in energy_data_scale, and a data lake is a Catalog of profiles rather than a category." ;
 	sh:closed false ;
 	sh:ignoredProperties _:c14n262 ;
 	sh:property _:c14n284 , _:c14n329 ;

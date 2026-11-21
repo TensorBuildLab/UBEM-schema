@@ -28,8 +28,7 @@ Liang Zhang^a,b,\*^, Jianli Chen^c^, Jia Zou^d^
 ## Abstract {.unnumbered}
 
 Urban building energy modeling (UBEM) combines heterogeneous open data, increasingly with help from
-language models that read schemas written for people. Building on an earlier seven-category taxonomy of open UBEM
-data, we present UBEM-Link: six facets and seven typed category profiles, a variable-level LinkML schema and an
+language models that read schemas written for people. We present UBEM-Link: a new taxonomy of open UBEM data with six facets and seven typed category profiles, a variable-level LinkML schema and an
 81-concept vocabulary compiled into artifacts for people and AI, a catalog of 93 datasets, and an open tool that turns
 a dataset and its codebook into a checked profile. In experiments with three local open-weight models (8B and 14B), concept definitions,
 not labels, made mapping possible (definitions alone matched full cards), a closed vocabulary prevented invalid
@@ -86,10 +85,7 @@ but the data lack common formats and keys [@chen2019development], and most UBEM 
 [@malhotra2022information].
 
 Reviews have classified open UBEM data by modeling input or data domain [@goy2020data; @wang2022data;
-@jin2023review; @bishop2024review]. An earlier taxonomy sorted open data for physics-based UBEM into seven categories (weather; building stock GIS; occupant behavior; building characteristics; macroscopic
-and microscopic energy data; comprehensive data lakes) and listed, for each category, the metadata a modeler needs
-[@zhang2023taxonomy]. That list was free text, and a classification does not by itself tell software how to read a
-dataset. Schemas exist at other levels. Brick, Project Haystack and BuildingSync describe building equipment,
+@jin2023review; @bishop2024review], and a seven-category taxonomy (weather; building stock GIS; occupant behavior; building characteristics; macroscopic and microscopic energy data; comprehensive data lakes) listed, for each category, the metadata a modeler needs [@zhang2023taxonomy]. These classifications help a modeler find data, but they were not designed for integration: their categories mix what data are used for with how fine they are and how they are assembled, the metadata are free text that software cannot check, and linkage is not one of their dimensions. A classification does not by itself tell software how to read a dataset. Schemas exist at other levels. Brick, Project Haystack and BuildingSync describe building equipment,
 points and audits, BEDES defines terms for building energy data, and CityGML with its Energy ADE models city
 objects and their energy systems [@balaji2018brick; @haystack4; @long2021buildingsync; @bedes; @agugiaro2018energy];
 an exchange schema couples UBEM with urban microclimate models [@luo2025schema]. They describe buildings, not the
@@ -99,23 +95,19 @@ semantics.
 
 Generative artificial intelligence (AI) is beginning to take over integration work. Large language models (LLMs)
 match schemas [@narayan2022foundation; @sheetrit2024rematch; @liu2025magneto], generate building energy models
-[@jiang2024eplusllm; @zhang2025agentic], extract building data into exchange schemas [@jia2026bemeval] and act as
-agents that read documentation and write data pipelines [@anthropic2024mcp]. They read the same schemas and
+[@jiang2024eplusllm; @zhang2025agentic], extract building data into exchange schemas [@jia2026bemeval] and connect to data sources and tools through standard protocols [@anthropic2024mcp]. They read the same schemas and
 codebooks people read, with different limitations: they cannot ask what a code means, see only what fits in their
 context window, answer fluently where documentation is silent, and are only as checkable as the format their
-answer is requested in. Mapping real BACnet point names to Brick classes with LLMs reached 27% to 36% accuracy
+answer is requested in. Mapping real BACnet point names to Brick classes with LLMs reached 26.6% accuracy alone and 35.6% with retrieval-augmented prompting
 [@jain2025bacnetbrick]. Techniques that address these limitations exist separately: retrieval of documentation
 [@lewis2020rag], constrained decoding to a JSON Schema [@willard2023guided; @geng2025jsonschemabench], and
 documentation of datasets for machine learning [@gebru2021datasheets; @akhtar2024croissant;
 @clark2024aireadiness]. No study has compiled them from one domain schema, measured which of them help a language
 model integrate building energy data, or followed the remaining errors into urban energy results.
 
-This paper asks **which properties of a UBEM data schema help small, locally run language models integrate open
-building energy data, and whether the errors that remain reach national and city-scale energy indicators.** It
-contributes, in the order of the paper:
+This paper asks **which properties of a UBEM data schema help language models integrate open building energy data, and whether the errors that remain reach national and city-scale energy indicators.** UBEM-Link and its tool do not depend on a particular model and serve any AI system, from hosted assistants to models run on a city's own hardware. The experiments use open-weight models that run on a laptop, so that every answer can be reproduced and the results show what a schema achieves without a large hosted model. The paper contributes, in order:
 
-1. A taxonomy and category profiles for open UBEM data that refine the earlier seven categories into six
-   independent facets and seven typed category profiles, applied to a catalog of 93 open datasets (Section 2).
+1. A new taxonomy of open UBEM data designed for integration, with six independent facets and seven typed category profiles that address the weaknesses of existing classifications, applied to a catalog of 93 open datasets (Section 2).
 2. UBEM-Link, a LinkML schema with a dataset level, the category profiles, a variable level and an 81-concept
    vocabulary mapped to Brick, BEDES and the Energy ADE, compiled into artifacts for people and for AI; and a
    definition of AI-ready schemas with six design principles (Section 3).
@@ -129,22 +121,13 @@ contributes, in the order of the paper:
 
 ## 2. A taxonomy and category profiles for open UBEM data
 
-### 2.1 From seven categories to six facets
+### 2.1 Six independent facets
 
-The seven categories of @zhang2023taxonomy follow the inputs of a building energy model, which makes them easy to
-use but mixes three kinds of distinction: what the data are used for (weather, geometry, characteristics), how
-fine they are (macroscopic versus microscopic energy data) and how they are assembled (a data lake that combines
-sources). UBEM-Link keeps the categories as the user-facing entry point and separates the distinctions into six
-independent facets: UBEM workflow role, statistical nature, finest public spatial granularity, temporal
-resolution, access and join keys (Table 1). Every dataset is then a point in a six-dimensional space, and gaps can
-be counted along each facet. Two roles were added while cataloging, for datasets that fit none of the seven
-categories: reference simulations (synthetic building stocks and prototype models) and context and coupling data
-(land use, socio-economic data, grid emissions and tariffs).
+Existing classifications of open UBEM data, such as the seven categories of [@zhang2023taxonomy], follow the inputs of a building energy model. We reviewed them against the 93 datasets of the catalog (Section 2.3) and found that an input-based category mixes three kinds of distinction: what the data are used for (weather, geometry, characteristics), how fine they are (macroscopic versus microscopic energy data) and how they are assembled (a data lake that combines sources). Two kinds of dataset fit no category: reference simulations (synthetic building stocks and prototype models) and context and coupling data (land use, socio-economic data, grid emissions and tariffs). UBEM-Link therefore separates the distinctions into six independent facets: UBEM workflow role, statistical nature, finest public spatial granularity, temporal resolution, access and join keys (Table 1). Every dataset is then a point in a six-dimensional space, and gaps can be counted along each facet. The workflow role keeps the familiar input categories as the entry point for modelers, adds the two missing roles, and treats a data lake as what it is: a collection of datasets, each with its own profile.
 
-Table 1. From the categories of the earlier taxonomy [@zhang2023taxonomy] to UBEM-Link's facets and category
-profiles.
+Table 1. How UBEM-Link's roles, facets and category profiles resolve the input-based categories of [@zhang2023taxonomy].
 
-| Earlier category | UBEM-Link role | Facet values that carry the remaining distinction | Category profile |
+| Input-based category | UBEM-Link role | Facet values that carry the remaining distinction | Category profile |
 |---|---|---|---|
 | Weather information | boundary conditions | statistical nature: observed, reanalysis, typical year, projection | WeatherProfile |
 | Building stock GIS | geometry and inventory | spatial granularity: building, parcel, grid cell | GeometryProfile |
@@ -158,21 +141,18 @@ profiles.
 
 ### 2.2 Category profiles
 
-For each category, the earlier taxonomy listed the information a modeler needs in free text, such as
-"Timestamp format: e.g., HH:MM:SS MM/DD/YYYY" or "AMY/TMY/Others". UBEM-Link turns each item into a typed field
+Existing checklists record the information a modeler needs as free text, such as "Timestamp format: e.g., HH:MM:SS MM/DD/YYYY" or "AMY/TMY/Others" [@zhang2023taxonomy], which software can neither validate nor query. UBEM-Link turns each item into a typed field
 with a closed list of defined values, one profile class per role (Table 2). Variable lists became links to the
 concept vocabulary (`provides_concepts`), so that a catalog can be queried for every dataset that provides, say,
 building heights. Fields were added where integration needs them: the timestamp convention and clock of weather
 data (an EPW hour marks the end of the interval, in local standard time), the reference points and coordinate
 system of building heights, the representativeness of characteristics data (a probability sample generalizes, a
 mandated subset such as benchmarked buildings above a size threshold does not), and the metering level and
-measurement basis of energy data. The earlier description of CityGML levels of detail was replaced by the CityGML
-definitions.
+measurement basis of energy data. Where a checklist departed from the source standard, as @zhang2023taxonomy did for CityGML levels of detail, the profile follows the standard.
 
-Table 2. Category profiles: fields carried over from the earlier per-category metadata (now typed) and fields
-added. Full definitions and allowed values: Supplement S3.
+Table 2. Category profiles: fields that existing checklists list as free text [@zhang2023taxonomy], now typed, and fields that integration requires. Full definitions and allowed values: Supplement S3.
 
-| Profile | Carried over (typed) | Added |
+| Profile | Typed from free text | Added |
 |---|---|---|
 | Weather | year type (AMY, TMY, normals, projections); file format (EPW or other); time step; gap filling; variables | timestamp convention; clock (UTC, local standard time); grid resolution; station id scheme; scenarios |
 | Geometry | dimension (2D, 2.5D, 3D); CityGML level of detail; data format | height source and reference; coordinate reference system and its unit; building id scheme; capture threshold |
@@ -223,8 +203,7 @@ We call a schema AI-ready when its machine-readable artifacts are sufficient for
 what every element means, (ii) produce instances that conform to it, and (iii) check those instances, without a
 person explaining the schema, while the same artifacts remain a faithful and reviewable encoding of domain
 knowledge for people. Readiness is designed into the artifacts but can only be measured for a given model and
-task. Six design principles follow from documented limitations of language models reading documentation
-[@geng2025jsonschemabench; @gan2026lessismore; @parciak2024schema] and from the practice of reusing standards
+task. Six design principles follow from documented limitations of language models reading documentation [@gan2026lessismore; @parciak2024schema] and from the practice of reusing standards
 (Table 3); the last column gives the verdict reached in Section 8.
 
 Table 3. Design principles, their mechanism in UBEM-Link, the experiment that tests them, and the verdict for the
@@ -362,7 +341,7 @@ We evaluate three open-weight models run locally through Ollama 0.40.16 on one 8
 quantization, thinking disabled, 8,192-token context, output constrained by JSON Schema): Qwen3 8B [@yang2025qwen3]
 and Llama 3.1 8B [@grattafiori2024llama3] in all experiments, and Qwen3 14B, from the same family as Qwen3 8B and
 run with partial CPU offload, in the core mapping conditions and the four-source integration (E8b) to separate the effect of model size from that of the
-schema. Small local models are what a city or utility can run on its own hardware at no per-call cost. Each
+schema. Open-weight models give answers that anyone can reproduce, and a city or utility can run them on its own hardware at no per-call cost; hosted models can be used through the tool (Section 4) but were not evaluated. Each
 condition is run at T = 0; the base mapping conditions were repeated four times and normalization twice at T = 0.7
 to measure run-to-run variation. Every prompt and raw response is cached and released.
 
@@ -386,14 +365,6 @@ Each experiment changes one property of the schema and holds the rest fixed (Tab
 Baselines rank concept cards by TF-IDF over word and character n-grams and by dense embeddings. Paired conditions
 are compared with exact McNemar tests, Holm-adjusted over all comparisons and models; 95% intervals resample whole
 concepts (cluster bootstrap), because variables of one concept are correlated.
-
-### 5.5 Use of AI in this study
-
-AI was used in the research in six places: drafting and auditing catalog entries and drafting their category
-profiles (Claude Opus 5.5 and Sonnet 5.5 agents; Section 2.3); drafting concept definitions and synonyms and
-assigning mapping relations (Section 3.3); producing and adjudicating the mapping gold (Section 5.2); verifying
-references; and writing the analysis code and the tool. The evaluated models are the object of study. No step was
-repeated by an independent domain expert; Section 8.3 discusses this limitation.
 
 ## 6. Results
 
@@ -688,7 +659,7 @@ applied the conventions.
 
 ## 8. Discussion
 
-### 8.1 What makes a schema AI-ready for these models
+### 8.1 What makes a schema AI-ready
 
 Table 3 gives a verdict for each principle; four results bear on schema design. First, a model maps by meaning only
 when the schema describes its terms beyond a name: opaque codes defeated both 8B models, labels added nothing
@@ -700,7 +671,7 @@ should be written for the integration task, and linking keys should be defined e
 
 Second, conventions help where they state what an entry does not (all 30 CBECS flags linked) but, given as prose,
 were applied beyond their scope: a missing-code rule for yes/no questions applied to a climate zone, a multiplier
-applied on top of a unit that already contains it. Machine-readable scopes alone did not solve this: shown only the conventions that concern a column, both 8B models still applied "multiplier 1,000 on Btu" to kBtu (Section 7.4); Qwen3 14B did not, so a larger model may need the tool less, but the tool makes the result independent of the model. What worked was to let the schema carry the value and software apply it: with the tool, both models' profiles reproduced every indicator of the four-source integration. A convention should therefore be a typed statement (this unit, these missing codes, for these variables), not only a sentence for a model to read. Third, a closed vocabulary guarantees valid output
+applied on top of a unit that already contains it. Machine-readable scopes alone did not solve this: shown only the conventions that concern a column, both 8B models still applied "multiplier 1,000 on Btu" to kBtu (Section 7.4); Qwen3 14B did not, so a larger model may need the tool less, but the tool makes the result independent of the model. What worked was to let the schema carry the value and software apply it: with the tool, all three models' profiles reproduced every indicator of the four-source integration. A convention should therefore be a typed statement (this unit, these missing codes, for these variables), not only a sentence for a model to read. Third, a closed vocabulary guarantees valid output
 at no accuracy cost, but its content steers the answer: lacking kBtu, both models chose kilowatt-hours. Unit
 vocabularies should include the units in which sources publish and leave conversion to QUDT factors downstream.
 Fourth, profile checks must be validated on data they were not written on: version 1 was perfect on its own errors
@@ -720,7 +691,7 @@ of characteristics, operation and energy data with geometry has to go through ar
 The facts that decide whether an integration is right are often outside the data and its column descriptions: in
 New York City, the units of roof heights, the placeholder identifiers and the warning against the system-generated
 area are stated only in the publisher's metadata page. Recording such facts once, in a category profile and in
-scoped conventions, lets every later user and every model apply them. Once these facts were in the entries, a small local model with the tool reproduced an integration of benchmarking, tax lots, footprints and weather for 29,077 buildings exactly when given the right columns; the remaining failures were in column choice, where they were either visible (a footprint key that joined nothing) or refused by the tool (an area field the publisher marks as unusable). Identifier systems such
+scoped conventions, lets every later user and every model apply them. Once these facts were in the entries, even an 8B model run on a laptop reproduced, with the tool, an integration of benchmarking, tax lots, footprints and weather for 29,077 buildings exactly when given the right columns; the remaining failures were in column choice, where they were either visible (a footprint key that joined nothing) or refused by the tool (an area field the publisher marks as unusable). Identifier systems such
 as UBID [@wang2019ubid] and GERS [@overture2025gers] and exchange schemas between urban models [@luo2025schema]
 address linkage; UBEM-Link complements them by describing in one machine-readable profile what a dataset contains,
 how it is coded and through which keys it links, so that integrations such as that of @rehmann2025enhancing can be
@@ -740,8 +711,7 @@ integrated New York City table holds the inputs of a physics-based UBEM, but no 
 
 ## 9. Conclusions
 
-This paper built on an earlier seven-category taxonomy of open UBEM data to define UBEM-Link: six facets, seven
-typed category profiles, a variable-level schema and a concept vocabulary compiled for people and AI systems,
+This paper proposed UBEM-Link: a taxonomy of open UBEM data with six facets and seven typed category profiles, together with a variable-level schema and a concept vocabulary compiled for people and AI systems,
 applied to 93 datasets and released with a tool and tutorials. Experiments with local open-weight models showed
 that descriptions of each term beyond its name made concept mapping possible, a closed vocabulary made output valid
 at no cost, retrieval kept accuracy at a fifth of the context, and documentation borrowed from other standards did
@@ -750,8 +720,7 @@ their scope, and a unit missing from the vocabulary made both models overstate N
 215%. Built into the tool, these lessons held on new data: with the source's units in the vocabulary and
 conventions applied by software, all three models reproduced a four-source integration of benchmarking, tax lots,
 footprints and weather for 29,077 buildings exactly, and quantities combining sources exposed the geometry errors
-that remained without them. AI-assisted integration of urban building data is feasible with small local models
-when the schema defines its terms and keys for the task, records publishers' conventions as typed statements that
+that remained without them. AI-assisted integration of urban building data is feasible, even with 8B models run on a laptop, when the schema defines its terms and keys for the task, records publishers' conventions as typed statements that
 software applies, and offers the source's own units, and when a person reviews column choices and flagged profiles.
 Expert-labeled benchmarks, more cities, and simulation on the integrated inputs are the next steps.
 

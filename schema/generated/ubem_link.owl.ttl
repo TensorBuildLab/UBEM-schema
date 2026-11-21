@@ -163,7 +163,7 @@ ubem_link:Catalog a owl:Class ;
 ubem_link:CategoryProfile a owl:Class ;
 	rdfs:label "CategoryProfile" ;
 	rdfs:subClassOf _:c14n202 , _:c14n293 , _:c14n351 , _:c14n384 , _:c14n589 ;
-	skos:definition "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its \"macroscopic\" and \"microscopic\" energy data share EnergyProfile and differ in energy_data_scale, and its \"comprehensive data lake\" is a Catalog of profiles rather than a category." ;
+	skos:definition "Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. Existing classifications of open UBEM data record this information as free-text checklists; here every field is typed with a closed value list, macroscopic and microscopic energy data share EnergyProfile and differ in energy_data_scale, and a data lake is a Catalog of profiles rather than a category." ;
 	skos:inScheme ubem_link:schema .
 ubem_link:CharacteristicsProfile a owl:Class ;
 	rdfs:label "CharacteristicsProfile" ;

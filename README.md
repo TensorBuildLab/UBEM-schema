@@ -20,8 +20,8 @@ data:
 - the **`ubem-link` tool**, which turns a dataset and its codebook into a profile with a local or hosted language
   model, applies the profile, and integrates several datasets into one table.
 
-The taxonomy and category profiles refine the seven-category taxonomy and per-category metadata of Zhang, Chen and
-Zou (2023), *Taxonomy, Semantic Data Schema, and Schema Alignment for Open Data in Urban Building Energy Modeling*,
+The taxonomy and category profiles were designed for integration after reviewing existing classifications of open
+UBEM data, among them the seven categories and free-text metadata of Zhang, Chen and Zou (2023), *Taxonomy, Semantic Data Schema, and Schema Alignment for Open Data in Urban Building Energy Modeling*,
 arXiv:2311.08535.
 
 ## Quick start

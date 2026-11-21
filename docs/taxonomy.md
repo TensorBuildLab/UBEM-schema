@@ -1,18 +1,18 @@
 # Taxonomy of open UBEM data
 
-UBEM-Link classifies open data by the input of urban building energy modeling (UBEM) it serves. The
-classification extends an earlier taxonomy of open data for physics-based UBEM (Zhang, Chen and Zou, 2023,
-arXiv:2311.08535), which sorted open data into seven categories and listed, for each, the metadata a modeler
-needs. UBEM-Link keeps those categories as the user-facing entry point and makes them machine-checkable.
+UBEM-Link's taxonomy was designed for data integration after reviewing existing classifications of open data
+for urban building energy modeling (UBEM), which follow the inputs of a building energy model. One of them, by Zhang, Chen and Zou (2023, arXiv:2311.08535), sorts open data into seven categories and lists, for
+each, the metadata a modeler needs as free text. UBEM-Link keeps the familiar input categories as an entry point
+for modelers, and replaces the rest with independent facets and typed, machine-checkable category profiles.
 
-## From seven categories to roles and facets
+## From input categories to roles and facets
 
-The earlier taxonomy mixed three kinds of distinction in one list: what a dataset is used for (weather,
+Input-based categories mix three kinds of distinction in one list: what a dataset is used for (weather,
 geometry, characteristics), how fine it is (macroscopic versus microscopic energy data) and how it is assembled (a
 data lake that combines sources). UBEM-Link separates them into independent facets, so that every dataset is one
 point in a six-dimensional space and gaps can be counted along each facet.
 
-| 2023 category | UBEM-Link role (`ubem_roles`) | Other facets that carry the distinction | Category profile |
+| Input-based category (2023) | UBEM-Link role (`ubem_roles`) | Other facets that carry the distinction | Category profile |
 |---|---|---|---|
 | 1. Weather information | `boundary_conditions` | `statistical_nature` separates observations, reanalyses, typical years and projections | `WeatherProfile` |
 | 2. Building stock GIS information | `geometry_inventory` | `spatial_granularity` (building, parcel, grid) | `GeometryProfile` |

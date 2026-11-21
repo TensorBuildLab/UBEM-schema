@@ -11,7 +11,8 @@ First release.
   geometry, operation, characteristics, energy, simulation and context data, variable profile (CSVW column with
   concept, QUDT unit, multiplier, missing codes, code list, weight and flag roles, join key, provenance),
   conventions with machine-readable scopes (`applies_to_variables`, `applies_to_pattern`, `applies_to_codes`).
-  The roles and category profiles refine the seven-category taxonomy of open UBEM data of Zhang, Chen and Zou
+  The roles and category profiles replace input-based classifications of open UBEM data, such as the seven
+  categories of Zhang, Chen and Zou
   (2023, arXiv:2311.08535).
 - Vocabulary: 81 concepts (8 groups, 73 mapping targets) with definitions; 168 mappings to Brick 1.4.4, BEDES 2.5
   and the CityGML Energy ADE 1.0, published as SSSOM; unit vocabulary of 45 QUDT units with conversion factors.

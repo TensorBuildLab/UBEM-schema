@@ -498,10 +498,10 @@ class Verification(YAMLRoot):
 class CategoryProfile(YAMLRoot):
     """
     Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it.
-    There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an
-    earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its
-    "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its
-    "comprehensive data lake" is a Catalog of profiles rather than a category.
+    There is one profile class per UBEM workflow role. Existing classifications of open UBEM data record this
+    information as free-text checklists; here every field is typed with a closed value list, macroscopic and
+    microscopic energy data share EnergyProfile and differ in energy_data_scale, and a data lake is a Catalog of
+    profiles rather than a category.
     """
     _inherited_slots: ClassVar[list[str]] = []
 

@@ -268,7 +268,7 @@ values in the data: numeric values from 0 to 1,550 (median 26.15), 714 zeros
 
 Every field of the seven category profiles, generated from the schema. The category profiles of the catalog were drafted by agents from the verified entries: 88 from the entry text alone, 3 also against a publisher page, and the New York City PLUTO and footprint entries from the publishers' metadata; fields that could not be established were left empty (provenance per entry in the repository).
 
-Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. The classes refine the per-category metadata table of an earlier taxonomy of open UBEM data: its free-text fields became typed fields with closed value lists, its "macroscopic" and "microscopic" energy data share EnergyProfile and differ in energy_data_scale, and its "comprehensive data lake" is a Catalog of profiles rather than a category.
+Category-specific part of a dataset profile: what a modeler must know about one kind of UBEM data before using it. There is one profile class per UBEM workflow role. Existing classifications of open UBEM data record this information as free-text checklists; here every field is typed with a closed value list, macroscopic and microscopic energy data share EnergyProfile and differ in energy_data_scale, and a data lake is a Catalog of profiles rather than a category.
 
 Every category profile also has `provides_concepts` (ids of UBEM-Link concepts the dataset provides) and `metadata_standards` (standards the publisher already uses).
 
